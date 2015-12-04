@@ -12,6 +12,7 @@
 #import "LineProgressView.h"
 #import "NLAboutImageBtn.h"
 #import "NLBluetoothDataAnalytical.h"
+#import "NLHalfView.h"
 @interface NLHotMoxibustionViewController ()
 @property(nonatomic,strong)NSArray *peripheralArray;
 @property(nonatomic,strong)UILabel *setTemperatureLab;
@@ -165,30 +166,57 @@
     
 
     [self halfCircle];
-    [self corcleCount];
-    [self downBtns];
+//    [self corcleCount];
+//    [self downBtns];
 }
 -(void)halfCircle{
-    LineProgressView *lineProgressView = [[LineProgressView alloc] initWithFrame:CGRectMake((SCREENWIDTH-[ApplicationStyle control_weight:235*2])/2.0, [ApplicationStyle control_height:200], [ApplicationStyle control_weight:235*2], [ApplicationStyle control_weight:235*2])];
-//    lineProgressView.backgroundColor = [UIColor whiteColor];
-    lineProgressView.delegate = self;
-    lineProgressView.total = 51;
-    lineProgressView.color = [@"f7f3ff" hexStringToColor];
-    lineProgressView.radius = [ApplicationStyle control_weight:235*2]/2;
-//    lineProgressView.innerRadius = [ApplicationStyle control_weight:400]/2;
-    lineProgressView.startAngle = M_PI * 0.78;
-    lineProgressView.endAngle = M_PI * 2.3;
-    lineProgressView.completedColor = [@"ffde6a" hexStringToColor];
-    //    lineProgressView.animationDuration = 2.0;
-    lineProgressView.layer.shouldRasterize = YES;
-    [self.view addSubview:lineProgressView];
-    [lineProgressView setCompleted:30 animated:YES];
     
     
     
-    UIImageView *images = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:200*2])/2, [ApplicationStyle control_height:240], [ApplicationStyle control_weight:200 *2], [ApplicationStyle control_height:200 *2])];
-    images.image = [UIImage imageNamed:@"000"];
-    [self.view addSubview:images];
+//    [[NLDatahub sharedInstance] getVerificationCodePhones:@13269107610];
+//    [[NLDatahub sharedInstance] registeredCodephone:@13269107610 verification:@6408 password:@111111];
+//    [[NLDatahub sharedInstance] userSignInPhone:@13269107610 password:@111111];
+    
+    
+    
+    CGRect frame = CGRectMake(0, 100, self.view.frame.size.width, 300);
+    
+    NLHalfView *vc = [[NLHalfView alloc] initWithFrame:frame
+                                                   num:50
+                                                 index:20
+                                                redius:[ApplicationStyle control_weight:190]
+                                                 width:[ApplicationStyle control_weight:40]
+                                             starColor:[@"f7f3ff" hexStringToColor]
+                                              endColor:[@"ffde6a" hexStringToColor]];
+    vc.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:vc];
+    
+    
+    
+    
+    
+    
+    
+//    LineProgressView *lineProgressView = [[LineProgressView alloc] initWithFrame:CGRectMake((SCREENWIDTH-[ApplicationStyle control_weight:235*2])/2.0, [ApplicationStyle control_height:200], [ApplicationStyle control_weight:235*2], [ApplicationStyle control_weight:235*2])];
+////    lineProgressView.backgroundColor = [UIColor whiteColor];
+//    lineProgressView.delegate = self;
+//    lineProgressView.total = 51;
+//    lineProgressView.color = [@"f7f3ff" hexStringToColor];
+//    lineProgressView.radius = [ApplicationStyle control_weight:235*2]/2;
+////    lineProgressView.innerRadius = [ApplicationStyle control_weight:400]/2;
+//    lineProgressView.startAngle = M_PI * 0.78;
+//    lineProgressView.endAngle = M_PI * 2.3;
+//    lineProgressView.completedColor = [@"ffde6a" hexStringToColor];
+//    //    lineProgressView.animationDuration = 2.0;
+//    lineProgressView.layer.shouldRasterize = YES;
+//    [self.view addSubview:lineProgressView];
+//    [lineProgressView setCompleted:30 animated:YES];
+
+    
+    
+//    UIImageView *images = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:200*2])/2, [ApplicationStyle control_height:240], [ApplicationStyle control_weight:200 *2], [ApplicationStyle control_height:200 *2])];
+//    images.image = [UIImage imageNamed:@"000"];
+//    [self.view addSubview:images];
     
     
     

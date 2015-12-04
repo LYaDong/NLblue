@@ -58,6 +58,10 @@
 		04F5BB1F1C05673F00B37CE2 /* NLMyEquipmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5BB1E1C05673F00B37CE2 /* NLMyEquipmentController.m */; };
 		04F5BB221C05676700B37CE2 /* NLShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5BB211C05676700B37CE2 /* NLShareController.m */; };
 		04F5BB701C05B51A00B37CE2 /* NLIndividuaFormatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5BB6F1C05B51A00B37CE2 /* NLIndividuaFormatViewController.m */; };
+		04FA89BC1C117E400064F3AA /* NLDatahub.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B71C117E400064F3AA /* NLDatahub.m */; };
+		04FA89BD1C117E400064F3AA /* NLHTTPRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */; };
+		04FA89BE1C117E400064F3AA /* NLHTTPRequestOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */; };
+		04FA89C11C117F780064F3AA /* NLHalfView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89C01C117F780064F3AA /* NLHalfView.m */; };
 		04FB47A41C0FDED200FAE708 /* NLStepCountLabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB47A31C0FDED200FAE708 /* NLStepCountLabView.m */; };
 		4A3CFF267937751BD6F2302D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E0A4932CCDD3CB9C4B5CFA /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -182,6 +186,15 @@
 		04F5BB211C05676700B37CE2 /* NLShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLShareController.m; sourceTree = "<group>"; };
 		04F5BB6E1C05B51A00B37CE2 /* NLIndividuaFormatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLIndividuaFormatViewController.h; sourceTree = "<group>"; };
 		04F5BB6F1C05B51A00B37CE2 /* NLIndividuaFormatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLIndividuaFormatViewController.m; sourceTree = "<group>"; };
+		04FA89B51C117E400064F3AA /* NLApiURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLApiURL.h; sourceTree = "<group>"; };
+		04FA89B61C117E400064F3AA /* NLDatahub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLDatahub.h; sourceTree = "<group>"; };
+		04FA89B71C117E400064F3AA /* NLDatahub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLDatahub.m; sourceTree = "<group>"; };
+		04FA89B81C117E400064F3AA /* NLHTTPRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHTTPRequestFactory.h; sourceTree = "<group>"; };
+		04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHTTPRequestFactory.m; sourceTree = "<group>"; };
+		04FA89BA1C117E400064F3AA /* NLHTTPRequestOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHTTPRequestOperations.h; sourceTree = "<group>"; };
+		04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHTTPRequestOperations.m; sourceTree = "<group>"; };
+		04FA89BF1C117F780064F3AA /* NLHalfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NLHalfView.h; path = NBlue/NetWork/NLHalfView.h; sourceTree = SOURCE_ROOT; };
+		04FA89C01C117F780064F3AA /* NLHalfView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NLHalfView.m; path = NBlue/NetWork/NLHalfView.m; sourceTree = SOURCE_ROOT; };
 		04FB47A21C0FDED200FAE708 /* NLStepCountLabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLStepCountLabView.h; sourceTree = "<group>"; };
 		04FB47A31C0FDED200FAE708 /* NLStepCountLabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLStepCountLabView.m; sourceTree = "<group>"; };
 		46E0A4932CCDD3CB9C4B5CFA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,12 +256,12 @@
 			isa = PBXGroup;
 			children = (
 				049751D61BFEEF510044D97B /* ViewController */,
-				04F3CC5A1C04386E0066D39D /* Models */,
 				049751D91BFEEF970044D97B /* ThirdParty */,
-				049751D71BFEEF600044D97B /* NetWork */,
 				049751D41BFEEF2B0044D97B /* ToolClass */,
 				04F4B7C11C07FA3C00DE60DE /* TestImage */,
 				04F04F821C073A94009DC949 /* CacheData */,
+				04FA89B41C117E180064F3AA /* NetWork */,
+				04FA89B31C117E060064F3AA /* Model */,
 				049751D51BFEEF3F0044D97B /* Common */,
 				04C9954E1C02A08A00D8AE79 /* SystemBase */,
 				04F3CC3F1C03F4F30066D39D /* ThirdLibrary */,
@@ -332,13 +345,6 @@
 				04F3CC591C0438400066D39D /* View */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		049751D71BFEEF600044D97B /* NetWork */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NetWork;
 			sourceTree = "<group>";
 		};
 		049751D91BFEEF970044D97B /* ThirdParty */ = {
@@ -444,14 +450,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		04F3CC5A1C04386E0066D39D /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Models;
-			path = ThirdParty/Models;
-			sourceTree = "<group>";
-		};
 		04F3CC5B1C0438A10066D39D /* HealthMangerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -478,6 +476,8 @@
 		04F3CC5C1C0438AD0066D39D /* HotMoxibustionView */ = {
 			isa = PBXGroup;
 			children = (
+				04FA89BF1C117F780064F3AA /* NLHalfView.h */,
+				04FA89C01C117F780064F3AA /* NLHalfView.m */,
 			);
 			path = HotMoxibustionView;
 			sourceTree = "<group>";
@@ -526,6 +526,27 @@
 				04F4B7C31C07FA7100DE60DE /* battery@3x.png */,
 			);
 			path = TestImage;
+			sourceTree = "<group>";
+		};
+		04FA89B31C117E060064F3AA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		04FA89B41C117E180064F3AA /* NetWork */ = {
+			isa = PBXGroup;
+			children = (
+				04FA89B51C117E400064F3AA /* NLApiURL.h */,
+				04FA89B61C117E400064F3AA /* NLDatahub.h */,
+				04FA89B71C117E400064F3AA /* NLDatahub.m */,
+				04FA89B81C117E400064F3AA /* NLHTTPRequestFactory.h */,
+				04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */,
+				04FA89BA1C117E400064F3AA /* NLHTTPRequestOperations.h */,
+				04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */,
+			);
+			path = NetWork;
 			sourceTree = "<group>";
 		};
 		9B52667861575D0AACE7B05E /* Frameworks */ = {
@@ -735,10 +756,13 @@
 			files = (
 				0458E5DC1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m in Sources */,
 				04F5BB1F1C05673F00B37CE2 /* NLMyEquipmentController.m in Sources */,
+				04FA89C11C117F780064F3AA /* NLHalfView.m in Sources */,
 				04F4B7C81C082AD200DE60DE /* NLSQLData.m in Sources */,
+				04FA89BD1C117E400064F3AA /* NLHTTPRequestFactory.m in Sources */,
 				04F4B7D81C085C7000DE60DE /* NLAboutNLViewController.m in Sources */,
 				046F188B1C0D4A0700A21FA6 /* NLColumnImage.m in Sources */,
 				04F3CC801C0460120066D39D /* NLHealthStepNumber.m in Sources */,
+				04FA89BE1C117E400064F3AA /* NLHTTPRequestOperations.m in Sources */,
 				04C9955E1C02A56B00D8AE79 /* NLHotMoxibustionViewController.m in Sources */,
 				04F3CC7D1C045F9F0066D39D /* NLHealthSleepView.m in Sources */,
 				04A1519A1C0DC3B700CB93FF /* NLRing.m in Sources */,
@@ -764,6 +788,7 @@
 				04CDA17E1BFF119500D2A304 /* Convenlence.m in Sources */,
 				049751DC1BFEF2FE0044D97B /* AppDelegate.m in Sources */,
 				04C995611C02A57800D8AE79 /* NLProfileViewController.m in Sources */,
+				04FA89BC1C117E400064F3AA /* NLDatahub.m in Sources */,
 				04F3CC831C046D1A0066D39D /* NLHealthCalenderView.m in Sources */,
 				04F04F851C073AAC009DC949 /* PlistData.m in Sources */,
 				04F4B7D21C083B3E00DE60DE /* NLLocalUserInfo.m in Sources */,
