@@ -38,7 +38,10 @@
  *渐变描边
  */
 + (UIView *)statusBackView:(CGRect)frame;
-
+/**
+ *渐变Btn
+ */
++ (UIButton *)gradiengBtnFrame:(CGRect)frame;
 @end
 
 @interface NSString (Convenience)

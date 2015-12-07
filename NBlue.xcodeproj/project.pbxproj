@@ -22,6 +22,9 @@
 		049751C51BFEEED60044D97B /* NBlueUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751C41BFEEED60044D97B /* NBlueUITests.m */; };
 		049751DC1BFEF2FE0044D97B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751DB1BFEF2FE0044D97B /* AppDelegate.m */; };
 		049751DF1BFEF3140044D97B /* ApplicationStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751DE1BFEF3140044D97B /* ApplicationStyle.m */; };
+		049B077D1C1559D4005147B5 /* NLRegisteredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B077C1C1559D4005147B5 /* NLRegisteredViewController.m */; };
+		049B07821C1559ED005147B5 /* NLForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B077F1C1559ED005147B5 /* NLForgetPasswordViewController.m */; };
+		049B07831C1559ED005147B5 /* NLLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B07811C1559ED005147B5 /* NLLogInViewController.m */; };
 		04A151971C0DAA9700CB93FF /* NLRingLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A151961C0DAA9700CB93FF /* NLRingLine.m */; };
 		04A1519A1C0DC3B700CB93FF /* NLRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A151991C0DC3B700CB93FF /* NLRing.m */; };
 		04C995471C029D6B00D8AE79 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C995461C029D6B00D8AE79 /* CoreBluetooth.framework */; };
@@ -115,6 +118,13 @@
 		049751DD1BFEF3140044D97B /* ApplicationStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationStyle.h; sourceTree = "<group>"; };
 		049751DE1BFEF3140044D97B /* ApplicationStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationStyle.m; sourceTree = "<group>"; };
 		049751E11BFEF5050044D97B /* NLBlue.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NLBlue.pch; sourceTree = "<group>"; };
+		049B077B1C1559D4005147B5 /* NLRegisteredViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRegisteredViewController.h; sourceTree = "<group>"; };
+		049B077C1C1559D4005147B5 /* NLRegisteredViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRegisteredViewController.m; sourceTree = "<group>"; };
+		049B077E1C1559ED005147B5 /* NLForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLForgetPasswordViewController.h; sourceTree = "<group>"; };
+		049B077F1C1559ED005147B5 /* NLForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLForgetPasswordViewController.m; sourceTree = "<group>"; };
+		049B07801C1559ED005147B5 /* NLLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLLogInViewController.h; sourceTree = "<group>"; };
+		049B07811C1559ED005147B5 /* NLLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLLogInViewController.m; sourceTree = "<group>"; };
+		049B07841C158A78005147B5 /* NLNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NLNotification.h; sourceTree = "<group>"; };
 		04A151951C0DAA9700CB93FF /* NLRingLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRingLine.h; sourceTree = "<group>"; };
 		04A151961C0DAA9700CB93FF /* NLRingLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRingLine.m; sourceTree = "<group>"; };
 		04A151981C0DC3B700CB93FF /* NLRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRing.h; sourceTree = "<group>"; };
@@ -325,6 +335,7 @@
 				04C9954C1C029F2400D8AE79 /* NLBluetoothDataAnalytical.m */,
 				04C995621C02AC1A00D8AE79 /* ApplicationConstants.h */,
 				04F4B7CC1C08387A00DE60DE /* NLEquipmentCommand.h */,
+				049B07841C158A78005147B5 /* NLNotification.h */,
 				04F3CC511C0434C10066D39D /* Localizable.strings */,
 			);
 			path = Common;
@@ -339,6 +350,7 @@
 				04C995571C02A51000D8AE79 /* NLSubRootViewController.m */,
 				046934ED1C02BF5B00150D2A /* MainNavgationControllew.h */,
 				046934EE1C02BF5B00150D2A /* MainNavgationControllew.m */,
+				049B077A1C1559B8005147B5 /* MangetNumber */,
 				04C995501C02A2D100D8AE79 /* HealthMangerController */,
 				04C995521C02A38500D8AE79 /* HotMoxibustionController */,
 				04C995511C02A2E500D8AE79 /* ProfileController */,
@@ -352,6 +364,19 @@
 			children = (
 			);
 			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		049B077A1C1559B8005147B5 /* MangetNumber */ = {
+			isa = PBXGroup;
+			children = (
+				049B07801C1559ED005147B5 /* NLLogInViewController.h */,
+				049B07811C1559ED005147B5 /* NLLogInViewController.m */,
+				049B077B1C1559D4005147B5 /* NLRegisteredViewController.h */,
+				049B077C1C1559D4005147B5 /* NLRegisteredViewController.m */,
+				049B077E1C1559ED005147B5 /* NLForgetPasswordViewController.h */,
+				049B077F1C1559ED005147B5 /* NLForgetPasswordViewController.m */,
+			);
+			path = MangetNumber;
 			sourceTree = "<group>";
 		};
 		04C9954E1C02A08A00D8AE79 /* SystemBase */ = {
@@ -754,9 +779,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				049B07821C1559ED005147B5 /* NLForgetPasswordViewController.m in Sources */,
 				0458E5DC1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m in Sources */,
 				04F5BB1F1C05673F00B37CE2 /* NLMyEquipmentController.m in Sources */,
 				04FA89C11C117F780064F3AA /* NLHalfView.m in Sources */,
+				049B07831C1559ED005147B5 /* NLLogInViewController.m in Sources */,
 				04F4B7C81C082AD200DE60DE /* NLSQLData.m in Sources */,
 				04FA89BD1C117E400064F3AA /* NLHTTPRequestFactory.m in Sources */,
 				04F4B7D81C085C7000DE60DE /* NLAboutNLViewController.m in Sources */,
@@ -782,6 +809,7 @@
 				04C995551C02A40300D8AE79 /* NLRootViewController.m in Sources */,
 				04C9954D1C029F2400D8AE79 /* NLBluetoothDataAnalytical.m in Sources */,
 				04C9955B1C02A55000D8AE79 /* NLHealthMangerViewController.m in Sources */,
+				049B077D1C1559D4005147B5 /* NLRegisteredViewController.m in Sources */,
 				046934EF1C02BF5B00150D2A /* MainNavgationControllew.m in Sources */,
 				04C995581C02A51000D8AE79 /* NLSubRootViewController.m in Sources */,
 				049751DF1BFEF3140044D97B /* ApplicationStyle.m in Sources */,

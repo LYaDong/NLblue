@@ -16,4 +16,10 @@
                        width:(NSInteger)width
                    starColor:(UIColor *)starColor
                     endColor:(UIColor *)endColor;
+
+
+
+
+@property(nonatomic,assign)NSUInteger progressCount;
+
 @end

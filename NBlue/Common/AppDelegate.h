@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "NLLocalUserInfo.h"
+typedef NS_ENUM(NSUInteger,Controller) {
+    Controller_Loing = 0,                                   //登录页面
+    Controller_Main = 1,                                    //主页
+};
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NLLocalUserInfo *_loacluserinfo;
-
+-(void)tabBarViewControllerType:(Controller)type;
 @end
 

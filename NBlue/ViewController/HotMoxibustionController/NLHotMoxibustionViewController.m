@@ -166,16 +166,16 @@
     
 
     [self halfCircle];
-//    [self corcleCount];
-//    [self downBtns];
+    [self corcleCount];
+    [self downBtns];
 }
 -(void)halfCircle{
     
     
     
-//    [[NLDatahub sharedInstance] getVerificationCodePhones:@13269107610];
-//    [[NLDatahub sharedInstance] registeredCodephone:@13269107610 verification:@6408 password:@111111];
-//    [[NLDatahub sharedInstance] userSignInPhone:@13269107610 password:@111111];
+//
+//
+//   
     
     
     
@@ -188,6 +188,9 @@
                                                  width:[ApplicationStyle control_weight:40]
                                              starColor:[@"f7f3ff" hexStringToColor]
                                               endColor:[@"ffde6a" hexStringToColor]];
+    
+    vc.progressCount = 11;
+    
     vc.backgroundColor = [UIColor clearColor];
     [self.view addSubview:vc];
     

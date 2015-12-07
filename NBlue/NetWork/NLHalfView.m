@@ -15,6 +15,7 @@
 @property(nonatomic,strong)UIColor *starColor;
 @property(nonatomic,strong)UIColor *endColor;
 
+
 @end
 
 @implementation NLHalfView
@@ -34,6 +35,8 @@
         _width = width;
         _starColor = starColor;
         _endColor = endColor;
+        
+
     }
     return self;
 }
@@ -141,9 +144,15 @@
 //        [path stroke];
 //    }
     
-    
-    
+    self.progressCount = 10;
 }
+
+
+
+-(void)setProgro:(NSUInteger)progressCount{
+    self.progressCount = progressCount;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

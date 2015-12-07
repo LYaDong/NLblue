@@ -22,6 +22,12 @@
     [statusView.layer addSublayer:[ApplicationStyle shadowAsInverse:CGRectMake(0, 0, frame.size.width, frame.size.height) colorOne:[@"a60034" hexStringToColor] colorTow:[@"ffffff" hexStringToColor]]];
     return statusView;
 }
++ (UIButton *)gradiengBtnFrame:(CGRect)frame{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btn.frame = frame;
+    [btn.layer addSublayer:[ApplicationStyle shadowAsInverse:CGRectMake(0, 0, frame.size.width, frame.size.height) colorOne:[@"dc2849" hexStringToColor] colorTow:[@"e9395a" hexStringToColor]]];
+    return btn;
+}
 
 @end
 

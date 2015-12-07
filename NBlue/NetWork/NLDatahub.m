@@ -86,13 +86,12 @@ static NSString *NLSportApi = @"/sport";//各个接口端
             NSLog(@"expecting NSDictionary class");
         }
 
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLGetVerficationSuccessNotification object:nil userInfo:nil];
         });
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"请求失败 错误是 == %@",error);
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLGetVerficationFicaledNotification object:nil userInfo:nil];
         });
     }];
 //    [_networkOperationQueue addOperation:operation];
@@ -105,9 +104,13 @@ static NSString *NLSportApi = @"/sport";//各个接口端
     NSDictionary * parameters= @{@"phone":phone,@"code":verfication,@"password":password};
     _manger.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:NLtextHeml,NLapplication, nil];
     [_manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_register] parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%@",responseObject);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewSuccessNotification object:nil userInfo:nil];
+        });
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewFicaledNotification object:nil userInfo:nil];
+        });
     }];
 }
 #pragma mark 登录
@@ -116,9 +119,13 @@ static NSString *NLSportApi = @"/sport";//各个接口端
     _manger = [[AFHTTPRequestOperationManager alloc]init];
     _manger.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:NLtextHeml,NLapplication, nil];
     [_manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Login] parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%@",responseObject);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLLogInSuccessNotification object:responseObject userInfo:nil];
+        });
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLLogInFailedNotiFicaledtion object:nil userInfo:nil];
+        });
     }];
 }
 #pragma mark 添加睡眠信息

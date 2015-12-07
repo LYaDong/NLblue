@@ -70,3 +70,19 @@
 "NLHealthManger_StepDistance" = "当日距离";
 "NLHealthManger_StepEnergy" = "当日消耗能量";
 "NLHealthManger_StepActovity" = "当日活动时间";
+//NLLogInViewController
+"NLLogIn_TextNumber" = "账号";
+"NLLogIn_TextPassword" = "密码";
+"NLLogIn_TextLonInBtn" = "登录";
+"NLLogIn_LogInUser_ThirdLog" = "第三方登录";
+//NLRegisteredViewController
+"NLRegistered_registered" = "注册";
+"NLRegistered_Forget" = "忘记密码";
+"NLRegistered_PhoneNumber" = "请输入你的手机号";
+"NLRegistered_Verification" = "验证码";
+"NLRegistered_PassWord" = "密码";
+"NLRegistered_NewPassWord" = "新密码";
+"NLRegistered_GetVerfication" = "获得验证码";
+"NLRegistered_Protocol" = "同意隐私条款和隐私协议";
+"NLRegistered_completeBtn" = "完成";
+
