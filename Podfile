@@ -1,0 +1,5 @@
+platform:ios, '8.0'	
+	pod 'AFNetworking'
+	pod 'FMDB'
+	pod 'MBProgressHUD'
+	pod 'SDWebImage'

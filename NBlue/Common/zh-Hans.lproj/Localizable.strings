@@ -1,0 +1,88 @@
+/* 
+  Localizable.strings
+  NBlue
+
+  Created by LYD on 15/11/24.
+  Copyright © 2015年 LYD. All rights reserved.
+*/
+//GeneralText
+
+"GeneralText_OK" = "确定";
+"GeneralText_Cancel" = "取消";
+
+//tabBar
+"TabBar_HealthManger" = "健康管理";
+"TabBar_HotMoxibustion" = "热灸";
+"TabBar_Profile" = "我的";
+
+
+//HotMoxibustionViewController
+"HotMoxibustion_Effect" = "效果如何";
+"HotMoxibustion_Comfort" = "求安慰";
+"HotMoxibustion_NightHotMox" = "晚上热灸";
+//HealthMangerViewController
+"HealthManger_Calendar" = "日历";
+"HealthManger_Sleep" = "睡眠";
+"HealthManger_StepNumber" = "计步器";
+//NLProfileViewController
+"NLProfileView_MyEquitment" = "我的设备";
+"NLProfileView_Share" = "分享";
+"NLProfileView_FeedBack" = "反馈";
+"NLProfileView_Set" = "设置";
+"NLProfileView_AboutNL" = "关于暖蓝";
+//NLIndividuaFormatViewController
+"NLIndividuaFormat_Title" = "个人信息";
+"NLIndividuaFormat_HeadImage" = "头像";
+"NLIndividuaFormat_UserName" = "昵称";
+"NLIndividuaFormat_UserAge" = "年龄";
+"NLIndividuaFormat_UserHeight" = "身高";
+"NLIndividuaFormat_UserWidth" = "体重";
+"NLIndividuaFormat_UserPeriod" = "经期";
+"NLIndividuaFormat_UserCycle" = "周期";
+//NLMyEquipmentController
+"NLMyEquipment_MyEquipment" = "我的设备";
+"NLMyEquipment_EquipmentName" = "设备名称";
+"NLMyEquipment_FirmwareEdition" = "固件版本";
+"NLMyEquipment_MACAddress" = "MAC地址";
+"NLMyEquipment_FirmwareUP" = "固件更新";
+"NLMyEquipment_RelieveBinding" = "解除绑定";
+//NLFeedBackViewController
+"NLFeedBack_QuestionFeedBack" = "问题反馈";
+//NLAboutNLViewController
+"NLAboutNL_CopyrightInformation" = "版权信息";
+"NLAboutNL_ServiceAgreement" = "隐私策略";
+"NLAboutNL_PrivacyPolicy" = "服务协议";
+//NLHealthStepNumber
+"NLHealthStepNumber_TargetNumber" = "目标步数";
+"NLHealthStepNumber_TheCurrent" = "当前步数";
+"NLHealthStepNumber_MovingDistance" = "移动距离";
+"NLHealthStepNumber_ConsumedEnergy" = "消耗能量";
+//NLHealthSleepView
+"NLHealthSleepView_YesterDay" = "昨日睡眠";
+"NLHealthSleepView_GOSleepTime" = "入睡时间";
+"NLHealthSleepView_WakeUPSleepTime" = "醒来时间";
+"NLHealthSleepView_SleepQuality" = "睡眠质量";
+//NLHealthMangerStep
+"NLHealthManger_StepDay" = "日";
+"NLHealthManger_StepWeek" = "周";
+"NLHealthManger_StepMonth" = "月";
+"NLHealthManger_StepRemarkLab" = "当日步数";
+"NLHealthManger_StepDistance" = "当日距离";
+"NLHealthManger_StepEnergy" = "当日消耗能量";
+"NLHealthManger_StepActovity" = "当日活动时间";
+//NLLogInViewController
+"NLLogIn_TextNumber" = "账号";
+"NLLogIn_TextPassword" = "密码";
+"NLLogIn_TextLonInBtn" = "登录";
+"NLLogIn_LogInUser_ThirdLog" = "第三方登录";
+//NLRegisteredViewController
+"NLRegistered_registered" = "注册";
+"NLRegistered_Forget" = "忘记密码";
+"NLRegistered_PhoneNumber" = "请输入你的手机号";
+"NLRegistered_Verification" = "验证码";
+"NLRegistered_PassWord" = "密码";
+"NLRegistered_NewPassWord" = "新密码";
+"NLRegistered_GetVerfication" = "获得验证码";
+"NLRegistered_Protocol" = "同意隐私条款和隐私协议";
+"NLRegistered_completeBtn" = "完成";
+
