@@ -101,74 +101,45 @@
 //    
 //    self.view.backgroundColor = [@"f44c6d" hexStringToColor];
     
-    
+    self.returnBtn.hidden = YES;
     self.titles.text = @"热灸";
 //    self.returnBtn.hidden = YES;
     [self bulidUI];
     
     _sportDataArr = [NSMutableArray array];
     
-//    for (int i =0; i < strtest.length; i+=2) {
-//        NSString *strByte = [strtest substringWithRange:NSMakeRange(i,2)];
-//        unsigned long red = strtoul([strByte UTF8String],0,16);
-//        Byte b =  (Byte) ((0xff & red) );//( Byte) 0xff&iByte;
-//        bt[i/2+0] = b;
-//        
-//        NSLog(@"%hhu",b);
-//    }
-    unsigned long red = strtoul([@"28" UTF8String],0,16);
-    Byte b =  (Byte) ((0xff & red) );//( Byte) 0xff&iByte;
-    
 
-    Byte byte[20] = {0x90,0x03,b,0x00,0x08,0x00};
     
-    NSData *data = [NSData dataWithBytes:byte length:20];
-    NSLog(@"%@",data);
-    
-    
-    
-    
-//
-//
-//    unsigned long red = strtoul([@"28" UTF8String],0,16);
-//    Byte by = {(0xff) & red};
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    btn.frame = CGRectMake(40, 100, 40, 40);
+//    btn.backgroundColor = [UIColor redColor];
+//    [btn addTarget:self action:@selector(btnDown) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btn];
 //    
-//    NSLog(@"%lu",(0xff) & red);
-//    Byte bytex[20] = {0x90,0x03,0x28,0x00,0x08,0x00};
-//    NSLog(@"%s",bytex);
-    
-    
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    btn.frame = CGRectMake(40, 100, 40, 40);
-    btn.backgroundColor = [UIColor redColor];
-    [btn addTarget:self action:@selector(btnDown) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
-    
-    UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    btn1.frame = CGRectMake(100, 100, 100, 100);
-    btn1.backgroundColor = [UIColor yellowColor];
-    [btn1 addTarget:self action:@selector(btnDown1) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn1];
-    
-    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    btn2.frame = CGRectMake(100, 400, 100, 100);
-    btn2.backgroundColor = [UIColor yellowColor];
-    [btn2 addTarget:self action:@selector(btnDown2) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn2];
-//
-    UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    btn3.frame = CGRectMake(200, 200, 100, 100);
-    btn3.backgroundColor = [UIColor greenColor];
-    [btn3 addTarget:self action:@selector(sportxx1) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn3];
-    
-    
-    UIButton *btn4 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    btn4.frame = CGRectMake(100, 200, 100, 100);
-    btn4.backgroundColor = [UIColor greenColor];
-    [btn4 addTarget:self action:@selector(sportxx) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn4];
+//    UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    btn1.frame = CGRectMake(100, 100, 100, 100);
+//    btn1.backgroundColor = [UIColor yellowColor];
+//    [btn1 addTarget:self action:@selector(btnDown1) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btn1];
+//    
+//    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    btn2.frame = CGRectMake(100, 400, 100, 100);
+//    btn2.backgroundColor = [UIColor yellowColor];
+//    [btn2 addTarget:self action:@selector(btnDown2) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btn2];
+////
+//    UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    btn3.frame = CGRectMake(200, 200, 100, 100);
+//    btn3.backgroundColor = [UIColor greenColor];
+//    [btn3 addTarget:self action:@selector(sportxx1) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btn3];
+//    
+//    
+//    UIButton *btn4 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    btn4.frame = CGRectMake(100, 200, 100, 100);
+//    btn4.backgroundColor = [UIColor greenColor];
+//    [btn4 addTarget:self action:@selector(sportxx) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btn4];
     
     
     
@@ -209,10 +180,10 @@
         _peripheralArray = perpheral;//获得当前的外围设备
     };
     
-//    [self loadStepData];
-//    [self halfCircle];
-//    [self corcleCount];
-//    [self downBtns];
+    [self loadStepData];
+    [self halfCircle];
+    [self corcleCount];
+    [self downBtns];
 }
 -(void)halfCircle{
     
@@ -363,8 +334,6 @@
 }
 -(void)logInSuccess:(NSNotification *)notifi{
     NSDictionary *dic = notifi.object;
-    NSLog(@"%@",[dic objectForKey:@"records"]);
-    
     [NLSQLData sportRecordCreateData:[dic objectForKey:@"records"] isDeposit:0];
     
 }

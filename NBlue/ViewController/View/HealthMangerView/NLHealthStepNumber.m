@@ -9,6 +9,7 @@
 #import "NLHealthStepNumber.h"
 #import "NLColumnImage.h"
 #import "NLStepImageLabView.h"
+#import "NLStepColumnImage.h"
 @interface NLHealthStepNumber()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIButton *stepNumber;
 @property(nonatomic,strong)UILabel *maxStepNumber;
@@ -88,9 +89,9 @@
         [arrs addObject:[NSNumber numberWithInteger:num]];
     }
     
+    CGRect frame = CGRectMake(0, line.bottomOffset, SCREENWIDTH, [ApplicationStyle control_height:480]);
     
-    NLColumnImage *column = [[NLColumnImage alloc] initWithDataArr:arrs strokeColor:[@"882a00" hexStringToColor] withColor:[@"fac96f" hexStringToColor] type:NLCalendarType_Ordinary timeLabArr:nil];
-    column.frame = CGRectMake(0, line.bottomOffset, SCREENWIDTH, [ApplicationStyle control_height:480]);
+    NLStepColumnImage  *column = [[NLStepColumnImage alloc] initWithFrame:frame DataArr:arrs strokeColor:[@"882a00" hexStringToColor] withColor:[@"fac96f" hexStringToColor]];
     column.backgroundColor = [UIColor clearColor];
     [cell addSubview:column];
     

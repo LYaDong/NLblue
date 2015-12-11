@@ -71,34 +71,77 @@
 +(void)sportRecordCreateData:(NSArray *)arr isDeposit:(NSInteger)isDeposit{
     FMDatabase *db = [self sqlDataRoute];
     [db open];
-    NSString *createTable = @"create table if not exists SportData (caloriesAmount integer not null,count integer not null,sportDate text not null,stepsAmount integer not null,calories integer not null,endTime text not null,id text primary key,startTime text not null,steps integer not null,user_id text not null,isDeposit text not null)";
+    NSString *createTable = @"create table if not exists SportData (caloriesAmount integer not null,count integer not null,sportDate text not null,stepsAmount integer not null,calories integer not null,endTime text not null,id text not null,startTime text not null,steps integer not null,user_id text not null,isDeposit text not null,timeInterval text not null)";
     [db executeUpdate:createTable];
-    
     NSDictionary *dic = nil;
     for (dic in arr) {
         for (NSInteger i = 0; i<[[dic objectForKey:@"stepFragments"] count]; i++) {
-            [db executeUpdate:@"insert or replace into SportData (caloriesAmount,count,sportDate,stepsAmount,calories,endTime,id,startTime,steps,user_id,isDeposit) values (?,?,?,?,?,?,?,?,?,?,?)" withArgumentsInArray:
-             [NSArray arrayWithObjects:
-              [dic objectForKey:@"caloriesAmount"],
-              [dic objectForKey:@"count"],
-              [dic objectForKey:@"sportDate"],
-              [dic objectForKey:@"stepsAmount"],
-              [[[dic objectForKey:@"stepFragments"] objectAtIndex:i] objectForKey:@"calories"],
-              [[[dic objectForKey:@"stepFragments"] objectAtIndex:i] objectForKey:@"endTime"],
-              [[[dic objectForKey:@"stepFragments"] objectAtIndex:i] objectForKey:@"id"],
-              [[[dic objectForKey:@"stepFragments"] objectAtIndex:i] objectForKey:@"startTime"],
-              [[[dic objectForKey:@"stepFragments"] objectAtIndex:i] objectForKey:@"steps"],
-              [kAPPDELEGATE._loacluserinfo GetUser_ID],
-              @"1",
-              nil]];
+            
+            NSString *ids = [self sportDateCheckID:[[[dic objectForKey:@"stepFragments"] objectAtIndex:i] objectForKey:@"id"]];
+            if (!ids) {
+                [self setSportData:db dicData:dic i:i];
+            }else{
+                [self  delDateSportIDData:ids];
+                [self setSportData:db dicData:dic i:i];
+            }  
         }
     }
-    
-    
-    
-    
     [db close];
 }
+
++(void)setSportData:(FMDatabase *)db dicData:(NSDictionary *)dic i:(NSInteger)i{
+    [db executeUpdate:@"insert or replace into SportData (caloriesAmount,count,sportDate,stepsAmount,calories,endTime,id,startTime,steps,user_id,isDeposit,timeInterval) values (?,?,?,?,?,?,?,?,?,?,?,?)" withArgumentsInArray:
+     [NSArray arrayWithObjects:
+      [dic objectForKey:@"caloriesAmount"],
+      [dic objectForKey:@"count"],
+      [dic objectForKey:@"sportDate"],
+      [dic objectForKey:@"stepsAmount"],
+      [[[dic objectForKey:@"stepFragments"] objectAtIndex:i] objectForKey:@"calories"],
+      [[[dic objectForKey:@"stepFragments"] objectAtIndex:i] objectForKey:@"endTime"],
+      [[[dic objectForKey:@"stepFragments"] objectAtIndex:i] objectForKey:@"id"],
+      [[[dic objectForKey:@"stepFragments"] objectAtIndex:i] objectForKey:@"startTime"],
+      [[[dic objectForKey:@"stepFragments"] objectAtIndex:i] objectForKey:@"steps"],
+      [kAPPDELEGATE._loacluserinfo GetUser_ID],
+      @"1",
+      @"nil",
+      nil]];
+}
+
+
+
++(void)sportBlueData:(NSDictionary *)sportData{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    
+    NSString *createTable = @"create table if not exists SportData (caloriesAmount integer not null,count integer not null,sportDate text not null,stepsAmount integer not null,calories integer not null,endTime text not null,id text not null,startTime text not null,steps integer not null,user_id text not null,isDeposit text not null,timeInterval text not null)";
+    [db executeUpdate:createTable];
+    [self depositSportBlueData:db sportData:sportData];
+}
++(void)depositSportBlueData:(FMDatabase *)db sportData:(NSDictionary *)sportData{
+    
+    
+    
+    [db executeUpdate:@"insert or replace into SportData (caloriesAmount,count,sportDate,stepsAmount,calories,endTime,id,startTime,steps,user_id,isDeposit,timeInterval) values (?,?,?,?,?,?,?,?,?,?,?,?)" withArgumentsInArray:
+     [NSArray arrayWithObjects:
+      [sportData objectForKey:@"caloriesAmount"]==nil?@"":[sportData objectForKey:@"caloriesAmount"],
+      @"1",
+      [sportData objectForKey:@"sportDate"],
+      [sportData objectForKey:@"stepsAmount"],
+      [sportData objectForKey:@"calories"],
+      @"1",
+      @"1",
+      @"1",
+      [sportData objectForKey:@"steps"],
+      [kAPPDELEGATE._loacluserinfo GetUser_ID],
+      @"1",
+      [sportData objectForKey:@"timeInterval"],
+      nil]];
+    [db close];
+}
+
+
+
+
 +(NSMutableArray *)sportRecordGetData{
     NSMutableArray *dataArr = [NSMutableArray array];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -120,6 +163,33 @@
     }
     [db close];
     return dataArr;
+}
++(NSString *)sportDateCheckID:(NSString *)date{
+    NSString *dateStr = nil;
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *takeCreate = [NSString stringWithFormat:@"select * from SportData where user_id = '%@' and id = '%@' ",[kAPPDELEGATE._loacluserinfo GetUser_ID],date];
+    FMResultSet *rs = [db executeQuery:takeCreate];
+    while ([rs next]) {
+       dateStr = [rs stringForColumn:@"id"];
+    }
+    return dateStr;
+}
+
++(void)delDateSportData:(NSString *)date{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *del = [NSString stringWithFormat:@"delete from SportData where user_id = '%@' and sportDate = '%@'",[kAPPDELEGATE._loacluserinfo GetUser_ID],date];
+    [db executeUpdate:del];
+    [db close];
+}
+
++(void)delDateSportIDData:(NSString *)data{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *del = [NSString stringWithFormat:@"delete from SportData where user_id = '%@' and id = '%@'",[kAPPDELEGATE._loacluserinfo GetUser_ID],data];
+    [db executeUpdate:del];
+    [db close];
 }
 
 

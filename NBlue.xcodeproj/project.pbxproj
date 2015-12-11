@@ -14,6 +14,7 @@
 		046F18461C0D2D3100A21FA6 /* LYDSetSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F18441C0D2D3100A21FA6 /* LYDSetSegmentControl.m */; };
 		046F188B1C0D4A0700A21FA6 /* NLColumnImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F188A1C0D4A0700A21FA6 /* NLColumnImage.m */; };
 		046F188E1C0D777A00A21FA6 /* NLStepImageLabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F188D1C0D777A00A21FA6 /* NLStepImageLabView.m */; };
+		047BE7E91C19AB8600821F23 /* NLStepColumnImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 047BE7E81C19AB8600821F23 /* NLStepColumnImage.m */; };
 		049751A11BFEEED50044D97B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751A01BFEEED50044D97B /* main.m */; };
 		049751AA1BFEEED50044D97B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049751A81BFEEED50044D97B /* Main.storyboard */; };
 		049751AC1BFEEED50044D97B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049751AB1BFEEED50044D97B /* Assets.xcassets */; };
@@ -101,6 +102,8 @@
 		046F188A1C0D4A0700A21FA6 /* NLColumnImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLColumnImage.m; sourceTree = "<group>"; };
 		046F188C1C0D777A00A21FA6 /* NLStepImageLabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLStepImageLabView.h; sourceTree = "<group>"; };
 		046F188D1C0D777A00A21FA6 /* NLStepImageLabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLStepImageLabView.m; sourceTree = "<group>"; };
+		047BE7E71C19AB8600821F23 /* NLStepColumnImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLStepColumnImage.h; sourceTree = "<group>"; };
+		047BE7E81C19AB8600821F23 /* NLStepColumnImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLStepColumnImage.m; sourceTree = "<group>"; };
 		0497519C1BFEEED50044D97B /* NBlue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NBlue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		049751A01BFEEED50044D97B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		049751A91BFEEED50044D97B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -486,6 +489,8 @@
 				04F3CC7F1C0460120066D39D /* NLHealthStepNumber.m */,
 				046F18891C0D4A0700A21FA6 /* NLColumnImage.h */,
 				046F188A1C0D4A0700A21FA6 /* NLColumnImage.m */,
+				047BE7E71C19AB8600821F23 /* NLStepColumnImage.h */,
+				047BE7E81C19AB8600821F23 /* NLStepColumnImage.m */,
 				046F188C1C0D777A00A21FA6 /* NLStepImageLabView.h */,
 				046F188D1C0D777A00A21FA6 /* NLStepImageLabView.m */,
 				04A151951C0DAA9700CB93FF /* NLRingLine.h */,
@@ -781,6 +786,7 @@
 			files = (
 				049B07821C1559ED005147B5 /* NLForgetPasswordViewController.m in Sources */,
 				0458E5DC1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m in Sources */,
+				047BE7E91C19AB8600821F23 /* NLStepColumnImage.m in Sources */,
 				04F5BB1F1C05673F00B37CE2 /* NLMyEquipmentController.m in Sources */,
 				04FA89C11C117F780064F3AA /* NLHalfView.m in Sources */,
 				049B07831C1559ED005147B5 /* NLLogInViewController.m in Sources */,

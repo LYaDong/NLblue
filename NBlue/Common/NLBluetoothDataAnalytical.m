@@ -60,6 +60,12 @@
     return number;
 }
 
++ (long)sixTenHexTeen:(NSString *)num
+{
+    long   number = strtoul([[num substringWithRange:NSMakeRange(0, num.length)] UTF8String],0,16);
+    return number;
+}
+
 #pragma mark 两位16进制转换10进制
 +(NSArray *)FourHexConversion:(NSString *)hexString{
     NSMutableArray *numbers = [NSMutableArray arrayWithCapacity:0];
@@ -176,26 +182,70 @@
                      @"0803220f00000000000000000000000000000000",];
 
 
-   [self toDecimalSystemWithBinarySystem:[self getBinaryByhex:[self reversedPositionStr:@"604112e003"]]];
+
     
+    //计算时间
+    NSString *year = [arrData[0] substringWithRange:NSMakeRange(8, 4)];
+    NSString *yearDate = [NSString stringWithFormat:@"%ld",[self ToHexConversion:[self reversedPositionStr:year]]];
+    NSString *moht = [arrData[0] substringWithRange:NSMakeRange(12, 4)];
+    NSArray *mothDate = [self FourHexConversion:moht];
+    NSString *sportDate = [NSString stringWithFormat:@"%@-%@-%@",yearDate,mothDate[0],mothDate[1]];
+    [NLSQLData delDateSportData:sportDate];
+    
+    
+    static NSInteger timeInterval = 0;
     
     for (NSInteger i = 0; i<arrData.count; i++) {
-        if (i==0||i==1) {}else{
+        if (i==0||i==1) {
+            
+        }else{
             NSString *data = arrData[i];
             for (NSInteger j = 0; j<3; j++) {
+                timeInterval ++;
+                //计算时间
+               
+                NSString *sportDate = [NSString stringWithFormat:@"%@-%@-%@",yearDate,mothDate[0],mothDate[1]];
+                //计算总步数 总卡路里
+                NSString *sportCountStr = [arrData[1] substringWithRange:NSMakeRange(8, 8)];
+                NSString *sportCount = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[self reversedPositionStr:sportCountStr]]];
+                NSString *sportClaorie =[arrData[1] substringWithRange:NSMakeRange(16, 8)];
+                NSString *caloriesAmount = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[self reversedPositionStr:sportClaorie]]];
+
+//                NSString *xx =  [self reversedPositionStr:[hexTo substringWithRange:NSMakeRange(2, 12)]];
+//                if (![xx isEqualToString:@"000000000000"]) {
+////                    NSLog(@"%@",[self toDecimalSystemWithBinarySystem:xx]);
+//                    
+//                    NSLog(@"%@",xx);
+//
+//                }
+                //计算步数卡路里什么的
                 NSString *format = [data substringWithRange:NSMakeRange(8 + j*10, 10)];
                 NSString *reversenStr = [self reversedPositionStr:format];
                 NSString *hexTo = [self getBinaryByhex:reversenStr];
-                NSString *hexSixTeen = [self toDecimalSystemWithBinarySystem:hexTo];
-                
-                NSLog(@"%@",hexSixTeen);
-                
+                NSString *sportNum = [self toDecimalSystemWithBinarySystem:[hexTo substringWithRange:NSMakeRange(2, 12)]];
+                NSString *activeTime = [self toDecimalSystemWithBinarySystem:[hexTo substringWithRange:NSMakeRange(14, 4)]];
+                NSString *calorie = [self toDecimalSystemWithBinarySystem:[hexTo substringWithRange:NSMakeRange(18, 10)]];
+                NSString *distance = [self toDecimalSystemWithBinarySystem:[hexTo substringWithRange:NSMakeRange(28, 12)]];
+                if (![sportNum isEqualToString:@"0"]) {
+//                    NSArray *blueDate = @[sportDate,sportNum,activeTime,calorie,distance,sportCount,[NSString stringWithFormat:@"%ld",(long)timeInterval]];
+                    
+                    NSDictionary *dic = @{@"calories":calorie,
+                                          @"stepsAmount":sportCount,
+                                          @"sportDate":sportDate,
+                                          @"activeTime":activeTime,
+                                          @"distance":distance,
+                                          @"timeInterval":[NSString stringWithFormat:@"%ld",(long)timeInterval],
+                                          @"steps":sportNum,
+                                          @"caloriesAmount":caloriesAmount};
+                    
+                    
+                    [NLSQLData sportBlueData:dic];
+                    
+//                    NSLog(@" %@ 步数 = %@ 活跃时间 = %@ 卡路里 = %@ 距离 = %@",sportDate,sportNum,activeTime,calorie,distance);
+                }
             }
         }
-        
     }
-
-    
 }
 
 

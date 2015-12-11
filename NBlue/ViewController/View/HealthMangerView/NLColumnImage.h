@@ -18,12 +18,16 @@ typedef NS_ENUM(NSUInteger,NLCalendarType) {
 
 @interface NLColumnImage : UIView
 
+@property(nonatomic,strong)UILabel *timeLab;
++(NLColumnImage *)sharedInstance;
+
+- (instancetype)initWithFrame:(CGRect)frame DataArr:(NSArray *)arr
+                  strokeColor:(UIColor *)strokeColor
+                    withColor:(UIColor *)withColor
+                         type:(NSInteger)type
+                   timeLabArr:(NSArray *)labTimeArr;
 
 
-
-- (instancetype)initWithDataArr:(NSArray *)arr
-                    strokeColor:(UIColor *)strokeColor
-                      withColor:(UIColor *)withColor
-                           type:(NSInteger)type
-                     timeLabArr:(NSArray *)labTimeArr;
+//- (void)slideChangearr:(NSArray *)arr intx:(NSInteger)uin;
+//-(void)vvvvv;
 @end

@@ -15,6 +15,7 @@
 @property(nonatomic,strong)UIScrollView *mainScrollew;
 @property(nonatomic,strong)NLColumnImage *column;
 @property(nonatomic,strong)NSMutableArray *dataArr;
+@property(nonatomic,assign)CGFloat convenImageWeight;
 
 @end
 
@@ -52,20 +53,9 @@
     LYDSegmentControl *sele = [[LYDSegmentControl alloc] initWithSetSegment:segement frame:frame];
     sele.delegate = self;
     [self.view addSubview:sele];
-    
-    
-    
-    _mainScrollew = [[UIScrollView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle statusBarSize] - [ApplicationStyle navigationBarSize])];
-    _mainScrollew.delegate = self;
-    
-    
-
-//    _mainScrollew.pagingEnabled = YES;
-//    _mainScrollew.bounces = NO;
-    [self.view addSubview:_mainScrollew];
 
     _dataArr = [NSMutableArray array];
-    for (NSInteger i=0; i<22; i++) {
+    for (NSInteger i=0; i<10; i++) {
         NSInteger num = arc4random()%150;
         [_dataArr addObject:[NSNumber numberWithInteger:num]];
     }
@@ -83,13 +73,18 @@
     line.backgroundColor = [ApplicationStyle subjectWithColor];
     [self.view addSubview:line];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake((SCREENWIDTH - 10)/2, [ApplicationStyle control_height:480] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize] - 10, 10, 10)];
-    view.backgroundColor = [UIColor redColor];
+    
+    
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:10])/2, [ApplicationStyle control_height:480] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize] - [ApplicationStyle control_weight:10], [ApplicationStyle control_weight:10], [ApplicationStyle control_weight:10])];
+//    view.layer.borderColor = [UIColor greenColor].CGColor;
+//    view.layer.borderWidth = 1;
+    view.backgroundColor = [UIColor greenColor];
+    
     [self.view addSubview:view];
     
     
-    
-    
+
     
     
     NSArray *remarkLabText = @[NSLocalizedString(@"NLHealthManger_StepRemarkLab", nil),
@@ -121,32 +116,15 @@
         [self.view addSubview:labView];
         
     }
- 
     
 }
+
 #pragma mark 系统Delegate
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    NSLog(@"%0.0f",scrollView.contentOffset.x/([ApplicationStyle control_weight:50] + [ApplicationStyle control_weight:10]));
-    NSLog(@"%0.0f",scrollView.contentOffset.x);
-    
-}
-
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    float xx = (NSInteger)(scrollView.contentOffset.x/([ApplicationStyle control_weight:50] + [ApplicationStyle control_weight:10])) + 0.5;
-    float yy = scrollView.contentOffset.x/([ApplicationStyle control_weight:50] + [ApplicationStyle control_weight:10]);
-    
-//    if (scrollView.contentOffset.x) {
-//        <#statements#>
-//    }
-    
-    
-}
-
 #pragma mark 自己的Delegate
 -(void)segmentedIndex:(NSInteger)index{
     
     [_column removeFromSuperview];
+    [_dataArr removeAllObjects];
     
     switch (index) {
         case NLCalendarType_Day:
@@ -158,6 +136,7 @@
                 [arrs addObject:[NSNumber numberWithInteger:num]];
             }
             
+            [_dataArr addObjectsFromArray:arrs];
             [self imageConvenDataArr:arrs type:NLCalendarType_Day];
             break;
         }
@@ -168,7 +147,7 @@
                 NSInteger num = arc4random()%150;
                 [arrs addObject:[NSNumber numberWithInteger:num]];
             }
-            
+            [_dataArr addObjectsFromArray:arrs];
            [self imageConvenDataArr:arrs type:NLCalendarType_Week];
             break;
         }
@@ -180,19 +159,14 @@
                 NSInteger num = arc4random()%150;
                 [arrs addObject:[NSNumber numberWithInteger:num]];
             }
-            
+            [_dataArr addObjectsFromArray:arrs];
             [self imageConvenDataArr:arrs type:NLCalendarType_Month];
             break;
         }
         default:
             break;
     }
-    
-    
-    
-    
-    //    > SCREENWIDTH + arrs.count * [ApplicationStyle control_weight:10]?arrs.count * [ApplicationStyle control_weight:50] + arrs.count * [ApplicationStyle control_weight:10]: SCREENWIDTH + arrs.count * [ApplicationStyle control_weight:10]
-    
+ 
     
     
 }
@@ -201,39 +175,31 @@
 
 
 -(void)imageConvenDataArr:(NSArray *)arr type:(NSInteger)type{
-    
-    
-    CGFloat convenImageWeight = 0;
+
     switch (type) {
         case NLCalendarType_Day:
         {
-            convenImageWeight = [ApplicationStyle control_weight:50];
+            _convenImageWeight = [ApplicationStyle control_weight:50];
 
             break;
         }
         case NLCalendarType_Week:
         {
-            convenImageWeight = [ApplicationStyle control_weight:90];
+            _convenImageWeight = [ApplicationStyle control_weight:90];
             break;
         }
         case NLCalendarType_Month:
         {
-            convenImageWeight = [ApplicationStyle control_weight:120];
+            _convenImageWeight = [ApplicationStyle control_weight:120];
             break;
         }
         default:
             break;
     }
-    
-    NSInteger weight = arr.count * convenImageWeight + arr.count * [ApplicationStyle control_weight:10] - [ApplicationStyle control_weight:20];
-    
-    _mainScrollew.contentSize = CGSizeMake(weight + SCREENWIDTH , SCREENHEIGHT - [ApplicationStyle statusBarSize] - [ApplicationStyle navigationBarSize]);
-    _mainScrollew.contentOffset = CGPointMake(weight - [ApplicationStyle control_weight:10]  , 0);
-    
-    _column = [[NLColumnImage alloc] initWithDataArr:arr strokeColor:[@"882a00" hexStringToColor] withColor:[@"fac96f" hexStringToColor] type:type timeLabArr:nil];
-    _column.frame = CGRectMake(SCREENWIDTH/2, 0, weight , [ApplicationStyle control_height:480]);
-    _column.backgroundColor = [UIColor clearColor];
-    [_mainScrollew addSubview:_column];
+
+    CGRect frame = CGRectMake(0, [ApplicationStyle navigationBarSize] + [ApplicationStyle statusBarSize], SCREENWIDTH, [ApplicationStyle control_height:540]);
+    _column = [[NLColumnImage alloc] initWithFrame:frame DataArr:arr strokeColor:[@"882a00" hexStringToColor] withColor:[@"fac96f" hexStringToColor] type:type timeLabArr:nil];
+    [self.view addSubview:_column];
     
 }
 
