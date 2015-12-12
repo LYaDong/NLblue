@@ -62,6 +62,7 @@
 		04F5BB1F1C05673F00B37CE2 /* NLMyEquipmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5BB1E1C05673F00B37CE2 /* NLMyEquipmentController.m */; };
 		04F5BB221C05676700B37CE2 /* NLShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5BB211C05676700B37CE2 /* NLShareController.m */; };
 		04F5BB701C05B51A00B37CE2 /* NLIndividuaFormatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5BB6F1C05B51A00B37CE2 /* NLIndividuaFormatViewController.m */; };
+		04F7F64E1C1BFC9000466EBC /* NLGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7F64D1C1BFC9000466EBC /* NLGestureRecognizer.m */; };
 		04FA89BC1C117E400064F3AA /* NLDatahub.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B71C117E400064F3AA /* NLDatahub.m */; };
 		04FA89BD1C117E400064F3AA /* NLHTTPRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */; };
 		04FA89BE1C117E400064F3AA /* NLHTTPRequestOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */; };
@@ -199,6 +200,8 @@
 		04F5BB211C05676700B37CE2 /* NLShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLShareController.m; sourceTree = "<group>"; };
 		04F5BB6E1C05B51A00B37CE2 /* NLIndividuaFormatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLIndividuaFormatViewController.h; sourceTree = "<group>"; };
 		04F5BB6F1C05B51A00B37CE2 /* NLIndividuaFormatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLIndividuaFormatViewController.m; sourceTree = "<group>"; };
+		04F7F64C1C1BFC9000466EBC /* NLGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLGestureRecognizer.h; sourceTree = "<group>"; };
+		04F7F64D1C1BFC9000466EBC /* NLGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLGestureRecognizer.m; sourceTree = "<group>"; };
 		04FA89B51C117E400064F3AA /* NLApiURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLApiURL.h; sourceTree = "<group>"; };
 		04FA89B61C117E400064F3AA /* NLDatahub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLDatahub.h; sourceTree = "<group>"; };
 		04FA89B71C117E400064F3AA /* NLDatahub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLDatahub.m; sourceTree = "<group>"; };
@@ -319,6 +322,8 @@
 			children = (
 				04F4B7D01C083B3E00DE60DE /* NLLocalUserInfo.h */,
 				04F4B7D11C083B3E00DE60DE /* NLLocalUserInfo.m */,
+				04F7F64C1C1BFC9000466EBC /* NLGestureRecognizer.h */,
+				04F7F64D1C1BFC9000466EBC /* NLGestureRecognizer.m */,
 			);
 			path = ToolClass;
 			sourceTree = "<group>";
@@ -805,6 +810,7 @@
 				04F04F811C06E46F009DC949 /* NLPickView.m in Sources */,
 				0458E5D91C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m in Sources */,
 				049751A11BFEEED50044D97B /* main.m in Sources */,
+				04F7F64E1C1BFC9000466EBC /* NLGestureRecognizer.m in Sources */,
 				04A151971C0DAA9700CB93FF /* NLRingLine.m in Sources */,
 				04F3CC461C03F5710066D39D /* LineProgressView.m in Sources */,
 				04F4B7C01C07ED2A00DE60DE /* NLMyEquipmentCell.m in Sources */,

@@ -26,7 +26,7 @@ static const NSInteger calenderVertical = 5;
     return self;
 }
 -(void)buildUI:(NSInteger)day{
-    NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:day];
+    NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:0];
     CGFloat w = (self.frame.size.width - [ApplicationStyle control_weight:47 * 2]) / Corss;
 //    CGFloat h = self.frame.size.height / Vertical;
     //年 月
@@ -48,6 +48,9 @@ static const NSInteger calenderVertical = 5;
     
     NSInteger theCurrent = [ApplicationStyle whatDays:date];
     
+    
+    NSLog(@"%ld",theCurrent);
+    
     for (NSInteger i = 0; i< calenderVertical * 7; i++) {
         NSInteger x = [ApplicationStyle control_weight:47] + (i % 7) * w, y = (i / 7) * w + _yearMonthLab.bottomOffset + [ApplicationStyle control_height:10] + [ApplicationStyle control_height:60];
         UIButton *dayButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -55,17 +58,24 @@ static const NSInteger calenderVertical = 5;
         dayButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         
         NSInteger daysInLastMonth = [ApplicationStyle totalDaysInMonth:date];
-        NSInteger daysInThisMonth = [ApplicationStyle totalDaysInMonth:date];
+//        NSInteger daysInThisMonth = [ApplicationStyle totalDaysInMonth:date];
         NSInteger firstWeekday    = [ApplicationStyle getWeekofFirstInDate:date];
+        
+        NSLog(@"%ld",firstWeekday);
         NSInteger day = 0;
         if (i < firstWeekday) {
+            //上个月的日子
             day = daysInLastMonth - firstWeekday + i + 1;
-        }else if (i > firstWeekday + daysInThisMonth - 1){
-            day = i + 1 - firstWeekday - daysInThisMonth;
+            dayButton.backgroundColor = [UIColor lightGrayColor];
+        }else if (i > firstWeekday + daysInLastMonth - 1){
+            //下个月的日子
+            day = i + 1 - firstWeekday - daysInLastMonth;
+            dayButton.backgroundColor = [UIColor lightGrayColor];
         }else{
+            //本月的日子
             day = i - firstWeekday + 1;
         }
-        if (i + 1 == theCurrent) {
+        if (i - firstWeekday == theCurrent - 1) {
             dayButton.backgroundColor = [UIColor redColor];
             dayButton.layer.cornerRadius = w/2;
         }

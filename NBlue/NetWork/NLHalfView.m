@@ -7,7 +7,12 @@
 //
 
 #import "NLHalfView.h"
+#import "NLGestureRecognizer.h"
 @interface NLHalfView()
+@property(nonatomic,strong)NLGestureRecognizer *gestureRecognizer;
+@property(nonatomic,assign)CGFloat startAngle;
+@property(nonatomic,assign)CGFloat endAngle;
+
 @property(nonatomic,assign)NSInteger num;
 @property(nonatomic,assign)NSInteger index;
 @property(nonatomic,assign)CGFloat redius;
@@ -35,7 +40,8 @@
         _width = width;
         _starColor = starColor;
         _endColor = endColor;
-        
+        _gestureRecognizer = [[NLGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+        [self addGestureRecognizer:_gestureRecognizer];
 
     }
     return self;
@@ -44,11 +50,10 @@
 
 -(void)drawRect:(CGRect)rect{
     
+    _startAngle = -(M_PI + M_PI_4);
+    _endAngle = M_PI - (M_PI_4 + M_PI_2);
+    
     [_starColor set];
-
-    
-    
-    
     CGFloat sl = (2 * M_PI_2 - M_PI_4)/(_num + 5);
     
     for (int i=0; i<=_num; i++) {
@@ -82,7 +87,7 @@
     
     [_endColor set];
     
-    for (int i=0; i<=_index; i++) {
+    for (int i=0; i<_index; i++) {
         
         CGFloat startValue = (sl * i) + sl * i + (sl * i)/[ApplicationStyle control_weight:300];
         CGFloat startAngle, endAngle;
@@ -147,7 +152,29 @@
     self.progressCount = 10;
 }
 
-
+#pragma mark 处理滑动收拾
+- (void)handleGesture:(NLGestureRecognizer *)gesture{
+    //    //    1 . 中点角
+    CGFloat midPointAngle = (2 * M_PI + _startAngle - _endAngle) / 2 + _endAngle;
+    //    2 . 确保角在一个合适的范围内
+    CGFloat boundedAngle = gesture.touchAngle;
+    if (boundedAngle > midPointAngle) {
+        boundedAngle -= 2*M_PI;
+        
+    }else if(boundedAngle<(midPointAngle - 2 *M_PI)){
+        boundedAngle +=2 *M_PI;
+    }
+    //    3 . 在适当范围内约束角度
+    boundedAngle = MIN(_endAngle, MAX(_startAngle, boundedAngle));     //???
+    //    4 . 将角度转为值
+    CGFloat angleRange = _endAngle - _startAngle;
+    CGFloat valueRange = 1 - 0;
+    CGFloat valueForAngle = (boundedAngle - _startAngle)/angleRange * valueRange + 0;
+    //要滑动的值 - 起点值  / 角度值  *  差值  + 最小值     =   最终角度值
+    
+    _index = valueForAngle * 51;
+    [self setNeedsDisplay];
+}
 
 -(void)setProgro:(NSUInteger)progressCount{
     self.progressCount = progressCount;

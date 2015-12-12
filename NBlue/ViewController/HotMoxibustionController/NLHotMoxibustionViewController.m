@@ -16,9 +16,6 @@
 #import "NLSQLData.h"
 @interface NLHotMoxibustionViewController ()
 @property(nonatomic,strong)NSArray *peripheralArray;
-@property(nonatomic,strong)UILabel *setTemperatureLab;
-@property(nonatomic,strong)UILabel *timesLab;
-@property(nonatomic,strong)UIButton *addTimesBtn;
 @property(nonatomic,strong)NSMutableArray *sportDataArr;
 @end
 
@@ -182,18 +179,16 @@
     
     [self loadStepData];
     [self halfCircle];
-    [self corcleCount];
-    [self downBtns];
 }
 -(void)halfCircle{
     
 
     
-    CGRect frame = CGRectMake(0, 100, self.view.frame.size.width, 300);
+    CGRect frame = CGRectMake((SCREENWIDTH - 270 )/2, 100, 270, 250);
     
     NLHalfView *vc = [[NLHalfView alloc] initWithFrame:frame
                                                    num:50
-                                                 index:20
+                                                 index:0
                                                 redius:[ApplicationStyle control_weight:190]
                                                  width:[ApplicationStyle control_weight:40]
                                              starColor:[@"f7f3ff" hexStringToColor]
@@ -234,63 +229,10 @@
     
     
 }
--(void)corcleCount{
-    _setTemperatureLab = [[UILabel alloc] initWithFrame:CGRectMake(0, [ApplicationStyle control_height:400], SCREENWIDTH, [ApplicationStyle control_height:40])];
-    _setTemperatureLab.text = @"36°C温度设置";
-    _setTemperatureLab.textAlignment = NSTextAlignmentCenter;
-    _setTemperatureLab.textColor = [UIColor whiteColor];
-    _setTemperatureLab.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:20]];
-    [self.view addSubview:_setTemperatureLab];
-    [self heartReatlab:_setTemperatureLab andRang:NSMakeRange(0, 4)];
-    
-    NSString *strs = @"热灸时间 01:30";
-    CGSize timesLabSize = [ApplicationStyle textSize:strs font:[UIFont systemFontOfSize:[ApplicationStyle control_weight:20]] size:SCREENWIDTH];
-    _timesLab = [[UILabel  alloc] initWithFrame:CGRectMake(130, _setTemperatureLab.bottomOffset + [ApplicationStyle control_height:34], timesLabSize.width, timesLabSize.height)];
-    _timesLab.text = strs;
-    _timesLab.textColor = [UIColor whiteColor];
-    _timesLab.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:20]];
-    [self.view addSubview:_timesLab];
-    
-    _addTimesBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _addTimesBtn.frame = CGRectMake(_timesLab.rightSideOffset + [ApplicationStyle control_weight:20], _setTemperatureLab.bottomOffset + [ApplicationStyle control_height:34], 20, 20);
-    _addTimesBtn.backgroundColor = [UIColor redColor];
-    [self.view addSubview:_addTimesBtn];
-    
-    UIButton *offBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    offBtn.frame = CGRectMake((SCREENWIDTH - 20 )/2, _addTimesBtn.bottomOffset + [ApplicationStyle control_height:55], 20, 20);
-    offBtn.backgroundColor =[UIColor whiteColor];
-    [self.view addSubview:offBtn];
-    
-   
-}
 
--(void)downBtns{
-    UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle control_height:561] + [ApplicationStyle statusBarSize]+[ApplicationStyle navigationBarSize], SCREENWIDTH, [ApplicationStyle control_height:2])];
-    viewLine.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:viewLine];
-    
-    
-    NSArray *effectBtnTextArr = @[NSLocalizedString(@"HotMoxibustion_Effect", nil),NSLocalizedString(@"HotMoxibustion_Comfort", nil)];
-    int64_t type = 0;
-    for (int i=0; i<effectBtnTextArr.count; i++) {
-        if (i==0) {
-            type = 0;
-        }else{
-            type = 1;
-        }
-        
-        NLAboutImageBtn *imageBtn = [[NLAboutImageBtn alloc] initWithFrame:CGRectMake(0 + i*(SCREENWIDTH/2 + [ApplicationStyle control_weight:2]), viewLine.bottomOffset + [ApplicationStyle control_height:8], SCREENWIDTH/2 - [ApplicationStyle control_height:4], [ApplicationStyle control_height:89])
-                                                                  type:type
-                                                                  font:[ApplicationStyle textSuperSmallFont]
-                                                                 color:[UIColor blackColor]
-                                                                 image:[UIImage imageNamed:@"Health_Manger_X"]
-                                                                  text:effectBtnTextArr[i]];
-        imageBtn.backgroundColor = [UIColor whiteColor];
-        [self.view addSubview:imageBtn];
 
-    }
-    
-}
+
+
 
 -(void)loadStepData{
     
