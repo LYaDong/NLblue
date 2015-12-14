@@ -6,6 +6,8 @@
 //  Copyright © 2015年 LYD. All rights reserved.
 //
 
+static const NSInteger TIMELINE = 90;
+
 #import "NLHotMoxibustionViewController.h"
 #import "NLBluetoothAgreement.h"
 #import "NLBluetoothDataAnalytical.h"
@@ -14,9 +16,14 @@
 #import "NLBluetoothDataAnalytical.h"
 #import "NLHalfView.h"
 #import "NLSQLData.h"
-@interface NLHotMoxibustionViewController ()
+@interface NLHotMoxibustionViewController ()<UIScrollViewDelegate,NLHalfViewDelgate>
 @property(nonatomic,strong)NSArray *peripheralArray;
 @property(nonatomic,strong)NSMutableArray *sportDataArr;
+@property(nonatomic,strong)UILabel *temperatureLab;
+@property(nonatomic,strong)UIScrollView *staffScrollew;
+@property(nonatomic,assign)CGFloat lenthWidth;
+@property(nonatomic,strong)UIButton *moxibustionBtn;
+@property(nonatomic,assign)BOOL isOff;
 @end
 
 @implementation NLHotMoxibustionViewController
@@ -184,7 +191,7 @@
     
 
     
-    CGRect frame = CGRectMake((SCREENWIDTH - 270 )/2, 100, 270, 250);
+    CGRect frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:446] )/2, [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize] + [ApplicationStyle control_height:76], [ApplicationStyle control_weight:446], [ApplicationStyle control_height:446]);
     
     NLHalfView *vc = [[NLHalfView alloc] initWithFrame:frame
                                                    num:50
@@ -193,40 +200,70 @@
                                                  width:[ApplicationStyle control_weight:40]
                                              starColor:[@"f7f3ff" hexStringToColor]
                                               endColor:[@"ffde6a" hexStringToColor]];
-    
-    vc.progressCount = 11;
+    vc.delegate = self;
     
     vc.backgroundColor = [UIColor clearColor];
     [self.view addSubview:vc];
     
     
     
-    
-
-    
-    
-//    LineProgressView *lineProgressView = [[LineProgressView alloc] initWithFrame:CGRectMake((SCREENWIDTH-[ApplicationStyle control_weight:235*2])/2.0, [ApplicationStyle control_height:200], [ApplicationStyle control_weight:235*2], [ApplicationStyle control_weight:235*2])];
-////    lineProgressView.backgroundColor = [UIColor whiteColor];
-//    lineProgressView.delegate = self;
-//    lineProgressView.total = 51;
-//    lineProgressView.color = [@"f7f3ff" hexStringToColor];
-//    lineProgressView.radius = [ApplicationStyle control_weight:235*2]/2;
-////    lineProgressView.innerRadius = [ApplicationStyle control_weight:400]/2;
-//    lineProgressView.startAngle = M_PI * 0.78;
-//    lineProgressView.endAngle = M_PI * 2.3;
-//    lineProgressView.completedColor = [@"ffde6a" hexStringToColor];
-//    //    lineProgressView.animationDuration = 2.0;
-//    lineProgressView.layer.shouldRasterize = YES;
-//    [self.view addSubview:lineProgressView];
-//    [lineProgressView setCompleted:30 animated:YES];
-
+    _temperatureLab = [[UILabel alloc] initWithFrame:CGRectMake(0, [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize] +[ApplicationStyle control_height:255], SCREENWIDTH, [ApplicationStyle control_height:70])];
+    _temperatureLab.textColor = [ApplicationStyle subjectWithColor];
+    _temperatureLab.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:90]];
+    _temperatureLab.text = [NSString stringWithFormat:@"%d°C",35];
+    _temperatureLab.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:_temperatureLab];
     
     
-//    UIImageView *images = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:200*2])/2, [ApplicationStyle control_height:240], [ApplicationStyle control_weight:200 *2], [ApplicationStyle control_height:200 *2])];
-//    images.image = [UIImage imageNamed:@"000"];
-//    [self.view addSubview:images];
+    UIImageView *sj= [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:24])/2, [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize] + [ApplicationStyle control_height:530], [ApplicationStyle control_weight:24], [ApplicationStyle control_height:24])];
+    sj.image = [UIImage imageNamed:@"HM_SJ"];
+    [self.view addSubview:sj];
     
     
+    
+    
+    NSInteger width = (SCREENWIDTH - [ApplicationStyle control_weight:68 * 2]);
+    
+    _staffScrollew = [[UIScrollView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:68], [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize] + [ApplicationStyle control_height:566], width, [ApplicationStyle control_height:96])];
+    _staffScrollew.delegate = self;
+    _staffScrollew.bounces = NO;
+    _staffScrollew.showsVerticalScrollIndicator = FALSE;
+    _staffScrollew.showsHorizontalScrollIndicator = FALSE;
+    _staffScrollew.userInteractionEnabled = YES;
+    _staffScrollew.contentSize = CGSizeMake(TIMELINE * [ApplicationStyle control_weight:16] + width, [ApplicationStyle control_height:96]);
+    [self.view addSubview:_staffScrollew];
+    
+    
+    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:68], [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize] + [ApplicationStyle control_height:566], width, [ApplicationStyle control_height:96])];
+    image.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:image];
+    
+    NSInteger num = 0;
+    for (NSInteger i=0; i<=TIMELINE; i++) {
+        
+        UIView *timeLine = [[UIView alloc] initWithFrame:CGRectMake(width/2 + i * [ApplicationStyle control_weight:16], [ApplicationStyle control_height:15], [ApplicationStyle control_weight:4], [ApplicationStyle control_height:36])];
+        
+        
+        timeLine.backgroundColor = [ApplicationStyle subjectWithColor];
+        [_staffScrollew addSubview:timeLine];
+        num +=5;
+        
+        UILabel *labTime = [[UILabel alloc] initWithFrame:CGRectMake((width/2 - [ApplicationStyle control_weight:23]) + i * [ApplicationStyle control_weight:16], [ApplicationStyle control_height:60], [ApplicationStyle control_weight:67], [ApplicationStyle control_height:23])];
+        labTime.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:23]];
+        labTime.textColor = [ApplicationStyle subjectWithColor];
+        [_staffScrollew addSubview:labTime];
+        if (i%5 == 0) {
+            timeLine.frame = CGRectMake(width/2 + i * [ApplicationStyle control_weight:16], 0, [ApplicationStyle control_weight:4], [ApplicationStyle control_height:60]);
+            labTime.text = @"5分钟";
+        }
+    }
+    
+    
+    _moxibustionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _moxibustionBtn.frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:80])/2, _staffScrollew.bottomOffset + [ApplicationStyle control_height:86], [ApplicationStyle control_weight:80], [ApplicationStyle control_height:80]);
+    [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_G"] forState:UIControlStateNormal];
+    [_moxibustionBtn addTarget:self action:@selector(moxibustionBtnDown) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_moxibustionBtn];
     
 }
 
@@ -236,9 +273,12 @@
 
 -(void)loadStepData{
     
-    NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:0];
-    NSString *starDate = [ApplicationStyle datePickerTransformationCorss:date];
-    NSString *endDate = [ApplicationStyle datePickerTransformationCorss:[NSDate date]];
+//    NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:0];
+    /*
+     下面是真数据
+     */
+//    NSString *starDate = [ApplicationStyle datePickerTransformationCorss:date];
+//    NSString *endDate = [ApplicationStyle datePickerTransformationCorss:[NSDate date]];
     
     
     //测试
@@ -254,8 +294,40 @@
 //                                            endDate:endDate];
 }
 #pragma mark 系统Delegate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    [self scrollViewAnimation:scrollView];
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self scrollViewAnimation:scrollView];
+}
+-(void)scrollViewAnimation:(UIScrollView *)scrollView{
+    CGFloat width = scrollView.contentOffset.x/[ApplicationStyle control_weight:16];
+    CGFloat startPoint = (NSInteger)width + 0.5;
+    CGFloat endPoint = width;
+    NSInteger centPoint = (NSInteger)(endPoint + 0.5);
+    if (endPoint >= startPoint) {
+        scrollView.contentOffset = CGPointMake(centPoint * [ApplicationStyle control_weight:16], scrollView.contentOffset.y);
+    }else{
+        scrollView.contentOffset = CGPointMake(centPoint * [ApplicationStyle control_weight:16], scrollView.contentOffset.y);
+    }
+}
 #pragma mark 自己的Delegate
-
+-(void)index:(NSInteger)index{
+    _temperatureLab.text = [NSString stringWithFormat:@"%ld°C",35 + index/10];
+}
+#pragma mark 按钮事件
+- (void)moxibustionBtnDown{
+    if (!_isOff) {
+        [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_K"] forState:UIControlStateNormal];
+        _isOff = !_isOff;
+        return;
+    }else{
+        [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_G"] forState:UIControlStateNormal];
+        _isOff = !_isOff;
+        return;
+    }
+}
 
 
 #pragma makr 字体大小

@@ -148,8 +148,6 @@
 //        path.lineWidth = width;
 //        [path stroke];
 //    }
-    
-    self.progressCount = 10;
 }
 
 #pragma mark 处理滑动收拾
@@ -173,12 +171,11 @@
     //要滑动的值 - 起点值  / 角度值  *  差值  + 最小值     =   最终角度值
     
     _index = valueForAngle * 51;
+    [self.delegate index:_index];
+
     [self setNeedsDisplay];
 }
 
--(void)setProgro:(NSUInteger)progressCount{
-    self.progressCount = progressCount;
-}
 
 /*
 // Only override drawRect: if you perform custom drawing.

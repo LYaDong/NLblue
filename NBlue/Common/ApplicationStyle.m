@@ -37,9 +37,9 @@
 
 + (CGFloat)Proportion_height{return [self screenHeight]/1136;}
 
-+ (CGFloat)control_weight:(NSInteger)weight{return weight * [self proportion_weight];}
++ (CGFloat)control_weight:(CGFloat)weight{return weight * [self proportion_weight];}
 
-+ (CGFloat)control_height:(NSInteger)height{return height * [self Proportion_height];}
++ (CGFloat)control_height:(CGFloat)height{return height * [self Proportion_height];}
 + (CGSize)textSize:(NSString *)text font:(UIFont *)font size:(CGFloat)size{
     NSDictionary *attribute = @{NSFontAttributeName:font};
     CGSize questionSize = [text boundingRectWithSize:CGSizeMake(size, MAXFLOAT)  options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;

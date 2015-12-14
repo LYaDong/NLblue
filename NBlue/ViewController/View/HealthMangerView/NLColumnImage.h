@@ -19,7 +19,6 @@ typedef NS_ENUM(NSUInteger,NLCalendarType) {
 @interface NLColumnImage : UIView
 
 @property(nonatomic,strong)UILabel *timeLab;
-+(NLColumnImage *)sharedInstance;
 
 - (instancetype)initWithFrame:(CGRect)frame DataArr:(NSArray *)arr
                   strokeColor:(UIColor *)strokeColor

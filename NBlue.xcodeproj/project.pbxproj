@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		044255361C1EABAE003F8503 /* NLHealtCalenderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044255351C1EABAE003F8503 /* NLHealtCalenderCell.m */; };
 		0458E5D91C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458E5D81C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m */; };
 		0458E5DC1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458E5DB1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m */; };
 		046934EF1C02BF5B00150D2A /* MainNavgationControllew.m in Sources */ = {isa = PBXBuildFile; fileRef = 046934EE1C02BF5B00150D2A /* MainNavgationControllew.m */; };
@@ -44,7 +45,6 @@
 		04F04F851C073AAC009DC949 /* PlistData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F04F841C073AAC009DC949 /* PlistData.m */; };
 		04F3CC451C03F5710066D39D /* LineProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CC421C03F5710066D39D /* LineProgressLayer.m */; };
 		04F3CC461C03F5710066D39D /* LineProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CC441C03F5710066D39D /* LineProgressView.m */; };
-		04F3CC481C0427290066D39D /* 000.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F3CC471C0427290066D39D /* 000.png */; };
 		04F3CC4F1C0434C10066D39D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F3CC511C0434C10066D39D /* Localizable.strings */; };
 		04F3CC611C0439280066D39D /* NLAboutImageBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CC601C0439280066D39D /* NLAboutImageBtn.m */; };
 		04F3CC7D1C045F9F0066D39D /* NLHealthSleepView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CC7C1C045F9F0066D39D /* NLHealthSleepView.m */; };
@@ -89,6 +89,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		044255341C1EABAE003F8503 /* NLHealtCalenderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealtCalenderCell.h; sourceTree = "<group>"; };
+		044255351C1EABAE003F8503 /* NLHealtCalenderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealtCalenderCell.m; sourceTree = "<group>"; };
 		0458E5D71C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthMangerStepNumViewController.h; sourceTree = "<group>"; };
 		0458E5D81C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthMangerStepNumViewController.m; sourceTree = "<group>"; };
 		0458E5DA1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthMangerSleepViewController.h; sourceTree = "<group>"; };
@@ -164,7 +166,6 @@
 		04F3CC421C03F5710066D39D /* LineProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineProgressLayer.m; sourceTree = "<group>"; };
 		04F3CC431C03F5710066D39D /* LineProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineProgressView.h; sourceTree = "<group>"; };
 		04F3CC441C03F5710066D39D /* LineProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineProgressView.m; sourceTree = "<group>"; };
-		04F3CC471C0427290066D39D /* 000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 000.png; sourceTree = "<group>"; };
 		04F3CC521C0434C40066D39D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		04F3CC531C04350D0066D39D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		04F3CC541C04350D0066D39D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -437,7 +438,6 @@
 				04F3CC401C03F5210066D39D /* HalfCircle */,
 				04C9955C1C02A56B00D8AE79 /* NLHotMoxibustionViewController.h */,
 				04C9955D1C02A56B00D8AE79 /* NLHotMoxibustionViewController.m */,
-				04F3CC471C0427290066D39D /* 000.png */,
 			);
 			path = HotMoxibustionController;
 			sourceTree = "<group>";
@@ -488,6 +488,8 @@
 			children = (
 				04F3CC811C046D1A0066D39D /* NLHealthCalenderView.h */,
 				04F3CC821C046D1A0066D39D /* NLHealthCalenderView.m */,
+				044255341C1EABAE003F8503 /* NLHealtCalenderCell.h */,
+				044255351C1EABAE003F8503 /* NLHealtCalenderCell.m */,
 				04F3CC7B1C045F9F0066D39D /* NLHealthSleepView.h */,
 				04F3CC7C1C045F9F0066D39D /* NLHealthSleepView.m */,
 				04F3CC7E1C0460120066D39D /* NLHealthStepNumber.h */,
@@ -715,7 +717,6 @@
 				049751AF1BFEEED50044D97B /* LaunchScreen.storyboard in Resources */,
 				04F4B7C51C07FA7100DE60DE /* battery@3x.png in Resources */,
 				049751AC1BFEEED50044D97B /* Assets.xcassets in Resources */,
-				04F3CC481C0427290066D39D /* 000.png in Resources */,
 				049751AA1BFEEED50044D97B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -814,6 +815,7 @@
 				04A151971C0DAA9700CB93FF /* NLRingLine.m in Sources */,
 				04F3CC461C03F5710066D39D /* LineProgressView.m in Sources */,
 				04F4B7C01C07ED2A00DE60DE /* NLMyEquipmentCell.m in Sources */,
+				044255361C1EABAE003F8503 /* NLHealtCalenderCell.m in Sources */,
 				04F04F7B1C06940F009DC949 /* NLIndividuaFormaCell.m in Sources */,
 				04F5BB221C05676700B37CE2 /* NLShareController.m in Sources */,
 				04F4B7CF1C083AE500DE60DE /* NLCalenderPackage.m in Sources */,

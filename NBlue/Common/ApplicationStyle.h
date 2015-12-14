@@ -38,11 +38,11 @@
 /**
  *设计图适配的宽
  */
-+ (CGFloat)control_weight:(NSInteger)weight;
++ (CGFloat)control_weight:(CGFloat)weight;
 /**
  *设计图适配的高
  */
-+ (CGFloat)control_height:(NSInteger)height;
++ (CGFloat)control_height:(CGFloat)height;
 /**
  *根据文字多少计算文本的Size
  */
