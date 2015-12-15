@@ -36,12 +36,6 @@ static const NSInteger DATEPICKERTAGBTN = 4000;                             //�
 -(void)viewWillDisappear:(BOOL)animated{
     _pickerView.delegate = nil;
 }
-#pragma mark 基础UI
--(void)bulidUI{
-    
-}
-
-
 - (instancetype)initWithDateStyleType:(NSInteger)dateStyleType useDatePicker:(NSInteger)useDatePicker{
     if (self = [super init]) {
         _datePickerType = useDatePicker;

@@ -22,6 +22,14 @@
     CGFloat heights = self.frame.size.height;
     CGFloat x = [ApplicationStyle control_weight:46],w = [ApplicationStyle control_weight:40],h = [ApplicationStyle control_height:40];
     
+    
+    
+    UIImageView *back = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle control_height:88])];
+    back.image = [UIImage imageNamed:@"NLBackCalenderTableBack"];
+    [self.contentView addSubview:back];
+    
+    
+    
     self.cellImage = [[UIImageView alloc] initWithFrame:CGRectMake(x, (heights - h)/2, w, h)];
     [self.contentView addSubview:self.cellImage];
     
@@ -31,9 +39,9 @@
     self.cellLab.font = [ApplicationStyle textThrityFont];
     [self.contentView addSubview:self.cellLab];
     
-    self.cellBtnImage = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.cellBtnImage.frame = CGRectMake(SCREENWIDTH - w - [ApplicationStyle control_weight:24], (heights - h)/2, w, h);
-    [self.contentView addSubview:self.cellBtnImage];
+
+    self.cellCountImage = [[UIImageView alloc] initWithFrame:CGRectMake(SCREENWIDTH - w - [ApplicationStyle control_weight:24], (heights - h)/2, w, h)];
+    [self.contentView addSubview:self.cellCountImage];
     
 }
 - (void)awakeFromNib {

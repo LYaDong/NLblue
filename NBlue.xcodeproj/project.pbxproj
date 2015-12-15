@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04015D5F1C1FB72F00454566 /* NLHealtCalenderPeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = 04015D5E1C1FB72F00454566 /* NLHealtCalenderPeriod.m */; };
+		04015D631C1FDD1800454566 /* NLCalenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 04015D621C1FDD1800454566 /* NLCalenderPicker.m */; };
 		044255361C1EABAE003F8503 /* NLHealtCalenderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044255351C1EABAE003F8503 /* NLHealtCalenderCell.m */; };
 		0458E5D91C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458E5D81C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m */; };
 		0458E5DC1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458E5DB1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m */; };
@@ -89,6 +91,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04015D5D1C1FB72F00454566 /* NLHealtCalenderPeriod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealtCalenderPeriod.h; sourceTree = "<group>"; };
+		04015D5E1C1FB72F00454566 /* NLHealtCalenderPeriod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealtCalenderPeriod.m; sourceTree = "<group>"; };
+		04015D611C1FDD1800454566 /* NLCalenderPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderPicker.h; sourceTree = "<group>"; };
+		04015D621C1FDD1800454566 /* NLCalenderPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCalenderPicker.m; sourceTree = "<group>"; };
 		044255341C1EABAE003F8503 /* NLHealtCalenderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealtCalenderCell.h; sourceTree = "<group>"; };
 		044255351C1EABAE003F8503 /* NLHealtCalenderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealtCalenderCell.m; sourceTree = "<group>"; };
 		0458E5D71C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthMangerStepNumViewController.h; sourceTree = "<group>"; };
@@ -247,6 +253,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04015D601C1FC76100454566 /* CalenderUIView */ = {
+			isa = PBXGroup;
+			children = (
+				04015D611C1FDD1800454566 /* NLCalenderPicker.h */,
+				04015D621C1FDD1800454566 /* NLCalenderPicker.m */,
+			);
+			path = CalenderUIView;
+			sourceTree = "<group>";
+		};
 		049751931BFEEED50044D97B = {
 			isa = PBXGroup;
 			children = (
@@ -486,10 +501,13 @@
 		04F3CC5B1C0438A10066D39D /* HealthMangerView */ = {
 			isa = PBXGroup;
 			children = (
+				04015D601C1FC76100454566 /* CalenderUIView */,
 				04F3CC811C046D1A0066D39D /* NLHealthCalenderView.h */,
 				04F3CC821C046D1A0066D39D /* NLHealthCalenderView.m */,
 				044255341C1EABAE003F8503 /* NLHealtCalenderCell.h */,
 				044255351C1EABAE003F8503 /* NLHealtCalenderCell.m */,
+				04015D5D1C1FB72F00454566 /* NLHealtCalenderPeriod.h */,
+				04015D5E1C1FB72F00454566 /* NLHealtCalenderPeriod.m */,
 				04F3CC7B1C045F9F0066D39D /* NLHealthSleepView.h */,
 				04F3CC7C1C045F9F0066D39D /* NLHealthSleepView.m */,
 				04F3CC7E1C0460120066D39D /* NLHealthStepNumber.h */,
@@ -825,6 +843,7 @@
 				04C9955B1C02A55000D8AE79 /* NLHealthMangerViewController.m in Sources */,
 				049B077D1C1559D4005147B5 /* NLRegisteredViewController.m in Sources */,
 				046934EF1C02BF5B00150D2A /* MainNavgationControllew.m in Sources */,
+				04015D5F1C1FB72F00454566 /* NLHealtCalenderPeriod.m in Sources */,
 				04C995581C02A51000D8AE79 /* NLSubRootViewController.m in Sources */,
 				049751DF1BFEF3140044D97B /* ApplicationStyle.m in Sources */,
 				04CDA17E1BFF119500D2A304 /* Convenlence.m in Sources */,
@@ -832,6 +851,7 @@
 				04C995611C02A57800D8AE79 /* NLProfileViewController.m in Sources */,
 				04FA89BC1C117E400064F3AA /* NLDatahub.m in Sources */,
 				04F3CC831C046D1A0066D39D /* NLHealthCalenderView.m in Sources */,
+				04015D631C1FDD1800454566 /* NLCalenderPicker.m in Sources */,
 				04F04F851C073AAC009DC949 /* PlistData.m in Sources */,
 				04F4B7D21C083B3E00DE60DE /* NLLocalUserInfo.m in Sources */,
 				04F5BB1C1C0545CC00B37CE2 /* NLProTableCell.m in Sources */,

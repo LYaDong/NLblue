@@ -85,4 +85,20 @@
 "NLRegistered_GetVerfication" = "获得验证码";
 "NLRegistered_Protocol" = "同意隐私条款和隐私协议";
 "NLRegistered_completeBtn" = "完成";
+//NLHealthCalenderView
+"NLHealthCalender_DYM" = "大姨妈";
+"NLHealthCalender_AA" = "爱爱";
+"NLHealthCalender_SHXG" = "生活习惯";
+"NLHealthCalender_BSF" = "不舒服";
+"NLHealthCalender_JQ" = "经期";
+"NLHealthCalender_YCQ" = "预测期";
+"NLHealthCalender_AQQ" = "安全期";
+"NLHealthCalender_YYQ" = "易孕期";
+"NLHealthCalender_Picker_Title" = "爱爱记录";
+"NLHealthCalender_Picker_BtnCalue" = "消除";
+"NLHealthCalender_Picker_BtnOK" = "确认";
+"NLHealthCalender_Picker_MYZ" = "没有做";
+"NLHealthCalender_Picker_DTZ" = "带套做";
+"NLHealthCalender_Picker_CLSHY" = "吃了药事后";
+"NLHealthCalender_Picker_WBHCS" = "无保护措施";
 
