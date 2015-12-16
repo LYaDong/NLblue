@@ -8,12 +8,14 @@
 static const NSInteger PICKERTAG = 1000;
 static const NSInteger IMAGETAG = 2000;
 static const NSInteger TITLETAG = 3000;
+static const NSInteger BTNTAG = 4000;
 
 #import "NLCalenderPicker.h"
 @interface NLCalenderPicker()<UIPickerViewDataSource,UIPickerViewDelegate>
 @property(nonatomic,strong)UIPickerView *pickerView;
 @property(nonatomic,strong)NSArray *imageArr;
 @property(nonatomic,strong)NSArray *titleArr;
+@property(nonatomic,assign)NSInteger choicePickerIndex;
 @end
 @implementation NLCalenderPicker
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -48,6 +50,10 @@ static const NSInteger TITLETAG = 3000;
     titleLab.textColor = [ApplicationStyle subjectPinkColor];
     [backView addSubview:titleLab];
     
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:10], [ApplicationStyle control_height:80], backView.viewWidth - [ApplicationStyle control_weight:20], [ApplicationStyle control_height:1])];
+    line.backgroundColor = [@"f5d6d6" hexStringToColor];
+    [backView addSubview:line];
+    
     _pickerView = [[UIPickerView  alloc] initWithFrame:CGRectMake(0, titleLab.bottomOffset, backView.viewWidth,backView.viewHeight - [ApplicationStyle control_height:160])];
     _pickerView.delegate = self;
     _pickerView.dataSource = self;
@@ -77,7 +83,7 @@ static const NSInteger TITLETAG = 3000;
         btn.layer.borderWidth = [ApplicationStyle control_weight:2];
         btn.layer.borderColor = [@"fb597a" hexStringToColor].CGColor;
         btn.layer.cornerRadius = [ApplicationStyle control_weight:10];
-//        btn.userInteractionEnabled = YES;
+        btn.tag = BTNTAG + i;
         [btn addTarget:self action:@selector(btnDown:) forControlEvents:UIControlEventTouchUpInside];
         [backView addSubview:btn];
     }
@@ -120,14 +126,18 @@ static const NSInteger TITLETAG = 3000;
     return view;
 }
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    NSString *str = _titleArr[row];
-    NSLog(@"%@",str);
+    _choicePickerIndex = row;
+    NSLog(@"%ld",row);
 }
 #pragma mark 自己的代理
 #pragma mark 按钮事件
 
 -(void)btnDown:(UIButton *)btn{
-    NSLog(@"xxx");
+    if (btn.tag == BTNTAG) {
+        [self.delegate pickerIndex:10];
+    }else{
+        [self.delegate pickerIndex:_choicePickerIndex];
+    }
 }
 
 /*

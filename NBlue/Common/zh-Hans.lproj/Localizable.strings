@@ -101,4 +101,21 @@
 "NLHealthCalender_Picker_DTZ" = "带套做";
 "NLHealthCalender_Picker_CLSHY" = "吃了药事后";
 "NLHealthCalender_Picker_WBHCS" = "无保护措施";
+"NLHealthCalender_LifeHabit_Title" = "生活习惯";
+"NLHealthCalender_LifeHabit_SG" = "水果";
+"NLHealthCalender_LifeHabit_YD" = "运动";
+"NLHealthCalender_LifeHabit_PB" = "排便";
+"NLHealthCalender_Unconmfortable_TT" = "头疼";
+"NLHealthCalender_Unconmfortable_BD" = "爆豆";
+"NLHealthCalender_Unconmfortable_HLLY" = "喝了冷饮";
+"NLHealthCalender_Unconmfortable_FX" = "腹泻";
+"NLHealthCalender_Unconmfortable_XFZT" = "小腹坠痛";
+"NLHealthCalender_Unconmfortable_MSY" = "没食欲";
+"NLHealthCalender_Unconmfortable_YS" = "腰酸";
+"NLHealthCalender_Unconmfortable_HSST" = "浑身酸痛";
+"NLHealthCalender_Unconmfortable_RFZT" = "乳房胀痛";
+"NLHealthCalender_Unconmfortable_RFCT" = "乳房刺痛";
+"NLHealthCalender_Unconmfortable_BDYC" = "白带异常";
+"NLHealthCalender_Unconmfortable_QT" = "其他";
+
 

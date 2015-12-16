@@ -17,7 +17,7 @@
 @interface NLHealthMangerViewController ()<UIScrollViewDelegate,LYDSetSegmentDelegate>
 @property(nonatomic,strong)UIScrollView *mainScrollew;
 @property(nonatomic,assign)NSInteger numPage;
-
+@property(nonatomic,strong)UIView *blackBackView;
 
 @end
 
@@ -93,7 +93,7 @@
     _mainScrollew.bounces = NO;
     [self.view addSubview:_mainScrollew];
     
-    
+
     
 }
 -(void)initView{
@@ -132,8 +132,8 @@
         default:
             break;
     }
-
 }
+
 -(void)loadStepData{
     
     

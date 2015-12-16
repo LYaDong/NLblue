@@ -363,6 +363,22 @@ static const NSInteger TIMELINE = 90;
     // Dispose of any resources that can be recreated.
 }
 
+
+/*
+ NSMutableSet *seenObjects = [NSMutableSet set];
+ NSPredicate *dupPred = [NSPredicate predicateWithBlock: ^BOOL(id obj, NSDictionary *bind) {
+ HistoryObject *hObj = (HistoryObject*)obj;
+ BOOL seen = [seenObjects containsObject:hObj.title];
+ if (!seen) {
+ [seenObjects addObject:hObj.title];
+ }
+ return !seen;
+ }];
+ 
+ 
+ */
+
+
 /*
 #pragma mark - Navigation
 

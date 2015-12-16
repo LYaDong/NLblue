@@ -27,22 +27,23 @@ static const NSInteger calenderVertical = 5;
 }
 -(void)buildUI:(NSInteger)day{
     NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:0];
-    CGFloat w = (self.frame.size.width - [ApplicationStyle control_weight:47 * 2]) / Corss;
+    CGFloat w = (self.frame.size.width - [ApplicationStyle control_weight:60 * 2]) / Corss;
 //    CGFloat h = self.frame.size.height / Vertical;
     //年 月
-    _yearMonthLab = [[UILabel alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:47], 0, SCREENWIDTH - [ApplicationStyle control_weight:47 *2], [ApplicationStyle control_height:60])];
+    _yearMonthLab = [[UILabel alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:47], 0, SCREENWIDTH - [ApplicationStyle control_weight:47 *2], [ApplicationStyle control_height:66])];
     _yearMonthLab.text = [NSString stringWithFormat:@"%ld年%ld月",(long)[ApplicationStyle whatYears:date],(long)[ApplicationStyle whatMonths:date]];
-    _yearMonthLab.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:28]];
+    _yearMonthLab.font = [ApplicationStyle textThrityFont];
+    _yearMonthLab.textColor = [@"f13c61" hexStringToColor];
     _yearMonthLab.textAlignment = NSTextAlignmentCenter;
     [self addSubview:_yearMonthLab];
     
     NSArray *weekArray = @[@"日", @"一", @"二", @"三", @"四", @"五", @"六"];
     for (NSInteger i = 0; i<weekArray.count; i++) {
-        UILabel *weekLab = [[UILabel alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:47] + i * w, _yearMonthLab.bottomOffset + [ApplicationStyle control_height:10], w, [ApplicationStyle control_height:60])];
+        UILabel *weekLab = [[UILabel alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:47] + i * (w + [ApplicationStyle control_weight:10]), _yearMonthLab.bottomOffset, w, [ApplicationStyle control_height:50])];
         weekLab.text = weekArray[i];
-        weekLab.textColor = [UIColor redColor];
+        weekLab.textColor = [@"ffc4d0" hexStringToColor];
         weekLab.textAlignment = NSTextAlignmentCenter;
-        weekLab.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:28]];
+        weekLab.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:20]];
         [self addSubview:weekLab];
     }
     
@@ -52,13 +53,22 @@ static const NSInteger calenderVertical = 5;
     NSLog(@"%ld",theCurrent);
     
     for (NSInteger i = 0; i< calenderVertical * 7; i++) {
-        NSInteger x = [ApplicationStyle control_weight:47] + (i % 7) * w, y = (i / 7) * w + _yearMonthLab.bottomOffset + [ApplicationStyle control_height:10] + [ApplicationStyle control_height:60];
+//        NSInteger x = [ApplicationStyle control_weight:47] + (i % 7) * (w + [ApplicationStyle control_weight:10]), y = (i / 7) * (w + [ApplicationStyle control_weight:10]) + _yearMonthLab.bottomOffset + [ApplicationStyle control_height:50];
+        
+        
+        CGFloat x = [ApplicationStyle control_weight:41] +  i%7*[ApplicationStyle control_weight:82];
+        CGFloat y = _yearMonthLab.bottomOffset + [ApplicationStyle control_height:50] + i/7*[ApplicationStyle control_weight:82];
+        CGFloat ww = [ApplicationStyle control_weight:66];
+        CGFloat h = [ApplicationStyle control_weight:66];
+        
+        
+        
         UIButton *dayButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        dayButton.frame = CGRectMake(x, y, w, w);
+        dayButton.frame = CGRectMake(x, y, ww, h);
+        [dayButton setTitleColor:[ApplicationStyle subjectPinkColor] forState:UIControlStateNormal];
         dayButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         
         NSInteger daysInLastMonth = [ApplicationStyle totalDaysInMonth:date];
-//        NSInteger daysInThisMonth = [ApplicationStyle totalDaysInMonth:date];
         NSInteger firstWeekday    = [ApplicationStyle getWeekofFirstInDate:date];
         
         NSLog(@"%ld",firstWeekday);
@@ -66,14 +76,15 @@ static const NSInteger calenderVertical = 5;
         if (i < firstWeekday) {
             //上个月的日子
             day = daysInLastMonth - firstWeekday + i + 1;
-            dayButton.backgroundColor = [UIColor lightGrayColor];
+//            dayButton.backgroundColor = [UIColor lightGrayColor];
         }else if (i > firstWeekday + daysInLastMonth - 1){
             //下个月的日子
             day = i + 1 - firstWeekday - daysInLastMonth;
-            dayButton.backgroundColor = [UIColor lightGrayColor];
+//            dayButton.backgroundColor = [UIColor lightGrayColor];
         }else{
             //本月的日子
             day = i - firstWeekday + 1;
+            dayButton.backgroundColor = [@"ffdbe2" hexStringToColor];
         }
         if (i - firstWeekday == theCurrent - 1) {
             dayButton.backgroundColor = [UIColor redColor];
