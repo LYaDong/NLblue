@@ -178,7 +178,18 @@
  *01.01 格式
  */
 +(NSString *)datePickerTransformationCorssCorssMothDay:(NSDate *)date;
-
+/**
+ *20150101格式
+ */
++(NSString *)datePickerTransformationStr:(NSDate *)date;
+/**
+ *201512 只有年和月格式
+ */
++(NSString *)datePickerTransformationYearAndMonth:(NSDate *)date;
+/**
+ *NSDate转字符串   2015年01月01日格式
+ */
++(NSDate *)dateTransformationStr:(NSString *)str;
 @end
 
 

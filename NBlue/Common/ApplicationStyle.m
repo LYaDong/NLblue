@@ -190,5 +190,24 @@
     NSString *formatDate = [formatter stringFromDate:date];
     return formatDate;
 }
++(NSString *)datePickerTransformationStr:(NSDate *)date{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyyMMdd"];
+    NSString *formatDate = [formatter stringFromDate:date];
+    return formatDate;
+}
++(NSString *)datePickerTransformationYearAndMonth:(NSDate *)date{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyyMM"];
+    NSString *formatDate = [formatter stringFromDate:date];
+    return formatDate;
+}
++(NSDate *)dateTransformationStr:(NSString *)str{
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init] ;
+    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [inputFormatter setDateFormat:@"yyyyMMdd"];
+    NSDate *inputDate = [inputFormatter dateFromString:str];
+    return inputDate;
+}
 
 @end
