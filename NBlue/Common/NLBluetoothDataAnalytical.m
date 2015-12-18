@@ -29,7 +29,8 @@
         }
         i++;
     }
-    NSString *bytesTo = [NSString stringWithFormat:@"%ld",[self ToHexConversion:[NSString stringWithFormat:@"%@%@",toStr,oneStr]]];
+    NSString *bytesTo = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[NSString stringWithFormat:@"%@%@",toStr,oneStr]]];
+//    NSString *bytesTo = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[NSString stringWithFormat:@"%@%@",toStr,oneStr]]];
     return bytesTo;
 }
 
@@ -47,14 +48,15 @@
         }
         i++;
     }
-    NSString *bytesTo = [NSString stringWithFormat:@"%ld",[self ToHexConversion:[NSString stringWithFormat:@"%@%@",toStr,oneStr]]];
+    NSString *bytesTo = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[NSString stringWithFormat:@"%@%@",toStr,oneStr]]];
+//    NSString *bytesTo = [NSString stringWithFormat:@"%ld",[self ToHexConversion:[NSString stringWithFormat:@"%@%@",toStr,oneStr]]];
     return bytesTo;
 }
 
 
 
 #pragma mark 16进制 四位数的进制转换 10进制
-+ (long)ToHexConversion:(NSString *)num
++ (long)ToHexConversion:(NSString *)num __attribute((deprecated("方法已经替换，不建议使用，使用 sixTenHexTeen：")))
 {
     long   number = strtoul([[num substringWithRange:NSMakeRange(0, 4)] UTF8String],0,16);
     return number;
@@ -140,54 +142,58 @@
 
 //运动数据
 +(void)blueSportOrdinArrayData:(NSArray *)arr{
+    
+    
+    NSLog(@"%@",arr);
 //    NSString *timeByte = arr[0];
 //    NSString *format = [timeByte substringWithRange:NSMakeRange(8, 4)];
 //    NSLog(@"%@",[self bytesToFour:@"df07"]);
 //    NSLog(@"%@",[self FourHexConversion:[timeByte substringWithRange:NSMakeRange(12, 4)]]);
     
     
-    NSArray *arrData = @[@"08030110df070c0800000f602200",
-                     @"08030210d50000000800000095000000a3000000",
-                     @"0803030f00000000000000000000000000000000",
-                     @"0803040f00000000000000000000000000000000",
-                     @"0803050f00000000000000000000000000000000",
-                     @"0803060f00000000000000000000000000000000",
-                     @"0803070f00000000000000000000000000000000",
-                     @"0803080f00000000000000000000000000000000",
-                     @"0803090f00000000000000000000000000000000",
-                     @"08030a0f00000000000000000000000000000000",
-                     @"08030b0f00000000000000000000000000000000",
-                     @"08030c0f00000000000000000000000000000000",
-                     @"08030d0f00000000000000000000000000000000",
-                     @"08030e0f00000000000000000000000000000000",
-                     @"08030f0f00000000000000000000000000000000",
-                     @"0803100f00000000000000000000000000000000",
-                     @"0803110f00000000000000000000000000000000",
-                     @"0803120f00000000000000000000000000000000",
-                     @"0803130f00000000000000000000000000000000",
-                     @"0803140f00000000000000000000000000000000",
-                     @"0803150f00000000000000000000000000000000",
-                     @"0803160f604112e0030000000000000000000000",
-                     @"0803170f00000000000000000000000000000000",
-                     @"0803180f00000000000000000000000000000000",
-                     @"0803190f00000000000000000000000000000000",
-                     @"08031a0f5cc003000188c00a7001000000000000",
-                     @"08031b0f88800480013080039000000000000000",
-                     @"08031c0f00000000000000000000580004f00000",
-                     @"08031d0f00000000000000000000000000000000",
-                     @"08031e0f00000000000000000000000000000000",
-                     @"08031f0f00000000000000000000000000000000",
-                     @"0803200f00000000000000000000000000000000",
-                     @"0803210f00000000000000000000000000000000",
-                     @"0803220f00000000000000000000000000000000",];
+//    NSArray *arrData = @[@"08030110df070c0800000f602200",
+//                     @"08030210d50000000800000095000000a3000000",
+//                     @"0803030f00000000000000000000000000000000",
+//                     @"0803040f00000000000000000000000000000000",
+//                     @"0803050f00000000000000000000000000000000",
+//                     @"0803060f00000000000000000000000000000000",
+//                     @"0803070f00000000000000000000000000000000",
+//                     @"0803080f00000000000000000000000000000000",
+//                     @"0803090f00000000000000000000000000000000",
+//                     @"08030a0f00000000000000000000000000000000",
+//                     @"08030b0f00000000000000000000000000000000",
+//                     @"08030c0f00000000000000000000000000000000",
+//                     @"08030d0f00000000000000000000000000000000",
+//                     @"08030e0f00000000000000000000000000000000",
+//                     @"08030f0f00000000000000000000000000000000",
+//                     @"0803100f00000000000000000000000000000000",
+//                     @"0803110f00000000000000000000000000000000",
+//                     @"0803120f00000000000000000000000000000000",
+//                     @"0803130f00000000000000000000000000000000",
+//                     @"0803140f00000000000000000000000000000000",
+//                     @"0803150f00000000000000000000000000000000",
+//                     @"0803160f604112e0030000000000000000000000",
+//                     @"0803170f00000000000000000000000000000000",
+//                     @"0803180f00000000000000000000000000000000",
+//                     @"0803190f00000000000000000000000000000000",
+//                     @"08031a0f5cc003000188c00a7001000000000000",
+//                     @"08031b0f88800480013080039000000000000000",
+//                     @"08031c0f00000000000000000000580004f00000",
+//                     @"08031d0f00000000000000000000000000000000",
+//                     @"08031e0f00000000000000000000000000000000",
+//                     @"08031f0f00000000000000000000000000000000",
+//                     @"0803200f00000000000000000000000000000000",
+//                     @"0803210f00000000000000000000000000000000",
+//                     @"0803220f00000000000000000000000000000000",];
 
 
 
     
     //计算时间
-    NSString *year = [arrData[0] substringWithRange:NSMakeRange(8, 4)];
-    NSString *yearDate = [NSString stringWithFormat:@"%ld",[self ToHexConversion:[self reversedPositionStr:year]]];
-    NSString *moht = [arrData[0] substringWithRange:NSMakeRange(12, 4)];
+    NSString *year = [arr[0] substringWithRange:NSMakeRange(8, 4)];
+    NSString *yearDate = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[self reversedPositionStr:year]]];
+//    NSString *yearDate = [NSString stringWithFormat:@"%ld",[self ToHexConversion:[self reversedPositionStr:year]]];
+    NSString *moht = [arr[0] substringWithRange:NSMakeRange(12, 4)];
     NSArray *mothDate = [self FourHexConversion:moht];
     NSString *sportDate = [NSString stringWithFormat:@"%@-%@-%@",yearDate,mothDate[0],mothDate[1]];
     [NLSQLData delDateSportData:sportDate];
@@ -195,29 +201,25 @@
     
     static NSInteger timeInterval = 0;
     
-    for (NSInteger i = 0; i<arrData.count; i++) {
+    for (NSInteger i = 0; i<arr.count; i++) {
         if (i==0||i==1) {
             
         }else{
-            NSString *data = arrData[i];
+            NSString *data = arr[i];
             for (NSInteger j = 0; j<3; j++) {
                 timeInterval ++;
                 //计算时间
                
                 NSString *sportDate = [NSString stringWithFormat:@"%@-%@-%@",yearDate,mothDate[0],mothDate[1]];
                 //计算总步数 总卡路里
-                NSString *sportCountStr = [arrData[1] substringWithRange:NSMakeRange(8, 8)];
+                NSString *sportCountStr = [arr[1] substringWithRange:NSMakeRange(8, 8)];
                 NSString *sportCount = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[self reversedPositionStr:sportCountStr]]];
-                NSString *sportClaorie =[arrData[1] substringWithRange:NSMakeRange(16, 8)];
+                NSString *sportClaorie =[arr[1] substringWithRange:NSMakeRange(16, 8)];
                 NSString *caloriesAmount = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[self reversedPositionStr:sportClaorie]]];
 
-//                NSString *xx =  [self reversedPositionStr:[hexTo substringWithRange:NSMakeRange(2, 12)]];
-//                if (![xx isEqualToString:@"000000000000"]) {
-////                    NSLog(@"%@",[self toDecimalSystemWithBinarySystem:xx]);
-//                    
-//                    NSLog(@"%@",xx);
-//
-//                }
+                
+                NSLog(@"%@  %@",sportCount,caloriesAmount);
+                
                 //计算步数卡路里什么的
                 NSString *format = [data substringWithRange:NSMakeRange(8 + j*10, 10)];
                 NSString *reversenStr = [self reversedPositionStr:format];
@@ -241,7 +243,7 @@
                     
                     [NLSQLData sportBlueData:dic];
                     
-//                    NSLog(@" %@ 步数 = %@ 活跃时间 = %@ 卡路里 = %@ 距离 = %@",sportDate,sportNum,activeTime,calorie,distance);
+                    NSLog(@" %@ 步数 = %@ 活跃时间 = %@ 卡路里 = %@ 距离 = %@",sportDate,sportNum,activeTime,calorie,distance);
                 }
             }
         }

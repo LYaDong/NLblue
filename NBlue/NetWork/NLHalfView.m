@@ -172,6 +172,11 @@
     
     _index = valueForAngle * 51;
     [self.delegate index:_index];
+    
+    
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+        [self.delegate gestureRecognizerStateEnded:_index];
+    }
 
     [self setNeedsDisplay];
 }

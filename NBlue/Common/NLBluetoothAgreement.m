@@ -23,8 +23,7 @@ static NLBluetoothAgreement *bluetoothagreement = nil;
 @property(nonatomic,strong)NSMutableArray *dataArr;
 @property(nonatomic,strong)NSMutableArray *dataServices;
 @property(nonatomic,strong)NSMutableArray *dataCharcteristics;
-@property(nonatomic,strong)NSMutableString *strSuanFa;
-
+@property(nonatomic,strong)NSString *connectionSuccess;
 
 
 @end
@@ -172,8 +171,9 @@ static NSString *TransLationF1 = @"0AF1";
 -(void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral{
     peripheral.delegate=self;
     [peripheral discoverServices:nil];
-    
     NSLog(@"连接成功");
+    _connectionSuccess = EquiomentConnectionSuccess;
+    
 }
 #pragma mark 连接失败
 -(void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
@@ -222,14 +222,30 @@ static NSString *TransLationF1 = @"0AF1";
         return;
     }
     unsigned char data[characteristic.value.length];
-//    [characteristic.value getBytes:&data];
     
-//    getBytes:length  新方法 试试 
+    
+    
+//    NSLog(@"%@",characteristic);
+//    
+//    CBUUID *UUID = [CBUUID UUIDWithString:@"0AF7"];
+//    
+//    NSLog(@"%@  %@",UUID,characteristic.UUID);
+
+
+    
+
+    
+//    [characteristic.value getBytes:&data];
+//    getBytes:length  新方法 试试
+    
     [characteristic.value getBytes:&data length:characteristic.value.length];
     
-    [self.strSuanFa appendFormat:@"%@",[self hexStringForData:characteristic.value]];
-    NSMutableString * str1=(NSMutableString *)[self hexStringForData:characteristic.value];
-    [self explainOrder:str1];
+    
+    NSString *value = [self hexStringForData:characteristic.value];
+    [self explainOrder:value];
+    
+    
+    
 }
 #pragma mark  中心读取外围设备
 -(void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error{
@@ -250,7 +266,8 @@ static NSString *TransLationF1 = @"0AF1";
         
     }
 }
-
+#pragma mark 暂且用不到
+/*
 #pragma  mark 把字符串转为Data
 
 - (NSMutableData *)stringFromHex:(NSString *)str
@@ -267,7 +284,7 @@ static NSString *TransLationF1 = @"0AF1";
     }
     return stringData;
 }
-
+*/
 #pragma mark --算法
 - (NSString*)hexStringForData:(NSData*)data
 {//将NSData转为字符串
@@ -275,28 +292,29 @@ static NSString *TransLationF1 = @"0AF1";
         return nil;
     }
     NSMutableString* hexString = [NSMutableString string];
-    const unsigned char *p = [data bytes];
-    for (int i=0; i < [data length]; i++) {
-        [hexString appendFormat:@"%02x", *p++];
+    Byte *testByte = (Byte *)[data bytes];
+    for(int i=0;i<[data length];i++){
+        [hexString appendFormat:@"%02x",testByte[i]];
     }
     return hexString;
-    
 }
 
+
+
+
+
 #pragma mark --translate zhilin
--(void)explainOrder:(NSMutableString *)buff
+-(void)explainOrder:(NSString *)buff
 {
-    
-    if (buff.length>5) {
-        if(self.getConnectData){
-            self.getConnectData(buff);
+    if(self.getConnectData){
+        self.getConnectData(buff);
+    }
+
+    if ([_connectionSuccess isEqualToString:EquiomentConnectionSuccess]) {
+        if (self.getConnectionSuccess) {
+            self.getConnectionSuccess(EquiomentConnectionSuccess);
         }
     }
-    
-    
-    
-    
-//    [self getExplainOrderShowLaber:buff];
     
 }
 -(void)getExplainOrderShowLaber:(NSString *)ss{

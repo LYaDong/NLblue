@@ -9,10 +9,12 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 typedef void  (^GetBlueData) (NSString *connect);
 typedef void (^Peripheral) (NSArray *perheral);
+typedef void (^ConnectionSuccess) (NSString *connectionSuccess);
 
 @interface NLBluetoothAgreement : NSObject
 @property(nonatomic,strong)GetBlueData getConnectData;
 @property(nonatomic,strong)Peripheral perheral;
+@property(nonatomic,strong)ConnectionSuccess getConnectionSuccess;
 
 +(NLBluetoothAgreement *)shareInstance;
 -(void)bluetoothAllocInit;

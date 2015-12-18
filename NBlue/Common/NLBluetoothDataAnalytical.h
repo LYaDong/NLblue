@@ -14,6 +14,15 @@
  */
 +(NSString *)tenTurnSixTeen:(NSInteger)index;
 /**
+ *前后位置颠倒
+ */
++(NSString *)reversedPositionStr:(NSString *)str;
+/**
+ *16进制转10进制
+ */
++ (long)sixTenHexTeen:(NSString *)num;
+
+/**
  *蓝牙命令获得数据解析判断
  */
 +(void)bluetoothCommandReturnData:(NSString *)data;

@@ -13,6 +13,7 @@
  */
 -(void)index:(NSInteger)index;
 
+-(void)gestureRecognizerStateEnded:(NSInteger)index;
 @end
 
 #import <UIKit/UIKit.h>

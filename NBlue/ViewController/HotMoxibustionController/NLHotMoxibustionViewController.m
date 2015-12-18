@@ -24,6 +24,9 @@ static const NSInteger TIMELINE = 90;
 @property(nonatomic,assign)CGFloat lenthWidth;
 @property(nonatomic,strong)UIButton *moxibustionBtn;
 @property(nonatomic,assign)BOOL isOff;
+@property(nonatomic,assign)NSInteger temperatureNUM;
+@property(nonatomic,assign)NSInteger blueTime;
+@property(nonatomic,assign)BOOL isQuert;
 @end
 
 @implementation NLHotMoxibustionViewController
@@ -101,9 +104,9 @@ static const NSInteger TIMELINE = 90;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    self.controllerBack.hidden = YES;
-//    
-//    self.view.backgroundColor = [@"f44c6d" hexStringToColor];
+
+    _temperatureNUM  = 350;         //默认温度 35°
+    _blueTime = 30;                 //默认时间 30分钟
     
     self.returnBtn.hidden = YES;
     self.titles.text = @"热灸";
@@ -112,14 +115,14 @@ static const NSInteger TIMELINE = 90;
     
     _sportDataArr = [NSMutableArray array];
     
-
     
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    btn.frame = CGRectMake(40, 100, 40, 40);
-//    btn.backgroundColor = [UIColor redColor];
-//    [btn addTarget:self action:@selector(btnDown) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn];
-//    
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btn.frame = CGRectMake(40, 100, 40, 40);
+    btn.backgroundColor = [UIColor redColor];
+    [btn addTarget:self action:@selector(btnDown3) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+//
 //    UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    btn1.frame = CGRectMake(100, 100, 100, 100);
 //    btn1.backgroundColor = [UIColor yellowColor];
@@ -128,17 +131,17 @@ static const NSInteger TIMELINE = 90;
 //    
 //    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    btn2.frame = CGRectMake(100, 400, 100, 100);
-//    btn2.backgroundColor = [UIColor yellowColor];
+//    btn2.backgroundColor = [UIColor orangeColor];
 //    [btn2 addTarget:self action:@selector(btnDown2) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview:btn2];
-////
+//////
 //    UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    btn3.frame = CGRectMake(200, 200, 100, 100);
 //    btn3.backgroundColor = [UIColor greenColor];
 //    [btn3 addTarget:self action:@selector(sportxx1) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview:btn3];
-//    
-//    
+////
+////    
 //    UIButton *btn4 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    btn4.frame = CGRectMake(100, 200, 100, 100);
 //    btn4.backgroundColor = [UIColor greenColor];
@@ -160,33 +163,45 @@ static const NSInteger TIMELINE = 90;
 #pragma mark 基础UI
 -(void)bulidUI{
     
-    [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
+    
+    
+    
+//    [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
     
     
     NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
     [blues bluetoothAllocInit];
     blues.getConnectData = ^(NSString *blueData){
+        //获得设备信息
         [NLBluetoothDataAnalytical bluetoothCommandReturnData:blueData];
+        //调温
+        [self temperaturetOFF:blueData];
+        //记步
+        [self sportData:blueData];
+        //判断温度
+        [self isTemperatureOff:blueData];
         
-        NSString *format = [blueData substringWithRange:NSMakeRange(0, 4)];
-        if ([format isEqualToString:EquiomentCommand_0803]) {
-            [_sportDataArr addObject:blueData];
-            
-            NSLog(@"%lu",(unsigned long)_sportDataArr.count);
-            
-            
-            if (_sportDataArr.count==34) {
-                [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];
-            }
-        }
+        NSLog(@"%@",blueData);
+        
     };
     blues.perheral = ^(NSArray *perpheral){
         _peripheralArray = perpheral;//获得当前的外围设备
+    };
+    blues.getConnectionSuccess = ^(NSString *connectionSuccess){
+        if ([connectionSuccess isEqualToString:EquiomentConnectionSuccess]) {
+            if (!_isQuert) {
+                [self judgmentTemperatureQuery];
+            }
+            
+        }
     };
     
     [self loadStepData];
     [self halfCircle];
 }
+
+
+
 -(void)halfCircle{
     
 
@@ -249,12 +264,12 @@ static const NSInteger TIMELINE = 90;
         num +=5;
         
         UILabel *labTime = [[UILabel alloc] initWithFrame:CGRectMake((width/2 - [ApplicationStyle control_weight:23]) + i * [ApplicationStyle control_weight:16], [ApplicationStyle control_height:60], [ApplicationStyle control_weight:67], [ApplicationStyle control_height:23])];
-        labTime.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:23]];
+        labTime.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:20]];
         labTime.textColor = [ApplicationStyle subjectWithColor];
         [_staffScrollew addSubview:labTime];
-        if (i%5 == 0) {
+        if (i%10 == 0) {
             timeLine.frame = CGRectMake(width/2 + i * [ApplicationStyle control_weight:16], 0, [ApplicationStyle control_weight:4], [ApplicationStyle control_height:60]);
-            labTime.text = @"5分钟";
+            labTime.text = [NSString stringWithFormat:@"%ld分钟",(long)i];
         }
     }
     
@@ -303,6 +318,10 @@ static const NSInteger TIMELINE = 90;
 }
 -(void)scrollViewAnimation:(UIScrollView *)scrollView{
     CGFloat width = scrollView.contentOffset.x/[ApplicationStyle control_weight:16];
+    
+    NSString *time = [NSString stringWithFormat:@"%0.0f",width];
+    _blueTime = [time integerValue];
+
     CGFloat startPoint = (NSInteger)width + 0.5;
     CGFloat endPoint = width;
     NSInteger centPoint = (NSInteger)(endPoint + 0.5);
@@ -314,17 +333,110 @@ static const NSInteger TIMELINE = 90;
 }
 #pragma mark 自己的Delegate
 -(void)index:(NSInteger)index{
-    _temperatureLab.text = [NSString stringWithFormat:@"%ld°C",35 + index/10];
+    _temperatureLab.text = [NSString stringWithFormat:@"%ld°C",(long)35 + index/10];
 }
+-(void)gestureRecognizerStateEnded:(NSInteger)index{
+    
+    NSInteger ture = 35 + index/10;
+    _temperatureNUM = ture * 10;
+    
+    if (_isOff) {
+       
+        NSLog(@"%ld",(long)_temperatureNUM);
+        [self controlTemperaturet];
+    }
+}
+
+#pragma makr 蓝牙方法
+//查询温度开关
+-(void)judgmentTemperatureQuery{
+    Byte byte[20] = {0x90,0x02};
+    NSData *data = [NSData dataWithBytes:byte length:20];
+    if (_peripheralArray.count>0) {
+        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+    }
+    _isQuert = !_isQuert;
+}
+-(void)isTemperatureOff:(NSString *)data{
+    NSString *to = [data substringWithRange:NSMakeRange(0, 4)];
+    if ([to isEqualToString:EquiomentCommand_9002]) {
+        NSString *off = [data substringWithRange:NSMakeRange(4, 2)];
+        if ([off isEqualToString:@"00"]) {
+            NSString *temperStr = [data substringWithRange:NSMakeRange(6, 4)];
+            NSString *temper = [NLBluetoothDataAnalytical reversedPositionStr:temperStr];
+            _temperatureNUM = [NLBluetoothDataAnalytical sixTenHexTeen:temper];
+        }
+    }
+}
+
+- (void)temperaturetOFF:(NSString *)command{
+    if ([command isEqualToString:EquiomentCommand_9001]) {
+        
+        if (_isOff) {
+            [self controlTemperaturet];
+        }
+    }
+}
+
+#warning   调节温度了
+
+-(void)controlTemperaturet{
+
+    NSString *str = [NLBluetoothDataAnalytical tenTurnSixTeen:_temperatureNUM];
+    
+    unsigned long red = strtoul([[str substringWithRange:NSMakeRange(0, 2)] UTF8String],0,16);
+    Byte b =  (Byte) ((0xff & red) );//( Byte) 0xff&iByte;
+    
+    unsigned long red1 = strtoul([[str substringWithRange:NSMakeRange(2, str.length - 2)] UTF8String],0,16);
+    Byte b1 =  (Byte) ((0xff & red1) );//( Byte) 0xff&iByte;
+    
+    
+    
+    unsigned long time = strtoul([[NSString stringWithFormat:@"%lx",(long)_blueTime] UTF8String], 0, 16);
+    Byte timeByty =  (Byte) ((0xff & time) );//( Byte) 0xff&iByte;
+    
+    Byte byte[20] = {0x90,0x03,b,b1,0x00,timeByty,0x00};
+    NSData *data = [NSData dataWithBytes:byte length:20];
+    if (_peripheralArray.count>0) {
+        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+    }
+}
+
+
+-(void)sportData:(NSString *)sportData{
+    NSString *format = [sportData substringWithRange:NSMakeRange(0, 4)];
+    if ([format isEqualToString:EquiomentCommand_0803]) {
+        [_sportDataArr addObject:sportData];
+        if (_sportDataArr.count==34) {
+            [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];
+        }
+    }
+}
+
 #pragma mark 按钮事件
+
 - (void)moxibustionBtnDown{
     if (!_isOff) {
         [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_K"] forState:UIControlStateNormal];
         _isOff = !_isOff;
+        Byte byte[18] = {0x90,0x01,0x55};
+        NSData *data = [NSData dataWithBytes:byte length:20];
+        if (_peripheralArray.count>0) {
+            //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+            [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+            NSLog(@"发送命令==  %@",data);
+        }
         return;
     }else{
         [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_G"] forState:UIControlStateNormal];
         _isOff = !_isOff;
+        Byte byte[18] = {0x90,0x01,0xAA};
+        NSData *data = [NSData dataWithBytes:byte length:20];
+        if (_peripheralArray.count>0) {
+            //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+            [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+            NSLog(@"发送命令==  %@",data);
+        }
         return;
     }
 }
