@@ -31,7 +31,9 @@
     _loacluserinfo = [[NLLocalUserInfo alloc] init];
     
     NSLog(@"%@",[kAPPDELEGATE._loacluserinfo getControllew]);
-    
+    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
+    [kAPPDELEGATE._loacluserinfo SetUser_ID:@"88830130-15c5-4fa9-92c2-b6960f11edc1"];
+    [kAPPDELEGATE._loacluserinfo SetUserAccessToken:@"123123123123"];
     
     if (![[kAPPDELEGATE._loacluserinfo getControllew] isEqualToString:@"1"]) {
         [self tabBarViewControllerType:Controller_Loing];

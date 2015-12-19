@@ -11,7 +11,7 @@
 /**
  *滑动到多少个
  */
--(void)index:(NSInteger)index;
+-(void)indexNum:(NSInteger)index;
 
 -(void)gestureRecognizerStateEnded:(NSInteger)index;
 @end
@@ -26,4 +26,8 @@
                        width:(NSInteger)width
                    starColor:(UIColor *)starColor
                     endColor:(UIColor *)endColor;
+@property(nonatomic,assign)NSInteger indexTemp;
+
+
+
 @end

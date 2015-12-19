@@ -201,9 +201,9 @@ static const NSInteger DATEPICKERTAGBTN = 4000;                             //æ—
 }
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
     if (view == nil) {
-        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH/4.0f, [ApplicationStyle control_height:200])];
+        view = [[UIView alloc] init];
         
-        UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(50, 30, 80, 40)];
+        UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [ApplicationStyle control_weight:160], [ApplicationStyle control_height:80])];
         lbl.backgroundColor = [UIColor clearColor];
         lbl.textAlignment = NSTextAlignmentLeft;
         lbl.textColor = [@"000000" hexStringToColor];

@@ -71,7 +71,7 @@
 +(void)sportRecordCreateData:(NSArray *)arr isDeposit:(NSInteger)isDeposit{
     FMDatabase *db = [self sqlDataRoute];
     [db open];
-    NSString *createTable = @"create table if not exists SportData (caloriesAmount integer not null,count integer not null,sportDate text not null,stepsAmount integer not null,calories integer not null,endTime text not null,id text not null,startTime text not null,steps integer not null,user_id text not null,isDeposit text not null,timeInterval text not null)";
+    NSString *createTable = @"create table if not exists SportData (caloriesAmount integer not null,count integer not null,sportDate text not null,stepsAmount integer not null,calories integer not null,endTime text not null,id text not null,startTime text not null,steps integer not null,user_id text not null,isDeposit text not null,timeInterval text not null,distanceCount text not null)";
     [db executeUpdate:createTable];
     NSDictionary *dic = nil;
     for (dic in arr) {
@@ -104,6 +104,7 @@
       [kAPPDELEGATE._loacluserinfo GetUser_ID],
       @"1",
       @"nil",
+      @"nil",
       nil]];
 }
 
@@ -113,7 +114,7 @@
     FMDatabase *db = [self sqlDataRoute];
     [db open];
     
-    NSString *createTable = @"create table if not exists SportData (caloriesAmount integer not null,count integer not null,sportDate text not null,stepsAmount integer not null,calories integer not null,endTime text not null,id text not null,startTime text not null,steps integer not null,user_id text not null,isDeposit text not null,timeInterval text not null)";
+    NSString *createTable = @"create table if not exists SportData (caloriesAmount integer not null,count integer not null,sportDate text not null,stepsAmount integer not null,calories integer not null,endTime text not null,id text not null,startTime text not null,steps integer not null,user_id text not null,isDeposit text not null,timeInterval text not null,distanceCount text not null)";
     [db executeUpdate:createTable];
     [self depositSportBlueData:db sportData:sportData];
 }
@@ -121,7 +122,7 @@
     
     
     
-    [db executeUpdate:@"insert or replace into SportData (caloriesAmount,count,sportDate,stepsAmount,calories,endTime,id,startTime,steps,user_id,isDeposit,timeInterval) values (?,?,?,?,?,?,?,?,?,?,?,?)" withArgumentsInArray:
+    [db executeUpdate:@"insert or replace into SportData (caloriesAmount,count,sportDate,stepsAmount,calories,endTime,id,startTime,steps,user_id,isDeposit,timeInterval,distanceCount) values (?,?,?,?,?,?,?,?,?,?,?,?,?)" withArgumentsInArray:
      [NSArray arrayWithObjects:
       [sportData objectForKey:@"caloriesAmount"]==nil?@"":[sportData objectForKey:@"caloriesAmount"],
       @"1",
@@ -135,6 +136,7 @@
       [kAPPDELEGATE._loacluserinfo GetUser_ID],
       @"1",
       [sportData objectForKey:@"timeInterval"],
+      [sportData objectForKey:@"distanceCount"],
       nil]];
     [db close];
 }
@@ -147,7 +149,7 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     FMDatabase *db =[self sqlDataRoute];
     [db open];
-    NSString *takeCreate = [NSString stringWithFormat:@"select * from SportData user_id = '%@'",[kAPPDELEGATE._loacluserinfo GetUser_ID]];
+    NSString *takeCreate = [NSString stringWithFormat:@"select * from SportData where user_id = '%@'",[kAPPDELEGATE._loacluserinfo GetUser_ID]];
     FMResultSet *rs = [db executeQuery:takeCreate];
     while ([rs next]) {
         [dic setValue:[rs stringForColumn:@"caloriesAmount"] forKey:@"caloriesAmount"];
@@ -159,6 +161,10 @@
         [dic setValue:[rs stringForColumn:@"id"] forKey:@"id"];
         [dic setValue:[rs stringForColumn:@"startTime"] forKey:@"startTime"];
         [dic setValue:[rs stringForColumn:@"steps"] forKey:@"steps"];
+        [dic setValue:[rs stringForColumn:@"user_id"] forKey:@"user_id"];
+        [dic setValue:[rs stringForColumn:@"isDeposit"] forKey:@"isDeposit"];
+        [dic setValue:[rs stringForColumn:@"timeInterval"] forKey:@"timeInterval"];
+        [dic setValue:[rs stringForColumn:@"distanceCount"] forKey:@"distanceCount"];
         [dataArr addObject:dic];
     }
     [db close];

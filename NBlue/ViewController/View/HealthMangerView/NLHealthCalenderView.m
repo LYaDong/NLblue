@@ -6,7 +6,7 @@
 //  Copyright © 2015年 LYD. All rights reserved.
 //
 
-static const NSInteger CELLTAG = 1000;
+static const NSInteger CELLTAG = 500;//不可以大于1000
 
 #import "NLHealthCalenderView.h"
 #import "NLCalenderPackage.h"
@@ -49,12 +49,12 @@ static const NSInteger CELLTAG = 1000;
     
     
     
-    NLCalenderPackage *calenderView = [[NLCalenderPackage alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle control_height:520])];
+    NLCalenderPackage *calenderView = [[NLCalenderPackage alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle control_height:598])];
     [_mainScrollew addSubview:calenderView];
     
     
     {//经期时间
-        UIImageView *calenderback = [[UIImageView alloc] initWithFrame:CGRectMake(0, calenderView.bottomOffset, SCREENWIDTH, [ApplicationStyle control_height:100])];
+        UIImageView *calenderback = [[UIImageView alloc] initWithFrame:CGRectMake(0, calenderView.bottomOffset , SCREENWIDTH, [ApplicationStyle control_height:100])];
         calenderback.image = [UIImage imageNamed:@"NLBackCalender"];
         [_mainScrollew addSubview:calenderback];
         
@@ -77,7 +77,7 @@ static const NSInteger CELLTAG = 1000;
         }
         
         _periodTimeDay = [[UILabel alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:52],
-                                                                  [ApplicationStyle control_height:40] + ((calenderback.viewHeight - [ApplicationStyle control_height:40]) - [ApplicationStyle control_height:35])/2 ,
+                                                                  [ApplicationStyle control_height:40] + ((calenderback.viewHeight - [ApplicationStyle control_height:40]) - [ApplicationStyle control_height:35])/2,
                                                                    SCREENWIDTH - [ApplicationStyle control_weight:100 * 2],
                                                                    [ApplicationStyle control_height:35])];
         
@@ -98,7 +98,7 @@ static const NSInteger CELLTAG = 1000;
     [_mainScrollew addSubview:_mainTableView];
     
     
-    _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + [ApplicationStyle control_height:4 * 88] + [ApplicationStyle control_height:2]);
+    _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + [ApplicationStyle control_height:4 * 88] + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78]);
 }
 -(void)controlUI{
     
@@ -166,7 +166,7 @@ static const NSInteger CELLTAG = 1000;
     if (indexPath.row==0) {
         cell.cellCountImage.image = [UIImage imageNamed:@"NLHClen_DYM_NO"];
     }
-    
+
     cell.backgroundColor = [UIColor  clearColor];
     return cell;
 }

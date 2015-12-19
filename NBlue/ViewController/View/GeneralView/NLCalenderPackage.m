@@ -111,10 +111,24 @@ static const NSInteger ARROWTAG = 1500;
         [dayButton addTarget:self action:@selector(dayButtonDown:) forControlEvents:UIControlEventTouchUpInside];
         [_calenderView addSubview:dayButton];
         
+
+        
         [self btnCalenderSortBtn:dayButton date:date i:i];
         [self calculationCalenderBtn:dayButton date:date i:i];
         
     }
+}
+//获取上个月的时间
+- (NSInteger)getLastMonthDay:(NSInteger)day{
+    NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:day];
+    NSInteger countDay = [ApplicationStyle totalDaysInMonth:date];
+    return countDay;
+}
+//获取下个月的时间
+- (NSInteger)getNextMonthDay:(NSInteger)day{
+    NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:day];
+    NSInteger countDay = [ApplicationStyle totalDaysInMonth:date];
+    return countDay;
 }
 
 
@@ -159,12 +173,17 @@ static const NSInteger ARROWTAG = 1500;
     NSInteger theCurrent = [ApplicationStyle whatDays:date];
     NSInteger daysInLastMonth = [ApplicationStyle totalDaysInMonth:date];
     NSInteger firstWeekday    = [ApplicationStyle getWeekofFirstInDate:date];
+
     
+    NSInteger lastCountDay = [self getLastMonthDay:_index - 1];
+
+//    NSInteger nextCountDay = [self getNextMonthDay:_index + 1];
+
     NSInteger day = 0;
     if (i < firstWeekday) {
         //上个月的日子
-        day = daysInLastMonth - firstWeekday + i ;
-        //            dayButton.backgroundColor = [UIColor lightGrayColor];
+//        day = daysInLastMonth - firstWeekday + i ;
+        day = lastCountDay - (firstWeekday - 1 - i);
     }else if (i > firstWeekday + daysInLastMonth - 1){
         //下个月的日子
         day = i + 1 - firstWeekday - daysInLastMonth;
@@ -194,12 +213,12 @@ static const NSInteger ARROWTAG = 1500;
 //计算经期
 -(void)calculationCalenderBtn:(UIButton *)dayButton date:(NSDate *)date i:(NSInteger)i{
     NSInteger firstWeekday    = [ApplicationStyle getWeekofFirstInDate:date];
-    
+    //间隔周期
     NSInteger ZQ = 28;
     
     NSDate *userDate = [ApplicationStyle dateTransformationStr:@"20151201"];
     NSString *currentTime = [ApplicationStyle datePickerTransformationStr:date];
-
+    //预计计算多少周
     for (NSInteger j=0; j<6; j++) {
         
         NSString *ycq = [ApplicationStyle datePickerTransformationStr:[userDate dateByAddingTimeInterval:(60 * 60 * 24) * ZQ * j]];

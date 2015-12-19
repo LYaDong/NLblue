@@ -113,7 +113,7 @@ static const NSInteger BTNPHOTO = 4000;
     
     
     
-    _viewPhoto = [[UIView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT+[ApplicationStyle control_height:169 * 2], SCREENWIDTH, [ApplicationStyle control_height:169 * 2])];
+    _viewPhoto = [[UIView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT + [ApplicationStyle control_height:110 * 3], SCREENWIDTH, [ApplicationStyle control_height:110 * 3] + [ApplicationStyle control_height:8])];
     _viewPhoto.layer.borderColor = [ApplicationStyle SubjectCustomLineColor].CGColor;
     _viewPhoto.layer.borderWidth = 0.5;
     _viewPhoto.backgroundColor = [UIColor whiteColor];
@@ -122,9 +122,9 @@ static const NSInteger BTNPHOTO = 4000;
     NSArray *arrLab = @[@"拍照",@"从相册选取",@"取消"];
     for (NSInteger i=0; i<arrLab.count; i++) {
         UIButton *btnPhoto = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        btnPhoto.frame = CGRectMake(0, 0+i*55, SCREENWIDTH, 55);
+        btnPhoto.frame = CGRectMake(0, 0+i*[ApplicationStyle control_height:110], SCREENWIDTH, [ApplicationStyle control_height:110]);
         if (i==2) {
-            btnPhoto.frame = CGRectMake(0, 4+i*55, SCREENWIDTH, 55);
+            btnPhoto.frame = CGRectMake(0, [ApplicationStyle control_height:8]+i*[ApplicationStyle control_height:110], SCREENWIDTH, [ApplicationStyle control_height:110]);
         }
         [btnPhoto setTitle:arrLab[i] forState:UIControlStateNormal];
         [btnPhoto setTitleColor:[@"353535" hexStringToColor] forState:UIControlStateNormal];
@@ -135,9 +135,9 @@ static const NSInteger BTNPHOTO = 4000;
     }
     
     for (NSInteger i=0; i<2; i++) {
-        UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(0, 55+i*55, SCREENWIDTH, 1)];
+        UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle control_height:110]+i*[ApplicationStyle control_height:110], SCREENWIDTH, 1)];
         if (i==1) {
-            viewLine.frame = CGRectMake(0, 55+i*55, SCREENWIDTH, 4);
+            viewLine.frame = CGRectMake(0, [ApplicationStyle control_height:110]+i*[ApplicationStyle control_height:110], SCREENWIDTH, 4);
         }
         viewLine.backgroundColor = [ApplicationStyle SubjectCustomLineColor];
         [_viewPhoto addSubview:viewLine];
@@ -228,7 +228,7 @@ static const NSInteger BTNPHOTO = 4000;
             {
                 _blackView.hidden = NO;
                 [UIView animateWithDuration:0.5 animations:^{
-                    _viewPhoto.frame = CGRectMake(0, SCREENHEIGHT-[ApplicationStyle control_height:169 * 2], SCREENWIDTH,[ApplicationStyle control_height:169 * 2]);
+                    _viewPhoto.frame = CGRectMake(0, SCREENHEIGHT-([ApplicationStyle control_height:110 * 3] + [ApplicationStyle control_height:8]), SCREENWIDTH,[ApplicationStyle control_height:110 * 3] + [ApplicationStyle control_height:8]);
                 }];
                 break;
             }
@@ -297,7 +297,7 @@ static const NSInteger BTNPHOTO = 4000;
     _userHeadImage.image = image;
     _blackView.hidden = YES;
     [UIView animateWithDuration:0.5 animations:^{
-        _viewPhoto.frame = CGRectMake(0, SCREENHEIGHT+[ApplicationStyle control_height:169 * 2], SCREENWIDTH, [ApplicationStyle control_height:169 * 2]);
+        _viewPhoto.frame = CGRectMake(0, SCREENHEIGHT+([ApplicationStyle control_height:110 * 3] + [ApplicationStyle control_height:8]), SCREENWIDTH, [ApplicationStyle control_height:110 * 3] + [ApplicationStyle control_height:8]);
     }];
 }
 
@@ -401,7 +401,7 @@ static const NSInteger BTNPHOTO = 4000;
         {
             _blackView.hidden = YES;
             [UIView animateWithDuration:0.5 animations:^{
-                _viewPhoto.frame = CGRectMake(0, SCREENHEIGHT+169, SCREENWIDTH, 169);
+                _viewPhoto.frame = CGRectMake(0, SCREENHEIGHT+([ApplicationStyle control_height:110 * 3] + [ApplicationStyle control_height:8]), SCREENWIDTH, [ApplicationStyle control_height:110 * 3] + [ApplicationStyle control_height:8]);
             }];
             
             break;
@@ -411,7 +411,11 @@ static const NSInteger BTNPHOTO = 4000;
     }
 }
 #pragma mark Cell线
--(void)cellLineView:(NSIndexPath *)indexPath viewLineOn:(UIView *)viewLineOn viewLineUnder:(UIView *)viewLineUnder cell:(NLIndividuaFormaCell *)cell{
+-(void)cellLineView:(NSIndexPath *)indexPath
+         viewLineOn:(UIView *)viewLineOn
+      viewLineUnder:(UIView *)viewLineUnder
+               cell:(NLIndividuaFormaCell *)cell{
+    
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             viewLineOn.frame = CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle control_height:2]);

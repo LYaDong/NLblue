@@ -100,7 +100,7 @@
 
     NLHealthCalenderView *calenderView = [[NLHealthCalenderView alloc] initWithFrame:CGRectMake(NLHealthManger_Calender * SCREENWIDTH, 0, SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle statusBarSize] - [ApplicationStyle navigationBarSize] - [ApplicationStyle tabBarSize])];
     [_mainScrollew addSubview:calenderView];
-    
+//    
     NLHealthSleepView *sleepView = [[NLHealthSleepView alloc] initWithFrame:CGRectMake(NLHealthManger_Sleep * SCREENWIDTH, 0, SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle statusBarSize] - [ApplicationStyle navigationBarSize] - [ApplicationStyle tabBarSize])];
     [_mainScrollew addSubview:sleepView];
     

@@ -10,10 +10,12 @@
 #import "NLColumnImage.h"
 #import "NLStepImageLabView.h"
 #import "NLStepColumnImage.h"
+#import "NLSQLData.h"
 @interface NLHealthStepNumber()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIButton *stepNumber;
 @property(nonatomic,strong)UILabel *maxStepNumber;
 @property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)NSMutableArray *sportData;
 @end
 
 @implementation NLHealthStepNumber
@@ -28,7 +30,10 @@
 -(void)bulidUI{
     
     
+    _sportData = [NSMutableArray array];
+    _sportData = [NLSQLData sportRecordGetData];
     
+
     
 
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, self.frame.size.height) style:UITableViewStylePlain];
@@ -119,11 +124,19 @@
     lineTime.backgroundColor = [ApplicationStyle subjectWithColor];
     [cell addSubview:lineTime];
     
-    
-    
-    
+    NSString *sportCount = nil;
+    NSString *calorCount = nil;
+    NSString *distanceCount = nil;
+    if (_sportData>0) {
+        sportCount = [_sportData[0] objectForKey:@"stepsAmount"];
+        calorCount = [_sportData[0] objectForKey:@"caloriesAmount"];
+        distanceCount = [_sportData[0] objectForKey:@"distanceCount"];
+    }
     NSArray *stepArr = @[@"Step_Num",@"Step_KM",@"Step_KLL"];
-    NSArray *stepData = @[@"1111步",@"5.34千米",@"241千卡"];
+    NSArray *stepData = @[[NSString stringWithFormat:@"%@步",sportCount],
+                          [NSString stringWithFormat:@"%@千米",distanceCount],
+                          [NSString stringWithFormat:@"%@千卡",calorCount]];
+    
     NSArray *stepRemark = @[NSLocalizedString(@"NLHealthStepNumber_TheCurrent", nil),
                             NSLocalizedString(@"NLHealthStepNumber_MovingDistance", nil),
                             NSLocalizedString(@"NLHealthStepNumber_ConsumedEnergy", nil)];
@@ -142,10 +155,6 @@
     }
     
 
-    
-    
-    
-    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     return cell;

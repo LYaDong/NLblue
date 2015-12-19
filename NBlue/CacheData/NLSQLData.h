@@ -26,8 +26,9 @@
  */
 +(void)sportRecordCreateData:(NSArray *)arr isDeposit:(NSInteger)isDeposit;
 /**
- *蓝牙获取的数据
+ *蓝牙获取运动
  */
 +(void)sportBlueData:(NSDictionary *)sportData;
 +(void)delDateSportData:(NSString *)date;
++(NSMutableArray *)sportRecordGetData;
 @end

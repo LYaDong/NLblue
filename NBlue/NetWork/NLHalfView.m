@@ -171,7 +171,7 @@
     //要滑动的值 - 起点值  / 角度值  *  差值  + 最小值     =   最终角度值
     
     _index = valueForAngle * 51;
-    [self.delegate index:_index];
+    [self.delegate indexNum:_index];
     
     
     if (gesture.state == UIGestureRecognizerStateEnded) {
@@ -180,7 +180,10 @@
 
     [self setNeedsDisplay];
 }
-
+- (void)setIndexTemp:(NSInteger)indexTemp{
+    _index = indexTemp;
+    [self setNeedsDisplay];
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
