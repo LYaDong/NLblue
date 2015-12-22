@@ -170,6 +170,33 @@
     [db close];
     return dataArr;
 }
+
++(NSString *)sportDayTaskData:(NSString *)timeDay{
+    NSString *string = nil;
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+//    @"select * from table where datediff(dd,getdate(),到期日期) between 0 and 7";
+//    
+//    @"select * from SportData WHERE YEARWEEK(date_format(submittime,'%Y-%m-%d')) = YEARWEEK(now())"
+    
+//    @"select *from SportData where YEARWEEK(date_format(date_format(submittime,'%Y-%m-%d')) = YEARWEEK(now())"
+    
+//    select * from SportData WHERE datetime(sportDate,'Y-m') = '2015-12'
+//    select  * from SportData where datetime(sportDate, "2015-12")
+   
+    
+    NSString *taskCreate = [NSString stringWithFormat:@"select * from SportData WHERE YEARWEEK(date_format(sportDate,'Y-m')) = '2015-12'"];
+    FMResultSet *rs = [db executeQuery:taskCreate];
+    while ([rs next]) {
+        [dic setValue:[rs stringForColumn:@"stepsAmount"] forKey:@"stepsAmount"];
+        
+        NSLog(@"%@",dic);
+        
+    }
+    return string;
+}
+
 +(NSString *)sportDateCheckID:(NSString *)date{
     NSString *dateStr = nil;
     FMDatabase *db = [self sqlDataRoute];
@@ -197,6 +224,62 @@
     [db executeUpdate:del];
     [db close];
 }
+
+
+
+
++(void)establishSportDataTable{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    
+    NSString *createTableBig = @"CREATE TABLE IF NOT EXISTS SportDataBig (sportDate TEXT PRIMARY KEY,count INTEGER NOT NULL,distanceAmount INTEGER NOT NULL,caloriesAmount INTEGER NOT NULL,stepsAmount INTEGER NOT NULL,user_id TEXT NOT NULL,isUpData TEXT NOT NULL)";//创建一个大表
+    NSString *createTableSmall = @"CREATE TABLE IF NOT EXISTS SportDataSmall (calories INTEGER NOT NULL,ids INTEGER NOT NULL,steps INTEGER NOT NULL,distance INTEGER NOT NULL,serialNumber TEXT PRIMARY KEY,activeTime INTEGER NOT NULL,sportDate TEXT NOT NULL)";//创建一个小表
+    [db executeUpdate:createTableBig];
+    [db executeUpdate:createTableSmall];
+    [db close];
+}
+
++(void)insterSportData:(NSArray *)dataArr
+              isUpdata:(NSInteger)updata{
+    
+//    NSLog(@"%@",dataArr);
+    
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+
+    NSDictionary *dic = nil;
+    for (dic in dataArr) {
+        NSString *inster = @"INSERT OR REPLACE INTO SportDataBig (sportDate,count,distanceAmount,caloriesAmount,stepsAmount,user_id,isUpData) VALUES (?,?,?,?,?,?,?)";
+        NSArray *dataArr = [NSArray arrayWithObjects:
+                            [dic objectForKey:@"sportDate"],
+                            [dic objectForKey:@"count"],
+                            [dic objectForKey:@"distanceAmount"],
+                            [dic objectForKey:@"caloriesAmount"],
+                            [dic objectForKey:@"stepsAmount"],
+                            [kAPPDELEGATE._loacluserinfo GetUser_ID],
+                            [NSNumber numberWithInteger:updata],
+                            nil];
+        [db executeUpdate:inster withArgumentsInArray:dataArr];
+        
+        NSDictionary *smallDic = nil;
+        for (smallDic in [dic objectForKey:@"stepFragments"]) {
+            NSString *insterSmall = @"INSERT OR REPLACE INTO SportDataSmall (calories,ids,steps,distance,serialNumber,activeTime,sportDate) VALUES (?,?,?,?,?,?,?)";
+            NSArray *dataArrSmall = [NSArray arrayWithObjects:
+                                     [smallDic objectForKey:@"calories"],
+                                     [smallDic objectForKey:@"id"] == nil?@"":[smallDic objectForKey:@"id"],
+                                     [smallDic objectForKey:@"steps"],
+                                     [smallDic objectForKey:@"distance"],
+                                     [smallDic objectForKey:@"seris"],
+                                     [smallDic objectForKey:@"activeTime"],
+                                     [dic objectForKey:@"sportDate"],
+                                     nil];
+            [db executeUpdate:insterSmall withArgumentsInArray:dataArrSmall];
+        }
+    }
+}
+
+
+
 
 
 @end

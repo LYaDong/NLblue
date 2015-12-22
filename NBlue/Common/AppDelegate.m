@@ -12,6 +12,7 @@
 #import "NLProfileViewController.h"
 #import "MainNavgationControllew.h"
 #import "NLLogInViewController.h"
+#import "OLGhostAlertView.h"
 @interface AppDelegate ()
 
 @end
@@ -31,9 +32,9 @@
     _loacluserinfo = [[NLLocalUserInfo alloc] init];
     
     NSLog(@"%@",[kAPPDELEGATE._loacluserinfo getControllew]);
-    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
-    [kAPPDELEGATE._loacluserinfo SetUser_ID:@"88830130-15c5-4fa9-92c2-b6960f11edc1"];
-    [kAPPDELEGATE._loacluserinfo SetUserAccessToken:@"123123123123"];
+//    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
+//    [kAPPDELEGATE._loacluserinfo SetUser_ID:@"88830130-15c5-4fa9-92c2-b6960f11edc1"];
+//    [kAPPDELEGATE._loacluserinfo SetUserAccessToken:@"123123123123"];
     
     if (![[kAPPDELEGATE._loacluserinfo getControllew] isEqualToString:@"1"]) {
         [self tabBarViewControllerType:Controller_Loing];
@@ -87,9 +88,13 @@
         tabBar.selectedIndex = 1;
         self.window.rootViewController = tabBar;
     }
-    
-    
-    
+}
+
+-(void)AutoDisplayAlertView:(NSString*) title :(NSString*)msg
+{
+    OLGhostAlertView *_ghostAlertView = [[OLGhostAlertView alloc] initWithTitle:title message:msg timeout:2.0 dismissible:YES];
+    _ghostAlertView.position = OLGhostAlertViewPositionBottom;
+    [_ghostAlertView show];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

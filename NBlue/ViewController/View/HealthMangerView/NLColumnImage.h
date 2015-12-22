@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol NLColumnImageDelegate <NSObject>
 
+-(void)sildeIndex:(NSInteger)index;
+
+@end
 typedef NS_ENUM(NSUInteger,NLCalendarType) {
     NLCalendarType_Day = 0,                                 //已天为单位
     NLCalendarType_Week = 1,                                //已星期为单位
@@ -25,6 +29,8 @@ typedef NS_ENUM(NSUInteger,NLCalendarType) {
                     withColor:(UIColor *)withColor
                          type:(NSInteger)type
                    timeLabArr:(NSArray *)labTimeArr;
+
+@property(nonatomic,assign)id<NLColumnImageDelegate>delegate;
 
 
 //- (void)slideChangearr:(NSArray *)arr intx:(NSInteger)uin;

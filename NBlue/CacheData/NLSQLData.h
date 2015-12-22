@@ -31,4 +31,12 @@
 +(void)sportBlueData:(NSDictionary *)sportData;
 +(void)delDateSportData:(NSString *)date;
 +(NSMutableArray *)sportRecordGetData;
++(NSString *)sportDayTaskData:(NSString *)timeDay;
+
+
++(void)establishSportDataTable;
++(void)insterSportData:(NSArray *)dataArr
+              isUpdata:(NSInteger)updata;
+
+
 @end

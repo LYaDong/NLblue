@@ -33,6 +33,7 @@
     _sportData = [NSMutableArray array];
     _sportData = [NLSQLData sportRecordGetData];
     
+    
 
     
 
@@ -124,18 +125,19 @@
     lineTime.backgroundColor = [ApplicationStyle subjectWithColor];
     [cell addSubview:lineTime];
     
-    NSString *sportCount = nil;
-    NSString *calorCount = nil;
-    NSString *distanceCount = nil;
+    #warning mark 测试
+//    NSString *sportCount = nil;
+//    NSString *calorCount = nil;
+//    NSString *distanceCount = nil;
     if (_sportData>0) {
-        sportCount = [_sportData[0] objectForKey:@"stepsAmount"];
-        calorCount = [_sportData[0] objectForKey:@"caloriesAmount"];
-        distanceCount = [_sportData[0] objectForKey:@"distanceCount"];
+//        sportCount = [_sportData[0] objectForKey:@"stepsAmount"];
+//        calorCount = [_sportData[0] objectForKey:@"caloriesAmount"];
+//        distanceCount = [_sportData[0] objectForKey:@"distanceCount"];
     }
     NSArray *stepArr = @[@"Step_Num",@"Step_KM",@"Step_KLL"];
-    NSArray *stepData = @[[NSString stringWithFormat:@"%@步",sportCount],
-                          [NSString stringWithFormat:@"%@千米",distanceCount],
-                          [NSString stringWithFormat:@"%@千卡",calorCount]];
+    NSArray *stepData = @[[NSString stringWithFormat:@"%@步",@"1234"],
+                          [NSString stringWithFormat:@"%@千米",@"555"],
+                          [NSString stringWithFormat:@"%@千卡",@"58"]];
     
     NSArray *stepRemark = @[NSLocalizedString(@"NLHealthStepNumber_TheCurrent", nil),
                             NSLocalizedString(@"NLHealthStepNumber_MovingDistance", nil),

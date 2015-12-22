@@ -61,6 +61,10 @@ static const NSInteger TEXT_TAG = 3000;
         text.borderStyle = UITextBorderStyleNone;
         text.tag = TEXT_TAG + i;
         [self.view addSubview:text];
+        
+        if (i==1) {
+            text.secureTextEntry=YES;
+        }
     }
     
     
@@ -91,6 +95,7 @@ static const NSInteger TEXT_TAG = 3000;
     
     
     
+    
     CGSize thirpParty = [ApplicationStyle textSize:NSLocalizedString(@"NLLogIn_LogInUser_ThirdLog", nil) font:[ApplicationStyle textSuperSmallFont] size:[ApplicationStyle screenWidth]];
     
     UILabel *labThirp  = nil;
@@ -112,7 +117,7 @@ static const NSInteger TEXT_TAG = 3000;
     
     for (NSInteger i =0 ; i<arrLogInImage.count; i++) {
         UIButton *thirdBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    CGFloat weight = (SCREENWIDTH - [ApplicationStyle control_weight:68 * 2]);
+        CGFloat weight = (SCREENWIDTH - [ApplicationStyle control_weight:68 * 2]);
 
         thirdBtn.frame = CGRectMake([ApplicationStyle control_weight:68] + i * ([ApplicationStyle control_weight:80] + (weight - [ApplicationStyle control_weight:80 * 3])/3 + (weight - [ApplicationStyle control_weight:80 * 3])/3/2),
                                     labThirp.bottomOffset + [ApplicationStyle control_height:60], [ApplicationStyle control_weight:80],
@@ -135,15 +140,15 @@ static const NSInteger TEXT_TAG = 3000;
     UITextField *textPhone = (UITextField *)[self.view viewWithTag:TEXT_TAG];
     UITextField *textPassWord = (UITextField *)[self.view viewWithTag:TEXT_TAG + 1];
     if (textPhone.text.length == 0) {
-        NSLog(@"请输入手机号");
+       [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"请输入手机号"];
         return;
     }
     if (![ApplicationStyle PhoteFormat:textPhone.text]) {
-        NSLog(@"手机格式不对");
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"手机格式不对"];
         return;
     }
     if (textPassWord.text.length == 0) {
-        NSLog(@"请输入密码");
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"请输入密码"];
         return;
     }
     [[NLDatahub sharedInstance] userSignInPhone:[NSString stringWithFormat:@"%@",textPhone.text]
@@ -182,10 +187,11 @@ static const NSInteger TEXT_TAG = 3000;
     [kAPPDELEGATE._loacluserinfo SetUserAccessToken:[dic objectForKey:@"authToken"]];
     [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
     [kAPPDELEGATE tabBarViewControllerType:Controller_Main];
+    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
     
 }
 -(void)logInFicaled{
-    
+    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"账号或密码错误"];
 }
 -(void)delNotification{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -195,6 +201,14 @@ static const NSInteger TEXT_TAG = 3000;
     // Dispose of any resources that can be recreated.
 }
 
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UITextField *text = (UITextField *)[self.view viewWithTag:3000];
+    [text endEditing:YES];
+    UITextField *text1 = (UITextField *)[self.view viewWithTag:3001];
+    [text1 endEditing:YES];
+}
 /*
 #pragma mark - Navigation
 

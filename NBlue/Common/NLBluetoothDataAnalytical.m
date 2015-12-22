@@ -294,87 +294,210 @@
     
     
     
+//    08031a0f5cc003000188c00a7001000000000000
     
-    //计算时间
+    
+    
+
+
+    Byte *testByte = [self stringConversionByte:@"28c0016000"];
+    NSInteger step = ((testByte[0] & 0xFC) >> 2) + ((testByte[1] & 0x3F) << 6);
+    NSInteger time = ((testByte[1] & 0xC0) >> 6) + ((testByte[2] & 0x03) << 2);
+    NSInteger cal = ((testByte[2] & 0xFC) >> 2) + ((testByte[3] & 0x0F) << 6);
+    NSInteger
+    dis = ((testByte[3] & 0xF0) >> 4) + ((testByte[4] & 0xFF) << 4);
+    
+    NSLog(@"step = %ld time %ld cal %ld dis %ld",(long)step,(long)time,(long)cal,(long)dis);
+    
+    
+    
+    
+    
+    
+   
+    
+//    NSString *sss = @"08031a0f28c001600028c001600028c0016000";
+//    NSMutableArray *array = [NSMutableArray array];
+//    NSMutableString *string = [NSMutableString string];
+//    for (NSInteger j=0; j<3; j++) {
+//        
+//         NSString *xxx = [sss substringWithRange:NSMakeRange(8 + j * 10, 10)];
+//        for (NSInteger n = 0; n<5; n++) {
+//            NSString *vvv = [xxx substringWithRange:NSMakeRange(0 + n * 2, 2)];
+//           [array addObject:[self getBinaryByhex:vvv]];
+//        }
+//        NSString *ddd = array[0];
+//        
+//        [ddd substringWithRange:NSMakeRange(ddd.length - 2, 2)];
+//        
+//        NSString *cccc = array[0];
+//        NSString *mmmm = [cccc substringWithRange:NSMakeRange(0, 6)];
+////        NSLog(@"%@",[cccc substringWithRange:NSMakeRange(0, 6)]);
+//        
+//        NSString *bbb = array[1];
+//        NSString *llll = [bbb substringWithRange:NSMakeRange(2, 6)];
+//        
+////        NSLog(@"%@",[bbb substringWithRange:NSMakeRange(2, 6)]);
+//        
+//       NSLog(@"%@",[self toDecimalSystemWithBinarySystem:[NSString stringWithFormat:@"%@%@",llll,mmmm]]);
+//        
+//    }
+    
+    
+    
+    
+    
+    
+    
+    NSMutableDictionary *dicSportDataBig = [NSMutableDictionary dictionary];
+//    //计算时间
     NSString *year = [arr[0] substringWithRange:NSMakeRange(8, 4)];
     NSString *yearDate = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[self reversedPositionStr:year]]];
-    //    NSString *yearDate = [NSString stringWithFormat:@"%ld",[self ToHexConversion:[self reversedPositionStr:year]]];
     NSString *moht = [arr[0] substringWithRange:NSMakeRange(12, 4)];
     NSArray *mothDate = [self FourHexConversion:moht];
     NSString *sportDate = [NSString stringWithFormat:@"%@-%@-%@",yearDate,mothDate[0],mothDate[1]];
-    [NLSQLData delDateSportData:sportDate];
+    
+    //计算总步数 总卡路里
+    NSString *sportCountStr = [arr[1] substringWithRange:NSMakeRange(8 * 1, 8)];
+    NSString *sportCount = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[self reversedPositionStr:sportCountStr]]];
+    NSString *sportClaorie =[arr[1] substringWithRange:NSMakeRange(8 * 2, 8)];
+    NSString *caloriesAmount = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[self reversedPositionStr:sportClaorie]]];
+    NSString *distanceStr = [arr[1] substringWithRange:NSMakeRange(8 * 3, 8)];
+    NSString *distanceCount = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[self reversedPositionStr:distanceStr]]];
+    
+    [dicSportDataBig setValue:sportDate forKey:@"sportDate"];
+    [dicSportDataBig setValue:sportCount forKey:@"stepsAmount"];
+    [dicSportDataBig setValue:caloriesAmount forKey:@"caloriesAmount"];
+    [dicSportDataBig setValue:distanceCount forKey:@"distanceAmount"];
+    
+    
     
     
     static NSInteger timeInterval = 0;
-    
+    NSInteger stepCount = 0;
+    NSMutableArray *stepFragments = [NSMutableArray array];
+    NSInteger count = 0;
     for (NSInteger i = 0; i<arr.count; i++) {
         if (i==0||i==1) {
             
         }else{
+            
             NSString *data = arr[i];
             for (NSInteger j = 0; j<3; j++) {
                 timeInterval ++;
-                //计算时间
-                
-                //                NSString *sportDate = [NSString stringWithFormat:@"%@-%@-%@",yearDate,mothDate[0],mothDate[1]];
-                //计算总步数 总卡路里
-                NSString *sportCountStr = [arr[1] substringWithRange:NSMakeRange(8 * 1, 8)];
-                NSString *sportCount = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[self reversedPositionStr:sportCountStr]]];
-                NSString *sportClaorie =[arr[1] substringWithRange:NSMakeRange(8 * 2, 8)];
-                NSString *caloriesAmount = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[self reversedPositionStr:sportClaorie]]];
-                NSString *distanceStr = [arr[1] substringWithRange:NSMakeRange(8 * 3, 8)];
-                NSString *distanceCount = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[self reversedPositionStr:distanceStr]]];
-                
-                
-                //                NSLog(@"%@  %@",sportCount,caloriesAmount);
+                NSMutableDictionary *dicSportDataSmall = [NSMutableDictionary dictionary];
                 
                 //计算步数卡路里什么的
                 NSString *format = [data substringWithRange:NSMakeRange(8 + j*10, 10)];
-                NSString *reversenStr = [self reversedPositionStr:format];
-                NSString *hexTo = [self getBinaryByhex:reversenStr];
-                NSString *sportNum = [self toDecimalSystemWithBinarySystem:[hexTo substringWithRange:NSMakeRange(2, 12)]];
-                NSString *activeTime = [self toDecimalSystemWithBinarySystem:[hexTo substringWithRange:NSMakeRange(14, 4)]];
-                NSString *calorie = [self toDecimalSystemWithBinarySystem:[hexTo substringWithRange:NSMakeRange(18, 10)]];
-                NSString *distance = [self toDecimalSystemWithBinarySystem:[hexTo substringWithRange:NSMakeRange(28, 12)]];
-                if (![sportNum isEqualToString:@"0"]) {
-                    //                    NSArray *blueDate = @[sportDate,sportNum,activeTime,calorie,distance,sportCount,[NSString stringWithFormat:@"%ld",(long)timeInterval]];
-                    
-                    NSDictionary *dic = @{@"calories":calorie,
-                                          @"stepsAmount":sportCount,
-                                          @"sportDate":sportDate,
-                                          @"activeTime":activeTime,
-                                          @"distance":distance,
-                                          @"timeInterval":[NSString stringWithFormat:@"%ld",(long)timeInterval],
-                                          @"steps":sportNum,
-                                          @"caloriesAmount":caloriesAmount,
-                                          @"distanceCount":distanceCount};
-                    
-                    
-                    [NLSQLData sportBlueData:dic];
-                    
-                    //                    NSLog(@" %@ 步数 = %@ 活跃时间 = %@ 卡路里 = %@ 距离 = %@",sportDate,sportNum,activeTime,calorie,distance);
+                
+                if (![format isEqualToString:@"0000000000"]) {
+                    count++;
                 }
+                
+                Byte *testByte = [self stringConversionByte:format];
+                NSInteger step = ((testByte[0] & 0xFC) >> 2) + ((testByte[1] & 0x3F) << 6);
+                NSInteger time = ((testByte[1] & 0xC0) >> 6) + ((testByte[2] & 0x03) << 2);
+                NSInteger calorie = ((testByte[2] & 0xFC) >> 2) + ((testByte[3] & 0x0F) << 6);
+                NSInteger distance = ((testByte[3] & 0xF0) >> 4) + ((testByte[4] & 0xFF) << 4);
+                [dicSportDataSmall setValue:[NSNumber numberWithInteger:time] forKey:@"activeTime"];
+                [dicSportDataSmall setValue:[NSNumber numberWithInteger:calorie] forKey:@"calories"];
+                [dicSportDataSmall setValue:[NSNumber numberWithInteger:distance] forKey:@"distance"];
+                [dicSportDataSmall setValue:[NSNumber numberWithInteger:step] forKey:@"steps"];
+                [dicSportDataSmall setValue:[NSString stringWithFormat:@"%@-%@-%@-%ld",yearDate,mothDate[0],mothDate[1],timeInterval] forKey:@"seris"];
+               
+//                    NSLog(@"步数 = %ld 时间 %ld 卡路里 %ld 距离 %ld",(long)step,(long)time,(long)calorie,(long)distance);
+                
+                    
+                stepCount = step + stepCount;
+                
+                [stepFragments addObject:dicSportDataSmall];
+                
+                //    caloriesAmount = 135;
+                //    count = 3;
+                //    distanceAmount = 36;
+                //    sportDate = "2015-06-08";
+                //    stepFragments =             (
+                //                                 {
+                //                                     activeTime = 13;
+                //                                     calories = 45;
+                //                                     distance = 12;
+                //                                     id = "79eb4d3b-3ba0-47ef-9640-0663d36b41f1";
+                //                                     seris = "2015-06-08-2";
+                //                                     steps = 234;
+                //                                 },
+                //    stepsAmount = 702;
+                //}
+
+                
             }
         }
     }
+    
+    
+    [dicSportDataBig setValue:stepFragments forKey:@"stepFragments"];
+    [dicSportDataBig setValue:[NSNumber numberWithInteger:count] forKey:@"count"];
+    
+    [NLSQLData insterSportData:[NSArray arrayWithObjects:dicSportDataBig, nil] isUpdata:0];
+    
+    
 }
 
 
+//caloriesAmount = 135;
+//count = 3;
+//distanceAmount = 36;
+//sportDate = "2015-06-08";
+//stepFragments =             (
+//                             {
+//                                 activeTime = 13;
+//                                 calories = 45;
+//                                 distance = 12;
+//                                 id = "79eb4d3b-3ba0-47ef-9640-0663d36b41f1";
+//                                 seris = "2015-06-08-2";
+//                                 steps = 234;
+//                             },
+//                             
+//stepsAmount = 702;
 
 
 
++(Byte *)stringConversionByte:(NSString *)hexString{
 
-
-
-
-
-
-
-
-
-
-
-
+    NSInteger j=0;
+    unsigned long num = hexString.length/2;
+    Byte bytes[num];
+    for(NSInteger i=0;i<[hexString length];i++)
+    {
+        NSInteger int_ch;  /// 两位16进制数转化后的10进制数
+        
+        unichar hex_char1 = [hexString characterAtIndex:i]; ////两位16进制数中的第一位(高位*16)
+        NSInteger int_ch1;
+        if(hex_char1 >= '0' && hex_char1 <='9')
+            int_ch1 = (hex_char1-48)*16;   //// 0 的Ascll - 48
+        else if(hex_char1 >= 'A' && hex_char1 <='F')
+            int_ch1 = (hex_char1-55)*16; //// A 的Ascll - 65
+        else
+            int_ch1 = (hex_char1-87)*16; //// a 的Ascll - 97
+        i++;
+        
+        unichar hex_char2 = [hexString characterAtIndex:i]; ///两位16进制数中的第二位(低位)
+        NSInteger int_ch2;
+        if(hex_char2 >= '0' && hex_char2 <='9')
+            int_ch2 = (hex_char2-48); //// 0 的Ascll - 48
+        else if(hex_char1 >= 'A' && hex_char1 <='F')
+            int_ch2 = hex_char2-55; //// A 的Ascll - 65
+        else
+            int_ch2 = hex_char2-87; //// a 的Ascll - 97
+        
+        int_ch = int_ch1+int_ch2;
+        bytes[j] = int_ch;  ///将转化后的数放入Byte数组里
+        j++;
+    }
+    
+    NSData *newData = [[NSData alloc] initWithBytes:bytes length:num];
+    Byte *testByte = (Byte *)[newData bytes];
+    return testByte;
+}
 
 
 

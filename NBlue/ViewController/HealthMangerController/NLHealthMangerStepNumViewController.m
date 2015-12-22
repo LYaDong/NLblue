@@ -11,11 +11,13 @@
 #import "LYDSegmentControl.h"
 #import "NLColumnImage.h"
 #import "NLStepCountLabView.h"
-@interface NLHealthMangerStepNumViewController ()<LYDSetSegmentDelegate,UIScrollViewDelegate>
+#import "NLSQLData.h"
+@interface NLHealthMangerStepNumViewController ()<LYDSetSegmentDelegate,UIScrollViewDelegate,NLColumnImageDelegate>
 @property(nonatomic,strong)UIScrollView *mainScrollew;
 @property(nonatomic,strong)NLColumnImage *column;
 @property(nonatomic,strong)NSMutableArray *dataArr;
 @property(nonatomic,assign)CGFloat convenImageWeight;
+@property(nonatomic,strong)UIView *labViewBack;
 
 @end
 
@@ -53,6 +55,14 @@
     LYDSegmentControl *sele = [[LYDSegmentControl alloc] initWithSetSegment:segement frame:frame];
     sele.delegate = self;
     [self.view addSubview:sele];
+    
+    
+    NSArray *arrs = [NLSQLData sportRecordGetData];
+    NSMutableArray *ddd = [NSMutableArray array];
+    for (NSInteger i=0; i<arrs.count; i++) {
+        [ddd addObject:[arrs[i] objectForKey:@"stepsAmount"]];
+    }
+    [NLSQLData sportDayTaskData:@"2015-12-8"];
 
     _dataArr = [NSMutableArray array];
     for (NSInteger i=0; i<10; i++) {
@@ -74,11 +84,7 @@
     [self.view addSubview:line];
     
     
-    
-    
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:10])/2, [ApplicationStyle control_height:480] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize] - [ApplicationStyle control_weight:10], [ApplicationStyle control_weight:10], [ApplicationStyle control_weight:10])];
-//    view.layer.borderColor = [UIColor greenColor].CGColor;
-//    view.layer.borderWidth = 1;
     view.backgroundColor = [UIColor greenColor];
     
     [self.view addSubview:view];
@@ -87,40 +93,15 @@
 
     
     
-    NSArray *remarkLabText = @[NSLocalizedString(@"NLHealthManger_StepRemarkLab", nil),
-                               NSLocalizedString(@"NLHealthManger_StepDistance", nil),
-                               NSLocalizedString(@"NLHealthManger_StepEnergy", nil),
-                               NSLocalizedString(@"NLHealthManger_StepActovity", nil),];
+    
     NSArray *dataLabArr = @[@"6880",@"241千米",@"241千卡",@"02小时15分钟"];
-    NSArray *typeLab = @[[NSNumber numberWithInteger:LabTextType_DayStepNum],
-                         [NSNumber numberWithInteger:LabTextType_DayDistance],
-                         [NSNumber numberWithInteger:LabTextType_DayEnergy],
-                         [NSNumber numberWithInteger:LabTextType_DayActovity]];
-    
-    CGFloat heights = [ApplicationStyle control_height:480 + 60] + [ApplicationStyle control_height:64] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize];
-    
-    for (NSInteger i=0; i<dataLabArr.count; i++) {
-        NSInteger x = 0 + i % 2 * SCREENWIDTH/2,
-        y = heights + i / 2 * [ApplicationStyle control_height:115],
-        w = SCREENWIDTH/2,
-        h = [ApplicationStyle control_height:115];
-        
-        CGRect frames = CGRectMake(x, y, w, h);
-        
-        NSInteger type = [[NSString stringWithFormat:@"%@",typeLab[i]] integerValue];
-        
-        NLStepCountLabView *labView = [[NLStepCountLabView alloc] initWithFrame:frames
-                                                                           type:type
-                                                                  remarkLabText:remarkLabText[i]
-                                                                    dataLabText:dataLabArr[i]];
-        [self.view addSubview:labView];
-        
-    }
+    [self stepAndColAndTime:dataLabArr];
     
 }
 
 #pragma mark 系统Delegate
 #pragma mark 自己的Delegate
+
 -(void)segmentedIndex:(NSInteger)index{
     
     [_column removeFromSuperview];
@@ -166,8 +147,60 @@
         default:
             break;
     }
- 
+}
+
+
+-(void)stepAndColAndTime:(NSArray *)arr{
     
+
+    
+    _labViewBack = [[UIView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT - [ApplicationStyle control_height:492], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle control_height:492])];
+    _labViewBack.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_labViewBack];
+    
+    NSArray *remarkLabText = @[NSLocalizedString(@"NLHealthManger_StepRemarkLab", nil),
+                               NSLocalizedString(@"NLHealthManger_StepDistance", nil),
+                               NSLocalizedString(@"NLHealthManger_StepEnergy", nil),
+                               NSLocalizedString(@"NLHealthManger_StepActovity", nil),];
+//    NSArray *dataLabArr = @[@"300",@"30千米",@"8千卡",@"00小时15分钟"];
+    NSArray *typeLab = @[[NSNumber numberWithInteger:LabTextType_DayStepNum],
+                         [NSNumber numberWithInteger:LabTextType_DayDistance],
+                         [NSNumber numberWithInteger:LabTextType_DayEnergy],
+                         [NSNumber numberWithInteger:LabTextType_DayActovity]];
+    
+    
+    
+    for (NSInteger i=0; i<arr.count; i++) {
+        NSInteger x = 0 + i % 2 * SCREENWIDTH/2,
+        y = [ApplicationStyle control_height:40] + i / 2 * [ApplicationStyle control_height:115],
+        w = SCREENWIDTH/2,
+        h = [ApplicationStyle control_height:115];
+        
+        CGRect frames = CGRectMake(x, y, w, h);
+        
+        NSInteger type = [[NSString stringWithFormat:@"%@",typeLab[i]] integerValue];
+        
+        NLStepCountLabView *labView = [[NLStepCountLabView alloc] initWithFrame:frames
+                                                                           type:type
+                                                                  remarkLabText:remarkLabText[i]
+                                                                    dataLabText:arr[i]];
+        [_labViewBack addSubview:labView];
+    }
+}
+
+-(void)sildeIndex:(NSInteger)index{
+
+    [_labViewBack removeFromSuperview];
+    
+    if (index == 0) {
+        NSArray *dataLabArr = @[@"300",@"30千米",@"8千卡",@"00小时15分钟"];
+        
+        [self stepAndColAndTime:dataLabArr];
+    }else{
+        NSArray *dataLabArr = @[@"6880",@"241千米",@"241千卡",@"02小时15分钟"];
+        
+        [self stepAndColAndTime:dataLabArr];
+    }
     
 }
 #pragma mark 自己的按钮事件
@@ -199,6 +232,7 @@
 
     CGRect frame = CGRectMake(0, [ApplicationStyle navigationBarSize] + [ApplicationStyle statusBarSize], SCREENWIDTH, [ApplicationStyle control_height:540]);
     _column = [[NLColumnImage alloc] initWithFrame:frame DataArr:arr strokeColor:[@"882a00" hexStringToColor] withColor:[@"fac96f" hexStringToColor] type:type timeLabArr:nil];
+    _column.delegate = self;
     [self.view addSubview:_column];
     
 }

@@ -38,6 +38,7 @@
 }
 #pragma mark 基础UI
 -(void)bulidUI{
+    
     _userHeadImage = [UIButton buttonWithType:UIButtonTypeCustom];
     _userHeadImage.backgroundColor = [UIColor redColor];
     _userHeadImage.frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:128])/2, [ApplicationStyle control_height:10] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], [ApplicationStyle control_weight:128], [ApplicationStyle control_weight:128]);
@@ -59,14 +60,7 @@
     [self.view addSubview:_userNameLab];
     
     
-//    CALayer* layer = [_userNameLab layer];
-//    
-//    CALayer *bottomBorder = [CALayer layer];
-////    bottomBorder.borderColor = [UIColor darkGrayColor].CGColor;
-////    bottomBorder.borderWidth = 3;
-//    bottomBorder.frame = CGRectMake(-1, layer.frame.size.height-1, layer.frame.size.width, 1);
-//    [bottomBorder setBorderColor:[UIColor blackColor].CGColor];
-//    [layer addSublayer:bottomBorder];
+
     
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle control_height:410], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle control_height:410] - [ApplicationStyle tabBarSize]) style:UITableViewStylePlain];
@@ -82,6 +76,8 @@
 #pragma mark 系统Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 5;
+
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [ApplicationStyle control_height:88];
@@ -92,12 +88,20 @@
     if (!cell) {
         cell = [[NLProTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nlProTableCell];
     }
+    
+
     NSArray *cellLabArray = @[NSLocalizedString(@"NLProfileView_MyEquitment", nil),
                               NSLocalizedString(@"NLProfileView_Share", nil),
                               NSLocalizedString(@"NLProfileView_FeedBack", nil),
                               NSLocalizedString(@"NLProfileView_Set", nil),
                               NSLocalizedString(@"NLProfileView_AboutNL", nil),];
     NSArray *cellImageArray = @[@"ProFile_M_E_T",@"ProFile_S_H",@"ProFile_F_B",@"ProFile_SET",@"ProFile_A_NL"];
+    
+    
+
+    
+    
+    
     cell.cellImages.image = [UIImage imageNamed:cellImageArray[indexPath.row]];
     cell.cellLabs.text = cellLabArray[indexPath.row];
     
@@ -105,7 +109,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+
     
     switch (indexPath.row) {
         case 0:
@@ -140,6 +144,11 @@
         default:
             break;
     }
+    
+  
+    
+    
+    
     
 }
 #pragma mark 自己的Delegate

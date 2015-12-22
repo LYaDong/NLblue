@@ -116,7 +116,7 @@ static NSString *NLSportApi = @"/sport";//各个接口端
 }
 #pragma mark 登录
 -(void)userSignInPhone:(NSString *)phone password:(NSString *)password{
-    NSDictionary *parameters= @{@"phone":phone,@"code":@"",@"password":password};
+    NSDictionary *parameters= @{@"phone":phone,@"code":@"",@"password":password,@"platform":@"ios"};
     
     
     

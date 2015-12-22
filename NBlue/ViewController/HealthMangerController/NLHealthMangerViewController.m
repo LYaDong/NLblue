@@ -41,16 +41,19 @@
         default:
             break;
     }
+    
+    
+
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.returnBtn.hidden = YES;
     _numPage = 0;
+    
     
     self.rightBtn.hidden = NO;
     [self.rightBtn setImage:[UIImage imageNamed:@"Step_T_B"] forState:UIControlStateNormal];
-    
     
     [self bulidUI];
     [self initView];
@@ -68,6 +71,7 @@
     CGRect frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:360])/2, [ApplicationStyle statusBarSize] + ([ApplicationStyle navigationBarSize] - [ApplicationStyle control_height:60])/2, [ApplicationStyle control_weight:360], [ApplicationStyle control_height:60]);
     NSArray * items = @[NSLocalizedString(@"HealthManger_Calendar", nil), NSLocalizedString(@"HealthManger_Sleep", nil),NSLocalizedString(@"HealthManger_StepNumber", nil)];
     
+
     LYDSetSegmentControl *segement = [LYDSetSegmentControl shareInstance];
     segement.titleArray = items;
     segement.cornerRedius = 15;
@@ -97,16 +101,21 @@
     
 }
 -(void)initView{
-
     NLHealthCalenderView *calenderView = [[NLHealthCalenderView alloc] initWithFrame:CGRectMake(NLHealthManger_Calender * SCREENWIDTH, 0, SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle statusBarSize] - [ApplicationStyle navigationBarSize] - [ApplicationStyle tabBarSize])];
     [_mainScrollew addSubview:calenderView];
-//    
+    
     NLHealthSleepView *sleepView = [[NLHealthSleepView alloc] initWithFrame:CGRectMake(NLHealthManger_Sleep * SCREENWIDTH, 0, SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle statusBarSize] - [ApplicationStyle navigationBarSize] - [ApplicationStyle tabBarSize])];
     [_mainScrollew addSubview:sleepView];
-    
+
     NLHealthStepNumber *stepView = [[NLHealthStepNumber alloc] initWithFrame:CGRectMake(NLHealthManger_StepNumber * SCREENWIDTH, 0, SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle statusBarSize] - [ApplicationStyle navigationBarSize] - [ApplicationStyle tabBarSize])];
     stepView.backgroundColor = [UIColor clearColor];
     [_mainScrollew addSubview:stepView];
+    
+
+
+    
+    
+    
 }
 #pragma mark 系统Delegate
 #pragma mark 自己的Delegate
@@ -132,13 +141,12 @@
         default:
             break;
     }
+    
+
+    
 }
 
 -(void)loadStepData{
-    
-    
-    NSLog(@"%@  %@",[kAPPDELEGATE._loacluserinfo GetAccessToken],[kAPPDELEGATE._loacluserinfo GetUser_ID]);
-    
     [[NLDatahub sharedInstance] userStepNumberToken:[kAPPDELEGATE._loacluserinfo GetAccessToken]
                                          consumerId:[kAPPDELEGATE._loacluserinfo GetUser_ID]
                                           startDate:@"2015-10-01"

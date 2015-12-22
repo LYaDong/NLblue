@@ -14,6 +14,6 @@
 
 #define SCREENWIDTH  [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
-
+#define kDEFAULTNOTIFICATION   [NSNotificationCenter defaultCenter]
 
 #endif /* ApplicationConstants_h */

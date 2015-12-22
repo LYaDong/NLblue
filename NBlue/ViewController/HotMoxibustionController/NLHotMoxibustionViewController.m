@@ -11,7 +11,6 @@ static const NSInteger TIMELINE = 90;
 #import "NLHotMoxibustionViewController.h"
 #import "NLBluetoothAgreement.h"
 #import "NLBluetoothDataAnalytical.h"
-#import "LineProgressView.h"
 #import "NLAboutImageBtn.h"
 #import "NLBluetoothDataAnalytical.h"
 #import "NLHalfView.h"
@@ -163,9 +162,9 @@ static const NSInteger TIMELINE = 90;
 //    [btn4 addTarget:self action:@selector(sportxx) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview:btn4];
     
-    _blueXXX  = [[UIView  alloc] initWithFrame:CGRectMake(10, 64, 20, 20)];
-    _blueXXX.backgroundColor = [UIColor redColor];
-    [self.view addSubview:_blueXXX];
+//    _blueXXX  = [[UIView  alloc] initWithFrame:CGRectMake(10, 64, 20, 20)];
+//    _blueXXX.backgroundColor = [UIColor redColor];
+//    [self.view addSubview:_blueXXX];
     
     
     
@@ -325,7 +324,7 @@ static const NSInteger TIMELINE = 90;
     //测试
     [[NLDatahub sharedInstance] userStepNumberToken:[kAPPDELEGATE._loacluserinfo GetAccessToken]
                                          consumerId:[kAPPDELEGATE._loacluserinfo GetUser_ID]
-                                          startDate:@"2015-10-01"
+                                          startDate:@"2015-6-01"
                                             endDate:@"2015-10-30"];
     
     //此为真实
@@ -399,7 +398,7 @@ static const NSInteger TIMELINE = 90;
             [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_K"] forState:UIControlStateNormal];
             _isOff = !_isOff;
             
-            _temperatureLab.text = [NSString stringWithFormat:@"%ld°C",_temperatureNUM/10];
+            _temperatureLab.text = [NSString stringWithFormat:@"%d°C",_temperatureNUM/10];
             
             NSInteger num = _temperatureNUM/10;
             
@@ -536,7 +535,20 @@ static const NSInteger TIMELINE = 90;
 }
 -(void)logInSuccess:(NSNotification *)notifi{
     NSDictionary *dic = notifi.object;
-    [NLSQLData sportRecordCreateData:[dic objectForKey:@"records"] isDeposit:0];
+    NSLog(@"%@",dic);
+    
+    
+    
+
+
+    
+
+    
+
+    
+//    [NLSQLData sportRecordCreateData:[dic objectForKey:@"records"] isDeposit:0];
+    [NLSQLData establishSportDataTable];
+    [NLSQLData insterSportData:[dic objectForKey:@"records"] isUpdata:0];
     
 }
 -(void)logInFicaled:(NSNotification *)notifi{

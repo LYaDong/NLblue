@@ -135,7 +135,7 @@ static NLColumnImage *cloumnImage = nil;
 
 #pragma mark 系统Delegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
+
     for (NSInteger i=0; i<_dataArr.count; i++) {
         UILabel *timeLab = (UILabel *)[self viewWithTag:LABTIMETAG + i];
         timeLab.textColor = [ApplicationStyle subjectWithColor];
@@ -186,6 +186,12 @@ static NLColumnImage *cloumnImage = nil;
 }
 
 -(void)scrollViewAnimation:(UIScrollView *)scrollView{
+    
+    NSString *index = [NSString stringWithFormat:@"%0.0f",scrollView.contentOffset.x/(_convenImageWeight + [ApplicationStyle control_weight:10])];
+    [self.delegate sildeIndex:[index integerValue]];
+    
+    
+    
     CGFloat toLength = (_dataArr.count - 1) * (_convenImageWeight + [ApplicationStyle control_weight:10]); //总长度
     CGFloat weight = _dataArr.count - 1;//总个数
     CGFloat scrollX = scrollView.contentOffset.x/(_convenImageWeight + [ApplicationStyle control_weight:10]);//每个平分长度

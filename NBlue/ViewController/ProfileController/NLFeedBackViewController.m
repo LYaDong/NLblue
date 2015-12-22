@@ -85,6 +85,8 @@
 #pragma mark 自己的按钮事件
 -(void)submitBtnDown{
     [_textView endEditing:YES];
+    
+    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"谢谢你的宝贵意见~~我们会及时处理"];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

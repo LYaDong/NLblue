@@ -39,14 +39,16 @@
 		04C9955B1C02A55000D8AE79 /* NLHealthMangerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9955A1C02A55000D8AE79 /* NLHealthMangerViewController.m */; };
 		04C9955E1C02A56B00D8AE79 /* NLHotMoxibustionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9955D1C02A56B00D8AE79 /* NLHotMoxibustionViewController.m */; };
 		04C995611C02A57800D8AE79 /* NLProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C995601C02A57800D8AE79 /* NLProfileViewController.m */; };
+		04CD22FF1C29221400AB467A /* Warman-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04CD22FC1C29221400AB467A /* Warman-568h@2x.png */; };
+		04CD23001C29221400AB467A /* Warman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04CD22FD1C29221400AB467A /* Warman@2x.png */; };
+		04CD23011C29221400AB467A /* Warman@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04CD22FE1C29221400AB467A /* Warman@3x.png */; };
+		04CD23121C29310100AB467A /* OLGhostAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CD23111C29310100AB467A /* OLGhostAlertView.m */; };
 		04CDA1751BFF022D00D2A304 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CDA1741BFF022D00D2A304 /* Foundation.framework */; };
 		04CDA17E1BFF119500D2A304 /* Convenlence.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CDA17D1BFF119500D2A304 /* Convenlence.m */; };
 		04F04F7B1C06940F009DC949 /* NLIndividuaFormaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F04F7A1C06940F009DC949 /* NLIndividuaFormaCell.m */; };
 		04F04F7E1C06D1D1009DC949 /* NLIndividuaEditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F04F7D1C06D1D1009DC949 /* NLIndividuaEditingViewController.m */; };
 		04F04F811C06E46F009DC949 /* NLPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F04F801C06E46F009DC949 /* NLPickView.m */; };
 		04F04F851C073AAC009DC949 /* PlistData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F04F841C073AAC009DC949 /* PlistData.m */; };
-		04F3CC451C03F5710066D39D /* LineProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CC421C03F5710066D39D /* LineProgressLayer.m */; };
-		04F3CC461C03F5710066D39D /* LineProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CC441C03F5710066D39D /* LineProgressView.m */; };
 		04F3CC4F1C0434C10066D39D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F3CC511C0434C10066D39D /* Localizable.strings */; };
 		04F3CC611C0439280066D39D /* NLAboutImageBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CC601C0439280066D39D /* NLAboutImageBtn.m */; };
 		04F3CC7D1C045F9F0066D39D /* NLHealthSleepView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CC7C1C045F9F0066D39D /* NLHealthSleepView.m */; };
@@ -160,6 +162,11 @@
 		04C9955F1C02A57800D8AE79 /* NLProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLProfileViewController.h; sourceTree = "<group>"; };
 		04C995601C02A57800D8AE79 /* NLProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLProfileViewController.m; sourceTree = "<group>"; };
 		04C995621C02AC1A00D8AE79 /* ApplicationConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ApplicationConstants.h; path = ../ApplicationConstants.h; sourceTree = "<group>"; };
+		04CD22FC1C29221400AB467A /* Warman-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Warman-568h@2x.png"; sourceTree = "<group>"; };
+		04CD22FD1C29221400AB467A /* Warman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Warman@2x.png"; sourceTree = "<group>"; };
+		04CD22FE1C29221400AB467A /* Warman@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Warman@3x.png"; sourceTree = "<group>"; };
+		04CD23101C29310100AB467A /* OLGhostAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLGhostAlertView.h; sourceTree = "<group>"; };
+		04CD23111C29310100AB467A /* OLGhostAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLGhostAlertView.m; sourceTree = "<group>"; };
 		04CDA1741BFF022D00D2A304 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		04CDA17C1BFF119500D2A304 /* Convenlence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Convenlence.h; sourceTree = "<group>"; };
 		04CDA17D1BFF119500D2A304 /* Convenlence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Convenlence.m; sourceTree = "<group>"; };
@@ -171,10 +178,6 @@
 		04F04F801C06E46F009DC949 /* NLPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLPickView.m; sourceTree = "<group>"; };
 		04F04F831C073AAC009DC949 /* PlistData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlistData.h; sourceTree = "<group>"; };
 		04F04F841C073AAC009DC949 /* PlistData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlistData.m; sourceTree = "<group>"; };
-		04F3CC411C03F5710066D39D /* LineProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineProgressLayer.h; sourceTree = "<group>"; };
-		04F3CC421C03F5710066D39D /* LineProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineProgressLayer.m; sourceTree = "<group>"; };
-		04F3CC431C03F5710066D39D /* LineProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineProgressView.h; sourceTree = "<group>"; };
-		04F3CC441C03F5710066D39D /* LineProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineProgressView.m; sourceTree = "<group>"; };
 		04F3CC521C0434C40066D39D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		04F3CC531C04350D0066D39D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		04F3CC541C04350D0066D39D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -303,8 +306,8 @@
 			isa = PBXGroup;
 			children = (
 				049751D61BFEEF510044D97B /* ViewController */,
-				049751D91BFEEF970044D97B /* ThirdParty */,
 				049751D41BFEEF2B0044D97B /* ToolClass */,
+				04CD230E1C2930F700AB467A /* ThirdParty */,
 				04F4B7C11C07FA3C00DE60DE /* TestImage */,
 				04F04F821C073A94009DC949 /* CacheData */,
 				04FA89B41C117E180064F3AA /* NetWork */,
@@ -313,6 +316,9 @@
 				04C9954E1C02A08A00D8AE79 /* SystemBase */,
 				04F3CC3F1C03F4F30066D39D /* ThirdLibrary */,
 				049751A81BFEEED50044D97B /* Main.storyboard */,
+				04CD22FC1C29221400AB467A /* Warman-568h@2x.png */,
+				04CD22FD1C29221400AB467A /* Warman@2x.png */,
+				04CD22FE1C29221400AB467A /* Warman@3x.png */,
 				049751AB1BFEEED50044D97B /* Assets.xcassets */,
 				049751AD1BFEEED50044D97B /* LaunchScreen.storyboard */,
 				049751B01BFEEED50044D97B /* Info.plist */,
@@ -398,13 +404,6 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		049751D91BFEEF970044D97B /* ThirdParty */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ThirdParty;
-			sourceTree = "<group>";
-		};
 		049B077A1C1559B8005147B5 /* MangetNumber */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,11 +464,27 @@
 		04C995521C02A38500D8AE79 /* HotMoxibustionController */ = {
 			isa = PBXGroup;
 			children = (
-				04F3CC401C03F5210066D39D /* HalfCircle */,
 				04C9955C1C02A56B00D8AE79 /* NLHotMoxibustionViewController.h */,
 				04C9955D1C02A56B00D8AE79 /* NLHotMoxibustionViewController.m */,
 			);
 			path = HotMoxibustionController;
+			sourceTree = "<group>";
+		};
+		04CD230E1C2930F700AB467A /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				04CD230F1C29310100AB467A /* OLGhostAlertView */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		04CD230F1C29310100AB467A /* OLGhostAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				04CD23101C29310100AB467A /* OLGhostAlertView.h */,
+				04CD23111C29310100AB467A /* OLGhostAlertView.m */,
+			);
+			path = OLGhostAlertView;
 			sourceTree = "<group>";
 		};
 		04F04F821C073A94009DC949 /* CacheData */ = {
@@ -488,18 +503,6 @@
 			children = (
 			);
 			path = ThirdLibrary;
-			sourceTree = "<group>";
-		};
-		04F3CC401C03F5210066D39D /* HalfCircle */ = {
-			isa = PBXGroup;
-			children = (
-				04F3CC411C03F5710066D39D /* LineProgressLayer.h */,
-				04F3CC421C03F5710066D39D /* LineProgressLayer.m */,
-				04F3CC431C03F5710066D39D /* LineProgressView.h */,
-				04F3CC441C03F5710066D39D /* LineProgressView.m */,
-			);
-			name = HalfCircle;
-			path = ../../ThirdLibrary/HalfCircle;
 			sourceTree = "<group>";
 		};
 		04F3CC591C0438400066D39D /* View */ = {
@@ -707,7 +710,7 @@
 				TargetAttributes = {
 					0497519B1BFEEED50044D97B = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 86G8HDRKQG;
+						DevelopmentTeam = B2TE79W3Y8;
 					};
 					049751B41BFEEED50044D97B = {
 						CreatedOnToolsVersion = 7.1;
@@ -745,7 +748,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04CD23001C29221400AB467A /* Warman@2x.png in Resources */,
+				04CD22FF1C29221400AB467A /* Warman-568h@2x.png in Resources */,
 				04F4B7C41C07FA7100DE60DE /* battery@2x.png in Resources */,
+				04CD23011C29221400AB467A /* Warman@3x.png in Resources */,
 				04F3CC4F1C0434C10066D39D /* Localizable.strings in Resources */,
 				049751AF1BFEEED50044D97B /* LaunchScreen.storyboard in Resources */,
 				04F4B7C51C07FA7100DE60DE /* battery@3x.png in Resources */,
@@ -839,7 +845,6 @@
 				04F3CC7D1C045F9F0066D39D /* NLHealthSleepView.m in Sources */,
 				04A1519A1C0DC3B700CB93FF /* NLRing.m in Sources */,
 				04F3CC611C0439280066D39D /* NLAboutImageBtn.m in Sources */,
-				04F3CC451C03F5710066D39D /* LineProgressLayer.m in Sources */,
 				04F5BB701C05B51A00B37CE2 /* NLIndividuaFormatViewController.m in Sources */,
 				04F04F811C06E46F009DC949 /* NLPickView.m in Sources */,
 				0458E5D91C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m in Sources */,
@@ -847,7 +852,6 @@
 				04F7F64E1C1BFC9000466EBC /* NLGestureRecognizer.m in Sources */,
 				04A151971C0DAA9700CB93FF /* NLRingLine.m in Sources */,
 				04FF66871C214E8800E276E2 /* NLCalenderUncomfortable.m in Sources */,
-				04F3CC461C03F5710066D39D /* LineProgressView.m in Sources */,
 				04FF66841C21138A00E276E2 /* NLCalenderLifeHabit.m in Sources */,
 				04F4B7C01C07ED2A00DE60DE /* NLMyEquipmentCell.m in Sources */,
 				044255361C1EABAE003F8503 /* NLHealtCalenderCell.m in Sources */,
@@ -863,6 +867,7 @@
 				04015D5F1C1FB72F00454566 /* NLHealtCalenderPeriod.m in Sources */,
 				04C995581C02A51000D8AE79 /* NLSubRootViewController.m in Sources */,
 				049751DF1BFEF3140044D97B /* ApplicationStyle.m in Sources */,
+				04CD23121C29310100AB467A /* OLGhostAlertView.m in Sources */,
 				04CDA17E1BFF119500D2A304 /* Convenlence.m in Sources */,
 				049751DC1BFEF2FE0044D97B /* AppDelegate.m in Sources */,
 				04C995611C02A57800D8AE79 /* NLProfileViewController.m in Sources */,
@@ -1031,15 +1036,17 @@
 			baseConfigurationReference = 7D156C54B110CBBF4D4804D4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Liu (6568Y9JWXY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Feng Liu (6568Y9JWXY)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/NBlue/NLBlue.pch";
 				INFOPLIST_FILE = NBlue/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = LYD.NBlue;
+				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2b738f47-fa1a-4200-8d50-e624b2aa1dd2";
+				"PROVISIONING_PROFILE[sdk=*]" = "2b738f47-fa1a-4200-8d50-e624b2aa1dd2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1048,15 +1055,17 @@
 			baseConfigurationReference = 8F50F23BC12A7C0575CA9364 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Pin Ai Networking Technology Co., Ltd. (FW77J8F5Y3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Pin Ai Networking Technology Co., Ltd. (FW77J8F5Y3)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/NBlue/NLBlue.pch";
 				INFOPLIST_FILE = NBlue/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = LYD.NBlue;
+				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "741f79ac-a1a9-4f0a-84a3-28412715a1bb";
+				"PROVISIONING_PROFILE[sdk=*]" = "741f79ac-a1a9-4f0a-84a3-28412715a1bb";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

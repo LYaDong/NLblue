@@ -17,5 +17,6 @@ typedef NS_ENUM(NSUInteger,Controller) {
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NLLocalUserInfo *_loacluserinfo;
 -(void)tabBarViewControllerType:(Controller)type;
+-(void)AutoDisplayAlertView:(NSString*) title :(NSString*)msg;
 @end
 
