@@ -181,9 +181,15 @@ static const NSInteger TIMELINE = 90;
 }
 #pragma mark 基础UI
 -(void)bulidUI{
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init] ;
+    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *inputDate = [inputFormatter dateFromString:@"2015-12-08"];
     
     
     
+    NSLog(@"%0.0f",[inputDate timeIntervalSince1970]);
+    NSLog(@"%@",[ApplicationStyle timestampTransformationTime:[inputDate timeIntervalSince1970]]);
     
     [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
     
@@ -398,7 +404,7 @@ static const NSInteger TIMELINE = 90;
             [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_K"] forState:UIControlStateNormal];
             _isOff = !_isOff;
             
-            _temperatureLab.text = [NSString stringWithFormat:@"%d°C",_temperatureNUM/10];
+            _temperatureLab.text = [NSString stringWithFormat:@"%ld°C",(long)_temperatureNUM/10];
             
             NSInteger num = _temperatureNUM/10;
             

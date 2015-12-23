@@ -21,6 +21,6 @@ typedef NSInteger NLHTTPRequestMethodType;
 
 + (NSMutableURLRequest *)createRequestWithURL:(NSURL *)url body:(NSDictionary *)body method:(NLHTTPRequestMethodType)method authHeader:(BOOL)insertAuthHeader;
 #pragma mark 获取验证码
-+(NSURLRequest *)getVerificationCodePhone:(NSNumber *)phone;
++(NSURLRequest *)getVerificationCodePhone:(NSString *)phone;
 
 @end

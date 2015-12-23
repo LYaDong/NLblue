@@ -75,18 +75,18 @@ static NSString *NLSportApi = @"/sport";//各个接口端
 }
 
 #pragma mark 获取验证码
--(void)getVerificationCodePhones:(NSNumber *)phone{
+-(void)getVerificationCodePhones:(NSString *)phone{
     NSURLRequest *request = [NLHTTPRequestFactory getVerificationCodePhone:phone];
     NLHTTPRequestOperations *operation = [[NLHTTPRequestOperations alloc] initWithRequest:request];
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
-//    operation.completionQueue = _networkConcurrentQueue;
+    //    operation.completionQueue = _networkConcurrentQueue;
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSLog(@"%@",responseObject);
         if (![responseObject isKindOfClass:[NSDictionary class]]) {
             NSLog(@"expecting NSDictionary class");
         }
-
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NLGetVerficationSuccessNotification object:nil userInfo:nil];
         });
@@ -95,18 +95,20 @@ static NSString *NLSportApi = @"/sport";//各个接口端
             [[NSNotificationCenter defaultCenter] postNotificationName:NLGetVerficationFicaledNotification object:nil userInfo:nil];
         });
     }];
-//    [_networkOperationQueue addOperation:operation];
+    //    [_networkOperationQueue addOperation:operation];
     [operation start];
 }
-
 #pragma mark 注册
--(void)registeredCodephone:(NSNumber *)phone verification:(NSNumber *)verfication password:(NSNumber *)password{
+-(void)registeredCodephone:(NSString *)phone verification:(NSString *)verfication password:(NSString *)password{
+    
+    NSLog(@"%@ %@ %@",phone,verfication,password);
+    
     _manger = [[AFHTTPRequestOperationManager alloc]init];
-    NSDictionary * parameters= @{@"phone":phone,@"code":verfication,@"password":password};
+    NSDictionary * parameters= @{@"phone":phone,@"code":verfication,@"password":password,@"platform":@"ios"};
     _manger.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:NLtextHeml,NLapplication, nil];
     [_manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_register] parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewSuccessNotification object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewSuccessNotification object:responseObject userInfo:nil];
         });
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{

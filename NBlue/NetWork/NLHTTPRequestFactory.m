@@ -10,7 +10,7 @@
 
 @implementation NLHTTPRequestFactory
 static int TIME_OUT = 30; // 延时30秒
-static NSString *NLmobileApiBaseUrl = @"http://123.56.127.139:8080/warman";//主接口
+static NSString *NLmobileApiBaseUrl = @"http://123.56.127.139/warman";//主接口
 static NSString *NLUserApi = @"/user";//各个接口端
 static NSString *NLSportApi = @"/sport";//各个接口端
 
@@ -200,7 +200,7 @@ static NSString *NLSportApi = @"/sport";//各个接口端
 
 
 #pragma mark 获取验证码
-+(NSURLRequest *)getVerificationCodePhone:(NSNumber *)phone{
++(NSURLRequest *)getVerificationCodePhone:(NSString *)phone{
     if (phone == nil) {
         return nil;
     }

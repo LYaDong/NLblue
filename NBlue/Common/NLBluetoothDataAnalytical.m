@@ -296,7 +296,7 @@
     
 //    08031a0f5cc003000188c00a7001000000000000
     
-    
+    [NLSQLData establishSportDataTable];//创建sportData表
     
 
 
@@ -403,7 +403,7 @@
                 [dicSportDataSmall setValue:[NSNumber numberWithInteger:calorie] forKey:@"calories"];
                 [dicSportDataSmall setValue:[NSNumber numberWithInteger:distance] forKey:@"distance"];
                 [dicSportDataSmall setValue:[NSNumber numberWithInteger:step] forKey:@"steps"];
-                [dicSportDataSmall setValue:[NSString stringWithFormat:@"%@-%@-%@-%ld",yearDate,mothDate[0],mothDate[1],timeInterval] forKey:@"seris"];
+                [dicSportDataSmall setValue:[NSString stringWithFormat:@"%@-%@-%@-%ld",yearDate,mothDate[0],mothDate[1],(long)timeInterval] forKey:@"seris"];
                
 //                    NSLog(@"步数 = %ld 时间 %ld 卡路里 %ld 距离 %ld",(long)step,(long)time,(long)calorie,(long)distance);
                 
@@ -411,24 +411,6 @@
                 stepCount = step + stepCount;
                 
                 [stepFragments addObject:dicSportDataSmall];
-                
-                //    caloriesAmount = 135;
-                //    count = 3;
-                //    distanceAmount = 36;
-                //    sportDate = "2015-06-08";
-                //    stepFragments =             (
-                //                                 {
-                //                                     activeTime = 13;
-                //                                     calories = 45;
-                //                                     distance = 12;
-                //                                     id = "79eb4d3b-3ba0-47ef-9640-0663d36b41f1";
-                //                                     seris = "2015-06-08-2";
-                //                                     steps = 234;
-                //                                 },
-                //    stepsAmount = 702;
-                //}
-
-                
             }
         }
     }

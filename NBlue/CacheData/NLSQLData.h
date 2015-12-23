@@ -37,6 +37,10 @@
 +(void)establishSportDataTable;
 +(void)insterSportData:(NSArray *)dataArr
               isUpdata:(NSInteger)updata;
+/**
+ *根据时间获取数据
+ */
++(NSMutableArray *)sportDataObtainTimeStr:(NSString *)timeStr;
 
 
 @end

@@ -187,9 +187,17 @@
  */
 +(NSString *)datePickerTransformationYearAndMonth:(NSDate *)date;
 /**
- *NSDate转字符串   2015年01月01日格式
+ *字符串转Date   字符串格式   20150101
  */
 +(NSDate *)dateTransformationStr:(NSString *)str;
+/**
+ *字符串转Date   字符串格式   2015-01-01
+ */
++(NSDate *)dateTransformationStringWhiffletree:(NSString *)str;
+/**
+ *时间戳转时间
+ */
++(NSString *)timestampTransformationTime:(int64_t)timestamp;
 @end
 
 

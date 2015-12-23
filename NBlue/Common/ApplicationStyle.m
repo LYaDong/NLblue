@@ -209,5 +209,21 @@
     NSDate *inputDate = [inputFormatter dateFromString:str];
     return inputDate;
 }
++(NSDate *)dateTransformationStringWhiffletree:(NSString *)str{
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init] ;
+    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *inputDate = [inputFormatter dateFromString:str];
+    return inputDate;
+}
+
++(NSString *)timestampTransformationTime:(int64_t)timestamp{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:timestamp];
+    return [dateFormatter stringFromDate:date];
+}
+
+
 
 @end

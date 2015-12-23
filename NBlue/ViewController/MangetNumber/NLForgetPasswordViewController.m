@@ -160,9 +160,9 @@ static const NSInteger TEXTFILED_TAG = 1000;
         return;
     }
     
-    [[NLDatahub sharedInstance] registeredCodephone:[NSNumber numberWithInteger:[[NSString stringWithFormat:@"%@",textPhone.text] integerValue]]
-                                       verification:[NSNumber numberWithInteger:[[NSString stringWithFormat:@"%@",textVerification.text] integerValue]]
-                                           password:[NSNumber numberWithInteger:[[NSString stringWithFormat:@"%@",textPassWord.text] integerValue]]];
+    [[NLDatahub sharedInstance] registeredCodephone:textPhone.text
+                                       verification:textVerification.text
+                                           password:textPassWord.text];
 }
 -(void)addNotification{
     NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];

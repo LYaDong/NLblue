@@ -18,6 +18,7 @@
 		046F188B1C0D4A0700A21FA6 /* NLColumnImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F188A1C0D4A0700A21FA6 /* NLColumnImage.m */; };
 		046F188E1C0D777A00A21FA6 /* NLStepImageLabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F188D1C0D777A00A21FA6 /* NLStepImageLabView.m */; };
 		047BE7E91C19AB8600821F23 /* NLStepColumnImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 047BE7E81C19AB8600821F23 /* NLStepColumnImage.m */; };
+		048EE89D1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048EE89C1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.m */; };
 		049751A11BFEEED50044D97B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751A01BFEEED50044D97B /* main.m */; };
 		049751AA1BFEEED50044D97B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049751A81BFEEED50044D97B /* Main.storyboard */; };
 		049751AC1BFEEED50044D97B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049751AB1BFEEED50044D97B /* Assets.xcassets */; };
@@ -118,6 +119,8 @@
 		046F188D1C0D777A00A21FA6 /* NLStepImageLabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLStepImageLabView.m; sourceTree = "<group>"; };
 		047BE7E71C19AB8600821F23 /* NLStepColumnImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLStepColumnImage.h; sourceTree = "<group>"; };
 		047BE7E81C19AB8600821F23 /* NLStepColumnImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLStepColumnImage.m; sourceTree = "<group>"; };
+		048EE89B1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthStepNumberCell.h; sourceTree = "<group>"; };
+		048EE89C1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthStepNumberCell.m; sourceTree = "<group>"; };
 		0497519C1BFEEED50044D97B /* NBlue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NBlue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		049751A01BFEEED50044D97B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		049751A91BFEEED50044D97B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -530,6 +533,8 @@
 				04F3CC7C1C045F9F0066D39D /* NLHealthSleepView.m */,
 				04F3CC7E1C0460120066D39D /* NLHealthStepNumber.h */,
 				04F3CC7F1C0460120066D39D /* NLHealthStepNumber.m */,
+				048EE89B1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.h */,
+				048EE89C1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.m */,
 				046F18891C0D4A0700A21FA6 /* NLColumnImage.h */,
 				046F188A1C0D4A0700A21FA6 /* NLColumnImage.m */,
 				047BE7E71C19AB8600821F23 /* NLStepColumnImage.h */,
@@ -829,6 +834,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				048EE89D1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.m in Sources */,
 				049B07821C1559ED005147B5 /* NLForgetPasswordViewController.m in Sources */,
 				0458E5DC1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m in Sources */,
 				047BE7E91C19AB8600821F23 /* NLStepColumnImage.m in Sources */,

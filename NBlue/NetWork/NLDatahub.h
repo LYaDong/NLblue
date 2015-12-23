@@ -13,11 +13,11 @@
 /**
  *获得验证码
  */
--(void)getVerificationCodePhones:(NSNumber *)phone;
+-(void)getVerificationCodePhones:(NSString *)phone;
 /**
  *注册手机号
  */
--(void)registeredCodephone:(NSNumber *)phone verification:(NSNumber *)verfication password:(NSNumber *)password;
+-(void)registeredCodephone:(NSString *)phone verification:(NSString *)verfication password:(NSString *)password;
 /**
  *用户登录
  */

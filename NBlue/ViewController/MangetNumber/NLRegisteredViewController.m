@@ -143,7 +143,7 @@ static const NSInteger TEXTFILED_TAG = 1000;
         }
         _verTimeLab.text = @"30";
         _timeVer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeVerDown) userInfo:nil repeats:YES];
-        [[NLDatahub sharedInstance] getVerificationCodePhones:[NSNumber numberWithInteger:[[NSString stringWithFormat:@"%@",textPhone.text] integerValue]]];
+        [[NLDatahub sharedInstance] getVerificationCodePhones:textPhone.text];
     }
     
 }
@@ -177,9 +177,9 @@ static const NSInteger TEXTFILED_TAG = 1000;
         return;
     }
     
-    [[NLDatahub sharedInstance] registeredCodephone:[NSNumber numberWithInteger:[[NSString stringWithFormat:@"%@",textPhone.text] integerValue]]
-                                       verification:[NSNumber numberWithInteger:[[NSString stringWithFormat:@"%@",textVerification.text] integerValue]]
-                                           password:[NSNumber numberWithInteger:[[NSString stringWithFormat:@"%@",textPassWord.text] integerValue]]];
+    [[NLDatahub sharedInstance] registeredCodephone:textPhone.text
+                                       verification:textVerification.text
+                                           password:textPassWord.text];
 }
 
 -(void)addNotification{

@@ -54,7 +54,7 @@
 "NLAboutNL_PrivacyPolicy" = "服务协议";
 //NLHealthStepNumber
 "NLHealthStepNumber_TargetNumber" = "目标步数";
-"NLHealthStepNumber_TheCurrent" = "当前步数";
+"NLHealthStepNumber_TheCurrent" = "今日步数";
 "NLHealthStepNumber_MovingDistance" = "移动距离";
 "NLHealthStepNumber_ConsumedEnergy" = "消耗能量";
 //NLHealthSleepView

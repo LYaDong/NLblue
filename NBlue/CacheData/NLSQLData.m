@@ -67,6 +67,8 @@
 }
 
 
+#pragma mark 注释 
+
 #pragma mark 运动数据
 +(void)sportRecordCreateData:(NSArray *)arr isDeposit:(NSInteger)isDeposit{
     FMDatabase *db = [self sqlDataRoute];
@@ -232,8 +234,8 @@
     FMDatabase *db = [self sqlDataRoute];
     [db open];
     
-    NSString *createTableBig = @"CREATE TABLE IF NOT EXISTS SportDataBig (sportDate TEXT PRIMARY KEY,count INTEGER NOT NULL,distanceAmount INTEGER NOT NULL,caloriesAmount INTEGER NOT NULL,stepsAmount INTEGER NOT NULL,user_id TEXT NOT NULL,isUpData TEXT NOT NULL)";//创建一个大表
-    NSString *createTableSmall = @"CREATE TABLE IF NOT EXISTS SportDataSmall (calories INTEGER NOT NULL,ids INTEGER NOT NULL,steps INTEGER NOT NULL,distance INTEGER NOT NULL,serialNumber TEXT PRIMARY KEY,activeTime INTEGER NOT NULL,sportDate TEXT NOT NULL)";//创建一个小表
+    NSString *createTableBig = @"CREATE TABLE IF NOT EXISTS SportDataBig (sportDate TEXT PRIMARY KEY,count INTEGER NOT NULL,distanceAmount INTEGER NOT NULL,caloriesAmount INTEGER NOT NULL,stepsAmount INTEGER NOT NULL,user_id TEXT NOT NULL,isUpData TEXT NOT NULL,timestamp INTEGER NOT NULL)";//创建一个大表
+    NSString *createTableSmall = @"CREATE TABLE IF NOT EXISTS SportDataSmall (calories INTEGER NOT NULL,ids INTEGER NOT NULL,steps INTEGER NOT NULL,distance INTEGER NOT NULL,seris TEXT PRIMARY KEY,activeTime INTEGER NOT NULL,sportDate TEXT NOT NULL)";//创建一个小表
     [db executeUpdate:createTableBig];
     [db executeUpdate:createTableSmall];
     [db close];
@@ -242,14 +244,14 @@
 +(void)insterSportData:(NSArray *)dataArr
               isUpdata:(NSInteger)updata{
     
-//    NSLog(@"%@",dataArr);
-    
     FMDatabase *db = [self sqlDataRoute];
     [db open];
 
     NSDictionary *dic = nil;
     for (dic in dataArr) {
-        NSString *inster = @"INSERT OR REPLACE INTO SportDataBig (sportDate,count,distanceAmount,caloriesAmount,stepsAmount,user_id,isUpData) VALUES (?,?,?,?,?,?,?)";
+        
+        NSInteger timestamp = [[ApplicationStyle dateTransformationStringWhiffletree:[dic objectForKey:@"sportDate"]] timeIntervalSince1970];
+        NSString *inster = @"INSERT OR REPLACE INTO SportDataBig (sportDate,count,distanceAmount,caloriesAmount,stepsAmount,user_id,isUpData,timestamp) VALUES (?,?,?,?,?,?,?,?)";
         NSArray *dataArr = [NSArray arrayWithObjects:
                             [dic objectForKey:@"sportDate"],
                             [dic objectForKey:@"count"],
@@ -258,12 +260,13 @@
                             [dic objectForKey:@"stepsAmount"],
                             [kAPPDELEGATE._loacluserinfo GetUser_ID],
                             [NSNumber numberWithInteger:updata],
+                            [NSNumber numberWithInteger:timestamp],
                             nil];
         [db executeUpdate:inster withArgumentsInArray:dataArr];
         
         NSDictionary *smallDic = nil;
         for (smallDic in [dic objectForKey:@"stepFragments"]) {
-            NSString *insterSmall = @"INSERT OR REPLACE INTO SportDataSmall (calories,ids,steps,distance,serialNumber,activeTime,sportDate) VALUES (?,?,?,?,?,?,?)";
+            NSString *insterSmall = @"INSERT OR REPLACE INTO SportDataSmall (calories,ids,steps,distance,seris,activeTime,sportDate) VALUES (?,?,?,?,?,?,?)";
             NSArray *dataArrSmall = [NSArray arrayWithObjects:
                                      [smallDic objectForKey:@"calories"],
                                      [smallDic objectForKey:@"id"] == nil?@"":[smallDic objectForKey:@"id"],
@@ -276,9 +279,43 @@
             [db executeUpdate:insterSmall withArgumentsInArray:dataArrSmall];
         }
     }
+    [db close];
 }
 
-
++(NSMutableArray *)sportDataObtainTimeStr:(NSString *)timeStr{
+    NSMutableArray *dataArray = [NSMutableArray array];
+    NSMutableArray *stepFragments = [NSMutableArray array];
+    
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    
+    NSString *takeCreate = [NSString stringWithFormat:@"SELECT * FROM SportDataBig WHERE user_id = '%@' and sportDate = '%@'",[kAPPDELEGATE._loacluserinfo GetUser_ID],timeStr];
+    FMResultSet *rs = [db executeQuery:takeCreate];
+    NSString *time = nil;
+    while ([rs next]) {
+        NSMutableDictionary *dicBig = [NSMutableDictionary dictionary];
+        time = [rs stringForColumn:@"sportDate"];
+        [dicBig setValue:[rs stringForColumn:@"caloriesAmount"] forKey:@"caloriesAmount"];
+        [dicBig setValue:[rs stringForColumn:@"count"] forKey:@"count"];
+        [dicBig setValue:[rs stringForColumn:@"distanceAmount"] forKey:@"distanceAmount"];
+        [dicBig setValue:[rs stringForColumn:@"sportDate"] forKey:@"sportDate"];
+        [dicBig setValue:[rs stringForColumn:@"stepsAmount"] forKey:@"stepsAmount"];
+        NSString *sportSamll = [NSString stringWithFormat:@"SELECT * FROM SportDataSmall WHERE sportDate = '%@'",time];
+        FMResultSet *samll = [db executeQuery:sportSamll];
+        while ([samll next]) {
+            NSMutableDictionary *dicSamll = [NSMutableDictionary dictionary];
+            [dicSamll setValue:[samll stringForColumn:@"activeTime"] forKey:@"activeTime"];
+            [dicSamll setValue:[samll stringForColumn:@"calories"] forKey:@"calories"];
+            [dicSamll setValue:[samll stringForColumn:@"distance"] forKey:@"distance"];
+            [dicSamll setValue:[samll stringForColumn:@"seris"] forKey:@"seris"];
+            [dicSamll setValue:[samll stringForColumn:@"steps"] forKey:@"steps"];
+            [stepFragments addObject:dicSamll];
+        }
+        [dicBig setValue:stepFragments forKey:@"stepFragments"];
+        [dataArray addObject:dicBig];
+    }
+    return dataArray;
+}
 
 
 
