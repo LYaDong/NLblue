@@ -40,10 +40,6 @@ static NLColumnImage *cloumnImage = nil;
 
 
 -(void)builArrd:(NSArray *)arr strokeColor:(UIColor *)strokeColor withColor:(UIColor *)withColor type:(NSInteger)type{
-    
-    
-    
-    
     switch (type) {
         case NLCalendarType_Day:
         {
@@ -89,11 +85,29 @@ static NLColumnImage *cloumnImage = nil;
     [_mainScrollew addSubview:timeLabBack];
     
     
+//    NSLog(@"%@",arr);
+//    
+    NSMutableArray *dataSport = [NSMutableArray array];
+    for (NSInteger i=0; i<arr.count; i++) {
+        [dataSport addObject:[arr[i] objectForKey:@"stepsAmount"]];
+    }
+    
+    NSInteger num = 0;
+    for (NSInteger i=0; i<dataSport.count; i++) {
+        if ([[NSString stringWithFormat:@"%@",dataSport[i]] intValue] > num) {
+            num = [[NSString stringWithFormat:@"%@",dataSport[i]] intValue];
+        }
+    }
+    NSMutableArray *ht = [NSMutableArray array];
+    for (NSInteger i=0; i<dataSport.count; i++) {
+        NSInteger index = [[NSString stringWithFormat:@"%@",dataSport[i]] integerValue];
+        [ht addObject:[NSNumber numberWithInteger:index * (height * 0.8)/num]];
+    }
     
 
     
     for (NSInteger i =0 ; i<arr.count; i++) {
-        NSInteger num = [[NSString stringWithFormat:@"%@",arr[i]] integerValue];
+        NSInteger num = [[NSString stringWithFormat:@"%@",ht[i]] integerValue];
         
         UIButton *columnarBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         columnarBtn.frame = CGRectMake(columnarBack.viewWidth - _convenImageWeight  - i* (_convenImageWeight + [ApplicationStyle control_weight:10]), (height - [ApplicationStyle control_weight:60]) - num, _convenImageWeight,num);
@@ -105,24 +119,25 @@ static NLColumnImage *cloumnImage = nil;
         [columnarBtn addTarget:self action:@selector(columnarBtnDown:) forControlEvents:UIControlEventTouchUpInside];
         [columnarBack addSubview:columnarBtn];
 
-        
-        
-        
+
         UILabel *labTime = [[UILabel alloc] initWithFrame:CGRectMake(columnarBack.viewWidth - _convenImageWeight  - i * (_convenImageWeight + [ApplicationStyle control_weight:10]),
                                                                      ([ApplicationStyle control_height:60] - [ApplicationStyle control_height:30])/2,
                                                                      _convenImageWeight,
                                                                      [ApplicationStyle control_height:30])];
-        labTime.text = @"11/11";
-        labTime.textColor = [ApplicationStyle subjectWithColor];
-        if (i == 0) {
-            labTime.text = @"今天";
-            labTime.textColor = [UIColor redColor];
-        }
-        if (i == 1) {
-            labTime.text = @"昨天";
-        }
 
-        labTime.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:18]];
+        NSString *time = [arr[i] objectForKey:@"sportDate"];
+        NSArray *timeArr = [time componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
+        labTime.text = [NSString stringWithFormat:@"%@/%@",timeArr[1],timeArr[2]];
+        labTime.textColor = [ApplicationStyle subjectWithColor];
+//        if (i == 0) {
+//            labTime.text = @"今天";
+//            labTime.textColor = [UIColor redColor];
+//        }
+//        if (i == 1) {
+//            labTime.text = @"昨天";
+//        }
+
+        labTime.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:16]];
         labTime.textAlignment = NSTextAlignmentCenter;
         labTime.tag = LABTIMETAG + i;
         [timeLabBack addSubview:labTime];

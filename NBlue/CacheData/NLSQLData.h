@@ -41,6 +41,12 @@
  *根据时间获取数据
  */
 +(NSMutableArray *)sportDataObtainTimeStr:(NSString *)timeStr;
-
-
+/**
+ *删除运动表
+ */
++(void)delSportDataTable;
+/**
+ *获取大表数据
+ */
++(NSMutableArray *)obtainSportDataBig;
 @end

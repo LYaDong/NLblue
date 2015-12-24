@@ -26,6 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _dataArr = [NSMutableArray array];
     [self bulidUI];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -57,19 +59,27 @@
     [self.view addSubview:sele];
     
     
-    NSArray *arrs = [NLSQLData sportRecordGetData];
-    NSMutableArray *ddd = [NSMutableArray array];
-    for (NSInteger i=0; i<arrs.count; i++) {
-        [ddd addObject:[arrs[i] objectForKey:@"stepsAmount"]];
-    }
-    [NLSQLData sportDayTaskData:@"2015-12-8"];
-
-    _dataArr = [NSMutableArray array];
-    for (NSInteger i=0; i<10; i++) {
-        NSInteger num = arc4random()%150;
-        [_dataArr addObject:[NSNumber numberWithInteger:num]];
-    }
+//    NSArray *arrs = [NLSQLData sportRecordGetData];
+//    NSMutableArray *ddd = [NSMutableArray array];
+//    for (NSInteger i=0; i<arrs.count; i++) {
+//        [ddd addObject:[arrs[i] objectForKey:@"stepsAmount"]];
+//    }
+//    [NLSQLData sportDayTaskData:@"2015-12-8"];
     
+    
+    
+
+    
+    
+    
+    
+
+    
+//    for (NSInteger i=0; i<10; i++) {
+//        NSInteger num = arc4random()%150;
+//        [_dataArr addObject:[NSNumber numberWithInteger:num]];
+//    }
+    _dataArr = [NLSQLData obtainSportDataBig];
     [self imageConvenDataArr:_dataArr type:NLCalendarType_Day];
     
     
@@ -90,7 +100,6 @@
     [self.view addSubview:view];
     
     
-
     
     
     
@@ -111,37 +120,35 @@
         case NLCalendarType_Day:
         {
             
-            NSMutableArray *arrs = [NSMutableArray array];
-            for (NSInteger i=0; i<10; i++) {
-                NSInteger num = arc4random()%150;
-                [arrs addObject:[NSNumber numberWithInteger:num]];
-            }
+            _dataArr = [NLSQLData obtainSportDataBig];
+            [self imageConvenDataArr:_dataArr type:NLCalendarType_Day];
             
-            [_dataArr addObjectsFromArray:arrs];
-            [self imageConvenDataArr:arrs type:NLCalendarType_Day];
             break;
         }
         case NLCalendarType_Week:
         {
-            NSMutableArray *arrs = [NSMutableArray array];
-            for (NSInteger i=0; i<12; i++) {
-                NSInteger num = arc4random()%150;
-                [arrs addObject:[NSNumber numberWithInteger:num]];
-            }
-            [_dataArr addObjectsFromArray:arrs];
-           [self imageConvenDataArr:arrs type:NLCalendarType_Week];
+            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            NSDate *now;
+            NSDateComponents *comps = [[NSDateComponents alloc] init];
+            NSInteger unitFlags =NSCalendarUnitYear | NSCalendarUnitMonth |NSCalendarUnitDay | NSCalendarUnitWeekday |
+            NSCalendarUnitHour |NSCalendarUnitMinute | NSCalendarUnitSecond;
+            now=[NSDate date];
+            comps = [calendar components:unitFlags fromDate:now];
+            NSLog(@"%ld",(long)[comps weekday]);
+            
+            
             break;
         }
         case NLCalendarType_Month:
         {
             
-            NSMutableArray *arrs = [NSMutableArray array];
-            for (NSInteger i=0; i<1; i++) {
-                NSInteger num = arc4random()%150;
-                [arrs addObject:[NSNumber numberWithInteger:num]];
-            }
-            [_dataArr addObjectsFromArray:arrs];
-            [self imageConvenDataArr:arrs type:NLCalendarType_Month];
+//            NSMutableArray *arrs = [NSMutableArray array];
+//            for (NSInteger i=0; i<1; i++) {
+//                NSInteger num = arc4random()%150;
+//                [arrs addObject:[NSNumber numberWithInteger:num]];
+//            }
+//            [_dataArr addObjectsFromArray:arrs];
+//            [self imageConvenDataArr:arrs type:NLCalendarType_Month];
             break;
         }
         default:

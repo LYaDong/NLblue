@@ -57,8 +57,8 @@
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSMutableArray *array = [NSMutableArray array];
         NSDate *dayDime = [NSDate date];
-//        array = [NLSQLData sportDataObtainTimeStr:[ApplicationStyle datePickerTransformationCorss:dayDime]];
-        array = [NLSQLData sportDataObtainTimeStr:@"2015-12-8"];
+        array = [NLSQLData sportDataObtainTimeStr:[ApplicationStyle datePickerTransformationCorss:dayDime]];
+//        array = [NLSQLData sportDataObtainTimeStr:@"2015-12-8"];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [_sportData addObjectsFromArray:array];
@@ -100,13 +100,6 @@
             }
         }
     }
-    
-    
-    
-    
-
-    
-//    NSLog(@"%f",num * [ApplicationStyle control_height:480]/_imageHeight);
 
     [cell histogram:sportData
           sportData:_sportData

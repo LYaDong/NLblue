@@ -543,14 +543,7 @@ static const NSInteger TIMELINE = 90;
     NSDictionary *dic = notifi.object;
     NSLog(@"%@",dic);
     
-    
-    
-
-
-    
-
-    
-
+ 
     
 //    [NLSQLData sportRecordCreateData:[dic objectForKey:@"records"] isDeposit:0];
     [NLSQLData establishSportDataTable];

@@ -13,6 +13,11 @@
 #import "MainNavgationControllew.h"
 #import "NLLogInViewController.h"
 #import "OLGhostAlertView.h"
+//友盟
+#import "UMSocial.h"
+#import "UMSocialSinaSSOHandler.h"
+#import "UMSocialQQHandler.h"
+#import "UMSocialWechatHandler.h"
 @interface AppDelegate ()
 
 @end
@@ -42,7 +47,7 @@
         [self tabBarViewControllerType:Controller_Main];
     }
     
-    
+    [self setUMSocial];
     return YES;
 }
 -(void)tabBarViewControllerType:(Controller)type{
@@ -89,6 +94,19 @@
         self.window.rootViewController = tabBar;
     }
 }
+-(void)setUMSocial{
+    //设置友盟Key
+    [UMSocialData setAppKey:UM_APP_KEY];
+    //设置微博
+    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:WB_APP_ID RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+    //设置QQ
+    [UMSocialQQHandler setQQWithAppId:QQ_APP_ID appKey:QQ_APP_EKY url:@"http://www.umeng.com/social"];
+    //设置微信
+    [UMSocialWechatHandler setWXAppId:WX_APP_ID appSecret:WX_APP_KEY url:@"http://www.umeng.com/social"];
+    
+}
+
+
 
 -(void)AutoDisplayAlertView:(NSString*) title :(NSString*)msg
 {
@@ -118,5 +136,18 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nonnull id)annotation{
+    BOOL result = [UMSocialSnsService handleOpenURL:url];
+    if (result == FALSE) {
+        
+    }
+    return result;
+}
+
+
+
+
+
 
 @end

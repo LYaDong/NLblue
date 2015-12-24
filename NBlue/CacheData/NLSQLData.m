@@ -314,9 +314,40 @@
         [dicBig setValue:stepFragments forKey:@"stepFragments"];
         [dataArray addObject:dicBig];
     }
+    [db close];
     return dataArray;
 }
 
++(NSMutableArray *)obtainSportDataBig{
+    NSMutableArray *array = [NSMutableArray array];
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *takeCreate = [NSString stringWithFormat:@"SELECT * FROM SportDataBig WHERE user_id = '%@'",[kAPPDELEGATE._loacluserinfo GetUser_ID]];
+    FMResultSet *rs = [db executeQuery:takeCreate];
+    while ([rs next]) {
+        NSMutableDictionary *dicBig = [NSMutableDictionary dictionary];
+        [dicBig setValue:[rs stringForColumn:@"caloriesAmount"] forKey:@"caloriesAmount"];
+        [dicBig setValue:[rs stringForColumn:@"count"] forKey:@"count"];
+        [dicBig setValue:[rs stringForColumn:@"distanceAmount"] forKey:@"distanceAmount"];
+        [dicBig setValue:[rs stringForColumn:@"sportDate"] forKey:@"sportDate"];
+        [dicBig setValue:[rs stringForColumn:@"stepsAmount"] forKey:@"stepsAmount"];
+        [array addObject:dicBig];
+    }
+    [db close];
+    return array;
+}
 
+
++(void)delSportDataTable{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *delBig = [NSString stringWithFormat:@"DELETE FROM SportDataBig"];
+    NSString *delSmall = [NSString stringWithFormat:@"DELETE FROM SportDataSmall"];
+    [db executeUpdate:delBig];
+    [db executeUpdate:delSmall];
+    [db close];
+    
+    
+}
 
 @end

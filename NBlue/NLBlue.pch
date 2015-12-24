@@ -19,6 +19,11 @@
 #import "NLApiURL.h"
 #import "NLDatahub.h"
 #import "NLNotification.h"
+
+
+#pragma clangdiagnosticpush
+#pragma clangdiagnosticignored"object file (Pods/UmengSocial/Umeng_SDK_Social_iOS_ARM64_4.4/UMSocial_Sdk_Extra_Frameworks/SinaSSO/libSocialSinaSSO.a(UMSocialSinaSSOHandler.o)) was built for newer iOS version (8.2) than being linked (8.1)"
+#pragma clangdiagnosticpop
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 

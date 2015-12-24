@@ -27,22 +27,11 @@
 
 
 -(void)histogram:(NSArray *)arrs sportData:(NSArray *)sportData target:(NSInteger)target{
-    
-    
-    
-    NSMutableArray *dddd = [NSMutableArray array];
-    for (int i=0; i<24; i++) {
-        int xxx = arc4random()%10000;
-        [dddd addObject:[NSNumber numberWithInt:xxx]];
-    }
-    
-    
-    
-    
+
     NSInteger num = 0;
-    for (NSInteger i=0; i<dddd.count; i++) {
-        if ([[NSString stringWithFormat:@"%@",dddd[i]] intValue] > num) {
-            num = [[NSString stringWithFormat:@"%@",dddd[i]] intValue];
+    for (NSInteger i=0; i<arrs.count; i++) {
+        if ([[NSString stringWithFormat:@"%@",arrs[i]] intValue] > num) {
+            num = [[NSString stringWithFormat:@"%@",arrs[i]] intValue];
         }
     }
     
@@ -53,12 +42,11 @@
     
     NSLog(@"%f",[ApplicationStyle control_height:480]);
     
-    NSLog(@"%@",dddd);
     
     
     NSMutableArray *dataArray = [NSMutableArray array];
-    for (NSInteger i=0; i<dddd.count; i++) {
-        NSInteger index = [[NSString stringWithFormat:@"%@",dddd[i]] integerValue];
+    for (NSInteger i=0; i<arrs.count; i++) {
+        NSInteger index = [[NSString stringWithFormat:@"%@",arrs[i]] integerValue];
         [dataArray addObject:[NSNumber numberWithInteger:index * ([ApplicationStyle control_height:480] * 0.8)/num]];
     }
     
