@@ -12,6 +12,7 @@
 #import "NLMyEquipmentController.h"
 #import "NLFeedBackViewController.h"
 #import "NLAboutNLViewController.h"
+#import "NLSetProfoleViewController.h"
 @interface NLProfileViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIButton *userHeadImage;
 @property(nonatomic,strong)UILabel *userNameLab;
@@ -132,6 +133,9 @@
         }
         case 3:
         {
+            NLSetProfoleViewController *vc = [[NLSetProfoleViewController alloc] init];
+            [vc setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 4:

@@ -118,4 +118,10 @@
 "NLHealthCalender_Unconmfortable_BDYC" = "白带异常";
 "NLHealthCalender_Unconmfortable_QT" = "其他";
 
+//NLSetProfoleViewController
+"NLSetProfile_Set" = "设置";
+"NLSetProfile_CallRemid" = "来电提醒";
+"NLSetProfile_GOScore" = "去评分";
+"NLSetProfile_SecurityEiet" = "安全退出";
+
 

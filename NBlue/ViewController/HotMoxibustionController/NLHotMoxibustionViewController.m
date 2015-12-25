@@ -15,6 +15,9 @@ static const NSInteger TIMELINE = 90;
 #import "NLBluetoothDataAnalytical.h"
 #import "NLHalfView.h"
 #import "NLSQLData.h"
+
+#import <CoreTelephony/CTCallCenter.h>
+#import <CoreTelephony/CTCall.h>
 @interface NLHotMoxibustionViewController ()<UIScrollViewDelegate,NLHalfViewDelgate>
 @property(nonatomic,strong)NLHalfView *temperatureCilcle;
 @property(nonatomic,strong)NSArray *peripheralArray;
@@ -28,6 +31,7 @@ static const NSInteger TIMELINE = 90;
 @property(nonatomic,assign)NSInteger blueTime;
 @property(nonatomic,assign)BOOL isQuert;
 @property(nonatomic,strong)UIView *blueXXX;
+@property(nonatomic,strong)CTCallCenter *callCenter;
 @end
 
 @implementation NLHotMoxibustionViewController
@@ -127,6 +131,24 @@ static const NSInteger TIMELINE = 90;
 
     
     
+    //电话监听
+//    _callCenter = [[CTCallCenter alloc] init];
+//    _callCenter.callEventHandler = ^(CTCall* call) {
+//        if (call.callState == CTCallStateDisconnected){
+//            NSLog(@"Call has been disconnected");
+//        }else if (call.callState == CTCallStateConnected){
+//            NSLog(@"Call has just been connected");
+//        }else if(call.callState == CTCallStateIncoming){
+//           NSLog(@"Call is incoming");
+//        } else if (call.callState ==CTCallStateDialing){
+//            NSLog(@"call is dialing");
+//        }else{
+//            NSLog(@"Nothing is done");   
+//        }
+//        
+//    };
+    
+    
     
     
     
@@ -166,8 +188,10 @@ static const NSInteger TIMELINE = 90;
 //    _blueXXX.backgroundColor = [UIColor redColor];
 //    [self.view addSubview:_blueXXX];
     
-    
-    
+ 
+}
+
+- (void)setupBackgroundHandler{
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -541,13 +565,31 @@ static const NSInteger TIMELINE = 90;
 }
 -(void)logInSuccess:(NSNotification *)notifi{
     NSDictionary *dic = notifi.object;
-    NSLog(@"%@",dic);
     
- 
+//    NSLog(@"%@",[dic objectForKey:@"records"] );
+//    NSLog(@"%@",[[dic objectForKey:@"records"] objectForKey:@"sportDate"]);
+    
+//    for (int i=0; i<[[dic objectForKey:@"records"] count]; i++) {
+//        NSLog(@"%@",[[[dic objectForKey:@"records"] objectAtIndex:i] objectForKey:@"sportDate"]);
+//    }
+    
+    
+
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [NLSQLData establishSportDataTable];
+        [NLSQLData insterSportData:[dic objectForKey:@"records"] isUpdata:0];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            NSLog(@"XXX");
+            
+        
+        });
+    });
+    
     
 //    [NLSQLData sportRecordCreateData:[dic objectForKey:@"records"] isDeposit:0];
-    [NLSQLData establishSportDataTable];
-    [NLSQLData insterSportData:[dic objectForKey:@"records"] isUpdata:0];
+    
     
 }
 -(void)logInFicaled:(NSNotification *)notifi{

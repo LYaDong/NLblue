@@ -331,6 +331,7 @@
         [dicBig setValue:[rs stringForColumn:@"distanceAmount"] forKey:@"distanceAmount"];
         [dicBig setValue:[rs stringForColumn:@"sportDate"] forKey:@"sportDate"];
         [dicBig setValue:[rs stringForColumn:@"stepsAmount"] forKey:@"stepsAmount"];
+        [dicBig setValue:[rs stringForColumn:@"timestamp"] forKey:@"timestamp"];
         [array addObject:dicBig];
     }
     [db close];

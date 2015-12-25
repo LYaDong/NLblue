@@ -18,6 +18,8 @@
 #import "UMSocialSinaSSOHandler.h"
 #import "UMSocialQQHandler.h"
 #import "UMSocialWechatHandler.h"
+
+
 @interface AppDelegate ()
 
 @end
@@ -36,7 +38,7 @@
     
     _loacluserinfo = [[NLLocalUserInfo alloc] init];
     
-    NSLog(@"%@",[kAPPDELEGATE._loacluserinfo getControllew]);
+//    NSLog(@"%@",[kAPPDELEGATE._loacluserinfo getControllew]);
 //    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
 //    [kAPPDELEGATE._loacluserinfo SetUser_ID:@"88830130-15c5-4fa9-92c2-b6960f11edc1"];
 //    [kAPPDELEGATE._loacluserinfo SetUserAccessToken:@"123123123123"];
@@ -48,6 +50,16 @@
     }
     
     [self setUMSocial];
+    
+    
+    
+//    if ([application applicationState] == UIApplicationStateBackground) {
+//        NSLog(@"是自启动");
+//    }else{
+//        NSLog(@"不是");
+//    }
+    
+    
     return YES;
 }
 -(void)tabBarViewControllerType:(Controller)type{

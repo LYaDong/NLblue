@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		04015D5F1C1FB72F00454566 /* NLHealtCalenderPeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = 04015D5E1C1FB72F00454566 /* NLHealtCalenderPeriod.m */; };
 		04015D631C1FDD1800454566 /* NLCalenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 04015D621C1FDD1800454566 /* NLCalenderPicker.m */; };
+		0403F9731C2CD3B90000A9C3 /* NLSetProfoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0403F9721C2CD3B90000A9C3 /* NLSetProfoleViewController.m */; };
+		0403F9761C2CD6380000A9C3 /* NLSetProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0403F9751C2CD6380000A9C3 /* NLSetProfileCell.m */; };
+		0403F9781C2CE3420000A9C3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0403F9771C2CE3420000A9C3 /* CoreTelephony.framework */; };
 		044255361C1EABAE003F8503 /* NLHealtCalenderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044255351C1EABAE003F8503 /* NLHealtCalenderCell.m */; };
 		0458E5D91C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458E5D81C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m */; };
 		0458E5DC1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458E5DB1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m */; };
@@ -101,6 +104,11 @@
 		04015D5E1C1FB72F00454566 /* NLHealtCalenderPeriod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealtCalenderPeriod.m; sourceTree = "<group>"; };
 		04015D611C1FDD1800454566 /* NLCalenderPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderPicker.h; sourceTree = "<group>"; };
 		04015D621C1FDD1800454566 /* NLCalenderPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCalenderPicker.m; sourceTree = "<group>"; };
+		0403F9711C2CD3B90000A9C3 /* NLSetProfoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLSetProfoleViewController.h; sourceTree = "<group>"; };
+		0403F9721C2CD3B90000A9C3 /* NLSetProfoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLSetProfoleViewController.m; sourceTree = "<group>"; };
+		0403F9741C2CD6380000A9C3 /* NLSetProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLSetProfileCell.h; sourceTree = "<group>"; };
+		0403F9751C2CD6380000A9C3 /* NLSetProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLSetProfileCell.m; sourceTree = "<group>"; };
+		0403F9771C2CE3420000A9C3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		044255341C1EABAE003F8503 /* NLHealtCalenderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealtCalenderCell.h; sourceTree = "<group>"; };
 		044255351C1EABAE003F8503 /* NLHealtCalenderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealtCalenderCell.m; sourceTree = "<group>"; };
 		0458E5D71C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthMangerStepNumViewController.h; sourceTree = "<group>"; };
@@ -245,6 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0403F9781C2CE3420000A9C3 /* CoreTelephony.framework in Frameworks */,
 				04C995471C029D6B00D8AE79 /* CoreBluetooth.framework in Frameworks */,
 				04CDA1751BFF022D00D2A304 /* Foundation.framework in Frameworks */,
 				4A3CFF267937751BD6F2302D /* libPods.a in Frameworks */,
@@ -460,6 +469,8 @@
 				04F4B7D41C084CFB00DE60DE /* NLFeedBackViewController.m */,
 				04F4B7D61C085C7000DE60DE /* NLAboutNLViewController.h */,
 				04F4B7D71C085C7000DE60DE /* NLAboutNLViewController.m */,
+				0403F9711C2CD3B90000A9C3 /* NLSetProfoleViewController.h */,
+				0403F9721C2CD3B90000A9C3 /* NLSetProfoleViewController.m */,
 			);
 			path = ProfileController;
 			sourceTree = "<group>";
@@ -569,6 +580,8 @@
 				04F04F7A1C06940F009DC949 /* NLIndividuaFormaCell.m */,
 				04F4B7BE1C07ED2A00DE60DE /* NLMyEquipmentCell.h */,
 				04F4B7BF1C07ED2A00DE60DE /* NLMyEquipmentCell.m */,
+				0403F9741C2CD6380000A9C3 /* NLSetProfileCell.h */,
+				0403F9751C2CD6380000A9C3 /* NLSetProfileCell.m */,
 			);
 			path = ProFileView;
 			sourceTree = "<group>";
@@ -630,6 +643,7 @@
 		9B52667861575D0AACE7B05E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0403F9771C2CE3420000A9C3 /* CoreTelephony.framework */,
 				04C995461C029D6B00D8AE79 /* CoreBluetooth.framework */,
 				46E0A4932CCDD3CB9C4B5CFA /* libPods.a */,
 			);
@@ -852,6 +866,7 @@
 				04A1519A1C0DC3B700CB93FF /* NLRing.m in Sources */,
 				04F3CC611C0439280066D39D /* NLAboutImageBtn.m in Sources */,
 				04F5BB701C05B51A00B37CE2 /* NLIndividuaFormatViewController.m in Sources */,
+				0403F9761C2CD6380000A9C3 /* NLSetProfileCell.m in Sources */,
 				04F04F811C06E46F009DC949 /* NLPickView.m in Sources */,
 				0458E5D91C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m in Sources */,
 				049751A11BFEEED50044D97B /* main.m in Sources */,
@@ -862,6 +877,7 @@
 				04F4B7C01C07ED2A00DE60DE /* NLMyEquipmentCell.m in Sources */,
 				044255361C1EABAE003F8503 /* NLHealtCalenderCell.m in Sources */,
 				04F04F7B1C06940F009DC949 /* NLIndividuaFormaCell.m in Sources */,
+				0403F9731C2CD3B90000A9C3 /* NLSetProfoleViewController.m in Sources */,
 				04F5BB221C05676700B37CE2 /* NLShareController.m in Sources */,
 				04F4B7CF1C083AE500DE60DE /* NLCalenderPackage.m in Sources */,
 				04F4B7D51C084CFB00DE60DE /* NLFeedBackViewController.m in Sources */,
