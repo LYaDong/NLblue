@@ -15,6 +15,7 @@ static const NSInteger CELLTAG = 500;//不可以大于1000
 #import "NLCalenderPicker.h"
 #import "NLCalenderLifeHabit.h"
 #import "NLCalenderUncomfortable.h"
+#import "PlistData.h"
 @interface NLHealthCalenderView()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,NLCalenderPickerDelegate,NLCalenderLifeHabitDelegate,NLCalenderUncomfortableDelegate>
 @property(nonatomic,strong)UIScrollView *mainScrollew;
 @property(nonatomic,strong)UITableView *mainTableView;
@@ -153,15 +154,6 @@ static const NSInteger CELLTAG = 500;//不可以大于1000
                         NSLocalizedString(@"NLHealthCalender_BSF", nil),];
     cell.cellImage.image = [UIImage imageNamed:imageArr[indexPath.row]];
     cell.cellLab.text = labArr[indexPath.row];
-    
-//    for (NSInteger i=0; i<4; i++) {
-//        UIImageView *rightImage = [[UIImageView alloc] initWithFrame:CGRectMake(cell.frame.size.width, 0, [ApplicationStyle control_weight:40], [ApplicationStyle control_height:40])];
-//    }
-    
-    
-    
-    
-    
     cell.cellCountImage.image = [UIImage imageNamed:@"NLHClen_DDD"];
     if (indexPath.row==0) {
         cell.cellCountImage.image = [UIImage imageNamed:@"NLHClen_DYM_NO"];
@@ -240,10 +232,13 @@ static const NSInteger CELLTAG = 500;//不可以大于1000
 }
 
 -(void)lifeHabitCount:(NSArray *)array{
+
+    
     _blackBack.hidden = YES;
     _calenLifeHabitView.hidden = YES;
 }
 -(void)uncomfortableArr:(NSArray *)array{
+
     _blackBack.hidden = YES;
     _uncomfortableView.hidden = YES;
 }

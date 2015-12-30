@@ -7,6 +7,8 @@
 //
 
 #import "Convenlence.h"
+const char oldDelegateKey;
+const char completionHandlerKey;
 
 @implementation UIView (Convenience)
 
@@ -27,6 +29,36 @@
     btn.frame = frame;
     [btn.layer addSublayer:[ApplicationStyle shadowAsInverse:CGRectMake(0, 0, frame.size.width, frame.size.height) colorOne:[@"dc2849" hexStringToColor] colorTow:[@"e9395a" hexStringToColor]]];
     return btn;
+}
+
+
+
+-(void)alertSuccessHandler:(void(^)(NSInteger buttonIndex))completionHandler{
+    UIAlertView *alert = (UIAlertView *)self;
+    if(completionHandler != nil)
+    {
+        id oldDelegate = objc_getAssociatedObject(self, &oldDelegateKey);
+        if(oldDelegate == nil)
+        {
+            objc_setAssociatedObject(self, &oldDelegateKey, oldDelegate, OBJC_ASSOCIATION_ASSIGN);
+        }
+        
+        oldDelegate = alert.delegate;
+        alert.delegate = self;
+        objc_setAssociatedObject(self, &completionHandlerKey, completionHandler, OBJC_ASSOCIATION_COPY);
+    }
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    UIAlertView *alert = (UIAlertView *)self;
+    void (^theCompletionHandler)(NSInteger buttonIndex) = objc_getAssociatedObject(self, &completionHandlerKey);
+    
+    if(theCompletionHandler == nil)
+        return;
+    
+    theCompletionHandler(buttonIndex);
+    alert.delegate = objc_getAssociatedObject(self, &oldDelegateKey);
 }
 
 @end
@@ -64,7 +96,6 @@
                            alpha:alpha];
 }
 @end
-
 
 
 

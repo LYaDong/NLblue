@@ -41,4 +41,12 @@
  *获得用户进入的页面
  */
 -(NSString *)getControllew;
+/**
+ *判断是否登录
+ */
+-(void)isLoginUser:(NSString *)isLogin;
+/**
+ *获得是否登录
+ */
+-(NSString *)GetIsLogin;
 @end

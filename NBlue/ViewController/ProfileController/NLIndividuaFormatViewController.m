@@ -26,6 +26,7 @@ static const NSInteger BTNPHOTO = 4000;
 @property(nonatomic,strong)NSMutableArray *headArray;
 @property(nonatomic,strong)NSMutableArray *measArray;
 @property(nonatomic,strong)NSMutableArray *periodArray;
+@property(nonatomic,strong)NSMutableDictionary *userDataDic;
 
 
 
@@ -77,18 +78,20 @@ static const NSInteger BTNPHOTO = 4000;
     }
     
     {
-        NSArray *headArray = @[@"wwww.baidu.com",@"啦啦啦"];
-        NSArray *measArray = @[@"23",@"178",@"75"];
-        NSArray *periodArray = @[@"无",@"无"];
         
-        [_headArray addObjectsFromArray:headArray];
-        [_measArray addObjectsFromArray:measArray];
-        [_periodArray addObjectsFromArray:periodArray];
+        
+        
         
         _userCountDataDic = [NSMutableDictionary dictionary];
-        [_userCountDataDic setValue:_headArray forKey:@"headNameArr"];
-        [_userCountDataDic setValue:_measArray forKey:@"measUrements"];
-        [_userCountDataDic setValue:_periodArray forKey:@"period"];
+        
+        _userCountDataDic = [PlistData getIndividuaData];
+//        [_userCountDataDic setValue:@"www.baidu.com" forKey:@"imageUrl"];
+//        [_userCountDataDic setValue:@"小丑" forKey:@"userName"];
+//        [_userCountDataDic setValue:@"22" forKey:@"age"];
+//        [_userCountDataDic setValue:@"178" forKey:@"height"];
+//        [_userCountDataDic setValue:@"23" forKey:@"width"];
+//        [_userCountDataDic setValue:@"无" forKey:@"periodTime"];
+//        [_userCountDataDic setValue:@"无" forKey:@"cycleTime"];
     }
     
 }
@@ -197,22 +200,42 @@ static const NSInteger BTNPHOTO = 4000;
             _cell.cellHeadTitleLab.frame = CGRectMake([ApplicationStyle control_weight:36], 0, [ApplicationStyle control_weight:300], [ApplicationStyle control_height:170]);
             _cell.imageArrow.frame = CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:24] - [ApplicationStyle control_weight:16], ([ApplicationStyle control_height:170] - [ApplicationStyle control_height:24])/2, [ApplicationStyle control_weight:16], [ApplicationStyle control_height:24]);
             _userHeadImage = [[UIImageView alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:54] - [ApplicationStyle control_weight:120], ([ApplicationStyle control_height:170] - [ApplicationStyle control_height:120])/2, [ApplicationStyle control_weight:120], [ApplicationStyle control_height:120])];
-            [_userHeadImage sd_setImageWithURL:[[_userCountDataDic objectForKey:@"headNameArr"] objectAtIndex:indexPath.row] placeholderImage:nil];
+            
+            
+            
             [_cell addSubview:_userHeadImage];
-            _cell.cellBehindTitleLab.hidden = YES;
+            _cell.cellimageUrl.hidden = YES;
 
         }
         _cell.cellHeadTitleLab.text = [[_individuaDataDic objectForKey:@"headNameArr"] objectAtIndex:indexPath.row];
-        _cell.cellBehindTitleLab.text = [[_userCountDataDic objectForKey:@"headNameArr"] objectAtIndex:indexPath.row];
+        
+        
+        if (indexPath.row==0) {
+            [_cell.imageArrow sd_setImageWithURL:[NSURL URLWithString:[_userCountDataDic objectForKey:@"imageUrl"]] placeholderImage:nil];
+        }else{
+            _cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"userName"];
+        }
+
         
     }else if (indexPath.section == 1){
         
         _cell.cellHeadTitleLab.text = [[_individuaDataDic objectForKey:@"measUrements"] objectAtIndex:indexPath.row];
-        _cell.cellBehindTitleLab.text = [[_userCountDataDic objectForKey:@"measUrements"] objectAtIndex:indexPath.row];
-    }else{
         
+        if (indexPath.row==0) {
+           _cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"age"];
+        }else if (indexPath.row == 1){
+            _cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"height"];
+        }else{
+            _cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"width"];
+        }
+    }else{
         _cell.cellHeadTitleLab.text = [[_individuaDataDic objectForKey:@"period"] objectAtIndex:indexPath.row];
-        _cell.cellBehindTitleLab.text = [[_userCountDataDic objectForKey:@"period"] objectAtIndex:indexPath.row];
+        
+        if (indexPath.row==0) {
+            _cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"periodTime"];
+        }else{
+            _cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"cycleTime"];
+        }
     }
     
     [self cellLineView:indexPath viewLineOn:viewLineOn viewLineUnder:viewLineUnder cell:_cell];
@@ -236,7 +259,8 @@ static const NSInteger BTNPHOTO = 4000;
             {
                 NLIndividuaEditingViewController *vc = [[NLIndividuaEditingViewController alloc] init];
                 vc.editionName = ^(NSString * userName){
-                    [_headArray replaceObjectAtIndex:indexPath.row withObject:userName];
+//                    [_headArray replaceObjectAtIndex:indexPath.row withObject:userName];
+                    [_userCountDataDic setValue:userName forKey:@"userName"];
                     [_tableView reloadData];
                 };
                 [self presentViewController:vc animated:YES completion:^{
@@ -274,12 +298,12 @@ static const NSInteger BTNPHOTO = 4000;
         switch (indexPath.row) {
             case 0:
             {
-                [self datePickView:UseDatePicker_Cycle];
+                [self datePickView:UseDatePicker_Period];
                 break;
             }
             case 1:
             {
-                [self datePickView:UseDatePicker_Period];
+                [self datePickView:UseDatePicker_Cycle];
                 break;
             }
             default:
@@ -315,17 +339,20 @@ static const NSInteger BTNPHOTO = 4000;
             switch (pickType) {
                 case PickerType_Age:
                 {
-                    [_measArray replaceObjectAtIndex:pickType withObject:count];
+//                    [_measArray replaceObjectAtIndex:pickType withObject:count];
+                    [_userCountDataDic setValue:count forKey:@"age"];
                     break;
                 }
                 case PickerType_Height:
                 {
-                    [_measArray replaceObjectAtIndex:pickType withObject:count];
+//                    [_measArray replaceObjectAtIndex:pickType withObject:count];
+                    [_userCountDataDic setValue:count forKey:@"height"];
                     break;
                 }
                 case PickerType_Width:
                 {
-                    [_measArray replaceObjectAtIndex:pickType withObject:count];
+//                    [_measArray replaceObjectAtIndex:pickType withObject:count];
+                    [_userCountDataDic setValue:count forKey:@"width"];
                     break;
                 }
                 default:
@@ -353,14 +380,18 @@ static const NSInteger BTNPHOTO = 4000;
         case SeleType_OK:
         {
             switch (useDatePicker) {
-                case UseDatePicker_Cycle:
-                {
-                    [_periodArray replaceObjectAtIndex:useDatePicker withObject:[ApplicationStyle datePickerTransformationCorss:date]];
-                    break;
-                }
                 case UseDatePicker_Period:
                 {
-                    [_periodArray replaceObjectAtIndex:useDatePicker withObject:[ApplicationStyle datePickerTransformationCorss:date]];
+//                    [_periodArray replaceObjectAtIndex:useDatePicker withObject:[ApplicationStyle datePickerTransformationCorss:date]];
+                    
+                    [_userCountDataDic setValue:[ApplicationStyle datePickerTransformationCorss:date] forKey:@"periodTime"];
+                    
+                    break;
+                }
+                case UseDatePicker_Cycle:
+                {
+//                    [_periodArray replaceObjectAtIndex:useDatePicker withObject:[ApplicationStyle datePickerTransformationCorss:date]];
+                    [_userCountDataDic setValue:[ApplicationStyle datePickerTransformationCorss:date] forKey:@"cycleTime"];
                     break;
                 }
                 default:
@@ -467,6 +498,11 @@ static const NSInteger BTNPHOTO = 4000;
 #pragma mark 黑色背景
 -(void)blackViewDown{
     _blackView.hidden = YES;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        _viewPhoto.frame = CGRectMake(0, SCREENHEIGHT+([ApplicationStyle control_height:110 * 3] + [ApplicationStyle control_height:8]), SCREENWIDTH,[ApplicationStyle control_height:110 * 3] + [ApplicationStyle control_height:8]);
+    }];
+    
     [self pickerViewFramkeHide];
 }
 
@@ -476,6 +512,12 @@ static const NSInteger BTNPHOTO = 4000;
     }];
 }
 -(void)returnBtnDown{
+    
+
+    
+
+    
+    
     [PlistData individuaData:_userCountDataDic];
     [self.navigationController popViewControllerAnimated:YES];
 }

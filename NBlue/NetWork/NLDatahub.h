@@ -29,4 +29,16 @@
                 consumerId:(NSString *)consumerId
                  startDate:(NSString *)startDate
                    endDate:(NSString *)endDate;
+/**
+ *上传用户信息
+ */
+- (void)upDataUserInformationConsumerid:(NSString *)consumerid
+                                   name:(NSString *)name
+                               nickname:(NSString *)nickname
+                                 gender:(NSString *)gender
+                                    age:(NSString *)age
+                                 height:(NSString *)height
+                                 weight:(NSString *)weight
+                                 header:(NSString *)header
+                               stepGoal:(NSString *)stepGoal;
 @end

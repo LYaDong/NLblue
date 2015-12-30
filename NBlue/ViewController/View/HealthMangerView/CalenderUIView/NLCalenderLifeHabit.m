@@ -10,13 +10,14 @@ static const NSInteger LIFEHABITTAG = 2000;
 #import "NLCalenderLifeHabit.h"
 @interface NLCalenderLifeHabit()
 @property(nonatomic,strong)NSMutableArray *lifeHabitArr;
+@property(nonatomic,strong)NSMutableArray *addDataArr;
 @end
 @implementation NLCalenderLifeHabit
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         _lifeHabitArr = [NSMutableArray array];
         
-        
+        _addDataArr = [NSMutableArray array];
         [self buildUI];
     }
     return self;
@@ -59,6 +60,10 @@ static const NSInteger LIFEHABITTAG = 2000;
         [backView addSubview:lifeHabit];
     }
     
+    for (NSInteger i=0; i<imageArr.count; i++) {
+        [_addDataArr addObject:@"0"];
+    }
+    
     
     
     NSArray *btnArr = @[NSLocalizedString(@"NLHealthCalender_Picker_BtnCalue", nil),
@@ -89,15 +94,30 @@ static const NSInteger LIFEHABITTAG = 2000;
     if (btn.tag == BTNTAG) {
         
     }else{
-        [self.delegate lifeHabitCount:nil];
+//        for (NSInteger i = _addDataArr.count - 1; i>=0; i--) {
+//            if ([_addDataArr[i] isEqualToString:@"0"]) {
+//                [_addDataArr removeObjectAtIndex:i];
+//            }
+//        }
+        
+        [self.delegate lifeHabitCount:_addDataArr];
     }
 }
 
 -(void)lifeHabitDown:(UIButton *)btn{
     
+     NSInteger num = [[NSString stringWithFormat:@"%@",_addDataArr[btn.tag - LIFEHABITTAG]] intValue] - 1;
+    
+    
     btn.selected = !btn.selected;
     switch (btn.tag - LIFEHABITTAG) {
         case LifeHabit_SG:{
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
+            
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_SHXG_SG"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
@@ -113,6 +133,12 @@ static const NSInteger LIFEHABITTAG = 2000;
             break;
         }
         case LifeHabit_YD:  {
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
+            
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_SHXG_YD"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
@@ -127,6 +153,11 @@ static const NSInteger LIFEHABITTAG = 2000;
             break;
         }
         case LifeHabit_PB:{
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_SHXG_DB"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];

@@ -49,4 +49,14 @@
     NSString *infotype = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_Project_Conllew"];
     return infotype;
 }
+
+//是否登录过
+-(void)isLoginUser:(NSString *)isLogin{
+    [[NSUserDefaults standardUserDefaults] setObject:isLogin forKey:@"NL_User_Project_IsLogin"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)GetIsLogin{
+    NSString *infotype = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_Project_IsLogin"];
+    return infotype;
+}
 @end

@@ -10,9 +10,14 @@ static const NSInteger LIFEHABITTAG = 2000;
 
 #import "NLCalenderUncomfortable.h"
 #import "NLCalenderUncomforBtn.h"
+@interface NLCalenderUncomfortable()
+@property(nonatomic,strong)NSMutableArray *addDataArr;
+@end
+
 @implementation NLCalenderUncomfortable
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+        _addDataArr = [NSMutableArray array];
         [self buildUI];
     }
     return self;
@@ -72,7 +77,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         [backView addSubview:uncomfortableBtn];
     }
     
-    
+    for (NSInteger i=0; i<labArr.count; i++) {
+        [_addDataArr addObject:@"0"];
+    }
     
     NSArray *btnArr = @[NSLocalizedString(@"NLHealthCalender_Picker_BtnCalue", nil),
                         NSLocalizedString(@"NLHealthCalender_Picker_BtnOK", nil),];
@@ -101,13 +108,21 @@ static const NSInteger LIFEHABITTAG = 2000;
     if (btn.tag == BTNTAG) {
         
     }else{
-        [self.delegate uncomfortableArr:nil];
-    }
+        [self.delegate uncomfortableArr:_addDataArr];
+    }   
 }
 -(void)uncomfortableBtnDown:(UIButton *)btn{
+    NSInteger num = [[NSString stringWithFormat:@"%@",_addDataArr[btn.tag - LIFEHABITTAG]] intValue] - 1;
+                     
     btn.selected = !btn.selected;
     switch (btn.tag - LIFEHABITTAG) {
         case Uncomfortable_TT:{
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
+            
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_TT"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
@@ -123,6 +138,12 @@ static const NSInteger LIFEHABITTAG = 2000;
             break;
         }
         case Uncomfortable_BD:  {
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
+            
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_BD"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
@@ -137,6 +158,12 @@ static const NSInteger LIFEHABITTAG = 2000;
             break;
         }
         case Uncomfortable_HELY:{
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
+            
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_LY"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
@@ -151,6 +178,12 @@ static const NSInteger LIFEHABITTAG = 2000;
             break;
         }
         case Uncomfortable_FX:{
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
+            
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_BM"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
@@ -166,6 +199,12 @@ static const NSInteger LIFEHABITTAG = 2000;
             break;
         }
         case Uncomfortable_XFZT:{
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
+            
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_XFT"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
@@ -181,6 +220,12 @@ static const NSInteger LIFEHABITTAG = 2000;
             break;
         }
         case Uncomfortable_MSY:{
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
+            
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_MSY"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
@@ -196,6 +241,12 @@ static const NSInteger LIFEHABITTAG = 2000;
             break;
         }
         case Uncomfortable_YS:{
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
+            
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_YS"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
@@ -211,6 +262,12 @@ static const NSInteger LIFEHABITTAG = 2000;
             break;
         }
         case Uncomfortable_HSST:{
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
+            
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_HSST"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
@@ -226,6 +283,12 @@ static const NSInteger LIFEHABITTAG = 2000;
             break;
         }
         case Uncomfortable_RFZT:{
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
+            
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_RFZT"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
@@ -241,6 +304,12 @@ static const NSInteger LIFEHABITTAG = 2000;
             break;
         }
         case Uncomfortable_RFCT:{
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
+            
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_RFCT"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
@@ -256,6 +325,12 @@ static const NSInteger LIFEHABITTAG = 2000;
             break;
         }
         case Uncomfortable_BDYC:{
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
+            
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_BDYC"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
@@ -271,6 +346,12 @@ static const NSInteger LIFEHABITTAG = 2000;
             break;
         }
         case Uncomfortable_QT:{
+            if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+            }else{
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+            }
+            
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_QT"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];

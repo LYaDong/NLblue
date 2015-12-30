@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
-@interface UIView (Convenience)
+#import <objc/runtime.h>
+@interface UIView (Convenience)<UIAlertViewDelegate>
 /**
  *self.frame.size.height
  */
@@ -42,6 +42,10 @@
  *渐变Btn
  */
 + (UIButton *)gradiengBtnFrame:(CGRect)frame;
+/**
+ *UIalertview
+ */
+-(void)alertSuccessHandler:(void(^)(NSInteger buttonIndex))completionHandler;
 @end
 
 @interface NSString (Convenience)
@@ -51,6 +55,7 @@
 - (UIColor *)hexStringToColorWithAlpha: (CGFloat)alpha;
 
 @end
+
 
 
 

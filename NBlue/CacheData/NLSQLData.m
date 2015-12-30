@@ -347,8 +347,12 @@
     [db executeUpdate:delBig];
     [db executeUpdate:delSmall];
     [db close];
-    
-    
+}
+
++(void)canlenderUncomfortable{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *createTable = @"CREATE TABLE IF NOT EXISTS CanlenderTable (time TEXT PRIMARY KEY,)";
 }
 
 @end

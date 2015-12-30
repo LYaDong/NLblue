@@ -15,5 +15,6 @@
 #define User_register @"/register"
 #define User_Login @"/login"
 #define Sport_record @"/record"
+#define User_Consumer @"/consumer"
 
 #endif /* NLApiURL_h */

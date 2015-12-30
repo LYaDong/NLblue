@@ -10,6 +10,12 @@
 
 @interface NLIndividuaFormaCell : UITableViewCell
 @property(nonatomic,strong)UILabel *cellHeadTitleLab;
-@property(nonatomic,strong)UILabel *cellBehindTitleLab;
+@property(nonatomic,strong)UILabel *cellimageUrl;
+@property(nonatomic,strong)UILabel *cellUserName;
+@property(nonatomic,strong)UILabel *cellAge;
+@property(nonatomic,strong)UILabel *cellHeight;
+@property(nonatomic,strong)UILabel *cellwidth;
+@property(nonatomic,strong)UILabel *cellPeriodTime;
+@property(nonatomic,strong)UILabel *cellCycleTime;
 @property(nonatomic,strong)UIImageView *imageArrow;
 @end

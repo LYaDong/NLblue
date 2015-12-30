@@ -39,6 +39,7 @@
 "NLIndividuaFormat_UserWidth" = "体重";
 "NLIndividuaFormat_UserPeriod" = "经期";
 "NLIndividuaFormat_UserCycle" = "周期";
+"NLIndividuaFormat_UpDayDate" = "上次的日期";
 //NLMyEquipmentController
 "NLMyEquipment_MyEquipment" = "我的设备";
 "NLMyEquipment_EquipmentName" = "设备名称";
@@ -123,5 +124,10 @@
 "NLSetProfile_CallRemid" = "来电提醒";
 "NLSetProfile_GOScore" = "去评分";
 "NLSetProfile_SecurityEiet" = "安全退出";
+//NLGenderSelectionViewController
+"NLGenderSelection_Male" = "男";
+"NLGenderSelection_Female" = "女";
+"NLSelection_LastStep" = "上一步";
+"NLGenderSelection_Next" = "下一步";
 
 

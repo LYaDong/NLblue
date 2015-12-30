@@ -21,6 +21,9 @@
 		046F188B1C0D4A0700A21FA6 /* NLColumnImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F188A1C0D4A0700A21FA6 /* NLColumnImage.m */; };
 		046F188E1C0D777A00A21FA6 /* NLStepImageLabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F188D1C0D777A00A21FA6 /* NLStepImageLabView.m */; };
 		047BE7E91C19AB8600821F23 /* NLStepColumnImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 047BE7E81C19AB8600821F23 /* NLStepColumnImage.m */; };
+		047D32D21C327FF70004A5C2 /* NLGenderSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D32D11C327FF70004A5C2 /* NLGenderSelectionViewController.m */; };
+		047D32D51C32802D0004A5C2 /* NLBodyParamentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D32D41C32802D0004A5C2 /* NLBodyParamentViewController.m */; };
+		047D32D81C32805D0004A5C2 /* NLPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D32D71C32805D0004A5C2 /* NLPeriodViewController.m */; };
 		048EE89D1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048EE89C1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.m */; };
 		049751A11BFEEED50044D97B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751A01BFEEED50044D97B /* main.m */; };
 		049751AA1BFEEED50044D97B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049751A81BFEEED50044D97B /* Main.storyboard */; };
@@ -71,6 +74,7 @@
 		04F5BB221C05676700B37CE2 /* NLShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5BB211C05676700B37CE2 /* NLShareController.m */; };
 		04F5BB701C05B51A00B37CE2 /* NLIndividuaFormatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5BB6F1C05B51A00B37CE2 /* NLIndividuaFormatViewController.m */; };
 		04F7F64E1C1BFC9000466EBC /* NLGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7F64D1C1BFC9000466EBC /* NLGestureRecognizer.m */; };
+		04F7F6E71C2E7F2F009020A0 /* NLUserInformat.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7F6E61C2E7F2F009020A0 /* NLUserInformat.m */; };
 		04FA89BC1C117E400064F3AA /* NLDatahub.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B71C117E400064F3AA /* NLDatahub.m */; };
 		04FA89BD1C117E400064F3AA /* NLHTTPRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */; };
 		04FA89BE1C117E400064F3AA /* NLHTTPRequestOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */; };
@@ -127,6 +131,12 @@
 		046F188D1C0D777A00A21FA6 /* NLStepImageLabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLStepImageLabView.m; sourceTree = "<group>"; };
 		047BE7E71C19AB8600821F23 /* NLStepColumnImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLStepColumnImage.h; sourceTree = "<group>"; };
 		047BE7E81C19AB8600821F23 /* NLStepColumnImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLStepColumnImage.m; sourceTree = "<group>"; };
+		047D32D01C327FF70004A5C2 /* NLGenderSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLGenderSelectionViewController.h; sourceTree = "<group>"; };
+		047D32D11C327FF70004A5C2 /* NLGenderSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLGenderSelectionViewController.m; sourceTree = "<group>"; };
+		047D32D31C32802D0004A5C2 /* NLBodyParamentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLBodyParamentViewController.h; sourceTree = "<group>"; };
+		047D32D41C32802D0004A5C2 /* NLBodyParamentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLBodyParamentViewController.m; sourceTree = "<group>"; };
+		047D32D61C32805D0004A5C2 /* NLPeriodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLPeriodViewController.h; sourceTree = "<group>"; };
+		047D32D71C32805D0004A5C2 /* NLPeriodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLPeriodViewController.m; sourceTree = "<group>"; };
 		048EE89B1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthStepNumberCell.h; sourceTree = "<group>"; };
 		048EE89C1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthStepNumberCell.m; sourceTree = "<group>"; };
 		0497519C1BFEEED50044D97B /* NBlue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NBlue.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +236,8 @@
 		04F5BB6F1C05B51A00B37CE2 /* NLIndividuaFormatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLIndividuaFormatViewController.m; sourceTree = "<group>"; };
 		04F7F64C1C1BFC9000466EBC /* NLGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLGestureRecognizer.h; sourceTree = "<group>"; };
 		04F7F64D1C1BFC9000466EBC /* NLGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLGestureRecognizer.m; sourceTree = "<group>"; };
+		04F7F6E51C2E7F2F009020A0 /* NLUserInformat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLUserInformat.h; sourceTree = "<group>"; };
+		04F7F6E61C2E7F2F009020A0 /* NLUserInformat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLUserInformat.m; sourceTree = "<group>"; };
 		04FA89B51C117E400064F3AA /* NLApiURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLApiURL.h; sourceTree = "<group>"; };
 		04FA89B61C117E400064F3AA /* NLDatahub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLDatahub.h; sourceTree = "<group>"; };
 		04FA89B71C117E400064F3AA /* NLDatahub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLDatahub.m; sourceTree = "<group>"; };
@@ -425,6 +437,12 @@
 				049B077C1C1559D4005147B5 /* NLRegisteredViewController.m */,
 				049B077E1C1559ED005147B5 /* NLForgetPasswordViewController.h */,
 				049B077F1C1559ED005147B5 /* NLForgetPasswordViewController.m */,
+				047D32D01C327FF70004A5C2 /* NLGenderSelectionViewController.h */,
+				047D32D11C327FF70004A5C2 /* NLGenderSelectionViewController.m */,
+				047D32D31C32802D0004A5C2 /* NLBodyParamentViewController.h */,
+				047D32D41C32802D0004A5C2 /* NLBodyParamentViewController.m */,
+				047D32D61C32805D0004A5C2 /* NLPeriodViewController.h */,
+				047D32D71C32805D0004A5C2 /* NLPeriodViewController.m */,
 			);
 			path = MangetNumber;
 			sourceTree = "<group>";
@@ -622,6 +640,8 @@
 		04FA89B31C117E060064F3AA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				04F7F6E51C2E7F2F009020A0 /* NLUserInformat.h */,
+				04F7F6E61C2E7F2F009020A0 /* NLUserInformat.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -885,6 +905,7 @@
 				04C9954D1C029F2400D8AE79 /* NLBluetoothDataAnalytical.m in Sources */,
 				04C9955B1C02A55000D8AE79 /* NLHealthMangerViewController.m in Sources */,
 				049B077D1C1559D4005147B5 /* NLRegisteredViewController.m in Sources */,
+				047D32D81C32805D0004A5C2 /* NLPeriodViewController.m in Sources */,
 				046934EF1C02BF5B00150D2A /* MainNavgationControllew.m in Sources */,
 				04015D5F1C1FB72F00454566 /* NLHealtCalenderPeriod.m in Sources */,
 				04C995581C02A51000D8AE79 /* NLSubRootViewController.m in Sources */,
@@ -896,6 +917,8 @@
 				04FA89BC1C117E400064F3AA /* NLDatahub.m in Sources */,
 				04F3CC831C046D1A0066D39D /* NLHealthCalenderView.m in Sources */,
 				04015D631C1FDD1800454566 /* NLCalenderPicker.m in Sources */,
+				047D32D21C327FF70004A5C2 /* NLGenderSelectionViewController.m in Sources */,
+				047D32D51C32802D0004A5C2 /* NLBodyParamentViewController.m in Sources */,
 				04F04F851C073AAC009DC949 /* PlistData.m in Sources */,
 				04F4B7D21C083B3E00DE60DE /* NLLocalUserInfo.m in Sources */,
 				04F5BB1C1C0545CC00B37CE2 /* NLProTableCell.m in Sources */,
@@ -904,6 +927,7 @@
 				046F18451C0D2D3100A21FA6 /* LYDSegmentControl.m in Sources */,
 				046F18461C0D2D3100A21FA6 /* LYDSetSegmentControl.m in Sources */,
 				04C9954A1C029E8300D8AE79 /* NLBluetoothAgreement.m in Sources */,
+				04F7F6E71C2E7F2F009020A0 /* NLUserInformat.m in Sources */,
 				046F188E1C0D777A00A21FA6 /* NLStepImageLabView.m in Sources */,
 				04FF668A1C21578200E276E2 /* NLCalenderUncomforBtn.m in Sources */,
 			);

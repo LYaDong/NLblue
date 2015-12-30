@@ -23,11 +23,11 @@
     _cellHeadTitleLab.textColor = [@"1b1b1b" hexStringToColor];
     [self.contentView addSubview:_cellHeadTitleLab];
     
-    _cellBehindTitleLab = [[UILabel alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:250], 0, [ApplicationStyle control_weight:200], h)];
-    _cellBehindTitleLab.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:26]];
-    _cellBehindTitleLab.textColor = [@"898989" hexStringToColor];
-    _cellBehindTitleLab.textAlignment = NSTextAlignmentRight;
-    [self.contentView addSubview:_cellBehindTitleLab];
+    _cellimageUrl = [[UILabel alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:250], 0, [ApplicationStyle control_weight:200], h)];
+    _cellimageUrl.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:26]];
+    _cellimageUrl.textColor = [@"898989" hexStringToColor];
+    _cellimageUrl.textAlignment = NSTextAlignmentRight;
+    [self.contentView addSubview:_cellimageUrl];
     
     
     

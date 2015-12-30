@@ -26,9 +26,6 @@
     // Do any additional setup after loading the view.
     self.navBarBack.hidden = YES;
     self.returnBtn.hidden = YES;
-    
-    
-    
     [self bulidUI];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -50,11 +47,13 @@
     [_userHeadImage addTarget:self action:@selector(userHeadImageDown) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_userHeadImage];
     
-    CGSize ss = [ApplicationStyle textSize:@"小丑" font:[ApplicationStyle textThrityFont] size:SCREENWIDTH];
+    NSDictionary *dic = [PlistData getIndividuaData];
+    
+    CGSize ss = [ApplicationStyle textSize:[dic objectForKey:@"userName"] font:[ApplicationStyle textThrityFont] size:SCREENWIDTH];
     
     _userNameLab = [[UILabel alloc] initWithFrame:CGRectMake((SCREENWIDTH - ss.width)/2, _userHeadImage.bottomOffset + [ApplicationStyle control_height:26], ss.width, [ApplicationStyle control_height:34])];
     _userNameLab.font = [ApplicationStyle textThrityFont];
-    _userNameLab.text = @"小丑";
+    _userNameLab.text = [dic objectForKey:@"userName"];
 
     _userNameLab.textAlignment = NSTextAlignmentCenter;
     _userNameLab.textColor = [UIColor whiteColor];
@@ -97,12 +96,6 @@
                               NSLocalizedString(@"NLProfileView_Set", nil),
                               NSLocalizedString(@"NLProfileView_AboutNL", nil),];
     NSArray *cellImageArray = @[@"ProFile_M_E_T",@"ProFile_S_H",@"ProFile_F_B",@"ProFile_SET",@"ProFile_A_NL"];
-    
-    
-
-    
-    
-    
     cell.cellImages.image = [UIImage imageNamed:cellImageArray[indexPath.row]];
     cell.cellLabs.text = cellLabArray[indexPath.row];
     

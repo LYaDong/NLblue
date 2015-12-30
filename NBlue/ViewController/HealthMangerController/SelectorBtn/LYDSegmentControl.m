@@ -44,8 +44,16 @@ static const NSInteger BTNTAG = 10000;
         if (i==_setSegment.selectedSegmentIndex) {
             [self setCurrentItem:item];
         }
-        
     }
+    for (NSInteger i=0; i<_setSegment.titleArray.count - 1; i++) {
+        CGFloat height = _seleBtn.viewHeight - (_seleBtn.viewHeight/2/2/1.1);
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(_seleBtn.rightSideOffset, (_seleBtn.viewHeight - height)/2, 1, height)];
+        view.backgroundColor = _setSegment.lineColor;
+        view.hidden = _setSegment.lineHide;
+        [self addSubview:view];
+    }
+    
 }
 -(void)setCurrentItem:(UIButton *)currentItem{
     [_seleBtn setSelected:NO];
@@ -67,7 +75,6 @@ static const NSInteger BTNTAG = 10000;
 }
 -(void)segmentBtnsDown:(UIButton *)btn{
     self.currentItem = btn;
-    
     [self.delegate segmentedIndex:btn.tag - BTNTAG];
 }
 

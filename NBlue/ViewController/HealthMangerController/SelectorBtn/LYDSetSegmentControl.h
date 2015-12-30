@@ -46,5 +46,14 @@
  *控制器里面的文字的大小
  */
 @property(nonatomic,strong)UIFont *titleFont;
+/**
+ *控制线的颜色
+ */
+@property(nonatomic,strong)UIColor *lineColor;
+/**
+ *是否隐藏控制器的线
+ */
+@property(nonatomic,assign)BOOL lineHide;
+
 
 @end

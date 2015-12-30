@@ -19,5 +19,7 @@
 #define NLForgetPasswordViewControllerFicaledNotification @"NLForgetPasswordViewControllerFicaledNotification"
 #define NLGetSoortRecordDataSuccessNotification @"NLGetSoortRecordDataSuccessNotification"
 #define NLGetSoortRecordDataFicaledNotification @"NLGetSoortRecordDataFicaledNotification"
+#define NLUserConsumerDataSuccessNotification @"NLUserConsumerDataSuccessNotification"
+#define NLUserConsumerDataFicaledNotification @"NLUserConsumerDataFicaledNotification"
 
 #endif /* NLNotification_h */

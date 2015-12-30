@@ -170,5 +170,49 @@ static NSString *NLSportApi = @"/sport";//各个接口端
     }];
 }
 
+#pragma mark 上传个人信息
+- (void)upDataUserInformationConsumerid:(NSString *)consumerid
+                                   name:(NSString *)name
+                               nickname:(NSString *)nickname
+                                 gender:(NSString *)gender
+                                    age:(NSString *)age
+                                 height:(NSString *)height
+                                 weight:(NSString *)weight
+                                 header:(NSString *)header
+                               stepGoal:(NSString *)stepGoal{
+    
+    NSDictionary *parmeter = @{@"consumerid":consumerid,
+                          @"name":name,
+                          @"nickname":nickname,
+                          @"gender":gender,
+                          @"age":age,
+                          @"height":height,
+                          @"weight":weight,
+                          @"header":header,
+                          @"stepGoal":stepGoal,};
+    AFHTTPRequestOperationManager *manger = [[AFHTTPRequestOperationManager alloc] init];
+    manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+//    [manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Consumer] parameters:parmeter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserConsumerDataSuccessNotification object:responseObject userInfo:nil];
+//        });
+//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserConsumerDataFicaledNotification object:error userInfo:nil];
+//        });
+//    }];
+    
+    
+    
+    [manger PUT:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Consumer] parameters:parmeter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserConsumerDataSuccessNotification object:responseObject userInfo:nil];
+        });
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserConsumerDataFicaledNotification object:error userInfo:nil];
+        });
 
+    }];
+}
 @end

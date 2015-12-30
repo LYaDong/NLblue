@@ -14,6 +14,7 @@ static const NSInteger TEXT_TAG = 3000;
 #import "NLRegisteredViewController.h"
 #import "NLForgetPasswordViewController.h"
 #import "UMSocial.h"
+#import "NLGenderSelectionViewController.h"
 @interface NLLogInViewController ()<UITextFieldDelegate>
 
 @end
@@ -241,10 +242,16 @@ static const NSInteger TEXT_TAG = 3000;
     NSDictionary *dic = notifi.object;
     [kAPPDELEGATE._loacluserinfo SetUser_ID:[dic objectForKey:@"consumerId"]];
     [kAPPDELEGATE._loacluserinfo SetUserAccessToken:[dic objectForKey:@"authToken"]];
-    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
-    [kAPPDELEGATE tabBarViewControllerType:Controller_Main];
-    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
     
+    if ([[kAPPDELEGATE._loacluserinfo GetIsLogin] isEqualToString:@"1"]) {
+        [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
+        [kAPPDELEGATE tabBarViewControllerType:Controller_Main];
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
+    }else{
+        NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
+        [vc setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 -(void)logInFicaled{
     [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"账号或密码错误"];

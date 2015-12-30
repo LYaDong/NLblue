@@ -83,36 +83,9 @@
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         _dataArr = [NLSQLData obtainSportDataBig];
-       dispatch_async(dispatch_get_main_queue(), ^{
-           
-           
-           NSMutableArray *data = [NSMutableArray array];
-           [data addObjectsFromArray:_dataArr];
-           
-           NSLog(@"%@",data);
-           
-           
-           
-//           NSMutableArray *p = [[NSMutableArray alloc] initWithObjects:@"1",@"5",@"4",@"2",nil];
-//           for (int i = 0; i<[p count]; i++)
-//           {
-//               for (int j=i+1; j<[p count]; j++)
-//               {
-//                   int a = [[p objectAtIndex:i] intValue];
-//                   //                NSLog(@"a = %d",a);
-//                   int b = [[p objectAtIndex:j] intValue];
-//                   //                NSLog(@"b = %d",b);
-//                   //                NSLog(@"------");
-//                   if (a > b)
-//                   {
-//                       [p replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%d",b]];
-//                       [p replaceObjectAtIndex:j withObject:[NSString stringWithFormat:@"%d",a]];
-//                   }
-//                   
-//               }
-//               
-//           }
-           
+       dispatch_async(dispatch_get_main_queue(), ^{           
+           NSMutableArray *arrData = [self sortArrayData:_dataArr];
+           [self imageConvenDataArr:arrData type:NLCalendarType_Day];
        });
     });
     
@@ -284,6 +257,29 @@
     [self.view addSubview:_column];
     
 }
+
+#pragma mark 排序
+
+- (NSMutableArray *)sortArrayData:(NSMutableArray *)arr{
+    for (NSInteger i = 0; i<arr.count; i++) {
+        for (NSInteger j=i+1; j<arr.count; j++) {
+            
+            int aa = [[arr[i] objectForKey:@"timestamp"] intValue];
+            int bb = [[arr[j] objectForKey:@"timestamp"] intValue];
+            NSArray *one = arr[i];
+            NSArray *tow = arr[j];
+            
+            if (aa<bb) {
+                [arr replaceObjectAtIndex:i withObject:tow];
+                [arr replaceObjectAtIndex:j withObject:one];
+                
+            }
+        }
+    }
+    
+    return arr;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
