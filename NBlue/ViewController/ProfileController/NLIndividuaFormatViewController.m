@@ -512,12 +512,6 @@ static const NSInteger BTNPHOTO = 4000;
     }];
 }
 -(void)returnBtnDown{
-    
-
-    
-
-    
-    
     [PlistData individuaData:_userCountDataDic];
     [self.navigationController popViewControllerAnimated:YES];
 }

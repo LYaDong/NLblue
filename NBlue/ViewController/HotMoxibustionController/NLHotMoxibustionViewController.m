@@ -18,7 +18,9 @@ static const NSInteger TIMELINE = 90;
 
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
-@interface NLHotMoxibustionViewController ()<UIScrollViewDelegate,NLHalfViewDelgate>
+#import "NLConnectBloothViewController.h"
+
+@interface NLHotMoxibustionViewController ()<UIScrollViewDelegate,NLHalfViewDelgate,UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)NLHalfView *temperatureCilcle;
 @property(nonatomic,strong)NSArray *peripheralArray;
 @property(nonatomic,strong)NSMutableArray *sportDataArr;
@@ -32,6 +34,10 @@ static const NSInteger TIMELINE = 90;
 @property(nonatomic,assign)BOOL isQuert;
 @property(nonatomic,strong)UIView *blueXXX;
 @property(nonatomic,strong)CTCallCenter *callCenter;
+
+
+
+
 @end
 
 @implementation NLHotMoxibustionViewController
@@ -115,12 +121,20 @@ static const NSInteger TIMELINE = 90;
         NSLog(@"发送命令==  %@",data);
     }
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.returnBtn.hidden = YES;
     self.titles.text = @"热灸";
+    
+    
+    [self connectBlueTooth];
+    
+    
+//    =================================================================================================================================
+    
 
     _temperatureNUM  = 370;         //默认温度 35°
     _blueTime = 30;                 //默认时间 30分钟
@@ -129,7 +143,7 @@ static const NSInteger TIMELINE = 90;
     [self bulidUI];
     
 
-    
+
     
     //电话监听
 //    _callCenter = [[CTCallCenter alloc] init];
@@ -203,6 +217,14 @@ static const NSInteger TIMELINE = 90;
     [super viewWillDisappear:animated];
     [self delNotification];
 }
+
+#pragma mark 连接蓝牙
+-(void)connectBlueTooth{
+    NLConnectBloothViewController *vc = [[NLConnectBloothViewController alloc] init];
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark 基础UI
 -(void)bulidUI{
     NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init] ;
@@ -355,7 +377,7 @@ static const NSInteger TIMELINE = 90;
     [[NLDatahub sharedInstance] userStepNumberToken:[kAPPDELEGATE._loacluserinfo GetAccessToken]
                                          consumerId:[kAPPDELEGATE._loacluserinfo GetUser_ID]
                                           startDate:@"2015-6-01"
-                                            endDate:@"2015-10-30"];
+                                            endDate:@"2016-10-30"];
     
     //此为真实
 //    [[NLDatahub sharedInstance] userStepNumberToken:[kAPPDELEGATE._loacluserinfo GetAccessToken]
@@ -411,7 +433,6 @@ static const NSInteger TIMELINE = 90;
     if (_peripheralArray.count>0) {
         [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
     }
-    
 }
 -(void)isTemperatureOff:(NSString *)data{
     if (data.length<=4) {
@@ -572,6 +593,9 @@ static const NSInteger TIMELINE = 90;
 //    for (int i=0; i<[[dic objectForKey:@"records"] count]; i++) {
 //        NSLog(@"%@",[[[dic objectForKey:@"records"] objectAtIndex:i] objectForKey:@"sportDate"]);
 //    }
+    
+    
+    
     
     
 

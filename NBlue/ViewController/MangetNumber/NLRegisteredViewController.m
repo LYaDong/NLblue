@@ -185,7 +185,7 @@ static const NSInteger TEXTFILED_TAG = 1000;
 -(void)addNotification{
     NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
     [notifi addObserver:self selector:@selector(logInSuccess:) name:NLRegisteredViewControllewSuccessNotification object:nil];
-    [notifi addObserver:self selector:@selector(logInFicaled) name:NLRegisteredViewControllewFicaledNotification object:nil];
+    [notifi addObserver:self selector:@selector(logInFicaled:) name:NLRegisteredViewControllewFicaledNotification object:nil];
 }
 -(void)logInSuccess:(NSNotification *)notifi{
     NSDictionary *dic = notifi.object;
@@ -195,8 +195,8 @@ static const NSInteger TEXTFILED_TAG = 1000;
     [kAPPDELEGATE tabBarViewControllerType:Controller_Main];
     
 }
--(void)logInFicaled{
-    
+-(void)logInFicaled:(NSNotification *)notifi{
+    NSLog(@"%@",notifi);
 }
 -(void)delNotification{
     [[NSNotificationCenter defaultCenter] removeObserver:self];

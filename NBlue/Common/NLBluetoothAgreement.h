@@ -10,12 +10,12 @@
 typedef void  (^GetBlueData) (NSString *connect);
 typedef void (^Peripheral) (NSArray *perheral);
 typedef void (^ConnectionSuccess) (NSString *connectionSuccess);
-
+typedef void (^EquipmentArray)(NSArray *equipment);
 @interface NLBluetoothAgreement : NSObject
 @property(nonatomic,strong)GetBlueData getConnectData;
 @property(nonatomic,strong)Peripheral perheral;
 @property(nonatomic,strong)ConnectionSuccess getConnectionSuccess;
-
+@property(nonatomic,strong)EquipmentArray getEquiment;
 +(NLBluetoothAgreement *)shareInstance;
 -(void)bluetoothAllocInit;
 

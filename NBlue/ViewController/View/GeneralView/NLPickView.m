@@ -230,6 +230,8 @@ static const NSInteger DATEPICKERTAGBTN = 4000;                             //æ—
         }
         case SelectionBtn + 1:
         {
+            NSLog(@"%@",_data);
+            
             [self.delegate pickerCount:_data seleType:pickerBtn.tag - SelectionBtn pickerType:_picktype];
             break;
         }

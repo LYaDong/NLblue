@@ -88,18 +88,28 @@ static const NSInteger LIFEHABITTAG = 2000;
         [btn addTarget:self action:@selector(btnDown:) forControlEvents:UIControlEventTouchUpInside];
         [backView addSubview:btn];
     }
+    
+//    贵州暖蓝科技有限公司
 }
 #pragma mark 按钮事件
 -(void)btnDown:(UIButton *)btn{
     if (btn.tag == BTNTAG) {
         
-    }else{
-//        for (NSInteger i = _addDataArr.count - 1; i>=0; i--) {
-//            if ([_addDataArr[i] isEqualToString:@"0"]) {
-//                [_addDataArr removeObjectAtIndex:i];
-//            }
-//        }
+        NSArray *imageArr = @[@"NLHClen_SHXG_SG_X",
+                              @"NLHClen_SHXG_YD_X",
+                              @"NLHClen_SHXG_DB_X",];
+        for (NSInteger i=0; i<imageArr.count; i++) {
+            UIButton *liftHabit = (UIButton *)[self viewWithTag:LIFEHABITTAG + i];
+            [liftHabit setTitleColor:[@"dedede" hexStringToColor] forState:UIControlStateNormal];
+            liftHabit.backgroundColor = [ApplicationStyle subjectWithColor];
+            [liftHabit setImage:[UIImage imageNamed:imageArr[i]] forState:UIControlStateNormal];
+            if (liftHabit.selected == YES) {
+               liftHabit.selected = !liftHabit.selected;
+            }
+            
+        }
         
+    }else{
         [self.delegate lifeHabitCount:_addDataArr];
     }
 }
@@ -113,9 +123,9 @@ static const NSInteger LIFEHABITTAG = 2000;
     switch (btn.tag - LIFEHABITTAG) {
         case LifeHabit_SG:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             
             if (btn.selected) {
@@ -134,9 +144,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case LifeHabit_YD:  {
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             
             if (btn.selected) {
@@ -154,9 +164,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case LifeHabit_PB:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_SHXG_DB"] forState:UIControlStateNormal];

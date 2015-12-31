@@ -9,6 +9,7 @@
 
 static const NSInteger MANGERTAG = 2000;
 static const NSInteger TEXT_TAG = 3000;
+static const NSInteger THIRDBTNTAG = 4000;
 
 #import "NLLogInViewController.h"
 #import "NLRegisteredViewController.h"
@@ -125,6 +126,7 @@ static const NSInteger TEXT_TAG = 3000;
                                     labThirp.bottomOffset + [ApplicationStyle control_height:60], [ApplicationStyle control_weight:80],
                                     [ApplicationStyle control_weight:80]);
         thirdBtn.backgroundColor = [UIColor redColor];
+        thirdBtn.tag = THIRDBTNTAG + i;
         [thirdBtn addTarget:self action:@selector(thirdBtnDown:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:thirdBtn];
     }
@@ -180,55 +182,72 @@ static const NSInteger TEXT_TAG = 3000;
 }
 
 -(void)thirdBtnDown:(UIButton *)btn{
-    //微博
     
-//    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
-//    
-//    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-//        
-//        //          获取微博用户名、uid、token等
-//        
-//        if (response.responseCode == UMSResponseCodeSuccess) {
-//            
-//            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
-//            
-//            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-//            
-//        }
-//    });
-    
-    
-    //  qq
-//    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
-//    
-//    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-//        
-//        //          获取微博用户名、uid、token等
-//        
-//        if (response.responseCode == UMSResponseCodeSuccess) {
-//            
-//            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
-//            
-//            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-//            
-//        }});
-    
-    
-////    WeChat
-//    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
-//    
-//    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-//        
-//        if (response.responseCode == UMSResponseCodeSuccess) {
-//            
-//            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
-//            
-//            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-//            
-//        }
-//        
-//    });
-    
+    switch (btn.tag - THIRDBTNTAG) {
+        case 0:
+        {
+            //  qq
+            UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
+            
+            snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+                
+                //          获取微博用户名、uid、token等
+                
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    
+                    UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
+                    
+                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+                    
+                }});
+            
+            break;
+        }
+        case 1:
+        {
+            //    WeChat
+            UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
+            
+            snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+                
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    
+                    UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
+                    
+                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+                    
+                }
+                
+            });
+            
+            break;
+        }
+        case 2:
+        {
+            
+            //微博
+            
+            UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
+            
+            snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+                
+                //          获取微博用户名、uid、token等
+                
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    
+                    UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
+                    
+                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+                    
+                }
+            });
+            
+            break;
+        }
+        default:
+            break;
+    }
+  
 }
 
 #pragma mark 通知

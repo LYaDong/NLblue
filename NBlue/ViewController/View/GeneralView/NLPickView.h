@@ -19,6 +19,12 @@ typedef NS_ENUM(int64_t,DatePickerType) {//时间格式
 typedef NS_ENUM(int64_t,UseDatePicker) {//谁用到这个时间控件
     UseDatePicker_Cycle = 0,                                        //周期
     UseDatePicker_Period = 1,                                       //经期
+    UseDatePicker_UpNext = 2,                                       //上一次来的时间
+};
+
+typedef NS_ENUM(int64_t,SeleType) {
+    SeleType_Cancel = 0,                            //取消
+    SeleType_OK     = 1,                            //确定
 };
 @protocol NLPickViewDelegate <NSObject>
 

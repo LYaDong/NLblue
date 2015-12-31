@@ -106,7 +106,28 @@ static const NSInteger LIFEHABITTAG = 2000;
 }
 -(void)btnDown:(UIButton *)btn{
     if (btn.tag == BTNTAG) {
-        
+        NSArray *imageArr = @[@"NLHClen_BSF_TT_X",
+                              @"NLHClen_BSF_BD_X",
+                              @"NLHClen_BSF_LY_X",
+                              @"NLHClen_BSF_BM_X",
+                              @"NLHClen_BSF_XFT_X",
+                              @"NLHClen_BSF_MSY_X",
+                              @"NLHClen_BSF_YS_X",
+                              @"NLHClen_BSF_HSST_X",
+                              @"NLHClen_BSF_RFZT_X",
+                              @"NLHClen_BSF_RFCT_X",
+                              @"NLHClen_BSF_BDYC_X",
+                              @"NLHClen_BSF_QT_X"];
+        for (NSInteger i=0; i<imageArr.count; i++) {
+            UIButton *liftHabit = (UIButton *)[self viewWithTag:LIFEHABITTAG + i];
+            [liftHabit setTitleColor:[@"dedede" hexStringToColor] forState:UIControlStateNormal];
+            liftHabit.backgroundColor = [ApplicationStyle subjectWithColor];
+            [liftHabit setImage:[UIImage imageNamed:imageArr[i]] forState:UIControlStateNormal];
+            if (liftHabit.selected == YES) {
+                liftHabit.selected = !liftHabit.selected;
+            }
+            
+        }
     }else{
         [self.delegate uncomfortableArr:_addDataArr];
     }   

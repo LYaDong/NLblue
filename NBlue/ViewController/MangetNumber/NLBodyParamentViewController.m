@@ -6,12 +6,15 @@
 //  Copyright © 2015年 LYD. All rights reserved.
 //
 static const NSInteger TEXTFILEDTAG = 1000;
+static const NSInteger BTNPICKERTAG = 2000;
 #import "NLBodyParamentViewController.h"
 #import "LYDSegmentControl.h"
 #import "LYDSetSegmentControl.h"
 #import "NLPeriodViewController.h"
-@interface NLBodyParamentViewController ()<LYDSetSegmentDelegate>
-
+#import "NLPickView.h"
+@interface NLBodyParamentViewController ()<LYDSetSegmentDelegate,NLPickViewDelegate>
+@property(nonatomic,strong)NLPickView *pickerView;
+@property(nonatomic,strong)UIButton *blackView;
 @end
 
 @implementation NLBodyParamentViewController
@@ -55,13 +58,23 @@ static const NSInteger TEXTFILEDTAG = 1000;
     
     
     for (NSInteger i=0; i<titleArr.count; i++) {
-        UITextField *textFiled = [[UITextField alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:170], [ApplicationStyle control_height:400] + i*[ApplicationStyle control_height:100], SCREENWIDTH - [ApplicationStyle control_weight:170 + 100], [ApplicationStyle control_height:80])];
+        UITextField *textFiled = [[UITextField alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:175], [ApplicationStyle control_height:403] + i*[ApplicationStyle control_height:100], SCREENWIDTH - [ApplicationStyle control_weight:170 + 120], [ApplicationStyle control_height:80])];
+        textFiled.textAlignment = NSTextAlignmentRight;
         textFiled.tag = TEXTFILEDTAG + i;
         [self.view addSubview:textFiled];
         
-        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(textFiled.rightSideOffset, [ApplicationStyle control_height:430]+ i * [ApplicationStyle control_height:100], [ApplicationStyle control_weight:16], [ApplicationStyle control_height:24])];
+        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(textFiled.rightSideOffset + [ApplicationStyle control_weight:20], [ApplicationStyle control_height:430]+ i * [ApplicationStyle control_height:100], [ApplicationStyle control_weight:16], [ApplicationStyle control_height:24])];
         image.image = [UIImage imageNamed:@"NL_BLACK_JT"];
         [self.view addSubview:image];
+    }
+    
+    
+    for (NSInteger i=0; i<titleArr.count; i++) {
+        UIButton *btnPicker = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        btnPicker.frame = CGRectMake([ApplicationStyle control_weight:170], [ApplicationStyle control_height:400] + i*[ApplicationStyle control_height:100], SCREENWIDTH - [ApplicationStyle control_weight:170 + 100], [ApplicationStyle control_height:80]);
+        btnPicker.tag = BTNPICKERTAG + i;
+        [btnPicker addTarget:self action:@selector(btnPickerDown:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btnPicker];
     }
     
     
@@ -89,6 +102,15 @@ static const NSInteger TEXTFILEDTAG = 1000;
     sele.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:sele];
     
+    
+    
+    _blackView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+    _blackView.backgroundColor = [UIColor blackColor];
+    _blackView.alpha = 0.5;
+    _blackView.hidden = YES;
+    [_blackView addTarget:self action:@selector(blackViewDown) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_blackView];
+    
 }
 #pragma mark 系统Delegate
 #pragma mark 自己的Delegate
@@ -101,8 +123,99 @@ static const NSInteger TEXTFILEDTAG = 1000;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
-#pragma mark 自己的按钮事件
+-(void)pickerCount:(NSString *)count seleType:(NSInteger)type pickerType:(NSInteger)pickType{
+    
 
+    [self pickerViewFramkeHide];
+    
+    switch (type) {
+        case SeleType_Cancel:
+        {
+            _blackView.hidden = YES;
+            break;
+        }
+        case SeleType_OK:
+        {
+            _blackView.hidden = YES;
+            switch (pickType) {
+                case PickerType_Age:
+                {
+                    UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + PickerType_Age];
+                    text.text = count;
+                    break;
+                }
+                case PickerType_Height:
+                {
+                    UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + PickerType_Height];
+                    text.text = count;
+                    break;
+                }
+                case PickerType_Width:
+                {
+                    UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + PickerType_Width];
+                    text.text = count;
+                    break;
+                }
+                default:
+                    break;
+            }
+            
+            break;
+        }
+        default:
+            break;
+    }
+}
+- (void)datePicker:(NSDate *)date cancel:(NSInteger)cancelType useDatePicker:(NSInteger)useDatePicker{
+    
+}
+#pragma mark 自己的按钮事件
+-(void)btnPickerDown:(UIButton *)btn{
+    
+    _blackView.hidden = NO;
+    
+    
+    switch (btn.tag - BTNPICKERTAG) {
+        case 0:
+        {
+            [self pickerView:PickerType_Age];
+            break;
+        }
+        case 1:
+        {
+            [self pickerView:PickerType_Height];
+            break;
+        }
+        case 2:
+        {
+            [self pickerView:PickerType_Width];
+            break;
+        }
+        default:
+            break;
+    }
+}
+-(void)blackViewDown{
+    
+}
+
+
+#pragma mark pickerView出现
+-(void)pickerView:(NSInteger)index{
+    _pickerView = [[NLPickView alloc] initWithPickTye:index];
+    _pickerView.frame = CGRectMake(0, SCREENHEIGHT + [ApplicationStyle control_height:560], SCREENWIDTH, [ApplicationStyle control_height:560]);
+    _pickerView.delegate = self;
+    [UIView animateWithDuration:0.5 animations:^{
+        _pickerView.frame = CGRectMake(0, SCREENHEIGHT-[ApplicationStyle control_height:560], SCREENWIDTH, [ApplicationStyle control_height:560]);
+    }];
+    [self.view addSubview:_pickerView];
+}
+
+- (void)pickerViewFramkeHide{
+    [UIView animateWithDuration:0.5 animations:^{
+        _pickerView.frame = CGRectMake(0, SCREENHEIGHT + [ApplicationStyle control_height:560], SCREENWIDTH, [ApplicationStyle control_height:560]);
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

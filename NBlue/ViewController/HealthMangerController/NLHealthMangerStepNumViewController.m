@@ -57,30 +57,7 @@
     LYDSegmentControl *sele = [[LYDSegmentControl alloc] initWithSetSegment:segement frame:frame];
     sele.delegate = self;
     [self.view addSubview:sele];
-    
-    
-//    NSArray *arrs = [NLSQLData sportRecordGetData];
-//    NSMutableArray *ddd = [NSMutableArray array];
-//    for (NSInteger i=0; i<arrs.count; i++) {
-//        [ddd addObject:[arrs[i] objectForKey:@"stepsAmount"]];
-//    }
-//    [NLSQLData sportDayTaskData:@"2015-12-8"];
-    
-    
-    
 
-    
-    
-    
-    
-
-    
-//    for (NSInteger i=0; i<10; i++) {
-//        NSInteger num = arc4random()%150;
-//        [_dataArr addObject:[NSNumber numberWithInteger:num]];
-//    }
-    
-    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         _dataArr = [NLSQLData obtainSportDataBig];
        dispatch_async(dispatch_get_main_queue(), ^{           
@@ -88,16 +65,7 @@
            [self imageConvenDataArr:arrData type:NLCalendarType_Day];
        });
     });
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     UIView *viewTimeBack = [[UIView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle control_height:480] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], SCREENWIDTH, [ApplicationStyle control_height:60])];
     viewTimeBack.backgroundColor = [ApplicationStyle subjectWithColor];
     viewTimeBack.alpha = 0.1;

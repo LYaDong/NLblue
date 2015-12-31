@@ -82,6 +82,7 @@
     segement.backGroupColor = [ApplicationStyle subjectShowAllPinkColor];
     segement.titleColor = [UIColor  whiteColor];
     segement.titleFont = [ApplicationStyle textSuperSmallFont];
+    segement.lineHide = YES;
     
     LYDSegmentControl *sele = [[LYDSegmentControl alloc] initWithSetSegment:segement frame:frame];
     sele.delegate = self;
@@ -109,13 +110,7 @@
 
     NLHealthStepNumber *stepView = [[NLHealthStepNumber alloc] initWithFrame:CGRectMake(NLHealthManger_StepNumber * SCREENWIDTH, 0, SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle statusBarSize] - [ApplicationStyle navigationBarSize] - [ApplicationStyle tabBarSize])];
     stepView.backgroundColor = [UIColor clearColor];
-    [_mainScrollew addSubview:stepView];
-    
-
-
-    
-    
-    
+    [_mainScrollew addSubview:stepView];    
 }
 #pragma mark 系统Delegate
 #pragma mark 自己的Delegate
@@ -141,9 +136,6 @@
         default:
             break;
     }
-    
-
-    
 }
 
 -(void)loadStepData{

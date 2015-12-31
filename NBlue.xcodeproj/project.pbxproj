@@ -12,6 +12,8 @@
 		0403F9731C2CD3B90000A9C3 /* NLSetProfoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0403F9721C2CD3B90000A9C3 /* NLSetProfoleViewController.m */; };
 		0403F9761C2CD6380000A9C3 /* NLSetProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0403F9751C2CD6380000A9C3 /* NLSetProfileCell.m */; };
 		0403F9781C2CE3420000A9C3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0403F9771C2CE3420000A9C3 /* CoreTelephony.framework */; };
+		0418DB951C351598000915E6 /* NLConnectBloothViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418DB941C351598000915E6 /* NLConnectBloothViewController.m */; };
+		0418DB981C351904000915E6 /* NLConnectBloothCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418DB971C351904000915E6 /* NLConnectBloothCell.m */; };
 		044255361C1EABAE003F8503 /* NLHealtCalenderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044255351C1EABAE003F8503 /* NLHealtCalenderCell.m */; };
 		0458E5D91C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458E5D81C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m */; };
 		0458E5DC1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458E5DB1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m */; };
@@ -113,6 +115,10 @@
 		0403F9741C2CD6380000A9C3 /* NLSetProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLSetProfileCell.h; sourceTree = "<group>"; };
 		0403F9751C2CD6380000A9C3 /* NLSetProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLSetProfileCell.m; sourceTree = "<group>"; };
 		0403F9771C2CE3420000A9C3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		0418DB931C351598000915E6 /* NLConnectBloothViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLConnectBloothViewController.h; sourceTree = "<group>"; };
+		0418DB941C351598000915E6 /* NLConnectBloothViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLConnectBloothViewController.m; sourceTree = "<group>"; };
+		0418DB961C351904000915E6 /* NLConnectBloothCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NLConnectBloothCell.h; path = NBlue/ViewController/HotMoxibustionController/NLConnectBloothCell.h; sourceTree = SOURCE_ROOT; };
+		0418DB971C351904000915E6 /* NLConnectBloothCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NLConnectBloothCell.m; path = NBlue/ViewController/HotMoxibustionController/NLConnectBloothCell.m; sourceTree = SOURCE_ROOT; };
 		044255341C1EABAE003F8503 /* NLHealtCalenderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealtCalenderCell.h; sourceTree = "<group>"; };
 		044255351C1EABAE003F8503 /* NLHealtCalenderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealtCalenderCell.m; sourceTree = "<group>"; };
 		0458E5D71C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthMangerStepNumViewController.h; sourceTree = "<group>"; };
@@ -498,6 +504,8 @@
 			children = (
 				04C9955C1C02A56B00D8AE79 /* NLHotMoxibustionViewController.h */,
 				04C9955D1C02A56B00D8AE79 /* NLHotMoxibustionViewController.m */,
+				0418DB931C351598000915E6 /* NLConnectBloothViewController.h */,
+				0418DB941C351598000915E6 /* NLConnectBloothViewController.m */,
 			);
 			path = HotMoxibustionController;
 			sourceTree = "<group>";
@@ -585,6 +593,8 @@
 			children = (
 				04FA89BF1C117F780064F3AA /* NLHalfView.h */,
 				04FA89C01C117F780064F3AA /* NLHalfView.m */,
+				0418DB961C351904000915E6 /* NLConnectBloothCell.h */,
+				0418DB971C351904000915E6 /* NLConnectBloothCell.m */,
 			);
 			path = HotMoxibustionView;
 			sourceTree = "<group>";
@@ -919,6 +929,7 @@
 				04015D631C1FDD1800454566 /* NLCalenderPicker.m in Sources */,
 				047D32D21C327FF70004A5C2 /* NLGenderSelectionViewController.m in Sources */,
 				047D32D51C32802D0004A5C2 /* NLBodyParamentViewController.m in Sources */,
+				0418DB951C351598000915E6 /* NLConnectBloothViewController.m in Sources */,
 				04F04F851C073AAC009DC949 /* PlistData.m in Sources */,
 				04F4B7D21C083B3E00DE60DE /* NLLocalUserInfo.m in Sources */,
 				04F5BB1C1C0545CC00B37CE2 /* NLProTableCell.m in Sources */,
@@ -927,6 +938,7 @@
 				046F18451C0D2D3100A21FA6 /* LYDSegmentControl.m in Sources */,
 				046F18461C0D2D3100A21FA6 /* LYDSetSegmentControl.m in Sources */,
 				04C9954A1C029E8300D8AE79 /* NLBluetoothAgreement.m in Sources */,
+				0418DB981C351904000915E6 /* NLConnectBloothCell.m in Sources */,
 				04F7F6E71C2E7F2F009020A0 /* NLUserInformat.m in Sources */,
 				046F188E1C0D777A00A21FA6 /* NLStepImageLabView.m in Sources */,
 				04FF668A1C21578200E276E2 /* NLCalenderUncomforBtn.m in Sources */,
@@ -1091,8 +1103,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2b738f47-fa1a-4200-8d50-e624b2aa1dd2";
-				"PROVISIONING_PROFILE[sdk=*]" = "2b738f47-fa1a-4200-8d50-e624b2aa1dd2";
+				PROVISIONING_PROFILE = "5a0c28ca-4c55-42a3-a971-faca6851cfe7";
+				"PROVISIONING_PROFILE[sdk=*]" = "5a0c28ca-4c55-42a3-a971-faca6851cfe7";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};
@@ -1112,8 +1124,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "741f79ac-a1a9-4f0a-84a3-28412715a1bb";
-				"PROVISIONING_PROFILE[sdk=*]" = "741f79ac-a1a9-4f0a-84a3-28412715a1bb";
+				PROVISIONING_PROFILE = "c33a9e98-3620-4035-ae55-785c1a80d6d6";
+				"PROVISIONING_PROFILE[sdk=*]" = "c33a9e98-3620-4035-ae55-785c1a80d6d6";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};

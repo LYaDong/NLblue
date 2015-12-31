@@ -71,6 +71,14 @@
 "NLHealthManger_StepDistance" = "当日距离";
 "NLHealthManger_StepEnergy" = "当日消耗能量";
 "NLHealthManger_StepActovity" = "当日活动时间";
+//NLHealthMangerSleep
+"NLHealthMangerSleep_FallAsleepTime" = "入睡时间";
+"NLHealthMangerSleep_WakeupTime" = "醒来时间时间";
+"NLHealthMangerSleep_SleepTime" = "睡眠时间";
+"NLHealthMangerSleep_ShallowSleepTime" = "浅睡眠时间";
+"NLHealthMangerSleep_DeepSleepTime" = "深睡眠时间";
+"NLHealthMangerSleep_SleepQualityTime" = "睡眠质量";
+
 //NLLogInViewController
 "NLLogIn_TextNumber" = "账号";
 "NLLogIn_TextPassword" = "密码";

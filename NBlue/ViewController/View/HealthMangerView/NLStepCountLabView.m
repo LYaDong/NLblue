@@ -36,32 +36,32 @@
 //    dataLab.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:48]];
     [self addSubview:dataLab];
     
-    switch (type) {
-        case LabTextType_DayStepNum:
-        {
-            
-            [self heartReatlab:dataLab rang:NSMakeRange(0, dataLab.text.length) rangTo:NSMakeRange(0, 0)];
-            
-            break;
-        }
-        case LabTextType_DayDistance:
-        {
-            [self heartReatlab:dataLab rang:NSMakeRange(0, dataLab.text.length - 2) rangTo:NSMakeRange(0, 0)];
-            break;
-        }
-        case LabTextType_DayEnergy:
-        {
-            [self heartReatlab:dataLab rang:NSMakeRange(0, dataLab.text.length - 2) rangTo:NSMakeRange(0, 0)];
-            break;
-        }
-        case LabTextType_DayActovity:
-        {
-            [self heartReatlab:dataLab rang:NSMakeRange(0, 2) rangTo:NSMakeRange(4, 2)];
-            break;
-        }
-        default:
-            break;
-    }
+//    switch (type) {
+//        case LabTextType_DayStepNum:
+//        {
+//            
+//            [self heartReatlab:dataLab rang:NSMakeRange(0, dataLab.text.length) rangTo:NSMakeRange(0, 0)];
+//            
+//            break;
+//        }
+//        case LabTextType_DayDistance:
+//        {
+//            [self heartReatlab:dataLab rang:NSMakeRange(0, dataLab.text.length - 2) rangTo:NSMakeRange(0, 0)];
+//            break;
+//        }
+//        case LabTextType_DayEnergy:
+//        {
+//            [self heartReatlab:dataLab rang:NSMakeRange(0, dataLab.text.length - 2) rangTo:NSMakeRange(0, 0)];
+//            break;
+//        }
+//        case LabTextType_DayActovity:
+//        {
+//            [self heartReatlab:dataLab rang:NSMakeRange(0, 2) rangTo:NSMakeRange(4, 2)];
+//            break;
+//        }
+//        default:
+//            break;
+//    }
     
 }
 
