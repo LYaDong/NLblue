@@ -158,6 +158,20 @@
     NSRange daysInOnMonth = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
     return daysInOnMonth.length;
 }
+/**
+ *查看当前日期在周几
+ */
++(NSInteger)currentDayWeek:(NSDate *)date{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |NSCalendarUnitDay | NSCalendarUnitWeekday |
+    NSCalendarUnitHour |NSCalendarUnitMinute | NSCalendarUnitSecond;
+
+    comps = [calendar components:unitFlags fromDate:date];
+    return [comps weekday];
+}
+
+
 
 +(NSString *)datePickerTransformationTextDate:(NSDate *)date{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

@@ -35,10 +35,6 @@ static const NSInteger ARROWTAG = 1500;
     if (self) {
         _indexDay = 0;
         _radinIndex = 0;
-        
-        
-
-        
         [self buildUI:_indexDay];
     }
     return self;

@@ -84,15 +84,13 @@ static NLColumnImage *cloumnImage = nil;
     UIView *timeLabBack = [[UIView alloc] initWithFrame:CGRectMake(((weightSize + SCREENWIDTH) - (weightSize + _convenImageWeight))/2, height - [ApplicationStyle control_height:60], weightSize + _convenImageWeight, [ApplicationStyle control_height:60])];
     [_mainScrollew addSubview:timeLabBack];
     
-    
-//    NSLog(@"%@",arr);
-//    
+  
     NSMutableArray *dataSport = [NSMutableArray array];
     for (NSInteger i=0; i<arr.count; i++) {
         [dataSport addObject:[arr[i] objectForKey:@"stepsAmount"]];
     }
     
-    NSInteger num = 0;
+    CGFloat num = 0.1;
     for (NSInteger i=0; i<dataSport.count; i++) {
         if ([[NSString stringWithFormat:@"%@",dataSport[i]] intValue] > num) {
             num = [[NSString stringWithFormat:@"%@",dataSport[i]] intValue];
@@ -104,9 +102,9 @@ static NLColumnImage *cloumnImage = nil;
         [ht addObject:[NSNumber numberWithInteger:index * (height * 0.8)/num]];
     }
     
-
-    
     for (NSInteger i =0 ; i<arr.count; i++) {
+        
+        
         NSInteger num = [[NSString stringWithFormat:@"%@",ht[i]] integerValue];
         
         UIButton *columnarBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -149,42 +147,42 @@ static NLColumnImage *cloumnImage = nil;
 
 
 #pragma mark 系统Delegate
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-
-    for (NSInteger i=0; i<_dataArr.count; i++) {
-        UILabel *timeLab = (UILabel *)[self viewWithTag:LABTIMETAG + i];
-        timeLab.textColor = [ApplicationStyle subjectWithColor];
-        
-        UIButton *columBtn = (UIButton *)[self viewWithTag:BTNTAB + i];
-        columBtn.backgroundColor = _withColor;
-    }
-    NSInteger change = [[NSString stringWithFormat:@"%0.0f",scrollView.contentOffset.x/(_convenImageWeight + [ApplicationStyle control_weight:10])] integerValue];
-    UILabel *timeLab = (UILabel *)[self viewWithTag:LABTIMETAG + ((_dataArr.count - 1) - change)];
-    
-    UIButton *columBtn = (UIButton *)[self viewWithTag:BTNTAB + ((_dataArr.count - 1) - change)];
-    
-    
-    CGFloat weight = _dataArr.count - 1;//总个数
-    CGFloat scrollX = scrollView.contentOffset.x/(_convenImageWeight + [ApplicationStyle control_weight:10]);//每个平分长度
-    CGFloat startPoint = (NSInteger)(weight - scrollX) + 0.5;//起点位置
-    CGFloat endPoint = weight - scrollX;//结束点位置
-    
-    if (startPoint<=0) {
-        
-        timeLab.textColor = [UIColor redColor];
-        columBtn.backgroundColor = [@"ffd890" hexStringToColor];
-    }else{
-        [UIView animateWithDuration:0.5 animations:^{
-            if (endPoint>=startPoint) {
-                timeLab.textColor = [UIColor redColor];
-                columBtn.backgroundColor = [@"ffd890" hexStringToColor];
-            }else{
-                timeLab.textColor = [UIColor redColor];
-                columBtn.backgroundColor = [@"ffd890" hexStringToColor];
-            }
-        }];
-    }
-}
+//-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//
+//    for (NSInteger i=0; i<_dataArr.count; i++) {
+//        UILabel *timeLab = (UILabel *)[self viewWithTag:LABTIMETAG + i];
+//        timeLab.textColor = [ApplicationStyle subjectWithColor];
+//        
+//        UIButton *columBtn = (UIButton *)[self viewWithTag:BTNTAB + i];
+//        columBtn.backgroundColor = _withColor;
+//    }
+//    NSInteger change = [[NSString stringWithFormat:@"%0.0f",scrollView.contentOffset.x/(_convenImageWeight + [ApplicationStyle control_weight:10])] integerValue];
+//    UILabel *timeLab = (UILabel *)[self viewWithTag:LABTIMETAG + ((_dataArr.count - 1) - change)];
+//    
+//    UIButton *columBtn = (UIButton *)[self viewWithTag:BTNTAB + ((_dataArr.count - 1) - change)];
+//    
+//    
+//    CGFloat weight = _dataArr.count - 1;//总个数
+//    CGFloat scrollX = scrollView.contentOffset.x/(_convenImageWeight + [ApplicationStyle control_weight:10]);//每个平分长度
+//    CGFloat startPoint = (NSInteger)(weight - scrollX) + 0.5;//起点位置
+//    CGFloat endPoint = weight - scrollX;//结束点位置
+//    
+//    if (startPoint<=0) {
+//        
+//        timeLab.textColor = [UIColor redColor];
+//        columBtn.backgroundColor = [@"ffd890" hexStringToColor];
+//    }else{
+//        [UIView animateWithDuration:0.5 animations:^{
+//            if (endPoint>=startPoint) {
+//                timeLab.textColor = [UIColor redColor];
+//                columBtn.backgroundColor = [@"ffd890" hexStringToColor];
+//            }else{
+//                timeLab.textColor = [UIColor redColor];
+//                columBtn.backgroundColor = [@"ffd890" hexStringToColor];
+//            }
+//        }];
+//    }
+//}
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     for (NSInteger i=0; i<_dataArr.count; i++) {
         UILabel *timeLab = (UILabel *)[self viewWithTag:LABTIMETAG + i];

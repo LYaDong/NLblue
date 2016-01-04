@@ -240,44 +240,131 @@
     [db executeUpdate:createTableSmall];
     [db close];
 }
-
 +(void)insterSportData:(NSArray *)dataArr
               isUpdata:(NSInteger)updata{
     
     FMDatabase *db = [self sqlDataRoute];
     [db open];
-
-    NSDictionary *dic = nil;
-    for (dic in dataArr) {
+    NSInteger num = 0;
+    __goto:
+    if (num == 0) {
         
-        NSInteger timestamp = [[ApplicationStyle dateTransformationStringWhiffletree:[dic objectForKey:@"sportDate"]] timeIntervalSince1970];
-        NSString *inster = @"INSERT OR REPLACE INTO SportDataBig (sportDate,count,distanceAmount,caloriesAmount,stepsAmount,user_id,isUpData,timestamp) VALUES (?,?,?,?,?,?,?,?)";
-        NSArray *dataArr = [NSArray arrayWithObjects:
-                            [dic objectForKey:@"sportDate"],
-                            [dic objectForKey:@"count"],
-                            [dic objectForKey:@"distanceAmount"],
-                            [dic objectForKey:@"caloriesAmount"],
-                            [dic objectForKey:@"stepsAmount"],
-                            [kAPPDELEGATE._loacluserinfo GetUser_ID],
-                            [NSNumber numberWithInteger:updata],
-                            [NSNumber numberWithInteger:timestamp],
-                            nil];
-        [db executeUpdate:inster withArgumentsInArray:dataArr];
+        NSLog(@"%@",[NSDate date]);
         
-        NSDictionary *smallDic = nil;
-        for (smallDic in [dic objectForKey:@"stepFragments"]) {
-            NSString *insterSmall = @"INSERT OR REPLACE INTO SportDataSmall (calories,ids,steps,distance,seris,activeTime,sportDate) VALUES (?,?,?,?,?,?,?)";
-            NSArray *dataArrSmall = [NSArray arrayWithObjects:
-                                     [smallDic objectForKey:@"calories"],
-                                     [smallDic objectForKey:@"id"] == nil?@"":[smallDic objectForKey:@"id"],
-                                     [smallDic objectForKey:@"steps"],
-                                     [smallDic objectForKey:@"distance"],
-                                     [smallDic objectForKey:@"seris"],
-                                     [smallDic objectForKey:@"activeTime"],
-                                     [dic objectForKey:@"sportDate"],
-                                     nil];
-            [db executeUpdate:insterSmall withArgumentsInArray:dataArrSmall];
+        
+        NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:num];
+        NSLog(@"%@",date);
+        
+        //        NSInteger dayCount = [ApplicationStyle totalDaysInMonth:date];
+        NSInteger dayInt = [ApplicationStyle whatDays:date];
+        NSInteger dayMonth = [ApplicationStyle whatMonths:date];
+        NSInteger dayYear = [ApplicationStyle whatYears:date];
+        for (NSInteger i=0; i<dayInt; i++) {
+            NSString *inster = @"INSERT OR REPLACE INTO SportDataBig (sportDate,count,distanceAmount,caloriesAmount,stepsAmount,user_id,isUpData,timestamp) VALUES (?,?,?,?,?,?,?,?)";
+            NSArray *dataArr = [NSArray arrayWithObjects:
+                                [NSString stringWithFormat:@"%ld-%ld-%ld",dayYear,dayMonth,dayInt - i],
+                                @"",
+                                @"",
+                                @"",
+                                @"0",
+                                [kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                @"",
+                                @"",
+                                nil];
+            
+            [db executeUpdate:inster withArgumentsInArray:dataArr];
         }
+        num = num - 1;
+        goto __goto;
+    }else{
+        NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:num];
+        NSInteger dayCount = [ApplicationStyle totalDaysInMonth:date];
+        //        NSInteger dayInt = [ApplicationStyle whatDays:date];
+        NSInteger dayMonth = [ApplicationStyle whatMonths:date];
+        NSInteger dayYear = [ApplicationStyle whatYears:date];
+        for (NSInteger i=0; i<dayCount; i++) {
+            NSString *establishTime = nil;
+            if (dayCount - i <10) {
+              establishTime = [NSString stringWithFormat:@"%ld-%ld-0%ld",dayYear,dayMonth,dayCount  - i];
+            }else{
+              establishTime = [NSString stringWithFormat:@"%ld-%ld-%ld",dayYear,dayMonth,dayCount  - i];
+            }
+            
+            if ([establishTime isEqualToString:@"2015-8-08"]) {
+                return;
+            }
+            
+            
+            NSString *inster = @"INSERT OR REPLACE INTO SportDataBig (sportDate,count,distanceAmount,caloriesAmount,stepsAmount,user_id,isUpData,timestamp) VALUES (?,?,?,?,?,?,?,?)";
+            NSArray *dataArr = [NSArray arrayWithObjects:
+                                [NSString stringWithFormat:@"%ld-%ld-%ld",dayYear,dayMonth,dayCount  - i],
+                                @"",
+                                @"",
+                                @"",
+                                @"0",
+                                [kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                @"",
+                                @"",
+                                nil];
+            
+            [db executeUpdate:inster withArgumentsInArray:dataArr];
+        }
+        num = num - 1;
+        goto __goto;
+    }
+
+//    NSDictionary *dic = nil;
+//    for (dic in dataArr) {
+//
+//        NSInteger timestamp = [[ApplicationStyle dateTransformationStringWhiffletree:[dic objectForKey:@"sportDate"]] timeIntervalSince1970];
+//        NSString *inster = @"INSERT OR REPLACE INTO SportDataBig (sportDate,count,distanceAmount,caloriesAmount,stepsAmount,user_id,isUpData,timestamp) VALUES (?,?,?,?,?,?,?,?)";
+//        NSArray *dataArr = [NSArray arrayWithObjects:
+//                            [dic objectForKey:@"sportDate"]==nil?@"":[dic objectForKey:@"sportDate"],
+//                            [dic objectForKey:@"count"]==nil?@"0":[dic objectForKey:@"count"],
+//                            [dic objectForKey:@"distanceAmount"]==nil?@"0":[dic objectForKey:@"distanceAmount"],
+//                            [dic objectForKey:@"caloriesAmount"]==nil?@"0":[dic objectForKey:@"caloriesAmount"],
+//                            [dic objectForKey:@"stepsAmount"]==nil?@"0":[dic objectForKey:@"stepsAmount"],
+//                            [kAPPDELEGATE._loacluserinfo GetUser_ID],
+//                            [NSNumber numberWithInteger:updata],
+//                            [NSNumber numberWithInteger:timestamp],
+//                            nil];
+//        [db executeUpdate:inster withArgumentsInArray:dataArr];
+//        
+//        NSDictionary *smallDic = nil;
+//        for (smallDic in [dic objectForKey:@"stepFragments"]) {
+//            NSString *insterSmall = @"INSERT OR REPLACE INTO SportDataSmall (calories,ids,steps,distance,seris,activeTime,sportDate) VALUES (?,?,?,?,?,?,?)";
+//            NSArray *dataArrSmall = [NSArray arrayWithObjects:
+//                                     [smallDic objectForKey:@"calories"]==nil?@"0":[dic objectForKey:@"calories"],
+//                                     [smallDic objectForKey:@"id"] == nil?@"0":[smallDic objectForKey:@"id"],
+//                                     [smallDic objectForKey:@"steps"]==nil?@"0":[dic objectForKey:@"steps"],
+//                                     [smallDic objectForKey:@"distance"]==nil?@"0":[dic objectForKey:@"distance"],
+//                                     [smallDic objectForKey:@"seris"]==nil?@"0":[dic objectForKey:@"seris"],
+//                                     [smallDic objectForKey:@"activeTime"]==nil?@"0":[dic objectForKey:@"activeTime"],
+//                                     [dic objectForKey:@"sportDate"]==nil?@"":[dic objectForKey:@"sportDate"],
+//                                     nil];
+//            [db executeUpdate:insterSmall withArgumentsInArray:dataArrSmall];
+//        }
+//    }
+//    [db close];
+}
+
++(void)upDataSport:(NSArray *)arr isUpdata:(NSInteger)updata{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    
+    NSDictionary *dic = nil;
+    for (dic in arr) {
+        NSString *updateTable = @"UPDATE SportDataBig SET count = ?,distanceAmount = ?,caloriesAmount = ?,stepsAmount = ?,isUpData = ?,timestamp = ? WHERE sportDate = ? and user_id = ?";
+        [db executeUpdate:
+         updateTable,
+         [dic objectForKey:@"count"]==nil?@"0":[dic objectForKey:@"count"],
+         [dic objectForKey:@"distanceAmount"]==nil?@"0":[dic objectForKey:@"distanceAmount"],
+         [dic objectForKey:@"caloriesAmount"]==nil?@"0":[dic objectForKey:@"caloriesAmount"],
+         [dic objectForKey:@"stepsAmount"]==nil?@"0":[dic objectForKey:@"stepsAmount"],
+         [dic objectForKey:@"isUpData"]==nil?@"0":[dic objectForKey:@"isUpData"],
+         [NSNumber numberWithInteger:updata],
+         [dic objectForKey:@"sportDate"]==nil?@"0":[dic objectForKey:@"sportDate"],
+         [kAPPDELEGATE._loacluserinfo GetUser_ID]];
     }
     [db close];
 }

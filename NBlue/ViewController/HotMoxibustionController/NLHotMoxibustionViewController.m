@@ -130,7 +130,7 @@ static const NSInteger TIMELINE = 90;
     self.titles.text = @"热灸";
     
     
-    [self connectBlueTooth];
+//    [self connectBlueTooth];
     
     
 //    =================================================================================================================================
@@ -227,15 +227,14 @@ static const NSInteger TIMELINE = 90;
 
 #pragma mark 基础UI
 -(void)bulidUI{
-    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init] ;
-    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSDate *inputDate = [inputFormatter dateFromString:@"2015-12-08"];
+
+    
+    
+    [NLSQLData establishSportDataTable];
+    [NLSQLData insterSportData:nil isUpdata:0];
     
     
     
-    NSLog(@"%0.0f",[inputDate timeIntervalSince1970]);
-    NSLog(@"%@",[ApplicationStyle timestampTransformationTime:[inputDate timeIntervalSince1970]]);
     
     [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
     
@@ -513,8 +512,6 @@ static const NSInteger TIMELINE = 90;
     unsigned long red1 = strtoul([[str substringWithRange:NSMakeRange(2, str.length - 2)] UTF8String],0,16);
     Byte b1 =  (Byte) ((0xff & red1) );//( Byte) 0xff&iByte;
     
-    
-    
     unsigned long time = strtoul([[NSString stringWithFormat:@"%lx",(long)_blueTime] UTF8String], 0, 16);
     Byte timeByty =  (Byte) ((0xff & time) );//( Byte) 0xff&iByte;
     
@@ -601,7 +598,8 @@ static const NSInteger TIMELINE = 90;
 
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [NLSQLData establishSportDataTable];
-        [NLSQLData insterSportData:[dic objectForKey:@"records"] isUpdata:0];
+//        [NLSQLData insterSportData:[dic objectForKey:@"records"] isUpdata:0];
+        [NLSQLData upDataSport:[dic objectForKey:@"records"] isUpdata:0];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             

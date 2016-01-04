@@ -18,6 +18,7 @@
 @property(nonatomic,strong)NSMutableArray *dataArr;
 @property(nonatomic,assign)CGFloat convenImageWeight;
 @property(nonatomic,strong)UIView *labViewBack;
+@property(nonatomic,assign)NSInteger weekMonthCount;
 
 @end
 
@@ -28,6 +29,7 @@
     // Do any additional setup after loading the view.
     
     _dataArr = [NSMutableArray array];
+    _weekMonthCount = 0;
     [self bulidUI];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -38,6 +40,15 @@
 }
 #pragma mark 基础UI
 -(void)bulidUI{
+    
+    
+    
+    
+    
+    
+    
+    
+    
     CGRect frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:360])/2, [ApplicationStyle statusBarSize] + ([ApplicationStyle navigationBarSize] - [ApplicationStyle control_height:60])/2, [ApplicationStyle control_weight:360], [ApplicationStyle control_height:60]);
     NSArray * items = @[NSLocalizedString(@"NLHealthManger_StepDay", nil),
                         NSLocalizedString(@"NLHealthManger_StepWeek", nil),
@@ -60,9 +71,57 @@
 
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         _dataArr = [NLSQLData obtainSportDataBig];
-       dispatch_async(dispatch_get_main_queue(), ^{           
+       dispatch_async(dispatch_get_main_queue(), ^{
+           
+           
+           
            NSMutableArray *arrData = [self sortArrayData:_dataArr];
-           [self imageConvenDataArr:arrData type:NLCalendarType_Day];
+           
+           
+          NSInteger week = (long)[ApplicationStyle currentDayWeek:[ApplicationStyle dateTransformationStringWhiffletree:[arrData[0] objectForKey:@"sportDate"]]] - 1;
+           
+           
+           NSMutableArray *dddd = [NSMutableArray array];
+           
+           if (week == 0) {
+               week = 7;
+           }
+           
+           NSInteger nums = 0;
+           NSInteger sportCount = 0;
+           
+       __goto:
+           for (NSInteger i=nums; i<week+nums; i++) {
+               sportCount =  sportCount + [[arrData[i] objectForKey:@"stepsAmount"] integerValue];
+           }
+           NSDictionary *dic = @{@"stepsAmount":[NSNumber numberWithInteger:sportCount]};
+           [dddd addObject:dic];
+           
+           nums = nums + 7;
+           
+           NSLog(@"%ld",(long)nums);
+           
+           if (nums<=arrData.count) {
+              week = (long)[ApplicationStyle currentDayWeek:[ApplicationStyle dateTransformationStringWhiffletree:[arrData[nums] objectForKey:@"sportDate"]]] - 1;
+           }
+           
+           
+           
+           if (nums >=arrData.count) {
+               [self imageConvenDataArr:arrData type:NLCalendarType_Day];
+               return ;
+           }else{
+               sportCount = 0;
+               goto __goto;
+           }
+           
+           
+           
+           
+           
+           
+           
+           
        });
     });
 
@@ -96,33 +155,33 @@
 -(void)segmentedIndex:(NSInteger)index{
     
     [_column removeFromSuperview];
-    [_dataArr removeAllObjects];
+//    [_dataArr removeAllObjects];
     
     switch (index) {
         case NLCalendarType_Day:
         {
             
-            _dataArr = [NLSQLData obtainSportDataBig];
+//            _dataArr = [NLSQLData obtainSportDataBig];
             [self imageConvenDataArr:_dataArr type:NLCalendarType_Day];
             
             break;
         }
         case NLCalendarType_Week:
         {
-            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-            NSDate *now;
-            NSDateComponents *comps = [[NSDateComponents alloc] init];
-            NSInteger unitFlags =NSCalendarUnitYear | NSCalendarUnitMonth |NSCalendarUnitDay | NSCalendarUnitWeekday |
-            NSCalendarUnitHour |NSCalendarUnitMinute | NSCalendarUnitSecond;
-            now=[NSDate date];
-            comps = [calendar components:unitFlags fromDate:now];
-            NSLog(@"%ld",(long)[comps weekday]);
             
+            _weekMonthCount = 7;
+            
+            [self imageConvenDataArr:[self dataThreeData:_dataArr] type:NLCalendarType_Week];
             
             break;
         }
         case NLCalendarType_Month:
         {
+            
+            _weekMonthCount = 30;
+            
+            
+            [self imageConvenDataArr:[self dataThreeData:_dataArr] type:NLCalendarType_Month];
             
 //            NSMutableArray *arrs = [NSMutableArray array];
 //            for (NSInteger i=0; i<1; i++) {
@@ -193,9 +252,6 @@
     
 }
 #pragma mark 自己的按钮事件
-
-
-
 -(void)imageConvenDataArr:(NSArray *)arr type:(NSInteger)type{
 
     switch (type) {
@@ -247,6 +303,69 @@
     
     return arr;
 }
+
+#pragma mark 返回7天的数据
+-(NSArray *)dataThreeData:(NSMutableArray *)data{
+    NSMutableArray *arrData = [self sortArrayData:data];
+    
+    NSInteger dayInt = 0;
+    //取出第一条数据，判断是星期几，推断第一个循环
+    NSInteger countS = 0;//总累计数的和
+    
+    NSDate  *currTime = [ApplicationStyle dateTransformationStringWhiffletree:[arrData[0] objectForKey:@"sportDate"]];
+    
+    if (_weekMonthCount == 7) {
+         countS = [ApplicationStyle currentDayWeek:currTime] - 1;
+    }else{ 
+        countS =  [ApplicationStyle totalDaysInMonth:currTime] - ([ApplicationStyle totalDaysInMonth:currTime] - [ApplicationStyle whatDays:currTime]);
+    }
+    
+    
+    
+    //放数据的数组
+    NSMutableArray *dataGather = [NSMutableArray array];
+    
+    if (_weekMonthCount ==0) {
+        if (countS == 0) {
+            countS = _weekMonthCount;
+        }
+    }
+    //累加值
+    NSInteger nums = 0;
+    //每7天加一次数据
+    NSInteger sportCount = 0;
+    NSString *dateTime = nil;
+__goto:
+    dateTime = [arrData[nums] objectForKey:@"sportDate"];
+    for (NSInteger i=nums; i<countS+nums; i++) {
+        //每7天加一次数据
+        sportCount =  sportCount + [[arrData[i] objectForKey:@"stepsAmount"] integerValue];
+    }
+    //添加到数组
+    NSDictionary *dic = @{@"stepsAmount":[NSNumber numberWithInteger:sportCount],@"sportDate":dateTime};
+    [dataGather addObject:dic];
+    
+    
+    NSLog(@"xxxxx   ====   %@",dataGather);
+    
+    dayInt  = dayInt - 1;
+    if (_weekMonthCount == 7) {
+        nums = nums + _weekMonthCount;//每次加7天
+    }else{
+        nums = nums + [ApplicationStyle totalDaysInMonth:[ApplicationStyle whatMonth:[NSDate date] timeDay:dayInt]];
+    }
+    if (nums<=arrData.count) {
+        countS = (long)[ApplicationStyle currentDayWeek:[ApplicationStyle dateTransformationStringWhiffletree:[arrData[nums] objectForKey:@"sportDate"]]] - 1;
+    }
+    //判断是不是大于总数，如果没有继续算，如果大于则返回数组
+    if (nums >=arrData.count) {
+        return dataGather;
+    }else{
+        sportCount = 0;
+        goto __goto;
+    }
+}
+
 
 
 - (void)didReceiveMemoryWarning {

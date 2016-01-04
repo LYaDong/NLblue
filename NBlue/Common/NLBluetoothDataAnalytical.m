@@ -419,7 +419,8 @@
     [dicSportDataBig setValue:stepFragments forKey:@"stepFragments"];
     [dicSportDataBig setValue:[NSNumber numberWithInteger:count] forKey:@"count"];
     
-    [NLSQLData insterSportData:[NSArray arrayWithObjects:dicSportDataBig, nil] isUpdata:0];
+//    [NLSQLData insterSportData:[NSArray arrayWithObjects:dicSportDataBig, nil] isUpdata:0];
+    [NLSQLData upDataSport:[NSArray arrayWithObjects:dicSportDataBig, nil] isUpdata:0];
     
     
 }

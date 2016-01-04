@@ -159,7 +159,11 @@
  */
 +(NSInteger)totalDaysInMonth:(NSDate *)date;
 /**
- *2015年01月01日
+ *查看当前日期在周几
+ */
++(NSInteger)currentDayWeek:(NSDate *)date;
+/**
+ *2015年01月01日 格式
  */
 +(NSString *)datePickerTransformationTextDate:(NSDate *)date;
 /**

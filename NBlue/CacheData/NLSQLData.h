@@ -42,6 +42,10 @@
  */
 +(NSMutableArray *)sportDataObtainTimeStr:(NSString *)timeStr;
 /**
+ *更新数据
+ */
++(void)upDataSport:(NSArray *)arr isUpdata:(NSInteger)updata;
+/**
  *删除运动表
  */
 +(void)delSportDataTable;
