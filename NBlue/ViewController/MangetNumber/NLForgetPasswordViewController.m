@@ -126,7 +126,7 @@ static const NSInteger TEXTFILED_TAG = 1000;
         }
         _verTimeLab.text = @"30";
         _timeVer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeVerDown) userInfo:nil repeats:YES];
-        [[NLDatahub sharedInstance] getVerificationCodePhones:[NSNumber numberWithInteger:[[NSString stringWithFormat:@"%@",textPhone.text] integerValue]]];
+        [[NLDatahub sharedInstance] getVerificationCodePhones:textPhone.text];
     }
     
 }

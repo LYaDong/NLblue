@@ -130,7 +130,7 @@ static const NSInteger TIMELINE = 90;
     self.titles.text = @"热灸";
     
     
-//    [self connectBlueTooth];
+    [self connectBlueTooth];
     
     
 //    =================================================================================================================================

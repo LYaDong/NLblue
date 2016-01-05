@@ -139,9 +139,9 @@ static const NSInteger LIFEHABITTAG = 2000;
     switch (btn.tag - LIFEHABITTAG) {
         case Uncomfortable_TT:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             
             if (btn.selected) {
@@ -160,9 +160,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_BD:  {
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             
             if (btn.selected) {
@@ -180,9 +180,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_HELY:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             
             if (btn.selected) {
@@ -200,9 +200,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_FX:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             
             if (btn.selected) {
@@ -221,9 +221,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_XFZT:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             
             if (btn.selected) {
@@ -242,9 +242,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_MSY:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             
             if (btn.selected) {
@@ -263,9 +263,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_YS:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             
             if (btn.selected) {
@@ -284,9 +284,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_HSST:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             
             if (btn.selected) {
@@ -305,9 +305,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_RFZT:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             
             if (btn.selected) {
@@ -326,9 +326,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_RFCT:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             
             if (btn.selected) {
@@ -347,9 +347,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_BDYC:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             
             if (btn.selected) {
@@ -368,9 +368,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_QT:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
             }
             
             if (btn.selected) {

@@ -124,16 +124,62 @@ static NLColumnImage *cloumnImage = nil;
                                                                      [ApplicationStyle control_height:30])];
 
         NSString *time = [arr[i] objectForKey:@"sportDate"];
-        NSArray *timeArr = [time componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
-        labTime.text = [NSString stringWithFormat:@"%@/%@",timeArr[1],timeArr[2]];
-        labTime.textColor = [ApplicationStyle subjectWithColor];
-//        if (i == 0) {
-//            labTime.text = @"今天";
-//            labTime.textColor = [UIColor redColor];
-//        }
-//        if (i == 1) {
-//            labTime.text = @"昨天";
-//        }
+        
+        
+        
+        
+        switch (type) {
+            case NLCalendarType_Day:
+            {
+                NSArray *timeArr = [time componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
+                labTime.text = [NSString stringWithFormat:@"%@/%@",timeArr[1],timeArr[2]];
+                labTime.textColor = [ApplicationStyle subjectWithColor];
+                
+                if (i == 0) {
+                    labTime.text = @"今天";
+                    labTime.textColor = [UIColor redColor];
+                }
+                if (i == 1) {
+                    labTime.text = @"昨天";
+                }
+                break;
+            }
+            case NLCalendarType_Week:
+            {
+                NSArray *timeArr = [time componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
+                labTime.text = [NSString stringWithFormat:@"%@/%@",timeArr[1],timeArr[2]];
+                labTime.textColor = [ApplicationStyle subjectWithColor];
+                
+                if (i == 0) {
+                    labTime.text = @"本周";
+                    labTime.textColor = [UIColor redColor];
+                }
+                if (i == 1) {
+                    labTime.text = @"上周";
+                }
+                break;
+            }
+            case NLCalendarType_Month:
+            {
+                NSArray *timeArr = [time componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
+                labTime.text = [NSString stringWithFormat:@"%@月",timeArr[1]];
+                labTime.textColor = [ApplicationStyle subjectWithColor];
+                
+                if (i == 0) {
+                    labTime.text = @"本月";
+                    labTime.textColor = [UIColor redColor];
+                }
+                if (i == 1) {
+                    labTime.text = @"上月";
+                }
+                break;
+            }
+            default:
+                break;
+        }
+        
+        
+        
 
         labTime.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:16]];
         labTime.textAlignment = NSTextAlignmentCenter;

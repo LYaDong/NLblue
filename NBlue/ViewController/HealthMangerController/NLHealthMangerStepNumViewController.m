@@ -317,10 +317,9 @@
     if (_weekMonthCount == 7) {
          countS = [ApplicationStyle currentDayWeek:currTime] - 1;
     }else{ 
-        countS =  [ApplicationStyle totalDaysInMonth:currTime] - ([ApplicationStyle totalDaysInMonth:currTime] - [ApplicationStyle whatDays:currTime]);
+//        countS =  [ApplicationStyle totalDaysInMonth:currTime] - ([ApplicationStyle totalDaysInMonth:currTime] - [ApplicationStyle whatDays:currTime]);
+        countS  = [ApplicationStyle whatDays:currTime];
     }
-    
-    
     
     //放数据的数组
     NSMutableArray *dataGather = [NSMutableArray array];
@@ -337,25 +336,32 @@
     NSString *dateTime = nil;
 __goto:
     dateTime = [arrData[nums] objectForKey:@"sportDate"];
-    for (NSInteger i=nums; i<countS+nums; i++) {
-        //每7天加一次数据
-        sportCount =  sportCount + [[arrData[i] objectForKey:@"stepsAmount"] integerValue];
+    
+    if (countS>arrData.count) {
+
+    }else{
+        for (NSInteger i=nums; i<countS; i++) {
+            //每7天加一次数据
+            sportCount =  sportCount + [[arrData[i] objectForKey:@"stepsAmount"] integerValue];
+        }
     }
     //添加到数组
     NSDictionary *dic = @{@"stepsAmount":[NSNumber numberWithInteger:sportCount],@"sportDate":dateTime};
     [dataGather addObject:dic];
-    
-    
-    NSLog(@"xxxxx   ====   %@",dataGather);
-    
     dayInt  = dayInt - 1;
     if (_weekMonthCount == 7) {
-        nums = nums + _weekMonthCount;//每次加7天
+        nums =  countS;
     }else{
-        nums = nums + [ApplicationStyle totalDaysInMonth:[ApplicationStyle whatMonth:[NSDate date] timeDay:dayInt]];
+        nums = countS;
     }
     if (nums<=arrData.count) {
-        countS = (long)[ApplicationStyle currentDayWeek:[ApplicationStyle dateTransformationStringWhiffletree:[arrData[nums] objectForKey:@"sportDate"]]] - 1;
+        if (_weekMonthCount == 7) {
+            countS = countS + _weekMonthCount;
+        }else{
+            countS = countS + [ApplicationStyle totalDaysInMonth:[ApplicationStyle whatMonth:[NSDate date] timeDay:dayInt]];
+        }
+        
+        
     }
     //判断是不是大于总数，如果没有继续算，如果大于则返回数组
     if (nums >=arrData.count) {

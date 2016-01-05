@@ -285,9 +285,9 @@
         for (NSInteger i=0; i<dayCount; i++) {
             NSString *establishTime = nil;
             if (dayCount - i <10) {
-              establishTime = [NSString stringWithFormat:@"%ld-%ld-0%ld",dayYear,dayMonth,dayCount  - i];
+              establishTime = [NSString stringWithFormat:@"%ld-%ld-0%ld",(long)dayYear,(long)dayMonth,(long)dayCount  - i];
             }else{
-              establishTime = [NSString stringWithFormat:@"%ld-%ld-%ld",dayYear,dayMonth,dayCount  - i];
+              establishTime = [NSString stringWithFormat:@"%ld-%ld-%ld",(long)dayYear,(long)dayMonth,(long)dayCount  - i];
             }
             
             if ([establishTime isEqualToString:@"2015-8-08"]) {
@@ -297,7 +297,7 @@
             
             NSString *inster = @"INSERT OR REPLACE INTO SportDataBig (sportDate,count,distanceAmount,caloriesAmount,stepsAmount,user_id,isUpData,timestamp) VALUES (?,?,?,?,?,?,?,?)";
             NSArray *dataArr = [NSArray arrayWithObjects:
-                                [NSString stringWithFormat:@"%ld-%ld-%ld",dayYear,dayMonth,dayCount  - i],
+                                [NSString stringWithFormat:@"%ld-%ld-%ld",(long)dayYear,(long)dayMonth,(long)dayCount  - i],
                                 @"",
                                 @"",
                                 @"",
@@ -439,7 +439,7 @@
 +(void)canlenderUncomfortable{
     FMDatabase *db = [self sqlDataRoute];
     [db open];
-    NSString *createTable = @"CREATE TABLE IF NOT EXISTS CanlenderTable (time TEXT PRIMARY KEY,)";
+//    NSString *createTable = @"CREATE TABLE IF NOT EXISTS CanlenderTable (time TEXT PRIMARY KEY,)";
 }
 
 @end

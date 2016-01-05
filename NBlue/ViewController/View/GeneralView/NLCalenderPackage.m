@@ -187,7 +187,7 @@ static const NSInteger ARROWTAG = 1500;
     }else{
         //本月的日子
         day = i - firstWeekday + 1;
-        dayButton.backgroundColor = [@"ffdbe2" hexStringToColor];
+        dayButton.backgroundColor = [@"fee39a" hexStringToColor];
         
     }
     //判断让谁圆角
@@ -232,23 +232,18 @@ static const NSInteger ARROWTAG = 1500;
             for (NSInteger z=0; z<5; z++) {
                 //经期来临的日子
                 if (day == [yddd integerValue] + z) {
-                    dayButton.backgroundColor = [UIColor greenColor];
+                    dayButton.backgroundColor = [@"ffad54" hexStringToColor];//预测期
                     if (j==0) {
-                        dayButton.backgroundColor = [UIColor orangeColor];
+                        dayButton.backgroundColor = [@"ff6c32" hexStringToColor];//经期
                     }
-                    
                 }
             }
             //易孕期
             for (NSInteger x = 0; x<10; x++) {
                 if ([yddd integerValue] - 14 + x == day) {
-                    dayButton.backgroundColor = [UIColor purpleColor];
+                    dayButton.backgroundColor = [@"ffe9ed" hexStringToColor];//易孕期
                 }
             }
-            
-            
- 
-            
         }
     }
 }
