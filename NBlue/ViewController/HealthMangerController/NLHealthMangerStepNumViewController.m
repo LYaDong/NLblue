@@ -72,56 +72,7 @@
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         _dataArr = [NLSQLData obtainSportDataBig];
        dispatch_async(dispatch_get_main_queue(), ^{
-           
-           
-           
-           NSMutableArray *arrData = [self sortArrayData:_dataArr];
-           
-           
-          NSInteger week = (long)[ApplicationStyle currentDayWeek:[ApplicationStyle dateTransformationStringWhiffletree:[arrData[0] objectForKey:@"sportDate"]]] - 1;
-           
-           
-           NSMutableArray *dddd = [NSMutableArray array];
-           
-           if (week == 0) {
-               week = 7;
-           }
-           
-           NSInteger nums = 0;
-           NSInteger sportCount = 0;
-           
-       __goto:
-           for (NSInteger i=nums; i<week+nums; i++) {
-               sportCount =  sportCount + [[arrData[i] objectForKey:@"stepsAmount"] integerValue];
-           }
-           NSDictionary *dic = @{@"stepsAmount":[NSNumber numberWithInteger:sportCount]};
-           [dddd addObject:dic];
-           
-           nums = nums + 7;
-           
-           NSLog(@"%ld",(long)nums);
-           
-           if (nums<=arrData.count) {
-              week = (long)[ApplicationStyle currentDayWeek:[ApplicationStyle dateTransformationStringWhiffletree:[arrData[nums] objectForKey:@"sportDate"]]] - 1;
-           }
-           
-           
-           
-           if (nums >=arrData.count) {
-               [self imageConvenDataArr:arrData type:NLCalendarType_Day];
-               return ;
-           }else{
-               sportCount = 0;
-               goto __goto;
-           }
-           
-           
-           
-           
-           
-           
-           
-           
+           [self imageConvenDataArr:_dataArr type:NLCalendarType_Day];
        });
     });
 

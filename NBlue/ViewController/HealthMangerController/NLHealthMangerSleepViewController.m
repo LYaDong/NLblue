@@ -57,14 +57,12 @@
     sele.delegate = self;
     [self.view addSubview:sele];
     
-    
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//        _dataArr = [NLSQLData obtainSportDataBig];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            NSMutableArray *arrData = [self sortArrayData:_dataArr];
-//            [self imageConvenDataArr:arrData type:NLCalendarType_Day];
-//        });
-//    });
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        _dataArr = [NLSQLData obtainSportDataBig];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self imageConvenDataArr:_dataArr type:NLCalendarType_Day];
+        });
+    });
     
     
     UIView *viewTimeBack = [[UIView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle control_height:480] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], SCREENWIDTH, [ApplicationStyle control_height:60])];
@@ -131,6 +129,8 @@
     }
     
 }
+
+-(void)sildeIndex:(NSInteger)index{}
 #pragma mark 自己的按钮事件
 
 -(void)imageConvenDataArr:(NSArray *)arr type:(NSInteger)type{

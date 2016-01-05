@@ -583,17 +583,7 @@ static const NSInteger TIMELINE = 90;
 }
 -(void)logInSuccess:(NSNotification *)notifi{
     NSDictionary *dic = notifi.object;
-    
-//    NSLog(@"%@",[dic objectForKey:@"records"] );
-//    NSLog(@"%@",[[dic objectForKey:@"records"] objectForKey:@"sportDate"]);
-    
-//    for (int i=0; i<[[dic objectForKey:@"records"] count]; i++) {
-//        NSLog(@"%@",[[[dic objectForKey:@"records"] objectAtIndex:i] objectForKey:@"sportDate"]);
-//    }
-    
-    
-    
-    
+
     
 
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -615,7 +605,7 @@ static const NSInteger TIMELINE = 90;
     
 }
 -(void)logInFicaled:(NSNotification *)notifi{
-    
+    NSLog(@"%@",notifi);
 }
 -(void)delNotification{
     [[NSNotificationCenter defaultCenter] removeObserver:self];

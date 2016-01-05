@@ -70,8 +70,14 @@ static const NSInteger THIRDBTNTAG = 4000;
         }
     }
     
+    UITextField *textFiled = (UITextField *)[self.view viewWithTag:TEXT_TAG];
     
-    
+    NSArray *logImage = @[@"NLLoing_US",@"NLLoing_PW"];
+    for (NSInteger i=0; i<logImage.count; i++) {
+        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(textFiled.leftSidePosition - [ApplicationStyle control_weight:42], [ApplicationStyle control_height:440] + i * [ApplicationStyle control_height:90], [ApplicationStyle control_weight:32], [ApplicationStyle control_height:32])];
+        image.image = [UIImage imageNamed:logImage[i]];
+        [self.view addSubview:image];
+    }
     
     UIButton *logIn = [UIButton gradiengBtnFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:480])/2,[ApplicationStyle control_height:422] + [ApplicationStyle control_height:200], [ApplicationStyle control_weight:480], [ApplicationStyle control_height:70])];
     [logIn setTitle:NSLocalizedString(@"NLLogIn_TextLonInBtn", nil) forState:UIControlStateNormal];
@@ -115,18 +121,19 @@ static const NSInteger THIRDBTNTAG = 4000;
     }
     
     
-    NSArray *arrLogInImage = @[@"LogIn_WeChat",@"LogIn_QQ",@"LogIn_Sina"];
+    NSArray *arrLogInImage = @[@"NLLoing_Thrid_QQ",@"NLLoing_Thrid_WX",@"NLLoing_Thrid_WB"];
     
     
     for (NSInteger i =0 ; i<arrLogInImage.count; i++) {
-        UIButton *thirdBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        UIButton *thirdBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         CGFloat weight = (SCREENWIDTH - [ApplicationStyle control_weight:68 * 2]);
 
         thirdBtn.frame = CGRectMake([ApplicationStyle control_weight:68] + i * ([ApplicationStyle control_weight:80] + (weight - [ApplicationStyle control_weight:80 * 3])/3 + (weight - [ApplicationStyle control_weight:80 * 3])/3/2),
                                     labThirp.bottomOffset + [ApplicationStyle control_height:60], [ApplicationStyle control_weight:80],
                                     [ApplicationStyle control_weight:80]);
-        thirdBtn.backgroundColor = [UIColor redColor];
+//        thirdBtn.backgroundColor = [UIColor redColor];
         thirdBtn.tag = THIRDBTNTAG + i;
+        [thirdBtn setImage:[UIImage imageNamed:arrLogInImage[i]] forState:UIControlStateNormal];
         [thirdBtn addTarget:self action:@selector(thirdBtnDown:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:thirdBtn];
     }
