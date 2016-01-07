@@ -35,18 +35,32 @@
 -(NSString *)GetUser_ID;
 /**
  *判断用户进入哪个页面
+ *0：登录页面 1：主页面 女  2 ： 男主页面
  */
 -(void)goControllew:(NSString *)controllews;
 /**
  *获得用户进入的页面
+ *0：登录页面 1：主页面
  */
 -(NSString *)getControllew;
 /**
  *判断是否登录
+ *0：未登录 1：已经登录
  */
 -(void)isLoginUser:(NSString *)isLogin;
 /**
  *获得是否登录
+ *0：未登录 1：已经登录
  */
 -(NSString *)GetIsLogin;
+/**
+ *  输入用户性别
+ *  0：女性    1：男性
+ */
+-(void)userGender:(NSString *)gender;
+/**
+ *  获得用户性别
+ *  0：女性    1：男性
+ */
+-(NSString *)getUserGender;
 @end

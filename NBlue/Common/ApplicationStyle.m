@@ -66,7 +66,9 @@
 + (UIColor *)subjectNavBarBackColor{return [@"fb4d7e" hexStringToColor];}
 + (UIColor *)subjectTableCellLabColor{return [@"1b1b1b" hexStringToColor];}
 + (UIColor *)subjectWithColor{return [@"ffffff" hexStringToColor];}
-//a60034
++ (UIColor *)subjectMaleBlueColor{return [@"56cbf9" hexStringToColor];}
++ (UIColor *)subjectMaleTextBlackColor{return [@"" hexStringToColor];}
+
 
 //渐变颜色
 + (UIColor *)customColor:(NSString *)color{ return [color hexStringToColor];}

@@ -15,6 +15,10 @@
 "TabBar_HotMoxibustion" = "热灸";
 "TabBar_Profile" = "我的";
 
+"TabBar_Male_HealthManger" = "健康管理";
+"TabBar_Male_HotMoxibustion" = "我的她";
+"TabBar_Male_SignIn" = "签到";
+
 
 //HotMoxibustionViewController
 "HotMoxibustion_Effect" = "效果如何";
@@ -138,4 +142,15 @@
 "NLSelection_LastStep" = "上一步";
 "NLGenderSelection_Next" = "下一步";
 
+//NLMaleProfileViewController
+"NLMaleProfile_Myequipment" = "我的设备";
+"NLMaleProfile_NBluePlan" = "暖蓝计划";
+"NLMaleProfile_Share" = "分享";
+"NLMaleProfile_FeedBack" = "反馈";
+"NLMaleProfile_Set" = "设置";
+"NLMaleProfile_AboutNBlue" = "关于暖蓝";
+"NLMaleNBLuePlan_NBluePlan" = "暖蓝计划";
+"NLMaleNBLuePlan_MessagePush" = "消息推送";
+"NLMaleNBLuePlan_Shock" = "震动";
+"NLMaleNBLuePlan_PushTime" = "推送时间选择";
 

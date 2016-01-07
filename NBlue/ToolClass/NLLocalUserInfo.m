@@ -6,6 +6,11 @@
 //  Copyright © 2015年 LYD. All rights reserved.
 //
 
+
+
+
+
+
 #import "NLLocalUserInfo.h"
 
 @implementation NLLocalUserInfo
@@ -59,4 +64,14 @@
     NSString *infotype = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_Project_IsLogin"];
     return infotype;
 }
+//性别
+-(void)userGender:(NSString *)gender{
+    [[NSUserDefaults standardUserDefaults] setObject:gender forKey:@"NL_User_Project_Gender"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)getUserGender{
+    NSString *infotype = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_Project_Gender"];
+    return infotype;
+}
+
 @end

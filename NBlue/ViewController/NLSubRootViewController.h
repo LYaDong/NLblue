@@ -9,6 +9,9 @@
 #import "NLRootViewController.h"
 
 @interface NLSubRootViewController : NLRootViewController
+//==========================================
+//-------------------女版-------------------
+//==========================================
 /**
  *常用背景
  */
@@ -24,6 +27,20 @@
 @property(nonatomic,strong)UIImageView *controllerBack;
 @property(nonatomic,strong)UIButton *returnBtn;
 @property(nonatomic,strong)UIButton *rightBtn;
+
+
+
+
+
+//==========================================
+//-------------------男版-------------------
+//==========================================
+/**
+ *男版NabBar背景颜色
+ */
+@property(nonatomic,strong)UIView *navBarMaleBack;
+
+
 
 
 @end

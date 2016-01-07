@@ -10,7 +10,8 @@
 #import "NLLocalUserInfo.h"
 typedef NS_ENUM(NSUInteger,Controller) {
     Controller_Loing = 0,                                   //登录页面
-    Controller_Main = 1,                                    //主页
+    Controller_WoManMain = 1,                                    //女主页
+    Controller_MaleMain = 2,                                    //男主页
 };
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

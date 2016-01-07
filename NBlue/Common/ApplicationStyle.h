@@ -108,6 +108,14 @@
  */
 + (UIColor *)subjectWithColor;
 /**
+ *男版常用蓝色
+ */
++ (UIColor *)subjectMaleBlueColor;
+/**
+ *男版字体常用黑色
+ */
++ (UIColor *)subjectMaleTextBlackColor;
+/**
  *渐变颜色 //不知道会不会用到 方法先写下来
  */
 + (CAGradientLayer *)shadowAsInverse:(CGRect )frome colorOne:(UIColor *)colorOne colorTow:(UIColor *)colorTow;

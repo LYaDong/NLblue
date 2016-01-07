@@ -1,6 +1,6 @@
 //
 //  RWRotationGestureRecognizer.m
-//  转圈滑动
+//  NBlue
 //
 //  Created by LYD on 15/12/12.
 //  Copyright © 2015年 LYD. All rights reserved.

@@ -7,26 +7,61 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04015D5F1C1FB72F00454566 /* NLHealtCalenderPeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = 04015D5E1C1FB72F00454566 /* NLHealtCalenderPeriod.m */; };
-		04015D631C1FDD1800454566 /* NLCalenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 04015D621C1FDD1800454566 /* NLCalenderPicker.m */; };
-		0403F9731C2CD3B90000A9C3 /* NLSetProfoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0403F9721C2CD3B90000A9C3 /* NLSetProfoleViewController.m */; };
-		0403F9761C2CD6380000A9C3 /* NLSetProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0403F9751C2CD6380000A9C3 /* NLSetProfileCell.m */; };
+		04018BFD1C3CB914009AC56A /* NLHealthMangerSleepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018B951C3CB914009AC56A /* NLHealthMangerSleepViewController.m */; };
+		04018BFE1C3CB914009AC56A /* NLHealthMangerStepNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018B971C3CB914009AC56A /* NLHealthMangerStepNumViewController.m */; };
+		04018BFF1C3CB914009AC56A /* NLHealthMangerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018B991C3CB914009AC56A /* NLHealthMangerViewController.m */; };
+		04018C001C3CB914009AC56A /* LYDSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018B9C1C3CB914009AC56A /* LYDSegmentControl.m */; };
+		04018C011C3CB914009AC56A /* LYDSetSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018B9E1C3CB914009AC56A /* LYDSetSegmentControl.m */; };
+		04018C021C3CB914009AC56A /* NLConnectBloothCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BA11C3CB914009AC56A /* NLConnectBloothCell.m */; };
+		04018C031C3CB914009AC56A /* NLConnectBloothViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BA31C3CB914009AC56A /* NLConnectBloothViewController.m */; };
+		04018C041C3CB914009AC56A /* NLHotMoxibustionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BA51C3CB914009AC56A /* NLHotMoxibustionViewController.m */; };
+		04018C061C3CB914009AC56A /* NLBodyParamentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BAA1C3CB914009AC56A /* NLBodyParamentViewController.m */; };
+		04018C071C3CB914009AC56A /* NLForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BAC1C3CB914009AC56A /* NLForgetPasswordViewController.m */; };
+		04018C081C3CB914009AC56A /* NLGenderSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BAE1C3CB914009AC56A /* NLGenderSelectionViewController.m */; };
+		04018C091C3CB914009AC56A /* NLLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BB01C3CB914009AC56A /* NLLogInViewController.m */; };
+		04018C0A1C3CB914009AC56A /* NLPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BB21C3CB914009AC56A /* NLPeriodViewController.m */; };
+		04018C0B1C3CB914009AC56A /* NLRegisteredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BB41C3CB914009AC56A /* NLRegisteredViewController.m */; };
+		04018C0E1C3CB914009AC56A /* NLAboutNLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BBB1C3CB914009AC56A /* NLAboutNLViewController.m */; };
+		04018C0F1C3CB914009AC56A /* NLFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BBD1C3CB914009AC56A /* NLFeedBackViewController.m */; };
+		04018C101C3CB914009AC56A /* NLIndividuaEditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BBF1C3CB914009AC56A /* NLIndividuaEditingViewController.m */; };
+		04018C111C3CB914009AC56A /* NLIndividuaFormatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BC11C3CB914009AC56A /* NLIndividuaFormatViewController.m */; };
+		04018C121C3CB914009AC56A /* NLMyEquipmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BC31C3CB914009AC56A /* NLMyEquipmentController.m */; };
+		04018C131C3CB914009AC56A /* NLProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BC51C3CB914009AC56A /* NLProfileViewController.m */; };
+		04018C141C3CB914009AC56A /* NLSetProfoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BC71C3CB914009AC56A /* NLSetProfoleViewController.m */; };
+		04018C151C3CB914009AC56A /* NLShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BC91C3CB914009AC56A /* NLShareController.m */; };
+		04018C161C3CB914009AC56A /* NLAboutImageBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BCD1C3CB914009AC56A /* NLAboutImageBtn.m */; };
+		04018C171C3CB914009AC56A /* NLCalenderPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BCF1C3CB914009AC56A /* NLCalenderPackage.m */; };
+		04018C181C3CB914009AC56A /* NLPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BD11C3CB914009AC56A /* NLPickView.m */; };
+		04018C191C3CB914009AC56A /* NLCalenderLifeHabit.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BD51C3CB914009AC56A /* NLCalenderLifeHabit.m */; };
+		04018C1A1C3CB914009AC56A /* NLCalenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BD71C3CB914009AC56A /* NLCalenderPicker.m */; };
+		04018C1B1C3CB914009AC56A /* NLCalenderUncomforBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BD91C3CB914009AC56A /* NLCalenderUncomforBtn.m */; };
+		04018C1C1C3CB914009AC56A /* NLCalenderUncomfortable.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BDB1C3CB914009AC56A /* NLCalenderUncomfortable.m */; };
+		04018C1D1C3CB914009AC56A /* NLColumnImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BDD1C3CB914009AC56A /* NLColumnImage.m */; };
+		04018C1E1C3CB914009AC56A /* NLHealtCalenderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BDF1C3CB914009AC56A /* NLHealtCalenderCell.m */; };
+		04018C1F1C3CB914009AC56A /* NLHealtCalenderPeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BE11C3CB914009AC56A /* NLHealtCalenderPeriod.m */; };
+		04018C201C3CB914009AC56A /* NLHealthCalenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BE31C3CB914009AC56A /* NLHealthCalenderView.m */; };
+		04018C211C3CB914009AC56A /* NLHealthSleepView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BE51C3CB914009AC56A /* NLHealthSleepView.m */; };
+		04018C221C3CB914009AC56A /* NLHealthStepNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BE71C3CB914009AC56A /* NLHealthStepNumber.m */; };
+		04018C231C3CB914009AC56A /* NLHealthStepNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BE91C3CB914009AC56A /* NLHealthStepNumberCell.m */; };
+		04018C241C3CB914009AC56A /* NLRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BEB1C3CB914009AC56A /* NLRing.m */; };
+		04018C251C3CB914009AC56A /* NLRingLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BED1C3CB914009AC56A /* NLRingLine.m */; };
+		04018C261C3CB914009AC56A /* NLStepColumnImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BEF1C3CB914009AC56A /* NLStepColumnImage.m */; };
+		04018C271C3CB914009AC56A /* NLStepCountLabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BF11C3CB914009AC56A /* NLStepCountLabView.m */; };
+		04018C281C3CB914009AC56A /* NLStepImageLabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BF31C3CB914009AC56A /* NLStepImageLabView.m */; };
+		04018C291C3CB914009AC56A /* NLIndividuaFormaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BF61C3CB914009AC56A /* NLIndividuaFormaCell.m */; };
+		04018C2A1C3CB914009AC56A /* NLMyEquipmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BF81C3CB914009AC56A /* NLMyEquipmentCell.m */; };
+		04018C2B1C3CB914009AC56A /* NLProTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BFA1C3CB914009AC56A /* NLProTableCell.m */; };
+		04018C2C1C3CB914009AC56A /* NLSetProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BFC1C3CB914009AC56A /* NLSetProfileCell.m */; };
+		04018C301C3CB9B7009AC56A /* NLHalfView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018C2F1C3CB9B7009AC56A /* NLHalfView.m */; };
+		04018C381C3CBCD2009AC56A /* MainNavgationControllew.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018C331C3CBCD2009AC56A /* MainNavgationControllew.m */; };
+		04018C391C3CBCD2009AC56A /* NLRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018C351C3CBCD2009AC56A /* NLRootViewController.m */; };
+		04018C3A1C3CBCD2009AC56A /* NLSubRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018C371C3CBCD2009AC56A /* NLSubRootViewController.m */; };
+		04018CE51C3CBDBC009AC56A /* NLMyHerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018CE41C3CBDBC009AC56A /* NLMyHerViewController.m */; };
+		04018CE81C3CBFEA009AC56A /* NLMaleProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018CE71C3CBFEA009AC56A /* NLMaleProfileViewController.m */; };
+		04018CEB1C3CC002009AC56A /* NLMaleHealthMangerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018CEA1C3CC002009AC56A /* NLMaleHealthMangerViewController.m */; };
+		04018CEE1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018CED1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m */; };
+		04018CF11C3D179F009AC56A /* NLMaleIndividuaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018CF01C3D179F009AC56A /* NLMaleIndividuaViewController.m */; };
 		0403F9781C2CE3420000A9C3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0403F9771C2CE3420000A9C3 /* CoreTelephony.framework */; };
-		0418DB951C351598000915E6 /* NLConnectBloothViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418DB941C351598000915E6 /* NLConnectBloothViewController.m */; };
-		0418DB981C351904000915E6 /* NLConnectBloothCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418DB971C351904000915E6 /* NLConnectBloothCell.m */; };
-		044255361C1EABAE003F8503 /* NLHealtCalenderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044255351C1EABAE003F8503 /* NLHealtCalenderCell.m */; };
-		0458E5D91C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458E5D81C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m */; };
-		0458E5DC1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458E5DB1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m */; };
-		046934EF1C02BF5B00150D2A /* MainNavgationControllew.m in Sources */ = {isa = PBXBuildFile; fileRef = 046934EE1C02BF5B00150D2A /* MainNavgationControllew.m */; };
-		046F18451C0D2D3100A21FA6 /* LYDSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F18421C0D2D3100A21FA6 /* LYDSegmentControl.m */; };
-		046F18461C0D2D3100A21FA6 /* LYDSetSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F18441C0D2D3100A21FA6 /* LYDSetSegmentControl.m */; };
-		046F188B1C0D4A0700A21FA6 /* NLColumnImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F188A1C0D4A0700A21FA6 /* NLColumnImage.m */; };
-		046F188E1C0D777A00A21FA6 /* NLStepImageLabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F188D1C0D777A00A21FA6 /* NLStepImageLabView.m */; };
-		047BE7E91C19AB8600821F23 /* NLStepColumnImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 047BE7E81C19AB8600821F23 /* NLStepColumnImage.m */; };
-		047D32D21C327FF70004A5C2 /* NLGenderSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D32D11C327FF70004A5C2 /* NLGenderSelectionViewController.m */; };
-		047D32D51C32802D0004A5C2 /* NLBodyParamentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D32D41C32802D0004A5C2 /* NLBodyParamentViewController.m */; };
-		047D32D81C32805D0004A5C2 /* NLPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D32D71C32805D0004A5C2 /* NLPeriodViewController.m */; };
-		048EE89D1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048EE89C1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.m */; };
 		049751A11BFEEED50044D97B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751A01BFEEED50044D97B /* main.m */; };
 		049751AA1BFEEED50044D97B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049751A81BFEEED50044D97B /* Main.storyboard */; };
 		049751AC1BFEEED50044D97B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049751AB1BFEEED50044D97B /* Assets.xcassets */; };
@@ -35,56 +70,27 @@
 		049751C51BFEEED60044D97B /* NBlueUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751C41BFEEED60044D97B /* NBlueUITests.m */; };
 		049751DC1BFEF2FE0044D97B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751DB1BFEF2FE0044D97B /* AppDelegate.m */; };
 		049751DF1BFEF3140044D97B /* ApplicationStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751DE1BFEF3140044D97B /* ApplicationStyle.m */; };
-		049B077D1C1559D4005147B5 /* NLRegisteredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B077C1C1559D4005147B5 /* NLRegisteredViewController.m */; };
-		049B07821C1559ED005147B5 /* NLForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B077F1C1559ED005147B5 /* NLForgetPasswordViewController.m */; };
-		049B07831C1559ED005147B5 /* NLLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B07811C1559ED005147B5 /* NLLogInViewController.m */; };
-		04A151971C0DAA9700CB93FF /* NLRingLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A151961C0DAA9700CB93FF /* NLRingLine.m */; };
-		04A1519A1C0DC3B700CB93FF /* NLRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A151991C0DC3B700CB93FF /* NLRing.m */; };
 		04C995471C029D6B00D8AE79 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C995461C029D6B00D8AE79 /* CoreBluetooth.framework */; };
 		04C9954A1C029E8300D8AE79 /* NLBluetoothAgreement.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C995491C029E8300D8AE79 /* NLBluetoothAgreement.m */; };
 		04C9954D1C029F2400D8AE79 /* NLBluetoothDataAnalytical.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9954C1C029F2400D8AE79 /* NLBluetoothDataAnalytical.m */; };
-		04C995551C02A40300D8AE79 /* NLRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C995541C02A40300D8AE79 /* NLRootViewController.m */; };
-		04C995581C02A51000D8AE79 /* NLSubRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C995571C02A51000D8AE79 /* NLSubRootViewController.m */; };
-		04C9955B1C02A55000D8AE79 /* NLHealthMangerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9955A1C02A55000D8AE79 /* NLHealthMangerViewController.m */; };
-		04C9955E1C02A56B00D8AE79 /* NLHotMoxibustionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9955D1C02A56B00D8AE79 /* NLHotMoxibustionViewController.m */; };
-		04C995611C02A57800D8AE79 /* NLProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C995601C02A57800D8AE79 /* NLProfileViewController.m */; };
 		04CD22FF1C29221400AB467A /* Warman-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04CD22FC1C29221400AB467A /* Warman-568h@2x.png */; };
 		04CD23001C29221400AB467A /* Warman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04CD22FD1C29221400AB467A /* Warman@2x.png */; };
 		04CD23011C29221400AB467A /* Warman@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04CD22FE1C29221400AB467A /* Warman@3x.png */; };
 		04CD23121C29310100AB467A /* OLGhostAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CD23111C29310100AB467A /* OLGhostAlertView.m */; };
 		04CDA1751BFF022D00D2A304 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CDA1741BFF022D00D2A304 /* Foundation.framework */; };
 		04CDA17E1BFF119500D2A304 /* Convenlence.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CDA17D1BFF119500D2A304 /* Convenlence.m */; };
-		04F04F7B1C06940F009DC949 /* NLIndividuaFormaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F04F7A1C06940F009DC949 /* NLIndividuaFormaCell.m */; };
-		04F04F7E1C06D1D1009DC949 /* NLIndividuaEditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F04F7D1C06D1D1009DC949 /* NLIndividuaEditingViewController.m */; };
-		04F04F811C06E46F009DC949 /* NLPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F04F801C06E46F009DC949 /* NLPickView.m */; };
 		04F04F851C073AAC009DC949 /* PlistData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F04F841C073AAC009DC949 /* PlistData.m */; };
 		04F3CC4F1C0434C10066D39D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F3CC511C0434C10066D39D /* Localizable.strings */; };
-		04F3CC611C0439280066D39D /* NLAboutImageBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CC601C0439280066D39D /* NLAboutImageBtn.m */; };
-		04F3CC7D1C045F9F0066D39D /* NLHealthSleepView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CC7C1C045F9F0066D39D /* NLHealthSleepView.m */; };
-		04F3CC801C0460120066D39D /* NLHealthStepNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CC7F1C0460120066D39D /* NLHealthStepNumber.m */; };
-		04F3CC831C046D1A0066D39D /* NLHealthCalenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CC821C046D1A0066D39D /* NLHealthCalenderView.m */; };
-		04F4B7C01C07ED2A00DE60DE /* NLMyEquipmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4B7BF1C07ED2A00DE60DE /* NLMyEquipmentCell.m */; };
 		04F4B7C41C07FA7100DE60DE /* battery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F4B7C21C07FA7100DE60DE /* battery@2x.png */; };
 		04F4B7C51C07FA7100DE60DE /* battery@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F4B7C31C07FA7100DE60DE /* battery@3x.png */; };
 		04F4B7C81C082AD200DE60DE /* NLSQLData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4B7C71C082AD200DE60DE /* NLSQLData.m */; };
-		04F4B7CF1C083AE500DE60DE /* NLCalenderPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4B7CE1C083AE500DE60DE /* NLCalenderPackage.m */; };
 		04F4B7D21C083B3E00DE60DE /* NLLocalUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4B7D11C083B3E00DE60DE /* NLLocalUserInfo.m */; };
-		04F4B7D51C084CFB00DE60DE /* NLFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4B7D41C084CFB00DE60DE /* NLFeedBackViewController.m */; };
-		04F4B7D81C085C7000DE60DE /* NLAboutNLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4B7D71C085C7000DE60DE /* NLAboutNLViewController.m */; };
-		04F5BB1C1C0545CC00B37CE2 /* NLProTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5BB1B1C0545CC00B37CE2 /* NLProTableCell.m */; };
-		04F5BB1F1C05673F00B37CE2 /* NLMyEquipmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5BB1E1C05673F00B37CE2 /* NLMyEquipmentController.m */; };
-		04F5BB221C05676700B37CE2 /* NLShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5BB211C05676700B37CE2 /* NLShareController.m */; };
-		04F5BB701C05B51A00B37CE2 /* NLIndividuaFormatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5BB6F1C05B51A00B37CE2 /* NLIndividuaFormatViewController.m */; };
 		04F7F64E1C1BFC9000466EBC /* NLGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7F64D1C1BFC9000466EBC /* NLGestureRecognizer.m */; };
 		04F7F6E71C2E7F2F009020A0 /* NLUserInformat.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7F6E61C2E7F2F009020A0 /* NLUserInformat.m */; };
 		04FA89BC1C117E400064F3AA /* NLDatahub.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B71C117E400064F3AA /* NLDatahub.m */; };
 		04FA89BD1C117E400064F3AA /* NLHTTPRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */; };
 		04FA89BE1C117E400064F3AA /* NLHTTPRequestOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */; };
-		04FA89C11C117F780064F3AA /* NLHalfView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89C01C117F780064F3AA /* NLHalfView.m */; };
-		04FB47A41C0FDED200FAE708 /* NLStepCountLabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB47A31C0FDED200FAE708 /* NLStepCountLabView.m */; };
-		04FF66841C21138A00E276E2 /* NLCalenderLifeHabit.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF66831C21138A00E276E2 /* NLCalenderLifeHabit.m */; };
-		04FF66871C214E8800E276E2 /* NLCalenderUncomfortable.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF66861C214E8800E276E2 /* NLCalenderUncomfortable.m */; };
-		04FF668A1C21578200E276E2 /* NLCalenderUncomforBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF66891C21578200E276E2 /* NLCalenderUncomforBtn.m */; };
+		04FB75911C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB75901C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m */; };
 		4A3CFF267937751BD6F2302D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E0A4932CCDD3CB9C4B5CFA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -106,45 +112,115 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		04015D5D1C1FB72F00454566 /* NLHealtCalenderPeriod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealtCalenderPeriod.h; sourceTree = "<group>"; };
-		04015D5E1C1FB72F00454566 /* NLHealtCalenderPeriod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealtCalenderPeriod.m; sourceTree = "<group>"; };
-		04015D611C1FDD1800454566 /* NLCalenderPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderPicker.h; sourceTree = "<group>"; };
-		04015D621C1FDD1800454566 /* NLCalenderPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCalenderPicker.m; sourceTree = "<group>"; };
-		0403F9711C2CD3B90000A9C3 /* NLSetProfoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLSetProfoleViewController.h; sourceTree = "<group>"; };
-		0403F9721C2CD3B90000A9C3 /* NLSetProfoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLSetProfoleViewController.m; sourceTree = "<group>"; };
-		0403F9741C2CD6380000A9C3 /* NLSetProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLSetProfileCell.h; sourceTree = "<group>"; };
-		0403F9751C2CD6380000A9C3 /* NLSetProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLSetProfileCell.m; sourceTree = "<group>"; };
+		04018B941C3CB914009AC56A /* NLHealthMangerSleepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthMangerSleepViewController.h; sourceTree = "<group>"; };
+		04018B951C3CB914009AC56A /* NLHealthMangerSleepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthMangerSleepViewController.m; sourceTree = "<group>"; };
+		04018B961C3CB914009AC56A /* NLHealthMangerStepNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthMangerStepNumViewController.h; sourceTree = "<group>"; };
+		04018B971C3CB914009AC56A /* NLHealthMangerStepNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthMangerStepNumViewController.m; sourceTree = "<group>"; };
+		04018B981C3CB914009AC56A /* NLHealthMangerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthMangerViewController.h; sourceTree = "<group>"; };
+		04018B991C3CB914009AC56A /* NLHealthMangerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthMangerViewController.m; sourceTree = "<group>"; };
+		04018B9B1C3CB914009AC56A /* LYDSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYDSegmentControl.h; sourceTree = "<group>"; };
+		04018B9C1C3CB914009AC56A /* LYDSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYDSegmentControl.m; sourceTree = "<group>"; };
+		04018B9D1C3CB914009AC56A /* LYDSetSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYDSetSegmentControl.h; sourceTree = "<group>"; };
+		04018B9E1C3CB914009AC56A /* LYDSetSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYDSetSegmentControl.m; sourceTree = "<group>"; };
+		04018BA01C3CB914009AC56A /* NLConnectBloothCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLConnectBloothCell.h; sourceTree = "<group>"; };
+		04018BA11C3CB914009AC56A /* NLConnectBloothCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLConnectBloothCell.m; sourceTree = "<group>"; };
+		04018BA21C3CB914009AC56A /* NLConnectBloothViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLConnectBloothViewController.h; sourceTree = "<group>"; };
+		04018BA31C3CB914009AC56A /* NLConnectBloothViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLConnectBloothViewController.m; sourceTree = "<group>"; };
+		04018BA41C3CB914009AC56A /* NLHotMoxibustionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHotMoxibustionViewController.h; sourceTree = "<group>"; };
+		04018BA51C3CB914009AC56A /* NLHotMoxibustionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHotMoxibustionViewController.m; sourceTree = "<group>"; };
+		04018BA91C3CB914009AC56A /* NLBodyParamentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLBodyParamentViewController.h; sourceTree = "<group>"; };
+		04018BAA1C3CB914009AC56A /* NLBodyParamentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLBodyParamentViewController.m; sourceTree = "<group>"; };
+		04018BAB1C3CB914009AC56A /* NLForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLForgetPasswordViewController.h; sourceTree = "<group>"; };
+		04018BAC1C3CB914009AC56A /* NLForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLForgetPasswordViewController.m; sourceTree = "<group>"; };
+		04018BAD1C3CB914009AC56A /* NLGenderSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLGenderSelectionViewController.h; sourceTree = "<group>"; };
+		04018BAE1C3CB914009AC56A /* NLGenderSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLGenderSelectionViewController.m; sourceTree = "<group>"; };
+		04018BAF1C3CB914009AC56A /* NLLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLLogInViewController.h; sourceTree = "<group>"; };
+		04018BB01C3CB914009AC56A /* NLLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLLogInViewController.m; sourceTree = "<group>"; };
+		04018BB11C3CB914009AC56A /* NLPeriodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLPeriodViewController.h; sourceTree = "<group>"; };
+		04018BB21C3CB914009AC56A /* NLPeriodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLPeriodViewController.m; sourceTree = "<group>"; };
+		04018BB31C3CB914009AC56A /* NLRegisteredViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRegisteredViewController.h; sourceTree = "<group>"; };
+		04018BB41C3CB914009AC56A /* NLRegisteredViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRegisteredViewController.m; sourceTree = "<group>"; };
+		04018BBA1C3CB914009AC56A /* NLAboutNLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLAboutNLViewController.h; sourceTree = "<group>"; };
+		04018BBB1C3CB914009AC56A /* NLAboutNLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLAboutNLViewController.m; sourceTree = "<group>"; };
+		04018BBC1C3CB914009AC56A /* NLFeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLFeedBackViewController.h; sourceTree = "<group>"; };
+		04018BBD1C3CB914009AC56A /* NLFeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLFeedBackViewController.m; sourceTree = "<group>"; };
+		04018BBE1C3CB914009AC56A /* NLIndividuaEditingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLIndividuaEditingViewController.h; sourceTree = "<group>"; };
+		04018BBF1C3CB914009AC56A /* NLIndividuaEditingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLIndividuaEditingViewController.m; sourceTree = "<group>"; };
+		04018BC01C3CB914009AC56A /* NLIndividuaFormatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLIndividuaFormatViewController.h; sourceTree = "<group>"; };
+		04018BC11C3CB914009AC56A /* NLIndividuaFormatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLIndividuaFormatViewController.m; sourceTree = "<group>"; };
+		04018BC21C3CB914009AC56A /* NLMyEquipmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMyEquipmentController.h; sourceTree = "<group>"; };
+		04018BC31C3CB914009AC56A /* NLMyEquipmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMyEquipmentController.m; sourceTree = "<group>"; };
+		04018BC41C3CB914009AC56A /* NLProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLProfileViewController.h; sourceTree = "<group>"; };
+		04018BC51C3CB914009AC56A /* NLProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLProfileViewController.m; sourceTree = "<group>"; };
+		04018BC61C3CB914009AC56A /* NLSetProfoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLSetProfoleViewController.h; sourceTree = "<group>"; };
+		04018BC71C3CB914009AC56A /* NLSetProfoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLSetProfoleViewController.m; sourceTree = "<group>"; };
+		04018BC81C3CB914009AC56A /* NLShareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLShareController.h; sourceTree = "<group>"; };
+		04018BC91C3CB914009AC56A /* NLShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLShareController.m; sourceTree = "<group>"; };
+		04018BCC1C3CB914009AC56A /* NLAboutImageBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLAboutImageBtn.h; sourceTree = "<group>"; };
+		04018BCD1C3CB914009AC56A /* NLAboutImageBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLAboutImageBtn.m; sourceTree = "<group>"; };
+		04018BCE1C3CB914009AC56A /* NLCalenderPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderPackage.h; sourceTree = "<group>"; };
+		04018BCF1C3CB914009AC56A /* NLCalenderPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCalenderPackage.m; sourceTree = "<group>"; };
+		04018BD01C3CB914009AC56A /* NLPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLPickView.h; sourceTree = "<group>"; };
+		04018BD11C3CB914009AC56A /* NLPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLPickView.m; sourceTree = "<group>"; };
+		04018BD41C3CB914009AC56A /* NLCalenderLifeHabit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderLifeHabit.h; sourceTree = "<group>"; };
+		04018BD51C3CB914009AC56A /* NLCalenderLifeHabit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCalenderLifeHabit.m; sourceTree = "<group>"; };
+		04018BD61C3CB914009AC56A /* NLCalenderPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderPicker.h; sourceTree = "<group>"; };
+		04018BD71C3CB914009AC56A /* NLCalenderPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCalenderPicker.m; sourceTree = "<group>"; };
+		04018BD81C3CB914009AC56A /* NLCalenderUncomforBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderUncomforBtn.h; sourceTree = "<group>"; };
+		04018BD91C3CB914009AC56A /* NLCalenderUncomforBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCalenderUncomforBtn.m; sourceTree = "<group>"; };
+		04018BDA1C3CB914009AC56A /* NLCalenderUncomfortable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderUncomfortable.h; sourceTree = "<group>"; };
+		04018BDB1C3CB914009AC56A /* NLCalenderUncomfortable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCalenderUncomfortable.m; sourceTree = "<group>"; };
+		04018BDC1C3CB914009AC56A /* NLColumnImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLColumnImage.h; sourceTree = "<group>"; };
+		04018BDD1C3CB914009AC56A /* NLColumnImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLColumnImage.m; sourceTree = "<group>"; };
+		04018BDE1C3CB914009AC56A /* NLHealtCalenderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealtCalenderCell.h; sourceTree = "<group>"; };
+		04018BDF1C3CB914009AC56A /* NLHealtCalenderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealtCalenderCell.m; sourceTree = "<group>"; };
+		04018BE01C3CB914009AC56A /* NLHealtCalenderPeriod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealtCalenderPeriod.h; sourceTree = "<group>"; };
+		04018BE11C3CB914009AC56A /* NLHealtCalenderPeriod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealtCalenderPeriod.m; sourceTree = "<group>"; };
+		04018BE21C3CB914009AC56A /* NLHealthCalenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthCalenderView.h; sourceTree = "<group>"; };
+		04018BE31C3CB914009AC56A /* NLHealthCalenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthCalenderView.m; sourceTree = "<group>"; };
+		04018BE41C3CB914009AC56A /* NLHealthSleepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthSleepView.h; sourceTree = "<group>"; };
+		04018BE51C3CB914009AC56A /* NLHealthSleepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthSleepView.m; sourceTree = "<group>"; };
+		04018BE61C3CB914009AC56A /* NLHealthStepNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthStepNumber.h; sourceTree = "<group>"; };
+		04018BE71C3CB914009AC56A /* NLHealthStepNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthStepNumber.m; sourceTree = "<group>"; };
+		04018BE81C3CB914009AC56A /* NLHealthStepNumberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthStepNumberCell.h; sourceTree = "<group>"; };
+		04018BE91C3CB914009AC56A /* NLHealthStepNumberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthStepNumberCell.m; sourceTree = "<group>"; };
+		04018BEA1C3CB914009AC56A /* NlRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NlRing.h; sourceTree = "<group>"; };
+		04018BEB1C3CB914009AC56A /* NLRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRing.m; sourceTree = "<group>"; };
+		04018BEC1C3CB914009AC56A /* NLRingLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRingLine.h; sourceTree = "<group>"; };
+		04018BED1C3CB914009AC56A /* NLRingLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRingLine.m; sourceTree = "<group>"; };
+		04018BEE1C3CB914009AC56A /* NLStepColumnImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLStepColumnImage.h; sourceTree = "<group>"; };
+		04018BEF1C3CB914009AC56A /* NLStepColumnImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLStepColumnImage.m; sourceTree = "<group>"; };
+		04018BF01C3CB914009AC56A /* NLStepCountLabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLStepCountLabView.h; sourceTree = "<group>"; };
+		04018BF11C3CB914009AC56A /* NLStepCountLabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLStepCountLabView.m; sourceTree = "<group>"; };
+		04018BF21C3CB914009AC56A /* NLStepImageLabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLStepImageLabView.h; sourceTree = "<group>"; };
+		04018BF31C3CB914009AC56A /* NLStepImageLabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLStepImageLabView.m; sourceTree = "<group>"; };
+		04018BF51C3CB914009AC56A /* NLIndividuaFormaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLIndividuaFormaCell.h; sourceTree = "<group>"; };
+		04018BF61C3CB914009AC56A /* NLIndividuaFormaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLIndividuaFormaCell.m; sourceTree = "<group>"; };
+		04018BF71C3CB914009AC56A /* NLMyEquipmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMyEquipmentCell.h; sourceTree = "<group>"; };
+		04018BF81C3CB914009AC56A /* NLMyEquipmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMyEquipmentCell.m; sourceTree = "<group>"; };
+		04018BF91C3CB914009AC56A /* NLProTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLProTableCell.h; sourceTree = "<group>"; };
+		04018BFA1C3CB914009AC56A /* NLProTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLProTableCell.m; sourceTree = "<group>"; };
+		04018BFB1C3CB914009AC56A /* NLSetProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLSetProfileCell.h; sourceTree = "<group>"; };
+		04018BFC1C3CB914009AC56A /* NLSetProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLSetProfileCell.m; sourceTree = "<group>"; };
+		04018C2E1C3CB9B7009AC56A /* NLHalfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHalfView.h; sourceTree = "<group>"; };
+		04018C2F1C3CB9B7009AC56A /* NLHalfView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHalfView.m; sourceTree = "<group>"; };
+		04018C321C3CBCD2009AC56A /* MainNavgationControllew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavgationControllew.h; sourceTree = "<group>"; };
+		04018C331C3CBCD2009AC56A /* MainNavgationControllew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavgationControllew.m; sourceTree = "<group>"; };
+		04018C341C3CBCD2009AC56A /* NLRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRootViewController.h; sourceTree = "<group>"; };
+		04018C351C3CBCD2009AC56A /* NLRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRootViewController.m; sourceTree = "<group>"; };
+		04018C361C3CBCD2009AC56A /* NLSubRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLSubRootViewController.h; sourceTree = "<group>"; };
+		04018C371C3CBCD2009AC56A /* NLSubRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLSubRootViewController.m; sourceTree = "<group>"; };
+		04018CE31C3CBDBC009AC56A /* NLMyHerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMyHerViewController.h; sourceTree = "<group>"; };
+		04018CE41C3CBDBC009AC56A /* NLMyHerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMyHerViewController.m; sourceTree = "<group>"; };
+		04018CE61C3CBFEA009AC56A /* NLMaleProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMaleProfileViewController.h; sourceTree = "<group>"; };
+		04018CE71C3CBFEA009AC56A /* NLMaleProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMaleProfileViewController.m; sourceTree = "<group>"; };
+		04018CE91C3CC002009AC56A /* NLMaleHealthMangerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMaleHealthMangerViewController.h; sourceTree = "<group>"; };
+		04018CEA1C3CC002009AC56A /* NLMaleHealthMangerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMaleHealthMangerViewController.m; sourceTree = "<group>"; };
+		04018CEC1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMaleNBLuePlanViewController.h; sourceTree = "<group>"; };
+		04018CED1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMaleNBLuePlanViewController.m; sourceTree = "<group>"; };
+		04018CEF1C3D179F009AC56A /* NLMaleIndividuaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMaleIndividuaViewController.h; sourceTree = "<group>"; };
+		04018CF01C3D179F009AC56A /* NLMaleIndividuaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMaleIndividuaViewController.m; sourceTree = "<group>"; };
 		0403F9771C2CE3420000A9C3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		0418DB931C351598000915E6 /* NLConnectBloothViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLConnectBloothViewController.h; sourceTree = "<group>"; };
-		0418DB941C351598000915E6 /* NLConnectBloothViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLConnectBloothViewController.m; sourceTree = "<group>"; };
-		0418DB961C351904000915E6 /* NLConnectBloothCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NLConnectBloothCell.h; path = NBlue/ViewController/HotMoxibustionController/NLConnectBloothCell.h; sourceTree = SOURCE_ROOT; };
-		0418DB971C351904000915E6 /* NLConnectBloothCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NLConnectBloothCell.m; path = NBlue/ViewController/HotMoxibustionController/NLConnectBloothCell.m; sourceTree = SOURCE_ROOT; };
-		044255341C1EABAE003F8503 /* NLHealtCalenderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealtCalenderCell.h; sourceTree = "<group>"; };
-		044255351C1EABAE003F8503 /* NLHealtCalenderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealtCalenderCell.m; sourceTree = "<group>"; };
-		0458E5D71C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthMangerStepNumViewController.h; sourceTree = "<group>"; };
-		0458E5D81C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthMangerStepNumViewController.m; sourceTree = "<group>"; };
-		0458E5DA1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthMangerSleepViewController.h; sourceTree = "<group>"; };
-		0458E5DB1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthMangerSleepViewController.m; sourceTree = "<group>"; };
-		046934ED1C02BF5B00150D2A /* MainNavgationControllew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavgationControllew.h; sourceTree = "<group>"; };
-		046934EE1C02BF5B00150D2A /* MainNavgationControllew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavgationControllew.m; sourceTree = "<group>"; };
-		046F18411C0D2D3100A21FA6 /* LYDSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYDSegmentControl.h; sourceTree = "<group>"; };
-		046F18421C0D2D3100A21FA6 /* LYDSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYDSegmentControl.m; sourceTree = "<group>"; };
-		046F18431C0D2D3100A21FA6 /* LYDSetSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYDSetSegmentControl.h; sourceTree = "<group>"; };
-		046F18441C0D2D3100A21FA6 /* LYDSetSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYDSetSegmentControl.m; sourceTree = "<group>"; };
-		046F18891C0D4A0700A21FA6 /* NLColumnImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLColumnImage.h; sourceTree = "<group>"; };
-		046F188A1C0D4A0700A21FA6 /* NLColumnImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLColumnImage.m; sourceTree = "<group>"; };
-		046F188C1C0D777A00A21FA6 /* NLStepImageLabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLStepImageLabView.h; sourceTree = "<group>"; };
-		046F188D1C0D777A00A21FA6 /* NLStepImageLabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLStepImageLabView.m; sourceTree = "<group>"; };
-		047BE7E71C19AB8600821F23 /* NLStepColumnImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLStepColumnImage.h; sourceTree = "<group>"; };
-		047BE7E81C19AB8600821F23 /* NLStepColumnImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLStepColumnImage.m; sourceTree = "<group>"; };
-		047D32D01C327FF70004A5C2 /* NLGenderSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLGenderSelectionViewController.h; sourceTree = "<group>"; };
-		047D32D11C327FF70004A5C2 /* NLGenderSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLGenderSelectionViewController.m; sourceTree = "<group>"; };
-		047D32D31C32802D0004A5C2 /* NLBodyParamentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLBodyParamentViewController.h; sourceTree = "<group>"; };
-		047D32D41C32802D0004A5C2 /* NLBodyParamentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLBodyParamentViewController.m; sourceTree = "<group>"; };
-		047D32D61C32805D0004A5C2 /* NLPeriodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLPeriodViewController.h; sourceTree = "<group>"; };
-		047D32D71C32805D0004A5C2 /* NLPeriodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLPeriodViewController.m; sourceTree = "<group>"; };
-		048EE89B1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthStepNumberCell.h; sourceTree = "<group>"; };
-		048EE89C1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthStepNumberCell.m; sourceTree = "<group>"; };
 		0497519C1BFEEED50044D97B /* NBlue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NBlue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		049751A01BFEEED50044D97B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		049751A91BFEEED50044D97B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -162,32 +238,12 @@
 		049751DD1BFEF3140044D97B /* ApplicationStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationStyle.h; sourceTree = "<group>"; };
 		049751DE1BFEF3140044D97B /* ApplicationStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationStyle.m; sourceTree = "<group>"; };
 		049751E11BFEF5050044D97B /* NLBlue.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NLBlue.pch; sourceTree = "<group>"; };
-		049B077B1C1559D4005147B5 /* NLRegisteredViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRegisteredViewController.h; sourceTree = "<group>"; };
-		049B077C1C1559D4005147B5 /* NLRegisteredViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRegisteredViewController.m; sourceTree = "<group>"; };
-		049B077E1C1559ED005147B5 /* NLForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLForgetPasswordViewController.h; sourceTree = "<group>"; };
-		049B077F1C1559ED005147B5 /* NLForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLForgetPasswordViewController.m; sourceTree = "<group>"; };
-		049B07801C1559ED005147B5 /* NLLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLLogInViewController.h; sourceTree = "<group>"; };
-		049B07811C1559ED005147B5 /* NLLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLLogInViewController.m; sourceTree = "<group>"; };
 		049B07841C158A78005147B5 /* NLNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NLNotification.h; sourceTree = "<group>"; };
-		04A151951C0DAA9700CB93FF /* NLRingLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRingLine.h; sourceTree = "<group>"; };
-		04A151961C0DAA9700CB93FF /* NLRingLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRingLine.m; sourceTree = "<group>"; };
-		04A151981C0DC3B700CB93FF /* NLRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRing.h; sourceTree = "<group>"; };
-		04A151991C0DC3B700CB93FF /* NLRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRing.m; sourceTree = "<group>"; };
 		04C995461C029D6B00D8AE79 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		04C995481C029E8300D8AE79 /* NLBluetoothAgreement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLBluetoothAgreement.h; sourceTree = "<group>"; };
 		04C995491C029E8300D8AE79 /* NLBluetoothAgreement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLBluetoothAgreement.m; sourceTree = "<group>"; };
 		04C9954B1C029F2400D8AE79 /* NLBluetoothDataAnalytical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLBluetoothDataAnalytical.h; sourceTree = "<group>"; };
 		04C9954C1C029F2400D8AE79 /* NLBluetoothDataAnalytical.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLBluetoothDataAnalytical.m; sourceTree = "<group>"; };
-		04C995531C02A40300D8AE79 /* NLRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NLRootViewController.h; path = NBlue/ViewController/NLRootViewController.h; sourceTree = SOURCE_ROOT; };
-		04C995541C02A40300D8AE79 /* NLRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NLRootViewController.m; path = NBlue/ViewController/NLRootViewController.m; sourceTree = SOURCE_ROOT; };
-		04C995561C02A51000D8AE79 /* NLSubRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLSubRootViewController.h; sourceTree = "<group>"; };
-		04C995571C02A51000D8AE79 /* NLSubRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLSubRootViewController.m; sourceTree = "<group>"; };
-		04C995591C02A55000D8AE79 /* NLHealthMangerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthMangerViewController.h; sourceTree = "<group>"; };
-		04C9955A1C02A55000D8AE79 /* NLHealthMangerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthMangerViewController.m; sourceTree = "<group>"; };
-		04C9955C1C02A56B00D8AE79 /* NLHotMoxibustionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHotMoxibustionViewController.h; sourceTree = "<group>"; };
-		04C9955D1C02A56B00D8AE79 /* NLHotMoxibustionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHotMoxibustionViewController.m; sourceTree = "<group>"; };
-		04C9955F1C02A57800D8AE79 /* NLProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLProfileViewController.h; sourceTree = "<group>"; };
-		04C995601C02A57800D8AE79 /* NLProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLProfileViewController.m; sourceTree = "<group>"; };
 		04C995621C02AC1A00D8AE79 /* ApplicationConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ApplicationConstants.h; path = ../ApplicationConstants.h; sourceTree = "<group>"; };
 		04CD22FC1C29221400AB467A /* Warman-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Warman-568h@2x.png"; sourceTree = "<group>"; };
 		04CD22FD1C29221400AB467A /* Warman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Warman@2x.png"; sourceTree = "<group>"; };
@@ -197,49 +253,19 @@
 		04CDA1741BFF022D00D2A304 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		04CDA17C1BFF119500D2A304 /* Convenlence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Convenlence.h; sourceTree = "<group>"; };
 		04CDA17D1BFF119500D2A304 /* Convenlence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Convenlence.m; sourceTree = "<group>"; };
-		04F04F791C06940F009DC949 /* NLIndividuaFormaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLIndividuaFormaCell.h; sourceTree = "<group>"; };
-		04F04F7A1C06940F009DC949 /* NLIndividuaFormaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLIndividuaFormaCell.m; sourceTree = "<group>"; };
-		04F04F7C1C06D1D1009DC949 /* NLIndividuaEditingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLIndividuaEditingViewController.h; sourceTree = "<group>"; };
-		04F04F7D1C06D1D1009DC949 /* NLIndividuaEditingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLIndividuaEditingViewController.m; sourceTree = "<group>"; };
-		04F04F7F1C06E46F009DC949 /* NLPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLPickView.h; sourceTree = "<group>"; };
-		04F04F801C06E46F009DC949 /* NLPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLPickView.m; sourceTree = "<group>"; };
 		04F04F831C073AAC009DC949 /* PlistData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlistData.h; sourceTree = "<group>"; };
 		04F04F841C073AAC009DC949 /* PlistData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlistData.m; sourceTree = "<group>"; };
 		04F3CC521C0434C40066D39D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		04F3CC531C04350D0066D39D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		04F3CC541C04350D0066D39D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		04F3CC551C04350D0066D39D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		04F3CC5F1C0439280066D39D /* NLAboutImageBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLAboutImageBtn.h; sourceTree = "<group>"; };
-		04F3CC601C0439280066D39D /* NLAboutImageBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLAboutImageBtn.m; sourceTree = "<group>"; };
-		04F3CC7B1C045F9F0066D39D /* NLHealthSleepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthSleepView.h; sourceTree = "<group>"; };
-		04F3CC7C1C045F9F0066D39D /* NLHealthSleepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthSleepView.m; sourceTree = "<group>"; };
-		04F3CC7E1C0460120066D39D /* NLHealthStepNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthStepNumber.h; sourceTree = "<group>"; };
-		04F3CC7F1C0460120066D39D /* NLHealthStepNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthStepNumber.m; sourceTree = "<group>"; };
-		04F3CC811C046D1A0066D39D /* NLHealthCalenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthCalenderView.h; sourceTree = "<group>"; };
-		04F3CC821C046D1A0066D39D /* NLHealthCalenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthCalenderView.m; sourceTree = "<group>"; };
-		04F4B7BE1C07ED2A00DE60DE /* NLMyEquipmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMyEquipmentCell.h; sourceTree = "<group>"; };
-		04F4B7BF1C07ED2A00DE60DE /* NLMyEquipmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMyEquipmentCell.m; sourceTree = "<group>"; };
 		04F4B7C21C07FA7100DE60DE /* battery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "battery@2x.png"; sourceTree = "<group>"; };
 		04F4B7C31C07FA7100DE60DE /* battery@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "battery@3x.png"; sourceTree = "<group>"; };
 		04F4B7C61C082AD200DE60DE /* NLSQLData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLSQLData.h; sourceTree = "<group>"; };
 		04F4B7C71C082AD200DE60DE /* NLSQLData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLSQLData.m; sourceTree = "<group>"; };
 		04F4B7CC1C08387A00DE60DE /* NLEquipmentCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NLEquipmentCommand.h; sourceTree = "<group>"; };
-		04F4B7CD1C083AE500DE60DE /* NLCalenderPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderPackage.h; sourceTree = "<group>"; };
-		04F4B7CE1C083AE500DE60DE /* NLCalenderPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCalenderPackage.m; sourceTree = "<group>"; };
 		04F4B7D01C083B3E00DE60DE /* NLLocalUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLLocalUserInfo.h; sourceTree = "<group>"; };
 		04F4B7D11C083B3E00DE60DE /* NLLocalUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLLocalUserInfo.m; sourceTree = "<group>"; };
-		04F4B7D31C084CFB00DE60DE /* NLFeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLFeedBackViewController.h; sourceTree = "<group>"; };
-		04F4B7D41C084CFB00DE60DE /* NLFeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLFeedBackViewController.m; sourceTree = "<group>"; };
-		04F4B7D61C085C7000DE60DE /* NLAboutNLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLAboutNLViewController.h; sourceTree = "<group>"; };
-		04F4B7D71C085C7000DE60DE /* NLAboutNLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLAboutNLViewController.m; sourceTree = "<group>"; };
-		04F5BB1A1C0545CC00B37CE2 /* NLProTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLProTableCell.h; sourceTree = "<group>"; };
-		04F5BB1B1C0545CC00B37CE2 /* NLProTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLProTableCell.m; sourceTree = "<group>"; };
-		04F5BB1D1C05673F00B37CE2 /* NLMyEquipmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMyEquipmentController.h; sourceTree = "<group>"; };
-		04F5BB1E1C05673F00B37CE2 /* NLMyEquipmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMyEquipmentController.m; sourceTree = "<group>"; };
-		04F5BB201C05676700B37CE2 /* NLShareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLShareController.h; sourceTree = "<group>"; };
-		04F5BB211C05676700B37CE2 /* NLShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLShareController.m; sourceTree = "<group>"; };
-		04F5BB6E1C05B51A00B37CE2 /* NLIndividuaFormatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLIndividuaFormatViewController.h; sourceTree = "<group>"; };
-		04F5BB6F1C05B51A00B37CE2 /* NLIndividuaFormatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLIndividuaFormatViewController.m; sourceTree = "<group>"; };
 		04F7F64C1C1BFC9000466EBC /* NLGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLGestureRecognizer.h; sourceTree = "<group>"; };
 		04F7F64D1C1BFC9000466EBC /* NLGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLGestureRecognizer.m; sourceTree = "<group>"; };
 		04F7F6E51C2E7F2F009020A0 /* NLUserInformat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLUserInformat.h; sourceTree = "<group>"; };
@@ -251,16 +277,8 @@
 		04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHTTPRequestFactory.m; sourceTree = "<group>"; };
 		04FA89BA1C117E400064F3AA /* NLHTTPRequestOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHTTPRequestOperations.h; sourceTree = "<group>"; };
 		04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHTTPRequestOperations.m; sourceTree = "<group>"; };
-		04FA89BF1C117F780064F3AA /* NLHalfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NLHalfView.h; path = NBlue/NetWork/NLHalfView.h; sourceTree = SOURCE_ROOT; };
-		04FA89C01C117F780064F3AA /* NLHalfView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NLHalfView.m; path = NBlue/NetWork/NLHalfView.m; sourceTree = SOURCE_ROOT; };
-		04FB47A21C0FDED200FAE708 /* NLStepCountLabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLStepCountLabView.h; sourceTree = "<group>"; };
-		04FB47A31C0FDED200FAE708 /* NLStepCountLabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLStepCountLabView.m; sourceTree = "<group>"; };
-		04FF66821C21138A00E276E2 /* NLCalenderLifeHabit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderLifeHabit.h; sourceTree = "<group>"; };
-		04FF66831C21138A00E276E2 /* NLCalenderLifeHabit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCalenderLifeHabit.m; sourceTree = "<group>"; };
-		04FF66851C214E8800E276E2 /* NLCalenderUncomfortable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderUncomfortable.h; sourceTree = "<group>"; };
-		04FF66861C214E8800E276E2 /* NLCalenderUncomfortable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCalenderUncomfortable.m; sourceTree = "<group>"; };
-		04FF66881C21578200E276E2 /* NLCalenderUncomforBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderUncomforBtn.h; sourceTree = "<group>"; };
-		04FF66891C21578200E276E2 /* NLCalenderUncomforBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCalenderUncomforBtn.m; sourceTree = "<group>"; };
+		04FB758F1C3DF8F200A8DF35 /* NLMaleNBluePlanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMaleNBluePlanCell.h; sourceTree = "<group>"; };
+		04FB75901C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMaleNBluePlanCell.m; sourceTree = "<group>"; };
 		46E0A4932CCDD3CB9C4B5CFA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D156C54B110CBBF4D4804D4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8F50F23BC12A7C0575CA9364 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -295,19 +313,233 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04015D601C1FC76100454566 /* CalenderUIView */ = {
+		04018B921C3CB8C1009AC56A /* FemaleVersion */ = {
 			isa = PBXGroup;
 			children = (
-				04015D611C1FDD1800454566 /* NLCalenderPicker.h */,
-				04015D621C1FDD1800454566 /* NLCalenderPicker.m */,
-				04FF66821C21138A00E276E2 /* NLCalenderLifeHabit.h */,
-				04FF66831C21138A00E276E2 /* NLCalenderLifeHabit.m */,
-				04FF66851C214E8800E276E2 /* NLCalenderUncomfortable.h */,
-				04FF66861C214E8800E276E2 /* NLCalenderUncomfortable.m */,
-				04FF66881C21578200E276E2 /* NLCalenderUncomforBtn.h */,
-				04FF66891C21578200E276E2 /* NLCalenderUncomforBtn.m */,
+				04018B931C3CB914009AC56A /* HealthMangerController */,
+				04018B9F1C3CB914009AC56A /* HotMoxibustionController */,
+				04018BA81C3CB914009AC56A /* MangetNumber */,
+				04018BB91C3CB914009AC56A /* ProfileController */,
+				04018BCA1C3CB914009AC56A /* View */,
+			);
+			path = FemaleVersion;
+			sourceTree = "<group>";
+		};
+		04018B931C3CB914009AC56A /* HealthMangerController */ = {
+			isa = PBXGroup;
+			children = (
+				04018B941C3CB914009AC56A /* NLHealthMangerSleepViewController.h */,
+				04018B951C3CB914009AC56A /* NLHealthMangerSleepViewController.m */,
+				04018B961C3CB914009AC56A /* NLHealthMangerStepNumViewController.h */,
+				04018B971C3CB914009AC56A /* NLHealthMangerStepNumViewController.m */,
+				04018B981C3CB914009AC56A /* NLHealthMangerViewController.h */,
+				04018B991C3CB914009AC56A /* NLHealthMangerViewController.m */,
+				04018B9A1C3CB914009AC56A /* SelectorBtn */,
+			);
+			path = HealthMangerController;
+			sourceTree = "<group>";
+		};
+		04018B9A1C3CB914009AC56A /* SelectorBtn */ = {
+			isa = PBXGroup;
+			children = (
+				04018B9B1C3CB914009AC56A /* LYDSegmentControl.h */,
+				04018B9C1C3CB914009AC56A /* LYDSegmentControl.m */,
+				04018B9D1C3CB914009AC56A /* LYDSetSegmentControl.h */,
+				04018B9E1C3CB914009AC56A /* LYDSetSegmentControl.m */,
+			);
+			path = SelectorBtn;
+			sourceTree = "<group>";
+		};
+		04018B9F1C3CB914009AC56A /* HotMoxibustionController */ = {
+			isa = PBXGroup;
+			children = (
+				04018BA01C3CB914009AC56A /* NLConnectBloothCell.h */,
+				04018BA11C3CB914009AC56A /* NLConnectBloothCell.m */,
+				04018BA21C3CB914009AC56A /* NLConnectBloothViewController.h */,
+				04018BA31C3CB914009AC56A /* NLConnectBloothViewController.m */,
+				04018BA41C3CB914009AC56A /* NLHotMoxibustionViewController.h */,
+				04018BA51C3CB914009AC56A /* NLHotMoxibustionViewController.m */,
+			);
+			path = HotMoxibustionController;
+			sourceTree = "<group>";
+		};
+		04018BA81C3CB914009AC56A /* MangetNumber */ = {
+			isa = PBXGroup;
+			children = (
+				04018BAD1C3CB914009AC56A /* NLGenderSelectionViewController.h */,
+				04018BAE1C3CB914009AC56A /* NLGenderSelectionViewController.m */,
+				04018BA91C3CB914009AC56A /* NLBodyParamentViewController.h */,
+				04018BAA1C3CB914009AC56A /* NLBodyParamentViewController.m */,
+				04018BB11C3CB914009AC56A /* NLPeriodViewController.h */,
+				04018BB21C3CB914009AC56A /* NLPeriodViewController.m */,
+				04018BAB1C3CB914009AC56A /* NLForgetPasswordViewController.h */,
+				04018BAC1C3CB914009AC56A /* NLForgetPasswordViewController.m */,
+				04018BAF1C3CB914009AC56A /* NLLogInViewController.h */,
+				04018BB01C3CB914009AC56A /* NLLogInViewController.m */,
+				04018BB31C3CB914009AC56A /* NLRegisteredViewController.h */,
+				04018BB41C3CB914009AC56A /* NLRegisteredViewController.m */,
+			);
+			path = MangetNumber;
+			sourceTree = "<group>";
+		};
+		04018BB91C3CB914009AC56A /* ProfileController */ = {
+			isa = PBXGroup;
+			children = (
+				04018BBA1C3CB914009AC56A /* NLAboutNLViewController.h */,
+				04018BBB1C3CB914009AC56A /* NLAboutNLViewController.m */,
+				04018BBC1C3CB914009AC56A /* NLFeedBackViewController.h */,
+				04018BBD1C3CB914009AC56A /* NLFeedBackViewController.m */,
+				04018BBE1C3CB914009AC56A /* NLIndividuaEditingViewController.h */,
+				04018BBF1C3CB914009AC56A /* NLIndividuaEditingViewController.m */,
+				04018BC01C3CB914009AC56A /* NLIndividuaFormatViewController.h */,
+				04018BC11C3CB914009AC56A /* NLIndividuaFormatViewController.m */,
+				04018BC21C3CB914009AC56A /* NLMyEquipmentController.h */,
+				04018BC31C3CB914009AC56A /* NLMyEquipmentController.m */,
+				04018BC41C3CB914009AC56A /* NLProfileViewController.h */,
+				04018BC51C3CB914009AC56A /* NLProfileViewController.m */,
+				04018BC61C3CB914009AC56A /* NLSetProfoleViewController.h */,
+				04018BC71C3CB914009AC56A /* NLSetProfoleViewController.m */,
+				04018BC81C3CB914009AC56A /* NLShareController.h */,
+				04018BC91C3CB914009AC56A /* NLShareController.m */,
+			);
+			path = ProfileController;
+			sourceTree = "<group>";
+		};
+		04018BCA1C3CB914009AC56A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04018C2D1C3CB9B1009AC56A /* HotMoxibustionView */,
+				04018BCB1C3CB914009AC56A /* GeneralView */,
+				04018BD21C3CB914009AC56A /* HealthMangerView */,
+				04018BF41C3CB914009AC56A /* ProFileView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04018BCB1C3CB914009AC56A /* GeneralView */ = {
+			isa = PBXGroup;
+			children = (
+				04018BCC1C3CB914009AC56A /* NLAboutImageBtn.h */,
+				04018BCD1C3CB914009AC56A /* NLAboutImageBtn.m */,
+				04018BCE1C3CB914009AC56A /* NLCalenderPackage.h */,
+				04018BCF1C3CB914009AC56A /* NLCalenderPackage.m */,
+				04018BD01C3CB914009AC56A /* NLPickView.h */,
+				04018BD11C3CB914009AC56A /* NLPickView.m */,
+			);
+			path = GeneralView;
+			sourceTree = "<group>";
+		};
+		04018BD21C3CB914009AC56A /* HealthMangerView */ = {
+			isa = PBXGroup;
+			children = (
+				04018BD31C3CB914009AC56A /* CalenderUIView */,
+				04018BDC1C3CB914009AC56A /* NLColumnImage.h */,
+				04018BDD1C3CB914009AC56A /* NLColumnImage.m */,
+				04018BDE1C3CB914009AC56A /* NLHealtCalenderCell.h */,
+				04018BDF1C3CB914009AC56A /* NLHealtCalenderCell.m */,
+				04018BE01C3CB914009AC56A /* NLHealtCalenderPeriod.h */,
+				04018BE11C3CB914009AC56A /* NLHealtCalenderPeriod.m */,
+				04018BE21C3CB914009AC56A /* NLHealthCalenderView.h */,
+				04018BE31C3CB914009AC56A /* NLHealthCalenderView.m */,
+				04018BE41C3CB914009AC56A /* NLHealthSleepView.h */,
+				04018BE51C3CB914009AC56A /* NLHealthSleepView.m */,
+				04018BE61C3CB914009AC56A /* NLHealthStepNumber.h */,
+				04018BE71C3CB914009AC56A /* NLHealthStepNumber.m */,
+				04018BE81C3CB914009AC56A /* NLHealthStepNumberCell.h */,
+				04018BE91C3CB914009AC56A /* NLHealthStepNumberCell.m */,
+				04018BEA1C3CB914009AC56A /* NlRing.h */,
+				04018BEB1C3CB914009AC56A /* NLRing.m */,
+				04018BEC1C3CB914009AC56A /* NLRingLine.h */,
+				04018BED1C3CB914009AC56A /* NLRingLine.m */,
+				04018BEE1C3CB914009AC56A /* NLStepColumnImage.h */,
+				04018BEF1C3CB914009AC56A /* NLStepColumnImage.m */,
+				04018BF01C3CB914009AC56A /* NLStepCountLabView.h */,
+				04018BF11C3CB914009AC56A /* NLStepCountLabView.m */,
+				04018BF21C3CB914009AC56A /* NLStepImageLabView.h */,
+				04018BF31C3CB914009AC56A /* NLStepImageLabView.m */,
+			);
+			path = HealthMangerView;
+			sourceTree = "<group>";
+		};
+		04018BD31C3CB914009AC56A /* CalenderUIView */ = {
+			isa = PBXGroup;
+			children = (
+				04018BD41C3CB914009AC56A /* NLCalenderLifeHabit.h */,
+				04018BD51C3CB914009AC56A /* NLCalenderLifeHabit.m */,
+				04018BD61C3CB914009AC56A /* NLCalenderPicker.h */,
+				04018BD71C3CB914009AC56A /* NLCalenderPicker.m */,
+				04018BD81C3CB914009AC56A /* NLCalenderUncomforBtn.h */,
+				04018BD91C3CB914009AC56A /* NLCalenderUncomforBtn.m */,
+				04018BDA1C3CB914009AC56A /* NLCalenderUncomfortable.h */,
+				04018BDB1C3CB914009AC56A /* NLCalenderUncomfortable.m */,
 			);
 			path = CalenderUIView;
+			sourceTree = "<group>";
+		};
+		04018BF41C3CB914009AC56A /* ProFileView */ = {
+			isa = PBXGroup;
+			children = (
+				04018BF51C3CB914009AC56A /* NLIndividuaFormaCell.h */,
+				04018BF61C3CB914009AC56A /* NLIndividuaFormaCell.m */,
+				04018BF71C3CB914009AC56A /* NLMyEquipmentCell.h */,
+				04018BF81C3CB914009AC56A /* NLMyEquipmentCell.m */,
+				04018BF91C3CB914009AC56A /* NLProTableCell.h */,
+				04018BFA1C3CB914009AC56A /* NLProTableCell.m */,
+				04018BFB1C3CB914009AC56A /* NLSetProfileCell.h */,
+				04018BFC1C3CB914009AC56A /* NLSetProfileCell.m */,
+			);
+			path = ProFileView;
+			sourceTree = "<group>";
+		};
+		04018C2D1C3CB9B1009AC56A /* HotMoxibustionView */ = {
+			isa = PBXGroup;
+			children = (
+				04018C2E1C3CB9B7009AC56A /* NLHalfView.h */,
+				04018C2F1C3CB9B7009AC56A /* NLHalfView.m */,
+			);
+			path = HotMoxibustionView;
+			sourceTree = "<group>";
+		};
+		04018C311C3CBB97009AC56A /* MaleVersion */ = {
+			isa = PBXGroup;
+			children = (
+				04FB758B1C3DF7BE00A8DF35 /* MaleView */,
+				04018C401C3CBD8D009AC56A /* MaleHealthManger */,
+				04018C3F1C3CBD73009AC56A /* MaleProfile */,
+				04018C3E1C3CBD56009AC56A /* MyHer */,
+			);
+			path = MaleVersion;
+			sourceTree = "<group>";
+		};
+		04018C3E1C3CBD56009AC56A /* MyHer */ = {
+			isa = PBXGroup;
+			children = (
+				04018CE31C3CBDBC009AC56A /* NLMyHerViewController.h */,
+				04018CE41C3CBDBC009AC56A /* NLMyHerViewController.m */,
+			);
+			path = MyHer;
+			sourceTree = "<group>";
+		};
+		04018C3F1C3CBD73009AC56A /* MaleProfile */ = {
+			isa = PBXGroup;
+			children = (
+				04018CE61C3CBFEA009AC56A /* NLMaleProfileViewController.h */,
+				04018CE71C3CBFEA009AC56A /* NLMaleProfileViewController.m */,
+				04018CEC1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.h */,
+				04018CED1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m */,
+				04018CEF1C3D179F009AC56A /* NLMaleIndividuaViewController.h */,
+				04018CF01C3D179F009AC56A /* NLMaleIndividuaViewController.m */,
+			);
+			path = MaleProfile;
+			sourceTree = "<group>";
+		};
+		04018C401C3CBD8D009AC56A /* MaleHealthManger */ = {
+			isa = PBXGroup;
+			children = (
+				04018CE91C3CC002009AC56A /* NLMaleHealthMangerViewController.h */,
+				04018CEA1C3CC002009AC56A /* NLMaleHealthMangerViewController.m */,
+			);
+			path = MaleHealthManger;
 			sourceTree = "<group>";
 		};
 		049751931BFEEED50044D97B = {
@@ -419,38 +651,16 @@
 		049751D61BFEEF510044D97B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				04C995531C02A40300D8AE79 /* NLRootViewController.h */,
-				04C995541C02A40300D8AE79 /* NLRootViewController.m */,
-				04C995561C02A51000D8AE79 /* NLSubRootViewController.h */,
-				04C995571C02A51000D8AE79 /* NLSubRootViewController.m */,
-				046934ED1C02BF5B00150D2A /* MainNavgationControllew.h */,
-				046934EE1C02BF5B00150D2A /* MainNavgationControllew.m */,
-				049B077A1C1559B8005147B5 /* MangetNumber */,
-				04C995501C02A2D100D8AE79 /* HealthMangerController */,
-				04C995521C02A38500D8AE79 /* HotMoxibustionController */,
-				04C995511C02A2E500D8AE79 /* ProfileController */,
-				04F3CC591C0438400066D39D /* View */,
+				04018C321C3CBCD2009AC56A /* MainNavgationControllew.h */,
+				04018C331C3CBCD2009AC56A /* MainNavgationControllew.m */,
+				04018C341C3CBCD2009AC56A /* NLRootViewController.h */,
+				04018C351C3CBCD2009AC56A /* NLRootViewController.m */,
+				04018C361C3CBCD2009AC56A /* NLSubRootViewController.h */,
+				04018C371C3CBCD2009AC56A /* NLSubRootViewController.m */,
+				04018C311C3CBB97009AC56A /* MaleVersion */,
+				04018B921C3CB8C1009AC56A /* FemaleVersion */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		049B077A1C1559B8005147B5 /* MangetNumber */ = {
-			isa = PBXGroup;
-			children = (
-				049B07801C1559ED005147B5 /* NLLogInViewController.h */,
-				049B07811C1559ED005147B5 /* NLLogInViewController.m */,
-				049B077B1C1559D4005147B5 /* NLRegisteredViewController.h */,
-				049B077C1C1559D4005147B5 /* NLRegisteredViewController.m */,
-				049B077E1C1559ED005147B5 /* NLForgetPasswordViewController.h */,
-				049B077F1C1559ED005147B5 /* NLForgetPasswordViewController.m */,
-				047D32D01C327FF70004A5C2 /* NLGenderSelectionViewController.h */,
-				047D32D11C327FF70004A5C2 /* NLGenderSelectionViewController.m */,
-				047D32D31C32802D0004A5C2 /* NLBodyParamentViewController.h */,
-				047D32D41C32802D0004A5C2 /* NLBodyParamentViewController.m */,
-				047D32D61C32805D0004A5C2 /* NLPeriodViewController.h */,
-				047D32D71C32805D0004A5C2 /* NLPeriodViewController.m */,
-			);
-			path = MangetNumber;
 			sourceTree = "<group>";
 		};
 		04C9954E1C02A08A00D8AE79 /* SystemBase */ = {
@@ -460,54 +670,6 @@
 			);
 			name = SystemBase;
 			path = Common/SystemBase;
-			sourceTree = "<group>";
-		};
-		04C995501C02A2D100D8AE79 /* HealthMangerController */ = {
-			isa = PBXGroup;
-			children = (
-				04F3CC6A1C0459EB0066D39D /* SelectorBtn */,
-				04C995591C02A55000D8AE79 /* NLHealthMangerViewController.h */,
-				04C9955A1C02A55000D8AE79 /* NLHealthMangerViewController.m */,
-				0458E5D71C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.h */,
-				0458E5D81C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m */,
-				0458E5DA1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.h */,
-				0458E5DB1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m */,
-			);
-			path = HealthMangerController;
-			sourceTree = "<group>";
-		};
-		04C995511C02A2E500D8AE79 /* ProfileController */ = {
-			isa = PBXGroup;
-			children = (
-				04C9955F1C02A57800D8AE79 /* NLProfileViewController.h */,
-				04C995601C02A57800D8AE79 /* NLProfileViewController.m */,
-				04F5BB6E1C05B51A00B37CE2 /* NLIndividuaFormatViewController.h */,
-				04F5BB6F1C05B51A00B37CE2 /* NLIndividuaFormatViewController.m */,
-				04F04F7C1C06D1D1009DC949 /* NLIndividuaEditingViewController.h */,
-				04F04F7D1C06D1D1009DC949 /* NLIndividuaEditingViewController.m */,
-				04F5BB1D1C05673F00B37CE2 /* NLMyEquipmentController.h */,
-				04F5BB1E1C05673F00B37CE2 /* NLMyEquipmentController.m */,
-				04F5BB201C05676700B37CE2 /* NLShareController.h */,
-				04F5BB211C05676700B37CE2 /* NLShareController.m */,
-				04F4B7D31C084CFB00DE60DE /* NLFeedBackViewController.h */,
-				04F4B7D41C084CFB00DE60DE /* NLFeedBackViewController.m */,
-				04F4B7D61C085C7000DE60DE /* NLAboutNLViewController.h */,
-				04F4B7D71C085C7000DE60DE /* NLAboutNLViewController.m */,
-				0403F9711C2CD3B90000A9C3 /* NLSetProfoleViewController.h */,
-				0403F9721C2CD3B90000A9C3 /* NLSetProfoleViewController.m */,
-			);
-			path = ProfileController;
-			sourceTree = "<group>";
-		};
-		04C995521C02A38500D8AE79 /* HotMoxibustionController */ = {
-			isa = PBXGroup;
-			children = (
-				04C9955C1C02A56B00D8AE79 /* NLHotMoxibustionViewController.h */,
-				04C9955D1C02A56B00D8AE79 /* NLHotMoxibustionViewController.m */,
-				0418DB931C351598000915E6 /* NLConnectBloothViewController.h */,
-				0418DB941C351598000915E6 /* NLConnectBloothViewController.m */,
-			);
-			path = HotMoxibustionController;
 			sourceTree = "<group>";
 		};
 		04CD230E1C2930F700AB467A /* ThirdParty */ = {
@@ -545,99 +707,6 @@
 			path = ThirdLibrary;
 			sourceTree = "<group>";
 		};
-		04F3CC591C0438400066D39D /* View */ = {
-			isa = PBXGroup;
-			children = (
-				04F3CC5E1C0438E10066D39D /* GeneralView */,
-				04F3CC5D1C0438BA0066D39D /* ProFileView */,
-				04F3CC5C1C0438AD0066D39D /* HotMoxibustionView */,
-				04F3CC5B1C0438A10066D39D /* HealthMangerView */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		04F3CC5B1C0438A10066D39D /* HealthMangerView */ = {
-			isa = PBXGroup;
-			children = (
-				04015D601C1FC76100454566 /* CalenderUIView */,
-				04F3CC811C046D1A0066D39D /* NLHealthCalenderView.h */,
-				04F3CC821C046D1A0066D39D /* NLHealthCalenderView.m */,
-				044255341C1EABAE003F8503 /* NLHealtCalenderCell.h */,
-				044255351C1EABAE003F8503 /* NLHealtCalenderCell.m */,
-				04015D5D1C1FB72F00454566 /* NLHealtCalenderPeriod.h */,
-				04015D5E1C1FB72F00454566 /* NLHealtCalenderPeriod.m */,
-				04F3CC7B1C045F9F0066D39D /* NLHealthSleepView.h */,
-				04F3CC7C1C045F9F0066D39D /* NLHealthSleepView.m */,
-				04F3CC7E1C0460120066D39D /* NLHealthStepNumber.h */,
-				04F3CC7F1C0460120066D39D /* NLHealthStepNumber.m */,
-				048EE89B1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.h */,
-				048EE89C1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.m */,
-				046F18891C0D4A0700A21FA6 /* NLColumnImage.h */,
-				046F188A1C0D4A0700A21FA6 /* NLColumnImage.m */,
-				047BE7E71C19AB8600821F23 /* NLStepColumnImage.h */,
-				047BE7E81C19AB8600821F23 /* NLStepColumnImage.m */,
-				046F188C1C0D777A00A21FA6 /* NLStepImageLabView.h */,
-				046F188D1C0D777A00A21FA6 /* NLStepImageLabView.m */,
-				04A151951C0DAA9700CB93FF /* NLRingLine.h */,
-				04A151961C0DAA9700CB93FF /* NLRingLine.m */,
-				04A151981C0DC3B700CB93FF /* NLRing.h */,
-				04A151991C0DC3B700CB93FF /* NLRing.m */,
-				04FB47A21C0FDED200FAE708 /* NLStepCountLabView.h */,
-				04FB47A31C0FDED200FAE708 /* NLStepCountLabView.m */,
-			);
-			path = HealthMangerView;
-			sourceTree = "<group>";
-		};
-		04F3CC5C1C0438AD0066D39D /* HotMoxibustionView */ = {
-			isa = PBXGroup;
-			children = (
-				04FA89BF1C117F780064F3AA /* NLHalfView.h */,
-				04FA89C01C117F780064F3AA /* NLHalfView.m */,
-				0418DB961C351904000915E6 /* NLConnectBloothCell.h */,
-				0418DB971C351904000915E6 /* NLConnectBloothCell.m */,
-			);
-			path = HotMoxibustionView;
-			sourceTree = "<group>";
-		};
-		04F3CC5D1C0438BA0066D39D /* ProFileView */ = {
-			isa = PBXGroup;
-			children = (
-				04F5BB1A1C0545CC00B37CE2 /* NLProTableCell.h */,
-				04F5BB1B1C0545CC00B37CE2 /* NLProTableCell.m */,
-				04F04F791C06940F009DC949 /* NLIndividuaFormaCell.h */,
-				04F04F7A1C06940F009DC949 /* NLIndividuaFormaCell.m */,
-				04F4B7BE1C07ED2A00DE60DE /* NLMyEquipmentCell.h */,
-				04F4B7BF1C07ED2A00DE60DE /* NLMyEquipmentCell.m */,
-				0403F9741C2CD6380000A9C3 /* NLSetProfileCell.h */,
-				0403F9751C2CD6380000A9C3 /* NLSetProfileCell.m */,
-			);
-			path = ProFileView;
-			sourceTree = "<group>";
-		};
-		04F3CC5E1C0438E10066D39D /* GeneralView */ = {
-			isa = PBXGroup;
-			children = (
-				04F4B7CD1C083AE500DE60DE /* NLCalenderPackage.h */,
-				04F4B7CE1C083AE500DE60DE /* NLCalenderPackage.m */,
-				04F3CC5F1C0439280066D39D /* NLAboutImageBtn.h */,
-				04F3CC601C0439280066D39D /* NLAboutImageBtn.m */,
-				04F04F7F1C06E46F009DC949 /* NLPickView.h */,
-				04F04F801C06E46F009DC949 /* NLPickView.m */,
-			);
-			path = GeneralView;
-			sourceTree = "<group>";
-		};
-		04F3CC6A1C0459EB0066D39D /* SelectorBtn */ = {
-			isa = PBXGroup;
-			children = (
-				046F18411C0D2D3100A21FA6 /* LYDSegmentControl.h */,
-				046F18421C0D2D3100A21FA6 /* LYDSegmentControl.m */,
-				046F18431C0D2D3100A21FA6 /* LYDSetSegmentControl.h */,
-				046F18441C0D2D3100A21FA6 /* LYDSetSegmentControl.m */,
-			);
-			path = SelectorBtn;
-			sourceTree = "<group>";
-		};
 		04F4B7C11C07FA3C00DE60DE /* TestImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -668,6 +737,40 @@
 				04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */,
 			);
 			path = NetWork;
+			sourceTree = "<group>";
+		};
+		04FB758B1C3DF7BE00A8DF35 /* MaleView */ = {
+			isa = PBXGroup;
+			children = (
+				04FB758E1C3DF8CA00A8DF35 /* MaleMyHer */,
+				04FB758D1C3DF8B300A8DF35 /* MaleProfileView */,
+				04FB758C1C3DF89F00A8DF35 /* MaleHealthMangeView */,
+			);
+			name = MaleView;
+			path = ../MaleView;
+			sourceTree = "<group>";
+		};
+		04FB758C1C3DF89F00A8DF35 /* MaleHealthMangeView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MaleHealthMangeView;
+			sourceTree = "<group>";
+		};
+		04FB758D1C3DF8B300A8DF35 /* MaleProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				04FB758F1C3DF8F200A8DF35 /* NLMaleNBluePlanCell.h */,
+				04FB75901C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m */,
+			);
+			path = MaleProfileView;
+			sourceTree = "<group>";
+		};
+		04FB758E1C3DF8CA00A8DF35 /* MaleMyHer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MaleMyHer;
 			sourceTree = "<group>";
 		};
 		9B52667861575D0AACE7B05E /* Frameworks */ = {
@@ -878,70 +981,76 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				048EE89D1C2A7AEB00FF5D57 /* NLHealthStepNumberCell.m in Sources */,
-				049B07821C1559ED005147B5 /* NLForgetPasswordViewController.m in Sources */,
-				0458E5DC1C0E985C001D0EE7 /* NLHealthMangerSleepViewController.m in Sources */,
-				047BE7E91C19AB8600821F23 /* NLStepColumnImage.m in Sources */,
-				04F5BB1F1C05673F00B37CE2 /* NLMyEquipmentController.m in Sources */,
-				04FA89C11C117F780064F3AA /* NLHalfView.m in Sources */,
-				049B07831C1559ED005147B5 /* NLLogInViewController.m in Sources */,
+				04018C0E1C3CB914009AC56A /* NLAboutNLViewController.m in Sources */,
+				04018CF11C3D179F009AC56A /* NLMaleIndividuaViewController.m in Sources */,
+				04018C291C3CB914009AC56A /* NLIndividuaFormaCell.m in Sources */,
+				04018BFD1C3CB914009AC56A /* NLHealthMangerSleepViewController.m in Sources */,
+				04018CE51C3CBDBC009AC56A /* NLMyHerViewController.m in Sources */,
+				04018C0A1C3CB914009AC56A /* NLPeriodViewController.m in Sources */,
+				04018C1A1C3CB914009AC56A /* NLCalenderPicker.m in Sources */,
+				04018C191C3CB914009AC56A /* NLCalenderLifeHabit.m in Sources */,
+				04018C041C3CB914009AC56A /* NLHotMoxibustionViewController.m in Sources */,
 				04F4B7C81C082AD200DE60DE /* NLSQLData.m in Sources */,
+				04018C081C3CB914009AC56A /* NLGenderSelectionViewController.m in Sources */,
+				04018BFF1C3CB914009AC56A /* NLHealthMangerViewController.m in Sources */,
+				04018CEB1C3CC002009AC56A /* NLMaleHealthMangerViewController.m in Sources */,
 				04FA89BD1C117E400064F3AA /* NLHTTPRequestFactory.m in Sources */,
-				04F4B7D81C085C7000DE60DE /* NLAboutNLViewController.m in Sources */,
-				046F188B1C0D4A0700A21FA6 /* NLColumnImage.m in Sources */,
-				04F3CC801C0460120066D39D /* NLHealthStepNumber.m in Sources */,
+				04018BFE1C3CB914009AC56A /* NLHealthMangerStepNumViewController.m in Sources */,
+				04018C271C3CB914009AC56A /* NLStepCountLabView.m in Sources */,
 				04FA89BE1C117E400064F3AA /* NLHTTPRequestOperations.m in Sources */,
-				04C9955E1C02A56B00D8AE79 /* NLHotMoxibustionViewController.m in Sources */,
-				04F3CC7D1C045F9F0066D39D /* NLHealthSleepView.m in Sources */,
-				04A1519A1C0DC3B700CB93FF /* NLRing.m in Sources */,
-				04F3CC611C0439280066D39D /* NLAboutImageBtn.m in Sources */,
-				04F5BB701C05B51A00B37CE2 /* NLIndividuaFormatViewController.m in Sources */,
-				0403F9761C2CD6380000A9C3 /* NLSetProfileCell.m in Sources */,
-				04F04F811C06E46F009DC949 /* NLPickView.m in Sources */,
-				0458E5D91C0E9832001D0EE7 /* NLHealthMangerStepNumViewController.m in Sources */,
 				049751A11BFEEED50044D97B /* main.m in Sources */,
+				04018C1C1C3CB914009AC56A /* NLCalenderUncomfortable.m in Sources */,
+				04018C241C3CB914009AC56A /* NLRing.m in Sources */,
+				04018C181C3CB914009AC56A /* NLPickView.m in Sources */,
 				04F7F64E1C1BFC9000466EBC /* NLGestureRecognizer.m in Sources */,
-				04A151971C0DAA9700CB93FF /* NLRingLine.m in Sources */,
-				04FF66871C214E8800E276E2 /* NLCalenderUncomfortable.m in Sources */,
-				04FF66841C21138A00E276E2 /* NLCalenderLifeHabit.m in Sources */,
-				04F4B7C01C07ED2A00DE60DE /* NLMyEquipmentCell.m in Sources */,
-				044255361C1EABAE003F8503 /* NLHealtCalenderCell.m in Sources */,
-				04F04F7B1C06940F009DC949 /* NLIndividuaFormaCell.m in Sources */,
-				0403F9731C2CD3B90000A9C3 /* NLSetProfoleViewController.m in Sources */,
-				04F5BB221C05676700B37CE2 /* NLShareController.m in Sources */,
-				04F4B7CF1C083AE500DE60DE /* NLCalenderPackage.m in Sources */,
-				04F4B7D51C084CFB00DE60DE /* NLFeedBackViewController.m in Sources */,
-				04C995551C02A40300D8AE79 /* NLRootViewController.m in Sources */,
 				04C9954D1C029F2400D8AE79 /* NLBluetoothDataAnalytical.m in Sources */,
-				04C9955B1C02A55000D8AE79 /* NLHealthMangerViewController.m in Sources */,
-				049B077D1C1559D4005147B5 /* NLRegisteredViewController.m in Sources */,
-				047D32D81C32805D0004A5C2 /* NLPeriodViewController.m in Sources */,
-				046934EF1C02BF5B00150D2A /* MainNavgationControllew.m in Sources */,
-				04015D5F1C1FB72F00454566 /* NLHealtCalenderPeriod.m in Sources */,
-				04C995581C02A51000D8AE79 /* NLSubRootViewController.m in Sources */,
+				04018C201C3CB914009AC56A /* NLHealthCalenderView.m in Sources */,
 				049751DF1BFEF3140044D97B /* ApplicationStyle.m in Sources */,
+				04018C301C3CB9B7009AC56A /* NLHalfView.m in Sources */,
+				04018C151C3CB914009AC56A /* NLShareController.m in Sources */,
+				04018C161C3CB914009AC56A /* NLAboutImageBtn.m in Sources */,
 				04CD23121C29310100AB467A /* OLGhostAlertView.m in Sources */,
+				04018C071C3CB914009AC56A /* NLForgetPasswordViewController.m in Sources */,
+				04FB75911C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m in Sources */,
+				04018C3A1C3CBCD2009AC56A /* NLSubRootViewController.m in Sources */,
+				04018C061C3CB914009AC56A /* NLBodyParamentViewController.m in Sources */,
+				04018C2B1C3CB914009AC56A /* NLProTableCell.m in Sources */,
+				04018C121C3CB914009AC56A /* NLMyEquipmentController.m in Sources */,
+				04018C141C3CB914009AC56A /* NLSetProfoleViewController.m in Sources */,
 				04CDA17E1BFF119500D2A304 /* Convenlence.m in Sources */,
+				04018C2C1C3CB914009AC56A /* NLSetProfileCell.m in Sources */,
 				049751DC1BFEF2FE0044D97B /* AppDelegate.m in Sources */,
-				04C995611C02A57800D8AE79 /* NLProfileViewController.m in Sources */,
+				04018C0B1C3CB914009AC56A /* NLRegisteredViewController.m in Sources */,
+				04018C131C3CB914009AC56A /* NLProfileViewController.m in Sources */,
+				04018C281C3CB914009AC56A /* NLStepImageLabView.m in Sources */,
+				04018C021C3CB914009AC56A /* NLConnectBloothCell.m in Sources */,
+				04018C001C3CB914009AC56A /* LYDSegmentControl.m in Sources */,
+				04018C031C3CB914009AC56A /* NLConnectBloothViewController.m in Sources */,
+				04018C091C3CB914009AC56A /* NLLogInViewController.m in Sources */,
+				04018C171C3CB914009AC56A /* NLCalenderPackage.m in Sources */,
+				04018C2A1C3CB914009AC56A /* NLMyEquipmentCell.m in Sources */,
+				04018C101C3CB914009AC56A /* NLIndividuaEditingViewController.m in Sources */,
+				04018C231C3CB914009AC56A /* NLHealthStepNumberCell.m in Sources */,
+				04018C1D1C3CB914009AC56A /* NLColumnImage.m in Sources */,
+				04018C391C3CBCD2009AC56A /* NLRootViewController.m in Sources */,
+				04018C251C3CB914009AC56A /* NLRingLine.m in Sources */,
+				04018C381C3CBCD2009AC56A /* MainNavgationControllew.m in Sources */,
+				04018C261C3CB914009AC56A /* NLStepColumnImage.m in Sources */,
 				04FA89BC1C117E400064F3AA /* NLDatahub.m in Sources */,
-				04F3CC831C046D1A0066D39D /* NLHealthCalenderView.m in Sources */,
-				04015D631C1FDD1800454566 /* NLCalenderPicker.m in Sources */,
-				047D32D21C327FF70004A5C2 /* NLGenderSelectionViewController.m in Sources */,
-				047D32D51C32802D0004A5C2 /* NLBodyParamentViewController.m in Sources */,
-				0418DB951C351598000915E6 /* NLConnectBloothViewController.m in Sources */,
 				04F04F851C073AAC009DC949 /* PlistData.m in Sources */,
+				04018C111C3CB914009AC56A /* NLIndividuaFormatViewController.m in Sources */,
+				04018C221C3CB914009AC56A /* NLHealthStepNumber.m in Sources */,
+				04018C211C3CB914009AC56A /* NLHealthSleepView.m in Sources */,
+				04018C0F1C3CB914009AC56A /* NLFeedBackViewController.m in Sources */,
+				04018CEE1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m in Sources */,
 				04F4B7D21C083B3E00DE60DE /* NLLocalUserInfo.m in Sources */,
-				04F5BB1C1C0545CC00B37CE2 /* NLProTableCell.m in Sources */,
-				04FB47A41C0FDED200FAE708 /* NLStepCountLabView.m in Sources */,
-				04F04F7E1C06D1D1009DC949 /* NLIndividuaEditingViewController.m in Sources */,
-				046F18451C0D2D3100A21FA6 /* LYDSegmentControl.m in Sources */,
-				046F18461C0D2D3100A21FA6 /* LYDSetSegmentControl.m in Sources */,
+				04018CE81C3CBFEA009AC56A /* NLMaleProfileViewController.m in Sources */,
 				04C9954A1C029E8300D8AE79 /* NLBluetoothAgreement.m in Sources */,
-				0418DB981C351904000915E6 /* NLConnectBloothCell.m in Sources */,
+				04018C011C3CB914009AC56A /* LYDSetSegmentControl.m in Sources */,
+				04018C1E1C3CB914009AC56A /* NLHealtCalenderCell.m in Sources */,
+				04018C1F1C3CB914009AC56A /* NLHealtCalenderPeriod.m in Sources */,
 				04F7F6E71C2E7F2F009020A0 /* NLUserInformat.m in Sources */,
-				046F188E1C0D777A00A21FA6 /* NLStepImageLabView.m in Sources */,
-				04FF668A1C21578200E276E2 /* NLCalenderUncomforBtn.m in Sources */,
+				04018C1B1C3CB914009AC56A /* NLCalenderUncomforBtn.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

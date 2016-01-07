@@ -10,6 +10,9 @@
 #import "NLHealthMangerViewController.h"
 #import "NLHotMoxibustionViewController.h"
 #import "NLProfileViewController.h"
+#import "NLMyHerViewController.h"
+#import "NLMaleProfileViewController.h"
+#import "NLMaleHealthMangerViewController.h"
 #import "MainNavgationControllew.h"
 #import "NLLogInViewController.h"
 #import "OLGhostAlertView.h"
@@ -38,74 +41,137 @@
     
     _loacluserinfo = [[NLLocalUserInfo alloc] init];
     
-//    NSLog(@"%@",[kAPPDELEGATE._loacluserinfo getControllew]);
-//    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
-//    [kAPPDELEGATE._loacluserinfo SetUser_ID:@"88830130-15c5-4fa9-92c2-b6960f11edc1"];
-//    [kAPPDELEGATE._loacluserinfo SetUserAccessToken:@"123123123123"];
+    
+    
     
     if (![[kAPPDELEGATE._loacluserinfo getControllew] isEqualToString:@"1"]) {
         [self tabBarViewControllerType:Controller_Loing];
     }else{
-        [self tabBarViewControllerType:Controller_Main];
+        if ([[kAPPDELEGATE._loacluserinfo getUserGender] isEqualToString:@"0"]) {
+            [self tabBarViewControllerType:Controller_WoManMain];
+        }else{
+            [self tabBarViewControllerType:Controller_MaleMain];
+        }
     }
     
     [self setUMSocial];
-    
-    
-    
-//    if ([application applicationState] == UIApplicationStateBackground) {
-//        NSLog(@"是自启动");
-//    }else{
-//        NSLog(@"不是");
-//    }
-    
     
     return YES;
 }
 -(void)tabBarViewControllerType:(Controller)type{
     
     
-    if (type == Controller_Loing) {
-        NLLogInViewController *vc = [[NLLogInViewController alloc] init];
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-        self.window.rootViewController = nav;
-    }else{
-        UIColor *titleWhite = [UIColor whiteColor];
-        NSMutableArray *controllewArr = [NSMutableArray arrayWithCapacity:0];
-        NSArray *arrVC = [NSArray array];
-        NSArray *arrTitle = [NSArray array];
-        NSArray *arrTabBarImageX = [NSArray array];
-        NSArray *arrTabBarImage = [NSArray array];
-        UITabBarController *tabBar = [[UITabBarController alloc] init];
-        NLHealthMangerViewController *healthVC = [[NLHealthMangerViewController alloc] init];
-        NLHotMoxibustionViewController *hotVC = [[NLHotMoxibustionViewController alloc] init];
-        NLProfileViewController *proVC = [[NLProfileViewController alloc] init];
-        arrVC = @[healthVC,hotVC,proVC];
-        arrTitle = @[NSLocalizedString(@"TabBar_HealthManger", nil),NSLocalizedString(@"TabBar_HotMoxibustion", nil),NSLocalizedString(@"TabBar_Profile", nil)];
-        arrTabBarImageX = @[@"Health_Manger_X",@"Hot_Moxibus_X",@"Pro_File_X"];
-        arrTabBarImage = @[@"Health_Manger",@"Hot_Moxibus",@"Pro_File"];
-        for (int i=0 ; i<arrVC.count; i++) {
-            MainNavgationControllew *baseVc = [[MainNavgationControllew alloc] initWithRootViewController:arrVC[i]];
-            UITabBarItem *tabBaritem = [[UITabBarItem alloc]init];
-            [tabBaritem setTitle:arrTitle[i]];
-            tabBaritem.image = [[UIImage imageNamed:arrTabBarImage[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-            tabBaritem.selectedImage = [[UIImage imageNamed:arrTabBarImageX[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-            baseVc.title = arrTitle[i];
-            ((UIViewController *)arrVC[i]).tabBarItem = tabBaritem;
-            [controllewArr addObject:baseVc];
+    switch (type) {
+        case Controller_Loing:
+        {
+            NLLogInViewController *vc = [[NLLogInViewController alloc] init];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+            self.window.rootViewController = nav;
+            break;
         }
-        UIView *viewBack = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, tabBar.tabBar.frame.size.height)];
-        viewBack.backgroundColor = [@"1d1b24" hexStringToColor];
-        [tabBar.tabBar insertSubview:viewBack atIndex:0];
-        
-        [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [ApplicationStyle subjectPinkColor],NSFontAttributeName:[UIFont systemFontOfSize:10]}            forState:UIControlStateSelected];
-        
-        [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : titleWhite,NSFontAttributeName:[UIFont systemFontOfSize:10]}            forState:UIControlStateNormal];
-        tabBar.viewControllers = controllewArr;
-        tabBar.selectedIndex = 1;
-        self.window.rootViewController = tabBar;
+        case Controller_WoManMain:
+        {
+            NLHealthMangerViewController *healthVC = [[NLHealthMangerViewController alloc] init];
+            NLHotMoxibustionViewController *hotVC = [[NLHotMoxibustionViewController alloc] init];
+            NLProfileViewController *proVC = [[NLProfileViewController alloc] init];
+            
+            
+            [self nlViewContrller:healthVC
+                           middle:hotVC
+                            right:proVC
+                         titleArr:@[NSLocalizedString(@"TabBar_HealthManger", nil),
+                                    NSLocalizedString(@"TabBar_HotMoxibustion", nil),
+                                    NSLocalizedString(@"TabBar_Profile", nil)]
+                  tabBarImageXArr:@[@"Health_Manger_X",
+                                    @"Hot_Moxibus_X",
+                                    @"Pro_File_X"]
+                   tabBarImageArr:@[@"Health_Manger",
+                                    @"Hot_Moxibus",
+                                    @"Pro_File"]
+                        backColor:[@"1d1b24" hexStringToColor]
+                pitchOnTitleColor:[ApplicationStyle subjectPinkColor]
+                defaultTitleColor:[UIColor whiteColor]];
+
+            
+            break;
+        }
+        case Controller_MaleMain:
+        {
+            
+            NLMaleHealthMangerViewController *maleHealthManger = [[NLMaleHealthMangerViewController alloc] init];
+            NLMyHerViewController *myHer = [[NLMyHerViewController alloc] init];
+            NLMaleProfileViewController *maleProfile = [[NLMaleProfileViewController alloc] init];
+            
+            [self nlViewContrller:maleHealthManger
+                           middle:myHer
+                            right:maleProfile
+                         titleArr:@[NSLocalizedString(@"TabBar_Male_HealthManger", nil),
+                                    NSLocalizedString(@"TabBar_Male_HotMoxibustion", nil),
+                                    NSLocalizedString(@"TabBar_Profile", nil)]
+                  tabBarImageXArr:@[@"Health_Manger_X",
+                                    @"Hot_Moxibus_X",
+                                    @"Pro_File_X"]
+                   tabBarImageArr:@[@"Health_Manger",
+                                    @"Hot_Moxibus",
+                                    @"Pro_File"]
+                        backColor:[@"eef3f4" hexStringToColor]
+                pitchOnTitleColor:[ApplicationStyle subjectMaleBlueColor]
+                defaultTitleColor:[@"959595" hexStringToColor]];
+            
+            
+            
+            break;
+        }
+        default:
+            break;
     }
+    
 }
+
+
+
+-(void)nlViewContrller:(__weak UIViewController *)liftController
+                middle:(__weak UIViewController *)middleController
+                 right:(__weak UIViewController *)rightController
+              titleArr:(NSArray *)titleArr
+       tabBarImageXArr:(NSArray *)tabBarImageXArr
+        tabBarImageArr:(NSArray *)tabBarImageArr
+             backColor:(UIColor *)backColor
+     pitchOnTitleColor:(UIColor *)pitchOnTitleColor
+     defaultTitleColor:(UIColor *)defaultTitleColor{
+    
+    NSMutableArray *controllewArr = [NSMutableArray arrayWithCapacity:0];
+    NSArray *arrVC = [NSArray array];
+    NSArray *arrTitle = [NSArray array];
+    NSArray *arrTabBarImageX = [NSArray array];
+    NSArray *arrTabBarImage = [NSArray array];
+    UITabBarController *tabBar = [[UITabBarController alloc] init];
+    arrVC = @[liftController,middleController,rightController];
+    arrTitle = titleArr;
+    arrTabBarImageX = tabBarImageXArr;
+    arrTabBarImage = tabBarImageArr;
+    for (int i=0 ; i<arrVC.count; i++) {
+        MainNavgationControllew *baseVc = [[MainNavgationControllew alloc] initWithRootViewController:arrVC[i]];
+        UITabBarItem *tabBaritem = [[UITabBarItem alloc]init];
+        [tabBaritem setTitle:arrTitle[i]];
+        tabBaritem.image = [[UIImage imageNamed:arrTabBarImage[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        tabBaritem.selectedImage = [[UIImage imageNamed:arrTabBarImageX[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        baseVc.title = arrTitle[i];
+        ((UIViewController *)arrVC[i]).tabBarItem = tabBaritem;
+        [controllewArr addObject:baseVc];
+    }
+    UIView *viewBack = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, tabBar.tabBar.frame.size.height)];
+    viewBack.backgroundColor = backColor;
+    [tabBar.tabBar insertSubview:viewBack atIndex:0];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : pitchOnTitleColor,NSFontAttributeName:[UIFont systemFontOfSize:10]}            forState:UIControlStateSelected];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : defaultTitleColor,NSFontAttributeName:[UIFont systemFontOfSize:10]}            forState:UIControlStateNormal];
+    tabBar.viewControllers = controllewArr;
+    tabBar.selectedIndex = 1;
+    self.window.rootViewController = tabBar;
+}
+
 -(void)setUMSocial{
     //设置友盟Key
     [UMSocialData setAppKey:UM_APP_KEY];
