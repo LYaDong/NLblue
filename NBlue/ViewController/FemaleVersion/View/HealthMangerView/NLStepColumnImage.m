@@ -37,8 +37,13 @@
     ToPointW = [ApplicationStyle control_weight:40];
     
     CGContextMoveToPoint(context, ToPointW, [ApplicationStyle control_height:480]);
+    
+    
+    
+    
     for (NSInteger i=0; i<_dataArr.count; i++) {
         NSInteger num = [[NSString stringWithFormat:@"%@",_dataArr[i]] integerValue];
+
         CGContextAddRect(context,
                          CGRectMake([ApplicationStyle control_weight:40]+ i * (SCREENWIDTH - [ApplicationStyle control_weight:80])/_dataArr.count,
                                     [ApplicationStyle control_height:480] - num ,

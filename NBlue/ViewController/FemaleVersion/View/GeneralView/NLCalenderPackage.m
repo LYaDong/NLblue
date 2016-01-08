@@ -66,7 +66,7 @@ static const NSInteger ARROWTAG = 1500;
         UIButton *arrowBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         arrowBtn.frame = CGRectMake([ApplicationStyle control_weight:46] + i* (SCREENWIDTH - [ApplicationStyle control_weight:46 * 2] - [ApplicationStyle control_weight:18]), ([ApplicationStyle control_height:66] - [ApplicationStyle control_height:34])/2, [ApplicationStyle control_weight:18], [ApplicationStyle control_height:34]);
         arrowBtn.tag = ARROWTAG + i;
-        arrowBtn.backgroundColor = [UIColor redColor];
+//        arrowBtn.backgroundColor = [UIColor redColor];
         [arrowBtn setImage:[UIImage imageNamed:arrowImage[i]] forState:UIControlStateNormal];
         [arrowBtn addTarget:self action:@selector(arrowBtnDown:) forControlEvents:UIControlEventTouchUpInside];
         [_calenderView addSubview:arrowBtn];

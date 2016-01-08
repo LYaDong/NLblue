@@ -10,6 +10,7 @@
 #define NLEquipmentCommand_h
 
 #define EquiomentConnectionSuccess @"连接成功"
+#define EquiomentConnectionFiale @"断开连接"
 
 #define EquiomentCommand_0201 @"0201"
 #define EquiomentCommand_0901 @"0901"

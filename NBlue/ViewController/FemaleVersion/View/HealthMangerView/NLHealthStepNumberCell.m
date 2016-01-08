@@ -40,14 +40,19 @@
         target = target * 1.2;
     }
     
-    NSLog(@"%f",[ApplicationStyle control_height:480]);
     
     
     
     NSMutableArray *dataArray = [NSMutableArray array];
-    for (NSInteger i=0; i<arrs.count; i++) {
-        NSInteger index = [[NSString stringWithFormat:@"%@",arrs[i]] integerValue];
-        [dataArray addObject:[NSNumber numberWithInteger:index * ([ApplicationStyle control_height:480] * 0.8)/num]];
+//    for (NSInteger i=0; i<arrs.count; i++) {
+//        NSInteger index = [[NSString stringWithFormat:@"%@",arrs[i]] integerValue];
+//        [dataArray addObject:[NSNumber numberWithInteger:index * ([ApplicationStyle control_height:480] * 0.8)/num]];
+//    }
+#warning 测试
+    for (NSInteger i=0; i<24; i++) {
+//        NSInteger index = [[NSString stringWithFormat:@"%@",arrs[i]] integerValue];
+        NSInteger index = arc4random()%500;
+        [dataArray addObject:[NSNumber numberWithInteger:index * ([ApplicationStyle control_height:480] * 0.8)/1000]];
     }
     
     
@@ -84,6 +89,9 @@
     
     
     CGRect frame = CGRectMake(0, line.bottomOffset, SCREENWIDTH, [ApplicationStyle control_height:480]);
+    
+    
+    NSLog(@"%@",dataArray);
     
     NLStepColumnImage  *column = [[NLStepColumnImage alloc] initWithFrame:frame DataArr:dataArray strokeColor:[@"882a00" hexStringToColor] withColor:[@"fac96f" hexStringToColor]];
     column.backgroundColor = [UIColor clearColor];
@@ -135,8 +143,8 @@
     
     NSArray *stepArr = @[@"Step_Num",@"Step_KM",@"Step_KLL"];
     NSArray *stepData = @[[NSString stringWithFormat:@"%@步",sportCount],
-                          [NSString stringWithFormat:@"%@千米",distanceAmount],
-                          [NSString stringWithFormat:@"%@千卡",calorCount]];
+                          [NSString stringWithFormat:@"%@米",distanceAmount],
+                          [NSString stringWithFormat:@"%@卡",calorCount]];
     
     NSArray *stepRemark = @[NSLocalizedString(@"NLHealthStepNumber_TheCurrent", nil),
                             NSLocalizedString(@"NLHealthStepNumber_MovingDistance", nil),

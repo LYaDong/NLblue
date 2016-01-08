@@ -57,6 +57,7 @@ static const NSInteger LIFEHABITTAG = 2000;
         lifeHabit.tag = LIFEHABITTAG + i;
         [lifeHabit addTarget:self action:@selector(lifeHabitDown:) forControlEvents:UIControlEventTouchUpInside];
         lifeHabit.layer.cornerRadius = [ApplicationStyle control_weight:10];
+        lifeHabit.titleLabel.font = [ApplicationStyle textThrityFont];
         [backView addSubview:lifeHabit];
     }
     
@@ -78,7 +79,7 @@ static const NSInteger LIFEHABITTAG = 2000;
         if (i==0) {
             [btn setTitleColor:[ApplicationStyle subjectPinkColor] forState:UIControlStateNormal];
         }else{
-            btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+            btn.backgroundColor = [@"fb597a" hexStringToColor];
             [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
         }
         btn.layer.borderWidth = [ApplicationStyle control_weight:2];
@@ -131,7 +132,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_SHXG_SG"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 
                 return;
             }else{
@@ -152,7 +153,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_SHXG_YD"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 return;
             }else{
                 [btn setImage:[UIImage imageNamed:@"NLHClen_SHXG_YD_X"] forState:UIControlStateNormal];
@@ -171,7 +172,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_SHXG_DB"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 return;
             }else{
                 [btn setImage:[UIImage imageNamed:@"NLHClen_SHXG_DB_X"] forState:UIControlStateNormal];
@@ -184,6 +185,12 @@ static const NSInteger LIFEHABITTAG = 2000;
         default:
             break;
     }
+}
+
+
+-(UIColor *)backColor{
+    UIColor *color = [@"ff829b" hexStringToColor];
+    return color;
 }
 
 /*

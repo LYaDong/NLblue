@@ -52,7 +52,9 @@
     _numPage = 0;
     
     
-    self.rightBtn.hidden = NO;
+    self.returnBtn.hidden = YES;
+    
+    self.rightBtn.hidden = YES;
     [self.rightBtn setImage:[UIImage imageNamed:@"Step_T_B"] forState:UIControlStateNormal];
     
     [self bulidUI];
@@ -120,16 +122,19 @@
     switch (index) {
         case NLHealthManger_Calender:
         {
+            self.rightBtn.hidden = YES;
             _mainScrollew.contentOffset = CGPointMake(NLHealthManger_Calender * SCREENWIDTH, 0);
             break;
         }
         case NLHealthManger_Sleep:
         {
+            self.rightBtn.hidden = NO;
             _mainScrollew.contentOffset = CGPointMake(NLHealthManger_Sleep * SCREENWIDTH, 0);
             break;
         }
         case NLHealthManger_StepNumber:
         {
+            self.rightBtn.hidden = NO;
             _mainScrollew.contentOffset = CGPointMake(NLHealthManger_StepNumber * SCREENWIDTH, 0);
             break;
         }

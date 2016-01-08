@@ -53,4 +53,13 @@
  *获取大表数据
  */
 +(NSMutableArray *)obtainSportDataBig;
+/**
+ *创建日历表
+ */
++(void)canlenderUncomfortable;
+/**
+ *给日历表先创建字段，后面获得数据之后更新
+ */
++(void)insterCanlenderData;
+
 @end

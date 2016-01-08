@@ -98,6 +98,8 @@ static NSString *TransLationF1 = @"0AF1";
         }
         case CBCentralManagerStatePoweredOff:
         {
+            _connectionSuccess = EquiomentConnectionFiale;
+            [self disconnect];
             NSLog(@"蓝牙已关闭，请开启外设");
             break;
         }
@@ -187,7 +189,8 @@ static NSString *TransLationF1 = @"0AF1";
 }
 #pragma mark 断开连接
 -(void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
-//    _manger
+    _connectionSuccess = EquiomentConnectionFiale;
+    [self disconnect];
 }
 
 #pragma mark 周围设备的代理事件
@@ -228,19 +231,7 @@ static NSString *TransLationF1 = @"0AF1";
         return;
     }
     unsigned char data[characteristic.value.length];
-    
-    
-    
-//    NSLog(@"%@",characteristic);
-//    
-//    CBUUID *UUID = [CBUUID UUIDWithString:@"0AF7"];
-//    
-//    NSLog(@"%@  %@",UUID,characteristic.UUID);
 
-
-    
-
-    
 //    [characteristic.value getBytes:&data];
 //    getBytes:length  新方法 试试
     
@@ -321,7 +312,14 @@ static NSString *TransLationF1 = @"0AF1";
             self.getConnectionSuccess(EquiomentConnectionSuccess);
         }
     }
-    
+}
+
+-(void)disconnect{
+    if ([_connectionSuccess isEqualToString:EquiomentConnectionFiale]) {
+        if (self.getConnectionSuccess) {
+            self.getConnectionSuccess(EquiomentConnectionFiale);
+        }
+    }
 }
 -(void)getExplainOrderShowLaber:(NSString *)ss{
     

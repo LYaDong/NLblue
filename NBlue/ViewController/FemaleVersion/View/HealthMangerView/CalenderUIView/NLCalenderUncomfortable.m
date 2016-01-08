@@ -73,6 +73,7 @@ static const NSInteger LIFEHABITTAG = 2000;
         uncomfortableBtn.tag = LIFEHABITTAG + i;
         [uncomfortableBtn addTarget:self action:@selector(uncomfortableBtnDown:) forControlEvents:UIControlEventTouchUpInside];
         uncomfortableBtn.layer.cornerRadius = [ApplicationStyle control_weight:10];
+        uncomfortableBtn.titleLabel.font = [ApplicationStyle textThrityFont];
 //        [uncomfortableBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
         [backView addSubview:uncomfortableBtn];
     }
@@ -93,7 +94,7 @@ static const NSInteger LIFEHABITTAG = 2000;
         if (i==0) {
             [btn setTitleColor:[ApplicationStyle subjectPinkColor] forState:UIControlStateNormal];
         }else{
-            btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+            btn.backgroundColor = [@"fb597a" hexStringToColor];
             [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
         }
         btn.layer.borderWidth = [ApplicationStyle control_weight:2];
@@ -147,7 +148,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_TT"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 
                 return;
             }else{
@@ -168,7 +169,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_BD"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 return;
             }else{
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_BD_X"] forState:UIControlStateNormal];
@@ -188,7 +189,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_LY"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 return;
             }else{
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_LY_X"] forState:UIControlStateNormal];
@@ -208,7 +209,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_BM"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 
                 return;
             }else{
@@ -229,7 +230,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_XFT"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 
                 return;
             }else{
@@ -250,7 +251,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_MSY"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 
                 return;
             }else{
@@ -271,7 +272,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_YS"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 
                 return;
             }else{
@@ -292,7 +293,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_HSST"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 
                 return;
             }else{
@@ -313,7 +314,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_RFZT"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 
                 return;
             }else{
@@ -334,7 +335,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_RFCT"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 
                 return;
             }else{
@@ -355,13 +356,13 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_BDYC"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 
                 return;
             }else{
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_BDYC_X"] forState:UIControlStateNormal];
                 [btn setTitleColor:[@"dedede" hexStringToColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectWithColor];
+                btn.backgroundColor = [self backColor];
                 return;
             }
             break;
@@ -376,7 +377,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_QT"] forState:UIControlStateNormal];
                 [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+                btn.backgroundColor = [self backColor];
                 
                 return;
             }else{
@@ -390,6 +391,11 @@ static const NSInteger LIFEHABITTAG = 2000;
         default:
             break;
     }
+}
+
+-(UIColor *)backColor{
+    UIColor *color = [@"ff829b" hexStringToColor];
+    return color;
 }
 /*
 // Only override drawRect: if you perform custom drawing.

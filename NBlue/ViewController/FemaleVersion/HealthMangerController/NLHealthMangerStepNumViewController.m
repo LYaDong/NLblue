@@ -19,6 +19,7 @@
 @property(nonatomic,assign)CGFloat convenImageWeight;
 @property(nonatomic,strong)UIView *labViewBack;
 @property(nonatomic,assign)NSInteger weekMonthCount;
+@property(nonatomic,strong)UIImageView *imageArrow;
 
 @end
 
@@ -37,17 +38,12 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    _imageArrow.hidden = YES;
 }
 #pragma mark 基础UI
 -(void)bulidUI{
     
-    
-    
-    
-    
-    
-    
-    
+
     
     CGRect frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:360])/2, [ApplicationStyle statusBarSize] + ([ApplicationStyle navigationBarSize] - [ApplicationStyle control_height:60])/2, [ApplicationStyle control_weight:360], [ApplicationStyle control_height:60]);
     NSArray * items = @[NSLocalizedString(@"NLHealthManger_StepDay", nil),
@@ -85,12 +81,11 @@
     line.backgroundColor = [ApplicationStyle subjectWithColor];
     [self.view addSubview:line];
     
+
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:10])/2, [ApplicationStyle control_height:480] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize] - [ApplicationStyle control_weight:10], [ApplicationStyle control_weight:10], [ApplicationStyle control_weight:10])];
-    view.backgroundColor = [UIColor greenColor];
-    
-    [self.view addSubview:view];
-    
+    _imageArrow = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:28])/2, [ApplicationStyle control_height:480] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize] - [ApplicationStyle control_weight:14], [ApplicationStyle control_weight:28], [ApplicationStyle control_weight:14])];
+    _imageArrow.image = [UIImage imageNamed:@"NL_Step_Arrow"];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:_imageArrow];
     
     
     

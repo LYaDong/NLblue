@@ -257,40 +257,40 @@
     //    NSLog(@"%@",[self FourHexConversion:[timeByte substringWithRange:NSMakeRange(12, 4)]]);
     
     
-    arr = @[@"08030110df070c0800000f602200",
-            @"08030210d50000000800000095000000a3000000",
-            @"0803030f00000000000000000000000000000000",
-            @"0803040f00000000000000000000000000000000",
-            @"0803050f00000000000000000000000000000000",
-            @"0803060f00000000000000000000000000000000",
-            @"0803070f00000000000000000000000000000000",
-            @"0803080f00000000000000000000000000000000",
-            @"0803090f00000000000000000000000000000000",
-            @"08030a0f00000000000000000000000000000000",
-            @"08030b0f00000000000000000000000000000000",
-            @"08030c0f00000000000000000000000000000000",
-            @"08030d0f00000000000000000000000000000000",
-            @"08030e0f00000000000000000000000000000000",
-            @"08030f0f00000000000000000000000000000000",
-            @"0803100f00000000000000000000000000000000",
-            @"0803110f00000000000000000000000000000000",
-            @"0803120f00000000000000000000000000000000",
-            @"0803130f00000000000000000000000000000000",
-            @"0803140f00000000000000000000000000000000",
-            @"0803150f00000000000000000000000000000000",
-            @"0803160f604112e0030000000000000000000000",
-            @"0803170f00000000000000000000000000000000",
-            @"0803180f00000000000000000000000000000000",
-            @"0803190f00000000000000000000000000000000",
-            @"08031a0f5cc003000188c00a7001000000000000",
-            @"08031b0f88800480013080039000000000000000",
-            @"08031c0f00000000000000000000580004f00000",
-            @"08031d0f00000000000000000000000000000000",
-            @"08031e0f00000000000000000000000000000000",
-            @"08031f0f00000000000000000000000000000000",
-            @"0803200f00000000000000000000000000000000",
-            @"0803210f00000000000000000000000000000000",
-            @"0803220f00000000000000000000000000000000",];
+//    arr = @[@"08030110e007010700000f602200",
+//            @"080302100f000000000000000a0000000c000000",
+//            @"0803030f00000000000000000000000000000000",
+//            @"0803040f00000000000000000000000000000000",
+//            @"0803050f00000000000000000000000000000000",
+//            @"0803060f00000000000000000000000000000000",
+//            @"0803070f00000000000000000000000000000000",
+//            @"0803080f00000000000000000000000000000000",
+//            @"0803090f00000000000000000000000000000000",
+//            @"08030a0f00000000000000000000000000000000",
+//            @"08030b0f00000000000000000000000000000000",
+//            @"08030c0f00000000000000000000000000000000",
+//            @"08030d0f00000000000000000000000000000000",
+//            @"08030e0f00000000000000000000000000000000",
+//            @"08030f0f00000000000000000000000000000000",
+//            @"0803100f00000000000000000000000000000000",
+//            @"0803110f00000000000000000000000000000000",
+//            @"0803120f00000000000000000000000000000000",
+//            @"0803130f00000000000000000000000000000000",
+//            @"0803140f00000000000000000000000000000000",
+//            @"0803150f00000000000000000000000000000000",
+//            @"0803160f00000000000000000000000000000000",
+//            @"0803170f00000000000000000000000000000000",
+//            @"0803180f00000000000000000000000000000000",
+//            @"0803190f00000000000000000000000000000000",
+//            @"08031a0f3c0003a0000000000000000000000000",
+//            @"08031b0f00000000000000000000000000000000",
+//            @"08031c0f00000000000000000000000000000000",
+//            @"08031d0f00000000000000000000000000000000",
+//            @"08031e0f00000000000000000000000000000000",
+//            @"08031f0f00000000000000000000000000000000",
+//            @"0803200f00000000000000000000000000000000",
+//            @"0803210f00000000000000000000000000000000",
+//            @"0803220f00000000000000000000000000000000"];
     
     
     
@@ -355,7 +355,23 @@
     NSString *yearDate = [NSString stringWithFormat:@"%ld",[self sixTenHexTeen:[self reversedPositionStr:year]]];
     NSString *moht = [arr[0] substringWithRange:NSMakeRange(12, 4)];
     NSArray *mothDate = [self FourHexConversion:moht];
-    NSString *sportDate = [NSString stringWithFormat:@"%@-%@-%@",yearDate,mothDate[0],mothDate[1]];
+    
+    NSString *month = nil;
+    NSString *days = nil;
+    //判断大不大于10  大于10 则不补0  否则补0
+    if ([mothDate[0] integerValue]>=10) {
+        month = [NSString stringWithFormat:@"%@",mothDate[0]];
+    }else{
+        month = [NSString stringWithFormat:@"0%@",mothDate[0]];
+    }
+    
+    if ([mothDate[1] integerValue]>=10) {
+        days = [NSString stringWithFormat:@"%@",mothDate[1]];
+    }else{
+        days = [NSString stringWithFormat:@"0%@",mothDate[1]];
+    }
+    
+    NSString *sportDate = [NSString stringWithFormat:@"%@-%@-%@",yearDate,month,days];
     
     //计算总步数 总卡路里
     NSString *sportCountStr = [arr[1] substringWithRange:NSMakeRange(8 * 1, 8)];
@@ -394,6 +410,13 @@
                     count++;
                 }
                 
+                NSString *countinterVal = nil;
+                if (timeInterval>=10) {
+                    countinterVal = [NSString stringWithFormat:@"%ld",(long)timeInterval];
+                }else{
+                    countinterVal = [NSString stringWithFormat:@"0%ld",(long)timeInterval];
+                }
+                
                 Byte *testByte = [self stringConversionByte:format];
                 NSInteger step = ((testByte[0] & 0xFC) >> 2) + ((testByte[1] & 0x3F) << 6);
                 NSInteger time = ((testByte[1] & 0xC0) >> 6) + ((testByte[2] & 0x03) << 2);
@@ -403,7 +426,7 @@
                 [dicSportDataSmall setValue:[NSNumber numberWithInteger:calorie] forKey:@"calories"];
                 [dicSportDataSmall setValue:[NSNumber numberWithInteger:distance] forKey:@"distance"];
                 [dicSportDataSmall setValue:[NSNumber numberWithInteger:step] forKey:@"steps"];
-                [dicSportDataSmall setValue:[NSString stringWithFormat:@"%@-%@-%@-%ld",yearDate,mothDate[0],mothDate[1],(long)timeInterval] forKey:@"seris"];
+                [dicSportDataSmall setValue:[NSString stringWithFormat:@"%@-%@-%@-%@",yearDate,month,days,countinterVal] forKey:@"seris"];
                
 //                    NSLog(@"步数 = %ld 时间 %ld 卡路里 %ld 距离 %ld",(long)step,(long)time,(long)calorie,(long)distance);
                 
@@ -420,6 +443,11 @@
     [dicSportDataBig setValue:[NSNumber numberWithInteger:count] forKey:@"count"];
     
 //    [NLSQLData insterSportData:[NSArray arrayWithObjects:dicSportDataBig, nil] isUpdata:0];
+    
+    
+    NSLog(@"%@",dicSportDataBig);
+    
+    
     [NLSQLData upDataSport:[NSArray arrayWithObjects:dicSportDataBig, nil] isUpdata:0];
     
     

@@ -232,8 +232,6 @@ static const NSInteger CELLTAG = 500;//不可以大于1000
 }
 
 -(void)lifeHabitCount:(NSArray *)array{
-
-    
     _blackBack.hidden = YES;
     _calenLifeHabitView.hidden = YES;
 }

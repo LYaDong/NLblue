@@ -81,10 +81,19 @@ static const NSInteger BTNPHOTO = 4000;
         
         
         
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:0];
+        NSLog(@"%@",dic);
         
-        _userCountDataDic = [NSMutableDictionary dictionary];
+        _userCountDataDic = [NSMutableDictionary dictionaryWithCapacity:0];
+        NSLog(@"%@",_userCountDataDic);
         
-        _userCountDataDic = [PlistData getIndividuaData];
+        if ([[PlistData getIndividuaData] count]!=0) {
+            _userCountDataDic = [PlistData getIndividuaData];
+        }
+        
+        
+        
+        
 //        [_userCountDataDic setValue:@"www.baidu.com" forKey:@"imageUrl"];
 //        [_userCountDataDic setValue:@"小丑" forKey:@"userName"];
 //        [_userCountDataDic setValue:@"22" forKey:@"age"];
@@ -260,7 +269,10 @@ static const NSInteger BTNPHOTO = 4000;
                 NLIndividuaEditingViewController *vc = [[NLIndividuaEditingViewController alloc] init];
                 vc.editionName = ^(NSString * userName){
 //                    [_headArray replaceObjectAtIndex:indexPath.row withObject:userName];
+                    NSLog(@"%@",userName);
+                    
                     [_userCountDataDic setValue:userName forKey:@"userName"];
+                    NSLog(@"%@",_userCountDataDic);
                     [_tableView reloadData];
                 };
                 [self presentViewController:vc animated:YES completion:^{

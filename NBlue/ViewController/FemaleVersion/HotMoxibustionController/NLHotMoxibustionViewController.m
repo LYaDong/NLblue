@@ -32,7 +32,8 @@ static const NSInteger TIMELINE = 90;
 @property(nonatomic,assign)NSInteger temperatureNUM;
 @property(nonatomic,assign)NSInteger blueTime;
 @property(nonatomic,assign)BOOL isQuert;
-@property(nonatomic,strong)UIView *blueXXX;
+@property(nonatomic,strong)UIImageView *blueImage;
+
 @property(nonatomic,strong)CTCallCenter *callCenter;
 
 
@@ -129,6 +130,12 @@ static const NSInteger TIMELINE = 90;
     self.returnBtn.hidden = YES;
     self.titles.text = @"热灸";
     
+//    [NLSQLData canlenderUncomfortable];
+//    [NLSQLData insterCanlenderData];
+
+    
+    
+    
     
     [self connectBlueTooth];
     
@@ -198,11 +205,12 @@ static const NSInteger TIMELINE = 90;
 //    [btn4 addTarget:self action:@selector(sportxx) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview:btn4];
     
-//    _blueXXX  = [[UIView  alloc] initWithFrame:CGRectMake(10, 64, 20, 20)];
-//    _blueXXX.backgroundColor = [UIColor redColor];
-//    [self.view addSubview:_blueXXX];
     
  
+    _blueImage = [[UIImageView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:24], [ApplicationStyle statusBarSize] + ([ApplicationStyle navigationBarSize] - [ApplicationStyle control_height:40])/2, [ApplicationStyle control_weight:40], [ApplicationStyle control_height:44])];
+    _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect_N"];
+    [self.view addSubview:_blueImage];
+    
 }
 
 - (void)setupBackgroundHandler{
@@ -236,7 +244,7 @@ static const NSInteger TIMELINE = 90;
     
     
     
-    [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
+//    [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
     
     
     NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
@@ -251,7 +259,6 @@ static const NSInteger TIMELINE = 90;
         //判断温度
         [self isTemperatureOff:blueData];
         
-        NSLog(@"%@",blueData);
         
     };
     blues.perheral = ^(NSArray *perpheral){
@@ -260,7 +267,7 @@ static const NSInteger TIMELINE = 90;
     blues.getConnectionSuccess = ^(NSString *connectionSuccess){
         if ([connectionSuccess isEqualToString:EquiomentConnectionSuccess]) {
             
-            _blueXXX.backgroundColor = [UIColor orangeColor];
+            _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect"];
             
             if (!_isQuert) {
                 [self judgmentTemperatureQuery];
@@ -268,6 +275,10 @@ static const NSInteger TIMELINE = 90;
                 
                 _isQuert = !_isQuert;
             }
+        }
+        
+        if ([connectionSuccess isEqualToString:EquiomentConnectionFiale]) {
+            _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect_N"];
             
         }
     };
