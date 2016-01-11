@@ -10,6 +10,7 @@ static const NSInteger LIFEHABITTAG = 2000;
 
 #import "NLCalenderUncomfortable.h"
 #import "NLCalenderUncomforBtn.h"
+#import "NLSQLData.h"
 @interface NLCalenderUncomfortable()
 @property(nonatomic,strong)NSMutableArray *addDataArr;
 @end
@@ -17,12 +18,18 @@ static const NSInteger LIFEHABITTAG = 2000;
 @implementation NLCalenderUncomfortable
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        _addDataArr = [NSMutableArray array];
-        [self buildUI];
+        
     }
     return self;
 }
 -(void)buildUI{
+    _addDataArr = [NSMutableArray array];
+    
+    NSArray *habitData = [self canlenData];//获得生活习惯的每天数据
+    [_addDataArr addObjectsFromArray:habitData];
+    
+    
+    
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:40], 0, SCREENWIDTH - [ApplicationStyle control_weight:80], [ApplicationStyle control_height:660])];
     backView.backgroundColor = [ApplicationStyle subjectWithColor];
     backView.layer.cornerRadius = [ApplicationStyle control_weight:10];
@@ -53,6 +60,20 @@ static const NSInteger LIFEHABITTAG = 2000;
                           @"NLHClen_BSF_BDYC_X",
                           @"NLHClen_BSF_QT_X"];
     
+    NSArray *imageArrYes = @[@"NLHClen_BSF_TT",
+                             @"NLHClen_BSF_BD",
+                             @"NLHClen_BSF_LY",
+                             @"NLHClen_BSF_BM",
+                             @"NLHClen_BSF_XFT",
+                             @"NLHClen_BSF_MSY",
+                             @"NLHClen_BSF_YS",
+                             @"NLHClen_BSF_HSST",
+                             @"NLHClen_BSF_RFZT",
+                             @"NLHClen_BSF_RFCT",
+                             @"NLHClen_BSF_BDYC",
+                             @"NLHClen_BSF_QT"];
+    
+    
     NSArray *labArr = @[NSLocalizedString(@"NLHealthCalender_Unconmfortable_TT", nil),
                         NSLocalizedString(@"NLHealthCalender_Unconmfortable_BD", nil),
                         NSLocalizedString(@"NLHealthCalender_Unconmfortable_HLLY", nil),
@@ -67,8 +88,15 @@ static const NSInteger LIFEHABITTAG = 2000;
                         NSLocalizedString(@"NLHealthCalender_Unconmfortable_QT", nil),];
     for (NSInteger i=0; i<imageArr.count; i++) {
         NLCalenderUncomforBtn *uncomfortableBtn = [[NLCalenderUncomforBtn alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:54] + i%2*[ApplicationStyle control_weight:200 + 52], [ApplicationStyle control_height:98]+i/2*[ApplicationStyle control_height:80], [ApplicationStyle control_weight:200], [ApplicationStyle control_height:60])];
-        [uncomfortableBtn setImage:[UIImage imageNamed:imageArr[i]] forState:UIControlStateNormal];
-        [uncomfortableBtn setTitleColor:[@"dedede" hexStringToColor] forState:UIControlStateNormal];
+        if ([habitData[i] isEqualToString:@"0"]) {
+            [uncomfortableBtn setImage:[UIImage imageNamed:imageArr[i]] forState:UIControlStateNormal];
+            [uncomfortableBtn setTitleColor:[@"dedede" hexStringToColor] forState:UIControlStateNormal];
+        }else{
+            [uncomfortableBtn setImage:[UIImage imageNamed:imageArrYes[i]] forState:UIControlStateNormal];
+            uncomfortableBtn.backgroundColor = [self backColor];
+            [uncomfortableBtn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
+            uncomfortableBtn.selected = !uncomfortableBtn.selected;
+        }
         [uncomfortableBtn setTitle:labArr[i] forState:UIControlStateNormal];
         uncomfortableBtn.tag = LIFEHABITTAG + i;
         [uncomfortableBtn addTarget:self action:@selector(uncomfortableBtnDown:) forControlEvents:UIControlEventTouchUpInside];
@@ -127,8 +155,8 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (liftHabit.selected == YES) {
                 liftHabit.selected = !liftHabit.selected;
             }
-            
         }
+        [self.delegate uncomfortableArr:nil];
     }else{
         [self.delegate uncomfortableArr:_addDataArr];
     }   
@@ -362,7 +390,7 @@ static const NSInteger LIFEHABITTAG = 2000;
             }else{
                 [btn setImage:[UIImage imageNamed:@"NLHClen_BSF_BDYC_X"] forState:UIControlStateNormal];
                 [btn setTitleColor:[@"dedede" hexStringToColor] forState:UIControlStateNormal];
-                btn.backgroundColor = [self backColor];
+                btn.backgroundColor = [ApplicationStyle subjectWithColor];
                 return;
             }
             break;
@@ -397,6 +425,12 @@ static const NSInteger LIFEHABITTAG = 2000;
     UIColor *color = [@"ff829b" hexStringToColor];
     return color;
 }
+-(NSArray *)canlenData{
+    NSString *count = [[NLSQLData canlenderDayData:self.commonTime] objectForKey:@"uncomfortable"];
+    NSArray *array = [count componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
+    return array;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

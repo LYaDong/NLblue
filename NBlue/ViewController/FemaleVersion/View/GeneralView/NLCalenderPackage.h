@@ -6,8 +6,14 @@
 //  Copyright © 2015年 LYD. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@protocol NLCalenderPackageDelegate <NSObject>
 
+-(void)returnCalenderTime:(NSString *)time;
+
+@end
+
+#import <UIKit/UIKit.h>
 @interface NLCalenderPackage : UIView
+@property(nonatomic,assign)id<NLCalenderPackageDelegate>delegate;
 
 @end

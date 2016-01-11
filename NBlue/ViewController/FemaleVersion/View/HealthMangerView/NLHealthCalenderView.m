@@ -16,7 +16,16 @@ static const NSInteger CELLTAG = 500;//不可以大于1000
 #import "NLCalenderLifeHabit.h"
 #import "NLCalenderUncomfortable.h"
 #import "PlistData.h"
-@interface NLHealthCalenderView()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,NLCalenderPickerDelegate,NLCalenderLifeHabitDelegate,NLCalenderUncomfortableDelegate>
+#import "NLSQLData.h"
+@interface NLHealthCalenderView()<
+UIScrollViewDelegate,
+UITableViewDataSource,
+UITableViewDelegate,
+NLCalenderPickerDelegate,
+NLCalenderLifeHabitDelegate,
+NLCalenderUncomfortableDelegate,
+NLCalenderPackageDelegate>
+@property(nonatomic,strong)NSString *selectedTime;
 @property(nonatomic,strong)UIScrollView *mainScrollew;
 @property(nonatomic,strong)UITableView *mainTableView;
 @property(nonatomic,strong)UILabel *periodTimeDay;
@@ -43,6 +52,23 @@ static const NSInteger CELLTAG = 500;//不可以大于1000
     
     [self controlUI];
     
+    
+    NSString *years = [NSString stringWithFormat:@"%ld",(long)[ApplicationStyle whatYears:[NSDate date]]];
+    NSString *month = nil;
+    NSString *days = nil;
+    if ((long)[ApplicationStyle whatMonths:[NSDate date]]>=10) {
+        month = [NSString stringWithFormat:@"%ld",(long)[ApplicationStyle whatMonths:[NSDate date]]];
+    }else{
+        month = [NSString stringWithFormat:@"0%ld",(long)[ApplicationStyle whatMonths:[NSDate date]]];
+    }
+    if ((long)[ApplicationStyle whatDays:[NSDate date]]>=10) {
+        days = [NSString stringWithFormat:@"%ld",(long)[ApplicationStyle whatDays:[NSDate date]]];
+    }else{
+        days = [NSString stringWithFormat:@"0%ld",(long)[ApplicationStyle whatDays:[NSDate date]]];
+    }
+    
+    _selectedTime = [NSString stringWithFormat:@"%@-%@-%@",years,month,days];
+    
     _mainScrollew = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, self.frame.size.height)];
     _mainScrollew.delegate = self;
     _mainScrollew.bounces = NO;
@@ -51,6 +77,7 @@ static const NSInteger CELLTAG = 500;//不可以大于1000
     
     
     NLCalenderPackage *calenderView = [[NLCalenderPackage alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle control_height:598])];
+    calenderView.delegate = self;
     [_mainScrollew addSubview:calenderView];
     
     
@@ -88,13 +115,9 @@ static const NSInteger CELLTAG = 500;//不可以大于1000
         [calenderback addSubview:_periodTimeDay];
     }
     
-    
-    
-    
     _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, calenderView.bottomOffset + [ApplicationStyle control_height:100] + [ApplicationStyle control_height:2 ], SCREENWIDTH, [ApplicationStyle control_height:4 * 88]) style:UITableViewStylePlain];
     _mainTableView.delegate = self;
     _mainTableView.dataSource = self;
-//    _mainTableView.separatorStyle = UITableViewCellSelectionStyleNone;
     _mainTableView.backgroundColor = [UIColor clearColor];
     [_mainScrollew addSubview:_mainTableView];
     
@@ -182,12 +205,19 @@ static const NSInteger CELLTAG = 500;//不可以大于1000
         {
             _blackBack.hidden = NO;
             _calenLifeHabitView.hidden = NO;
+            
+            _calenLifeHabitView.commonTime = _selectedTime;
+            [_calenLifeHabitView buildUI];
+            
             break;
         }
         case 3:
         {
             _blackBack.hidden = NO;
             _uncomfortableView.hidden = NO;
+            _uncomfortableView.commonTime = _selectedTime;
+            [_uncomfortableView buildUI];
+            
             break;
         }
         default:
@@ -196,9 +226,12 @@ static const NSInteger CELLTAG = 500;//不可以大于1000
     
 }
 #pragma mark 自己的Delegate
+-(void)returnCalenderTime:(NSString *)time{
+    _selectedTime = time;
+}
+//爱爱代理
 -(void)pickerIndex:(NSInteger)index{
-    _blackBack.hidden = YES;
-    _calenderPickerView.hidden = YES;
+    [self hideBack];
     NLHealtCalenderCell *cell = (NLHealtCalenderCell *)[self viewWithTag:_cellRow+CELLTAG];
     switch (index) {
         case PlayLove_MYZ:
@@ -229,17 +262,53 @@ static const NSInteger CELLTAG = 500;//不可以大于1000
         default:
             break;
     }
+    NSDictionary *dataDic = @{@"loveLove":[NSString stringWithFormat:@"%ld",index],@"time":_selectedTime};
+    [NLSQLData upDataCanlenderLoveLove:dataDic];
+    
+}
+//生活习惯
+-(void)lifeHabitCount:(NSArray *)array{
+    [self hideBack];
+    NSDictionary *dataDic = nil;
+    if (array==nil) {
+        dataDic = @{@"habitsAndCustoms":CommonText_Canlender_habitsAndCustoms,@"time":_selectedTime};
+    }else{
+        dataDic = @{@"habitsAndCustoms":[self countString:array]==nil?@"":[self countString:array],@"time":_selectedTime};
+    }
+    [NLSQLData upDataCanlenderhabitsAndCustoms:dataDic];
+}
+//不舒服
+-(void)uncomfortableArr:(NSArray *)array{
+    
+    [self hideBack];
+    NSDictionary *dataDic = nil;
+    if (array == nil) {
+        dataDic = @{@"uncomfortable":CommonText_Canlender_uncomfortable,@"time":_selectedTime};
+    }else{
+        dataDic = @{@"uncomfortable":[self countString:array]==nil?@"":[self countString:array],@"time":_selectedTime};
+    }
+    [NLSQLData upDataCanlenderuncomfortable:dataDic];
 }
 
--(void)lifeHabitCount:(NSArray *)array{
+-(NSMutableString *)countString:(NSArray *)array{
+    NSMutableString *count = [NSMutableString string];
+    for (NSInteger i=0; i<array.count; i++) {
+        if (i==array.count-1) {
+            [count appendFormat:@"%@",array[i]];
+        }else{
+            [count appendFormat:@"%@-",array[i]];
+        }
+    }
+    return count;
+}
+#pragma mark 隐藏
+-(void)hideBack{
     _blackBack.hidden = YES;
     _calenLifeHabitView.hidden = YES;
-}
--(void)uncomfortableArr:(NSArray *)array{
-
-    _blackBack.hidden = YES;
     _uncomfortableView.hidden = YES;
+    _calenderPickerView.hidden = YES;
 }
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

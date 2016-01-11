@@ -30,5 +30,6 @@ typedef NS_ENUM(NSUInteger,Uncomfortable) {
 
 @interface NLCalenderUncomfortable : UIView
 @property(nonatomic,strong)id<NLCalenderUncomfortableDelegate>delegate;
-
+-(void)buildUI;
+@property(nonatomic,strong)NSString *commonTime;
 @end

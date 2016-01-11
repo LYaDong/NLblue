@@ -175,7 +175,7 @@ static const NSInteger TEXTFILED_TAG = 1000;
     if (textPassWord.text.length == 0) {
         NSLog(@"请输入密码");
         return;
-    }
+    } 
     
     [[NLDatahub sharedInstance] registeredCodephone:textPhone.text
                                        verification:textVerification.text
@@ -193,6 +193,7 @@ static const NSInteger TEXTFILED_TAG = 1000;
     [kAPPDELEGATE._loacluserinfo SetUserAccessToken:[dic objectForKey:@"authToken"]];
     [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
     [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
+
     
 }
 -(void)logInFicaled:(NSNotification *)notifi{

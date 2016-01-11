@@ -61,5 +61,21 @@
  *给日历表先创建字段，后面获得数据之后更新
  */
 +(void)insterCanlenderData;
+/**
+ *更新日历爱爱数据
+ */
++(void)upDataCanlenderLoveLove:(NSDictionary *)dic;
+/**
+ *更新日历生活习惯数据
+ */
++(void)upDataCanlenderhabitsAndCustoms:(NSDictionary *)dic;
+/**
+ *更新日历不舒服数据
+ */
++(void)upDataCanlenderuncomfortable:(NSDictionary *)dic;
+/**
+ * @param 获取日历数据
+ */
++(NSMutableDictionary *)canlenderDayData:(NSString *)dayTime;
 
 @end

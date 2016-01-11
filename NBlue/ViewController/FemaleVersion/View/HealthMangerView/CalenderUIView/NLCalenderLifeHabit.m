@@ -8,22 +8,40 @@
 static const NSInteger BTNTAG = 1000;
 static const NSInteger LIFEHABITTAG = 2000;
 #import "NLCalenderLifeHabit.h"
+#import "NLSQLData.h"
 @interface NLCalenderLifeHabit()
 @property(nonatomic,strong)NSMutableArray *lifeHabitArr;
 @property(nonatomic,strong)NSMutableArray *addDataArr;
 @end
 @implementation NLCalenderLifeHabit
+
+
+
+
+
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        _lifeHabitArr = [NSMutableArray array];
         
-        _addDataArr = [NSMutableArray array];
-        [self buildUI];
     }
     return self;
 }
 
 -(void)buildUI{
+    
+    NSLog(@"%@",self.commonTime);
+    
+    
+    _lifeHabitArr = [NSMutableArray array];
+    _addDataArr = [NSMutableArray array];
+    
+    
+    NSArray *habitData = [self canlenData];//获得生活习惯的每天数据
+    [_addDataArr addObjectsFromArray:habitData];
+    
+    
+    
+
+    
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:40], 0, SCREENWIDTH - [ApplicationStyle control_weight:80], [ApplicationStyle control_height:500])];
     backView.backgroundColor = [ApplicationStyle subjectWithColor];
     backView.layer.cornerRadius = [ApplicationStyle control_weight:10];
@@ -45,13 +63,26 @@ static const NSInteger LIFEHABITTAG = 2000;
                           @"NLHClen_SHXG_YD_X",
                           @"NLHClen_SHXG_DB_X",];
     
+    NSArray *imageArrYes = @[@"NLHClen_SHXG_SG",
+                             @"NLHClen_SHXG_YD",
+                             @"NLHClen_SHXG_DB",];
+    
     NSArray *labArr = @[NSLocalizedString(@"NLHealthCalender_LifeHabit_SG", nil),
                         NSLocalizedString(@"NLHealthCalender_LifeHabit_YD", nil),
                         NSLocalizedString(@"NLHealthCalender_LifeHabit_PB", nil),];
     for (NSInteger i=0; i<imageArr.count; i++) {
         UIButton *lifeHabit = [UIButton buttonWithType:UIButtonTypeCustom];
         lifeHabit.frame = CGRectMake((backView.viewWidth - [ApplicationStyle control_weight:240])/2, [ApplicationStyle control_height:50 + 80]+i*[ApplicationStyle control_height:70], [ApplicationStyle control_weight:240], [ApplicationStyle control_height:60]);
-        [lifeHabit setImage:[UIImage imageNamed:imageArr[i]] forState:UIControlStateNormal];
+        
+        if ([habitData[i] isEqualToString:@"0"]) {
+          [lifeHabit setImage:[UIImage imageNamed:imageArr[i]] forState:UIControlStateNormal];
+        }else{
+            [lifeHabit setImage:[UIImage imageNamed:imageArrYes[i]] forState:UIControlStateNormal];
+            lifeHabit.backgroundColor = [self backColor];
+            [lifeHabit setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
+            lifeHabit.selected = !lifeHabit.selected;
+        }
+        
         [lifeHabit setTitleColor:[@"dedede" hexStringToColor] forState:UIControlStateNormal];
         [lifeHabit setTitle:labArr[i] forState:UIControlStateNormal];
         lifeHabit.tag = LIFEHABITTAG + i;
@@ -61,9 +92,7 @@ static const NSInteger LIFEHABITTAG = 2000;
         [backView addSubview:lifeHabit];
     }
     
-    for (NSInteger i=0; i<imageArr.count; i++) {
-        [_addDataArr addObject:@"0"];
-    }
+    
     
     
     
@@ -90,7 +119,7 @@ static const NSInteger LIFEHABITTAG = 2000;
         [backView addSubview:btn];
     }
     
-//    贵州暖蓝科技有限公司
+
 }
 #pragma mark 按钮事件
 -(void)btnDown:(UIButton *)btn{
@@ -107,19 +136,18 @@ static const NSInteger LIFEHABITTAG = 2000;
             if (liftHabit.selected == YES) {
                liftHabit.selected = !liftHabit.selected;
             }
-            
         }
-        
+        [self.delegate lifeHabitCount:nil];
     }else{
+        
+        NSLog(@"%@",_addDataArr);
+        
         [self.delegate lifeHabitCount:_addDataArr];
     }
 }
 
 -(void)lifeHabitDown:(UIButton *)btn{
-    
-     NSInteger num = [[NSString stringWithFormat:@"%@",_addDataArr[btn.tag - LIFEHABITTAG]] intValue] - 1;
-    
-    
+    NSInteger num = [[NSString stringWithFormat:@"%@",_addDataArr[btn.tag - LIFEHABITTAG]] intValue] - 1;
     btn.selected = !btn.selected;
     switch (btn.tag - LIFEHABITTAG) {
         case LifeHabit_SG:{
@@ -187,12 +215,15 @@ static const NSInteger LIFEHABITTAG = 2000;
     }
 }
 
-
 -(UIColor *)backColor{
     UIColor *color = [@"ff829b" hexStringToColor];
     return color;
 }
-
+-(NSArray *)canlenData{
+    NSString *count = [[NLSQLData canlenderDayData:self.commonTime] objectForKey:@"habitsAndCustoms"];
+    NSArray *array = [count componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
+    return array;
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

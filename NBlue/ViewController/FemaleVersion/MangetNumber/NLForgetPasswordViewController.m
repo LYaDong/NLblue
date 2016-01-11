@@ -175,6 +175,9 @@ static const NSInteger TEXTFILED_TAG = 1000;
     [kAPPDELEGATE._loacluserinfo SetUserAccessToken:[dic objectForKey:@"authToken"]];
     [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
     [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    
     
 }
 -(void)logInFicaled{

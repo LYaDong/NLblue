@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NBlue/ViewController/FemaleVersion/View/HealthMangerView/NLHealthStepNumberCell.m"
-            timestampString = "473912008.502274"
+            filePath = "NBlue/ViewController/FemaleVersion/MangetNumber/NLRegisteredViewController.m"
+            timestampString = "473943503.779572"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "-histogram:sportData:target:"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "-logInFicaled:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

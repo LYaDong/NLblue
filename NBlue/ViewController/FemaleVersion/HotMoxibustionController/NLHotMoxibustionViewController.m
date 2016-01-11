@@ -130,8 +130,8 @@ static const NSInteger TIMELINE = 90;
     self.returnBtn.hidden = YES;
     self.titles.text = @"热灸";
     
-//    [NLSQLData canlenderUncomfortable];
-//    [NLSQLData insterCanlenderData];
+    [NLSQLData canlenderUncomfortable];
+    [NLSQLData insterCanlenderData];
 
     
     

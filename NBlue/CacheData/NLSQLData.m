@@ -545,71 +545,157 @@
 __goto:
     if (num == 0) {
         NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:num];
+        NSLog(@"%@",date);
         NSInteger dayInt = [ApplicationStyle whatDays:date];
         NSInteger dayMonth = [ApplicationStyle whatMonths:date];
         NSInteger dayYear = [ApplicationStyle whatYears:date];
         for (NSInteger i=0; i<dayInt; i++) {
             NSString *inster = @"INSERT OR REPLACE INTO CanlenderTable(time,aunt,loveLove,habitsAndCustoms,uncomfortable,user_id) VALUES (?,?,?,?,?,?)";
-            NSArray *dataArr = [NSArray arrayWithObjects:
-                                [NSString stringWithFormat:@"%ld-%ld-%ld",(long)dayYear,(long)dayMonth,(long)dayInt - i],
-                                @"",
-                                @"",
-                                @"",
-                                @"",
-                                [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
-            [db executeUpdate:inster withArgumentsInArray:dataArr];
+            
+            NSString *month = nil;
+            NSString *days = nil;
+            
+            if (dayMonth>=10) {//判断个位是否大于两位，如果不是，则补0
+                month = [NSString stringWithFormat:@"%ld",(long)dayMonth];
+            }else{
+                month = [NSString stringWithFormat:@"0%ld",(long)dayMonth];
+            }
+            
+            if (dayInt-i>= 10) {
+                days = [NSString stringWithFormat:@"%ld",dayInt-i];
+            }else{
+                days = [NSString stringWithFormat:@"0%ld",dayInt-i];
+            }
+            
+            
+            NSString *times = [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days];
+            if ([[self canlenderDayData:times] count]==0) {
+                NSArray *dataArr = [NSArray arrayWithObjects:
+                                    times,
+                                    @"0",
+                                    @"0",
+                                    CommonText_Canlender_habitsAndCustoms,
+                                    CommonText_Canlender_uncomfortable,
+                                    [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
+                [db executeUpdate:inster withArgumentsInArray:dataArr];
+            }
         }
         num = num -1;
         goto __goto;
     }else{
         NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:num];
         NSInteger dayCount = [ApplicationStyle totalDaysInMonth:date];
-        NSInteger dayInt = [ApplicationStyle whatDays:date];
+//        NSInteger dayInt = [ApplicationStyle whatDays:date];
         NSInteger dayMonth = [ApplicationStyle whatMonths:date];
         NSInteger dayYear = [ApplicationStyle whatYears:date];
         
         for (NSInteger i=0; i<dayCount; i++) {
             NSString *establishTime = nil;
-            if (dayCount - i < 10) {//判断个位是否大于两位，如果不是，则补0
-                establishTime = [NSString stringWithFormat:@"%ld-%ld-0%ld",(long)dayYear,(long)dayMonth,(long)dayCount  - i];
+            
+            
+            NSString *month = nil;
+            NSString *days = nil;
+            if (dayMonth>=10) {//判断个位是否大于两位，如果不是，则补0
+                month = [NSString stringWithFormat:@"%ld",(long)dayMonth];
             }else{
-                establishTime = [NSString stringWithFormat:@"%ld-%ld-%ld",(long)dayYear,(long)dayMonth,(long)dayCount  - i];
+                month = [NSString stringWithFormat:@"0%ld",(long)dayMonth];
             }
             
-//            NSLog(@"123");
+            if (dayCount - i < 10) {
+                days = [NSString stringWithFormat:@"0%ld",(long)dayCount  - i];
+            }else{
+                days = [NSString stringWithFormat:@"%ld",(long)dayCount  - i];
+            }
+            
+            establishTime = [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days];
             
             if ([establishTime isEqualToString:@"2015-08-01"]) {
                 [db close];
                 return;
             }
             NSString *inster = @"INSERT OR REPLACE INTO CanlenderTable(time,aunt,loveLove,habitsAndCustoms,uncomfortable,user_id) VALUES (?,?,?,?,?,?)";
-            NSArray *dataArr = [NSArray arrayWithObjects:
-                                [NSString stringWithFormat:@"%ld-%ld-%ld",(long)dayYear,(long)dayMonth,(long)dayInt - i],
-                                @"",
-                                @"",
-                                @"",
-                                @"",
-                                [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
-            [db executeUpdate:inster withArgumentsInArray:dataArr];
+            
+            
+            NSString *times = [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days];
+            if ([[self canlenderDayData:times] count]==0) {
+                NSArray *dataArr = [NSArray arrayWithObjects:
+                                    times,
+                                    @"0",
+                                    @"0",
+                                    CommonText_Canlender_habitsAndCustoms,
+                                    CommonText_Canlender_uncomfortable,
+                                    [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
+                [db executeUpdate:inster withArgumentsInArray:dataArr];
+            }
+            
+            
+//            NSArray *dataArr = [NSArray arrayWithObjects:
+//                                [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days],
+//                                @"0",
+//                                @"0",
+//                                @"0-0-0",
+//                                @"0",
+//                                [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
+//            [db executeUpdate:inster withArgumentsInArray:dataArr];
         }
         num = num -1;
         goto __goto;
     }
 }
 
-+(void)upDataCanlenderLoveLove:(NSArray *)arr{
++(void)upDataCanlenderLoveLove:(NSDictionary *)dic{
     FMDatabase *db = [self sqlDataRoute];
     [db open];
-    NSDictionary *dic = nil;
-    for (dic in arr) {
-        NSString *updateTable = @"UPDATE CanlenderTable SET loveLove = ? WHERE time = ? and user_id = ?";
-        [db executeUpdate:
-         updateTable,
-         [dic objectForKey:@"loveLove"]==nil?@"":[dic objectForKey:@"loveLove"],
-         [dic objectForKey:@"time"]==nil?@"":[dic objectForKey:@"time"],
-         [kAPPDELEGATE._loacluserinfo GetUser_ID]];
-    }
+    NSString *updateTable = @"UPDATE CanlenderTable SET loveLove = ? WHERE time = ? and user_id = ?";
+    [db executeUpdate:
+     updateTable,
+     [dic objectForKey:@"loveLove"]==nil?@"":[dic objectForKey:@"loveLove"],
+     [dic objectForKey:@"time"]==nil?@"":[dic objectForKey:@"time"],
+     [kAPPDELEGATE._loacluserinfo GetUser_ID]];
     [db close];
 }
++(void)upDataCanlenderhabitsAndCustoms:(NSDictionary *)dic{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *updateTable = @"UPDATE CanlenderTable SET habitsAndCustoms = ? WHERE time = ? and user_id = ?";
+    [db executeUpdate:
+     updateTable,
+     [dic objectForKey:@"habitsAndCustoms"]==nil?@"":[dic objectForKey:@"habitsAndCustoms"],
+     [dic objectForKey:@"time"]==nil?@"":[dic objectForKey:@"time"],
+     [kAPPDELEGATE._loacluserinfo GetUser_ID]];
+    [db close];
+}
++(void)upDataCanlenderuncomfortable:(NSDictionary *)dic{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *updateTable = @"UPDATE CanlenderTable SET uncomfortable = ? WHERE time = ? and user_id = ?";
+    [db executeUpdate:
+     updateTable,
+     [dic objectForKey:@"uncomfortable"]==nil?@"":[dic objectForKey:@"uncomfortable"],
+     [dic objectForKey:@"time"]==nil?@"":[dic objectForKey:@"time"],
+     [kAPPDELEGATE._loacluserinfo GetUser_ID]];
+    [db close];
+}
+
+
++(NSMutableDictionary *)canlenderDayData:(NSString *)dayTime{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *takeCreate = [NSString stringWithFormat:@"SELECT * FROM CanlenderTable WHERE time = '%@' and user_id = '%@'",dayTime,[kAPPDELEGATE._loacluserinfo GetUser_ID]];
+    FMResultSet *rs = [db executeQuery:takeCreate];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    while ([rs next]) {
+        [dic setValue:[rs stringForColumn:@"time"] forKey:@"time"];
+        [dic setValue:[rs stringForColumn:@"habitsAndCustoms"] forKey:@"habitsAndCustoms"];
+        [dic setValue:[rs stringForColumn:@"uncomfortable"] forKey:@"uncomfortable"];
+    }
+    return dic;
+    
+}
+
+//+(NSMutableArray *)queryIsFiledData:(NSString *)time{
+//
+//}
+
 
 @end

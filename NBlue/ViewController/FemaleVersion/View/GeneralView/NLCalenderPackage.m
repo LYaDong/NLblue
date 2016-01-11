@@ -16,6 +16,11 @@ static const NSInteger ARROWTAG = 1500;
 
 
 @interface NLCalenderPackage()
+
+@property(nonatomic,strong)NSString *yearTime;
+@property(nonatomic,strong)NSString *monthTime;
+@property(nonatomic,strong)NSString *dayTime;
+
 @property(nonatomic,strong)UIView *calenderView;
 
 @property(nonatomic,strong)UILabel *yearMonthLab;
@@ -51,10 +56,16 @@ static const NSInteger ARROWTAG = 1500;
     viewBack.alpha = 0.1;
     [_calenderView addSubview:viewBack];
     
-
+    _yearTime = [NSString stringWithFormat:@"%ld",(long)[ApplicationStyle whatYears:date]];
+    if ((long)[ApplicationStyle whatMonths:date]>=10) {
+      _monthTime = [NSString stringWithFormat:@"%ld",(long)[ApplicationStyle whatMonths:date]];
+    }else{
+      _monthTime = [NSString stringWithFormat:@"0%ld",(long)[ApplicationStyle whatMonths:date]];
+    }
+    
     //年 月
     _yearMonthLab = [[UILabel alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:47], 0, SCREENWIDTH - [ApplicationStyle control_weight:47 *2], [ApplicationStyle control_height:66])];
-    _yearMonthLab.text = [NSString stringWithFormat:@"%ld年%ld月",(long)[ApplicationStyle whatYears:date],(long)[ApplicationStyle whatMonths:date]];
+    _yearMonthLab.text = [NSString stringWithFormat:@"%@年%@月",_yearTime,_monthTime];
     _yearMonthLab.font = [ApplicationStyle textThrityFont];
     _yearMonthLab.textColor = [@"f13c61" hexStringToColor];
     _yearMonthLab.textAlignment = NSTextAlignmentCenter;
@@ -105,7 +116,7 @@ static const NSInteger ARROWTAG = 1500;
         dayButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         dayButton.layer.cornerRadius = [ApplicationStyle control_weight:6];
         dayButton.tag = CALENDERTAG + i;
-        [dayButton addTarget:self action:@selector(dayButtonDown:) forControlEvents:UIControlEventTouchUpInside];
+        
         [_calenderView addSubview:dayButton];
         
 
@@ -139,6 +150,16 @@ static const NSInteger ARROWTAG = 1500;
 }
 //日历按钮
 -(void)dayButtonDown:(UIButton *)btn{
+    NSString *dayss = btn.titleLabel.text;
+    
+    if ([dayss integerValue]>=10) {
+        _dayTime = [NSString stringWithFormat:@"%@",dayss];
+    }else{
+        _dayTime = [NSString stringWithFormat:@"0%@",dayss];
+    }
+    
+    NSString *times = [NSString stringWithFormat:@"%@-%@-%@",_yearTime,_monthTime,_dayTime];
+    [self.delegate returnCalenderTime:[NSString stringWithFormat:@"%@",times]];
     
     [self resetRadius];
     btn.layer.cornerRadius = WidthSCalender/2;
@@ -179,14 +200,13 @@ static const NSInteger ARROWTAG = 1500;
     NSInteger day = 0;
     if (i < firstWeekday) {
         //上个月的日子
-//        day = daysInLastMonth - firstWeekday + i ;
         day = lastCountDay - (firstWeekday - 1 - i);
     }else if (i > firstWeekday + daysInLastMonth - 1){
         //下个月的日子
         day = i + 1 - firstWeekday - daysInLastMonth;
-        //            dayButton.backgroundColor = [UIColor lightGrayColor];
     }else{
         //本月的日子
+        [dayButton addTarget:self action:@selector(dayButtonDown:) forControlEvents:UIControlEventTouchUpInside];
         day = i - firstWeekday + 1;
         dayButton.backgroundColor = [@"fee39a" hexStringToColor];
         
@@ -195,8 +215,9 @@ static const NSInteger ARROWTAG = 1500;
     if (_radinIndex==0) {
         //等于当天的日子
         if (i - firstWeekday == theCurrent - 1) {
-            //            dayButton.backgroundColor = [UIColor redColor];
-            dayButton.layer.cornerRadius = WidthSCalender/2;
+            if ([[ApplicationStyle datePickerTransformationCorss:[NSDate date]] isEqualToString:[ApplicationStyle datePickerTransformationCorss:date]]) {
+                dayButton.layer.cornerRadius = WidthSCalender/2;
+            }
         }
     }else{
         //等于点击的日子

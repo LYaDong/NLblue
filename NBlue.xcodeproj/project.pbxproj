@@ -503,10 +503,10 @@
 		04018C311C3CBB97009AC56A /* MaleVersion */ = {
 			isa = PBXGroup;
 			children = (
-				04FB758B1C3DF7BE00A8DF35 /* MaleView */,
 				04018C401C3CBD8D009AC56A /* MaleHealthManger */,
-				04018C3F1C3CBD73009AC56A /* MaleProfile */,
 				04018C3E1C3CBD56009AC56A /* MyHer */,
+				04018C3F1C3CBD73009AC56A /* MaleProfile */,
+				04FB758B1C3DF7BE00A8DF35 /* MaleView */,
 			);
 			path = MaleVersion;
 			sourceTree = "<group>";
@@ -1212,8 +1212,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5a0c28ca-4c55-42a3-a971-faca6851cfe7";
-				"PROVISIONING_PROFILE[sdk=*]" = "5a0c28ca-4c55-42a3-a971-faca6851cfe7";
+				PROVISIONING_PROFILE = "44df239e-822c-4bf8-bd13-a3e644427e13";
+				"PROVISIONING_PROFILE[sdk=*]" = "44df239e-822c-4bf8-bd13-a3e644427e13";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};

@@ -19,4 +19,6 @@ typedef NS_ENUM(NSUInteger,LifeHabit) {
 
 @interface NLCalenderLifeHabit : UIView
 @property(nonatomic,strong)id<NLCalenderLifeHabitDelegate>delegate;
+-(void)buildUI;
+@property(nonatomic,strong)NSString *commonTime;
 @end
