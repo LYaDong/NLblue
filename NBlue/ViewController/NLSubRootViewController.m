@@ -76,7 +76,7 @@
         nabStroke.alpha = 0.15 + 0.25;
         [self.navBarBack addSubview:nabStroke];
         
-        self.navBarPushBack = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle navigationBarSize] + [ApplicationStyle statusBarSize])];
+        self.navBarPushBack = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH,[ApplicationStyle navBarAndStatusBarSize])];
         self.navBarPushBack.hidden = YES;
         self.navBarPushBack.backgroundColor = [ApplicationStyle subJectNavBarColor];
         [self.view addSubview:self.navBarPushBack];

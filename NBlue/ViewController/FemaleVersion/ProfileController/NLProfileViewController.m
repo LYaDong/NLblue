@@ -14,6 +14,8 @@
 #import "NLAboutNLViewController.h"
 #import "NLSetProfoleViewController.h"
 #import "NLShareController.h"
+#import "NLMyMaleViewController.h"
+#import "NLGiffiredSignViewController.h"
 @interface NLProfileViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIButton *userHeadImage;
 @property(nonatomic,strong)UILabel *userNameLab;
@@ -21,10 +23,17 @@
 @end
 
 @implementation NLProfileViewController
-
+-(void)rightBtnDown{
+    NLGiffiredSignViewController *vc = [[NLGiffiredSignViewController alloc] init];
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.rightBtn.hidden = NO;
+    [self.rightBtn setTitle:NSLocalizedString(@"TabBar_Male_SignIn", nil) forState:UIControlStateNormal];
+    
     self.navBarBack.hidden = YES;
     self.returnBtn.hidden = YES;
     [self bulidUI];
@@ -76,7 +85,7 @@
 }
 #pragma mark 系统Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return 6;
 
     
 }
@@ -92,11 +101,12 @@
     
 
     NSArray *cellLabArray = @[NSLocalizedString(@"NLProfileView_MyEquitment", nil),
+                              NSLocalizedString(@"NLProfileView_MyMale", nil),
                               NSLocalizedString(@"NLProfileView_Share", nil),
                               NSLocalizedString(@"NLProfileView_FeedBack", nil),
                               NSLocalizedString(@"NLProfileView_Set", nil),
                               NSLocalizedString(@"NLProfileView_AboutNL", nil),];
-    NSArray *cellImageArray = @[@"ProFile_M_E_T",@"ProFile_S_H",@"ProFile_F_B",@"ProFile_SET",@"ProFile_A_NL"];
+    NSArray *cellImageArray = @[@"ProFile_M_E_T",@"ProFile_M_male",@"ProFile_S_H",@"ProFile_F_B",@"ProFile_SET",@"ProFile_A_NL"];
     cell.cellImages.image = [UIImage imageNamed:cellImageArray[indexPath.row]];
     cell.cellLabs.text = cellLabArray[indexPath.row];
     cell.imageArrow.image = [UIImage imageNamed:@"Profile_Arrow"];
@@ -109,6 +119,7 @@
     
     
     NSArray *viewConrollerArray = @[@"NLMyEquipmentController",
+                                    @"NLMyMaleViewController",
                                     @"NLShareController",
                                     @"NLFeedBackViewController",
                                     @"NLSetProfoleViewController",
@@ -117,12 +128,7 @@
     UIViewController *viewControllew = [[NSClassFromString(viewConrollerArray[indexPath.row])alloc] init];
     [viewControllew setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:viewControllew animated:YES];
-    
   
-    
-    
-    
-    
 }
 #pragma mark 自己的Delegate
 #pragma mark 事件方法

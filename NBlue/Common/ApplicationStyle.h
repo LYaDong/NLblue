@@ -26,6 +26,10 @@
  */
 + (CGFloat)statusBarSize;
 /**
+ * @param navBar+StatusBar 的高度
+ */
++ (CGFloat)navBarAndStatusBarSize;
+/**
  *系统屏幕的宽
  */
 + (CGFloat)screenWidth;
@@ -59,6 +63,10 @@
  *设计图30号字体
  */
 + (UIFont *)textThrityFont;
+/**
+ * @param 设计图26号字体
+ */
++ (UIFont *)textTwentySixFont;
 @end
 
 

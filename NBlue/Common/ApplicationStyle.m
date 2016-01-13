@@ -29,6 +29,12 @@
     CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
     return rectStatus.size.height;
 }
++ (CGFloat)navBarAndStatusBarSize{
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
+    NSInteger tab =  tabBarController.tabBar.frame.size.height;
+    return tab+rectStatus.size.height;
+}
 + (CGFloat)screenWidth {return [UIScreen mainScreen].bounds.size.width;}
 
 + (CGFloat)screenHeight {return [UIScreen mainScreen].bounds.size.height;}
@@ -52,6 +58,7 @@
 
 + (UIFont *)textSuperSmallFont{return [UIFont systemFontOfSize:[self control_weight:24]];}
 + (UIFont *)textThrityFont{return [UIFont systemFontOfSize:[self control_weight:30]];}
++ (UIFont *)textTwentySixFont{return [UIFont systemFontOfSize:[self control_weight:26]];}
 @end
 
 @implementation ApplicationStyle (Colors)

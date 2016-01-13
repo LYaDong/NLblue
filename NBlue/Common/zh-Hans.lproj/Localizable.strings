@@ -30,10 +30,16 @@
 "HealthManger_StepNumber" = "计步器";
 //NLProfileViewController
 "NLProfileView_MyEquitment" = "我的设备";
+"NLProfileView_MyMale" = "我的男友";
 "NLProfileView_Share" = "分享";
 "NLProfileView_FeedBack" = "反馈";
 "NLProfileView_Set" = "设置";
 "NLProfileView_AboutNL" = "关于暖蓝";
+"NLProfileView_MaleTextCount" = "你还木有绑定男友呦\n快让你的帅气贴心男友和你绑定吧";
+"NLProfileView_Sweep" = "扫一扫";
+"NLProfileView_MaleText" = "绑定男朋友，让他能够看到你的信息\n当然，如果他不乖的话，你可以只给他看部分信息呦!";
+"NLProfileView_SweepMale" = "扫码男友";
+"NLProfileView_QRMaleText" = "将男友的二维码放入框内，即可自动识别";
 //NLIndividuaFormatViewController
 "NLIndividuaFormat_Title" = "个人信息";
 "NLIndividuaFormat_HeadImage" = "头像";

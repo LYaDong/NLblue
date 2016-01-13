@@ -9,38 +9,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NBlue/ViewController/FemaleVersion/ProfileController/NLIndividuaFormatViewController.m"
-            timestampString = "473827899.331468"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NBlue/ViewController/FemaleVersion/ProfileController/NLIndividuaFormatViewController.m"
-            timestampString = "473827450.958424"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "-buildData"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "NBlue/ViewController/FemaleVersion/MangetNumber/NLRegisteredViewController.m"
             timestampString = "473943503.779572"
             startingColumnNumber = "9223372036854775807"

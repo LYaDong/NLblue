@@ -85,6 +85,9 @@
 		04F4B7C51C07FA7100DE60DE /* battery@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F4B7C31C07FA7100DE60DE /* battery@3x.png */; };
 		04F4B7C81C082AD200DE60DE /* NLSQLData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4B7C71C082AD200DE60DE /* NLSQLData.m */; };
 		04F4B7D21C083B3E00DE60DE /* NLLocalUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4B7D11C083B3E00DE60DE /* NLLocalUserInfo.m */; };
+		04F762D11C44933E003DBE4D /* NLMyMaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F762D01C44933E003DBE4D /* NLMyMaleViewController.m */; };
+		04F762D71C44A54C003DBE4D /* NLQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F762D61C44A54C003DBE4D /* NLQRCodeViewController.m */; };
+		04F762DA1C44EC69003DBE4D /* NLGiffiredSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F762D91C44EC69003DBE4D /* NLGiffiredSignViewController.m */; };
 		04F7F64E1C1BFC9000466EBC /* NLGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7F64D1C1BFC9000466EBC /* NLGestureRecognizer.m */; };
 		04F7F6E71C2E7F2F009020A0 /* NLUserInformat.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7F6E61C2E7F2F009020A0 /* NLUserInformat.m */; };
 		04FA89BC1C117E400064F3AA /* NLDatahub.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B71C117E400064F3AA /* NLDatahub.m */; };
@@ -266,6 +269,12 @@
 		04F4B7CC1C08387A00DE60DE /* NLEquipmentCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NLEquipmentCommand.h; sourceTree = "<group>"; };
 		04F4B7D01C083B3E00DE60DE /* NLLocalUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLLocalUserInfo.h; sourceTree = "<group>"; };
 		04F4B7D11C083B3E00DE60DE /* NLLocalUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLLocalUserInfo.m; sourceTree = "<group>"; };
+		04F762CF1C44933E003DBE4D /* NLMyMaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMyMaleViewController.h; sourceTree = "<group>"; };
+		04F762D01C44933E003DBE4D /* NLMyMaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMyMaleViewController.m; sourceTree = "<group>"; };
+		04F762D51C44A54C003DBE4D /* NLQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLQRCodeViewController.h; sourceTree = "<group>"; };
+		04F762D61C44A54C003DBE4D /* NLQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLQRCodeViewController.m; sourceTree = "<group>"; };
+		04F762D81C44EC69003DBE4D /* NLGiffiredSignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLGiffiredSignViewController.h; sourceTree = "<group>"; };
+		04F762D91C44EC69003DBE4D /* NLGiffiredSignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLGiffiredSignViewController.m; sourceTree = "<group>"; };
 		04F7F64C1C1BFC9000466EBC /* NLGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLGestureRecognizer.h; sourceTree = "<group>"; };
 		04F7F64D1C1BFC9000466EBC /* NLGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLGestureRecognizer.m; sourceTree = "<group>"; };
 		04F7F6E51C2E7F2F009020A0 /* NLUserInformat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLUserInformat.h; sourceTree = "<group>"; };
@@ -397,6 +406,10 @@
 				04018BC31C3CB914009AC56A /* NLMyEquipmentController.m */,
 				04018BC41C3CB914009AC56A /* NLProfileViewController.h */,
 				04018BC51C3CB914009AC56A /* NLProfileViewController.m */,
+				04F762D81C44EC69003DBE4D /* NLGiffiredSignViewController.h */,
+				04F762D91C44EC69003DBE4D /* NLGiffiredSignViewController.m */,
+				04F762CF1C44933E003DBE4D /* NLMyMaleViewController.h */,
+				04F762D01C44933E003DBE4D /* NLMyMaleViewController.m */,
 				04018BC61C3CB914009AC56A /* NLSetProfoleViewController.h */,
 				04018BC71C3CB914009AC56A /* NLSetProfoleViewController.m */,
 				04018BC81C3CB914009AC56A /* NLShareController.h */,
@@ -623,6 +636,8 @@
 				04F4B7D11C083B3E00DE60DE /* NLLocalUserInfo.m */,
 				04F7F64C1C1BFC9000466EBC /* NLGestureRecognizer.h */,
 				04F7F64D1C1BFC9000466EBC /* NLGestureRecognizer.m */,
+				04F762D51C44A54C003DBE4D /* NLQRCodeViewController.h */,
+				04F762D61C44A54C003DBE4D /* NLQRCodeViewController.m */,
 			);
 			path = ToolClass;
 			sourceTree = "<group>";
@@ -981,6 +996,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04F762DA1C44EC69003DBE4D /* NLGiffiredSignViewController.m in Sources */,
 				04018C0E1C3CB914009AC56A /* NLAboutNLViewController.m in Sources */,
 				04018CF11C3D179F009AC56A /* NLMaleIndividuaViewController.m in Sources */,
 				04018C291C3CB914009AC56A /* NLIndividuaFormaCell.m in Sources */,
@@ -1007,6 +1023,7 @@
 				04018C201C3CB914009AC56A /* NLHealthCalenderView.m in Sources */,
 				049751DF1BFEF3140044D97B /* ApplicationStyle.m in Sources */,
 				04018C301C3CB9B7009AC56A /* NLHalfView.m in Sources */,
+				04F762D71C44A54C003DBE4D /* NLQRCodeViewController.m in Sources */,
 				04018C151C3CB914009AC56A /* NLShareController.m in Sources */,
 				04018C161C3CB914009AC56A /* NLAboutImageBtn.m in Sources */,
 				04CD23121C29310100AB467A /* OLGhostAlertView.m in Sources */,
@@ -1048,6 +1065,7 @@
 				04C9954A1C029E8300D8AE79 /* NLBluetoothAgreement.m in Sources */,
 				04018C011C3CB914009AC56A /* LYDSetSegmentControl.m in Sources */,
 				04018C1E1C3CB914009AC56A /* NLHealtCalenderCell.m in Sources */,
+				04F762D11C44933E003DBE4D /* NLMyMaleViewController.m in Sources */,
 				04018C1F1C3CB914009AC56A /* NLHealtCalenderPeriod.m in Sources */,
 				04F7F6E71C2E7F2F009020A0 /* NLUserInformat.m in Sources */,
 				04018C1B1C3CB914009AC56A /* NLCalenderUncomforBtn.m in Sources */,

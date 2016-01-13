@@ -119,12 +119,6 @@ static NSString *NLSportApi = @"/sport";//各个接口端
 #pragma mark 登录
 -(void)userSignInPhone:(NSString *)phone password:(NSString *)password{
     NSDictionary *parameters= @{@"phone":phone,@"code":@"",@"password":password,@"platform":@"ios"};
-    
-    
-    
-    
-    
-    
     _manger = [[AFHTTPRequestOperationManager alloc]init];
     _manger.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:NLtextHeml,NLapplication, nil];
     [_manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Login] parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -214,5 +208,23 @@ static NSString *NLSportApi = @"/sport";//各个接口端
         });
 
     }];
+}
+#pragma mark 扫二维码
+- (void)qrCodeNextWorkFrom_to_id:(NSString *)from_to_id{
+    NSDictionary *parmeter =@{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],@"folkConsumerId":from_to_id,@"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
+    AFHTTPRequestOperationManager *manger = [[AFHTTPRequestOperationManager alloc] init];
+    manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication,nil];
+    
+    [manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_QRCode] parameters:parmeter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"%ld",(long)operation.response.statusCode);
+        
+        NSLog(@"%@",responseObject);
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@  error = %@",operation.responseObject,error);
+    }];
+}
+#pragma mark 提醒他
+-(void)remindMale{
+    
 }
 @end

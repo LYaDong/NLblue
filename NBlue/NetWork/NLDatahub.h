@@ -41,4 +41,11 @@
                                  weight:(NSString *)weight
                                  header:(NSString *)header
                                stepGoal:(NSString *)stepGoal;
+/**
+ * @param 二维码扫描
+ */
+- (void)qrCodeNextWorkFrom_to_id:(NSString *)from_to_id;
+
+
+
 @end
