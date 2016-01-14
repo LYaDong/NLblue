@@ -110,6 +110,8 @@
 +(NSString *)theCurrnetEditionBuild{
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 }
+
++ (void)jumpAppStoreScore{[[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_Story_URL]];}
 @end
 
 @implementation ApplicationStyle (date)

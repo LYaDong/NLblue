@@ -33,8 +33,9 @@ static const NSInteger TIMELINE = 90;
 @property(nonatomic,assign)NSInteger blueTime;
 @property(nonatomic,assign)BOOL isQuert;
 @property(nonatomic,strong)UIImageView *blueImage;
-
 @property(nonatomic,strong)CTCallCenter *callCenter;
+@property(nonatomic,assign)NSInteger timeInt;
+@property(nonatomic,strong)NSTimer *timeVer;
 
 
 
@@ -128,6 +129,7 @@ static const NSInteger TIMELINE = 90;
     // Do any additional setup after loading the view.
     
     self.returnBtn.hidden = YES;
+    _timeInt = 0;
     self.titles.text = @"热灸";
     
     [NLSQLData canlenderUncomfortable];
@@ -250,16 +252,18 @@ static const NSInteger TIMELINE = 90;
     NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
     [blues bluetoothAllocInit];
     blues.getConnectData = ^(NSString *blueData){
+        
+        
+        NSLog(@"蓝牙反馈数据：%@",blueData);
+        
         //获得设备信息
-        [NLBluetoothDataAnalytical bluetoothCommandReturnData:blueData];
-        //调温
-        [self temperaturetOFF:blueData];
-        //记步
-        [self sportData:blueData];
-        //判断温度
+//        [NLBluetoothDataAnalytical bluetoothCommandReturnData:blueData];
+//        //调温
+//        [self temperaturetOFF:blueData];
+//        //记步
+//        [self sportData:blueData];
+//        //判断温度
         [self isTemperatureOff:blueData];
-        
-        
     };
     blues.perheral = ^(NSArray *perpheral){
         _peripheralArray = perpheral;//获得当前的外围设备
@@ -271,8 +275,7 @@ static const NSInteger TIMELINE = 90;
             
             if (!_isQuert) {
                 [self judgmentTemperatureQuery];
-                [self sportDataQuery];
-                
+//                [self sportDataQuery];
                 _isQuert = !_isQuert;
             }
         }
@@ -453,30 +456,29 @@ static const NSInteger TIMELINE = 90;
         NSString *off = [data substringWithRange:NSMakeRange(4, 2)];
         if ([off isEqualToString:@"00"]) {
             NSString *temperStr = [data substringWithRange:NSMakeRange(6, 4)];
-            NSString *temper = [NLBluetoothDataAnalytical reversedPositionStr:temperStr];
-            _temperatureNUM = [NLBluetoothDataAnalytical sixTenHexTeen:temper];
-            [self controlTemperaturet];
-            [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_K"] forState:UIControlStateNormal];
-            _isOff = !_isOff;
-            
-            _temperatureLab.text = [NSString stringWithFormat:@"%ld°C",(long)_temperatureNUM/10];
-            
-            NSInteger num = _temperatureNUM/10;
-            
-            if (num>=39&& num<40) {
-                _temperatureCilcle.indexTemp = 50;
-            }else if (num>=38 && num<39){
-                _temperatureCilcle.indexTemp = 40;
-            }else if (num>=37 && num<38){
-                _temperatureCilcle.indexTemp = 30;
-            }else if (num>=36 && num<37){
-                _temperatureCilcle.indexTemp = 20;
-            }else if (num>=35 && num<36){
-                _temperatureCilcle.indexTemp = 10;
-            }else{
-                _temperatureCilcle.indexTemp = 0;
+            if (![temperStr isEqualToString:@"ffff"]) {
+                NSString *temper = [NLBluetoothDataAnalytical reversedPositionStr:temperStr];
+                _temperatureNUM = [NLBluetoothDataAnalytical sixTenHexTeen:temper];
+                [self controlTemperaturet];
+                [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_K"] forState:UIControlStateNormal];
+                _isOff = !_isOff;
+                _temperatureLab.text = [NSString stringWithFormat:@"%ld°C",(long)_temperatureNUM/10];
+
+                NSInteger num = _temperatureNUM/10;
+                if (num>=39&& num<40) {
+                    _temperatureCilcle.indexTemp = 50;
+                }else if (num>=38 && num<39){
+                    _temperatureCilcle.indexTemp = 40;
+                }else if (num>=37 && num<38){
+                    _temperatureCilcle.indexTemp = 30;
+                }else if (num>=36 && num<37){
+                    _temperatureCilcle.indexTemp = 20;
+                }else if (num>=35 && num<36){
+                    _temperatureCilcle.indexTemp = 10;
+                }else{
+                    _temperatureCilcle.indexTemp = 0;
+                }
             }
-            
         }
     }
 }
@@ -509,12 +511,10 @@ static const NSInteger TIMELINE = 90;
             NSLog(@"发送命令==  %@",data);
         }
     }
-    
-    
 }
 
+//设置温度
 -(void)controlTemperaturet{
-
     NSString *str = [NLBluetoothDataAnalytical tenTurnSixTeen:_temperatureNUM];
     
     unsigned long red = strtoul([[str substringWithRange:NSMakeRange(0, 2)] UTF8String],0,16);
@@ -550,28 +550,44 @@ static const NSInteger TIMELINE = 90;
 #pragma mark 按钮事件
 
 - (void)moxibustionBtnDown{
-    if (!_isOff) {
-        [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_K"] forState:UIControlStateNormal];
-        _isOff = !_isOff;
-        Byte byte[18] = {0x90,0x01,0x55};
-        NSData *data = [NSData dataWithBytes:byte length:20];
-        if (_peripheralArray.count>0) {
-            //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-            [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-            NSLog(@"发送命令==  %@",data);
+    
+    if (_timeInt ==0) {
+        _timeInt = 2;
+        _timeVer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeVerDown) userInfo:nil repeats:YES];
+        if (!_isOff) {
+            [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_K"] forState:UIControlStateNormal];
+            _isOff = !_isOff;
+            //发送加热
+            Byte byte[18] = {0x90,0x01,0x55};
+            NSData *data = [NSData dataWithBytes:byte length:20];
+            if (_peripheralArray.count>0) {
+                //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+                [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+                NSLog(@"发送命令==  %@",data);
+            }
+            return;
+        }else{
+            [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_G"] forState:UIControlStateNormal];
+            _isOff = !_isOff;
+            //关闭加热
+            Byte byte[18] = {0x90,0x01,0xAA};
+            NSData *data = [NSData dataWithBytes:byte length:20];
+            if (_peripheralArray.count>0) {
+                //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+                [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+                NSLog(@"发送命令==  %@",data);
+            }
+            return;
         }
-        return;
     }else{
-        [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_G"] forState:UIControlStateNormal];
-        _isOff = !_isOff;
-        Byte byte[18] = {0x90,0x01,0xAA};
-        NSData *data = [NSData dataWithBytes:byte length:20];
-        if (_peripheralArray.count>0) {
-            //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-            [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-            NSLog(@"发送命令==  %@",data);
-        }
-        return;
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"亲~请不要频繁操作!!!"];
+    }
+}
+
+-(void)timeVerDown{
+    _timeInt -=1;
+    if (_timeInt == 0) {
+        [_timeVer invalidate];
     }
 }
 

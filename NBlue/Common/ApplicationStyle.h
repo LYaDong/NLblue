@@ -26,7 +26,7 @@
  */
 + (CGFloat)statusBarSize;
 /**
- * @param navBar+StatusBar 的高度
+ *navBar+StatusBar 的高度
  */
 + (CGFloat)navBarAndStatusBarSize;
 /**
@@ -64,7 +64,7 @@
  */
 + (UIFont *)textThrityFont;
 /**
- * @param 设计图26号字体
+ *设计图26号字体
  */
 + (UIFont *)textTwentySixFont;
 @end
@@ -145,6 +145,10 @@
  *判断Build版本
  */
 +(NSString *)theCurrnetEditionBuild;
+/**
+ *跳转到AppStory评分
+ */
++ (void)jumpAppStoreScore;
 @end
 
 @interface ApplicationStyle (date)

@@ -19,10 +19,11 @@ static const NSInteger BTNTAG = 10000;
 @implementation LYDSegmentControl
 
 
+
 - (instancetype)initWithSetSegment:(LYDSetSegmentControl *)setSegment frame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         
-        setSegment.lineHide = YES;
+        
         _setSegment = setSegment;
         [self layerFrame];
         [self segmentCount];

@@ -21,7 +21,7 @@ static const NSInteger BTNPICKERTAG = 2000;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [self colors];
     [self preferredContentSize];
     [self bulidUI];
 }
@@ -43,15 +43,15 @@ static const NSInteger BTNPICKERTAG = 2000;
     
     
     for (NSInteger i=0; i<titleArr.count; i++) {
-        UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:97], [ApplicationStyle control_height:420] + i * [ApplicationStyle control_height:100], [ApplicationStyle control_weight:80], [ApplicationStyle control_height:40])];
+        UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:97], [ApplicationStyle control_height:420] + i * [ApplicationStyle control_height:100], [ApplicationStyle control_weight:300], [ApplicationStyle control_height:40])];
         titleLab.text = titleArr[i];
         titleLab.font = [ApplicationStyle textThrityFont];
-        titleLab.textColor = [ApplicationStyle subjectBlackColor];
-        titleLab.textAlignment = NSTextAlignmentCenter;
+        titleLab.textColor = [self titleColor];
+        titleLab.textAlignment = NSTextAlignmentLeft;
         [self.view addSubview:titleLab];
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:70], [ApplicationStyle control_height:480 + i* 100], SCREENWIDTH - [ApplicationStyle control_weight:70 * 2], [ApplicationStyle control_height:1])];
-        line.backgroundColor = [UIColor lightGrayColor];
+        line.backgroundColor = [self colors];
         [self.view addSubview:line];
     }
     
@@ -63,7 +63,7 @@ static const NSInteger BTNPICKERTAG = 2000;
         [self.view addSubview:textFiled];
         
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(textFiled.rightSideOffset + [ApplicationStyle control_weight:20], [ApplicationStyle control_height:430]+ i * [ApplicationStyle control_height:100], [ApplicationStyle control_weight:16], [ApplicationStyle control_height:24])];
-        image.image = [UIImage imageNamed:@"NL_BLACK_JT"];
+        image.image = [self uiImages];
         [self.view addSubview:image];
     }
     
@@ -84,9 +84,9 @@ static const NSInteger BTNPICKERTAG = 2000;
     segement.cornerRedius = 20;
     segement.borderWidth = 1;
     segement.selectedSegmentIndex = 0;
-    segement.borderColors = [UIColor lightGrayColor];
+    segement.borderColors = [self titleColor];
     segement.clipsBounds = YES;
-    segement.backGroupColor = [UIColor lightGrayColor];
+    segement.backGroupColor = [self titleColor];
     segement.titleColor = [UIColor  whiteColor];
     segement.titleFont = [ApplicationStyle textSuperSmallFont];
     segement.lineColor = [UIColor whiteColor];
@@ -97,7 +97,7 @@ static const NSInteger BTNPICKERTAG = 2000;
     
     LYDSegmentControl *sele = [[LYDSegmentControl alloc] initWithSetSegment:segement frame:frame];
     sele.delegate = self;
-    sele.backgroundColor = [UIColor lightGrayColor];
+    sele.backgroundColor = [self titleColor];
     [self.view addSubview:sele];
     
     _blackView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
@@ -205,6 +205,39 @@ static const NSInteger BTNPICKERTAG = 2000;
         _pickerView.frame = CGRectMake(0, SCREENHEIGHT + [ApplicationStyle control_height:560], SCREENWIDTH, [ApplicationStyle control_height:560]);
     }];
 }
+
+
+-(UIColor *)colors{
+    UIColor *color = nil;
+    if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
+        color = [@"ffe3e3" hexStringToColor];
+    }else{
+        color = [@"b7ebff" hexStringToColor];
+    }
+    return color;
+}
+
+-(UIColor *)titleColor{
+    UIColor *color = nil;
+    if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
+        color = [@"f3366b" hexStringToColor];
+    }else{
+        color = [@"1f9af4" hexStringToColor];
+    }
+    return color;
+}
+
+-(UIImage *)uiImages{
+    UIImage *img = nil;
+    if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
+        img = [UIImage imageNamed:@"NL_Arrow_female"];
+    }else{
+        img = [UIImage imageNamed:@"NL_Arrow_Male"];
+    }
+    return img;
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

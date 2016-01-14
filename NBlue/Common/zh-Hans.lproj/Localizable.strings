@@ -159,4 +159,36 @@
 "NLMaleNBLuePlan_MessagePush" = "消息推送";
 "NLMaleNBLuePlan_Shock" = "震动";
 "NLMaleNBLuePlan_PushTime" = "推送时间选择";
+//NLMaleIndividuaViewController
+"NLMaleIndividua_SedentaryRemid" = "久坐提醒";
+"NLMaleIndividua_IntervalTime" = "间隔时长";
+"NLMaleIndividua_ReminderInterval" = "提醒区间";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//通用
+"NL_Currency_YouGender" = "你的性别";
+"NL_Currency_Next" = "下一步";
+
+
+
 

@@ -31,7 +31,6 @@
 		04018C151C3CB914009AC56A /* NLShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BC91C3CB914009AC56A /* NLShareController.m */; };
 		04018C161C3CB914009AC56A /* NLAboutImageBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BCD1C3CB914009AC56A /* NLAboutImageBtn.m */; };
 		04018C171C3CB914009AC56A /* NLCalenderPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BCF1C3CB914009AC56A /* NLCalenderPackage.m */; };
-		04018C181C3CB914009AC56A /* NLPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BD11C3CB914009AC56A /* NLPickView.m */; };
 		04018C191C3CB914009AC56A /* NLCalenderLifeHabit.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BD51C3CB914009AC56A /* NLCalenderLifeHabit.m */; };
 		04018C1A1C3CB914009AC56A /* NLCalenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BD71C3CB914009AC56A /* NLCalenderPicker.m */; };
 		04018C1B1C3CB914009AC56A /* NLCalenderUncomforBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018BD91C3CB914009AC56A /* NLCalenderUncomforBtn.m */; };
@@ -81,6 +80,7 @@
 		04CDA17E1BFF119500D2A304 /* Convenlence.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CDA17D1BFF119500D2A304 /* Convenlence.m */; };
 		04F04F851C073AAC009DC949 /* PlistData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F04F841C073AAC009DC949 /* PlistData.m */; };
 		04F3CC4F1C0434C10066D39D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F3CC511C0434C10066D39D /* Localizable.strings */; };
+		04F3EBFA1C45FA8F0003E37D /* NLMaleIndivuaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3EBF91C45FA8F0003E37D /* NLMaleIndivuaCell.m */; };
 		04F4B7C41C07FA7100DE60DE /* battery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F4B7C21C07FA7100DE60DE /* battery@2x.png */; };
 		04F4B7C51C07FA7100DE60DE /* battery@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F4B7C31C07FA7100DE60DE /* battery@3x.png */; };
 		04F4B7C81C082AD200DE60DE /* NLSQLData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4B7C71C082AD200DE60DE /* NLSQLData.m */; };
@@ -94,6 +94,7 @@
 		04FA89BD1C117E400064F3AA /* NLHTTPRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */; };
 		04FA89BE1C117E400064F3AA /* NLHTTPRequestOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */; };
 		04FB75911C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB75901C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m */; };
+		04FDE4C91C464B8800FFB065 /* NLPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FDE4C81C464B8800FFB065 /* NLPickView.m */; };
 		4A3CFF267937751BD6F2302D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E0A4932CCDD3CB9C4B5CFA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -163,8 +164,6 @@
 		04018BCD1C3CB914009AC56A /* NLAboutImageBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLAboutImageBtn.m; sourceTree = "<group>"; };
 		04018BCE1C3CB914009AC56A /* NLCalenderPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderPackage.h; sourceTree = "<group>"; };
 		04018BCF1C3CB914009AC56A /* NLCalenderPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCalenderPackage.m; sourceTree = "<group>"; };
-		04018BD01C3CB914009AC56A /* NLPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLPickView.h; sourceTree = "<group>"; };
-		04018BD11C3CB914009AC56A /* NLPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLPickView.m; sourceTree = "<group>"; };
 		04018BD41C3CB914009AC56A /* NLCalenderLifeHabit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderLifeHabit.h; sourceTree = "<group>"; };
 		04018BD51C3CB914009AC56A /* NLCalenderLifeHabit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCalenderLifeHabit.m; sourceTree = "<group>"; };
 		04018BD61C3CB914009AC56A /* NLCalenderPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCalenderPicker.h; sourceTree = "<group>"; };
@@ -262,6 +261,8 @@
 		04F3CC531C04350D0066D39D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		04F3CC541C04350D0066D39D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		04F3CC551C04350D0066D39D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		04F3EBF81C45FA8F0003E37D /* NLMaleIndivuaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMaleIndivuaCell.h; sourceTree = "<group>"; };
+		04F3EBF91C45FA8F0003E37D /* NLMaleIndivuaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMaleIndivuaCell.m; sourceTree = "<group>"; };
 		04F4B7C21C07FA7100DE60DE /* battery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "battery@2x.png"; sourceTree = "<group>"; };
 		04F4B7C31C07FA7100DE60DE /* battery@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "battery@3x.png"; sourceTree = "<group>"; };
 		04F4B7C61C082AD200DE60DE /* NLSQLData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLSQLData.h; sourceTree = "<group>"; };
@@ -288,6 +289,8 @@
 		04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHTTPRequestOperations.m; sourceTree = "<group>"; };
 		04FB758F1C3DF8F200A8DF35 /* NLMaleNBluePlanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMaleNBluePlanCell.h; sourceTree = "<group>"; };
 		04FB75901C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMaleNBluePlanCell.m; sourceTree = "<group>"; };
+		04FDE4C71C464B8800FFB065 /* NLPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLPickView.h; sourceTree = "<group>"; };
+		04FDE4C81C464B8800FFB065 /* NLPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLPickView.m; sourceTree = "<group>"; };
 		46E0A4932CCDD3CB9C4B5CFA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D156C54B110CBBF4D4804D4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8F50F23BC12A7C0575CA9364 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -436,8 +439,6 @@
 				04018BCD1C3CB914009AC56A /* NLAboutImageBtn.m */,
 				04018BCE1C3CB914009AC56A /* NLCalenderPackage.h */,
 				04018BCF1C3CB914009AC56A /* NLCalenderPackage.m */,
-				04018BD01C3CB914009AC56A /* NLPickView.h */,
-				04018BD11C3CB914009AC56A /* NLPickView.m */,
 			);
 			path = GeneralView;
 			sourceTree = "<group>";
@@ -632,6 +633,8 @@
 		049751D41BFEEF2B0044D97B /* ToolClass */ = {
 			isa = PBXGroup;
 			children = (
+				04FDE4C71C464B8800FFB065 /* NLPickView.h */,
+				04FDE4C81C464B8800FFB065 /* NLPickView.m */,
 				04F4B7D01C083B3E00DE60DE /* NLLocalUserInfo.h */,
 				04F4B7D11C083B3E00DE60DE /* NLLocalUserInfo.m */,
 				04F7F64C1C1BFC9000466EBC /* NLGestureRecognizer.h */,
@@ -777,6 +780,8 @@
 			children = (
 				04FB758F1C3DF8F200A8DF35 /* NLMaleNBluePlanCell.h */,
 				04FB75901C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m */,
+				04F3EBF81C45FA8F0003E37D /* NLMaleIndivuaCell.h */,
+				04F3EBF91C45FA8F0003E37D /* NLMaleIndivuaCell.m */,
 			);
 			path = MaleProfileView;
 			sourceTree = "<group>";
@@ -877,7 +882,7 @@
 				TargetAttributes = {
 					0497519B1BFEEED50044D97B = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = B2TE79W3Y8;
+						DevelopmentTeam = FW77J8F5Y3;
 					};
 					049751B41BFEEED50044D97B = {
 						CreatedOnToolsVersion = 7.1;
@@ -1001,6 +1006,7 @@
 				04018CF11C3D179F009AC56A /* NLMaleIndividuaViewController.m in Sources */,
 				04018C291C3CB914009AC56A /* NLIndividuaFormaCell.m in Sources */,
 				04018BFD1C3CB914009AC56A /* NLHealthMangerSleepViewController.m in Sources */,
+				04FDE4C91C464B8800FFB065 /* NLPickView.m in Sources */,
 				04018CE51C3CBDBC009AC56A /* NLMyHerViewController.m in Sources */,
 				04018C0A1C3CB914009AC56A /* NLPeriodViewController.m in Sources */,
 				04018C1A1C3CB914009AC56A /* NLCalenderPicker.m in Sources */,
@@ -1017,7 +1023,6 @@
 				049751A11BFEEED50044D97B /* main.m in Sources */,
 				04018C1C1C3CB914009AC56A /* NLCalenderUncomfortable.m in Sources */,
 				04018C241C3CB914009AC56A /* NLRing.m in Sources */,
-				04018C181C3CB914009AC56A /* NLPickView.m in Sources */,
 				04F7F64E1C1BFC9000466EBC /* NLGestureRecognizer.m in Sources */,
 				04C9954D1C029F2400D8AE79 /* NLBluetoothDataAnalytical.m in Sources */,
 				04018C201C3CB914009AC56A /* NLHealthCalenderView.m in Sources */,
@@ -1067,6 +1072,7 @@
 				04018C1E1C3CB914009AC56A /* NLHealtCalenderCell.m in Sources */,
 				04F762D11C44933E003DBE4D /* NLMyMaleViewController.m in Sources */,
 				04018C1F1C3CB914009AC56A /* NLHealtCalenderPeriod.m in Sources */,
+				04F3EBFA1C45FA8F0003E37D /* NLMaleIndivuaCell.m in Sources */,
 				04F7F6E71C2E7F2F009020A0 /* NLUserInformat.m in Sources */,
 				04018C1B1C3CB914009AC56A /* NLCalenderUncomforBtn.m in Sources */,
 			);
@@ -1226,12 +1232,12 @@
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/NBlue/NLBlue.pch";
 				INFOPLIST_FILE = NBlue/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "44df239e-822c-4bf8-bd13-a3e644427e13";
-				"PROVISIONING_PROFILE[sdk=*]" = "44df239e-822c-4bf8-bd13-a3e644427e13";
+				PROVISIONING_PROFILE = "2c040cab-febd-413d-94b5-b5d432c84aa4";
+				"PROVISIONING_PROFILE[sdk=*]" = "2c040cab-febd-413d-94b5-b5d432c84aa4";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};
@@ -1247,12 +1253,12 @@
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/NBlue/NLBlue.pch";
 				INFOPLIST_FILE = NBlue/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c33a9e98-3620-4035-ae55-785c1a80d6d6";
-				"PROVISIONING_PROFILE[sdk=*]" = "c33a9e98-3620-4035-ae55-785c1a80d6d6";
+				PROVISIONING_PROFILE = "9edc56ca-7174-4a9a-886b-b850198254d0";
+				"PROVISIONING_PROFILE[sdk=*]" = "9edc56ca-7174-4a9a-886b-b850198254d0";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};
