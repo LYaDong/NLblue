@@ -15,6 +15,7 @@ static const NSInteger BTNPICKERTAG = 2000;
 @interface NLBodyParamentViewController ()<LYDSetSegmentDelegate,NLPickViewDelegate>
 @property(nonatomic,strong)NLPickView *pickerView;
 @property(nonatomic,strong)UIButton *blackView;
+@property(nonatomic,strong)NSMutableDictionary *userDic;
 @end
 
 @implementation NLBodyParamentViewController
@@ -22,11 +23,9 @@ static const NSInteger BTNPICKERTAG = 2000;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    _userDic = [NSMutableDictionary dictionary];
     self.view.backgroundColor = [self colors];
     
-    self.view.backgroundColor = [self colors];
-
     [self prefersStatusBarHidden];
     [self bulidUI];
 }
@@ -123,14 +122,37 @@ static const NSInteger BTNPICKERTAG = 2000;
         [self.navigationController popViewControllerAnimated:YES];
     }else{
         
+        UITextField *textAge = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + PickerType_Age];
+        UITextField *textHeight = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + PickerType_Height];
+        UITextField *textWidth = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + PickerType_Width];
+        
+        if (textAge.text.length == 0) {
+            [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"年龄不能为空哦~"];
+            return;
+        }
+        
+        if (textHeight.text.length == 0) {
+            [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"身高不能为空哦~"];
+            return;
+        }
+        
+        if (textWidth.text.length == 0){
+            [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"体重不能为空哦~"];
+            return;
+        }
+        
+        
+        
         if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"1"]) {
             [kAPPDELEGATE._loacluserinfo isLoginUser:@"1"];
             [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
             [kAPPDELEGATE tabBarViewControllerType:Controller_MaleMain];
             [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
+            [PlistData individuaData:_userDic];
         }else{
             NLPeriodViewController *vc = [[NLPeriodViewController alloc] init];
             [vc setHidesBottomBarWhenPushed:YES];
+            vc.user_Dic = _userDic;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
@@ -154,18 +176,21 @@ static const NSInteger BTNPICKERTAG = 2000;
                 {
                     UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + PickerType_Age];
                     text.text = count;
+                    [_userDic setValue:count  forKey:@"age"];
                     break;
                 }
                 case PickerType_Height:
                 {
                     UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + PickerType_Height];
                     text.text = count;
+                    [_userDic setValue:count  forKey:@"height"];
                     break;
                 }
                 case PickerType_Width:
                 {
                     UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + PickerType_Width];
                     text.text = count;
+                    [_userDic setValue:count  forKey:@"width"];
                     break;
                 }
                 default:
@@ -179,7 +204,6 @@ static const NSInteger BTNPICKERTAG = 2000;
     }
 }
 - (void)datePicker:(NSDate *)date cancel:(NSInteger)cancelType useDatePicker:(NSInteger)useDatePicker{
-    
 }
 #pragma mark 自己的按钮事件
 -(void)btnPickerDown:(UIButton *)btn{

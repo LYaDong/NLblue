@@ -222,6 +222,21 @@
  *时间戳转时间
  */
 +(NSString *)timestampTransformationTime:(int64_t)timestamp;
+
 @end
 
+@interface ApplicationStyle (UIImages)
+/**
+ *生成二维码
+ */
++ (CIImage *)createQRForString:(NSString *)qrString;
+/**
+ *把CIImage转成Image
+ */
++ (UIImage *)createNonInterpolatedUIImageFormCIImage:(CIImage *)image withSize:(CGFloat) size;
+/**
+ * 修改二维码颜色 待优化
+ */
++ (UIImage*)imageBlackToTransparent:(UIImage*)image withRed:(CGFloat)red andGreen:(CGFloat)green andBlue:(CGFloat)blue;
+@end
 

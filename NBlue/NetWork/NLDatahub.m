@@ -10,7 +10,7 @@
 #import "NLHTTPRequestFactory.h"
 #import "NLHTTPRequestOperations.h"
 #import "AFHTTPRequestOperationManager.h"
-    
+#import "SMProgressHUD.h"
 static NLDatahub *datahub = nil;
 static NSString *NLtextHeml = @"text/html";
 static NSString *NLapplication = @"application/json";
@@ -118,15 +118,18 @@ static NSString *NLSportApi = @"/sport";//各个接口端
 }
 #pragma mark 登录
 -(void)userSignInPhone:(NSString *)phone password:(NSString *)password{
+    [self loadingView];
     NSDictionary *parameters= @{@"phone":phone,@"code":@"",@"password":password,@"platform":@"ios"};
     _manger = [[AFHTTPRequestOperationManager alloc]init];
     _manger.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:NLtextHeml,NLapplication, nil];
     [_manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Login] parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissHide];
             [[NSNotificationCenter defaultCenter] postNotificationName:NLLogInSuccessNotification object:responseObject userInfo:nil];
         });
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissHide];
             NSLog(@"%@",error);
             [[NSNotificationCenter defaultCenter] postNotificationName:NLLogInFailedNotiFicaledtion object:nil userInfo:nil];
         });
@@ -226,5 +229,20 @@ static NSString *NLSportApi = @"/sport";//各个接口端
 #pragma mark 提醒他
 -(void)remindMale{
     
+}
+
+
+
+#pragma mark loading提示框
+-(void)loadingView{
+    [[SMProgressHUD shareInstancetype] showLoading];
+}
+
+-(void)loadingViewString:(NSString *)string{
+    [[SMProgressHUD shareInstancetype] showLoadingWithTip:string];
+}
+
+-(void)dismissHide{
+    [[SMProgressHUD shareInstancetype] dismiss];
 }
 @end

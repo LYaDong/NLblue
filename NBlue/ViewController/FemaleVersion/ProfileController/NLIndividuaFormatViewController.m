@@ -310,12 +310,17 @@ static const NSInteger BTNPHOTO = 4000;
         switch (indexPath.row) {
             case 0:
             {
-                [self datePickView:UseDatePicker_Period];
+                
+                
+                [self pickerView:PickerType_Period];
+//                [self datePickView:UseDatePicker_Period];
                 break;
             }
             case 1:
             {
-                [self datePickView:UseDatePicker_Cycle];
+                
+                [self pickerView:PickerType_Cycle];
+//                [self datePickView:UseDatePicker_Cycle];
                 break;
             }
             default:
@@ -367,6 +372,18 @@ static const NSInteger BTNPHOTO = 4000;
                     [_userCountDataDic setValue:count forKey:@"width"];
                     break;
                 }
+                case PickerType_Period:
+                {
+                    //                    [_measArray replaceObjectAtIndex:pickType withObject:count];
+                   [_userCountDataDic setValue:count forKey:@"periodTime"];
+                    break;
+                }
+                case PickerType_Cycle:
+                {
+                    //                    [_measArray replaceObjectAtIndex:pickType withObject:count];
+                    [_userCountDataDic setValue:count forKey:@"cycleTime"];
+                    break;
+                }
                 default:
                     break;
             }
@@ -377,45 +394,11 @@ static const NSInteger BTNPHOTO = 4000;
             break;
     }
     
-    [_tableView reloadSections:[[NSIndexSet alloc] initWithIndex:1] withRowAnimation:NO];
+    [_tableView reloadData];
     
 }
 
 -(void)datePicker:(NSDate *)date cancel:(NSInteger)cancelType useDatePicker:(NSInteger)useDatePicker{
-    [self pickerViewFramkeHide];
-    switch (cancelType) {
-        case SeleType_Cancel:
-        {
-            _blackView.hidden = YES;
-            break;
-        }
-        case SeleType_OK:
-        {
-            switch (useDatePicker) {
-                case UseDatePicker_Period:
-                {
-//                    [_periodArray replaceObjectAtIndex:useDatePicker withObject:[ApplicationStyle datePickerTransformationCorss:date]];
-                    
-                    [_userCountDataDic setValue:[ApplicationStyle datePickerTransformationCorss:date] forKey:@"periodTime"];
-                    
-                    break;
-                }
-                case UseDatePicker_Cycle:
-                {
-//                    [_periodArray replaceObjectAtIndex:useDatePicker withObject:[ApplicationStyle datePickerTransformationCorss:date]];
-                    [_userCountDataDic setValue:[ApplicationStyle datePickerTransformationCorss:date] forKey:@"cycleTime"];
-                    break;
-                }
-                default:
-                    break;
-            }
-            _blackView.hidden = YES;
-            break;
-        }
-        default:
-            break;
-    }
-    [_tableView reloadSections:[[NSIndexSet alloc] initWithIndex:2] withRowAnimation:NO];
 }
 #pragma mark 自己的按钮事件
 -(void)btnPhotoDown:(UIButton *)btn{
@@ -524,6 +507,7 @@ static const NSInteger BTNPHOTO = 4000;
     }];
 }
 -(void)returnBtnDown{
+    
     [PlistData individuaData:_userCountDataDic];
     [self.navigationController popViewControllerAnimated:YES];
 }

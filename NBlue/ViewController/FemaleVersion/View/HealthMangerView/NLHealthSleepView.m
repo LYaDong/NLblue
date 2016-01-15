@@ -33,12 +33,12 @@
     CGRect frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:500])/2,([ApplicationStyle control_height:600] - [ApplicationStyle control_height:500])/2, [ApplicationStyle control_weight:500], [ApplicationStyle control_height:500]);
     
     _ring = [[NLRing alloc] init];
-    _ring.backColors = [@"f7f3ff" hexStringToColor];
-    _ring.coverColor = [@"ffde6a" hexStringToColor];
     _ring.lineWidth = [ApplicationStyle control_weight:30];
     _ring.lineIndex = 100;
     _ring.progressCounter = 30;
     _ring.radius = [ApplicationStyle control_weight:200];
+    _ring.backColors = [self circleBackColor];
+    _ring.coverColor = [self circleCoverdColor];
     
     NLRingLine *ringLine = [[NLRingLine alloc] initWithRing:_ring frame:frame];
     ringLine.backgroundColor = [UIColor clearColor];
@@ -52,25 +52,25 @@
     UILabel *yesterdayLab = [[UILabel alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:128])/2, [ApplicationStyle control_height:220], [ApplicationStyle control_weight:128], [ApplicationStyle control_height:30])];
     yesterdayLab.text = NSLocalizedString(@"NLHealthSleepView_YesterDay", nil);
     yesterdayLab.font = [UIFont  systemFontOfSize:[ApplicationStyle control_weight:28]];
-    yesterdayLab.textColor = [ApplicationStyle subjectWithColor];
+    yesterdayLab.textColor = [self titleColor];
     [self addSubview:yesterdayLab];
     
     _timeSleep = [[UILabel alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:300])/2, yesterdayLab.bottomOffset + [ApplicationStyle control_height:20], [ApplicationStyle control_weight:300], [ApplicationStyle control_height:50])];
     _timeSleep.font = [UIFont  fontWithName:@"Helvetica-Bold" size:[ApplicationStyle control_weight:40]];
-    _timeSleep.textColor = [ApplicationStyle subjectWithColor];
+    _timeSleep.textColor = [self titleColor];
     _timeSleep.textAlignment = NSTextAlignmentCenter;
     _timeSleep.text = @"6小时30分钟";
     [self addSubview:_timeSleep];
     
     _depthLab = [[UILabel alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:300])/2, _timeSleep.bottomOffset + [ApplicationStyle control_height:34], [ApplicationStyle control_weight:300 ], [ApplicationStyle control_height:30])];
     _depthLab.font = [UIFont  fontWithName:@"Helvetica-Bold" size:[ApplicationStyle control_weight:26]];
-    _depthLab.textColor = [ApplicationStyle subjectWithColor];
+    _depthLab.textColor = [self titleColor];
     _depthLab.textAlignment = NSTextAlignmentCenter;
     _depthLab.text = @"深度睡眠 3小时30分钟";
     [self addSubview:_depthLab];
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:40], [ApplicationStyle control_height:600], SCREENWIDTH - [ApplicationStyle control_weight:40 * 2], [ApplicationStyle control_height:1])];
-    line.backgroundColor = [ApplicationStyle subjectWithColor];
+    line.backgroundColor = [self circleBackColor];
     [self addSubview:line];
     
     
@@ -85,15 +85,44 @@
         
         NLStepImageLabView *viewLab = [[NLStepImageLabView alloc] initWithImage:[UIImage imageNamed:slppeImage[i]]
                                                                        textFont:[ApplicationStyle textThrityFont]
-                                                                      textColor:[ApplicationStyle subjectWithColor]
+                                                                      textColor:[self titleColor]
                                                                      textRemark:sleepLabArr[i]
                                                                         textNum:timeArr[i]
                                                                           frame:frames];
         viewLab.frame = frames;
         [self addSubview:viewLab];
     }
+}
+
+- (UIColor *)circleBackColor{
     
+    UIColor *color = nil;
+    if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
+        color = [@"f7f3ff" hexStringToColor];
+    }else{
+        color = [@"e5aa5f" hexStringToColor];
+    }
+    return color;
+}
+- (UIColor *)circleCoverdColor{
+    UIColor *color = nil;
     
+    if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
+        color = [@"ffde6a" hexStringToColor];
+    }else{
+        color = [@"a66d1b" hexStringToColor];
+    }
+    return color;
+}
+- (UIColor *)titleColor{
+    UIColor *color = nil;
+    
+    if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
+        color = [@"ffde6a" hexStringToColor];
+    }else{
+        color = [@"a66d1b" hexStringToColor];
+    }
+    return color;
 }
 
 /*

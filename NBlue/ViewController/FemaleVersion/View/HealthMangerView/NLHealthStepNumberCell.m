@@ -63,7 +63,7 @@
     
     UILabel *targetNumber = [[UILabel alloc] initWithFrame:CGRectMake(x, 0, [ApplicationStyle control_weight:170], h)];
     targetNumber.text = NSLocalizedString(@"NLHealthStepNumber_TargetNumber", nil);
-    targetNumber.textColor = [@"ffffff" hexStringToColor];
+    targetNumber.textColor = [self titleColor];
     targetNumber.font = [ApplicationStyle  textThrityFont];
     targetNumber.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:targetNumber];
@@ -71,19 +71,20 @@
     _stepNumber = [UIButton buttonWithType:UIButtonTypeCustom];
     _stepNumber.frame = CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:150] - x, 0, [ApplicationStyle control_weight:150], h);
     [_stepNumber setTitle:@"8,000" forState:UIControlStateNormal];
+    [_stepNumber setTitleColor:[self titleColor] forState:UIControlStateNormal];
     [_stepNumber setImage:[UIImage imageNamed:@"Health_M_R_B"] forState:UIControlStateNormal];
     [_stepNumber addTarget:self action:@selector(stepNumberDown) forControlEvents:UIControlEventTouchUpInside];
     _stepNumber.titleLabel.font = [ApplicationStyle textThrityFont];
     [self.contentView addSubview:_stepNumber];
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(x,h, SCREENWIDTH - x * 2, [ApplicationStyle control_height:1])];
-    line.backgroundColor = [@"ffcdd0" hexStringToColor];
+    line.backgroundColor = [self lineColor];
     [self.contentView addSubview:line];
     
     _maxStepNumber = [[UILabel alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:110] - x, line.bottomOffset, [ApplicationStyle control_weight:110], [ApplicationStyle control_height:50])];
     _maxStepNumber.text = @"4,000";
     _maxStepNumber.font = [ApplicationStyle textSuperSmallFont];
-    _maxStepNumber.textColor = [@"ffecf0" hexStringToColor];
+    _maxStepNumber.textColor = [self titleColor];
     _maxStepNumber.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:_maxStepNumber];
     
@@ -93,7 +94,7 @@
     
     NSLog(@"%@",dataArray);
     
-    NLStepColumnImage  *column = [[NLStepColumnImage alloc] initWithFrame:frame DataArr:dataArray strokeColor:[@"882a00" hexStringToColor] withColor:[@"fac96f" hexStringToColor]];
+    NLStepColumnImage  *column = [[NLStepColumnImage alloc] initWithFrame:frame DataArr:dataArray strokeColor:[@"882a00" hexStringToColor] withColor:[self histogramColor]];
     column.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:column];
     
@@ -114,11 +115,11 @@
         UILabel *timeLab = [[UILabel alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:14] + i * (SCREENWIDTH - [ApplicationStyle control_weight:14 * 2] - sizeTime.width)/4 , column.bottomOffset, sizeTime.width, [ApplicationStyle control_height:60])];
         timeLab.text = arrTime[i];
         timeLab.font = [ApplicationStyle textSuperSmallFont];
-        timeLab.textColor = [ApplicationStyle subjectWithColor];
+        timeLab.textColor = [self titleColor];
         [self.contentView addSubview:timeLab];
     }
     UIView *lineTime = [[UIView alloc] initWithFrame:CGRectMake(0, column.bottomOffset + [ApplicationStyle control_height:60 - 1], SCREENWIDTH, [ApplicationStyle control_height:1])];
-    lineTime.backgroundColor = [ApplicationStyle subjectWithColor];
+    lineTime.backgroundColor = [self lineColor];
     [self.contentView addSubview:lineTime];
 
     
@@ -138,9 +139,6 @@
         distanceAmount = @"0";
     }
     
-    
-    
-    
     NSArray *stepArr = @[@"Step_Num",@"Step_KM",@"Step_KLL"];
     NSArray *stepData = @[[NSString stringWithFormat:@"%@步",sportCount],
                           [NSString stringWithFormat:@"%@米",distanceAmount],
@@ -155,20 +153,48 @@
         
         NLStepImageLabView *viewLab = [[NLStepImageLabView alloc] initWithImage:[UIImage imageNamed:stepArr[i]]
                                                                        textFont:[ApplicationStyle textThrityFont]
-                                                                      textColor:[ApplicationStyle subjectWithColor]
+                                                                      textColor:[self titleColor]
                                                                      textRemark:stepRemark[i]
                                                                         textNum:stepData[i]
                                                                           frame:frames];
         viewLab.frame = frames;
         [self.contentView addSubview:viewLab];
     }
-
-
 }
 
 -(void)stepNumberDown{
     NSLog(@"填写步数");
 }
+
+- (UIColor *)histogramColor{
+    UIColor *color = nil;
+    if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
+        color = [@"fac96f" hexStringToColor];
+    }else{
+        color = [@"fac96f" hexStringToColor];
+    }
+    return color;
+}
+- (UIColor *)titleColor{
+    UIColor *color = nil;
+    if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
+        color = [ApplicationStyle subjectWithColor];
+    }else{
+        color = [@"d49a2f" hexStringToColor];
+    }
+    return color;
+}
+
+- (UIColor *)lineColor{
+    UIColor *color = nil;
+    if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
+        color = [@"ffcdd0" hexStringToColor];
+    }else{
+        color = [@"ddab56" hexStringToColor];
+    }
+    return color;
+}
+
 - (void)awakeFromNib {
     // Initialization code
 }

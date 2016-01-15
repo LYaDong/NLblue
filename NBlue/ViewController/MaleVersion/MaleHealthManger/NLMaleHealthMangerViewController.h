@@ -7,7 +7,6 @@
 //
 
 #import "NLSubRootViewController.h"
-
 @interface NLMaleHealthMangerViewController : NLSubRootViewController
 
 @end

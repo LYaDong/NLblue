@@ -33,18 +33,12 @@
     
     [self loadData];
     
-
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, self.frame.size.height) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     _tableView.backgroundColor = [UIColor clearColor];
     [self addSubview:_tableView];
-    
-    
-//    NSTimer *time = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
-    
-    
 }
 -(void)timeDown{
     [_tableView reloadData];
@@ -108,11 +102,6 @@
             }
         }
     }
-    
-    NSLog(@"%@ %@",sportData,_sportData);
-    
-    
-    
     [cell histogram:sportData
           sportData:_sportData
              target:4000];

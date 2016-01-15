@@ -61,6 +61,10 @@
 		04018CEE1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018CED1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m */; };
 		04018CF11C3D179F009AC56A /* NLMaleIndividuaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018CF01C3D179F009AC56A /* NLMaleIndividuaViewController.m */; };
 		0403F9781C2CE3420000A9C3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0403F9771C2CE3420000A9C3 /* CoreTelephony.framework */; };
+		040E12621C48DA1400769AD1 /* SMProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E12591C48DA1400769AD1 /* SMProgressHUD.m */; };
+		040E12631C48DA1400769AD1 /* SMProgressHUDLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E125C1C48DA1400769AD1 /* SMProgressHUDLoadingView.m */; };
+		040E12641C48DA1400769AD1 /* SMProgressHUDTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E125E1C48DA1400769AD1 /* SMProgressHUDTipView.m */; };
+		040E12651C48DA1400769AD1 /* UIView+SMAutolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E12601C48DA1400769AD1 /* UIView+SMAutolayout.m */; };
 		049751A11BFEEED50044D97B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751A01BFEEED50044D97B /* main.m */; };
 		049751AA1BFEEED50044D97B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049751A81BFEEED50044D97B /* Main.storyboard */; };
 		049751AC1BFEEED50044D97B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049751AB1BFEEED50044D97B /* Assets.xcassets */; };
@@ -69,6 +73,20 @@
 		049751C51BFEEED60044D97B /* NBlueUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751C41BFEEED60044D97B /* NBlueUITests.m */; };
 		049751DC1BFEF2FE0044D97B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751DB1BFEF2FE0044D97B /* AppDelegate.m */; };
 		049751DF1BFEF3140044D97B /* ApplicationStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751DE1BFEF3140044D97B /* ApplicationStyle.m */; };
+		0497B9A61C48EE3A003F5CFF /* done.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B9981C48EE3A003F5CFF /* done.png */; };
+		0497B9A71C48EE3A003F5CFF /* done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B9991C48EE3A003F5CFF /* done@2x.png */; };
+		0497B9A81C48EE3A003F5CFF /* done@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B99A1C48EE3A003F5CFF /* done@3x.png */; };
+		0497B9A91C48EE3A003F5CFF /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B99B1C48EE3A003F5CFF /* error.png */; };
+		0497B9AA1C48EE3A003F5CFF /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B99C1C48EE3A003F5CFF /* error@2x.png */; };
+		0497B9AB1C48EE3A003F5CFF /* error@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B99D1C48EE3A003F5CFF /* error@3x.png */; };
+		0497B9AC1C48EE3A003F5CFF /* succeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B99E1C48EE3A003F5CFF /* succeed.png */; };
+		0497B9AD1C48EE3A003F5CFF /* succeed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B99F1C48EE3A003F5CFF /* succeed@2x.png */; };
+		0497B9AE1C48EE3A003F5CFF /* succeed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B9A01C48EE3A003F5CFF /* succeed@3x.png */; };
+		0497B9AF1C48EE3A003F5CFF /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B9A11C48EE3A003F5CFF /* success.png */; };
+		0497B9B01C48EE3A003F5CFF /* success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B9A21C48EE3A003F5CFF /* success@2x.png */; };
+		0497B9B11C48EE3A003F5CFF /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B9A31C48EE3A003F5CFF /* warning.png */; };
+		0497B9B21C48EE3A003F5CFF /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B9A41C48EE3A003F5CFF /* warning@2x.png */; };
+		0497B9B31C48EE3A003F5CFF /* warning@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B9A51C48EE3A003F5CFF /* warning@3x.png */; };
 		04C995471C029D6B00D8AE79 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C995461C029D6B00D8AE79 /* CoreBluetooth.framework */; };
 		04C9954A1C029E8300D8AE79 /* NLBluetoothAgreement.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C995491C029E8300D8AE79 /* NLBluetoothAgreement.m */; };
 		04C9954D1C029F2400D8AE79 /* NLBluetoothDataAnalytical.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9954C1C029F2400D8AE79 /* NLBluetoothDataAnalytical.m */; };
@@ -223,6 +241,15 @@
 		04018CEF1C3D179F009AC56A /* NLMaleIndividuaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMaleIndividuaViewController.h; sourceTree = "<group>"; };
 		04018CF01C3D179F009AC56A /* NLMaleIndividuaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMaleIndividuaViewController.m; sourceTree = "<group>"; };
 		0403F9771C2CE3420000A9C3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		040E12581C48DA1400769AD1 /* SMProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMProgressHUD.h; sourceTree = "<group>"; };
+		040E12591C48DA1400769AD1 /* SMProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMProgressHUD.m; sourceTree = "<group>"; };
+		040E125A1C48DA1400769AD1 /* SMProgressHUDConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMProgressHUDConfigure.h; sourceTree = "<group>"; };
+		040E125B1C48DA1400769AD1 /* SMProgressHUDLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMProgressHUDLoadingView.h; sourceTree = "<group>"; };
+		040E125C1C48DA1400769AD1 /* SMProgressHUDLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMProgressHUDLoadingView.m; sourceTree = "<group>"; };
+		040E125D1C48DA1400769AD1 /* SMProgressHUDTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMProgressHUDTipView.h; sourceTree = "<group>"; };
+		040E125E1C48DA1400769AD1 /* SMProgressHUDTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMProgressHUDTipView.m; sourceTree = "<group>"; };
+		040E125F1C48DA1400769AD1 /* UIView+SMAutolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SMAutolayout.h"; sourceTree = "<group>"; };
+		040E12601C48DA1400769AD1 /* UIView+SMAutolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SMAutolayout.m"; sourceTree = "<group>"; };
 		0497519C1BFEEED50044D97B /* NBlue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NBlue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		049751A01BFEEED50044D97B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		049751A91BFEEED50044D97B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -240,6 +267,20 @@
 		049751DD1BFEF3140044D97B /* ApplicationStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationStyle.h; sourceTree = "<group>"; };
 		049751DE1BFEF3140044D97B /* ApplicationStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationStyle.m; sourceTree = "<group>"; };
 		049751E11BFEF5050044D97B /* NLBlue.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NLBlue.pch; sourceTree = "<group>"; };
+		0497B9981C48EE3A003F5CFF /* done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = done.png; path = ../done.png; sourceTree = "<group>"; };
+		0497B9991C48EE3A003F5CFF /* done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "done@2x.png"; path = "../done@2x.png"; sourceTree = "<group>"; };
+		0497B99A1C48EE3A003F5CFF /* done@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "done@3x.png"; path = "../done@3x.png"; sourceTree = "<group>"; };
+		0497B99B1C48EE3A003F5CFF /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = error.png; path = ../error.png; sourceTree = "<group>"; };
+		0497B99C1C48EE3A003F5CFF /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "error@2x.png"; path = "../error@2x.png"; sourceTree = "<group>"; };
+		0497B99D1C48EE3A003F5CFF /* error@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "error@3x.png"; path = "../error@3x.png"; sourceTree = "<group>"; };
+		0497B99E1C48EE3A003F5CFF /* succeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = succeed.png; path = ../succeed.png; sourceTree = "<group>"; };
+		0497B99F1C48EE3A003F5CFF /* succeed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "succeed@2x.png"; path = "../succeed@2x.png"; sourceTree = "<group>"; };
+		0497B9A01C48EE3A003F5CFF /* succeed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "succeed@3x.png"; path = "../succeed@3x.png"; sourceTree = "<group>"; };
+		0497B9A11C48EE3A003F5CFF /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = success.png; path = ../success.png; sourceTree = "<group>"; };
+		0497B9A21C48EE3A003F5CFF /* success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "success@2x.png"; path = "../success@2x.png"; sourceTree = "<group>"; };
+		0497B9A31C48EE3A003F5CFF /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = warning.png; path = ../warning.png; sourceTree = "<group>"; };
+		0497B9A41C48EE3A003F5CFF /* warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "warning@2x.png"; path = "../warning@2x.png"; sourceTree = "<group>"; };
+		0497B9A51C48EE3A003F5CFF /* warning@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "warning@3x.png"; path = "../warning@3x.png"; sourceTree = "<group>"; };
 		049B07841C158A78005147B5 /* NLNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NLNotification.h; sourceTree = "<group>"; };
 		04C995461C029D6B00D8AE79 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		04C995481C029E8300D8AE79 /* NLBluetoothAgreement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLBluetoothAgreement.h; sourceTree = "<group>"; };
@@ -556,6 +597,31 @@
 			path = MaleHealthManger;
 			sourceTree = "<group>";
 		};
+		040E123F1C48D6CE00769AD1 /* SystemLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				04CDA1741BFF022D00D2A304 /* Foundation.framework */,
+			);
+			path = SystemLibrary;
+			sourceTree = "<group>";
+		};
+		040E12561C48DA1400769AD1 /* SMProgresHUD */ = {
+			isa = PBXGroup;
+			children = (
+				0497B9B41C48EE72003F5CFF /* SMprogressImg */,
+				040E12581C48DA1400769AD1 /* SMProgressHUD.h */,
+				040E12591C48DA1400769AD1 /* SMProgressHUD.m */,
+				040E125A1C48DA1400769AD1 /* SMProgressHUDConfigure.h */,
+				040E125B1C48DA1400769AD1 /* SMProgressHUDLoadingView.h */,
+				040E125C1C48DA1400769AD1 /* SMProgressHUDLoadingView.m */,
+				040E125D1C48DA1400769AD1 /* SMProgressHUDTipView.h */,
+				040E125E1C48DA1400769AD1 /* SMProgressHUDTipView.m */,
+				040E125F1C48DA1400769AD1 /* UIView+SMAutolayout.h */,
+				040E12601C48DA1400769AD1 /* UIView+SMAutolayout.m */,
+			);
+			path = SMProgresHUD;
+			sourceTree = "<group>";
+		};
 		049751931BFEEED50044D97B = {
 			isa = PBXGroup;
 			children = (
@@ -589,8 +655,7 @@
 				04FA89B41C117E180064F3AA /* NetWork */,
 				04FA89B31C117E060064F3AA /* Model */,
 				049751D51BFEEF3F0044D97B /* Common */,
-				04C9954E1C02A08A00D8AE79 /* SystemBase */,
-				04F3CC3F1C03F4F30066D39D /* ThirdLibrary */,
+				040E123F1C48D6CE00769AD1 /* SystemLibrary */,
 				049751A81BFEEED50044D97B /* Main.storyboard */,
 				04CD22FC1C29221400AB467A /* Warman-568h@2x.png */,
 				04CD22FD1C29221400AB467A /* Warman@2x.png */,
@@ -681,18 +746,31 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		04C9954E1C02A08A00D8AE79 /* SystemBase */ = {
+		0497B9B41C48EE72003F5CFF /* SMprogressImg */ = {
 			isa = PBXGroup;
 			children = (
-				04CDA1741BFF022D00D2A304 /* Foundation.framework */,
+				0497B9981C48EE3A003F5CFF /* done.png */,
+				0497B9991C48EE3A003F5CFF /* done@2x.png */,
+				0497B99A1C48EE3A003F5CFF /* done@3x.png */,
+				0497B99B1C48EE3A003F5CFF /* error.png */,
+				0497B99C1C48EE3A003F5CFF /* error@2x.png */,
+				0497B99D1C48EE3A003F5CFF /* error@3x.png */,
+				0497B99E1C48EE3A003F5CFF /* succeed.png */,
+				0497B99F1C48EE3A003F5CFF /* succeed@2x.png */,
+				0497B9A01C48EE3A003F5CFF /* succeed@3x.png */,
+				0497B9A11C48EE3A003F5CFF /* success.png */,
+				0497B9A21C48EE3A003F5CFF /* success@2x.png */,
+				0497B9A31C48EE3A003F5CFF /* warning.png */,
+				0497B9A41C48EE3A003F5CFF /* warning@2x.png */,
+				0497B9A51C48EE3A003F5CFF /* warning@3x.png */,
 			);
-			name = SystemBase;
-			path = Common/SystemBase;
+			path = SMprogressImg;
 			sourceTree = "<group>";
 		};
 		04CD230E1C2930F700AB467A /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				040E12561C48DA1400769AD1 /* SMProgresHUD */,
 				04CD230F1C29310100AB467A /* OLGhostAlertView */,
 			);
 			path = ThirdParty;
@@ -716,13 +794,6 @@
 				04F4B7C71C082AD200DE60DE /* NLSQLData.m */,
 			);
 			path = CacheData;
-			sourceTree = "<group>";
-		};
-		04F3CC3F1C03F4F30066D39D /* ThirdLibrary */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ThirdLibrary;
 			sourceTree = "<group>";
 		};
 		04F4B7C11C07FA3C00DE60DE /* TestImage */ = {
@@ -921,14 +992,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				04CD23001C29221400AB467A /* Warman@2x.png in Resources */,
+				0497B9B31C48EE3A003F5CFF /* warning@3x.png in Resources */,
+				0497B9A61C48EE3A003F5CFF /* done.png in Resources */,
 				04CD22FF1C29221400AB467A /* Warman-568h@2x.png in Resources */,
 				04F4B7C41C07FA7100DE60DE /* battery@2x.png in Resources */,
+				0497B9A71C48EE3A003F5CFF /* done@2x.png in Resources */,
 				04CD23011C29221400AB467A /* Warman@3x.png in Resources */,
+				0497B9AB1C48EE3A003F5CFF /* error@3x.png in Resources */,
+				0497B9AD1C48EE3A003F5CFF /* succeed@2x.png in Resources */,
+				0497B9AF1C48EE3A003F5CFF /* success.png in Resources */,
 				04F3CC4F1C0434C10066D39D /* Localizable.strings in Resources */,
+				0497B9A81C48EE3A003F5CFF /* done@3x.png in Resources */,
 				049751AF1BFEEED50044D97B /* LaunchScreen.storyboard in Resources */,
+				0497B9B11C48EE3A003F5CFF /* warning.png in Resources */,
+				0497B9B01C48EE3A003F5CFF /* success@2x.png in Resources */,
+				0497B9AC1C48EE3A003F5CFF /* succeed.png in Resources */,
 				04F4B7C51C07FA7100DE60DE /* battery@3x.png in Resources */,
 				049751AC1BFEEED50044D97B /* Assets.xcassets in Resources */,
+				0497B9AE1C48EE3A003F5CFF /* succeed@3x.png in Resources */,
+				0497B9A91C48EE3A003F5CFF /* error.png in Resources */,
+				0497B9B21C48EE3A003F5CFF /* warning@2x.png in Resources */,
 				049751AA1BFEEED50044D97B /* Main.storyboard in Resources */,
+				0497B9AA1C48EE3A003F5CFF /* error@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,12 +1086,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				040E12641C48DA1400769AD1 /* SMProgressHUDTipView.m in Sources */,
 				04F762DA1C44EC69003DBE4D /* NLGiffiredSignViewController.m in Sources */,
 				04018C0E1C3CB914009AC56A /* NLAboutNLViewController.m in Sources */,
 				04018CF11C3D179F009AC56A /* NLMaleIndividuaViewController.m in Sources */,
 				04018C291C3CB914009AC56A /* NLIndividuaFormaCell.m in Sources */,
 				04018BFD1C3CB914009AC56A /* NLHealthMangerSleepViewController.m in Sources */,
 				04FDE4C91C464B8800FFB065 /* NLPickView.m in Sources */,
+				040E12651C48DA1400769AD1 /* UIView+SMAutolayout.m in Sources */,
 				04018CE51C3CBDBC009AC56A /* NLMyHerViewController.m in Sources */,
 				04018C0A1C3CB914009AC56A /* NLPeriodViewController.m in Sources */,
 				04018C1A1C3CB914009AC56A /* NLCalenderPicker.m in Sources */,
@@ -1062,12 +1149,14 @@
 				04F04F851C073AAC009DC949 /* PlistData.m in Sources */,
 				04018C111C3CB914009AC56A /* NLIndividuaFormatViewController.m in Sources */,
 				04018C221C3CB914009AC56A /* NLHealthStepNumber.m in Sources */,
+				040E12621C48DA1400769AD1 /* SMProgressHUD.m in Sources */,
 				04018C211C3CB914009AC56A /* NLHealthSleepView.m in Sources */,
 				04018C0F1C3CB914009AC56A /* NLFeedBackViewController.m in Sources */,
 				04018CEE1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m in Sources */,
 				04F4B7D21C083B3E00DE60DE /* NLLocalUserInfo.m in Sources */,
 				04018CE81C3CBFEA009AC56A /* NLMaleProfileViewController.m in Sources */,
 				04C9954A1C029E8300D8AE79 /* NLBluetoothAgreement.m in Sources */,
+				040E12631C48DA1400769AD1 /* SMProgressHUDLoadingView.m in Sources */,
 				04018C011C3CB914009AC56A /* LYDSetSegmentControl.m in Sources */,
 				04018C1E1C3CB914009AC56A /* NLHealtCalenderCell.m in Sources */,
 				04F762D11C44933E003DBE4D /* NLMyMaleViewController.m in Sources */,

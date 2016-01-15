@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface NLPeriodViewController : UIViewController
-
+@property(nonatomic,strong)NSMutableDictionary *user_Dic;
 @end

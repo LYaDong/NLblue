@@ -14,6 +14,7 @@ static const NSInteger BTNPICKERTAG = 2000;
 @interface NLPeriodViewController ()<LYDSetSegmentDelegate,NLPickViewDelegate>
 @property(nonatomic,strong)NLPickView *pickerView;
 @property(nonatomic,strong)UIButton *blackView;
+@property(nonatomic,strong)NSMutableDictionary *userdic;
 @end
 
 @implementation NLPeriodViewController
@@ -21,6 +22,13 @@ static const NSInteger BTNPICKERTAG = 2000;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _userdic = [NSMutableDictionary dictionary];
+    
+     
+    _userdic = self.user_Dic;
+    
+    
+    
     self.view.backgroundColor = [self colors];
     [self preferredContentSize];
     [self bulidUI];
@@ -114,13 +122,72 @@ static const NSInteger BTNPICKERTAG = 2000;
     if (index == 0) {
         [self.navigationController popViewControllerAnimated:YES];
     }else{
+        UITextField *textPeriod = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + UseDatePicker_Period];
+        UITextField *textCycle = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + UseDatePicker_Cycle];
+        UITextField *textUpNext = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + UseDatePicker_UpNext];
+        
+        if (textPeriod.text.length == 0) {
+            [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"经期不能为空哦~"];
+            return;
+        }
+        
+        if (textCycle.text.length == 0) {
+            [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"周期不能为空哦~"];
+            return;
+        }
+        
+        if (textUpNext.text.length == 0){
+            [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"上次的日期不能为空哦~"];
+            return;
+        }
+        
+        
+        
         [kAPPDELEGATE._loacluserinfo isLoginUser:@"1"];
         [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
         [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
         [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
+        
+        [PlistData individuaData:_userdic];
     }
 }
 -(void)pickerCount:(NSString *)count seleType:(NSInteger)type pickerType:(NSInteger)pickType{
+    
+    [self pickerViewFramkeHide];
+    switch (type) {
+        case SeleType_Cancel:
+        {
+            _blackView.hidden = YES;
+            break;
+        }
+        case SeleType_OK:
+        {
+            _blackView.hidden = YES;
+            switch (pickType) {
+                case PickerType_Cycle:
+                {
+                    UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + UseDatePicker_Period];
+                    text.text = count;
+                    [_userdic setValue:count forKey:@"cycleTime"];
+                    break;
+                }
+                case PickerType_Period:
+                {
+                    UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + UseDatePicker_Cycle];
+                    text.text = count;
+                    [_userdic setValue:count   forKey:@"periodTime"];
+                    break;
+                }
+                default:
+                    break;
+            }
+            
+            break;
+        }
+        default:
+            break;
+    }
+    
 }
 -(void)datePicker:(NSDate *)date cancel:(NSInteger)cancelType useDatePicker:(NSInteger)useDatePicker{
     [self pickerViewFramkeHide];
@@ -134,18 +201,6 @@ static const NSInteger BTNPICKERTAG = 2000;
         {
             _blackView.hidden = YES;
             switch (useDatePicker) {
-                case UseDatePicker_Cycle:
-                {
-                    UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + UseDatePicker_Period];
-                    text.text = [ApplicationStyle datePickerTransformationCorss:date];
-                    break;
-                }
-                case UseDatePicker_Period:
-                {
-                    UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + UseDatePicker_Cycle];
-                    text.text = [ApplicationStyle datePickerTransformationCorss:date];
-                    break;
-                }
                 case UseDatePicker_UpNext:
                 {
                     UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + UseDatePicker_UpNext];
@@ -169,12 +224,12 @@ static const NSInteger BTNPICKERTAG = 2000;
     switch (btn.tag - BTNPICKERTAG) {
         case 0:
         {
-            [self datePickView:UseDatePicker_Period];
+            [self pickerView:PickerType_Period];
             break;
         }
         case 1:
         {
-            [self datePickView:UseDatePicker_Cycle];
+            [self pickerView:PickerType_Cycle];
             break;
         }
         case 2:
@@ -191,6 +246,16 @@ static const NSInteger BTNPICKERTAG = 2000;
     
 }
 
+-(void)pickerView:(NSInteger)index{
+    _pickerView = [[NLPickView alloc] initWithPickTye:index];
+    _pickerView.frame = CGRectMake(0, SCREENHEIGHT + [ApplicationStyle control_height:560], SCREENWIDTH, [ApplicationStyle control_height:560]);
+    _pickerView.delegate = self;
+    [UIView animateWithDuration:0.5 animations:^{
+        _pickerView.frame = CGRectMake(0, SCREENHEIGHT-[ApplicationStyle control_height:560], SCREENWIDTH, [ApplicationStyle control_height:560]);
+    }];
+    [self.view addSubview:_pickerView];
+}
+
 -(void)datePickView:(NSInteger)index{
     _pickerView = [[NLPickView alloc] initWithDateStyleType:DatePickerType_YearMothDay useDatePicker:index];
     _pickerView.frame = CGRectMake(0, SCREENHEIGHT + [ApplicationStyle control_height:560], SCREENWIDTH, [ApplicationStyle control_height:560]);
@@ -200,6 +265,7 @@ static const NSInteger BTNPICKERTAG = 2000;
     }];
     [self.view addSubview:_pickerView];
 }
+
 - (void)pickerViewFramkeHide{
     [UIView animateWithDuration:0.5 animations:^{
         _pickerView.frame = CGRectMake(0, SCREENHEIGHT + [ApplicationStyle control_height:560], SCREENWIDTH, [ApplicationStyle control_height:560]);
