@@ -7,6 +7,7 @@
 //
 
 #import "NLMyHerViewController.h"
+#import "NLMyHerPeriodCircle.h"
 @interface NLMyHerViewController ()
 
 @end
@@ -16,7 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.view.backgroundColor = [UIColor redColor];
+    
+    
     self.returnBtn.hidden = YES;
+    self.titles.text = NSLocalizedString(@"NLMyHer_titls", nil);
     [self bulidUI];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -27,7 +33,8 @@
 }
 #pragma mark 基础UI
 -(void)bulidUI{
-    [self generateQRCode];
+//    [self generateQRCode];
+    [self periodCircleView];
 }
 -(void)generateQRCode{
     UIImage *qrcode = [ApplicationStyle createNonInterpolatedUIImageFormCIImage:
@@ -37,6 +44,10 @@
     imagex.image =  qrcode;
     imagex.backgroundColor = [UIColor redColor];
     [self.view addSubview:imagex];
+}
+-(void)periodCircleView{
+    NLMyHerPeriodCircle *viewDDD = [[NLMyHerPeriodCircle alloc] initWithFrame:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize], 300, 300)];
+    [self.view addSubview:viewDDD];
 }
 #pragma mark 系统Delegate
 #pragma mark 自己的Delegate

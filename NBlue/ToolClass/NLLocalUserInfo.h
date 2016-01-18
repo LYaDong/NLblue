@@ -63,4 +63,14 @@
  *  0：女性    1：男性
  */
 -(NSString *)getUserGender;
+/**
+ *上次来经期的时间
+ * @param date 字符串时间
+ */
+-(void)lastTimeGoPeriodDate:(NSString *)date;
+/**
+ *  获得上次来的时间
+ * 
+ */
+-(NSString *)getLastTimeGoPeriodDate;
 @end

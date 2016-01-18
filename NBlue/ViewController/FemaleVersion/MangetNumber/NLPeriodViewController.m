@@ -205,6 +205,7 @@ static const NSInteger BTNPICKERTAG = 2000;
                 {
                     UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + UseDatePicker_UpNext];
                     text.text = [ApplicationStyle datePickerTransformationCorss:date];
+                    [kAPPDELEGATE._loacluserinfo lastTimeGoPeriodDate:[ApplicationStyle datePickerTransformationCorss:date]];
                     break;
                 }
                 default:

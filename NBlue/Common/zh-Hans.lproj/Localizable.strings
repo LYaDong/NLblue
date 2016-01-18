@@ -163,7 +163,8 @@
 "NLMaleIndividua_SedentaryRemid" = "久坐提醒";
 "NLMaleIndividua_IntervalTime" = "间隔时长";
 "NLMaleIndividua_ReminderInterval" = "提醒区间";
-
+//NLMyHerViewController
+"NLMyHer_titls" = "我的女神";
 
 
 

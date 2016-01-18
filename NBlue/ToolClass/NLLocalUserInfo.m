@@ -73,5 +73,14 @@
     NSString *infotype = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_Project_Gender"];
     return infotype;
 }
+//上次月经来的时间
+-(void)lastTimeGoPeriodDate:(NSString *)date{
+    [[NSUserDefaults standardUserDefaults] setObject:date forKey:@"NL_User_LastTime_Period"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)getLastTimeGoPeriodDate{
+    NSString *period = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_LastTime_Period"];
+    return period;
+}
 
 @end

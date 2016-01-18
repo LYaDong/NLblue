@@ -231,15 +231,18 @@ static const NSInteger ARROWTAG = 1500;
 //计算经期
 -(void)calculationCalenderBtn:(UIButton *)dayButton date:(NSDate *)date i:(NSInteger)i{
     NSInteger firstWeekday    = [ApplicationStyle getWeekofFirstInDate:date];
-    //间隔周期
-    NSInteger ZQ = 28;
     
-    NSDate *userDate = [ApplicationStyle dateTransformationStr:@"20151201"];
+    
+    NSDictionary *dic = [PlistData getIndividuaData];
+    
+    //间隔周期
+    NSInteger ZQ = [[dic objectForKey:@"cycleTime"] integerValue];    
+    NSDate *lastTimepPeriod = [ApplicationStyle dateTransformationStringWhiffletree:[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate]];
     NSString *currentTime = [ApplicationStyle datePickerTransformationStr:date];
     //预计计算多少周
     for (NSInteger j=0; j<6; j++) {
         
-        NSString *ycq = [ApplicationStyle datePickerTransformationStr:[userDate dateByAddingTimeInterval:(60 * 60 * 24) * ZQ * j]];
+        NSString *ycq = [ApplicationStyle datePickerTransformationStr:[lastTimepPeriod dateByAddingTimeInterval:(60 * 60 * 24) * ZQ * j]];
         NSString *currentYearMonth = [currentTime substringWithRange:NSMakeRange(0, 6)];
         NSString *userYearMonth = [ycq  substringWithRange:NSMakeRange(0, 6)];
         

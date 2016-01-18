@@ -103,6 +103,7 @@
 		04F4B7C51C07FA7100DE60DE /* battery@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F4B7C31C07FA7100DE60DE /* battery@3x.png */; };
 		04F4B7C81C082AD200DE60DE /* NLSQLData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4B7C71C082AD200DE60DE /* NLSQLData.m */; };
 		04F4B7D21C083B3E00DE60DE /* NLLocalUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4B7D11C083B3E00DE60DE /* NLLocalUserInfo.m */; };
+		04F5FA8C1C4C8103000AF80A /* NLMyHerPeriodCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5FA8B1C4C8103000AF80A /* NLMyHerPeriodCircle.m */; };
 		04F762D11C44933E003DBE4D /* NLMyMaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F762D01C44933E003DBE4D /* NLMyMaleViewController.m */; };
 		04F762D71C44A54C003DBE4D /* NLQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F762D61C44A54C003DBE4D /* NLQRCodeViewController.m */; };
 		04F762DA1C44EC69003DBE4D /* NLGiffiredSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F762D91C44EC69003DBE4D /* NLGiffiredSignViewController.m */; };
@@ -311,6 +312,8 @@
 		04F4B7CC1C08387A00DE60DE /* NLEquipmentCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NLEquipmentCommand.h; sourceTree = "<group>"; };
 		04F4B7D01C083B3E00DE60DE /* NLLocalUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLLocalUserInfo.h; sourceTree = "<group>"; };
 		04F4B7D11C083B3E00DE60DE /* NLLocalUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLLocalUserInfo.m; sourceTree = "<group>"; };
+		04F5FA8A1C4C8103000AF80A /* NLMyHerPeriodCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMyHerPeriodCircle.h; sourceTree = "<group>"; };
+		04F5FA8B1C4C8103000AF80A /* NLMyHerPeriodCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMyHerPeriodCircle.m; sourceTree = "<group>"; };
 		04F762CF1C44933E003DBE4D /* NLMyMaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMyMaleViewController.h; sourceTree = "<group>"; };
 		04F762D01C44933E003DBE4D /* NLMyMaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMyMaleViewController.m; sourceTree = "<group>"; };
 		04F762D51C44A54C003DBE4D /* NLQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLQRCodeViewController.h; sourceTree = "<group>"; };
@@ -860,6 +863,8 @@
 		04FB758E1C3DF8CA00A8DF35 /* MaleMyHer */ = {
 			isa = PBXGroup;
 			children = (
+				04F5FA8A1C4C8103000AF80A /* NLMyHerPeriodCircle.h */,
+				04F5FA8B1C4C8103000AF80A /* NLMyHerPeriodCircle.m */,
 			);
 			path = MaleMyHer;
 			sourceTree = "<group>";
@@ -1159,6 +1164,7 @@
 				040E12631C48DA1400769AD1 /* SMProgressHUDLoadingView.m in Sources */,
 				04018C011C3CB914009AC56A /* LYDSetSegmentControl.m in Sources */,
 				04018C1E1C3CB914009AC56A /* NLHealtCalenderCell.m in Sources */,
+				04F5FA8C1C4C8103000AF80A /* NLMyHerPeriodCircle.m in Sources */,
 				04F762D11C44933E003DBE4D /* NLMyMaleViewController.m in Sources */,
 				04018C1F1C3CB914009AC56A /* NLHealtCalenderPeriod.m in Sources */,
 				04F3EBFA1C45FA8F0003E37D /* NLMaleIndivuaCell.m in Sources */,

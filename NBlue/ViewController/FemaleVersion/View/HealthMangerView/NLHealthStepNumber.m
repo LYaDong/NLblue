@@ -103,7 +103,7 @@
         }
     }
     [cell histogram:sportData
-          sportData:_sportData
+          sportData:_sportData 
              target:4000];
 
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
