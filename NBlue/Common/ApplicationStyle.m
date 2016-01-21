@@ -74,7 +74,7 @@
 + (UIColor *)subjectTableCellLabColor{return [@"1b1b1b" hexStringToColor];}
 + (UIColor *)subjectWithColor{return [@"ffffff" hexStringToColor];}
 + (UIColor *)subjectMaleBlueColor{return [@"56cbf9" hexStringToColor];}
-+ (UIColor *)subjectMaleTextBlackColor{return [@"" hexStringToColor];}
++ (UIColor *)subjectMaleBackColor{return [@"fffeeb" hexStringToColor];}
 
 
 //渐变颜色

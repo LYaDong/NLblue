@@ -30,47 +30,99 @@
 }
 - (void)drawRect:(CGRect)rect{
     
-    UIColor *color = _ring.backColors;
-    [color set];
-
-    NSInteger slicesCount = _ring.lineIndex;
-    CGFloat sliceAngle = (2 * M_PI_2 ) / slicesCount;
-    for (int i = 0; i < slicesCount; i++) {
-        CGFloat startValue = (sliceAngle * i)+sliceAngle * i ;
-        CGFloat startAngle, endAngle;
-        startAngle =  - M_PI_2 + startValue;
-        endAngle = startAngle + sliceAngle;
-        UIBezierPath *path1 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width/2,self.frame.size.height/2)
-                                                             radius:_ring.radius
-                                                         startAngle:startAngle
-                                                           endAngle:endAngle
-                                                          clockwise:YES];
-        
-        path1.lineWidth = _ring.lineWidth;
-        [path1 stroke];
-        
-        
+    
+    switch (_ring.types) {
+        case NLRingType_separateCircle: {
+            UIColor *color = _ring.backColors;
+            [color set];
+            
+            NSInteger slicesCount = _ring.lineIndex;
+            CGFloat sliceAngle = (2 * M_PI ) / slicesCount;
+            for (int i = 0; i < slicesCount/2; i++) {
+                CGFloat startValue = (sliceAngle * i)+sliceAngle * i ;
+                CGFloat startAngle, endAngle;
+                startAngle = -M_PI_2 + startValue;
+                endAngle = startAngle + sliceAngle;
+                UIBezierPath *path1 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width/2,self.frame.size.height/2)
+                                                                     radius:_ring.radius
+                                                                 startAngle:startAngle
+                                                                   endAngle:endAngle
+                                                                  clockwise:YES];
+                
+                path1.lineWidth = _ring.lineWidth;
+                [path1 stroke];
+                
+                
+            }
+            
+            
+            UIColor *color1 = _ring.coverColor;
+            [color1 set];
+            
+            
+            for (int i = 0; i < _ring.progressCounter/2; i++) {
+                CGFloat startValue = (sliceAngle * i)+sliceAngle * i ;
+                CGFloat startAngle, endAngle;
+                startAngle =  - M_PI_2 + startValue;
+                endAngle = startAngle + sliceAngle;
+                UIBezierPath *path1 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width/2,self.frame.size.height/2)
+                                                                     radius:_ring.radius
+                                                                 startAngle:startAngle
+                                                                   endAngle:endAngle
+                                                                  clockwise:YES];
+                path1.lineWidth = _ring.lineWidth;
+                [path1 stroke];
+                
+            }
+            break;
+        }
+        case NLRingType_SimpleCircle: {
+            UIColor *color = _ring.backColors;
+            [color set];
+            
+            NSInteger slicesCount = _ring.lineIndex;
+            CGFloat sliceAngle = (2 * M_PI ) / slicesCount;
+            for (int i = 0; i < slicesCount; i++) {
+                CGFloat startValue = sliceAngle * i;
+                CGFloat startAngle, endAngle;
+                startAngle =   -M_PI_2 + startValue;
+                endAngle = startAngle + sliceAngle+0.01;
+                UIBezierPath *path1 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width/2,self.frame.size.height/2)
+                                                                     radius:_ring.radius
+                                                                 startAngle:startAngle
+                                                                   endAngle:endAngle
+                                                                  clockwise:YES];
+                
+                path1.lineWidth = _ring.lineWidth;
+                [path1 stroke];
+                
+                
+            }
+            
+            
+            UIColor *color1 = _ring.coverColor;
+            [color1 set];
+            
+            for (int i = 0; i <9; i++) {
+                CGFloat startValue = sliceAngle * i;
+                CGFloat startAngle, endAngle;
+                startAngle =  M_PI+M_PI_2 - startValue;
+                endAngle = startAngle - sliceAngle-0.01;
+                UIBezierPath *path1 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width/2,self.frame.size.height/2)
+                                                                     radius:_ring.radius
+                                                                 startAngle:startAngle
+                                                                   endAngle:endAngle
+                                                                  clockwise:NO];
+                path1.lineWidth = _ring.lineWidth;
+                [path1 stroke];
+                
+            }
+            break;
+        }
+        default:
+            break;
     }
     
-    
-    UIColor *color1 = _ring.coverColor;
-    [color1 set];
-    
-    
-    for (int i = 0; i < _ring.progressCounter; i++) {
-        CGFloat startValue = (sliceAngle * i)+sliceAngle * i ;
-        CGFloat startAngle, endAngle;
-        startAngle =  - M_PI_2 + startValue;
-        endAngle = startAngle + sliceAngle;
-        UIBezierPath *path1 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width/2,self.frame.size.height/2)
-                                                             radius:_ring.radius
-                                                         startAngle:startAngle
-                                                           endAngle:endAngle
-                                                          clockwise:YES];
-        path1.lineWidth = _ring.lineWidth;
-        [path1 stroke];
-        
-    }
     
     
 }

@@ -113,6 +113,7 @@
 "NLHealthCalender_YCQ" = "预测期";
 "NLHealthCalender_AQQ" = "安全期";
 "NLHealthCalender_YYQ" = "易孕期";
+"NLHealthCalender_GQS" = "过去时";
 "NLHealthCalender_Picker_Title" = "爱爱记录";
 "NLHealthCalender_Picker_BtnCalue" = "消除";
 "NLHealthCalender_Picker_BtnOK" = "确认";
@@ -165,7 +166,7 @@
 "NLMaleIndividua_ReminderInterval" = "提醒区间";
 //NLMyHerViewController
 "NLMyHer_titls" = "我的女神";
-
+"NLMyHer_DayPregnancy" = "今日怀孕指数";
 
 
 

@@ -213,6 +213,20 @@ static const NSInteger TIMELINE = 90;
     _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect_N"];
     [self.view addSubview:_blueImage];
     
+    
+    
+    UIButton *btn = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+    btn.frame = CGRectMake(0, 64, 50, 50);
+//    btn.backgroundColor = [UIColor redColor];
+    [btn setTitle:@"搜搜" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(btnDownXXX) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    
+}
+-(void)btnDownXXX{
+    NLConnectBloothViewController *vc = [[NLConnectBloothViewController alloc] init];
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)setupBackgroundHandler{

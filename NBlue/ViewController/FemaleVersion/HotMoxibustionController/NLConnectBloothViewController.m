@@ -26,7 +26,18 @@
     [self bloothView];
     
     
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btn.frame = CGRectMake(200, 20, 44, 44);
+    [btn setTitle:@"刷新" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(btnDOwn) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
     
+    
+    
+}
+-(void)btnDOwn{
+    [_dataArr removeAllObjects];
+    [_mainTableView reloadData];
 }
 -(void)buildUI{
     _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], SCREENWIDTH, SCREENHEIGHT - ([ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize])) style: UITableViewStylePlain];

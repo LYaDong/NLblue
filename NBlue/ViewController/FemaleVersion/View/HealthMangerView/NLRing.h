@@ -33,4 +33,8 @@
  *已画多少个
  */
 @property(nonatomic,assign)NSInteger progressCounter;
+/**
+ *type 要画哪一种类型
+ */
+@property(nonatomic,assign)NSInteger types;
 @end

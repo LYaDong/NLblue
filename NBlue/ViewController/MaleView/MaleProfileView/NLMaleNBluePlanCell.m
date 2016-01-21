@@ -22,7 +22,7 @@
     CGFloat x = [ApplicationStyle control_weight:38],y = [ApplicationStyle control_height:88];
     
     self.titleLab = [[UILabel alloc] initWithFrame:CGRectMake(x, 0, SCREENWIDTH, y)];
-    self.titleLab.textColor = [ApplicationStyle subjectMaleTextBlackColor];
+//    self.titleLab.textColor = [ApplicationStyle subjectMaleTextBlackColor];
     self.titleLab.font = [ApplicationStyle textThrityFont];
     [self.contentView addSubview:self.titleLab];
     

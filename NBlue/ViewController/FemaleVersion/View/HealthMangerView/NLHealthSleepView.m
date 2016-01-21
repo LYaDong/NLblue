@@ -35,10 +35,11 @@
     _ring = [[NLRing alloc] init];
     _ring.lineWidth = [ApplicationStyle control_weight:30];
     _ring.lineIndex = 100;
-    _ring.progressCounter = 30;
+    _ring.progressCounter = 97;
     _ring.radius = [ApplicationStyle control_weight:200];
     _ring.backColors = [self circleBackColor];
     _ring.coverColor = [self circleCoverdColor];
+    _ring.types = NLRingType_separateCircle;
     
     NLRingLine *ringLine = [[NLRingLine alloc] initWithRing:_ring frame:frame];
     ringLine.backgroundColor = [UIColor clearColor];

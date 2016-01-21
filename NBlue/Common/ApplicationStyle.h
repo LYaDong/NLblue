@@ -120,9 +120,9 @@
  */
 + (UIColor *)subjectMaleBlueColor;
 /**
- *男版字体常用黑色
+ * 男版背景颜色
  */
-+ (UIColor *)subjectMaleTextBlackColor;
++ (UIColor *)subjectMaleBackColor;
 /**
  *渐变颜色 //不知道会不会用到 方法先写下来
  */

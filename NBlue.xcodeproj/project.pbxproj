@@ -97,6 +97,7 @@
 		04CDA1751BFF022D00D2A304 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CDA1741BFF022D00D2A304 /* Foundation.framework */; };
 		04CDA17E1BFF119500D2A304 /* Convenlence.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CDA17D1BFF119500D2A304 /* Convenlence.m */; };
 		04F04F851C073AAC009DC949 /* PlistData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F04F841C073AAC009DC949 /* PlistData.m */; };
+		04F26C3A1C4FC0C000D25D48 /* NLTextImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F26C391C4FC0C000D25D48 /* NLTextImageView.m */; };
 		04F3CC4F1C0434C10066D39D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F3CC511C0434C10066D39D /* Localizable.strings */; };
 		04F3EBFA1C45FA8F0003E37D /* NLMaleIndivuaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3EBF91C45FA8F0003E37D /* NLMaleIndivuaCell.m */; };
 		04F4B7C41C07FA7100DE60DE /* battery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F4B7C21C07FA7100DE60DE /* battery@2x.png */; };
@@ -205,7 +206,7 @@
 		04018BE71C3CB914009AC56A /* NLHealthStepNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthStepNumber.m; sourceTree = "<group>"; };
 		04018BE81C3CB914009AC56A /* NLHealthStepNumberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthStepNumberCell.h; sourceTree = "<group>"; };
 		04018BE91C3CB914009AC56A /* NLHealthStepNumberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthStepNumberCell.m; sourceTree = "<group>"; };
-		04018BEA1C3CB914009AC56A /* NlRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NlRing.h; sourceTree = "<group>"; };
+		04018BEA1C3CB914009AC56A /* NLRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRing.h; sourceTree = "<group>"; };
 		04018BEB1C3CB914009AC56A /* NLRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRing.m; sourceTree = "<group>"; };
 		04018BEC1C3CB914009AC56A /* NLRingLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRingLine.h; sourceTree = "<group>"; };
 		04018BED1C3CB914009AC56A /* NLRingLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRingLine.m; sourceTree = "<group>"; };
@@ -299,6 +300,8 @@
 		04CDA17D1BFF119500D2A304 /* Convenlence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Convenlence.m; sourceTree = "<group>"; };
 		04F04F831C073AAC009DC949 /* PlistData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlistData.h; sourceTree = "<group>"; };
 		04F04F841C073AAC009DC949 /* PlistData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlistData.m; sourceTree = "<group>"; };
+		04F26C381C4FC0C000D25D48 /* NLTextImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTextImageView.h; sourceTree = "<group>"; };
+		04F26C391C4FC0C000D25D48 /* NLTextImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTextImageView.m; sourceTree = "<group>"; };
 		04F3CC521C0434C40066D39D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		04F3CC531C04350D0066D39D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		04F3CC541C04350D0066D39D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -481,6 +484,8 @@
 			children = (
 				04018BCC1C3CB914009AC56A /* NLAboutImageBtn.h */,
 				04018BCD1C3CB914009AC56A /* NLAboutImageBtn.m */,
+				04F26C381C4FC0C000D25D48 /* NLTextImageView.h */,
+				04F26C391C4FC0C000D25D48 /* NLTextImageView.m */,
 				04018BCE1C3CB914009AC56A /* NLCalenderPackage.h */,
 				04018BCF1C3CB914009AC56A /* NLCalenderPackage.m */,
 			);
@@ -505,7 +510,7 @@
 				04018BE71C3CB914009AC56A /* NLHealthStepNumber.m */,
 				04018BE81C3CB914009AC56A /* NLHealthStepNumberCell.h */,
 				04018BE91C3CB914009AC56A /* NLHealthStepNumberCell.m */,
-				04018BEA1C3CB914009AC56A /* NlRing.h */,
+				04018BEA1C3CB914009AC56A /* NLRing.h */,
 				04018BEB1C3CB914009AC56A /* NLRing.m */,
 				04018BEC1C3CB914009AC56A /* NLRingLine.h */,
 				04018BED1C3CB914009AC56A /* NLRingLine.m */,
@@ -1116,6 +1121,7 @@
 				04018C1C1C3CB914009AC56A /* NLCalenderUncomfortable.m in Sources */,
 				04018C241C3CB914009AC56A /* NLRing.m in Sources */,
 				04F7F64E1C1BFC9000466EBC /* NLGestureRecognizer.m in Sources */,
+				04F26C3A1C4FC0C000D25D48 /* NLTextImageView.m in Sources */,
 				04C9954D1C029F2400D8AE79 /* NLBluetoothDataAnalytical.m in Sources */,
 				04018C201C3CB914009AC56A /* NLHealthCalenderView.m in Sources */,
 				049751DF1BFEF3140044D97B /* ApplicationStyle.m in Sources */,
@@ -1322,8 +1328,8 @@
 			baseConfigurationReference = 7D156C54B110CBBF4D4804D4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Liu (6568Y9JWXY)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Feng Liu (6568Y9JWXY)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/NBlue/NLBlue.pch";
 				INFOPLIST_FILE = NBlue/Info.plist;
@@ -1331,8 +1337,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2c040cab-febd-413d-94b5-b5d432c84aa4";
-				"PROVISIONING_PROFILE[sdk=*]" = "2c040cab-febd-413d-94b5-b5d432c84aa4";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};
@@ -1343,8 +1349,8 @@
 			baseConfigurationReference = 8F50F23BC12A7C0575CA9364 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Pin Ai Networking Technology Co., Ltd. (FW77J8F5Y3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Pin Ai Networking Technology Co., Ltd. (FW77J8F5Y3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/NBlue/NLBlue.pch";
 				INFOPLIST_FILE = NBlue/Info.plist;
@@ -1352,8 +1358,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9edc56ca-7174-4a9a-886b-b850198254d0";
-				"PROVISIONING_PROFILE[sdk=*]" = "9edc56ca-7174-4a9a-886b-b850198254d0";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};
