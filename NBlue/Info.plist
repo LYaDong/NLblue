@@ -97,6 +97,12 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MiSDKAppID</key>
+	<string>2882303761517425655</string>
+	<key>MiSDKAppKey</key>
+	<string>5541742568655</string>
+	<key>MiSDKRun</key>
+	<string>Debug</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -104,7 +110,7 @@
 	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>voip</string>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

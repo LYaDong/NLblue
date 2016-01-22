@@ -101,7 +101,6 @@ static NSString *NLSportApi = @"/sport";//各个接口端
 #pragma mark 注册
 -(void)registeredCodephone:(NSString *)phone verification:(NSString *)verfication password:(NSString *)password{
     
-    NSLog(@"%@ %@ %@",phone,verfication,password);
     
     _manger = [[AFHTTPRequestOperationManager alloc]init];
     NSDictionary * parameters= @{@"phone":phone,@"code":verfication,@"password":password,@"platform":@"ios"};
@@ -115,6 +114,22 @@ static NSString *NLSportApi = @"/sport";//各个接口端
             [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewFicaledNotification object:operation.responseObject userInfo:nil];
         });
     }];
+}
+#pragma mark 忘记密码
+- (void)forgetPassWordphone:(NSString *)phone verification:(NSString *)verfication password:(NSString *)password {
+    _manger = [[AFHTTPRequestOperationManager alloc] init];
+    NSDictionary *parameters = @{@"phone":phone,@"code":verfication,@"password":password,@"platform":@"ios"};
+    _manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication,nil];
+    [_manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,user_ForgetPassWord] parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserForgetPassWordSuccessNotification object:responseObject userInfo:nil];
+        });
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserForgetPassWordFicaledNotification object:nil userInfo:nil];
+        });
+    }];
+    
 }
 #pragma mark 登录
 -(void)userSignInPhone:(NSString *)phone password:(NSString *)password{

@@ -19,6 +19,10 @@
  */
 -(void)registeredCodephone:(NSString *)phone verification:(NSString *)verfication password:(NSString *)password;
 /**
+ *忘记密码
+ */
+- (void)forgetPassWordphone:(NSString *)phone verification:(NSString *)verfication password:(NSString *)password;
+/**
  *用户登录
  */
 -(void)userSignInPhone:(NSString *)phone password:(NSString *)password;
@@ -42,7 +46,7 @@
                                  header:(NSString *)header
                                stepGoal:(NSString *)stepGoal;
 /**
- * @param 二维码扫描
+ *二维码扫描
  */
 - (void)qrCodeNextWorkFrom_to_id:(NSString *)from_to_id;
 

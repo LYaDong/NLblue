@@ -230,33 +230,37 @@ static const NSInteger ARROWTAG = 1500;
 
 //计算经期
 -(void)calculationCalenderBtn:(UIButton *)dayButton date:(NSDate *)date i:(NSInteger)i{
-    NSInteger firstWeekday    = [ApplicationStyle getWeekofFirstInDate:date];
-    
-    
-    NSDictionary *dic = [PlistData getIndividuaData];
+    /*
+     ZQ                     周期
+     ycq                    预测期
+     ycqDay                 预测期的哪天
+     */
+    NSInteger firstWeekday    = [ApplicationStyle getWeekofFirstInDate:date];//获得本周的时间
+    NSDictionary *dataDic = [PlistData getIndividuaData];//获得用户数据
     
     //间隔周期
-    NSInteger ZQ = [[dic objectForKey:@"cycleTime"] integerValue];    
-    NSDate *lastTimepPeriod = [ApplicationStyle dateTransformationStringWhiffletree:[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate]];
-    NSString *currentTime = [ApplicationStyle datePickerTransformationStr:date];
+    NSInteger ZQ = [[dataDic objectForKey:@"cycleTime"] integerValue];//获得周期
+    
+    NSDate *lastTimepPeriod = [ApplicationStyle dateTransformationStringWhiffletree:[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate]];//获得上一次来的时间
+    NSString *currentTime = [ApplicationStyle datePickerTransformationStr:date];//获得当前时间
     //预计计算多少周
     for (NSInteger j=0; j<6; j++) {
         
-        NSString *ycq = [ApplicationStyle datePickerTransformationStr:[lastTimepPeriod dateByAddingTimeInterval:(60 * 60 * 24) * ZQ * j]];
-        NSString *currentYearMonth = [currentTime substringWithRange:NSMakeRange(0, 6)];
-        NSString *userYearMonth = [ycq  substringWithRange:NSMakeRange(0, 6)];
+        NSString *ycq = [ApplicationStyle datePickerTransformationStr:[lastTimepPeriod dateByAddingTimeInterval:(60 * 60 * 24) * ZQ * j]];//每次的预测期
+        NSString *currentYearMonth = [currentTime substringWithRange:NSMakeRange(0, 6)];//来的年月日
+        NSString *userYearMonth = [ycq  substringWithRange:NSMakeRange(0, 6)];//用户的年月日
         
         
         if ([currentYearMonth isEqualToString:userYearMonth]) {
             
             NSInteger day = 0;
             if (i>=firstWeekday) {
-                day = i - firstWeekday + 1;
+                day = i - firstWeekday + 1;//获得本月的天数
             }
-            NSString *yddd = [ycq substringWithRange:NSMakeRange(ycq.length-2, 2)];
+            NSString *ycqDay = [ycq substringWithRange:NSMakeRange(ycq.length-2, 2)];//预测期的天数
             for (NSInteger z=0; z<5; z++) {
-                //经期来临的日子
-                if (day == [yddd integerValue] + z) {
+                //经期来临的日子  经期每次循环5天
+                if (day == [ycqDay integerValue] + z) {
                     dayButton.backgroundColor = [@"ffad54" hexStringToColor];//预测期
                     if (j==0) {
                         dayButton.backgroundColor = [@"ff6c32" hexStringToColor];//经期
@@ -265,8 +269,10 @@ static const NSInteger ARROWTAG = 1500;
             }
             //易孕期
             for (NSInteger x = 0; x<10; x++) {
-                if ([yddd integerValue] - 14 + x == day) {
-                    dayButton.backgroundColor = [@"ffe9ed" hexStringToColor];//易孕期
+                if (!day == 0) {//退14天，如果相等当前的day 则是易孕期
+                    if ([ycqDay integerValue] - 14 + x == day) {
+                        dayButton.backgroundColor = [@"ffe9ed" hexStringToColor];//易孕期
+                    }
                 }
             }
         }

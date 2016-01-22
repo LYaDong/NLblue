@@ -53,8 +53,22 @@
             [self tabBarViewControllerType:Controller_MaleMain];
         }
     }
+    NSLog(@"%@",[_loacluserinfo GetUser_ID]);
+    [MiPushSDK registerMiPush:self type:0 connect:YES];
+    [MiPushSDK setAlias:[kAPPDELEGATE._loacluserinfo GetUser_ID]];
+    
+    
+    NSDictionary *remoteNotifiInfo = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
+    
+    //Accept push notification when app is not open
+    if (remoteNotifiInfo) {
+        [self application:application didReceiveRemoteNotification:remoteNotifiInfo];
+    }
+    
+    
     
     [self setUMSocial];
+    [self setMIPush];
     
     return YES;
 }
@@ -124,8 +138,7 @@
         }
         default:
             break;
-    }
-    
+    }  
 }
 
 
@@ -183,6 +196,23 @@
     [UMSocialWechatHandler setWXAppId:WX_APP_ID appSecret:WX_APP_KEY url:@"http://www.umeng.com/social"];
     
 }
+-(void)setMIPush{
+    
+    
+    
+    
+//    [MiPushSDK registerMiPush:self type:0 connect:YES];
+//    NSString *messageId = [userInfo objectForKey:@"_id_"];
+//    if (messageId!=nil) {
+//        [MiPushSDK openAppNotify:messageId];
+//    }
+    
+    
+//    // 只启动APNs.
+//    [MiPushSDK registerMiPush:self];
+    // 同时启用APNs跟应用内长连接
+//    [MiPushSDK registerMiPush:self type:0 connect:YES];
+}
 
 
 
@@ -223,6 +253,69 @@
     return result;
 }
 
+#pragma mark push 
+#pragma mark UIApplicationDelegate
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    // 注册APNS成功, 注册deviceToken
+    [MiPushSDK bindDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err{
+    // 注册APNS失败
+    // 自行处理
+    NSLog(@"注册APNS失败:%@",err);
+    
+}
+
+#pragma mark 接收远程消息
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+    NSString *messageId = [userInfo objectForKey:MI_APP_ID];
+    [MiPushSDK openAppNotify:messageId];
+ 
+    
+    
+    
+}
+#pragma mark 接收本地消息
+- ( void )application:( UIApplication *)application didReceiveRemoteNotification:( NSDictionary *)userInfo{
+    [ MiPushSDK handleReceiveRemoteNotification :userInfo];
+    NSString *messageId = [userInfo objectForKey:MI_APP_ID];
+    if (messageId!=nil) {
+        [MiPushSDK openAppNotify:messageId];
+    }
+//    [MiPushSDK openAppNotify:messageId];
+    // 使用此方法后，所有消息会进行去重，然后通过miPushReceiveNotification:回调返回给App
+}
+
+
+
+#pragma mark MiPushSDKDelegate
+
+- (void)miPushRequestSuccWithSelector:(NSString *)selector data:(NSDictionary *)data{
+    // 请求成功
+    
+    NSLog(@"小米推送 selector == %@ data ==  %@",selector,data);
+    
+}
+
+- (void)miPushRequestErrWithSelector:(NSString *)selector error:(int)error data:(NSDictionary *)data{
+    
+    
+    if (error == -101) {
+        [MiPushSDK registerMiPush:self];
+    }
+    NSLog(@"请求失败：%d",error);
+    NSLog(@"selector：%@",selector);
+    NSLog(@"请求data：%@",data);
+    
+    // 请求失败
+}
+
+- ( void )miPushReceiveNotification:( NSDictionary *)data{
+    NSLog(@"%@",data);
+    
+    // 长连接收到的消息。消息格式跟APNs格式一样
+}
 
 
 

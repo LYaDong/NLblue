@@ -41,6 +41,12 @@ static const NSInteger BTNPICKERTAG = 2000;
 }
 #pragma mark 基础UI
 -(void)bulidUI{
+    UIImageView *logoImage = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:360])/2, [ApplicationStyle control_height:210], [ApplicationStyle control_weight:360], [ApplicationStyle control_height:84])];
+    logoImage.image = [UIImage imageNamed:@"NL_logo"];
+    [self.view addSubview:logoImage];
+    
+    
+    
     NSArray *titleArr = @[NSLocalizedString(@"NLIndividuaFormat_UserAge", nil),
                           NSLocalizedString(@"NLIndividuaFormat_UserHeight", nil),
                           NSLocalizedString(@"NLIndividuaFormat_UserWidth", nil),];

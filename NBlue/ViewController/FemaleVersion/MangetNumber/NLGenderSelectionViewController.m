@@ -37,6 +37,8 @@ static const NSUInteger NEXTTAG = 2000;
 #pragma mark 基础UI
 -(void)bulidUI{
     
+    
+    
     UILabel *genderLab = [[UILabel alloc] initWithFrame:CGRectMake(0, [ApplicationStyle control_height:96], SCREENWIDTH, [ApplicationStyle control_height:46])];
     genderLab.text = NSLocalizedString(@"NL_Currency_YouGender", nil);
     genderLab.textColor = [@"4b4b4b" hexStringToColor];

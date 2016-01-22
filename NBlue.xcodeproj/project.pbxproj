@@ -114,6 +114,13 @@
 		04FA89BD1C117E400064F3AA /* NLHTTPRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */; };
 		04FA89BE1C117E400064F3AA /* NLHTTPRequestOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */; };
 		04FB75911C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB75901C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m */; };
+		04FC238C1C51C3A100FC4FDA /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC238A1C51C3A100FC4FDA /* libMiPushSDK.a */; };
+		04FC238E1C51C3D600FC4FDA /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC238D1C51C3D600FC4FDA /* libresolv.tbd */; };
+		04FC23901C51C3E300FC4FDA /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC238F1C51C3E300FC4FDA /* libxml2.tbd */; };
+		04FC23921C51C3EE00FC4FDA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC23911C51C3EE00FC4FDA /* libz.tbd */; };
+		04FC23941C51C3FD00FC4FDA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC23931C51C3FD00FC4FDA /* SystemConfiguration.framework */; };
+		04FC23961C51C40600FC4FDA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC23951C51C40600FC4FDA /* MobileCoreServices.framework */; };
+		04FC23981C51C41200FC4FDA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC23971C51C41200FC4FDA /* CFNetwork.framework */; };
 		04FDE4C91C464B8800FFB065 /* NLPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FDE4C81C464B8800FFB065 /* NLPickView.m */; };
 		4A3CFF267937751BD6F2302D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E0A4932CCDD3CB9C4B5CFA /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -336,6 +343,14 @@
 		04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHTTPRequestOperations.m; sourceTree = "<group>"; };
 		04FB758F1C3DF8F200A8DF35 /* NLMaleNBluePlanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMaleNBluePlanCell.h; sourceTree = "<group>"; };
 		04FB75901C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMaleNBluePlanCell.m; sourceTree = "<group>"; };
+		04FC238A1C51C3A100FC4FDA /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
+		04FC238B1C51C3A100FC4FDA /* MiPushSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiPushSDK.h; sourceTree = "<group>"; };
+		04FC238D1C51C3D600FC4FDA /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		04FC238F1C51C3E300FC4FDA /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		04FC23911C51C3EE00FC4FDA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		04FC23931C51C3FD00FC4FDA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		04FC23951C51C40600FC4FDA /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		04FC23971C51C41200FC4FDA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		04FDE4C71C464B8800FFB065 /* NLPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLPickView.h; sourceTree = "<group>"; };
 		04FDE4C81C464B8800FFB065 /* NLPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLPickView.m; sourceTree = "<group>"; };
 		46E0A4932CCDD3CB9C4B5CFA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -348,6 +363,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04FC23981C51C41200FC4FDA /* CFNetwork.framework in Frameworks */,
+				04FC23961C51C40600FC4FDA /* MobileCoreServices.framework in Frameworks */,
+				04FC23941C51C3FD00FC4FDA /* SystemConfiguration.framework in Frameworks */,
+				04FC23921C51C3EE00FC4FDA /* libz.tbd in Frameworks */,
+				04FC23901C51C3E300FC4FDA /* libxml2.tbd in Frameworks */,
+				04FC238E1C51C3D600FC4FDA /* libresolv.tbd in Frameworks */,
+				04FC238C1C51C3A100FC4FDA /* libMiPushSDK.a in Frameworks */,
 				0403F9781C2CE3420000A9C3 /* CoreTelephony.framework in Frameworks */,
 				04C995471C029D6B00D8AE79 /* CoreBluetooth.framework in Frameworks */,
 				04CDA1751BFF022D00D2A304 /* Foundation.framework in Frameworks */,
@@ -778,6 +800,7 @@
 		04CD230E1C2930F700AB467A /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				04FC23891C51C3A100FC4FDA /* MIPushSDK */,
 				040E12561C48DA1400769AD1 /* SMProgresHUD */,
 				04CD230F1C29310100AB467A /* OLGhostAlertView */,
 			);
@@ -874,9 +897,24 @@
 			path = MaleMyHer;
 			sourceTree = "<group>";
 		};
+		04FC23891C51C3A100FC4FDA /* MIPushSDK */ = {
+			isa = PBXGroup;
+			children = (
+				04FC238A1C51C3A100FC4FDA /* libMiPushSDK.a */,
+				04FC238B1C51C3A100FC4FDA /* MiPushSDK.h */,
+			);
+			path = MIPushSDK;
+			sourceTree = "<group>";
+		};
 		9B52667861575D0AACE7B05E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04FC23971C51C41200FC4FDA /* CFNetwork.framework */,
+				04FC23951C51C40600FC4FDA /* MobileCoreServices.framework */,
+				04FC23931C51C3FD00FC4FDA /* SystemConfiguration.framework */,
+				04FC23911C51C3EE00FC4FDA /* libz.tbd */,
+				04FC238F1C51C3E300FC4FDA /* libxml2.tbd */,
+				04FC238D1C51C3D600FC4FDA /* libresolv.tbd */,
 				0403F9771C2CE3420000A9C3 /* CoreTelephony.framework */,
 				04C995461C029D6B00D8AE79 /* CoreBluetooth.framework */,
 				46E0A4932CCDD3CB9C4B5CFA /* libPods.a */,
@@ -964,6 +1002,14 @@
 					0497519B1BFEEED50044D97B = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = FW77J8F5Y3;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 					049751B41BFEEED50044D97B = {
 						CreatedOnToolsVersion = 7.1;
@@ -1328,17 +1374,21 @@
 			baseConfigurationReference = 7D156C54B110CBBF4D4804D4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Liu (6568Y9JWXY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Feng Liu (6568Y9JWXY)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/NBlue/NLBlue.pch";
 				INFOPLIST_FILE = NBlue/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NBlue/ThirdParty/MIPushSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=*]" = "";
+				PROVISIONING_PROFILE = "a3e564b2-1c5f-4f50-9bbd-32e4e20ed082";
+				"PROVISIONING_PROFILE[sdk=*]" = "a3e564b2-1c5f-4f50-9bbd-32e4e20ed082";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};
@@ -1349,17 +1399,21 @@
 			baseConfigurationReference = 8F50F23BC12A7C0575CA9364 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Pin Ai Networking Technology Co., Ltd. (FW77J8F5Y3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Pin Ai Networking Technology Co., Ltd. (FW77J8F5Y3)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/NBlue/NLBlue.pch";
 				INFOPLIST_FILE = NBlue/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NBlue/ThirdParty/MIPushSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=*]" = "";
+				PROVISIONING_PROFILE = "e406d405-0577-4546-8b64-2b9f042427f5";
+				"PROVISIONING_PROFILE[sdk=*]" = "e406d405-0577-4546-8b64-2b9f042427f5";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};

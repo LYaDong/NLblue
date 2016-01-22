@@ -25,5 +25,6 @@
 #define NLGetSoortRecordDataFicaledNotification @"NLGetSoortRecordDataFicaledNotification"
 #define NLUserConsumerDataSuccessNotification @"NLUserConsumerDataSuccessNotification"
 #define NLUserConsumerDataFicaledNotification @"NLUserConsumerDataFicaledNotification"
-
+#define NLUserForgetPassWordSuccessNotification @"NLUserForgetPassWordSuccessNotification"
+#define NLUserForgetPassWordFicaledNotification @"NLUserForgetPassWordFicaledNotification"
 #endif /* NLNotification_h */

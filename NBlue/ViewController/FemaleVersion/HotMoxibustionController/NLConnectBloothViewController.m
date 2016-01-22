@@ -76,6 +76,9 @@
     cell.bloothName.text = peripheral.name;
     cell.bloothUUID.text = [NSString stringWithFormat:@"%@",uuid];
     
+    
+    
+    
     return cell;
 }
 

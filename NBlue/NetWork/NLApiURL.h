@@ -17,5 +17,6 @@
 #define Sport_record @"/record"
 #define User_Consumer @"/consumer"
 #define User_QRCode @"/folk"
+#define user_ForgetPassWord @"/updatepwd"
 
 #endif /* NLApiURL_h */

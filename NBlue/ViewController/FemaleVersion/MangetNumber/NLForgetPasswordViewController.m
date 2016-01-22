@@ -160,22 +160,27 @@ static const NSInteger TEXTFILED_TAG = 1000;
         return;
     }
     
-    [[NLDatahub sharedInstance] registeredCodephone:textPhone.text
+    [[NLDatahub sharedInstance] forgetPassWordphone:textPhone.text
                                        verification:textVerification.text
                                            password:textPassWord.text];
 }
 -(void)addNotification{
     NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
-    [notifi addObserver:self selector:@selector(logInSuccess:) name:NLForgetPasswordViewControllerSuccessNotification object:nil];
-    [notifi addObserver:self selector:@selector(logInFicaled) name:NLForgetPasswordViewControllerFicaledNotification object:nil];
+    [notifi addObserver:self selector:@selector(logInSuccess:) name:NLUserForgetPassWordSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(logInFicaled) name:NLUserForgetPassWordFicaledNotification object:nil];
 }
 -(void)logInSuccess:(NSNotification *)notifi{
-    NSDictionary *dic = notifi.object;
-    [kAPPDELEGATE._loacluserinfo SetUser_ID:[dic objectForKey:@"consumerId"]];
-    [kAPPDELEGATE._loacluserinfo SetUserAccessToken:[dic objectForKey:@"authToken"]];
-    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
-    [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
+    
+    NSLog(@"%@",notifi.object);
+    
     [self.navigationController popViewControllerAnimated:YES];
+    
+//    NSDictionary *dic = notifi.object;
+//    [kAPPDELEGATE._loacluserinfo SetUser_ID:[dic objectForKey:@"consumerId"]];
+//    [kAPPDELEGATE._loacluserinfo SetUserAccessToken:[dic objectForKey:@"authToken"]];
+//    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
+//    [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
+//    [self.navigationController popViewControllerAnimated:YES];
     
     
     
