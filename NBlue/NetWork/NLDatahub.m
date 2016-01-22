@@ -8,8 +8,7 @@
 
 #import "NLDatahub.h"
 #import "NLHTTPRequestFactory.h"
-#import "NLHTTPRequestOperations.h"
-#import "AFHTTPRequestOperationManager.h"
+#import <AFHTTPSessionManager.h>
 #import "SMProgressHUD.h"
 static NLDatahub *datahub = nil;
 static NSString *NLtextHeml = @"text/html";
@@ -24,8 +23,8 @@ static NSString *NLSportApi = @"/sport";//各个接口端
     dispatch_queue_t _networkConcurrentQueue;
     NSOperationQueue *_networkOperationQueue;
 }
-@property(nonatomic,strong)AFHTTPRequestOperationManager *manger;
 
+@property(nonatomic,strong)AFHTTPSessionManager *manager;
 @end
 
 @implementation NLDatahub
@@ -76,73 +75,85 @@ static NSString *NLSportApi = @"/sport";//各个接口端
 
 #pragma mark 获取验证码
 -(void)getVerificationCodePhones:(NSString *)phone{
-    NSURLRequest *request = [NLHTTPRequestFactory getVerificationCodePhone:phone];
-    NLHTTPRequestOperations *operation = [[NLHTTPRequestOperations alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    //    operation.completionQueue = _networkConcurrentQueue;
     
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%@",responseObject);
+    _manager = [AFHTTPSessionManager manager];
+    [_manager GET:[NSString stringWithFormat:@"%@%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_GetRegistercode,phone] parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (![responseObject isKindOfClass:[NSDictionary class]]) {
             NSLog(@"expecting NSDictionary class");
         }
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NLGetVerficationSuccessNotification object:nil userInfo:nil];
         });
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NLGetVerficationFicaledNotification object:nil userInfo:nil];
         });
     }];
-    //    [_networkOperationQueue addOperation:operation];
-    [operation start];
 }
 #pragma mark 注册
 -(void)registeredCodephone:(NSString *)phone verification:(NSString *)verfication password:(NSString *)password{
     
-    
-    _manger = [[AFHTTPRequestOperationManager alloc]init];
     NSDictionary * parameters= @{@"phone":phone,@"code":verfication,@"password":password,@"platform":@"ios"};
-    _manger.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:NLtextHeml,NLapplication, nil];
-    [_manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_register] parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    _manager = [AFHTTPSessionManager manager];
+    [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_register] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewSuccessNotification object:responseObject userInfo:nil];
         });
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewFicaledNotification object:operation.responseObject userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewFicaledNotification object:nil userInfo:nil];
         });
     }];
+    
+    
+    
+    
+//    _manger = [[AFHTTPRequestOperationManager alloc]init];
+//    NSDictionary * parameters= @{@"phone":phone,@"code":verfication,@"password":password,@"platform":@"ios"};
+//    _manger.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+//    [_manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_register] parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewSuccessNotification object:responseObject userInfo:nil];
+//        });
+//    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewFicaledNotification object:operation.responseObject userInfo:nil];
+//        });
+//    }];
 }
 #pragma mark 忘记密码
 - (void)forgetPassWordphone:(NSString *)phone verification:(NSString *)verfication password:(NSString *)password {
-    _manger = [[AFHTTPRequestOperationManager alloc] init];
-    NSDictionary *parameters = @{@"phone":phone,@"code":verfication,@"password":password,@"platform":@"ios"};
-    _manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication,nil];
-    [_manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,user_ForgetPassWord] parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserForgetPassWordSuccessNotification object:responseObject userInfo:nil];
-        });
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserForgetPassWordFicaledNotification object:nil userInfo:nil];
-        });
-    }];
+//    _manger = [[AFHTTPRequestOperationManager alloc] init];
+//    NSDictionary *parameters = @{@"phone":phone,@"code":verfication,@"password":password,@"platform":@"ios"};
+//    _manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication,nil];
+//    [_manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,user_ForgetPassWord] parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserForgetPassWordSuccessNotification object:responseObject userInfo:nil];
+//        });
+//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserForgetPassWordFicaledNotification object:nil userInfo:nil];
+//        });
+//    }];
     
 }
 #pragma mark 登录
 -(void)userSignInPhone:(NSString *)phone password:(NSString *)password{
     [self loadingView];
     NSDictionary *parameters= @{@"phone":phone,@"code":@"",@"password":password,@"platform":@"ios"};
-    _manger = [[AFHTTPRequestOperationManager alloc]init];
-    _manger.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:NLtextHeml,NLapplication, nil];
-    [_manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Login] parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+    [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Login] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self dismissHide];
             [[NSNotificationCenter defaultCenter] postNotificationName:NLLogInSuccessNotification object:responseObject userInfo:nil];
         });
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self dismissHide];
             NSLog(@"%@",error);
@@ -161,21 +172,20 @@ static NSString *NLSportApi = @"/sport";//各个接口端
                 consumerId:(NSString *)consumerId
                  startDate:(NSString *)startDate
                    endDate:(NSString *)endDate{
-    NSDictionary *parmeter = @{@"authToken":authToken,
+    NSDictionary *parameters = @{@"authToken":authToken,
                                @"consumerId":consumerId,
                                @"startDate":startDate,
                                @"endDate":endDate};
-    AFHTTPRequestOperationManager *manger = [[AFHTTPRequestOperationManager alloc]init];
-    manger.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:NLtextHeml,NLapplication, nil];
-    [manger GET:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLSportApi,Sport_record] parameters:parmeter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-       
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+    [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Login] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
-        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NLGetSoortRecordDataSuccessNotification object:responseObject userInfo:nil];
         });
-        
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NLGetSoortRecordDataFicaledNotification object:error userInfo:nil];
         });
@@ -202,9 +212,10 @@ static NSString *NLSportApi = @"/sport";//各个接口端
                           @"weight":weight,
                           @"header":header,
                           @"stepGoal":stepGoal,};
-    AFHTTPRequestOperationManager *manger = [[AFHTTPRequestOperationManager alloc] init];
-    manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
-//    [manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Consumer] parameters:parmeter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//    AFHTTPRequestOperationManager *manger = [[AFHTTPRequestOperationManager alloc] init];
+//    manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+//    
+//    [manger PUT:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Consumer] parameters:parmeter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
 //        dispatch_async(dispatch_get_main_queue(), ^{
 //            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserConsumerDataSuccessNotification object:responseObject userInfo:nil];
 //        });
@@ -212,40 +223,58 @@ static NSString *NLSportApi = @"/sport";//各个接口端
 //        dispatch_async(dispatch_get_main_queue(), ^{
 //            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserConsumerDataFicaledNotification object:error userInfo:nil];
 //        });
+//
 //    }];
-    
-    
-    
-    [manger PUT:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Consumer] parameters:parmeter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserConsumerDataSuccessNotification object:responseObject userInfo:nil];
-        });
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserConsumerDataFicaledNotification object:error userInfo:nil];
-        });
-
-    }];
 }
 #pragma mark 扫二维码
 - (void)qrCodeNextWorkFrom_to_id:(NSString *)from_to_id{
-    NSDictionary *parmeter =@{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],@"folkConsumerId":from_to_id,@"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
-    AFHTTPRequestOperationManager *manger = [[AFHTTPRequestOperationManager alloc] init];
-    manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication,nil];
     
-    [manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_QRCode] parameters:parmeter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%ld",(long)operation.response.statusCode);
+    NSDictionary *parameters =@{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],@"folkConsumerId":from_to_id,@"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
+
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+    [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Login] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
-        NSLog(@"%@",responseObject);
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        NSLog(@"%@  error = %@",operation.responseObject,error);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"%ld",task.state);
+            NSLog(@"%@",responseObject);
+        });
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@" error = %@",error);
+        });
     }];
 }
 #pragma mark 提醒他
 -(void)remindMale{
     
 }
-
+#pragma mark 上传用户头像
+-(void)uploadUserImage:(NSString *)image{
+    
+    NSString *theImagePath = [[NSBundle mainBundle] pathForResource:@"sdfsdf" ofType:@"png"];
+    
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+    // 参数
+    NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
+    parameter[@"token"] = @"param....";
+    // 访问路径
+    NSString *stringURL = [NSString stringWithFormat:@"%@%@",@"123",@"123"];
+    
+    
+    [_manager POST:stringURL parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileURL:[NSURL fileURLWithPath:theImagePath] name:@"file" fileName:@"name" mimeType:@"image/png" error:nil];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
 
 
 #pragma mark loading提示框

@@ -224,9 +224,12 @@ static const NSInteger TIMELINE = 90;
     
 }
 -(void)btnDownXXX{
-    NLConnectBloothViewController *vc = [[NLConnectBloothViewController alloc] init];
-    [vc setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    [[NLDatahub sharedInstance] getVerificationCodePhones:@"13269107610"];
+    
+//    NLConnectBloothViewController *vc = [[NLConnectBloothViewController alloc] init];
+//    [vc setHidesBottomBarWhenPushed:YES];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)setupBackgroundHandler{

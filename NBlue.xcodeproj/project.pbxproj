@@ -65,6 +65,7 @@
 		040E12631C48DA1400769AD1 /* SMProgressHUDLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E125C1C48DA1400769AD1 /* SMProgressHUDLoadingView.m */; };
 		040E12641C48DA1400769AD1 /* SMProgressHUDTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E125E1C48DA1400769AD1 /* SMProgressHUDTipView.m */; };
 		040E12651C48DA1400769AD1 /* UIView+SMAutolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E12601C48DA1400769AD1 /* UIView+SMAutolayout.m */; };
+		043D2D311C52281F00873A0E /* sdfsdf.png in Resources */ = {isa = PBXBuildFile; fileRef = 043D2D301C52281F00873A0E /* sdfsdf.png */; };
 		049751A11BFEEED50044D97B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 049751A01BFEEED50044D97B /* main.m */; };
 		049751AA1BFEEED50044D97B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049751A81BFEEED50044D97B /* Main.storyboard */; };
 		049751AC1BFEEED50044D97B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049751AB1BFEEED50044D97B /* Assets.xcassets */; };
@@ -112,7 +113,6 @@
 		04F7F6E71C2E7F2F009020A0 /* NLUserInformat.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7F6E61C2E7F2F009020A0 /* NLUserInformat.m */; };
 		04FA89BC1C117E400064F3AA /* NLDatahub.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B71C117E400064F3AA /* NLDatahub.m */; };
 		04FA89BD1C117E400064F3AA /* NLHTTPRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */; };
-		04FA89BE1C117E400064F3AA /* NLHTTPRequestOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */; };
 		04FB75911C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB75901C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m */; };
 		04FC238C1C51C3A100FC4FDA /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC238A1C51C3A100FC4FDA /* libMiPushSDK.a */; };
 		04FC238E1C51C3D600FC4FDA /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC238D1C51C3D600FC4FDA /* libresolv.tbd */; };
@@ -259,6 +259,7 @@
 		040E125E1C48DA1400769AD1 /* SMProgressHUDTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMProgressHUDTipView.m; sourceTree = "<group>"; };
 		040E125F1C48DA1400769AD1 /* UIView+SMAutolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SMAutolayout.h"; sourceTree = "<group>"; };
 		040E12601C48DA1400769AD1 /* UIView+SMAutolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SMAutolayout.m"; sourceTree = "<group>"; };
+		043D2D301C52281F00873A0E /* sdfsdf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sdfsdf.png; sourceTree = "<group>"; };
 		0497519C1BFEEED50044D97B /* NBlue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NBlue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		049751A01BFEEED50044D97B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		049751A91BFEEED50044D97B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -339,8 +340,6 @@
 		04FA89B71C117E400064F3AA /* NLDatahub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLDatahub.m; sourceTree = "<group>"; };
 		04FA89B81C117E400064F3AA /* NLHTTPRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHTTPRequestFactory.h; sourceTree = "<group>"; };
 		04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHTTPRequestFactory.m; sourceTree = "<group>"; };
-		04FA89BA1C117E400064F3AA /* NLHTTPRequestOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHTTPRequestOperations.h; sourceTree = "<group>"; };
-		04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHTTPRequestOperations.m; sourceTree = "<group>"; };
 		04FB758F1C3DF8F200A8DF35 /* NLMaleNBluePlanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMaleNBluePlanCell.h; sourceTree = "<group>"; };
 		04FB75901C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMaleNBluePlanCell.m; sourceTree = "<group>"; };
 		04FC238A1C51C3A100FC4FDA /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
@@ -848,13 +847,12 @@
 		04FA89B41C117E180064F3AA /* NetWork */ = {
 			isa = PBXGroup;
 			children = (
+				043D2D301C52281F00873A0E /* sdfsdf.png */,
 				04FA89B51C117E400064F3AA /* NLApiURL.h */,
 				04FA89B61C117E400064F3AA /* NLDatahub.h */,
 				04FA89B71C117E400064F3AA /* NLDatahub.m */,
 				04FA89B81C117E400064F3AA /* NLHTTPRequestFactory.h */,
 				04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */,
-				04FA89BA1C117E400064F3AA /* NLHTTPRequestOperations.h */,
-				04FA89BB1C117E400064F3AA /* NLHTTPRequestOperations.m */,
 			);
 			path = NetWork;
 			sourceTree = "<group>";
@@ -1070,6 +1068,7 @@
 				0497B9B21C48EE3A003F5CFF /* warning@2x.png in Resources */,
 				049751AA1BFEEED50044D97B /* Main.storyboard in Resources */,
 				0497B9AA1C48EE3A003F5CFF /* error@2x.png in Resources */,
+				043D2D311C52281F00873A0E /* sdfsdf.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1162,7 +1161,6 @@
 				04FA89BD1C117E400064F3AA /* NLHTTPRequestFactory.m in Sources */,
 				04018BFE1C3CB914009AC56A /* NLHealthMangerStepNumViewController.m in Sources */,
 				04018C271C3CB914009AC56A /* NLStepCountLabView.m in Sources */,
-				04FA89BE1C117E400064F3AA /* NLHTTPRequestOperations.m in Sources */,
 				049751A11BFEEED50044D97B /* main.m in Sources */,
 				04018C1C1C3CB914009AC56A /* NLCalenderUncomfortable.m in Sources */,
 				04018C241C3CB914009AC56A /* NLRing.m in Sources */,
