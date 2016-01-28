@@ -335,6 +335,13 @@ static const NSInteger BTNPHOTO = 4000;
     [_picker dismissViewControllerAnimated:YES completion:nil];
     
     
+    NSLog(@"%@",info);
+    
+    
+    [[NLDatahub sharedInstance] uploadUserImage:[info objectForKey:UIImagePickerControllerOriginalImage]
+                                      imageType:[info objectForKey:UIImagePickerControllerReferenceURL]];
+    
+    
     _userHeadImage.image = image;
     _blackView.hidden = YES;
     [UIView animateWithDuration:0.5 animations:^{

@@ -51,6 +51,22 @@
     CGSize questionSize = [text boundingRectWithSize:CGSizeMake(size, MAXFLOAT)  options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
     return questionSize;
 }
++ (CGSize)compressImageSize:(UIImage *)image{
+    CGSize imageSize = image.size;
+    if (image.size.height/SCREENHEIGHT-[self navBarAndStatusBarSize] && image.size.width<SCREENWIDTH) {
+        imageSize.height = imageSize.height;
+        imageSize.width = imageSize.width;
+    }else{
+        if (image.size.height/(SCREENHEIGHT-[self navBarAndStatusBarSize]) > (image.size.width/SCREENWIDTH) ) {
+            imageSize.height = SCREENHEIGHT-[self navBarAndStatusBarSize];
+            imageSize.width = (((SCREENHEIGHT-[self navBarAndStatusBarSize])/image.size.height)*image.size.width);
+        }else if (image.size.height/(SCREENHEIGHT - [self navBarAndStatusBarSize]) <= image.size.width/SCREENWIDTH){
+            imageSize.height = (SCREENWIDTH/image.size.width)*image.size.height;
+            imageSize.width = SCREENWIDTH;
+        }
+    }
+    return imageSize;
+}
 
 @end
 
@@ -182,7 +198,12 @@
     return [comps weekday];
 }
 
-
++(NSString *)datePickerTransformationYearDate:(NSDate *)date{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd-HH-mm-ss"];
+    NSString *formatDate = [formatter stringFromDate:date];
+    return formatDate;
+}
 
 +(NSString *)datePickerTransformationTextDate:(NSDate *)date{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -202,7 +223,6 @@
     NSString *formatDate = [formatter stringFromDate:date];
     return formatDate;
 }
-
 +(NSString *)datePickerTransformationCorssPointMothDay:(NSDate *)date{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MM-dd"];
@@ -326,4 +346,29 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     return resultUIImage;
 }
 
++ (UIImage *)compressFinishIsImages:(UIImage *)image scaledToSize:(CGSize)size{
+//    创建一个图形图像上下文
+    UIGraphicsBeginImageContext(size);
+//    把图片换成新的尺寸
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+//    得到新的图片
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+//    结束上下文
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+@end
+
+@implementation ApplicationStyle (NSArrays)
+
++ (NSArray *)interceptText:(NSString *)text interceptCharacter:(NSString *)interceptCharacter{
+    NSArray *array = [text componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:interceptCharacter]];
+    return array;
+}
++ (Byte)byteTransformationTextSixteenByteStr:(NSString *)str{
+    unsigned long red1 = strtoul([[str substringWithRange:NSMakeRange(0, str.length)] UTF8String],0,16);
+    Byte byte =  (Byte) ((0xff & red1) );//( Byte) 0xff&iByte;
+    return byte;
+}
 @end

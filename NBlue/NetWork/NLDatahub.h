@@ -50,6 +50,6 @@
  */
 - (void)qrCodeNextWorkFrom_to_id:(NSString *)from_to_id;
 
--(void)uploadUserImage:(NSString *)image;
+-(void)uploadUserImage:(UIImage *)image imageType:(NSString *)imageType;
 
 @end

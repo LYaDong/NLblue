@@ -139,9 +139,6 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         [self.delegate lifeHabitCount:nil];
     }else{
-        
-        NSLog(@"%@",_addDataArr);
-        
         [self.delegate lifeHabitCount:_addDataArr];
     }
 }

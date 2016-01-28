@@ -106,6 +106,7 @@
 "NLRegistered_completeBtn" = "完成";
 //NLHealthCalenderView
 "NLHealthCalender_DYM" = "大姨妈";
+"NLHealthCalender_DYM_TJ" = "痛经程度";
 "NLHealthCalender_AA" = "爱爱";
 "NLHealthCalender_SHXG" = "生活习惯";
 "NLHealthCalender_BSF" = "不舒服";

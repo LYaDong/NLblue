@@ -268,6 +268,10 @@ static const NSInteger THIRDBTNTAG = 4000;
 }
 -(void)logInSuccess:(NSNotification *)notifi{
     NSDictionary *dic = notifi.object;
+    
+    NSLog(@"%@",dic);
+    
+    
     [kAPPDELEGATE._loacluserinfo SetUser_ID:[dic objectForKey:@"consumerId"]];
     [kAPPDELEGATE._loacluserinfo SetUserAccessToken:[dic objectForKey:@"authToken"]];
     

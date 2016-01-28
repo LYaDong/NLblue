@@ -82,5 +82,22 @@
     NSString *period = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_LastTime_Period"];
     return period;
 }
+-(void)bluetoothUUID:(NSString *)UUID{
+    [[NSUserDefaults standardUserDefaults] setObject:UUID forKey:@"NL_User_Bluetooth_UUID"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+- (NSString *)getBlueToothUUID{
+    NSString *period = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_Bluetooth_UUID"];
+    return period;
+}
+
+-(void)bluetoothSetTime:(NSString *)time{
+    [[NSUserDefaults standardUserDefaults] setObject:time forKey:@"NL_User_Bluetooth_time"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)getBlueToothTime{
+    NSString *period = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_Bluetooth_time"];
+    return period;
+}
 
 @end

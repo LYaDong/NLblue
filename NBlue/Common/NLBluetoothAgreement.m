@@ -68,6 +68,7 @@ static NSString *TransLationF1 = @"0AF1";
     [notifi addObserver:self selector:@selector(logInSuccess:) name:NLConnectBloothSuccessNotification object:nil];
     
 }
+//连接设备
 -(void)logInSuccess:(NSNotification *)notifi{
     CBPeripheral *periperal = notifi.object;
     _periperal = periperal;
@@ -130,16 +131,7 @@ static NSString *TransLationF1 = @"0AF1";
 
 #pragma mark 扫描周边设备
 -(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI{
-    
-    
-    
     NSLog(@"附近设备有:%@  UUID ==%@ ",peripheral.name,peripheral.identifier);
-    
-    
-//    NSMutableArray *data = [NSMutableArray array];
-//    [data addObject:peripheral];
-
-    
     if (![_equipmentArr containsObject:peripheral]) {
         [_equipmentArr addObject:peripheral];
         if (self.getEquiment) {
@@ -148,29 +140,22 @@ static NSString *TransLationF1 = @"0AF1";
     }
 
     peripheral.delegate = self;
-    NSString *subStrFromIdex = nil;
-//
-//    if (self.periperal != peripheral) {
-//        self.periperal = peripheral;
-//        NSUUID *ids = peripheral.identifier;
-//        NSString *strsss = [NSString stringWithFormat:@"%@",ids];
-//        subStrFromIdex = [strsss substringFromIndex:54];
-//    }
-//    
-//    
-////    WARMAN  UUID ==<__NSConcreteUUID 0x13f584a40> 6F1832A1-864D-EA2B-01DD-13B89FCA2FF1
-////    YDY_NL100_LED  UUID ==<__NSConcreteUUID 0x13f5a98a0> C97BBAEA-E8CB-D74C-EAA1-3CA7552CB89D 
-//    
-//    
-////    B49D61C2-E67F-252E-2661-FD5C81A2AE8E
-////    EBAEA52B-965B-2A95-FB82-76ED6D365CAE
-//    
-    if ([subStrFromIdex isEqualToString:@"2D2147B5C9D6"]){
+    if ([[kAPPDELEGATE._loacluserinfo getBlueToothUUID] length]>0) {
+        CBUUID *blue_UUID = [CBUUID UUIDWithCFUUID:(__bridge CFUUIDRef _Nonnull)(peripheral.identifier)];
+        NSString *blue_uuidstr = [NSString stringWithFormat:@"%@",blue_UUID];
         
-        
+        if ([blue_uuidstr isEqualToString:[kAPPDELEGATE._loacluserinfo getBlueToothUUID]]) {
+            _periperal = peripheral;
+            [_manger connectPeripheral:_periperal options:nil];
+            [_dataArr removeAllObjects];
+            [_dataArr addObject:peripheral];
+            [kAPPDELEGATE._loacluserinfo setBluetoothName:peripheral.name];
+            if(self.perheral){//返回当前的外围设备
+                self.perheral(_dataArr);
+            }
+            [_manger stopScan];
+        }
     }
-
-    
 }
 
 #pragma mark 中央设备的代理事件

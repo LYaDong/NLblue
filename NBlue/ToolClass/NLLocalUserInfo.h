@@ -73,4 +73,20 @@
  * 
  */
 -(NSString *)getLastTimeGoPeriodDate;
+/**
+ * 输入用户UUID
+ */
+-(void)bluetoothUUID:(NSString *)UUID;
+/**
+ * 获取用户UUID
+ */
+- (NSString *)getBlueToothUUID;
+/**
+ * 是否设置蓝牙时间
+ */
+-(void)bluetoothSetTime:(NSString *)time;
+/**
+ * 获得设置时间
+ */
+-(NSString *)getBlueToothTime;
 @end

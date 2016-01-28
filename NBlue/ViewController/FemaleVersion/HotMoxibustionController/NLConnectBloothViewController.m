@@ -85,6 +85,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CBPeripheral *peripheral = _dataArr[indexPath.row];
+    CBUUID *uuid = [CBUUID UUIDWithCFUUID:(__bridge CFUUIDRef _Nonnull)(peripheral.identifier)];
+    [kAPPDELEGATE._loacluserinfo bluetoothUUID:[NSString stringWithFormat:@"%@",uuid]];
     [[NSNotificationCenter defaultCenter] postNotificationName:NLConnectBloothSuccessNotification object:peripheral userInfo:nil];
     
     [self.navigationController popViewControllerAnimated:YES];

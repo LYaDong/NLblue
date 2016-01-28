@@ -77,6 +77,7 @@ static NSString *NLSportApi = @"/sport";//各个接口端
 -(void)getVerificationCodePhones:(NSString *)phone{
     
     _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [_manager GET:[NSString stringWithFormat:@"%@%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_GetRegistercode,phone] parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (![responseObject isKindOfClass:[NSDictionary class]]) {
@@ -96,10 +97,11 @@ static NSString *NLSportApi = @"/sport";//各个接口端
     
     NSDictionary * parameters= @{@"phone":phone,@"code":verfication,@"password":password,@"platform":@"ios"};
     _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_register] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewSuccessNotification object:responseObject userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
         });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -125,6 +127,23 @@ static NSString *NLSportApi = @"/sport";//各个接口端
 }
 #pragma mark 忘记密码
 - (void)forgetPassWordphone:(NSString *)phone verification:(NSString *)verfication password:(NSString *)password {
+    
+    NSDictionary * parameters= @{@"phone":phone,@"code":verfication,@"password":password,@"platform":@"ios"};
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,user_ForgetPassWord] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewFicaledNotification object:nil userInfo:nil];
+        });
+    }];
+    
+    
+    
 //    _manger = [[AFHTTPRequestOperationManager alloc] init];
 //    NSDictionary *parameters = @{@"phone":phone,@"code":verfication,@"password":password,@"platform":@"ios"};
 //    _manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication,nil];
@@ -146,12 +165,15 @@ static NSString *NLSportApi = @"/sport";//各个接口端
     
     _manager = [AFHTTPSessionManager manager];
     _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Login] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self dismissHide];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NLLogInSuccessNotification object:responseObject userInfo:nil];
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLLogInSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
         });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -178,11 +200,12 @@ static NSString *NLSportApi = @"/sport";//各个接口端
                                @"endDate":endDate};
     _manager = [AFHTTPSessionManager manager];
     _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Login] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NLGetSoortRecordDataSuccessNotification object:responseObject userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLGetSoortRecordDataSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
         });
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -233,6 +256,7 @@ static NSString *NLSportApi = @"/sport";//各个接口端
 
     _manager = [AFHTTPSessionManager manager];
     _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Login] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -252,28 +276,35 @@ static NSString *NLSportApi = @"/sport";//各个接口端
     
 }
 #pragma mark 上传用户头像
--(void)uploadUserImage:(NSString *)image{
-    
-    NSString *theImagePath = [[NSBundle mainBundle] pathForResource:@"sdfsdf" ofType:@"png"];
-    
-    _manager = [AFHTTPSessionManager manager];
-    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
-    // 参数
-    NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
-    parameter[@"token"] = @"param....";
-    // 访问路径
-    NSString *stringURL = [NSString stringWithFormat:@"%@%@",@"123",@"123"];
-    
-    
-    [_manager POST:stringURL parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        [formData appendPartWithFileURL:[NSURL fileURLWithPath:theImagePath] name:@"file" fileName:@"name" mimeType:@"image/png" error:nil];
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
+-(void)uploadUserImage:(UIImage *)image imageType:(NSString *)imageType{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        CGSize newImageSize =  [ApplicationStyle compressImageSize:image];
+        UIImage *newImage = [ApplicationStyle compressFinishIsImages:image scaledToSize:newImageSize];
+        NSData *imgData = UIImagePNGRepresentation(newImage);
+        NSDictionary * parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo  GetUser_ID],@"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
+        _manager = [AFHTTPSessionManager manager];
+        _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+        _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,@"/header"] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            //        NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"sdfsdf.png" withExtension:nil];
+            //        [formData appendPartWithFileURL:[NSURL URLWithString:image] name:@"file" fileName:@"sdfsdf.png" mimeType:@"image/png" error:NULL];
+            [formData appendPartWithFileData:imgData name:@"file" fileName:@"test.png" mimeType:@"image/png"];
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSString *result = [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
+            NSLog(@"%@",result);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
+    });
+}
+
+
+
+- (NSDictionary *)dataTransformationJson:(id  _Nullable)responseObject{
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+    return dic;
 }
 
 

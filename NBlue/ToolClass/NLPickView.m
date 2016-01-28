@@ -287,7 +287,7 @@ static const NSInteger DATEPICKERTAGBTN = 4000;                             //æ—
         
         lbl.backgroundColor = [UIColor clearColor];
         
-        lbl.textColor = [@"000000" hexStringToColor];
+        lbl.textColor = [UIColor redColor];
         lbl.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:36]];
         lbl.tag = LBLTAG;
         [view addSubview:lbl];

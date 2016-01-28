@@ -13,7 +13,7 @@
 #import "NLPickView.h"
 @interface NLMaleIndividuaViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *mainTableView;
-@property(nonatomic,assign)BOOL isCallRemind;
+@property(nonatomic,assign)BOOL isCallRemind; 
 @property(nonatomic,assign)BOOL isSendentary;
 @end
 
@@ -205,9 +205,9 @@
     NSMutableArray *array = [NSMutableArray array];
     for (NSInteger i=0; i<24; i++) {
         if (i<10) {
-            [array addObject:[NSString stringWithFormat:@"0%ld:00",i]];
+            [array addObject:[NSString stringWithFormat:@"0%ld:00",(long)i]];
         }else{
-            [array addObject:[NSString stringWithFormat:@"%ld:00",i]];
+            [array addObject:[NSString stringWithFormat:@"%ld:00",(long)i]];
         }
     }
     return array;

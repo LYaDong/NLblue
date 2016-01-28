@@ -137,9 +137,11 @@ static const NSInteger TIMELINE = 90;
 
     
     
+    if ([[kAPPDELEGATE._loacluserinfo getBlueToothUUID] length]<=0) {
+       [self connectBlueTooth]; 
+    }
     
     
-    [self connectBlueTooth];
     
     
 //    =================================================================================================================================
@@ -172,40 +174,7 @@ static const NSInteger TIMELINE = 90;
 //    };
     
     
-    
-    
-    
-    
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    btn.frame = CGRectMake(40, 100, 40, 40);
-//    btn.backgroundColor = [UIColor redColor];
-//    [btn addTarget:self action:@selector(sleep1) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn];
-//
-//    UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    btn1.frame = CGRectMake(100, 100, 100, 100);
-//    btn1.backgroundColor = [UIColor yellowColor];
-//    [btn1 addTarget:self action:@selector(btnDown1) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn1];
-//    
-//    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    btn2.frame = CGRectMake(100, 400, 100, 100);
-//    btn2.backgroundColor = [UIColor orangeColor];
-//    [btn2 addTarget:self action:@selector(btnDown2) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn2];
-//////
-//    UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    btn3.frame = CGRectMake(200, 200, 100, 100);
-//    btn3.backgroundColor = [UIColor greenColor];
-//    [btn3 addTarget:self action:@selector(sportxx1) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn3];
-////
-////    
-//    UIButton *btn4 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    btn4.frame = CGRectMake(100, 200, 100, 100);
-//    btn4.backgroundColor = [UIColor greenColor];
-//    [btn4 addTarget:self action:@selector(sportxx) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn4];
+  
     
     
  
@@ -222,14 +191,41 @@ static const NSInteger TIMELINE = 90;
     [btn addTarget:self action:@selector(btnDownXXX) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     
+//    UIButton *xxx = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+//    xxx.frame = CGRectMake(110, 64, 50, 50);
+//    [xxx setTitle:@"重启" forState:UIControlStateNormal];
+//    [xxx addTarget:self action:@selector(xxxxxxxx) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:xxx];
+//    
+//    UIButton *xvfvf = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+//    xvfvf.frame = CGRectMake(110, 224, 50, 50);
+//    [xvfvf setTitle:@"查时间" forState:UIControlStateNormal];
+//    [xvfvf addTarget:self action:@selector(xvfvf) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:xvfvf];
+    
 }
+-(void)xxxxxxxx{
+    Byte byte[20] = {0xF0,0x01};
+    NSData *data = [NSData dataWithBytes:byte length:20];
+    if (_peripheralArray.count>0) {
+        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+    }
+}
+-(void)xvfvf{
+    Byte byte[20] = {0x02,0x03};
+    NSData *data = [NSData dataWithBytes:byte length:20];
+    if (_peripheralArray.count>0) {
+        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+    }
+}
+
+
 -(void)btnDownXXX{
     
-    [[NLDatahub sharedInstance] getVerificationCodePhones:@"13269107610"];
     
-//    NLConnectBloothViewController *vc = [[NLConnectBloothViewController alloc] init];
-//    [vc setHidesBottomBarWhenPushed:YES];
-//    [self.navigationController pushViewController:vc animated:YES];
+    NLConnectBloothViewController *vc = [[NLConnectBloothViewController alloc] init];
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)setupBackgroundHandler{
@@ -254,7 +250,6 @@ static const NSInteger TIMELINE = 90;
 
 #pragma mark 基础UI
 -(void)bulidUI{
-
     
     
     [NLSQLData establishSportDataTable];
@@ -274,16 +269,19 @@ static const NSInteger TIMELINE = 90;
         NSLog(@"蓝牙反馈数据：%@",blueData);
         
         //获得设备信息
-//        [NLBluetoothDataAnalytical bluetoothCommandReturnData:blueData];
-//        //调温
-//        [self temperaturetOFF:blueData];
-//        //记步
-//        [self sportData:blueData];
+        [NLBluetoothDataAnalytical bluetoothCommandReturnData:blueData];
+        //调温
+        [self temperaturetOFF:blueData];
+        //记步
+        [self sportData:blueData];
 //        //判断温度
         [self isTemperatureOff:blueData];
     };
     blues.perheral = ^(NSArray *perpheral){
         _peripheralArray = perpheral;//获得当前的外围设备
+        
+
+        
     };
     blues.getConnectionSuccess = ^(NSString *connectionSuccess){
         if ([connectionSuccess isEqualToString:EquiomentConnectionSuccess]) {
@@ -291,18 +289,20 @@ static const NSInteger TIMELINE = 90;
             _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect"];
             
             if (!_isQuert) {
-                [self judgmentTemperatureQuery];
-//                [self sportDataQuery];
+                
+                if (![[kAPPDELEGATE._loacluserinfo getBlueToothTime] isEqualToString:@"1"]) {
+                    [kAPPDELEGATE._loacluserinfo bluetoothSetTime:@"1"];
+                    [self setTimeEquipment];//设置设备时间
+                }
+                [self judgmentTemperatureQuery];//查询温度
+                [self sportDataQuery];
                 _isQuert = !_isQuert;
             }
         }
-        
         if ([connectionSuccess isEqualToString:EquiomentConnectionFiale]) {
             _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect_N"];
-            
         }
     };
-    
     [self loadStepData];
     [self halfCircle];
 }
@@ -564,6 +564,34 @@ static const NSInteger TIMELINE = 90;
     }
 }
 
+-(void)setTimeEquipment{
+    NSString *dateTime = [ApplicationStyle datePickerTransformationYearDate:[NSDate date]];
+    NSArray *arrText = [ApplicationStyle interceptText:dateTime interceptCharacter:@"-"];
+    
+    NSString *yeatTime = arrText[0];
+    NSString *str = [NLBluetoothDataAnalytical tenTurnSixTeen:[yeatTime integerValue]];
+    unsigned long red = strtoul([[str substringWithRange:NSMakeRange(0, 2)] UTF8String],0,16);
+    Byte b =  (Byte) ((0xff & red) );//( Byte) 0xff&iByte;
+    
+    unsigned long red1 = strtoul([[str substringWithRange:NSMakeRange(2, str.length - 2)] UTF8String],0,16);
+    Byte b1 =  (Byte) ((0xff & red1) );//( Byte) 0xff&iByte;
+    Byte month = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[1] integerValue]]];
+    Byte day = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[2] integerValue]]];
+    Byte dayTime = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[3] integerValue]]];
+    Byte branch = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[4] integerValue]]];
+    Byte second = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[5] integerValue]]];
+    Byte weekDay = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[[NSString stringWithFormat:@"0%ld",(long)[ApplicationStyle currentDayWeek:[NSDate date]]] integerValue]]];
+    
+    NSLog(@"%hhu %hhu",b,b1);
+    
+    Byte byte[20] = {0x03,0x01,b,b1,month,day,dayTime,branch,second,weekDay};
+    
+    NSData *data = [NSData dataWithBytes:byte length:20];
+    if (_peripheralArray.count>0) {
+        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+    }
+
+}
 #pragma mark 按钮事件
 
 - (void)moxibustionBtnDown{

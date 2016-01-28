@@ -51,6 +51,11 @@
  *根据文字多少计算文本的Size
  */
 + (CGSize)textSize:(NSString *)text font:(UIFont *)font size:(CGFloat)size;
+/**
+ *等比例 屏幕大小压缩图片
+ * @param  image  图片
+ */
++ (CGSize)compressImageSize:(UIImage *)image;
 
 @end
 
@@ -183,6 +188,10 @@
  */
 +(NSInteger)currentDayWeek:(NSDate *)date;
 /**
+ *2015-01-01-00-00-00
+ */
++(NSString *)datePickerTransformationYearDate:(NSDate *)date;
+/**
  *2015年01月01日 格式
  */
 +(NSString *)datePickerTransformationTextDate:(NSDate *)date;
@@ -238,5 +247,26 @@
  * 修改二维码颜色 待优化
  */
 + (UIImage*)imageBlackToTransparent:(UIImage*)image withRed:(CGFloat)red andGreen:(CGFloat)green andBlue:(CGFloat)blue;
+/**
+ *压缩图片
+ * @param  image  要压缩的图片
+ * @param  size 要压缩的尺寸
+ */
++ (UIImage *)compressFinishIsImages:(UIImage *)image scaledToSize:(CGSize)size;
 @end
 
+@interface ApplicationStyle (NSArrays)
+/**
+ * 截取字符串
+ * @param text 内容
+ * @param interceptCharacter 要截取的字符串
+ */
++ (NSArray *)interceptText:(NSString *)text interceptCharacter:(NSString *)interceptCharacter;
+/**
+ * 转换字符为十六进制，在转为byte
+ * @param str 要转换的字符  一定要等于两位字符，否则补足
+ */
++ (Byte)byteTransformationTextSixteenByteStr:(NSString *)str;
+
+
+@end

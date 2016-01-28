@@ -102,6 +102,10 @@
             }
         }
     }
+    
+    NSLog(@"%@",sportData);
+    
+    
     [cell histogram:sportData
           sportData:_sportData 
              target:4000];

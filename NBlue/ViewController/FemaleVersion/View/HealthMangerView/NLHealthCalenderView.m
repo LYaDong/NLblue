@@ -17,6 +17,7 @@ static const NSInteger CELLTAG = 500;//不可以大于1000
 #import "NLCalenderUncomfortable.h"
 #import "PlistData.h"
 #import "NLSQLData.h"
+#import "NLLHRatingView.h"
 @interface NLHealthCalenderView()<
 UIScrollViewDelegate,
 UITableViewDataSource,
@@ -24,7 +25,8 @@ UITableViewDelegate,
 NLCalenderPickerDelegate,
 NLCalenderLifeHabitDelegate,
 NLCalenderUncomfortableDelegate,
-NLCalenderPackageDelegate>
+NLCalenderPackageDelegate,
+NLLHRatingViewDelegate>
 @property(nonatomic,strong)NSString *selectedTime;
 @property(nonatomic,strong)UIScrollView *mainScrollew;
 @property(nonatomic,strong)UITableView *mainTableView;
@@ -34,6 +36,8 @@ NLCalenderPackageDelegate>
 @property(nonatomic,strong)NLCalenderLifeHabit *calenLifeHabitView;
 @property(nonatomic,strong)NLCalenderUncomfortable *uncomfortableView;
 @property(nonatomic,assign)NSInteger cellRow;
+@property(nonatomic,assign)NSInteger switchOffNum;
+@property(nonatomic,strong)NLLHRatingView *starView;
 
 @end
 @implementation NLHealthCalenderView
@@ -42,7 +46,9 @@ NLCalenderPackageDelegate>
     self = [super initWithFrame:frame];
     if (self) {
 //        self.backgroundColor = [UIColor yellowColor];
+        _switchOffNum = 1;
         [self bulidUI];
+        
     }
     return self;
 }
@@ -114,15 +120,22 @@ NLCalenderPackageDelegate>
         _periodTimeDay.text = @"距离下次来临大约还有15天";
         [calenderback addSubview:_periodTimeDay];
     }
+    NSInteger tableHeight = 0;
+    if (_switchOffNum == 1) {
+        tableHeight = [ApplicationStyle control_height:5*88];
+    }else{
+        tableHeight = [ApplicationStyle control_height:4*88];
+    }
     
-    _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, calenderView.bottomOffset + [ApplicationStyle control_height:100] + [ApplicationStyle control_height:2 ], SCREENWIDTH, [ApplicationStyle control_height:4 * 88]) style:UITableViewStylePlain];
+    _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, calenderView.bottomOffset + [ApplicationStyle control_height:100] + [ApplicationStyle control_height:2], SCREENWIDTH, tableHeight) style:UITableViewStylePlain];
     _mainTableView.delegate = self;
     _mainTableView.dataSource = self;
+    _mainTableView.scrollEnabled = NO;
     _mainTableView.backgroundColor = [UIColor clearColor];
     [_mainScrollew addSubview:_mainTableView];
     
     
-    _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + [ApplicationStyle control_height:4 * 88] + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78]);
+    _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78]);
 }
 -(void)controlUI{
     
@@ -151,7 +164,12 @@ NLCalenderPackageDelegate>
 
 #pragma mark 系统Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    if (_switchOffNum == 1) {
+        return 5;
+    }else{
+        return 4;
+    }
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [ApplicationStyle control_height:88];
@@ -164,24 +182,61 @@ NLCalenderPackageDelegate>
         cell = [[NLHealtCalenderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
         cell.tag = indexPath.row + CELLTAG;
     }
+    NSArray *imageArr = nil;
+    NSArray *labArr = nil;
+    
+    if (_switchOffNum == 1) {
+        imageArr = @[@"NLHClen_DYM",
+                     @"NLHClen_DYM_TJ",
+                     @"NLHClen_AA",
+                     @"NLHClen_SHXG",
+                     @"NLHClen_BSF"];
+        
+        labArr = @[NSLocalizedString(@"NLHealthCalender_DYM", nil),
+                   NSLocalizedString(@"NLHealthCalender_DYM_TJ", nil),
+                   NSLocalizedString(@"NLHealthCalender_AA", nil),
+                   NSLocalizedString(@"NLHealthCalender_SHXG", nil),
+                   NSLocalizedString(@"NLHealthCalender_BSF", nil),];
+        cell.switchs.on = true;
+        if (indexPath.row == 0) {
+            cell.switchs.hidden = NO;
+            cell.cellCountImage.hidden = YES;
+        }
+        
+        if (indexPath.row==1) {
+            cell.cellCountImage.hidden = YES;
+            _starView = [[NLLHRatingView alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:240] - [ApplicationStyle control_weight:24], ([ApplicationStyle control_height:88] - [ApplicationStyle control_height:60])/2, [ApplicationStyle control_weight:240], [ApplicationStyle control_height:60])];
+            _starView.ratingType = INTEGER_TYPE;//整颗星
+            _starView.clipsToBounds = YES;
+            _starView.hidden = NO;
+            _starView.delegate = self;
+            [cell addSubview:_starView];
+        }
+    }else{
+        _starView.hidden = YES;
+        cell.cellCountImage.hidden = NO;
+        cell.switchs.on = false;
+        if (indexPath.row == 0) {
+           cell.cellCountImage.hidden = YES;
+        }
+        imageArr = @[@"NLHClen_DYM",
+                     @"NLHClen_AA",
+                     @"NLHClen_SHXG",
+                     @"NLHClen_BSF"];
+        
+        labArr = @[NSLocalizedString(@"NLHealthCalender_DYM", nil),
+                   NSLocalizedString(@"NLHealthCalender_AA", nil),
+                   NSLocalizedString(@"NLHealthCalender_SHXG", nil),
+                   NSLocalizedString(@"NLHealthCalender_BSF", nil),];
+        
+        
+    }
     
     
-    NSArray *imageArr = @[@"NLHClen_DYM",
-                          @"NLHClen_AA",
-                          @"NLHClen_SHXG",
-                          @"NLHClen_BSF"];
-    
-    NSArray *labArr = @[NSLocalizedString(@"NLHealthCalender_DYM", nil),
-                        NSLocalizedString(@"NLHealthCalender_AA", nil),
-                        NSLocalizedString(@"NLHealthCalender_SHXG", nil),
-                        NSLocalizedString(@"NLHealthCalender_BSF", nil),];
     cell.cellImage.image = [UIImage imageNamed:imageArr[indexPath.row]];
     cell.cellLab.text = labArr[indexPath.row];
     cell.cellCountImage.image = [UIImage imageNamed:@"NLHClen_DDD"];
-    if (indexPath.row==0) {
-        cell.cellCountImage.image = [UIImage imageNamed:@"NLHClen_DYM_NO"];
-    }
-
+    [cell.switchs addTarget:self action:@selector(switchOffDown:) forControlEvents:UIControlEventValueChanged];
     cell.backgroundColor = [UIColor  clearColor];
     return cell;
 }
@@ -189,20 +244,17 @@ NLCalenderPackageDelegate>
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
-        case 0:
-        {
+        case 0:{
             
             break;
         }
-        case 1:
-        {
+        case 1:{
             _blackBack.hidden = NO;
             _calenderPickerView.hidden = NO;
             _cellRow = indexPath.row;
             break;
         }
-        case 2:
-        {
+        case 2:{
             _blackBack.hidden = NO;
             _calenLifeHabitView.hidden = NO;
             
@@ -211,8 +263,7 @@ NLCalenderPackageDelegate>
             
             break;
         }
-        case 3:
-        {
+        case 3:{
             _blackBack.hidden = NO;
             _uncomfortableView.hidden = NO;
             _uncomfortableView.commonTime = _selectedTime;
@@ -262,7 +313,7 @@ NLCalenderPackageDelegate>
         default:
             break;
     }
-    NSDictionary *dataDic = @{@"loveLove":[NSString stringWithFormat:@"%ld",index],@"time":_selectedTime};
+    NSDictionary *dataDic = @{@"loveLove":[NSString stringWithFormat:@"%ld",(long)index],@"time":_selectedTime};
     [NLSQLData upDataCanlenderLoveLove:dataDic];
     
 }
@@ -290,6 +341,13 @@ NLCalenderPackageDelegate>
     [NLSQLData upDataCanlenderuncomfortable:dataDic];
 }
 
+#pragma mark - 星星代理
+- (void)ratingView:(NLLHRatingView *)view score:(CGFloat)score
+{
+    NSLog(@"分数  %.2f",score);
+    
+}
+
 -(NSMutableString *)countString:(NSArray *)array{
     NSMutableString *count = [NSMutableString string];
     for (NSInteger i=0; i<array.count; i++) {
@@ -307,6 +365,22 @@ NLCalenderPackageDelegate>
     _calenLifeHabitView.hidden = YES;
     _uncomfortableView.hidden = YES;
     _calenderPickerView.hidden = YES;
+}
+#pragma 自己按钮事件
+-(void)switchOffDown:(UISwitch *)sw{
+    if (sw.on == YES) {
+        _switchOffNum = 1;
+    }else{
+        _switchOffNum = 0;
+    }
+    NSInteger tableHeight = 0;
+    if (_switchOffNum == 1) {
+        tableHeight = [ApplicationStyle control_height:5*88];
+    }else{
+        tableHeight = [ApplicationStyle control_height:4*88];
+    }
+    _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78]);
+    [_mainTableView reloadData];
 }
 
 /*

@@ -127,7 +127,6 @@ static const NSInteger BTNTAG = 4000;
 }
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     _choicePickerIndex = row;
-    NSLog(@"%ld",(long)row);
 }
 #pragma mark 自己的代理
 #pragma mark 按钮事件

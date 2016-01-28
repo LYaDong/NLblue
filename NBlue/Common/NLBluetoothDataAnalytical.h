@@ -21,7 +21,10 @@
  *16进制转10进制
  */
 + (long)sixTenHexTeen:(NSString *)num;
-
+/**
+ * 16进制转10进制
+ */
++(NSString *)tenturnSinTenNew:(NSInteger)index;
 /**
  *蓝牙命令获得数据解析判断
  */

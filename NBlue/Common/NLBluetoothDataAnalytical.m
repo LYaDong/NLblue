@@ -99,8 +99,9 @@
     return numbers;
 }
 
-#pragma mark 10进制转16进制
-+(NSString *)tenTurnSixTeen:(NSInteger)index{
+
++(NSString *)tenTurnSixTeen:(NSInteger)index __attribute((deprecated("方法写的不是很完整：故转换用tenturnSinTenNew：")))
+{
     if (index<3){return nil;}
     NSMutableString *string = [NSMutableString string];
     NSString  *sixTeen = [[NSString alloc] initWithFormat:@"%lx",(long)index];
@@ -108,6 +109,11 @@
     NSString *forOne = [sixTeen substringWithRange:NSMakeRange(0, 1)];
     [string appendFormat:@"%@%@",forTo,forOne];
     return string;
+}
+#pragma mark 10进制转16进制
++(NSString *)tenturnSinTenNew:(NSInteger)index{
+    NSString  *sixTeen = [[NSString alloc] initWithFormat:@"%lx",(long)index];
+    return sixTeen;
 }
 
 
@@ -257,40 +263,40 @@
     //    NSLog(@"%@",[self FourHexConversion:[timeByte substringWithRange:NSMakeRange(12, 4)]]);
     
     
-//    arr = @[@"08030110e007010700000f602200",
-//            @"080302100f000000000000000a0000000c000000",
-//            @"0803030f00000000000000000000000000000000",
-//            @"0803040f00000000000000000000000000000000",
-//            @"0803050f00000000000000000000000000000000",
-//            @"0803060f00000000000000000000000000000000",
-//            @"0803070f00000000000000000000000000000000",
-//            @"0803080f00000000000000000000000000000000",
-//            @"0803090f00000000000000000000000000000000",
-//            @"08030a0f00000000000000000000000000000000",
-//            @"08030b0f00000000000000000000000000000000",
-//            @"08030c0f00000000000000000000000000000000",
-//            @"08030d0f00000000000000000000000000000000",
-//            @"08030e0f00000000000000000000000000000000",
-//            @"08030f0f00000000000000000000000000000000",
-//            @"0803100f00000000000000000000000000000000",
-//            @"0803110f00000000000000000000000000000000",
-//            @"0803120f00000000000000000000000000000000",
-//            @"0803130f00000000000000000000000000000000",
-//            @"0803140f00000000000000000000000000000000",
-//            @"0803150f00000000000000000000000000000000",
-//            @"0803160f00000000000000000000000000000000",
-//            @"0803170f00000000000000000000000000000000",
-//            @"0803180f00000000000000000000000000000000",
-//            @"0803190f00000000000000000000000000000000",
-//            @"08031a0f3c0003a0000000000000000000000000",
-//            @"08031b0f00000000000000000000000000000000",
-//            @"08031c0f00000000000000000000000000000000",
-//            @"08031d0f00000000000000000000000000000000",
-//            @"08031e0f00000000000000000000000000000000",
-//            @"08031f0f00000000000000000000000000000000",
-//            @"0803200f00000000000000000000000000000000",
-//            @"0803210f00000000000000000000000000000000",
-//            @"0803220f00000000000000000000000000000000"];
+    arr = @[@"08030110e007010700000f602200",
+            @"080302100f000000000000000a0000000c000000",
+            @"0803030f00000000000000000000000000000000",
+            @"0803040f00000000000000000000000000000000",
+            @"0803050f00000000000000000000000000000000",
+            @"0803060f00000000000000000000000000000000",
+            @"0803070f00000000000000000000000000000000",
+            @"0803080f00000000000000000000000000000000",
+            @"0803090f00000000000000000000000000000000",
+            @"08030a0f00000000000000000000000000000000",
+            @"08030b0f00000000000000000000000000000000",
+            @"08030c0f00000000000000000000000000000000",
+            @"08030d0f00000000000000000000000000000000",
+            @"08030e0f00000000000000000000000000000000",
+            @"08030f0f00000000000000000000000000000000",
+            @"0803100f00000000000000000000000000000000",
+            @"0803110f00000000000000000000000000000000",
+            @"0803120f00000000000000000000000000000000",
+            @"0803130f00000000000000000000000000000000",
+            @"0803140f00000000000000000000000000000000",
+            @"0803150f00000000000000000000000000000000",
+            @"0803160f00000000000000000000000000000000",
+            @"0803170f00000000000000000000000000000000",
+            @"0803180f00000000000000000000000000000000",
+            @"0803190f00000000000000000000000000000000",
+            @"08031a0f3c0003a0000000000000000000000000",
+            @"08031b0f00000000000000000000000000000000",
+            @"08031c0f00000000000000000000000000000000",
+            @"08031d0f00000000000000000000000000000000",
+            @"08031e0f00000000000000000000000000000000",
+            @"08031f0f00000000000000000000000000000000",
+            @"0803200f00000000000000000000000000000000",
+            @"0803210f00000000000000000000000000000000",
+            @"0803220f00000000000000000000000000000000"];
     
     
     
@@ -300,7 +306,7 @@
     
 
 
-    Byte *testByte = [self stringConversionByte:@"28c0016000"];
+    Byte *testByte = [self stringConversionByte:@"5cc0030001"];
     NSInteger step = ((testByte[0] & 0xFC) >> 2) + ((testByte[1] & 0x3F) << 6);
     NSInteger time = ((testByte[1] & 0xC0) >> 6) + ((testByte[2] & 0x03) << 2);
     NSInteger cal = ((testByte[2] & 0xFC) >> 2) + ((testByte[3] & 0x0F) << 6);
@@ -310,44 +316,7 @@
     NSLog(@"step = %ld time %ld cal %ld dis %ld",(long)step,(long)time,(long)cal,(long)dis);
     
     
-    
-    
-    
-    
-   
-    
-//    NSString *sss = @"08031a0f28c001600028c001600028c0016000";
-//    NSMutableArray *array = [NSMutableArray array];
-//    NSMutableString *string = [NSMutableString string];
-//    for (NSInteger j=0; j<3; j++) {
-//        
-//         NSString *xxx = [sss substringWithRange:NSMakeRange(8 + j * 10, 10)];
-//        for (NSInteger n = 0; n<5; n++) {
-//            NSString *vvv = [xxx substringWithRange:NSMakeRange(0 + n * 2, 2)];
-//           [array addObject:[self getBinaryByhex:vvv]];
-//        }
-//        NSString *ddd = array[0];
-//        
-//        [ddd substringWithRange:NSMakeRange(ddd.length - 2, 2)];
-//        
-//        NSString *cccc = array[0];
-//        NSString *mmmm = [cccc substringWithRange:NSMakeRange(0, 6)];
-////        NSLog(@"%@",[cccc substringWithRange:NSMakeRange(0, 6)]);
-//        
-//        NSString *bbb = array[1];
-//        NSString *llll = [bbb substringWithRange:NSMakeRange(2, 6)];
-//        
-////        NSLog(@"%@",[bbb substringWithRange:NSMakeRange(2, 6)]);
-//        
-//       NSLog(@"%@",[self toDecimalSystemWithBinarySystem:[NSString stringWithFormat:@"%@%@",llll,mmmm]]);
-//        
-//    }
-    
-    
-    
-    
-    
-    
+
     
     NSMutableDictionary *dicSportDataBig = [NSMutableDictionary dictionary];
 //    //计算时间
@@ -428,7 +397,7 @@
                 [dicSportDataSmall setValue:[NSNumber numberWithInteger:step] forKey:@"steps"];
                 [dicSportDataSmall setValue:[NSString stringWithFormat:@"%@-%@-%@-%@",yearDate,month,days,countinterVal] forKey:@"seris"];
                
-//                    NSLog(@"步数 = %ld 时间 %ld 卡路里 %ld 距离 %ld",(long)step,(long)time,(long)calorie,(long)distance);
+                NSLog(@"步数 = %ld 时间 %ld 卡路里 %ld 距离 %ld",(long)step,(long)time,(long)calorie,(long)distance);
                 
                     
                 stepCount = step + stepCount;
@@ -442,9 +411,6 @@
     [dicSportDataBig setValue:stepFragments forKey:@"stepFragments"];
     [dicSportDataBig setValue:[NSNumber numberWithInteger:count] forKey:@"count"];
     
-//    [NLSQLData insterSportData:[NSArray arrayWithObjects:dicSportDataBig, nil] isUpdata:0];
-    
-    
     NSLog(@"%@",dicSportDataBig);
     
     
@@ -452,26 +418,6 @@
     
     
 }
-
-
-//caloriesAmount = 135;
-//count = 3;
-//distanceAmount = 36;
-//sportDate = "2015-06-08";
-//stepFragments =             (
-//                             {
-//                                 activeTime = 13;
-//                                 calories = 45;
-//                                 distance = 12;
-//                                 id = "79eb4d3b-3ba0-47ef-9640-0663d36b41f1";
-//                                 seris = "2015-06-08-2";
-//                                 steps = 234;
-//                             },
-//                             
-//stepsAmount = 702;
-
-
-
 +(Byte *)stringConversionByte:(NSString *)hexString{
 
     NSInteger j=0;
