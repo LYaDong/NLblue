@@ -136,13 +136,11 @@ static const NSInteger TIMELINE = 90;
     [NLSQLData insterCanlenderData];
 
     
-    
-    if ([[kAPPDELEGATE._loacluserinfo getBlueToothUUID] length]<=0) {
-       [self connectBlueTooth]; 
-    }
-    
-    
-    
+    //判断要不要进入搜索页
+//    if ([[kAPPDELEGATE._loacluserinfo getBlueToothUUID] length]<=0) {
+//       [self connectBlueTooth]; 
+//    }
+
     
 //    =================================================================================================================================
     
@@ -172,6 +170,8 @@ static const NSInteger TIMELINE = 90;
 //        }
 //        
 //    };
+    
+    
     
     
   
@@ -401,6 +401,9 @@ static const NSInteger TIMELINE = 90;
      */
 //    NSString *starDate = [ApplicationStyle datePickerTransformationCorss:date];
 //    NSString *endDate = [ApplicationStyle datePickerTransformationCorss:[NSDate date]];
+    
+    
+    NSLog(@"%@  %@",[kAPPDELEGATE._loacluserinfo GetAccessToken],[kAPPDELEGATE._loacluserinfo GetUser_ID]);
     
     
     //测试
@@ -656,7 +659,7 @@ static const NSInteger TIMELINE = 90;
 -(void)logInSuccess:(NSNotification *)notifi{
     NSDictionary *dic = notifi.object;
 
-    
+    NSLog(@"%@",notifi.object);
 
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [NLSQLData establishSportDataTable];

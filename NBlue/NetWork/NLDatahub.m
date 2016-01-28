@@ -201,13 +201,18 @@ static NSString *NLSportApi = @"/sport";//各个接口端
     _manager = [AFHTTPSessionManager manager];
     _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
     _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Login] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    
+    
+    [_manager GET:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLSportApi,Sport_record] parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            
+            NSLog(@"%@",[self dataTransformationJson:responseObject]);
+            
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:NLGetSoortRecordDataSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
         });
-
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NLGetSoortRecordDataFicaledNotification object:error userInfo:nil];

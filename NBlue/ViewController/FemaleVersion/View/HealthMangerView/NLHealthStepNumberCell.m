@@ -45,18 +45,7 @@
         NSInteger index = [[NSString stringWithFormat:@"%@",arrs[i]] integerValue];
         [dataArray addObject:[NSNumber numberWithInteger:index * ([ApplicationStyle control_height:480] * 0.8)/num]];
     }
-#warning 测试
-//    for (NSInteger i=0; i<24; i++) {
-////        NSInteger index = [[NSString stringWithFormat:@"%@",arrs[i]] integerValue];
-//        NSInteger index = arc4random()%500;
-//        [dataArray addObject:[NSNumber numberWithInteger:index * ([ApplicationStyle control_height:480] * 0.8)/1000]];
-//    }
-    
-    
 
-    
-    
-    
     
     CGFloat x = [ApplicationStyle control_weight:24], h = [ApplicationStyle control_height:60];
     

@@ -50,17 +50,24 @@
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSMutableArray *array = [NSMutableArray array];
+//        unsigned units  = NSMonthCalendarUnit|NSDayCalendarUnit|NSYearCalendarUnit|NSHourCalendarUnit|NSSecondCalendarUnit|NSMinuteCalendarUnit;
+//        NSCalendar *myCal = [NSCalendar currentCalendar];
+//        NSDateComponents *comp1 = [myCal components:units fromDate:[NSDate date]];
+//        comp1.year = 2016;
+//        comp1.month = 1;
+//        comp1.day = 7;
+//        comp1.hour = 0;
+//        comp1.minute = 0;
+//        comp1.second = 0;
+//        NSDate *dayDime = [myCal dateFromComponents:comp1];
+        
         NSDate *dayDime = [NSDate date];
         
         
         NSLog(@"%@",[ApplicationStyle datePickerTransformationCorss:dayDime]);
         
         array = [NLSQLData sportDataObtainTimeStr:[ApplicationStyle datePickerTransformationCorss:dayDime]];
-        
-        
-        NSLog(@"%@",array);
-        
-//        array = [NLSQLData sportDataObtainTimeStr:@"2015-12-8"];
+
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [_sportData addObjectsFromArray:array];
@@ -91,20 +98,42 @@
     }
     
     NSMutableArray *stepFragments = [NSMutableArray array];
+    
+    
     NSInteger count = 0;
     if (_sportData.count != 0) {
         [stepFragments addObjectsFromArray: [_sportData[0] objectForKey:@"stepFragments"]];
-        for (int i=0; i<stepFragments.count; i++) {
-            count = count + [[stepFragments[i] objectForKey:@"steps"] integerValue];
+        
+        NSMutableArray *serisArray = [NSMutableArray array];
+        NSMutableArray *dataSerisArray = [NSMutableArray array];
+        for (NSInteger i=0; i<stepFragments.count; i++) {
+            NSString * seris = [stepFragments[i] objectForKey:@"seris"];
+            NSArray *arrseris = [ApplicationStyle interceptText:seris interceptCharacter:@"-"];
+            [serisArray addObject:arrseris[3]];
+        }
+        
+        
+        
+        for (NSInteger i=0; i<96; i++) {
+            for (NSInteger j=0; j<serisArray.count; j++) {
+                if (i == [serisArray[j] integerValue]) {
+                    NSString *step = [stepFragments[j] objectForKey:@"steps"];
+                    [dataSerisArray addObject:step];
+                }else{
+                    [dataSerisArray addObject:@"0"];
+                }
+            }
+        }
+     
+        
+        for (int i=0; i<dataSerisArray.count; i++) {
+            count = count + [dataSerisArray[i] integerValue];
             if (i%4 ==0) {
                 [sportData addObject:[NSNumber numberWithInteger:count]];
                 count = 0;
             }
         }
     }
-    
-    NSLog(@"%@",sportData);
-    
     
     [cell histogram:sportData
           sportData:_sportData 
