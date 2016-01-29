@@ -56,9 +56,12 @@ static const NSInteger BTNPHOTO = 4000;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self delNotification];
+    [self addNotification];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self delNotification];
 }
 #pragma mark 基础数据
 -(void)buildData{
@@ -85,8 +88,6 @@ static const NSInteger BTNPHOTO = 4000;
         NSLog(@"%@",dic);
         
         _userCountDataDic = [NSMutableDictionary dictionaryWithCapacity:0];
-        NSLog(@"%@",_userCountDataDic);
-        
         if ([[PlistData getIndividuaData] count]!=0) {
             _userCountDataDic = [PlistData getIndividuaData];
         }
@@ -210,8 +211,10 @@ static const NSInteger BTNPHOTO = 4000;
             _cell.imageArrow.frame = CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:24] - [ApplicationStyle control_weight:16], ([ApplicationStyle control_height:170] - [ApplicationStyle control_height:24])/2, [ApplicationStyle control_weight:16], [ApplicationStyle control_height:24]);
             _userHeadImage = [[UIImageView alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:54] - [ApplicationStyle control_weight:120], ([ApplicationStyle control_height:170] - [ApplicationStyle control_height:120])/2, [ApplicationStyle control_weight:120], [ApplicationStyle control_height:120])];
             
-            
-            
+            _userHeadImage.layer.cornerRadius = [ApplicationStyle control_weight:120]/2;
+            _userHeadImage.layer.borderWidth = [ApplicationStyle control_weight:3];
+            _userHeadImage.layer.borderColor = [UIColor whiteColor].CGColor;
+            _userHeadImage.clipsToBounds = YES;
             [_cell addSubview:_userHeadImage];
             _cell.cellimageUrl.hidden = YES;
 
@@ -220,7 +223,7 @@ static const NSInteger BTNPHOTO = 4000;
         
         
         if (indexPath.row==0) {
-            [_cell.imageArrow sd_setImageWithURL:[NSURL URLWithString:[_userCountDataDic objectForKey:@"imageUrl"]] placeholderImage:nil];
+            [_userHeadImage sd_setImageWithURL:[NSURL URLWithString:[_userCountDataDic objectForKey:@"imageUrl"]] placeholderImage:nil];
         }else{
             _cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"userName"];
         }
@@ -333,10 +336,6 @@ static const NSInteger BTNPHOTO = 4000;
 {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     [_picker dismissViewControllerAnimated:YES completion:nil];
-    
-    
-    NSLog(@"%@",info);
-    
     
     [[NLDatahub sharedInstance] uploadUserImage:[info objectForKey:UIImagePickerControllerOriginalImage]
                                       imageType:[info objectForKey:UIImagePickerControllerReferenceURL]];
@@ -513,11 +512,34 @@ static const NSInteger BTNPHOTO = 4000;
         _pickerView.frame = CGRectMake(0, SCREENHEIGHT + [ApplicationStyle control_height:560], SCREENWIDTH, [ApplicationStyle control_height:560]);
     }];
 }
+
+
+
 -(void)returnBtnDown{
     
     [PlistData individuaData:_userCountDataDic];
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+#pragma mark Notification
+-(void)addNotification{
+    NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
+    [notifi addObserver:self selector:@selector(logInSuccess:) name:NLUserUploadUserImageSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(logInFicaled:) name:NLUserUploadUserImageFicaledNotification object:nil];
+}
+-(void)logInSuccess:(NSNotification *)notifi{
+    
+    NSLog(@"%@",notifi.object);
+    
+    [_userCountDataDic setValue:notifi.object forKey:@"imageUrl"];
+}
+-(void)logInFicaled:(NSNotification *)notifi{
+    
+}
+-(void)delNotification{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

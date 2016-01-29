@@ -77,5 +77,17 @@
  * @param 获取日历数据
  */
 +(NSMutableDictionary *)canlenderDayData:(NSString *)dayTime;
+/**
+ * 创建睡眠表
+ */
++ (void)sleepDataTable;
+/**
+ * 添加睡眠数据
+ */
++ (void)insterSleepData:(NSArray *)dataArr isUpdata:(NSInteger)updata;
+/**
+ * 获取睡眠数据
+ */
++ (NSMutableArray *)sleepDataObtain;
 
 @end

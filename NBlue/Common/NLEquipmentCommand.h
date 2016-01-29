@@ -15,6 +15,7 @@
 #define EquiomentCommand_0201 @"0201"
 #define EquiomentCommand_0901 @"0901"
 #define EquiomentCommand_0803 @"0803"
+#define EquiomentCommand_0804 @"0804"
 #define EquiomentCommand_9001 @"9001"
 #define EquiomentCommand_9002 @"9002"
 

@@ -34,4 +34,8 @@
  *运动数据的返回
  */
 +(void)blueSportOrdinArrayData:(NSArray *)arr;
+/**
+ *睡眠数据解析判断返回
+ */
++(void)bluesleepOrdinArrayData:(NSArray *)arr;
 @end

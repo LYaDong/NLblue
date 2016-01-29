@@ -16,6 +16,7 @@
 #import "NLShareController.h"
 #import "NLMyMaleViewController.h"
 #import "NLGiffiredSignViewController.h"
+#import "UIImageView+WebCache.h"
 @interface NLProfileViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIButton *userHeadImage;
 @property(nonatomic,strong)UILabel *userNameLab;
@@ -47,6 +48,10 @@
 #pragma mark 基础UI
 -(void)bulidUI{
     
+    
+    NSDictionary *dicImage = [PlistData getIndividuaData];
+
+
     _userHeadImage = [UIButton buttonWithType:UIButtonTypeCustom];
     _userHeadImage.backgroundColor = [UIColor redColor];
     _userHeadImage.frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:128])/2, [ApplicationStyle control_height:10] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], [ApplicationStyle control_weight:128], [ApplicationStyle control_weight:128]);
@@ -57,13 +62,22 @@
     [_userHeadImage addTarget:self action:@selector(userHeadImageDown) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_userHeadImage];
     
-    NSDictionary *dic = [PlistData getIndividuaData];
+    UIImageView *userHead = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:128])/2, [ApplicationStyle control_height:10] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], [ApplicationStyle control_weight:128], [ApplicationStyle control_weight:128])];
+    [userHead sd_setImageWithURL:[NSURL URLWithString:[dicImage objectForKey:@"imageUrl"]] placeholderImage:nil];
+    userHead.layer.cornerRadius = [ApplicationStyle control_weight:128]/2;
+    userHead.layer.borderWidth = [ApplicationStyle control_weight:3];
+    userHead.layer.borderColor = [UIColor whiteColor].CGColor;
+    userHead.clipsToBounds = YES;
+    [self.view addSubview:userHead];
     
-    CGSize ss = [ApplicationStyle textSize:[dic objectForKey:@"userName"] font:[ApplicationStyle textThrityFont] size:SCREENWIDTH];
+    
+    
+    
+    CGSize ss = [ApplicationStyle textSize:[dicImage objectForKey:@"userName"] font:[ApplicationStyle textThrityFont] size:SCREENWIDTH];
     
     _userNameLab = [[UILabel alloc] initWithFrame:CGRectMake((SCREENWIDTH - ss.width)/2, _userHeadImage.bottomOffset + [ApplicationStyle control_height:26], ss.width, [ApplicationStyle control_height:34])];
     _userNameLab.font = [ApplicationStyle textThrityFont];
-    _userNameLab.text = [dic objectForKey:@"userName"];
+    _userNameLab.text = [dicImage objectForKey:@"userName"];
 
     _userNameLab.textAlignment = NSTextAlignmentCenter;
     _userNameLab.textColor = [UIColor whiteColor];

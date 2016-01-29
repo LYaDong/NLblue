@@ -27,4 +27,8 @@
 #define NLUserConsumerDataFicaledNotification @"NLUserConsumerDataFicaledNotification"
 #define NLUserForgetPassWordSuccessNotification @"NLUserForgetPassWordSuccessNotification"
 #define NLUserForgetPassWordFicaledNotification @"NLUserForgetPassWordFicaledNotification"
+#define NLUserUploadUserImageSuccessNotification @"NLUserUploadUserImageSuccessNotification"
+#define NLUserUploadUserImageFicaledNotification @"NLUserUploadUserImageFicaledNotification"
+#define NLUsergetUserInformationSuccessNotification @"NLUsergetUserInformationSuccessNotification"
+#define NLUsergetUserInformationFicaledNotification @"NLUsergetUserInformationFicaledNotification"
 #endif /* NLNotification_h */

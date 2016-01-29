@@ -10,6 +10,7 @@
 #import "NLRingLine.h"
 #import "NlRing.h"
 #import "NLStepImageLabView.h"
+#import "NLSQLData.h"
 @interface NLHealthSleepView()
 @property(nonatomic,strong)UILabel *timeSleep;
 @property(nonatomic,strong)UILabel *depthLab;
@@ -47,6 +48,9 @@
 
     
     
+    NSMutableArray *sleepData = [NLSQLData sleepDataObtain];
+    
+    NSLog(@"%@",sleepData);
     
     
     
@@ -60,14 +64,19 @@
     _timeSleep.font = [UIFont  fontWithName:@"Helvetica-Bold" size:[ApplicationStyle control_weight:40]];
     _timeSleep.textColor = [self titleColor];
     _timeSleep.textAlignment = NSTextAlignmentCenter;
-    _timeSleep.text = @"6小时30分钟";
+    
+    NSString *total_time = [sleepData[0] objectForKey:@"total_time"];
+    NSArray *timeSleep = [ApplicationStyle interceptText:[NSString stringWithFormat:@"%0.01f",[total_time integerValue]/60.0f] interceptCharacter:@"."];
+    _timeSleep.text = [NSString stringWithFormat:@"%@小时%@分钟",timeSleep[0],timeSleep[1]];
     [self addSubview:_timeSleep];
     
     _depthLab = [[UILabel alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:300])/2, _timeSleep.bottomOffset + [ApplicationStyle control_height:34], [ApplicationStyle control_weight:300 ], [ApplicationStyle control_height:30])];
     _depthLab.font = [UIFont  fontWithName:@"Helvetica-Bold" size:[ApplicationStyle control_weight:26]];
     _depthLab.textColor = [self titleColor];
     _depthLab.textAlignment = NSTextAlignmentCenter;
-    _depthLab.text = @"深度睡眠 3小时30分钟";
+    NSString *deepSleep_mins = [sleepData[0] objectForKey:@"deepSleep_mins"];
+    NSArray *depthLab = [ApplicationStyle interceptText:[NSString stringWithFormat:@"%0.01f",[deepSleep_mins integerValue]/60.0f] interceptCharacter:@"."];
+    _depthLab.text = [ NSString stringWithFormat:@"深度睡眠%@小时%@分钟",depthLab[0],depthLab[1]];
     [self addSubview:_depthLab];
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:40], [ApplicationStyle control_height:600], SCREENWIDTH - [ApplicationStyle control_weight:40 * 2], [ApplicationStyle control_height:1])];
@@ -75,7 +84,27 @@
     [self addSubview:line];
     
     
-    NSArray *timeArr = @[@"23:30",@"06:45",@"良"];
+    
+    NSString *wakeUp = [sleepData[0] objectForKey:@"endSleep_Time"];
+    NSArray *wakeUpArr = [ApplicationStyle interceptText:wakeUp interceptCharacter:@":"];
+    
+    NSInteger hourTime = [total_time integerValue]/60;
+    NSInteger miueTime = [total_time integerValue]%60;
+    
+    if ([wakeUpArr[1] integerValue] - miueTime<0) {
+        miueTime = [wakeUpArr[1] integerValue] - miueTime + 60;
+        hourTime = hourTime + 1;
+    }else{
+        miueTime = [wakeUpArr[1] integerValue] - miueTime;
+    }
+    
+    
+    if ([wakeUpArr[0] integerValue] - hourTime<0) {
+        hourTime = [wakeUpArr[0] integerValue] - hourTime  + 24;
+    }else{
+        hourTime = [wakeUpArr[0] integerValue] - hourTime;
+    }
+    NSArray *timeArr = @[[NSString stringWithFormat:@"%ld:%ld",(long)hourTime,(long)miueTime],[sleepData[0] objectForKey:@"endSleep_Time"],@"良"];
     NSArray *sleepLabArr = @[NSLocalizedString(@"NLHealthSleepView_GOSleepTime", nil),
                              NSLocalizedString(@"NLHealthSleepView_WakeUPSleepTime", nil),
                              NSLocalizedString(@"NLHealthSleepView_SleepQuality", nil)];

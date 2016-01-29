@@ -7,7 +7,7 @@
 //
 static const NSInteger TEXTFILED_TAG = 1000;
 #import "NLRegisteredViewController.h"
-
+#import "NLGenderSelectionViewController.h"
 @interface NLRegisteredViewController ()
 @property(nonatomic,strong)UIButton *verificationBtn;
 @property(nonatomic,strong)UIButton *completeBtn;
@@ -191,10 +191,10 @@ static const NSInteger TEXTFILED_TAG = 1000;
     NSDictionary *dic = notifi.object;
     [kAPPDELEGATE._loacluserinfo SetUser_ID:[dic objectForKey:@"consumerId"]];
     [kAPPDELEGATE._loacluserinfo SetUserAccessToken:[dic objectForKey:@"authToken"]];
-    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
-    [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
 
-    
+    NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)logInFicaled:(NSNotification *)notifi{
     NSLog(@"%@",notifi);

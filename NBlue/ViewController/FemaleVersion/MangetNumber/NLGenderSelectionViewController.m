@@ -100,13 +100,16 @@ static const NSUInteger NEXTTAG = 2000;
     
     UIButton *nextBtn = (UIButton *)[self.view viewWithTag:NEXTTAG];
     if (btn.tag == GENDERTAG) {
-        [kAPPDELEGATE._loacluserinfo userGender:@"1"];
-        [body setImage:[UIImage imageNamed:@"NL_Gender_Cen_Male_X"] forState:UIControlStateNormal];
-        [female setImage:[UIImage imageNamed:@"NL_Gender_Cen_Female"] forState:UIControlStateNormal];
-        nextBtn.backgroundColor = [@"70b2e2" hexStringToColor];
-        self.view.backgroundColor = [@"b7ebff" hexStringToColor];
-
-        _nextInt = 1;
+        
+        [kAPPDELEGATE AutoDisplayAlertView:@"温馨提示" :@"男版暂未开放，请选择女版"];
+        return;
+        
+//        [kAPPDELEGATE._loacluserinfo userGender:@"1"];
+//        [body setImage:[UIImage imageNamed:@"NL_Gender_Cen_Male_X"] forState:UIControlStateNormal];
+//        [female setImage:[UIImage imageNamed:@"NL_Gender_Cen_Female"] forState:UIControlStateNormal];
+//        nextBtn.backgroundColor = [@"70b2e2" hexStringToColor];
+//        self.view.backgroundColor = [@"b7ebff" hexStringToColor];
+//        _nextInt = 1;
     }else{
         [kAPPDELEGATE._loacluserinfo userGender:@"0"];
         [body setImage:[UIImage imageNamed:@"NL_Gender_Cen_Male"] forState:UIControlStateNormal];
@@ -114,9 +117,10 @@ static const NSUInteger NEXTTAG = 2000;
         nextBtn.backgroundColor = [@"ff5b89" hexStringToColor];
         self.view.backgroundColor = [@"ffe3e3" hexStringToColor];
         _nextInt = 1;
+        [nextBtn addTarget:self action:@selector(nextBtnDown) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    [nextBtn addTarget:self action:@selector(nextBtnDown) forControlEvents:UIControlEventTouchUpInside];
+//    [nextBtn addTarget:self action:@selector(nextBtnDown) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)nextBtnDown{

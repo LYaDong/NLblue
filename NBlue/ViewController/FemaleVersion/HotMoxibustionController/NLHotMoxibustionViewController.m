@@ -1,4 +1,4 @@
-//
+         //
 //  HotMoxibustionViewController.m
 //  NBlue
 //
@@ -24,6 +24,7 @@ static const NSInteger TIMELINE = 90;
 @property(nonatomic,strong)NLHalfView *temperatureCilcle;
 @property(nonatomic,strong)NSArray *peripheralArray;
 @property(nonatomic,strong)NSMutableArray *sportDataArr;
+@property(nonatomic,strong)NSMutableArray *sleepDataArr;
 @property(nonatomic,strong)UILabel *temperatureLab;
 @property(nonatomic,strong)UIScrollView *staffScrollew;
 @property(nonatomic,assign)CGFloat lenthWidth;
@@ -137,9 +138,9 @@ static const NSInteger TIMELINE = 90;
 
     
     //判断要不要进入搜索页
-//    if ([[kAPPDELEGATE._loacluserinfo getBlueToothUUID] length]<=0) {
-//       [self connectBlueTooth]; 
-//    }
+    if ([[kAPPDELEGATE._loacluserinfo getBlueToothUUID] length]<=0) {
+       [self connectBlueTooth]; 
+    }
 
     
 //    =================================================================================================================================
@@ -148,6 +149,7 @@ static const NSInteger TIMELINE = 90;
     _temperatureNUM  = 370;         //默认温度 35°
     _blueTime = 30;                 //默认时间 30分钟
     _sportDataArr = [NSMutableArray array];
+    _sleepDataArr = [NSMutableArray array];
     NSLog(@"%@",NSHomeDirectory());
     [self bulidUI];
     
@@ -259,6 +261,11 @@ static const NSInteger TIMELINE = 90;
     
     
 //    [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
+//    [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];//测试睡眠假数据
+    
+    
+    
+    
     
     
     NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
@@ -276,6 +283,8 @@ static const NSInteger TIMELINE = 90;
         [self sportData:blueData];
 //        //判断温度
         [self isTemperatureOff:blueData];
+        
+        [self sleepDatas:blueData];
     };
     blues.perheral = ^(NSArray *perpheral){
         _peripheralArray = perpheral;//获得当前的外围设备
@@ -295,7 +304,8 @@ static const NSInteger TIMELINE = 90;
                     [self setTimeEquipment];//设置设备时间
                 }
                 [self judgmentTemperatureQuery];//查询温度
-                [self sportDataQuery];
+                [self sportDataQuery];//获得运动数据
+                [self sleepDataQuery];
                 _isQuert = !_isQuert;
             }
         }
@@ -379,14 +389,11 @@ static const NSInteger TIMELINE = 90;
             labTime.text = [NSString stringWithFormat:@"%ld分钟",(long)i];
         }
     }
-    
-    
     _moxibustionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _moxibustionBtn.frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:80])/2, _staffScrollew.bottomOffset + [ApplicationStyle control_height:86], [ApplicationStyle control_weight:80], [ApplicationStyle control_height:80]);
     [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_G"] forState:UIControlStateNormal];
     [_moxibustionBtn addTarget:self action:@selector(moxibustionBtnDown) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_moxibustionBtn];
-    
 }
 
 
@@ -395,28 +402,28 @@ static const NSInteger TIMELINE = 90;
 
 -(void)loadStepData{
     
-//    NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:0];
+    NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:0];
     /*
      下面是真数据
      */
-//    NSString *starDate = [ApplicationStyle datePickerTransformationCorss:date];
-//    NSString *endDate = [ApplicationStyle datePickerTransformationCorss:[NSDate date]];
+    NSString *starDate = [ApplicationStyle datePickerTransformationCorss:date];
+    NSString *endDate = [ApplicationStyle datePickerTransformationCorss:[NSDate date]];
     
     
     NSLog(@"%@  %@",[kAPPDELEGATE._loacluserinfo GetAccessToken],[kAPPDELEGATE._loacluserinfo GetUser_ID]);
     
     
     //测试
-    [[NLDatahub sharedInstance] userStepNumberToken:[kAPPDELEGATE._loacluserinfo GetAccessToken]
-                                         consumerId:[kAPPDELEGATE._loacluserinfo GetUser_ID]
-                                          startDate:@"2015-6-01"
-                                            endDate:@"2016-10-30"];
-    
-    //此为真实
 //    [[NLDatahub sharedInstance] userStepNumberToken:[kAPPDELEGATE._loacluserinfo GetAccessToken]
 //                                         consumerId:[kAPPDELEGATE._loacluserinfo GetUser_ID]
-//                                          startDate:starDate
-//                                            endDate:endDate];
+//                                          startDate:@"2015-6-01"
+//                                            endDate:@"2016-10-30"];
+    
+    //此为真实
+    [[NLDatahub sharedInstance] userStepNumberToken:[kAPPDELEGATE._loacluserinfo GetAccessToken]
+                                         consumerId:[kAPPDELEGATE._loacluserinfo GetUser_ID]
+                                          startDate:starDate
+                                            endDate:endDate];
 }
 #pragma mark 系统Delegate
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -442,18 +449,21 @@ static const NSInteger TIMELINE = 90;
     }
 }
 #pragma mark 自己的Delegate
+//滑动设置显示文字
 -(void)indexNum:(NSInteger)index{
-    _temperatureLab.text = [NSString stringWithFormat:@"%ld°C",(long)35 + index/10];
+    
+    
+    NSLog(@"%ld",(long)index);
+    
+    _temperatureLab.text = [NSString stringWithFormat:@"%ld°C",(long)35 + index/5];
 }
-
+//滑动结束后设置温度
 -(void)gestureRecognizerStateEnded:(NSInteger)index{
     
-    NSInteger ture = 35 + index/10;
-    _temperatureNUM = ture * 10;
+    NSInteger ture = 35 + index/5;
     
+    _temperatureNUM = ture * 10;
     if (_isOff) {
-       
-        NSLog(@"%ld",(long)_temperatureNUM);
         [self controlTemperaturet];
     }
 }
@@ -485,16 +495,27 @@ static const NSInteger TIMELINE = 90;
                 _temperatureLab.text = [NSString stringWithFormat:@"%ld°C",(long)_temperatureNUM/10];
 
                 NSInteger num = _temperatureNUM/10;
-                if (num>=39&& num<40) {
-                    _temperatureCilcle.indexTemp = 50;
+                
+                if (num>=44&&num<45) {
+                    _temperatureCilcle.indexTemp = 47;
+                }else if (num>=43&& num<44){
+                    _temperatureCilcle.indexTemp = 43;
+                }else if (num>=42&& num<43){
+                    _temperatureCilcle.indexTemp = 38;
+                }else if (num>=41&& num<42){
+                    _temperatureCilcle.indexTemp = 35;
+                }else if (num>=40&& num<41){
+                    _temperatureCilcle.indexTemp = 27;
+                }else if (num>=39&& num<40) {
+                    _temperatureCilcle.indexTemp = 24;
                 }else if (num>=38 && num<39){
-                    _temperatureCilcle.indexTemp = 40;
+                    _temperatureCilcle.indexTemp = 18;
                 }else if (num>=37 && num<38){
-                    _temperatureCilcle.indexTemp = 30;
+                    _temperatureCilcle.indexTemp = 14;
                 }else if (num>=36 && num<37){
-                    _temperatureCilcle.indexTemp = 20;
+                    _temperatureCilcle.indexTemp = 9;
                 }else if (num>=35 && num<36){
-                    _temperatureCilcle.indexTemp = 10;
+                    _temperatureCilcle.indexTemp = 4;
                 }else{
                     _temperatureCilcle.indexTemp = 0;
                 }
@@ -521,7 +542,6 @@ static const NSInteger TIMELINE = 90;
             NSLog(@"发送命令==  %@",data);
         }
     }
-    
     {
         Byte byte[20] = {0x08,0x03,0x01};
         NSData *data = [NSData dataWithBytes:byte length:20];
@@ -531,6 +551,26 @@ static const NSInteger TIMELINE = 90;
             NSLog(@"发送命令==  %@",data);
         }
     }
+}
+-(void)sleepDataQuery{
+    
+    {
+        Byte byte[20] = {0x08,0x01,0x01,0x01};
+        NSData *data = [NSData dataWithBytes:byte length:20];
+        if (_peripheralArray.count>0) {
+            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+        }
+    }
+    
+    {
+        Byte byte[20] = {0x08,0x04,0x01};
+        NSData *data = [NSData dataWithBytes:byte length:20];
+        if (_peripheralArray.count>0) {
+            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+        }
+    }
+    
+    
 }
 
 //设置温度
@@ -564,6 +604,22 @@ static const NSInteger TIMELINE = 90;
         if (_sportDataArr.count==34) {
             [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];
         }
+    }
+}
+
+-(void)sleepDatas:(NSString *)sleepDatas{
+    if (sleepDatas.length<=4) {
+        return;
+    }
+    NSString *format = [sleepDatas substringWithRange:NSMakeRange(0, 4)];
+    if ([format isEqualToString:EquiomentCommand_0804]) {
+        [_sleepDataArr addObject:sleepDatas];
+        
+        if (_sleepDataArr.count>=4) {
+            [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];
+        }
+        
+
     }
 }
 
@@ -658,12 +714,8 @@ static const NSInteger TIMELINE = 90;
 }
 -(void)logInSuccess:(NSNotification *)notifi{
     NSDictionary *dic = notifi.object;
-
-    NSLog(@"%@",notifi.object);
-
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [NLSQLData establishSportDataTable];
-//        [NLSQLData insterSportData:[dic objectForKey:@"records"] isUpdata:0];
         [NLSQLData upDataSport:[dic objectForKey:@"records"] isUpdata:0];
         
         dispatch_async(dispatch_get_main_queue(), ^{

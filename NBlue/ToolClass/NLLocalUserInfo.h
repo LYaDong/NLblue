@@ -89,4 +89,12 @@
  * 获得设置时间
  */
 -(NSString *)getBlueToothTime;
+/**
+ * 存用户登录APP时间
+ */
+-(void)userLogInTime:(NSString *)time;
+/**
+ * 获得用户登录时间
+ */
+-(NSString *)getUserLogInTime;
 @end

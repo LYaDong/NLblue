@@ -472,9 +472,9 @@ __goto:
             }
             
             if (dayInt-i>= 10) {
-                days = [NSString stringWithFormat:@"%ld",dayInt-i];
+                days = [NSString stringWithFormat:@"%ld",(long)dayInt-i];
             }else{
-                days = [NSString stringWithFormat:@"0%ld",dayInt-i];
+                days = [NSString stringWithFormat:@"0%ld",(long)dayInt-i];
             }
             
             
@@ -519,7 +519,7 @@ __goto:
             
             establishTime = [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days];
             
-            if ([establishTime isEqualToString:@"2015-08-01"]) {
+            if ([establishTime isEqualToString:[kAPPDELEGATE._loacluserinfo getUserLogInTime]]) {
                 [db close];
                 return;
             }
@@ -593,9 +593,58 @@ __goto:
     
 }
 
-//+(NSMutableArray *)queryIsFiledData:(NSString *)time{
-//
-//}
 
++ (void)sleepDataTable{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *createTable = @"CREATE TABLE IF NOT EXISTS SleepData(sleepDate TEXT PRIMARY KEY,endSleep_Time TEXT NOT NULL,total_time TEXT NOT NULL,lightSleep_count TEXT NOT NULL,deepSleep_count TEXT NOT NULL,awake_count TEXT NOT NULL,lightSleep_mins TEXT NOT NULL,deepSleep_mins TEXT NOT NULL,user_id TEXT NOT NULL)";
+    [db executeUpdate:createTable];
+    [db close];
+}
+
++ (void)insterSleepData:(NSArray *)dataArr isUpdata:(NSInteger)updata{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    
+    NSDictionary *dic = nil;
+    for (dic in dataArr) {
+        NSString *inster = @"INSERT OR REPLACE INTO SleepData(sleepDate,endSleep_Time,total_time,lightSleep_count,deepSleep_count,awake_count,lightSleep_mins,deepSleep_mins,user_id) VALUES (?,?,?,?,?,?,?,?,?)";
+        NSArray *gumentsArr = [NSArray arrayWithObjects:
+                               [dic objectForKey:@"sleepDate"],
+                               [dic objectForKey:@"endSleep_Time"],
+                               [dic objectForKey:@"total_time"],
+                               [dic objectForKey:@"lightSleep_count"],
+                               [dic objectForKey:@"deepSleep_count"],
+                               [dic objectForKey:@"awake_count"],
+                               [dic objectForKey:@"lightSleep_mins"],
+                               [dic objectForKey:@"deepSleep_mins"],
+                               [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
+        [db executeUpdate:inster withArgumentsInArray:gumentsArr];
+    }
+    [db close];
+}
+
++ (NSMutableArray *)sleepDataObtain{
+    NSMutableArray *array = [NSMutableArray array];
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *takeCreate = [NSString stringWithFormat:@"SELECT * FROM SleepData WHERE user_id = '%@'",[kAPPDELEGATE._loacluserinfo GetUser_ID]];
+    FMResultSet *rs = [db executeQuery:takeCreate];
+    while ([rs next]) {
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        [dic setValue:[rs stringForColumn:@"sleepDate"] forKey:@"sleepDate"];
+        [dic setValue:[rs stringForColumn:@"endSleep_Time"] forKey:@"endSleep_Time"];
+        [dic setValue:[rs stringForColumn:@"total_time"] forKey:@"total_time"];
+        [dic setValue:[rs stringForColumn:@"lightSleep_count"] forKey:@"lightSleep_count"];
+        [dic setValue:[rs stringForColumn:@"deepSleep_count"] forKey:@"deepSleep_count"];
+        [dic setValue:[rs stringForColumn:@"awake_count"] forKey:@"awake_count"];
+        [dic setValue:[rs stringForColumn:@"lightSleep_mins"] forKey:@"lightSleep_mins"];
+        [dic setValue:[rs stringForColumn:@"deepSleep_mins"] forKey:@"deepSleep_mins"];
+        [dic setValue:[rs stringForColumn:@"user_id"] forKey:@"user_id"];
+        [array addObject:dic];
+    }
+    [db close];
+    return array;
+}
 
 @end

@@ -141,22 +141,7 @@ static NSString *NLSportApi = @"/sport";//各个接口端
             [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewFicaledNotification object:nil userInfo:nil];
         });
     }];
-    
-    
-    
-//    _manger = [[AFHTTPRequestOperationManager alloc] init];
-//    NSDictionary *parameters = @{@"phone":phone,@"code":verfication,@"password":password,@"platform":@"ios"};
-//    _manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication,nil];
-//    [_manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,user_ForgetPassWord] parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserForgetPassWordSuccessNotification object:responseObject userInfo:nil];
-//        });
-//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserForgetPassWordFicaledNotification object:nil userInfo:nil];
-//        });
-//    }];
-    
+
 }
 #pragma mark 登录
 -(void)userSignInPhone:(NSString *)phone password:(NSString *)password{
@@ -182,6 +167,28 @@ static NSString *NLSportApi = @"/sport";//各个接口端
             [[NSNotificationCenter defaultCenter] postNotificationName:NLLogInFailedNotiFicaledtion object:nil userInfo:nil];
         });
     }];
+}
+#pragma mark  获取用户信息
+-(void)getUserInformation{
+    [self  loadingView];
+    NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],@"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [_manager GET:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Consumer] parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (![responseObject isKindOfClass:[NSDictionary class]]) {
+            NSLog(@"expecting NSDictionary class");
+        }
+        NSLog(@"%@",[self dataTransformationJson:responseObject]);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLUsergetUserInformationSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLUsergetUserInformationFicaledNotification object:nil userInfo:nil];
+        });
+    }];
+    
 }
 #pragma mark 添加睡眠信息
 -(void)addSleepRecord:(NSNumber *)consumerId wareUUID:(NSNumber *)wareUUID sleepDate:(NSData *)sleepDate startTime:(NSString *)startTime duration:(NSString *)duratTime deepSleep:(NSString *)deepSleep shallowSleep:(NSString *)shallowSleep authToken:(NSNumber *)authToken{
@@ -229,30 +236,22 @@ static NSString *NLSportApi = @"/sport";//各个接口端
                                  height:(NSString *)height
                                  weight:(NSString *)weight
                                  header:(NSString *)header
-                               stepGoal:(NSString *)stepGoal{
+                               stepGoal:(NSString *)stepGoal
+                              authtoken:(NSString *)authtoken{
     
     NSDictionary *parmeter = @{@"consumerid":consumerid,
-                          @"name":name,
-                          @"nickname":nickname,
                           @"gender":gender,
                           @"age":age,
                           @"height":height,
                           @"weight":weight,
-                          @"header":header,
-                          @"stepGoal":stepGoal,};
-//    AFHTTPRequestOperationManager *manger = [[AFHTTPRequestOperationManager alloc] init];
-//    manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
-//    
-//    [manger PUT:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Consumer] parameters:parmeter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserConsumerDataSuccessNotification object:responseObject userInfo:nil];
-//        });
-//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserConsumerDataFicaledNotification object:error userInfo:nil];
-//        });
-//
-//    }];
+                          @"authToken":authtoken
+                          };
+    
+    [_manager PUT:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Consumer] parameters:parmeter success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
 }
 #pragma mark 扫二维码
 - (void)qrCodeNextWorkFrom_to_id:(NSString *)from_to_id{
@@ -298,9 +297,13 @@ static NSString *NLSportApi = @"/sport";//各个接口端
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSString *result = [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
-            NSLog(@"%@",result);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:NLUserUploadUserImageSuccessNotification object:result userInfo:nil];
+            });
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"%@",error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:NLUserUploadUserImageFicaledNotification object:error userInfo:nil];
+            });
         }];
     });
 }

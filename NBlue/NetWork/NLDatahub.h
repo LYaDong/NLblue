@@ -27,6 +27,10 @@
  */
 -(void)userSignInPhone:(NSString *)phone password:(NSString *)password;
 /**
+ * 获得用户信息
+ */
+-(void)getUserInformation;
+/**
  *获取用户运动数据
  */
 -(void)userStepNumberToken:(NSString *)authToken
@@ -44,7 +48,8 @@
                                  height:(NSString *)height
                                  weight:(NSString *)weight
                                  header:(NSString *)header
-                               stepGoal:(NSString *)stepGoal;
+                               stepGoal:(NSString *)stepGoal
+                              authtoken:(NSString *)authtoken;
 /**
  *二维码扫描
  */

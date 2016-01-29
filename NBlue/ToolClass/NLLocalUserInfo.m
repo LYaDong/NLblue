@@ -90,7 +90,7 @@
     NSString *period = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_Bluetooth_UUID"];
     return period;
 }
-
+//设置时间
 -(void)bluetoothSetTime:(NSString *)time{
     [[NSUserDefaults standardUserDefaults] setObject:time forKey:@"NL_User_Bluetooth_time"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -99,5 +99,12 @@
     NSString *period = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_Bluetooth_time"];
     return period;
 }
-
+-(void)userLogInTime:(NSString *)time{
+    [[NSUserDefaults standardUserDefaults] setObject:time forKey:@"NL_User_Loging_time"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)getUserLogInTime{
+    NSString *period = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_Loging_time"];
+    return period;
+}
 @end

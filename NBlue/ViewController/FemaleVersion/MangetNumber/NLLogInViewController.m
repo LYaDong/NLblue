@@ -192,70 +192,73 @@ static const NSInteger THIRDBTNTAG = 4000;
 
 -(void)thirdBtnDown:(UIButton *)btn{
     
-    switch (btn.tag - THIRDBTNTAG) {
-        case 0:
-        {
-            //  qq
-            UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
-            
-            snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-                
-                //          获取微博用户名、uid、token等
-                
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                    
-                    UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
-                    
-                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-                    
-                }});
-            
-            break;
-        }
-        case 1:
-        {
-            //    WeChat
-            UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
-            
-            snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-                
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                    
-                    UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
-                    
-                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-                    
-                }
-                
-            });
-            
-            break;
-        }
-        case 2:
-        {
-            
-            //微博
-            
-            UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
-            
-            snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-                
-                //          获取微博用户名、uid、token等
-                
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                    
-                    UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
-                    
-                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-                    
-                }
-            });
-            
-            break;
-        }
-        default:
-            break;
-    }
+    
+    [kAPPDELEGATE AutoDisplayAlertView:@"温馨提示" :@"暂未开放使用"];
+    
+//    switch (btn.tag - THIRDBTNTAG) {
+//        case 0:
+//        {
+//            //  qq
+//            UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
+//            
+//            snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+//                
+//                //          获取微博用户名、uid、token等
+//                
+//                if (response.responseCode == UMSResponseCodeSuccess) {
+//                    
+//                    UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
+//                    
+//                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+//                    
+//                }});
+//            
+//            break;
+//        }
+//        case 1:
+//        {
+//            //    WeChat
+//            UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
+//            
+//            snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+//                
+//                if (response.responseCode == UMSResponseCodeSuccess) {
+//                    
+//                    UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
+//                    
+//                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+//                    
+//                }
+//                
+//            });
+//            
+//            break;
+//        }
+//        case 2:
+//        {
+//            
+//            //微博
+//            
+//            UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
+//            
+//            snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+//                
+//                //          获取微博用户名、uid、token等
+//                
+//                if (response.responseCode == UMSResponseCodeSuccess) {
+//                    
+//                    UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
+//                    
+//                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+//                    
+//                }
+//            });
+//            
+//            break;
+//        }
+//        default:
+//            break;
+//    }
   
 }
 
@@ -265,29 +268,41 @@ static const NSInteger THIRDBTNTAG = 4000;
     NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
     [notifi addObserver:self selector:@selector(logInSuccess:) name:NLLogInSuccessNotification object:nil];
     [notifi addObserver:self selector:@selector(logInFicaled) name:NLLogInFailedNotiFicaledtion object:nil];
+    
+    NSNotificationCenter *notifixx= [NSNotificationCenter defaultCenter];
+    [notifixx addObserver:self selector:@selector(userInformationS:) name:NLUsergetUserInformationSuccessNotification object:nil];
+    [notifixx addObserver:self selector:@selector(userInformationF) name:NLUsergetUserInformationFicaledNotification object:nil];
+    
 }
 -(void)logInSuccess:(NSNotification *)notifi{
     NSDictionary *dic = notifi.object;
-    
-    NSLog(@"%@",dic);
-    
-    
     [kAPPDELEGATE._loacluserinfo SetUser_ID:[dic objectForKey:@"consumerId"]];
     [kAPPDELEGATE._loacluserinfo SetUserAccessToken:[dic objectForKey:@"authToken"]];
+    [kAPPDELEGATE._loacluserinfo userLogInTime:[dic objectForKey:@"created"]];
+    [kAPPDELEGATE._loacluserinfo goControllew:@"0"];
+    [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
+    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
     
-    if ([[kAPPDELEGATE._loacluserinfo GetIsLogin] isEqualToString:@"1"]) {
-        [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
-        [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
-        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
-    }else{
-        NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
-        [vc setHidesBottomBarWhenPushed:YES];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+//    [[NLDatahub sharedInstance] getUserInformation];
+    
 }
 -(void)logInFicaled{
     [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"账号或密码错误"];
 }
+-(void)userInformationS:(NSNotification *)notifi{
+    
+    NSDictionary *dic =notifi.object;
+    [kAPPDELEGATE._loacluserinfo userLogInTime:[dic objectForKey:@"created"]];
+    [kAPPDELEGATE._loacluserinfo goControllew:@"0"];
+    [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
+    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
+
+}
+
+-(void)userInformationF{
+    
+}
+
 -(void)delNotification{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

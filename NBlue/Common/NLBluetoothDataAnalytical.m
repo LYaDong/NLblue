@@ -117,11 +117,6 @@
 }
 
 
-
-
-
-
-
 +(void)bluetoothCommandReturnData:(NSString *)data{
     if (data.length<=4) {
         return;
@@ -415,9 +410,93 @@
     
     
     [NLSQLData upDataSport:[NSArray arrayWithObjects:dicSportDataBig, nil] isUpdata:0];
-    
-    
 }
+
++(void)bluesleepOrdinArrayData:(NSArray *)arr{
+    NSLog(@"%@",arr);
+    
+//    08040110df0708010623d8000904,
+//    080402100604015c005000000804,
+    arr = @[@"08040110df0708010623d8000904",
+            @"080402100604015c005000000804"];
+    
+    NSMutableArray *sleepDataArray = [NSMutableArray array];
+    NSMutableDictionary *sleepDataDic = [NSMutableDictionary dictionary];
+    
+    
+    //年月日
+    NSString *timesYear = [self reversedPositionStr:[arr[0] substringWithRange:NSMakeRange(8, 4)]];
+    NSArray *monthDay =[self FourHexConversion:[arr[0] substringWithRange:NSMakeRange(12, 4)]];
+    long years = (long)[self sixTenHexTeen:timesYear];
+    NSString * months = nil;
+    NSString * days = nil;
+    //判断大不大于10  大于10 则不补0  否则补0
+    if ([monthDay[0] integerValue]>=10) {
+        months = [NSString stringWithFormat:@"%@",monthDay[0]];
+    }else{
+        months = [NSString stringWithFormat:@"0%@",monthDay[0]];
+    }
+    
+    if ([monthDay[1] integerValue]>=10) {
+        days = [NSString stringWithFormat:@"%@",monthDay[1]];
+    }else{
+        days = [NSString stringWithFormat:@"0%@",monthDay[1]];
+    }
+    
+    
+    //结束睡眠时间
+    NSArray *endTimeArr = [self FourHexConversion:[arr[0] substringWithRange:NSMakeRange(16, 4)]];
+    NSString *hours = nil;
+    NSString *miute = nil;
+    if ([endTimeArr[0] integerValue]>=10) {
+        hours = [NSString stringWithFormat:@"%@",endTimeArr[0]];
+    }else{
+        hours = [NSString stringWithFormat:@"0%@",endTimeArr[0]];
+    }
+    
+    if ([endTimeArr[1] integerValue]>=10) {
+        miute = [NSString stringWithFormat:@"%@",endTimeArr[1]];
+    }else{
+        miute = [NSString stringWithFormat:@"0%@",endTimeArr[1]];
+    }
+    
+    long sleepTime = [self sixTenHexTeen:[self reversedPositionStr:[arr[0] substringWithRange:NSMakeRange(20, 4)]]];
+    
+    
+    
+    NSString *yearMonthDay = [NSString stringWithFormat:@"%ld-%@-%@",(long)years,months,days];
+    NSString *endTime = [NSString stringWithFormat:@"%@:%@",hours,miute];
+    
+//    NSLog(@"%@ %@睡醒 持续%f",yearMonthDay,endTime,sleepTime/60.0f);
+    
+    
+//    08040210 06 04 01 5c005000000804,
+    
+    NSArray *sleepCountArr = [self FourHexConversion:[arr[1] substringWithRange:NSMakeRange(8, 6)]];
+    long showllContinuedTime = [self sixTenHexTeen:[self reversedPositionStr:[arr[1] substringWithRange:NSMakeRange(14, 4)]]];
+    long deepContinuedTime = [self sixTenHexTeen:[self reversedPositionStr:[arr[1] substringWithRange:NSMakeRange(18, 4)]]];
+    
+    NSLog(@"%@ %@睡醒 持续%f",yearMonthDay,endTime,sleepTime/60.0f);
+    NSLog(@"浅睡眠%@次 深睡眠%@次  醒来%@次  浅睡眠时间：%0.01f 深睡眠时间%0.01f",sleepCountArr[0],sleepCountArr[1],sleepCountArr[2],showllContinuedTime/60.0f,deepContinuedTime/60.0f);
+    
+    [sleepDataDic setValue:yearMonthDay forKey:@"sleepDate"];
+    [sleepDataDic setValue:endTime forKey:@"endSleep_Time"];
+    [sleepDataDic setValue:[NSString stringWithFormat:@"%ld",(long)sleepTime] forKey:@"total_time"];
+    [sleepDataDic setValue:sleepCountArr[0] forKey:@"lightSleep_count"];
+    [sleepDataDic setValue:sleepCountArr[1] forKey:@"deepSleep_count"];
+    [sleepDataDic setValue:sleepCountArr[2] forKey:@"awake_count"];
+    [sleepDataDic setValue:[NSString stringWithFormat:@"%ld",(long)showllContinuedTime] forKey:@"lightSleep_mins"];
+    [sleepDataDic setValue:[NSString stringWithFormat:@"%ld",(long)showllContinuedTime] forKey:@"deepSleep_mins"];
+    
+    [sleepDataArray addObject:sleepDataDic];
+    
+    
+    [NLSQLData sleepDataTable];
+    [NLSQLData insterSleepData:sleepDataArray isUpdata:0];
+}
+
+
+
 +(Byte *)stringConversionByte:(NSString *)hexString{
 
     NSInteger j=0;
