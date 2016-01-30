@@ -60,6 +60,7 @@
     segement.backGroupColor = [ApplicationStyle subjectShowAllPinkColor];
     segement.titleColor = [UIColor  whiteColor];
     segement.titleFont = [ApplicationStyle textSuperSmallFont];
+    segement.lineHide = YES;
     
     LYDSegmentControl *sele = [[LYDSegmentControl alloc] initWithSetSegment:segement frame:frame];
     sele.delegate = self;

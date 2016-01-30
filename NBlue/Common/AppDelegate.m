@@ -41,9 +41,6 @@
     
     _loacluserinfo = [[NLLocalUserInfo alloc] init];
     
-    
-    
-    
     if (![[kAPPDELEGATE._loacluserinfo getControllew] isEqualToString:@"1"]) {
         [self tabBarViewControllerType:Controller_Loing];
     }else{

@@ -59,7 +59,7 @@
     
     [self bulidUI];
     [self initView];
-    [self loadStepData];
+//    [self loadStepData];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -128,7 +128,7 @@
         }
         case NLHealthManger_Sleep:
         {
-            self.rightBtn.hidden = NO;
+            self.rightBtn.hidden = YES;
             _mainScrollew.contentOffset = CGPointMake(NLHealthManger_Sleep * SCREENWIDTH, 0);
             break;
         }

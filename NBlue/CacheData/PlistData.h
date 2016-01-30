@@ -17,4 +17,12 @@
  *获取个人信息存储
  */
 +(NSMutableDictionary *)getIndividuaData;
+/**
+ * 当前设备存储
+ */
++(void)userBloothEquipment:(NSArray *)arr;
+/**
+ * 获取当期设备
+ */
++(NSMutableArray *)getUserBloothEquipment;
 @end

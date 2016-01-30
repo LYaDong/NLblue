@@ -107,4 +107,14 @@
     NSString *period = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_Loging_time"];
     return period;
 }
+
+-(void)userBlothEquipment:(NSData *)equopent{
+    [[NSUserDefaults standardUserDefaults] setObject:equopent forKey:@"NL_User_bloth_equment"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSData *)getUserBlothEquipment{
+//    NSString *period = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_bloth_equment"];
+   NSData *data = [[NSUserDefaults standardUserDefaults] dataForKey:@"NL_User_bloth_equment"];
+    return data;
+}
 @end

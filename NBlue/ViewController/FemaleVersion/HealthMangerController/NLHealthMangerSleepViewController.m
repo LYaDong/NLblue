@@ -81,9 +81,6 @@
     [self.view addSubview:view];
     
     
-    
-    
-    
     NSArray *dataLabArr = @[@"23:08",@"07:26",@"07:26",@"3h15m",@"2h15m",@"良"];
     [self stepAndColAndTime:dataLabArr];
     

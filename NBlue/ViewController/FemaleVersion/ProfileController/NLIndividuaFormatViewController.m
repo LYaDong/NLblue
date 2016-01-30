@@ -516,8 +516,8 @@ static const NSInteger BTNPHOTO = 4000;
 
 
 -(void)returnBtnDown{
-    
     [PlistData individuaData:_userCountDataDic];
+    [[NSNotificationCenter defaultCenter] postNotificationName:RefreshUserHeadImageSuccessNotification object:nil userInfo:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

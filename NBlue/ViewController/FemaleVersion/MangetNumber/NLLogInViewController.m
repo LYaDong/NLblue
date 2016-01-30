@@ -276,14 +276,20 @@ static const NSInteger THIRDBTNTAG = 4000;
 }
 -(void)logInSuccess:(NSNotification *)notifi{
     NSDictionary *dic = notifi.object;
+    
+   
     [kAPPDELEGATE._loacluserinfo SetUser_ID:[dic objectForKey:@"consumerId"]];
     [kAPPDELEGATE._loacluserinfo SetUserAccessToken:[dic objectForKey:@"authToken"]];
-    [kAPPDELEGATE._loacluserinfo userLogInTime:[dic objectForKey:@"created"]];
-    [kAPPDELEGATE._loacluserinfo goControllew:@"0"];
-    [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
-    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
     
-//    [[NLDatahub sharedInstance] getUserInformation];
+    
+     [[NLDatahub sharedInstance] getUserInformation];
+    
+    
+//    [kAPPDELEGATE._loacluserinfo goControllew:@"0"];
+//    [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
+//    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
+    
+    
     
 }
 -(void)logInFicaled{
@@ -292,8 +298,11 @@ static const NSInteger THIRDBTNTAG = 4000;
 -(void)userInformationS:(NSNotification *)notifi{
     
     NSDictionary *dic =notifi.object;
+    
+    [kAPPDELEGATE._loacluserinfo userGender:@"0"];//测试中
+    
     [kAPPDELEGATE._loacluserinfo userLogInTime:[dic objectForKey:@"created"]];
-    [kAPPDELEGATE._loacluserinfo goControllew:@"0"];
+    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
     [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
     [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
 

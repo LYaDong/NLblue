@@ -97,4 +97,12 @@
  * 获得用户登录时间
  */
 -(NSString *)getUserLogInTime;
+/**
+ *存用户设备
+ */ 
+-(void)userBlothEquipment:(NSData *)equopent;
+/**
+ * 用户现在是哪个设备
+ */
+-(NSData *)getUserBlothEquipment;
 @end

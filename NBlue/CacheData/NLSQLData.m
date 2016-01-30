@@ -20,6 +20,9 @@
     return db;
 }
 
+
+
+
 #pragma mark 蓝牙设备信息
 +(void)bluetoothEquipmentInformation:(NSDictionary *)dic{
     FMDatabase *db = [self sqlDataRoute];
@@ -269,6 +272,11 @@
                                 nil];
             
             [db executeUpdate:inster withArgumentsInArray:dataArrBig];
+            
+            if ([[kAPPDELEGATE._loacluserinfo getUserLogInTime] isEqualToString:[NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days]]) {
+                return;
+            }
+            
     
         }
         num = num - 1;
@@ -281,17 +289,15 @@
         NSInteger dayYear = [ApplicationStyle whatYears:date];
         for (NSInteger i=0; i<dayCount; i++) {
             NSString *establishTime = nil;
-            if (dayCount - i < 10) {//判断个位是否大于两位，如果不是，则补0
-              establishTime = [NSString stringWithFormat:@"%ld-%ld-0%ld",(long)dayYear,(long)dayMonth,(long)dayCount  - i];
-            }else{
-              establishTime = [NSString stringWithFormat:@"%ld-%ld-%ld",(long)dayYear,(long)dayMonth,(long)dayCount  - i];
-            }
             
-            if ([establishTime isEqualToString:@"2015-8-08"]) {
-                [db close];
-                return;
-            }
             
+            
+//            if (dayCount - i < 10) {//判断个位是否大于两位，如果不是，则补0
+//              establishTime = [NSString stringWithFormat:@"%ld-%ld-0%ld",(long)dayYear,(long)dayMonth,(long)dayCount  - i];
+//            }else{
+//              establishTime = [NSString stringWithFormat:@"%ld-%ld-%ld",(long)dayYear,(long)dayMonth,(long)dayCount  - i];
+//            }
+    
             NSString *month = nil;
             NSString *days = nil;
             
@@ -308,7 +314,12 @@
             }
             
             
+            establishTime = [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days];
             
+            if ([establishTime isEqualToString:[kAPPDELEGATE._loacluserinfo getUserLogInTime]]) {
+                [db close];
+                return;
+            }
             
             NSString *inster = @"INSERT OR REPLACE INTO SportDataBig (sportDate,count,distanceAmount,caloriesAmount,stepsAmount,user_id,isUpData,timestamp) VALUES (?,?,?,?,?,?,?,?)";
             NSArray *dataArrBig = [NSArray arrayWithObjects:
@@ -323,6 +334,12 @@
                                 nil];
             
             [db executeUpdate:inster withArgumentsInArray:dataArrBig];
+            
+            
+            if ([[kAPPDELEGATE._loacluserinfo getUserLogInTime] isEqualToString:establishTime]) {
+                return;
+            }
+            
         }
         num = num - 1;
         goto __goto;
@@ -459,6 +476,7 @@ __goto:
         NSInteger dayInt = [ApplicationStyle whatDays:date];
         NSInteger dayMonth = [ApplicationStyle whatMonths:date];
         NSInteger dayYear = [ApplicationStyle whatYears:date];
+        
         for (NSInteger i=0; i<dayInt; i++) {
             NSString *inster = @"INSERT OR REPLACE INTO CanlenderTable(time,aunt,loveLove,habitsAndCustoms,uncomfortable,user_id) VALUES (?,?,?,?,?,?)";
             
@@ -489,7 +507,15 @@ __goto:
                                     [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
                 [db executeUpdate:inster withArgumentsInArray:dataArr];
             }
+            
+            
+            if ([[kAPPDELEGATE._loacluserinfo getUserLogInTime] isEqualToString:times]) {
+                return;
+            }
         }
+        
+        
+        
         num = num -1;
         goto __goto;
     }else{
@@ -519,6 +545,7 @@ __goto:
             
             establishTime = [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days];
             
+            
             if ([establishTime isEqualToString:[kAPPDELEGATE._loacluserinfo getUserLogInTime]]) {
                 [db close];
                 return;
@@ -537,7 +564,16 @@ __goto:
                                     [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
                 [db executeUpdate:inster withArgumentsInArray:dataArr];
             }
+            
+            
+            if ([[kAPPDELEGATE._loacluserinfo getUserLogInTime] isEqualToString:times]) {
+                return;
+            }
         }
+        
+        
+        
+        
         num = num -1;
         goto __goto;
     }

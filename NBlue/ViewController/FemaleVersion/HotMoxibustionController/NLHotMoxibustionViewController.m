@@ -15,7 +15,7 @@ static const NSInteger TIMELINE = 90;
 #import "NLBluetoothDataAnalytical.h"
 #import "NLHalfView.h"
 #import "NLSQLData.h"
-
+#import "PlistData.h"
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
 #import "NLConnectBloothViewController.h"
@@ -186,12 +186,12 @@ static const NSInteger TIMELINE = 90;
     
     
     
-    UIButton *btn = [UIButton buttonWithType: UIButtonTypeRoundedRect];
-    btn.frame = CGRectMake(0, 64, 50, 50);
-//    btn.backgroundColor = [UIColor redColor];
-    [btn setTitle:@"搜搜" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(btnDownXXX) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
+//    UIButton *btn = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+//    btn.frame = CGRectMake(0, 64, 50, 50);
+////    btn.backgroundColor = [UIColor redColor];
+//    [btn setTitle:@"搜搜" forState:UIControlStateNormal];
+//    [btn addTarget:self action:@selector(btnDownXXX) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btn];
     
 //    UIButton *xxx = [UIButton buttonWithType: UIButtonTypeRoundedRect];
 //    xxx.frame = CGRectMake(110, 64, 50, 50);
@@ -254,6 +254,13 @@ static const NSInteger TIMELINE = 90;
 -(void)bulidUI{
     
     
+    
+    [PlistData userBloothEquipment:@{@"1":@"1"}];
+    
+    
+    NSLog(@"%@",[PlistData getUserBloothEquipment]);
+    
+    
     [NLSQLData establishSportDataTable];
     [NLSQLData insterSportData:nil isUpdata:0];
     
@@ -288,9 +295,7 @@ static const NSInteger TIMELINE = 90;
     };
     blues.perheral = ^(NSArray *perpheral){
         _peripheralArray = perpheral;//获得当前的外围设备
-        
-
-        
+    
     };
     blues.getConnectionSuccess = ^(NSString *connectionSuccess){
         if ([connectionSuccess isEqualToString:EquiomentConnectionSuccess]) {
@@ -313,6 +318,11 @@ static const NSInteger TIMELINE = 90;
             _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect_N"];
         }
     };
+    
+    
+    
+    
+    
     [self loadStepData];
     [self halfCircle];
 }
@@ -614,6 +624,9 @@ static const NSInteger TIMELINE = 90;
     NSString *format = [sleepDatas substringWithRange:NSMakeRange(0, 4)];
     if ([format isEqualToString:EquiomentCommand_0804]) {
         [_sleepDataArr addObject:sleepDatas];
+        
+        NSLog(@"%@",_sleepDataArr);
+        
         
         if (_sleepDataArr.count>=4) {
             [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];

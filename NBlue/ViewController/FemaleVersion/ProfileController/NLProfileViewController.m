@@ -20,6 +20,7 @@
 @interface NLProfileViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIButton *userHeadImage;
 @property(nonatomic,strong)UILabel *userNameLab;
+@property(nonatomic,strong)UIImageView *userImage;;
 @property(nonatomic,strong)UITableView *tableView;
 @end
 
@@ -37,7 +38,9 @@
     
     self.navBarBack.hidden = YES;
     self.returnBtn.hidden = YES;
+    [self notification];
     [self bulidUI];
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -45,9 +48,16 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
 }
+
+-(void)notification{
+    NSNotificationCenter *userHeadImageNotifi= [NSNotificationCenter defaultCenter];
+    [userHeadImageNotifi addObserver:self selector:@selector(userHeadImageNotifiDown) name:RefreshUserHeadImageSuccessNotification object:nil];
+    
+    
+}
+
 #pragma mark 基础UI
 -(void)bulidUI{
-    
     
     NSDictionary *dicImage = [PlistData getIndividuaData];
 
@@ -62,13 +72,13 @@
     [_userHeadImage addTarget:self action:@selector(userHeadImageDown) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_userHeadImage];
     
-    UIImageView *userHead = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:128])/2, [ApplicationStyle control_height:10] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], [ApplicationStyle control_weight:128], [ApplicationStyle control_weight:128])];
-    [userHead sd_setImageWithURL:[NSURL URLWithString:[dicImage objectForKey:@"imageUrl"]] placeholderImage:nil];
-    userHead.layer.cornerRadius = [ApplicationStyle control_weight:128]/2;
-    userHead.layer.borderWidth = [ApplicationStyle control_weight:3];
-    userHead.layer.borderColor = [UIColor whiteColor].CGColor;
-    userHead.clipsToBounds = YES;
-    [self.view addSubview:userHead];
+    _userImage = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:128])/2, [ApplicationStyle control_height:10] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], [ApplicationStyle control_weight:128], [ApplicationStyle control_weight:128])];
+    [_userImage sd_setImageWithURL:[NSURL URLWithString:[dicImage objectForKey:@"imageUrl"]] placeholderImage:nil];
+    _userImage.layer.cornerRadius = [ApplicationStyle control_weight:128]/2;
+    _userImage.layer.borderWidth = [ApplicationStyle control_weight:3];
+    _userImage.layer.borderColor = [UIColor whiteColor].CGColor;
+    _userImage.clipsToBounds = YES;
+    [self.view addSubview:_userImage];
     
     
     
@@ -96,6 +106,12 @@
     
     
     
+}
+
+-(void)userHeadImageNotifiDown{
+    NSDictionary *dicImage = [PlistData getIndividuaData];
+    [_userImage sd_setImageWithURL:[NSURL URLWithString:[dicImage objectForKey:@"imageUrl"]] placeholderImage:nil];
+    _userNameLab.text = [dicImage objectForKey:@"userName"];
 }
 #pragma mark 系统Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

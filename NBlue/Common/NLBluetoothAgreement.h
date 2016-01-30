@@ -16,9 +16,9 @@ typedef void (^EquipmentArray)(NSArray *equipment);
 @property(nonatomic,strong)Peripheral perheral;
 @property(nonatomic,strong)ConnectionSuccess getConnectionSuccess;
 @property(nonatomic,strong)EquipmentArray getEquiment;
+@property(nonatomic,strong)NSMutableArray *arrPeripheral;//传设备名字
 +(NLBluetoothAgreement *)shareInstance;
 -(void)bluetoothAllocInit;
-
 
 /**
  *UUID 也是通道 0AF6

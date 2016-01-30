@@ -9,11 +9,14 @@
 #import "NLMyEquipmentController.h"
 #import "NLMyEquipmentCell.h"
 #import "NLSQLData.h"
+#import "NLBluetoothAgreement.h"
+#import "NLConnectBloothViewController.h"
 @interface NLMyEquipmentController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIImageView *batteryBack;
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableDictionary *cellLabdic;
 @property(nonatomic,strong)NSMutableDictionary *cellCountLabDic;
+@property(nonatomic,strong)NSMutableArray *peripheralArray;
 @end
 
 @implementation NLMyEquipmentController
@@ -26,7 +29,20 @@
         self.navBarPushBack.hidden = NO;
         self.controllerBack.hidden = YES;
     }
+    
+    _peripheralArray = [NSMutableArray array];
+    
+    
     self.view.backgroundColor = [ApplicationStyle subjectBackViewColor];
+    
+    NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
+    
+
+    _peripheralArray  = blues.arrPeripheral;
+    
+
+    
+    
     
     _cellLabdic = [NSMutableDictionary dictionary];
     _cellCountLabDic = [NSMutableDictionary dictionary];
@@ -73,22 +89,23 @@
     _batteryBack.image = [UIImage imageNamed:@"battery"];
     [self.view addSubview:_batteryBack];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle control_height:495] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle control_height:495] - [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize]) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize] + [ApplicationStyle control_height:420], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle navBarAndStatusBarSize] - [ApplicationStyle control_height:420]) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    _tableView.scrollEnabled = NO;
     _tableView.backgroundColor = [ApplicationStyle subjectBackViewColor];
     [self.view addSubview:_tableView];
 }
 #pragma mark 系统Delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 4;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
         return [[_cellLabdic objectForKey:@"equipmentLabArray"] count];
     }else if (section == 1){
+        return 2;
+    }else if (section == 2){
         return [[_cellLabdic objectForKey:@"firmentUP"] count];
     }else{
         return [[_cellLabdic objectForKey:@"reilveArr"] count];
@@ -101,7 +118,7 @@
     return [ApplicationStyle control_height:88];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *str = @"LYD";
+     NSString *str = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];//以indexPath来唯一确定cell
     NLMyEquipmentCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
     if (!cell) {
         cell = [[NLMyEquipmentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
@@ -123,16 +140,15 @@
         
         
     }else if (indexPath.section == 1){
+        
+        NSArray *arr = @[@"搜索蓝牙",@"重启设备"];
+        cell.liftTitleLab.text = arr[indexPath.row];
+    }else if (indexPath.section == 2){
         cell.liftTitleLab.text = [[_cellLabdic objectForKey:@"firmentUP"] objectAtIndex:indexPath.row];
         cell.imageArrow.hidden = NO;
     }else{
         cell.relivewBindingLab.text = [[_cellLabdic objectForKey:@"reilveArr"] objectAtIndex:indexPath.row];
     }
-    
-    
-    
-    
-    
     
     viewLineOn.frame = CGRectMake(0, 0, SCREENWIDTH, 1);
     viewLineUnder.frame = CGRectMake(0, [ApplicationStyle control_height:88] - 1, SCREENWIDTH, 1);
@@ -151,6 +167,34 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            case 0:
+            {
+                NLConnectBloothViewController *vc = [[NLConnectBloothViewController alloc] init];
+                [vc setHidesBottomBarWhenPushed:YES];
+                [self.navigationController pushViewController:vc animated:YES];
+                break;
+            }
+            case 1:
+            {
+                Byte byte[20] = {0xF0,0x01};
+                NSData *data = [NSData dataWithBytes:byte length:20];
+                if (_peripheralArray.count>0) {
+                    [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+                }
+                
+                NLConnectBloothViewController *vc = [[NLConnectBloothViewController alloc] init];
+                [vc setHidesBottomBarWhenPushed:YES];
+                [self.navigationController pushViewController:vc animated:YES];
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    
 }
 #pragma mark 自己的Delegate
 #pragma mark 自己的按钮事件

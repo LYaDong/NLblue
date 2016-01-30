@@ -28,4 +28,14 @@
     return dicData;
 }
 
++(void)userBloothEquipment:(NSArray *)arr{
+    NSString *plistPath = [[self seekPath] stringByAppendingPathComponent:@"Equepment.plist"];
+    [arr writeToFile:plistPath atomically:YES];
+}
++(NSMutableArray *)getUserBloothEquipment{
+    NSString *plistPath = [[self seekPath] stringByAppendingPathComponent:@"Equepment.plist"];
+    NSMutableArray *array = [NSMutableArray arrayWithContentsOfFile:plistPath];
+    return array;
+}
+
 @end

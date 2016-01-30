@@ -18,6 +18,7 @@ static const NSInteger CELLTAG = 500;//不可以大于1000
 #import "PlistData.h"
 #import "NLSQLData.h"
 #import "NLLHRatingView.h"
+#import "NLBluetoothAgreement.h"
 @interface NLHealthCalenderView()<
 UIScrollViewDelegate,
 UITableViewDataSource,
@@ -38,6 +39,7 @@ NLLHRatingViewDelegate>
 @property(nonatomic,assign)NSInteger cellRow;
 @property(nonatomic,assign)NSInteger switchOffNum;
 @property(nonatomic,strong)NLLHRatingView *starView;
+@property(nonatomic,assign)BOOL isQuert;
 
 @end
 @implementation NLHealthCalenderView
@@ -52,10 +54,12 @@ NLLHRatingViewDelegate>
     }
     return self;
 }
-
+-(void)sleepDataQuery{
+    
+    
+}
 #pragma mark 基础UI
 -(void)bulidUI{
-    
     [self controlUI];
     
     

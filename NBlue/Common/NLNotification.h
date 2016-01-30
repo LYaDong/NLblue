@@ -9,10 +9,11 @@
 #ifndef NLNotification_h
 #define NLNotification_h
 
+
+#define RefreshUserHeadImageSuccessNotification @"RefreshUserHeadImageSuccessNotification"
+
 #define NLConnectBloothSuccessNotification @"NLConnectBloothSuccessNotification"
 #define NLConnectBloothFicaledNotification @"NLConnectBloothFicaledNotification"
-
-
 #define NLLogInSuccessNotification @"NLLogInSuccessNotification"
 #define NLLogInFailedNotiFicaledtion @"NLLogInFailedNotiFicaledtion"
 #define NLGetVerficationSuccessNotification @"NLGetVerficationSuccessNotification"

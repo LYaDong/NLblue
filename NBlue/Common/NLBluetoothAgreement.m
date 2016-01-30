@@ -49,6 +49,7 @@ static NSString *TransLationF1 = @"0AF1";
     
     _equipmentArr = [NSMutableArray array];
     _equipDataArray = [NSMutableArray array];
+    self.arrPeripheral = [NSMutableArray array];//传设备名字
     
     _manger = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     _manger.delegate = self;
@@ -68,6 +69,8 @@ static NSString *TransLationF1 = @"0AF1";
     [notifi addObserver:self selector:@selector(logInSuccess:) name:NLConnectBloothSuccessNotification object:nil];
     
 }
+
+
 //连接设备
 -(void)logInSuccess:(NSNotification *)notifi{
     CBPeripheral *periperal = notifi.object;
@@ -147,6 +150,8 @@ static NSString *TransLationF1 = @"0AF1";
         if ([blue_uuidstr isEqualToString:[kAPPDELEGATE._loacluserinfo getBlueToothUUID]]) {
             _periperal = peripheral;
             [_manger connectPeripheral:_periperal options:nil];
+            [self.arrPeripheral removeAllObjects];
+            [self.arrPeripheral addObject:peripheral];
             [_dataArr removeAllObjects];
             [_dataArr addObject:peripheral];
             [kAPPDELEGATE._loacluserinfo setBluetoothName:peripheral.name];
