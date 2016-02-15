@@ -297,6 +297,10 @@
     
 //    08031a0f5cc003000188c00a7001000000000000
     
+    
+    
+    NSLog(@"%@",arr);
+    
     [NLSQLData establishSportDataTable];//创建sportData表
     
 
@@ -417,8 +421,8 @@
     
 //    08040110df0708010623d8000904,
 //    080402100604015c005000000804,
-    arr = @[@"08040110df0708010623d8000904",
-            @"080402100604015c005000000804"];
+//    arr = @[@"08040110df0708010623d8000904",
+//            @"080402100604015c005000000804"];
     
     NSMutableArray *sleepDataArray = [NSMutableArray array];
     NSMutableDictionary *sleepDataDic = [NSMutableDictionary dictionary];

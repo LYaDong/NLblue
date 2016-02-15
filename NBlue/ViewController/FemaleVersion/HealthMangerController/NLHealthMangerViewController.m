@@ -128,7 +128,7 @@
         }
         case NLHealthManger_Sleep:
         {
-            self.rightBtn.hidden = YES;
+            self.rightBtn.hidden = NO;
             _mainScrollew.contentOffset = CGPointMake(NLHealthManger_Sleep * SCREENWIDTH, 0);
             break;
         }

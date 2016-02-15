@@ -188,8 +188,8 @@ static NSString *NLSportApi = @"/sport";//各个接口端
             [[NSNotificationCenter defaultCenter] postNotificationName:NLUsergetUserInformationFicaledNotification object:nil userInfo:nil];
         });
     }];
-    
 }
+
 #pragma mark 添加睡眠信息
 -(void)addSleepRecord:(NSNumber *)consumerId wareUUID:(NSNumber *)wareUUID sleepDate:(NSData *)sleepDate startTime:(NSString *)startTime duration:(NSString *)duratTime deepSleep:(NSString *)deepSleep shallowSleep:(NSString *)shallowSleep authToken:(NSNumber *)authToken{
 //    NSDictionary *sleepDic = @{@"":@"",@"":@"",@"":@"",@"":@"",@"":@"",@"":@"",@"":@""};
@@ -239,17 +239,24 @@ static NSString *NLSportApi = @"/sport";//各个接口端
                                stepGoal:(NSString *)stepGoal
                               authtoken:(NSString *)authtoken{
     
-    NSDictionary *parmeter = @{@"consumerid":consumerid,
-                          @"gender":gender,
-                          @"age":age,
-                          @"height":height,
-                          @"weight":weight,
-                          @"authToken":authtoken
+    NSDictionary *parmeter = @{@"consumerId":consumerid,
+                          @"authToken":authtoken,@"name":@"123",
                           };
     
+    NSLog(@"%@",parmeter);
+    
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
     [_manager PUT:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Consumer] parameters:parmeter success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        
         NSLog(@"%@",responseObject);
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        
         NSLog(@"%@",error);
     }];
 }

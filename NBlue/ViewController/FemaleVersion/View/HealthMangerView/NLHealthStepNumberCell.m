@@ -40,6 +40,8 @@
         target = target * 1.2;
     }
     
+    NSLog(@"%@",arrs);
+    
     NSMutableArray *dataArray = [NSMutableArray array];
     for (NSInteger i=0; i<arrs.count; i++) {
         NSInteger index = [[NSString stringWithFormat:@"%@",arrs[i]] integerValue];

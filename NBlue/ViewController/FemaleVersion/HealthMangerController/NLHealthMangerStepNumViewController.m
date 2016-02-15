@@ -102,13 +102,9 @@
 -(void)segmentedIndex:(NSInteger)index{
     
     [_column removeFromSuperview];
-//    [_dataArr removeAllObjects];
-    
     switch (index) {
         case NLCalendarType_Day:
         {
-            
-//            _dataArr = [NLSQLData obtainSportDataBig];
             [self imageConvenDataArr:_dataArr type:NLCalendarType_Day];
             
             break;
@@ -223,7 +219,7 @@
     }
 
     CGRect frame = CGRectMake(0, [ApplicationStyle navigationBarSize] + [ApplicationStyle statusBarSize], SCREENWIDTH, [ApplicationStyle control_height:540]);
-    _column = [[NLColumnImage alloc] initWithFrame:frame DataArr:arr strokeColor:[@"882a00" hexStringToColor] withColor:[@"fac96f" hexStringToColor] type:type timeLabArr:nil];
+    _column = [[NLColumnImage alloc] initWithFrame:frame DataArr:arr strokeColor:[@"882a00" hexStringToColor] withColor:[@"fac96f" hexStringToColor] type:type timeLabArr:nil dataType:NLDataExhibitionType_step];
     _column.delegate = self;
     [self.view addSubview:_column];
     
@@ -251,7 +247,7 @@
     return arr;
 }
 
-#pragma mark 返回7天的数据
+#pragma mark 返回7天的数据或者一个月内的数据
 -(NSArray *)dataThreeData:(NSMutableArray *)data{
     NSMutableArray *arrData = [self sortArrayData:data];
     
@@ -276,9 +272,10 @@
             countS = _weekMonthCount;
         }
     }
+    
     //累加值
     NSInteger nums = 0;
-    //每7天加一次数据
+    //每7天加一次数据/或者30天加一次数据
     NSInteger sportCount = 0;
     NSString *dateTime = nil;
 __goto:
@@ -288,10 +285,12 @@ __goto:
 
     }else{
         for (NSInteger i=nums; i<countS; i++) {
-            //每7天加一次数据
+            //每7天加一次数据/或者30天加一次数据
             sportCount =  sportCount + [[arrData[i] objectForKey:@"stepsAmount"] integerValue];
         }
     }
+    
+    NSLog(@"%@",dateTime);
     //添加到数组
     NSDictionary *dic = @{@"stepsAmount":[NSNumber numberWithInteger:sportCount],@"sportDate":dateTime};
     [dataGather addObject:dic];

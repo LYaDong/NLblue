@@ -9,13 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NBlue/ViewController/FemaleVersion/ProfileController/NLProfileViewController.m"
-            timestampString = "475823399.555571"
+            filePath = "NBlue/Common/NLBluetoothDataAnalytical.m"
+            timestampString = "477221328.341985"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "-bulidUI"
+            startingLineNumber = "315"
+            endingLineNumber = "315"
+            landmarkName = "+blueSportOrdinArrayData:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NBlue/Common/NLBluetoothDataAnalytical.m"
+            timestampString = "477221316.516202"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
+            landmarkName = "+blueSportOrdinArrayData:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

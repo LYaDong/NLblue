@@ -51,7 +51,7 @@
  */
 @property(nonatomic,strong)UIColor *lineColor;
 /**
- *是否隐藏控制器的线
+ *是否隐藏控制器的线 当为YES的时候，不需要设置线的颜色
  */
 @property(nonatomic,assign)BOOL lineHide;
 

@@ -26,20 +26,21 @@ static NLColumnImage *cloumnImage = nil;
                     strokeColor:(UIColor *)strokeColor
                       withColor:(UIColor *)withColor
                            type:(NSInteger)type
-                     timeLabArr:(NSArray *)labTimeArr{
+                   timeLabArr:(NSArray *)labTimeArr
+                     dataType:(NSInteger)dataType{
     if (self = [super initWithFrame:frame]) {
         _dataArr = arr;
         _strokeColor = strokeColor;
         _withColor = withColor;
 //        _type = type;
         
-        [self builArrd:arr strokeColor:strokeColor withColor:withColor type:type];
+        [self builArrd:arr strokeColor:strokeColor withColor:withColor type:type dataType:dataType];
     }
     return self;
 }
 
 
--(void)builArrd:(NSArray *)arr strokeColor:(UIColor *)strokeColor withColor:(UIColor *)withColor type:(NSInteger)type{
+-(void)builArrd:(NSArray *)arr strokeColor:(UIColor *)strokeColor withColor:(UIColor *)withColor type:(NSInteger)type dataType:(NSInteger)dataType{
     switch (type) {
         case NLCalendarType_Day:
         {
@@ -66,7 +67,6 @@ static NLColumnImage *cloumnImage = nil;
     CGFloat weightSize = arr.count * (_convenImageWeight + [ApplicationStyle control_weight:10]) - _convenImageWeight - [ApplicationStyle control_weight:10];
     CGFloat height = self.frame.size.height;
     
-    
     _mainScrollew = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, height)];
     _mainScrollew.delegate = self;
     _mainScrollew.showsVerticalScrollIndicator = FALSE;
@@ -80,6 +80,7 @@ static NLColumnImage *cloumnImage = nil;
 
     UIView *columnarBack = [[UIView alloc] initWithFrame:CGRectMake(((weightSize + SCREENWIDTH) - (weightSize + _convenImageWeight))/2, 0, weightSize + _convenImageWeight, height)];
     [_mainScrollew  addSubview:columnarBack];
+    
     
     UIView *timeLabBack = [[UIView alloc] initWithFrame:CGRectMake(((weightSize + SCREENWIDTH) - (weightSize + _convenImageWeight))/2, height - [ApplicationStyle control_height:60], weightSize + _convenImageWeight, [ApplicationStyle control_height:60])];
     [_mainScrollew addSubview:timeLabBack];
@@ -116,8 +117,14 @@ static NLColumnImage *cloumnImage = nil;
         columnarBtn.tag = BTNTAB + i;
         [columnarBtn addTarget:self action:@selector(columnarBtnDown:) forControlEvents:UIControlEventTouchUpInside];
         [columnarBack addSubview:columnarBtn];
-
-
+        
+        if (dataType == NLDataExhibitionType_Sleep) {
+            UIView *deepSleepView = [[UIView alloc] init];
+            deepSleepView.frame = CGRectMake(columnarBack.viewWidth - _convenImageWeight  - i* (_convenImageWeight + [ApplicationStyle control_weight:10]), (height - [ApplicationStyle control_weight:60]) - num/2, _convenImageWeight,num/2);
+            deepSleepView.backgroundColor = [@"fb9440" hexStringToColor];//深睡眠颜色
+            deepSleepView.userInteractionEnabled = NO;
+            [columnarBack addSubview:deepSleepView];
+        }
         UILabel *labTime = [[UILabel alloc] initWithFrame:CGRectMake(columnarBack.viewWidth - _convenImageWeight  - i * (_convenImageWeight + [ApplicationStyle control_weight:10]),
                                                                      ([ApplicationStyle control_height:60] - [ApplicationStyle control_height:30])/2,
                                                                      _convenImageWeight,
