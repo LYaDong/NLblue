@@ -1,0 +1,197 @@
+/* 
+  Localizable.strings
+  NBlue
+
+  Created by LYD on 15/11/24.
+  Copyright © 2015年 LYD. All rights reserved.
+*/
+//GeneralText
+
+"GeneralText_OK" = "确定";
+"GeneralText_Cancel" = "取消";
+
+//tabBar
+"TabBar_HealthManger" = "健康管理";
+"TabBar_HotMoxibustion" = "热灸";
+"TabBar_Profile" = "我的";
+
+"TabBar_Male_HealthManger" = "健康管理";
+"TabBar_Male_HotMoxibustion" = "我的她";
+"TabBar_Male_SignIn" = "签到";
+
+
+//HotMoxibustionViewController
+"HotMoxibustion_Effect" = "效果如何";
+"HotMoxibustion_Comfort" = "求安慰";
+"HotMoxibustion_NightHotMox" = "晚上热灸";
+//HealthMangerViewController
+"HealthManger_Calendar" = "日历";
+"HealthManger_Sleep" = "睡眠";
+"HealthManger_StepNumber" = "计步器";
+//NLProfileViewController
+"NLProfileView_MyEquitment" = "我的设备";
+"NLProfileView_MyMale" = "我的男友";
+"NLProfileView_Share" = "分享";
+"NLProfileView_FeedBack" = "反馈";
+"NLProfileView_Set" = "设置";
+"NLProfileView_AboutNL" = "关于暖蓝";
+"NLProfileView_MaleTextCount" = "你还木有绑定男友呦\n快让你的帅气贴心男友和你绑定吧";
+"NLProfileView_Sweep" = "扫一扫";
+"NLProfileView_MaleText" = "绑定男朋友，让他能够看到你的信息\n当然，如果他不乖的话，你可以只给他看部分信息呦!";
+"NLProfileView_SweepMale" = "扫码男友";
+"NLProfileView_QRMaleText" = "将男友的二维码放入框内，即可自动识别";
+//NLIndividuaFormatViewController
+"NLIndividuaFormat_Title" = "个人信息";
+"NLIndividuaFormat_HeadImage" = "头像";
+"NLIndividuaFormat_UserName" = "昵称";
+"NLIndividuaFormat_UserAge" = "年龄";
+"NLIndividuaFormat_UserHeight" = "身高";
+"NLIndividuaFormat_UserWidth" = "体重";
+"NLIndividuaFormat_UserPeriod" = "经期";
+"NLIndividuaFormat_UserCycle" = "周期";
+"NLIndividuaFormat_UpDayDate" = "上次的日期";
+//NLMyEquipmentController
+"NLMyEquipment_MyEquipment" = "我的设备";
+"NLMyEquipment_EquipmentName" = "设备名称";
+"NLMyEquipment_FirmwareEdition" = "固件版本";
+"NLMyEquipment_MACAddress" = "MAC地址";
+"NLMyEquipment_FirmwareUP" = "固件更新";
+"NLMyEquipment_RelieveBinding" = "解除绑定";
+//NLFeedBackViewController
+"NLFeedBack_QuestionFeedBack" = "问题反馈";
+//NLAboutNLViewController
+"NLAboutNL_CopyrightInformation" = "版权信息";
+"NLAboutNL_ServiceAgreement" = "隐私策略";
+"NLAboutNL_PrivacyPolicy" = "服务协议";
+//NLHealthStepNumber
+"NLHealthStepNumber_TargetNumber" = "目标步数";
+"NLHealthStepNumber_TheCurrent" = "今日步数";
+"NLHealthStepNumber_MovingDistance" = "移动距离";
+"NLHealthStepNumber_ConsumedEnergy" = "消耗能量";
+//NLHealthSleepView
+"NLHealthSleepView_YesterDay" = "昨日睡眠";
+"NLHealthSleepView_GOSleepTime" = "入睡时间";
+"NLHealthSleepView_WakeUPSleepTime" = "醒来时间";
+"NLHealthSleepView_SleepQuality" = "睡眠质量";
+//NLHealthMangerStep
+"NLHealthManger_StepDay" = "日";
+"NLHealthManger_StepWeek" = "周";
+"NLHealthManger_StepMonth" = "月";
+"NLHealthManger_StepRemarkLab" = "当日步数";
+"NLHealthManger_StepDistance" = "当日距离";
+"NLHealthManger_StepEnergy" = "当日消耗能量";
+"NLHealthManger_StepActovity" = "当日活动时间";
+//NLHealthMangerSleep
+"NLHealthMangerSleep_FallAsleepTime" = "入睡时间";
+"NLHealthMangerSleep_WakeupTime" = "醒来时间时间";
+"NLHealthMangerSleep_SleepTime" = "睡眠时间";
+"NLHealthMangerSleep_ShallowSleepTime" = "浅睡眠时间";
+"NLHealthMangerSleep_DeepSleepTime" = "深睡眠时间";
+"NLHealthMangerSleep_SleepQualityTime" = "睡眠质量";
+
+//NLLogInViewController
+"NLLogIn_TextNumber" = "账号";
+"NLLogIn_TextPassword" = "密码";
+"NLLogIn_TextLonInBtn" = "登录";
+"NLLogIn_LogInUser_ThirdLog" = "第三方登录";
+//NLRegisteredViewController
+"NLRegistered_registered" = "注册";
+"NLRegistered_Forget" = "忘记密码";
+"NLRegistered_PhoneNumber" = "请输入你的手机号";
+"NLRegistered_Verification" = "验证码";
+"NLRegistered_PassWord" = "密码";
+"NLRegistered_NewPassWord" = "新密码";
+"NLRegistered_GetVerfication" = "获得验证码";
+"NLRegistered_Protocol" = "同意隐私条款和隐私协议";
+"NLRegistered_completeBtn" = "完成";
+//NLHealthCalenderView
+"NLHealthCalender_DYM" = "大姨妈";
+"NLHealthCalender_DYM_TJ" = "痛经程度";
+"NLHealthCalender_AA" = "爱爱";
+"NLHealthCalender_SHXG" = "生活习惯";
+"NLHealthCalender_BSF" = "不舒服";
+"NLHealthCalender_JQ" = "经期";
+"NLHealthCalender_YCQ" = "预测期";
+"NLHealthCalender_AQQ" = "安全期";
+"NLHealthCalender_YYQ" = "易孕期";
+"NLHealthCalender_GQS" = "过去时";
+"NLHealthCalender_Picker_Title" = "爱爱记录";
+"NLHealthCalender_Picker_BtnCalue" = "消除";
+"NLHealthCalender_Picker_BtnOK" = "确认";
+"NLHealthCalender_Picker_MYZ" = "没有做";
+"NLHealthCalender_Picker_DTZ" = "带套做";
+"NLHealthCalender_Picker_CLSHY" = "吃了药事后";
+"NLHealthCalender_Picker_WBHCS" = "无保护措施";
+"NLHealthCalender_LifeHabit_Title" = "生活习惯";
+"NLHealthCalender_LifeHabit_SG" = "水果";
+"NLHealthCalender_LifeHabit_YD" = "运动";
+"NLHealthCalender_LifeHabit_PB" = "排便";
+"NLHealthCalender_Unconmfortable_TT" = "头疼";
+"NLHealthCalender_Unconmfortable_BD" = "爆豆";
+"NLHealthCalender_Unconmfortable_HLLY" = "喝了冷饮";
+"NLHealthCalender_Unconmfortable_FX" = "腹泻";
+"NLHealthCalender_Unconmfortable_XFZT" = "小腹坠痛";
+"NLHealthCalender_Unconmfortable_MSY" = "没食欲";
+"NLHealthCalender_Unconmfortable_YS" = "腰酸";
+"NLHealthCalender_Unconmfortable_HSST" = "浑身酸痛";
+"NLHealthCalender_Unconmfortable_RFZT" = "乳房胀痛";
+"NLHealthCalender_Unconmfortable_RFCT" = "乳房刺痛";
+"NLHealthCalender_Unconmfortable_BDYC" = "白带异常";
+"NLHealthCalender_Unconmfortable_QT" = "其他";
+
+//NLSetProfoleViewController
+"NLSetProfile_Set" = "设置";
+"NLSetProfile_CallRemid" = "来电提醒";
+"NLSetProfile_GOScore" = "去评分";
+"NLSetProfile_SecurityEiet" = "安全退出";
+//NLGenderSelectionViewController
+"NLGenderSelection_Male" = "男";
+"NLGenderSelection_Female" = "女";
+"NLSelection_LastStep" = "上一步";
+"NLGenderSelection_Next" = "下一步";
+
+//NLMaleProfileViewController
+"NLMaleProfile_Myequipment" = "我的设备";
+"NLMaleProfile_NBluePlan" = "暖蓝计划";
+"NLMaleProfile_Share" = "分享";
+"NLMaleProfile_FeedBack" = "反馈";
+"NLMaleProfile_Set" = "设置";
+"NLMaleProfile_AboutNBlue" = "关于暖蓝";
+"NLMaleNBLuePlan_NBluePlan" = "暖蓝计划";
+"NLMaleNBLuePlan_MessagePush" = "消息推送";
+"NLMaleNBLuePlan_Shock" = "震动";
+"NLMaleNBLuePlan_PushTime" = "推送时间选择";
+//NLMaleIndividuaViewController
+"NLMaleIndividua_SedentaryRemid" = "久坐提醒";
+"NLMaleIndividua_IntervalTime" = "间隔时长";
+"NLMaleIndividua_ReminderInterval" = "提醒区间";
+//NLMyHerViewController
+"NLMyHer_titls" = "我的女神";
+"NLMyHer_DayPregnancy" = "今日怀孕指数";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//通用
+"NL_Currency_YouGender" = "你的性别";
+"NL_Currency_Next" = "下一步";
+
+
+
+
