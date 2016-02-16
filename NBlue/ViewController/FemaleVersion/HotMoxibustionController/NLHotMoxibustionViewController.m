@@ -125,6 +125,12 @@ static const NSInteger TIMELINE = 90;
     }
 }
 
+
+-(void)upDate{
+    [[NLDatahub sharedInstance] upDataUserInformationConsumerid:[kAPPDELEGATE._loacluserinfo GetUser_ID] name:nil nickname:nil gender:nil age:nil height:nil weight:nil header:nil stepGoal:nil authtoken:[kAPPDELEGATE._loacluserinfo GetAccessToken]];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -133,9 +139,23 @@ static const NSInteger TIMELINE = 90;
     _timeInt = 0;
     self.titles.text = @"热灸";
     
-    [NLSQLData canlenderUncomfortable];
-    [NLSQLData insterCanlenderData];
-
+//    [self upDate];
+    
+    
+    //循环创建数据库
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [NLSQLData canlenderUncomfortable];
+        [NLSQLData insterCanlenderData];
+        
+        [NLSQLData establishSportDataTable];
+        [NLSQLData insterSportData:nil isUpdata:0];
+        
+        [NLSQLData sleepDataTable];
+        [NLSQLData insterSleepData:nil isUpdata:0];
+       dispatch_async(dispatch_get_main_queue(), ^{
+           
+       });
+    });
     
     //判断要不要进入搜索页
     if ([[kAPPDELEGATE._loacluserinfo getBlueToothUUID] length]<=0) {
@@ -172,13 +192,7 @@ static const NSInteger TIMELINE = 90;
 //        }
 //        
 //    };
-    
-    
-    
-    
-  
-    
-    
+ 
  
     _blueImage = [[UIImageView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:24], [ApplicationStyle statusBarSize] + ([ApplicationStyle navigationBarSize] - [ApplicationStyle control_height:40])/2, [ApplicationStyle control_weight:40], [ApplicationStyle control_height:44])];
     _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect_N"];
@@ -255,20 +269,19 @@ static const NSInteger TIMELINE = 90;
     
     
     
-    [PlistData userBloothEquipment:@{@"1":@"1"}];
+
     
     
     NSLog(@"%@",[PlistData getUserBloothEquipment]);
     
     
-    [NLSQLData establishSportDataTable];
-    [NLSQLData insterSportData:nil isUpdata:0];
+    
     
     
     
     
 //    [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
-//    [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];//测试睡眠假数据
+    [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];//测试睡眠假数据
     
     
     
@@ -290,7 +303,7 @@ static const NSInteger TIMELINE = 90;
         [self sportData:blueData];
 //        //判断温度
         [self isTemperatureOff:blueData];
-        
+        //睡眠数据
         [self sleepDatas:blueData];
     };
     blues.perheral = ^(NSArray *perpheral){
@@ -310,7 +323,7 @@ static const NSInteger TIMELINE = 90;
                 }
                 [self judgmentTemperatureQuery];//查询温度
                 [self sportDataQuery];//获得运动数据
-                [self sleepDataQuery];
+                [self sleepDataQuery];//获取睡眠数据
                 _isQuert = !_isQuert;
             }
         }
@@ -621,18 +634,19 @@ static const NSInteger TIMELINE = 90;
     if (sleepDatas.length<=4) {
         return;
     }
+    
+    
+    
     NSString *format = [sleepDatas substringWithRange:NSMakeRange(0, 4)];
     if ([format isEqualToString:EquiomentCommand_0804]) {
+        
+        NSLog(@"%@",sleepDatas);
+        
+        
         [_sleepDataArr addObject:sleepDatas];
-        
-        NSLog(@"%@",_sleepDataArr);
-        
-        
         if (_sleepDataArr.count>=4) {
             [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];
         }
-        
-
     }
 }
 

@@ -68,8 +68,9 @@
         
         array = [NLSQLData sportDataObtainTimeStr:[ApplicationStyle datePickerTransformationCorss:dayDime]];
 
-        
+        NSLog(@"%@",array);
         dispatch_async(dispatch_get_main_queue(), ^{
+            [_sportData removeAllObjects];
             [_sportData addObjectsFromArray:array];
             [_tableView reloadData];
         });
@@ -113,19 +114,17 @@
         }
         
         
-        
         for (NSInteger i=0; i<96; i++) {
+            [dataSerisArray addObject:@"0"];
+        }
+        for (NSInteger i=0; i<dataSerisArray.count; i++) {
             for (NSInteger j=0; j<serisArray.count; j++) {
                 if (i == [serisArray[j] integerValue]) {
                     NSString *step = [stepFragments[j] objectForKey:@"steps"];
-                    [dataSerisArray addObject:step];
-                }else{
-                    [dataSerisArray addObject:@"0"];
+                    [dataSerisArray replaceObjectAtIndex:i withObject:step];
                 }
             }
         }
-     
-        
         for (int i=0; i<dataSerisArray.count; i++) {
             count = count + [dataSerisArray[i] integerValue];
             if (i%4 ==0) {
@@ -134,7 +133,6 @@
             }
         }
     }
-    
     [cell histogram:sportData
           sportData:_sportData 
              target:4000];

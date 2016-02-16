@@ -86,6 +86,10 @@
  */
 + (void)insterSleepData:(NSArray *)dataArr isUpdata:(NSInteger)updata;
 /**
+ * 更新数据
+ */
++(void)upDataSleep:(NSArray *)arr isUpdata:(NSInteger)updata;
+/**
  * 获取睡眠数据
  */
 + (NSMutableArray *)sleepDataObtain;

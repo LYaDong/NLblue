@@ -26,46 +26,22 @@ static NLColumnImage *cloumnImage = nil;
                     strokeColor:(UIColor *)strokeColor
                       withColor:(UIColor *)withColor
                            type:(NSInteger)type
-                     timeLabArr:(NSArray *)labTimeArr{
+                   timeLabArr:(NSArray *)labTimeArr
+                     dataType:(NSInteger)dataType{
     if (self = [super initWithFrame:frame]) {
         _dataArr = arr;
         _strokeColor = strokeColor;
         _withColor = withColor;
 //        _type = type;
         
-        [self builArrd:arr strokeColor:strokeColor withColor:withColor type:type];
+        [self builArrd:arr strokeColor:strokeColor withColor:withColor type:type dataType:dataType];
     }
     return self;
 }
 
-
--(void)builArrd:(NSArray *)arr strokeColor:(UIColor *)strokeColor withColor:(UIColor *)withColor type:(NSInteger)type{
-    switch (type) {
-        case NLCalendarType_Day:
-        {
-            _convenImageWeight = [ApplicationStyle control_weight:50];
-            
-            break;
-        }
-        case NLCalendarType_Week:
-        {
-            _convenImageWeight = [ApplicationStyle control_weight:90];
-            break;
-        }
-        case NLCalendarType_Month:
-        {
-            _convenImageWeight = [ApplicationStyle control_weight:120];
-            break;
-        }
-        default:
-            break;
-    }
-    
-    
-    
+-(void)stepArray:(NSArray *)arr strokeColor:(UIColor *)strokeColor withColor:(UIColor *)withColor type:(NSInteger)type{
     CGFloat weightSize = arr.count * (_convenImageWeight + [ApplicationStyle control_weight:10]) - _convenImageWeight - [ApplicationStyle control_weight:10];
     CGFloat height = self.frame.size.height;
-    
     
     _mainScrollew = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, height)];
     _mainScrollew.delegate = self;
@@ -76,15 +52,16 @@ static NLColumnImage *cloumnImage = nil;
     [self addSubview:_mainScrollew];
     
     
-
-
+    
+    
     UIView *columnarBack = [[UIView alloc] initWithFrame:CGRectMake(((weightSize + SCREENWIDTH) - (weightSize + _convenImageWeight))/2, 0, weightSize + _convenImageWeight, height)];
     [_mainScrollew  addSubview:columnarBack];
+    
     
     UIView *timeLabBack = [[UIView alloc] initWithFrame:CGRectMake(((weightSize + SCREENWIDTH) - (weightSize + _convenImageWeight))/2, height - [ApplicationStyle control_height:60], weightSize + _convenImageWeight, [ApplicationStyle control_height:60])];
     [_mainScrollew addSubview:timeLabBack];
     
-  
+    
     NSMutableArray *dataSport = [NSMutableArray array];
     for (NSInteger i=0; i<arr.count; i++) {
         [dataSport addObject:[arr[i] objectForKey:@"stepsAmount"]];
@@ -117,12 +94,11 @@ static NLColumnImage *cloumnImage = nil;
         [columnarBtn addTarget:self action:@selector(columnarBtnDown:) forControlEvents:UIControlEventTouchUpInside];
         [columnarBack addSubview:columnarBtn];
 
-
         UILabel *labTime = [[UILabel alloc] initWithFrame:CGRectMake(columnarBack.viewWidth - _convenImageWeight  - i * (_convenImageWeight + [ApplicationStyle control_weight:10]),
                                                                      ([ApplicationStyle control_height:60] - [ApplicationStyle control_height:30])/2,
                                                                      _convenImageWeight,
                                                                      [ApplicationStyle control_height:30])];
-
+        
         NSString *time = [arr[i] objectForKey:@"sportDate"];
         
         
@@ -177,18 +153,171 @@ static NLColumnImage *cloumnImage = nil;
             default:
                 break;
         }
-        
-        
-        
-
         labTime.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:16]];
         labTime.textAlignment = NSTextAlignmentCenter;
         labTime.tag = LABTIMETAG + i;
         [timeLabBack addSubview:labTime];
         
     }
+}
+-(void)sleepArray:(NSArray *)arr strokeColor:(UIColor *)strokeColor withColor:(UIColor *)withColor type:(NSInteger)type{
+    CGFloat weightSize = arr.count * (_convenImageWeight + [ApplicationStyle control_weight:10]) - _convenImageWeight - [ApplicationStyle control_weight:10];
+    CGFloat height = self.frame.size.height;
+    
+    _mainScrollew = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, height)];
+    _mainScrollew.delegate = self;
+    _mainScrollew.showsVerticalScrollIndicator = FALSE;
+    _mainScrollew.showsHorizontalScrollIndicator = FALSE;
+    _mainScrollew.contentSize = CGSizeMake(weightSize + SCREENWIDTH, height);
+    _mainScrollew.contentOffset = CGPointMake(weightSize, 0);
+    [self addSubview:_mainScrollew];
     
     
+    UIView *columnarBack = [[UIView alloc] initWithFrame:CGRectMake(((weightSize + SCREENWIDTH) - (weightSize + _convenImageWeight))/2, 0, weightSize + _convenImageWeight, height)];
+    [_mainScrollew  addSubview:columnarBack];
+    
+    
+    UIView *timeLabBack = [[UIView alloc] initWithFrame:CGRectMake(((weightSize + SCREENWIDTH) - (weightSize + _convenImageWeight))/2, height - [ApplicationStyle control_height:60], weightSize + _convenImageWeight, [ApplicationStyle control_height:60])];
+    [_mainScrollew addSubview:timeLabBack];
+    
+    NSLog(@"%@",arr);
+    
+    
+    NSMutableArray *dataSport = [NSMutableArray array];
+    for (NSInteger i=0; i<arr.count; i++) {
+        [dataSport addObject:[arr[i] objectForKey:@"deepSleep_mins"]];
+    }
+    
+    CGFloat num = 0.1;
+    for (NSInteger i=0; i<dataSport.count; i++) {
+        if ([[NSString stringWithFormat:@"%@",dataSport[i]] intValue] > num) {
+            num = [[NSString stringWithFormat:@"%@",dataSport[i]] intValue];
+        }
+    }
+    NSMutableArray *ht = [NSMutableArray array];
+    for (NSInteger i=0; i<dataSport.count; i++) {
+        NSInteger index = [[NSString stringWithFormat:@"%@",dataSport[i]] integerValue];
+        [ht addObject:[NSNumber numberWithInteger:index * (height * 0.8)/num]];
+    }
+    
+    for (NSInteger i =0 ; i<arr.count; i++) {
+        
+        
+        NSInteger num = [[NSString stringWithFormat:@"%@",ht[i]] integerValue];
+        
+        UIButton *columnarBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        columnarBtn.frame = CGRectMake(columnarBack.viewWidth - _convenImageWeight  - i* (_convenImageWeight + [ApplicationStyle control_weight:10]), (height - [ApplicationStyle control_weight:60]) - num, _convenImageWeight,num);
+        columnarBtn.backgroundColor = _withColor;
+        if (i==0) {
+            columnarBtn.backgroundColor = [@"ffd890" hexStringToColor];
+        }
+        columnarBtn.tag = BTNTAB + i;
+        [columnarBtn addTarget:self action:@selector(columnarBtnDown:) forControlEvents:UIControlEventTouchUpInside];
+        [columnarBack addSubview:columnarBtn];
+        
+        
+        
+        UIView *deepSleepView = [[UIView alloc] init];
+        deepSleepView.frame = CGRectMake(columnarBack.viewWidth - _convenImageWeight  - i* (_convenImageWeight + [ApplicationStyle control_weight:10]), (height - [ApplicationStyle control_weight:60]) - num/2, _convenImageWeight,num/2);
+        deepSleepView.backgroundColor = [@"fb9440" hexStringToColor];//深睡眠颜色
+        deepSleepView.userInteractionEnabled = NO;
+        [columnarBack addSubview:deepSleepView];
+        
+        
+        UILabel *labTime = [[UILabel alloc] initWithFrame:CGRectMake(columnarBack.viewWidth - _convenImageWeight  - i * (_convenImageWeight + [ApplicationStyle control_weight:10]),
+                                                                     ([ApplicationStyle control_height:60] - [ApplicationStyle control_height:30])/2,
+                                                                     _convenImageWeight,
+                                                                     [ApplicationStyle control_height:30])];
+        
+        NSString *time = [arr[i] objectForKey:@"sleepDate"];
+        
+        
+        
+        
+        switch (type) {
+            case NLCalendarType_Day:
+            {
+                NSArray *timeArr = [time componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
+                labTime.text = [NSString stringWithFormat:@"%@/%@",timeArr[1],timeArr[2]];
+                labTime.textColor = [ApplicationStyle subjectWithColor];
+                
+                if (i == 0) {
+                    labTime.text = @"今天";
+                    labTime.textColor = [UIColor redColor];
+                }
+                if (i == 1) {
+                    labTime.text = @"昨天";
+                }
+                break;
+            }
+            case NLCalendarType_Week:
+            {
+                NSArray *timeArr = [time componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
+                labTime.text = [NSString stringWithFormat:@"%@/%@",timeArr[1],timeArr[2]];
+                labTime.textColor = [ApplicationStyle subjectWithColor];
+                
+                if (i == 0) {
+                    labTime.text = @"本周";
+                    labTime.textColor = [UIColor redColor];
+                }
+                if (i == 1) {
+                    labTime.text = @"上周";
+                }
+                break;
+            }
+            case NLCalendarType_Month:
+            {
+                NSArray *timeArr = [time componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
+                labTime.text = [NSString stringWithFormat:@"%@月",timeArr[1]];
+                labTime.textColor = [ApplicationStyle subjectWithColor];
+                
+                if (i == 0) {
+                    labTime.text = @"本月";
+                    labTime.textColor = [UIColor redColor];
+                }
+                if (i == 1) {
+                    labTime.text = @"上月";
+                }
+                break;
+            }
+            default:
+                break;
+        }
+        labTime.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:16]];
+        labTime.textAlignment = NSTextAlignmentCenter;
+        labTime.tag = LABTIMETAG + i;
+        [timeLabBack addSubview:labTime];
+        
+    }
+}
+
+-(void)builArrd:(NSArray *)arr strokeColor:(UIColor *)strokeColor withColor:(UIColor *)withColor type:(NSInteger)type dataType:(NSInteger)dataType{
+    switch (type) {
+        case NLCalendarType_Day:
+        {
+            _convenImageWeight = [ApplicationStyle control_weight:50];
+            
+            break;
+        }
+        case NLCalendarType_Week:
+        {
+            _convenImageWeight = [ApplicationStyle control_weight:90];
+            break;
+        }
+        case NLCalendarType_Month:
+        {
+            _convenImageWeight = [ApplicationStyle control_weight:120];
+            break;
+        }
+        default:
+            break;
+    }
+    
+    if (dataType == NLDataExhibitionType_Sleep) {
+        [self sleepArray:arr strokeColor:strokeColor withColor:withColor type:type];
+    }else if(dataType == NLDataExhibitionType_step){
+        [self stepArray:arr strokeColor:strokeColor withColor:withColor type:type];
+    }
 }
 
 

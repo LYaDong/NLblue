@@ -17,6 +17,8 @@
 @property(nonatomic,strong)NSMutableArray *dataArr;
 @property(nonatomic,assign)CGFloat convenImageWeight;
 @property(nonatomic,strong)NLColumnImage *column;
+@property(nonatomic,assign)NSInteger weekMonthCount;
+@property(nonatomic,strong)UIImageView *imageArrow;
 @end
 
 @implementation NLHealthMangerSleepViewController
@@ -50,15 +52,20 @@
     segement.backGroupColor = [ApplicationStyle subjectShowAllPinkColor];
     segement.titleColor = [UIColor  whiteColor];
     segement.titleFont = [ApplicationStyle textSuperSmallFont];
-    segement.lineHide = NO;
-    segement.lineColor = [UIColor blackColor];
+    segement.lineHide = YES;
     
     LYDSegmentControl *sele = [[LYDSegmentControl alloc] initWithSetSegment:segement frame:frame];
     sele.delegate = self;
     [self.view addSubview:sele];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        _dataArr = [NLSQLData obtainSportDataBig];
+        
+        
+        NSMutableArray *arrs = [NLSQLData sleepDataObtain];
+        NSLog(@"%@",[self sortArrayData:arrs]);
+        
+        [_dataArr removeAllObjects];
+        [_dataArr addObjectsFromArray:arrs];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self imageConvenDataArr:_dataArr type:NLCalendarType_Day];
         });
@@ -75,10 +82,9 @@
     [self.view addSubview:line];
     
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:10])/2, [ApplicationStyle control_height:480] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize] - [ApplicationStyle control_weight:10], [ApplicationStyle control_weight:10], [ApplicationStyle control_weight:10])];
-    view.backgroundColor = [UIColor greenColor];
-    
-    [self.view addSubview:view];
+    _imageArrow = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:28])/2, [ApplicationStyle control_height:480] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize] - [ApplicationStyle control_weight:14], [ApplicationStyle control_weight:28], [ApplicationStyle control_weight:14])];
+    _imageArrow.image = [UIImage imageNamed:@"NL_Step_Arrow"];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:_imageArrow];
     
     
     NSArray *dataLabArr = @[@"23:08",@"07:26",@"07:26",@"3h15m",@"2h15m",@"良"];
@@ -88,12 +94,30 @@
 #pragma mark 系统Delegate
 #pragma mark 自己的Delegate
 - (void)segmentedIndex:(NSInteger)index{
-    
+    [_column removeFromSuperview];
+    switch (index) {
+        case NLCalendarType_Day:
+        {
+            [self imageConvenDataArr:_dataArr type:NLCalendarType_Day];
+            break;
+        }
+        case NLCalendarType_Week:
+        {
+            _weekMonthCount = 7;
+            [self imageConvenDataArr:[self dataThreeData:_dataArr] type:NLCalendarType_Week];
+            break;
+        }
+        case NLCalendarType_Month:
+        {
+            _weekMonthCount = 30;
+            [self imageConvenDataArr:[self dataThreeData:_dataArr] type:NLCalendarType_Month];
+            break;
+        }
+        default:
+            break;
+    }
 }
 -(void)stepAndColAndTime:(NSArray *)arr{
-    
-    
-    
     _labViewBack = [[UIView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT - [ApplicationStyle control_height:492], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle control_height:492])];
     _labViewBack.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_labViewBack];
@@ -104,23 +128,13 @@
                                NSLocalizedString(@"NLHealthMangerSleep_ShallowSleepTime", nil),
                                NSLocalizedString(@"NLHealthMangerSleep_DeepSleepTime", nil),
                                NSLocalizedString(@"NLHealthMangerSleep_SleepQualityTime", nil),];
-    //    NSArray *dataLabArr = @[@"300",@"30千米",@"8千卡",@"00小时15分钟"];
-    NSArray *typeLab = @[[NSNumber numberWithInteger:LabTextType_DayStepNum],
-                         [NSNumber numberWithInteger:LabTextType_DayDistance],
-                         [NSNumber numberWithInteger:LabTextType_DayEnergy],
-                         [NSNumber numberWithInteger:LabTextType_DayActovity]];
-    
-    
     for (NSInteger i=0; i<arr.count; i++) {
-        
         CGFloat  x = 0+i % 3 * SCREENWIDTH/3,
         y = [ApplicationStyle control_height:40] + i / 3 * [ApplicationStyle control_height:120],
         w = SCREENWIDTH/3,
         h = [ApplicationStyle control_height:115];
         
         CGRect frams = CGRectMake(x, y, w, h);
-        
-        
         NLStepCountLabView *view = [[NLStepCountLabView alloc] initWithFrame:frams type:0 remarkLabText:remarkLabText[i] dataLabText:arr[i]];
         [_labViewBack addSubview:view];
     }
@@ -136,7 +150,6 @@
         case NLCalendarType_Day:
         {
             _convenImageWeight = [ApplicationStyle control_weight:50];
-            
             break;
         }
         case NLCalendarType_Week:
@@ -154,7 +167,7 @@
     }
     
     CGRect frame = CGRectMake(0, [ApplicationStyle navigationBarSize] + [ApplicationStyle statusBarSize], SCREENWIDTH, [ApplicationStyle control_height:540]);
-    _column = [[NLColumnImage alloc] initWithFrame:frame DataArr:arr strokeColor:[@"882a00" hexStringToColor] withColor:[@"fac96f" hexStringToColor] type:type timeLabArr:nil];
+    _column = [[NLColumnImage alloc] initWithFrame:frame DataArr:arr strokeColor:[@"882a00" hexStringToColor] withColor:[@"fac96f" hexStringToColor] type:type timeLabArr:nil dataType:NLDataExhibitionType_Sleep];
     _column.delegate = self;
     [self.view addSubview:_column];
     
@@ -162,6 +175,9 @@
 #pragma mark 排序
 
 - (NSMutableArray *)sortArrayData:(NSMutableArray *)arr{
+    
+    NSLog(@"%@",arr);
+    
     for (NSInteger i = 0; i<arr.count; i++) {
         for (NSInteger j=i+1; j<arr.count; j++) {
             
@@ -173,12 +189,80 @@
             if (aa<bb) {
                 [arr replaceObjectAtIndex:i withObject:tow];
                 [arr replaceObjectAtIndex:j withObject:one];
-                
             }
         }
     }
     
     return arr;
+}
+#pragma mark 返回7天的数据或者一个月内的数据
+-(NSArray *)dataThreeData:(NSMutableArray *)data{
+    NSLog(@"%@",data);
+    NSMutableArray *arrData = [self sortArrayData:data];
+    
+    NSInteger dayInt = 0;
+    //取出第一条数据，判断是星期几，推断第一个循环
+    NSInteger countS = 0;//总累计数的和
+    
+    NSDate  *currTime = [ApplicationStyle dateTransformationStringWhiffletree:[arrData[0] objectForKey:@"sleepDate"]];
+    
+    if (_weekMonthCount == 7) {
+        countS = [ApplicationStyle currentDayWeek:currTime] - 1;
+    }else{
+        //        countS =  [ApplicationStyle totalDaysInMonth:currTime] - ([ApplicationStyle totalDaysInMonth:currTime] - [ApplicationStyle whatDays:currTime]);
+        countS  = [ApplicationStyle whatDays:currTime];
+    }
+    
+    //放数据的数组
+    NSMutableArray *dataGather = [NSMutableArray array];
+    
+    if (_weekMonthCount ==0) {
+        if (countS == 0) {
+            countS = _weekMonthCount;
+        }
+    }
+    
+    //累加值
+    NSInteger nums = 0;
+    //每7天加一次数据/或者30天加一次数据
+    NSInteger sportCount = 0;
+    NSString *dateTime = nil;
+__goto:
+    dateTime = [arrData[nums] objectForKey:@"sleepDate"];
+    
+    if (countS>arrData.count) {
+        
+    }else{
+        for (NSInteger i=nums; i<countS; i++) {
+            //每7天加一次数据/或者30天加一次数据
+            sportCount =  sportCount + [[arrData[i] objectForKey:@"deepSleep_mins"] integerValue];
+        }
+    }
+    
+    NSLog(@"%@",dateTime);
+    //添加到数组
+    NSDictionary *dic = @{@"deepSleep_mins":[NSNumber numberWithInteger:sportCount],@"sleepDate":dateTime};
+    [dataGather addObject:dic];
+    dayInt  = dayInt - 1;
+    if (_weekMonthCount == 7) {
+        nums =  countS;
+    }else{
+        nums = countS;
+    }
+    if (nums<=arrData.count) {
+        if (_weekMonthCount == 7) {
+            countS = countS + _weekMonthCount;
+        }else{
+            countS = countS + [ApplicationStyle totalDaysInMonth:[ApplicationStyle whatMonth:[NSDate date] timeDay:dayInt]];
+        }
+    }
+    //判断是不是大于总数，如果没有继续算，如果大于则返回数组
+    if (nums >=arrData.count) {
+        return dataGather;
+    }else{
+        sportCount = 0;
+        goto __goto;
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
