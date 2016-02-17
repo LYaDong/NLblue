@@ -19,7 +19,7 @@ static const NSInteger TIMELINE = 90;
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
 #import "NLConnectBloothViewController.h"
-
+#import "SMProgressHUD.h"
 @interface NLHotMoxibustionViewController ()<UIScrollViewDelegate,NLHalfViewDelgate,UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)NLHalfView *temperatureCilcle;
 @property(nonatomic,strong)NSArray *peripheralArray;
@@ -37,6 +37,7 @@ static const NSInteger TIMELINE = 90;
 @property(nonatomic,strong)CTCallCenter *callCenter;
 @property(nonatomic,assign)NSInteger timeInt;
 @property(nonatomic,strong)NSTimer *timeVer;
+@property(nonatomic,assign)NSInteger equipmentStatsCount;
 
 
 
@@ -140,22 +141,6 @@ static const NSInteger TIMELINE = 90;
     self.titles.text = @"热灸";
     
 //    [self upDate];
-    
-    
-    //循环创建数据库
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [NLSQLData canlenderUncomfortable];
-        [NLSQLData insterCanlenderData];
-        
-        [NLSQLData establishSportDataTable];
-        [NLSQLData insterSportData:nil isUpdata:0];
-        
-        [NLSQLData sleepDataTable];
-        [NLSQLData insterSleepData:nil isUpdata:0];
-       dispatch_async(dispatch_get_main_queue(), ^{
-           
-       });
-    });
     
     //判断要不要进入搜索页
     if ([[kAPPDELEGATE._loacluserinfo getBlueToothUUID] length]<=0) {
@@ -266,34 +251,70 @@ static const NSInteger TIMELINE = 90;
 
 #pragma mark 基础UI
 -(void)bulidUI{
-    
-    
+//    [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
+//    [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];//测试睡眠假数据
     
 
+    [self bluetoothConnectOperation];
     
     
-    NSLog(@"%@",[PlistData getUserBloothEquipment]);
+    [self halfCircle];
+    [self estableSqlite];
     
     
+//    [self loadStepData];
     
+}
+-(void)estableSqlite{
+    //循环创建数据库
+    [[SMProgressHUD shareInstancetype] showLoadingWithTip:@"恢复数据中，请耐心等待"];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [NLSQLData canlenderUncomfortable];
+        [NLSQLData insterCanlenderData];
+        
+        [NLSQLData establishSportDataTable];
+        [NLSQLData insterSportData:nil isUpdata:0];
+        
+        [NLSQLData sleepDataTable];
+        [NLSQLData insterSleepData:nil isUpdata:0];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:EstablishDataSqliteNotification object:nil];
+            [self loadStepData];
+            [[SMProgressHUD shareInstancetype] dismiss];
+        });
+    });
+}
+
+-(void)bluetoothConnectOperation{
     
-    
-    
-    
-//    [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
-    [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];//测试睡眠假数据
-    
-    
-    
-    
-    
+    _equipmentStatsCount = 0;
     
     NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
     [blues bluetoothAllocInit];
     blues.getConnectData = ^(NSString *blueData){
-        
-        
         NSLog(@"蓝牙反馈数据：%@",blueData);
+        
+        if ([blueData isEqualToString:EquiomentCommandEndSportBlue]) {
+            _equipmentStatsCount = 1;
+            [self sleepDataQuery];//获取睡眠数据
+        }
+        
+        if (_equipmentStatsCount == 1) {
+            if ([blueData isEqualToString:EquiomentCommandEndSleepBlue]) {
+                [[SMProgressHUD shareInstancetype] dismiss];
+            }
+        }
+        
+        
+        //刷新页面数据
+        if ([blueData isEqualToString:EquiomentCommandEndSleepBlue]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:RefrefhSleepDataNotification object:nil];
+        }
+        if ([blueData isEqualToString:EquiomentCommandEndSportBlue]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:RefrefhStopDataNotification object:nil];
+        }
+        
+        
         
         //获得设备信息
         [NLBluetoothDataAnalytical bluetoothCommandReturnData:blueData];
@@ -301,14 +322,14 @@ static const NSInteger TIMELINE = 90;
         [self temperaturetOFF:blueData];
         //记步
         [self sportData:blueData];
-//        //判断温度
+        //        //判断温度
         [self isTemperatureOff:blueData];
         //睡眠数据
         [self sleepDatas:blueData];
     };
     blues.perheral = ^(NSArray *perpheral){
         _peripheralArray = perpheral;//获得当前的外围设备
-    
+        
     };
     blues.getConnectionSuccess = ^(NSString *connectionSuccess){
         if ([connectionSuccess isEqualToString:EquiomentConnectionSuccess]) {
@@ -316,14 +337,13 @@ static const NSInteger TIMELINE = 90;
             _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect"];
             
             if (!_isQuert) {
-                
+                [[SMProgressHUD shareInstancetype] showLoadingWithTip:@"恢复数据中，请耐心等待"];
                 if (![[kAPPDELEGATE._loacluserinfo getBlueToothTime] isEqualToString:@"1"]) {
                     [kAPPDELEGATE._loacluserinfo bluetoothSetTime:@"1"];
                     [self setTimeEquipment];//设置设备时间
                 }
                 [self judgmentTemperatureQuery];//查询温度
                 [self sportDataQuery];//获得运动数据
-                [self sleepDataQuery];//获取睡眠数据
                 _isQuert = !_isQuert;
             }
         }
@@ -331,17 +351,7 @@ static const NSInteger TIMELINE = 90;
             _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect_N"];
         }
     };
-    
-    
-    
-    
-    
-    [self loadStepData];
-    [self halfCircle];
 }
-
-
-
 -(void)halfCircle{
     
 
@@ -634,15 +644,9 @@ static const NSInteger TIMELINE = 90;
     if (sleepDatas.length<=4) {
         return;
     }
-    
-    
-    
     NSString *format = [sleepDatas substringWithRange:NSMakeRange(0, 4)];
     if ([format isEqualToString:EquiomentCommand_0804]) {
-        
-        NSLog(@"%@",sleepDatas);
-        
-        
+        [_sleepDataArr removeAllObjects];
         [_sleepDataArr addObject:sleepDatas];
         if (_sleepDataArr.count>=4) {
             [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];

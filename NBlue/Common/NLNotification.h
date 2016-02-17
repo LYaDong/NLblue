@@ -11,7 +11,15 @@
 
 
 #define RefreshUserHeadImageSuccessNotification @"RefreshUserHeadImageSuccessNotification"
+//创建数据库通知
+#define EstablishDataSqliteNotification @"EstablishDataSqliteNotification"
 
+#define RefrefhSleepDataNotification @"RefrefhSleepDataNotification"
+#define RefrefhStopDataNotification @"RefrefhStopDataNotification"
+
+/*
+ ================================   L    Y     D    ============================================
+ */
 #define NLConnectBloothSuccessNotification @"NLConnectBloothSuccessNotification"
 #define NLConnectBloothFicaledNotification @"NLConnectBloothFicaledNotification"
 #define NLLogInSuccessNotification @"NLLogInSuccessNotification"
@@ -32,4 +40,5 @@
 #define NLUserUploadUserImageFicaledNotification @"NLUserUploadUserImageFicaledNotification"
 #define NLUsergetUserInformationSuccessNotification @"NLUsergetUserInformationSuccessNotification"
 #define NLUsergetUserInformationFicaledNotification @"NLUsergetUserInformationFicaledNotification"
+//================================   L    Y     D    ============================================
 #endif /* NLNotification_h */

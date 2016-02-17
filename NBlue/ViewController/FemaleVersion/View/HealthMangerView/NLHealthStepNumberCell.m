@@ -32,8 +32,6 @@
     for (NSInteger i=0; i<arrs.count; i++) {
         if ([[NSString stringWithFormat:@"%@",arrs[i]] intValue] > num) {
             num = [[NSString stringWithFormat:@"%@",arrs[i]] intValue];
-        }else{
-            num = 0.1;
         }
     }
     
@@ -47,7 +45,13 @@
     NSMutableArray *dataArray = [NSMutableArray array];
     for (NSInteger i=0; i<arrs.count; i++) {
         NSInteger index = [[NSString stringWithFormat:@"%@",arrs[i]] integerValue];
-        [dataArray addObject:[NSNumber numberWithInteger:index * ([ApplicationStyle control_height:480] * 0.8)/0.1]];
+        
+        if (num == 0) {
+            [dataArray addObject:[NSNumber numberWithInteger:0]];
+        }else{
+           [dataArray addObject:[NSNumber numberWithInteger:index * ([ApplicationStyle control_height:480] * 0.8)/num]];
+        }
+        
     }
 
     

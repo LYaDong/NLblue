@@ -36,8 +36,6 @@
     self.view.backgroundColor = [ApplicationStyle subjectBackViewColor];
     
     NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
-    
-
     _peripheralArray  = blues.arrPeripheral;
     
 

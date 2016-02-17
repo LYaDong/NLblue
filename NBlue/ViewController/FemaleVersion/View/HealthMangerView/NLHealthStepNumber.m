@@ -12,6 +12,7 @@
 #import "NLStepColumnImage.h"
 #import "NLSQLData.h"
 #import "NLHealthStepNumberCell.h"
+#import "NLBluetoothAgreement.h"
 @interface NLHealthStepNumber()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIButton *stepNumber;
 @property(nonatomic,strong)UILabel *maxStepNumber;
@@ -26,6 +27,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self bulidUI];
+        [self notification];
     }
     return self;
 }
@@ -39,6 +41,13 @@
     _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     _tableView.backgroundColor = [UIColor clearColor];
     [self addSubview:_tableView];
+    _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self loadNewData];
+    }];
+}
+-(void)notification{
+    NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
+    [notifi addObserver:self selector:@selector(refishData) name:RefrefhStopDataNotification object:nil];
 }
 -(void)timeDown{
     [_tableView reloadData];
@@ -133,6 +142,11 @@
             }
         }
     }
+    
+    
+    NSLog(@"xxx = %@",sportData);
+    
+    
     [cell histogram:sportData
           sportData:_sportData 
              target:4000];
@@ -142,6 +156,34 @@
     return cell;
 }
 
+
+
+-(void)loadNewData{
+    NSMutableArray *dataArr = [NSMutableArray array];
+    NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
+    dataArr  = blues.arrPeripheral;
+    {
+        Byte byte[20] = {0x08,0x01,0x01,0x01};
+        NSData *data = [NSData dataWithBytes:byte length:20];
+        if (dataArr.count>0) {
+            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:dataArr[0] data:data];
+            NSLog(@"发送命令==  %@",data);
+        }
+    }
+    {
+        Byte byte[20] = {0x08,0x03,0x01};
+        NSData *data = [NSData dataWithBytes:byte length:20];
+        if (dataArr.count>0) {
+            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:dataArr[0] data:data];
+            //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+            NSLog(@"发送命令==  %@",data);
+        }
+    }
+}
+-(void)refishData{
+    [_tableView.mj_header endRefreshing];
+    [self loadData];
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

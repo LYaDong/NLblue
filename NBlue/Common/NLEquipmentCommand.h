@@ -9,6 +9,10 @@
 #ifndef NLEquipmentCommand_h
 #define NLEquipmentCommand_h
 //************************************ 蓝牙 ***********************************
+//结束运动数据传输
+#define EquiomentCommandEndSportBlue @"08ee000000"
+//结束睡眠数据传输
+#define EquiomentCommandEndSleepBlue @"08ee020000"
 #define EquiomentConnectionSuccess @"连接成功"
 #define EquiomentConnectionFiale @"断开连接"
 

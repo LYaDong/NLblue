@@ -361,11 +361,7 @@
         NSArray *small = [arr[0] objectForKey:@"stepFragments"];
         
         for (NSInteger i=0; i<small.count; i++) {
-            
-
             NSString *step = [small[i] objectForKey:@"steps"];
-            
-            
             if (![[NSString stringWithFormat:@"%@",step] isEqualToString:@"0"]) {
                 NSString *insterSmall = @"INSERT OR REPLACE INTO SportDataSmall (calories,ids,steps,distance,seris,activeTime,sportDate) VALUES (?,?,?,?,?,?,?)";
                 NSArray *dataArrSmall = [NSArray arrayWithObjects:

@@ -224,15 +224,10 @@ static NSString *TransLationF1 = @"0AF1";
 
 //    [characteristic.value getBytes:&data];
 //    getBytes:length  新方法 试试
-    
     [characteristic.value getBytes:&data length:characteristic.value.length];
-    
-    
     NSString *value = [self hexStringForData:characteristic.value];
     [self explainOrder:value];
-    
-    
-    
+
 }
 #pragma mark  中心读取外围设备
 -(void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error{

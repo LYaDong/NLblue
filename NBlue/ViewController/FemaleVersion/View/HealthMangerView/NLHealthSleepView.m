@@ -11,10 +11,13 @@
 #import "NlRing.h"
 #import "NLStepImageLabView.h"
 #import "NLSQLData.h"
-@interface NLHealthSleepView()
+#import "MJRefresh.h"
+#import "NLBluetoothAgreement.h"
+@interface NLHealthSleepView()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UILabel *timeSleep;
 @property(nonatomic,strong)UILabel *depthLab;
 @property(nonatomic,strong)NLRing *ring;
+@property(nonatomic,strong)UITableView *mainTableView;
 @end
 
 @implementation NLHealthSleepView
@@ -23,6 +26,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self buildUI];
+        [self notification];
     }
     return self;
 }
@@ -31,6 +35,39 @@
 }
 
 -(void)buildUI{
+    
+    _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.viewWidth, self.viewHeight) style:UITableViewStylePlain];
+    _mainTableView.delegate = self;
+    _mainTableView.dataSource = self;
+    _mainTableView.backgroundColor = [UIColor clearColor];
+    _mainTableView.separatorStyle = UITableViewCellSelectionStyleNone;
+    [self addSubview:_mainTableView];
+    
+    _mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self loadNewData];
+    }];
+}
+
+-(void)notification{
+    NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
+    [notifi addObserver:self selector:@selector(refishData) name:RefrefhSleepDataNotification object:nil];
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return self.viewHeight;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *str = @"LYD";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
+    }
+    cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     CGRect frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:500])/2,([ApplicationStyle control_height:600] - [ApplicationStyle control_height:500])/2, [ApplicationStyle control_weight:500], [ApplicationStyle control_height:500]);
     
     _ring = [[NLRing alloc] init];
@@ -44,21 +81,16 @@
     
     NLRingLine *ringLine = [[NLRingLine alloc] initWithRing:_ring frame:frame];
     ringLine.backgroundColor = [UIColor clearColor];
-    [self addSubview:ringLine];
-
+    [cell addSubview:ringLine];
+    
     
     
     NSMutableArray *sleepData = [NLSQLData sleepDataObtain];
-    
-    NSLog(@"%@",sleepData);
-    
-    
-    
     UILabel *yesterdayLab = [[UILabel alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:128])/2, [ApplicationStyle control_height:220], [ApplicationStyle control_weight:128], [ApplicationStyle control_height:30])];
     yesterdayLab.text = NSLocalizedString(@"NLHealthSleepView_YesterDay", nil);
     yesterdayLab.font = [UIFont  systemFontOfSize:[ApplicationStyle control_weight:28]];
     yesterdayLab.textColor = [self titleColor];
-    [self addSubview:yesterdayLab];
+    [cell addSubview:yesterdayLab];
     
     _timeSleep = [[UILabel alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:300])/2, yesterdayLab.bottomOffset + [ApplicationStyle control_height:20], [ApplicationStyle control_weight:300], [ApplicationStyle control_height:50])];
     _timeSleep.font = [UIFont  fontWithName:@"Helvetica-Bold" size:[ApplicationStyle control_weight:40]];
@@ -70,10 +102,10 @@
     }else{
         total_time = [sleepData[0] objectForKey:@"total_time"];
     }
-
+    
     NSArray *timeSleep = [ApplicationStyle interceptText:[NSString stringWithFormat:@"%0.01f",[total_time integerValue]/60.0f] interceptCharacter:@"."];
     _timeSleep.text = [NSString stringWithFormat:@"%@小时%@分钟",timeSleep[0],timeSleep[1]];
-    [self addSubview:_timeSleep];
+    [cell addSubview:_timeSleep];
     
     _depthLab = [[UILabel alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:300])/2, _timeSleep.bottomOffset + [ApplicationStyle control_height:34], [ApplicationStyle control_weight:300 ], [ApplicationStyle control_height:30])];
     _depthLab.font = [UIFont  fontWithName:@"Helvetica-Bold" size:[ApplicationStyle control_weight:26]];
@@ -91,11 +123,11 @@
     
     NSArray *depthLab = [ApplicationStyle interceptText:[NSString stringWithFormat:@"%0.01f",[deepSleep_mins integerValue]/60.0f] interceptCharacter:@"."];
     _depthLab.text = [ NSString stringWithFormat:@"深度睡眠%@小时%@分钟",depthLab[0],depthLab[1]];
-    [self addSubview:_depthLab];
+    [cell addSubview:_depthLab];
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:40], [ApplicationStyle control_height:600], SCREENWIDTH - [ApplicationStyle control_weight:40 * 2], [ApplicationStyle control_height:1])];
     line.backgroundColor = [self circleBackColor];
-    [self addSubview:line];
+    [cell addSubview:line];
     
     
     NSString *wakeUp = nil;
@@ -109,8 +141,7 @@
     
     NSInteger hourTime = [total_time integerValue]/60;
     NSInteger miueTime = [total_time integerValue]%60;
-    
-    NSLog(@"%@",wakeUpArr);
+
     if (wakeUpArr.count >=2) {
         if ([wakeUpArr[1] integerValue] - miueTime<0) {
             miueTime = [wakeUpArr[1] integerValue] - miueTime + 60;
@@ -151,10 +182,40 @@
                                                                         textNum:timeArr[i]
                                                                           frame:frames];
         viewLab.frame = frames;
-        [self addSubview:viewLab];
+        [cell addSubview:viewLab];
+    }
+    
+    return cell;
+}
+
+-(void)loadNewData{
+    NSMutableArray *dataArr = [NSMutableArray array];
+    NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
+    dataArr  = blues.arrPeripheral;
+    {
+        Byte byte[20] = {0x08,0x01,0x01,0x01};
+        NSData *data = [NSData dataWithBytes:byte length:20];
+        if (dataArr.count>0) {
+            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:dataArr[0] data:data];
+        }
+    }
+    
+    {
+        Byte byte[20] = {0x08,0x04,0x01};
+        NSData *data = [NSData dataWithBytes:byte length:20];
+        if (dataArr.count>0) {
+            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:dataArr[0] data:data];
+        }
     }
 }
 
+-(void)refishData{
+    [_mainTableView.mj_header endRefreshing];
+}
+
+
+
+// 颜色
 - (UIColor *)circleBackColor{
     
     UIColor *color = nil;
