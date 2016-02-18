@@ -22,7 +22,7 @@
  */
 + (long)sixTenHexTeen:(NSString *)num;
 /**
- * 16进制转10进制
+ * 10进制转16进制
  */
 +(NSString *)tenturnSinTenNew:(NSInteger)index;
 /**

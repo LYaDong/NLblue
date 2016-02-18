@@ -93,5 +93,9 @@
  * 获取睡眠数据
  */
 + (NSMutableArray *)sleepDataObtain;
+/**
+ * 根据时间获取当天睡眠数据
+ */
++(NSMutableArray *)sleepDataObtainTime:(NSString *)time;
 
 @end

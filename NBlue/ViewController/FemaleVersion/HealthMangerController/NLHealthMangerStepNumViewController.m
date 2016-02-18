@@ -68,6 +68,10 @@
 
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         _dataArr = [NLSQLData obtainSportDataBig];
+        
+        NSLog(@"%@",_dataArr);
+        
+        
        dispatch_async(dispatch_get_main_queue(), ^{
            [self imageConvenDataArr:_dataArr type:NLCalendarType_Day];
        });

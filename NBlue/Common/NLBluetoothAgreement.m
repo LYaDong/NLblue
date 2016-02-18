@@ -179,6 +179,7 @@ static NSString *TransLationF1 = @"0AF1";
 }
 #pragma mark 断开连接
 -(void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
+    _periperal = nil;
     _connectionSuccess = EquiomentConnectionFiale;
     [self disconnect];
 }
@@ -221,6 +222,13 @@ static NSString *TransLationF1 = @"0AF1";
         return;
     }
     unsigned char data[characteristic.value.length];
+    
+//    [peripheral setNotifyValue:NO forCharacteristic:characteristic];
+//    
+//    // and disconnect from the peripehral
+//    [_manger cancelPeripheralConnection:peripheral];
+    
+    
 
 //    [characteristic.value getBytes:&data];
 //    getBytes:length  新方法 试试
@@ -288,6 +296,18 @@ static NSString *TransLationF1 = @"0AF1";
 #pragma mark --translate zhilin
 -(void)explainOrder:(NSString *)buff
 {
+    
+    if (buff.length <4) {
+        return;
+    }
+    
+    if ([[buff substringWithRange:NSMakeRange(0, 4)] isEqualToString:EquiomentCommand_0201]) {
+        if (self.returnBatteryLevel) {
+            self.returnBatteryLevel(buff);
+        }
+        return;
+    }
+    
     if(self.getConnectData){
         self.getConnectData(buff);
     }

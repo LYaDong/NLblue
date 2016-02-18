@@ -11,15 +11,28 @@
 #import "NLSQLData.h"
 #import "NLBluetoothAgreement.h"
 #import "NLConnectBloothViewController.h"
+#import "TYWaveProgressView.h"
+#import "NLBluetoothDataAnalytical.h"
 @interface NLMyEquipmentController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIImageView *batteryBack;
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableDictionary *cellLabdic;
 @property(nonatomic,strong)NSMutableDictionary *cellCountLabDic;
 @property(nonatomic,strong)NSMutableArray *peripheralArray;
+@property(nonatomic,weak) TYWaveProgressView *waveView;
 @end
 
 @implementation NLMyEquipmentController
+
+-(void)queryBatteryLevel{
+    Byte byte[20] = {0x02,0x01};
+    NSData *data = [NSData dataWithBytes:byte length:20];
+    if (_peripheralArray.count>0) {
+        //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+    }
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,6 +43,8 @@
         self.controllerBack.hidden = YES;
     }
     
+    
+    [self batteryLevelUI];
     _peripheralArray = [NSMutableArray array];
     
     
@@ -37,8 +52,23 @@
     
     NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
     _peripheralArray  = blues.arrPeripheral;
+    blues.returnBatteryLevel = ^(NSString *batteryLevel){
+        long level = [NLBluetoothDataAnalytical sixTenHexTeen:[batteryLevel substringWithRange:NSMakeRange(14, 2)]];
+        
+        CGFloat floatLevel = level*0.01;
+        _waveView.numberLabel.text = [NSString stringWithFormat:@"%ld%@",level,@"%"];
+        _waveView.percent = floatLevel;
+        [_waveView startWave];
+    };
     
-
+    //    0201 dc07 0d 01 00 30 01 00
+    
+    
+    
+    
+    [self queryBatteryLevel];
+    
+    
     
     
     
@@ -56,7 +86,7 @@
     }
     {
         NSDictionary *dic = [NLSQLData getBluetoothEquipmentInformation];
-
+        
         NSString *equiomentName = nil;
         if ([kAPPDELEGATE._loacluserinfo getBluetoothName] == nil) {
             equiomentName = @"您还没有链接任何设备";
@@ -81,11 +111,27 @@
     [super viewWillDisappear:animated];
 }
 #pragma mark 基础UI
+//电池UI
+-(void)batteryLevelUI{
+    TYWaveProgressView *waveProgress = [[TYWaveProgressView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:10], [ApplicationStyle navBarAndStatusBarSize] + [ApplicationStyle control_height:60], [ApplicationStyle control_weight:220], [ApplicationStyle control_weight:220])];
+    //    waveProgress.waveViewMargin = UIEdgeInsetsMake(15, 15, 20, 20);
+    waveProgress.numberLabel.text = @"100%";
+    waveProgress.numberLabel.font = [UIFont boldSystemFontOfSize:[ApplicationStyle control_weight:50]];
+    waveProgress.numberLabel.textColor = [UIColor whiteColor];
+    waveProgress.explainLabel.text = @"电量";
+    waveProgress.explainLabel.font = [UIFont systemFontOfSize:20];
+    waveProgress.explainLabel.textColor = [UIColor whiteColor];
+    waveProgress.percent = 100;
+    [self.view addSubview:waveProgress];
+    _waveView = waveProgress;
+    [waveProgress startWave];
+}
+
 -(void)bulidUI{
-    _batteryBack = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:420])/2, [ApplicationStyle control_height:45] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], [ApplicationStyle control_weight:420], [ApplicationStyle control_height:420])];
-    _batteryBack.layer.cornerRadius = [ApplicationStyle control_weight:420]/2;
-    _batteryBack.image = [UIImage imageNamed:@"battery"];
-    [self.view addSubview:_batteryBack];
+    
+    
+    
+    
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize] + [ApplicationStyle control_height:420], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle navBarAndStatusBarSize] - [ApplicationStyle control_height:420]) style:UITableViewStylePlain];
     _tableView.delegate = self;
@@ -116,7 +162,7 @@
     return [ApplicationStyle control_height:88];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-     NSString *str = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];//以indexPath来唯一确定cell
+    NSString *str = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];//以indexPath来唯一确定cell
     NLMyEquipmentCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
     if (!cell) {
         cell = [[NLMyEquipmentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
@@ -203,13 +249,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

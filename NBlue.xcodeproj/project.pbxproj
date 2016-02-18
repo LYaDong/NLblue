@@ -132,6 +132,8 @@
 		04F7A23F1C57567C0044923B /* NLLHRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7A23E1C57567C0044923B /* NLLHRatingView.m */; };
 		04F7F64E1C1BFC9000466EBC /* NLGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7F64D1C1BFC9000466EBC /* NLGestureRecognizer.m */; };
 		04F7F6E71C2E7F2F009020A0 /* NLUserInformat.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7F6E61C2E7F2F009020A0 /* NLUserInformat.m */; };
+		04FA69281C75A9320063F0DB /* TYWaterWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA69251C75A9320063F0DB /* TYWaterWaveView.m */; };
+		04FA69291C75A9320063F0DB /* TYWaveProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA69271C75A9320063F0DB /* TYWaveProgressView.m */; };
 		04FA89BC1C117E400064F3AA /* NLDatahub.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B71C117E400064F3AA /* NLDatahub.m */; };
 		04FA89BD1C117E400064F3AA /* NLHTTPRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */; };
 		04FB75911C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB75901C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m */; };
@@ -397,6 +399,10 @@
 		04F7F64D1C1BFC9000466EBC /* NLGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLGestureRecognizer.m; sourceTree = "<group>"; };
 		04F7F6E51C2E7F2F009020A0 /* NLUserInformat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLUserInformat.h; sourceTree = "<group>"; };
 		04F7F6E61C2E7F2F009020A0 /* NLUserInformat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLUserInformat.m; sourceTree = "<group>"; };
+		04FA69241C75A9320063F0DB /* TYWaterWaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYWaterWaveView.h; sourceTree = "<group>"; };
+		04FA69251C75A9320063F0DB /* TYWaterWaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYWaterWaveView.m; sourceTree = "<group>"; };
+		04FA69261C75A9320063F0DB /* TYWaveProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYWaveProgressView.h; sourceTree = "<group>"; };
+		04FA69271C75A9320063F0DB /* TYWaveProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYWaveProgressView.m; sourceTree = "<group>"; };
 		04FA89B51C117E400064F3AA /* NLApiURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLApiURL.h; sourceTree = "<group>"; };
 		04FA89B61C117E400064F3AA /* NLDatahub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLDatahub.h; sourceTree = "<group>"; };
 		04FA89B71C117E400064F3AA /* NLDatahub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLDatahub.m; sourceTree = "<group>"; };
@@ -957,6 +963,7 @@
 		04CD230E1C2930F700AB467A /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				04FA69231C75A9320063F0DB /* BatteryLevel */,
 				045D03E21C746FC7006F0653 /* MJRefresh */,
 				04FC23891C51C3A100FC4FDA /* MIPushSDK */,
 				040E12561C48DA1400769AD1 /* SMProgresHUD */,
@@ -992,6 +999,17 @@
 				04F4B7C31C07FA7100DE60DE /* battery@3x.png */,
 			);
 			path = TestImage;
+			sourceTree = "<group>";
+		};
+		04FA69231C75A9320063F0DB /* BatteryLevel */ = {
+			isa = PBXGroup;
+			children = (
+				04FA69241C75A9320063F0DB /* TYWaterWaveView.h */,
+				04FA69251C75A9320063F0DB /* TYWaterWaveView.m */,
+				04FA69261C75A9320063F0DB /* TYWaveProgressView.h */,
+				04FA69271C75A9320063F0DB /* TYWaveProgressView.m */,
+			);
+			path = BatteryLevel;
 			sourceTree = "<group>";
 		};
 		04FA89B31C117E060064F3AA /* Model */ = {
@@ -1338,6 +1356,7 @@
 				04018C301C3CB9B7009AC56A /* NLHalfView.m in Sources */,
 				04F762D71C44A54C003DBE4D /* NLQRCodeViewController.m in Sources */,
 				04018C151C3CB914009AC56A /* NLShareController.m in Sources */,
+				04FA69281C75A9320063F0DB /* TYWaterWaveView.m in Sources */,
 				04018C161C3CB914009AC56A /* NLAboutImageBtn.m in Sources */,
 				04CD23121C29310100AB467A /* OLGhostAlertView.m in Sources */,
 				04018C071C3CB914009AC56A /* NLForgetPasswordViewController.m in Sources */,
@@ -1380,6 +1399,7 @@
 				045D041A1C746FC7006F0653 /* MJRefreshGifHeader.m in Sources */,
 				040E12621C48DA1400769AD1 /* SMProgressHUD.m in Sources */,
 				04018C211C3CB914009AC56A /* NLHealthSleepView.m in Sources */,
+				04FA69291C75A9320063F0DB /* TYWaveProgressView.m in Sources */,
 				04018C0F1C3CB914009AC56A /* NLFeedBackViewController.m in Sources */,
 				04018CEE1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m in Sources */,
 				045D041E1C746FC7006F0653 /* MJRefreshConst.m in Sources */,

@@ -85,7 +85,14 @@
     
     
     
-    NSMutableArray *sleepData = [NLSQLData sleepDataObtain];
+    
+
+    
+    NSMutableArray *sleepData = [NLSQLData sleepDataObtainTime:[ApplicationStyle datePickerTransformationCorss:[NSDate date]]];
+    NSLog(@"%@",sleepData);
+    
+    
+    
     UILabel *yesterdayLab = [[UILabel alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:128])/2, [ApplicationStyle control_height:220], [ApplicationStyle control_weight:128], [ApplicationStyle control_height:30])];
     yesterdayLab.text = NSLocalizedString(@"NLHealthSleepView_YesterDay", nil);
     yesterdayLab.font = [UIFont  systemFontOfSize:[ApplicationStyle control_weight:28]];

@@ -258,20 +258,23 @@
                 days = [NSString stringWithFormat:@"0%ld",(long)dayInt - i];
             }
             
+            NSString *times = [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days];
+            if ([[self repeatStopDataTime:times] count]==0) {
+                NSString *inster = @"INSERT OR REPLACE INTO SportDataBig (sportDate,count,distanceAmount,caloriesAmount,stepsAmount,user_id,isUpData,timestamp) VALUES (?,?,?,?,?,?,?,?)";
+                NSArray *dataArrBig = [NSArray arrayWithObjects:
+                                       [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days],
+                                       @"0",
+                                       @"0",
+                                       @"0",
+                                       @"0",
+                                       [kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                       @"0",
+                                       @"0",
+                                       nil];
+                
+                [db executeUpdate:inster withArgumentsInArray:dataArrBig];
+            }
             
-            NSString *inster = @"INSERT OR REPLACE INTO SportDataBig (sportDate,count,distanceAmount,caloriesAmount,stepsAmount,user_id,isUpData,timestamp) VALUES (?,?,?,?,?,?,?,?)";
-            NSArray *dataArrBig = [NSArray arrayWithObjects:
-                                [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days],
-                                @"",
-                                @"",
-                                @"",
-                                @"0",
-                                [kAPPDELEGATE._loacluserinfo GetUser_ID],
-                                @"",
-                                @"",
-                                nil];
-            
-            [db executeUpdate:inster withArgumentsInArray:dataArrBig];
             
             if ([[kAPPDELEGATE._loacluserinfo getUserLogInTime] isEqualToString:[NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days]]) {
                 return;
@@ -312,21 +315,22 @@
                 [db close];
                 return;
             }
-            
-            NSString *inster = @"INSERT OR REPLACE INTO SportDataBig (sportDate,count,distanceAmount,caloriesAmount,stepsAmount,user_id,isUpData,timestamp) VALUES (?,?,?,?,?,?,?,?)";
-            NSArray *dataArrBig = [NSArray arrayWithObjects:
-                                [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days],
-                                @"",
-                                @"",
-                                @"",
-                                @"0",
-                                [kAPPDELEGATE._loacluserinfo GetUser_ID],
-                                @"",
-                                @"",
-                                nil];
-            
-            [db executeUpdate:inster withArgumentsInArray:dataArrBig];
-            
+            NSString *times = [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days];
+            if ([[self repeatStopDataTime:times] count]==0) {
+                NSString *inster = @"INSERT OR REPLACE INTO SportDataBig (sportDate,count,distanceAmount,caloriesAmount,stepsAmount,user_id,isUpData,timestamp) VALUES (?,?,?,?,?,?,?,?)";
+                NSArray *dataArrBig = [NSArray arrayWithObjects:
+                                       [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days],
+                                       @"0",
+                                       @"0",
+                                       @"0",
+                                       @"0",
+                                       [kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                       @"0",
+                                       @"0",
+                                       nil];
+                
+                [db executeUpdate:inster withArgumentsInArray:dataArrBig];
+            }
             
             if ([[kAPPDELEGATE._loacluserinfo getUserLogInTime] isEqualToString:establishTime]) {
                 return;
@@ -337,6 +341,8 @@
         goto __goto;
     }
 }
+
+
 
 +(void)upDataSport:(NSArray *)arr isUpdata:(NSInteger)updata{
     FMDatabase *db = [self sqlDataRoute];
@@ -379,6 +385,18 @@
         }
     }
     [db close];
+}
+//检查重复数据
++(NSMutableDictionary *)repeatStopDataTime:(NSString *)time{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *takeCreate = [NSString stringWithFormat:@"SELECT * FROM SportDataBig WHERE sportDate = '%@' and user_id = '%@'",time,[kAPPDELEGATE._loacluserinfo GetUser_ID]];
+    FMResultSet *rs = [db executeQuery:takeCreate];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    while ([rs next]) {
+        [dic setValue:[rs stringForColumn:@"count"] forKey:@"count"];
+    }
+    return dic;
 }
 
 +(NSMutableArray *)sportDataObtainTimeStr:(NSString *)timeStr{
@@ -814,6 +832,30 @@ __goto:
     return array;
 }
 
++(NSMutableArray *)sleepDataObtainTime:(NSString *)time{
+    NSMutableArray *array = [NSMutableArray array];
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *takeCreate = [NSString stringWithFormat:@"SELECT * FROM SleepData WHERE user_id = '%@' and sleepDate = '%@'",[kAPPDELEGATE._loacluserinfo GetUser_ID],time];
+    FMResultSet *rs = [db executeQuery:takeCreate];
+    while ([rs next]) {
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        [dic setValue:[rs stringForColumn:@"sleepDate"] forKey:@"sleepDate"];
+        [dic setValue:[rs stringForColumn:@"endSleep_Time"] forKey:@"endSleep_Time"];
+        [dic setValue:[rs stringForColumn:@"total_time"] forKey:@"total_time"];
+        [dic setValue:[rs stringForColumn:@"lightSleep_count"] forKey:@"lightSleep_count"];
+        [dic setValue:[rs stringForColumn:@"deepSleep_count"] forKey:@"deepSleep_count"];
+        [dic setValue:[rs stringForColumn:@"awake_count"] forKey:@"awake_count"];
+        [dic setValue:[rs stringForColumn:@"lightSleep_mins"] forKey:@"lightSleep_mins"];
+        [dic setValue:[rs stringForColumn:@"deepSleep_mins"] forKey:@"deepSleep_mins"];
+        [dic setValue:[rs stringForColumn:@"user_id"] forKey:@"user_id"];
+        [dic setValue:[rs stringForColumn:@"timestamp"] forKey:@"timestamp"];
+        [array addObject:dic];
+    }
+    [db close];
+    return array;
+}
+
 +(NSMutableDictionary *)sleepDayData:(NSString *)dayTime{
     FMDatabase *db = [self sqlDataRoute];
     [db open];
@@ -824,7 +866,6 @@ __goto:
         [dic setValue:[rs stringForColumn:@"endSleep_Time"] forKey:@"endSleep_Time"];
     }
     return dic;
-    
 }
 
 @end

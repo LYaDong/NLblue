@@ -11,11 +11,13 @@ typedef void  (^GetBlueData) (NSString *connect);
 typedef void (^Peripheral) (NSArray *perheral);
 typedef void (^ConnectionSuccess) (NSString *connectionSuccess);
 typedef void (^EquipmentArray)(NSArray *equipment);
+typedef void(^RetirnBatteryLevel) (NSString *batteryLevel);
 @interface NLBluetoothAgreement : NSObject
 @property(nonatomic,strong)GetBlueData getConnectData;
 @property(nonatomic,strong)Peripheral perheral;
 @property(nonatomic,strong)ConnectionSuccess getConnectionSuccess;
 @property(nonatomic,strong)EquipmentArray getEquiment;
+@property(nonatomic,strong)RetirnBatteryLevel returnBatteryLevel;
 @property(nonatomic,strong)NSMutableArray *arrPeripheral;//传设备名字
 +(NLBluetoothAgreement *)shareInstance;
 -(void)bluetoothAllocInit;

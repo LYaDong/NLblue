@@ -275,9 +275,10 @@ static const NSInteger TIMELINE = 90;
         [NLSQLData establishSportDataTable];
         [NLSQLData insterSportData:nil isUpdata:0];
         
+        
         [NLSQLData sleepDataTable];
         [NLSQLData insterSleepData:nil isUpdata:0];
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{            
             [[NSNotificationCenter defaultCenter] postNotificationName:EstablishDataSqliteNotification object:nil];
             [self loadStepData];
             [[SMProgressHUD shareInstancetype] dismiss];
@@ -296,6 +297,7 @@ static const NSInteger TIMELINE = 90;
         
         if ([blueData isEqualToString:EquiomentCommandEndSportBlue]) {
             _equipmentStatsCount = 1;
+            [_sleepDataArr removeAllObjects];
             [self sleepDataQuery];//获取睡眠数据
         }
         
@@ -644,11 +646,18 @@ static const NSInteger TIMELINE = 90;
     if (sleepDatas.length<=4) {
         return;
     }
+    
     NSString *format = [sleepDatas substringWithRange:NSMakeRange(0, 4)];
     if ([format isEqualToString:EquiomentCommand_0804]) {
-        [_sleepDataArr removeAllObjects];
+
         [_sleepDataArr addObject:sleepDatas];
-        if (_sleepDataArr.count>=4) {
+        
+
+//        NSLog(@"%@",[NLBluetoothDataAnalytical tenturnSinTenNew:[[sleepDatas substringWithRange:NSMakeRange(sleepDatas.length-2, 2)] integerValue]]);
+        
+        
+        NSString *count = [NLBluetoothDataAnalytical tenturnSinTenNew:[[sleepDatas substringWithRange:NSMakeRange(sleepDatas.length-2, 2)] integerValue]];
+        if (_sleepDataArr.count>=[count integerValue]) {
             [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];
         }
     }
