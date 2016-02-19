@@ -19,6 +19,7 @@
 @property(nonatomic,assign)NSInteger width;
 @property(nonatomic,strong)UIColor *starColor;
 @property(nonatomic,strong)UIColor *endColor;
+@property(nonatomic,assign)BOOL temperatureBOOL;
 
 
 @end
@@ -34,6 +35,7 @@
                    starColor:(UIColor *)starColor
                     endColor:(UIColor *)endColor{
     if (self = [super initWithFrame:frame]) {
+        _temperatureBOOL = NO;//判断让不让禁止滑动
         _num = num;
         _index = index;
         _redius = redius;
@@ -42,6 +44,7 @@
         _endColor = endColor;
         _gestureRecognizer = [[NLGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
         [self addGestureRecognizer:_gestureRecognizer];
+        [self temperatureNotification];
 
     }
     return self;
@@ -152,37 +155,51 @@
 
 #pragma mark 处理滑动收拾
 - (void)handleGesture:(NLGestureRecognizer *)gesture{
-    //    //    1 . 中点角
-    CGFloat midPointAngle = (2 * M_PI + _startAngle - _endAngle) / 2 + _endAngle;
-    //    2 . 确保角在一个合适的范围内
-    CGFloat boundedAngle = gesture.touchAngle;
-    if (boundedAngle > midPointAngle) {
-        boundedAngle -= 2*M_PI;
+    if (_temperatureBOOL==NO) {
+        //    //    1 . 中点角
+        CGFloat midPointAngle = (2 * M_PI + _startAngle - _endAngle) / 2 + _endAngle;
+        //    2 . 确保角在一个合适的范围内
+        CGFloat boundedAngle = gesture.touchAngle;
+        if (boundedAngle > midPointAngle) {
+            boundedAngle -= 2*M_PI;
+            
+        }else if(boundedAngle<(midPointAngle - 2 *M_PI)){
+            boundedAngle +=2 *M_PI;
+        }
+        //    3 . 在适当范围内约束角度
+        boundedAngle = MIN(_endAngle, MAX(_startAngle, boundedAngle));     //???
+        //    4 . 将角度转为值
+        CGFloat angleRange = _endAngle - _startAngle;
+        CGFloat valueRange = 1 - 0;
+        CGFloat valueForAngle = (boundedAngle - _startAngle)/angleRange * valueRange + 0;
+        //要滑动的值 - 起点值  / 角度值  *  差值  + 最小值     =   最终角度值
         
-    }else if(boundedAngle<(midPointAngle - 2 *M_PI)){
-        boundedAngle +=2 *M_PI;
+        _index = valueForAngle * 51;
+        [self.delegate indexNum:_index];
+        
+        
+        if (gesture.state == UIGestureRecognizerStateEnded) {
+            [self.delegate gestureRecognizerStateEnded:_index];
+        }
+        [self setNeedsDisplay];
     }
-    //    3 . 在适当范围内约束角度
-    boundedAngle = MIN(_endAngle, MAX(_startAngle, boundedAngle));     //???
-    //    4 . 将角度转为值
-    CGFloat angleRange = _endAngle - _startAngle;
-    CGFloat valueRange = 1 - 0;
-    CGFloat valueForAngle = (boundedAngle - _startAngle)/angleRange * valueRange + 0;
-    //要滑动的值 - 起点值  / 角度值  *  差值  + 最小值     =   最终角度值
-    
-    _index = valueForAngle * 51;
-    [self.delegate indexNum:_index];
-    
-    
-    if (gesture.state == UIGestureRecognizerStateEnded) {
-        [self.delegate gestureRecognizerStateEnded:_index];
-    }
-
-    [self setNeedsDisplay];
 }
 - (void)setIndexTemp:(NSInteger)indexTemp{
     _index = indexTemp;
     [self setNeedsDisplay];
+}
+
+-(void)temperatureNotification{
+    NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
+    [notifi addObserver:self selector:@selector(temperatureNotifi:) name:TemperatureSetNotification object:nil];
+}
+-(void)temperatureNotifi:(NSNotification *)notifi{
+    if ([notifi.object isEqualToString:TemperatureSetAgreeNotification]) {
+       _temperatureBOOL = NO;
+    }else{
+        _temperatureBOOL = YES;
+    }
+    
 }
 
 /*

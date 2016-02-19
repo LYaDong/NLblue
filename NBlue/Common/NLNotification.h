@@ -17,6 +17,15 @@
 #define RefrefhSleepDataNotification @"RefrefhSleepDataNotification"
 #define RefrefhStopDataNotification @"RefrefhStopDataNotification"
 
+//滑动通知
+#define TemperatureSetNotification @"TemperatureSetNotification"
+//温度滑动禁止
+#define TemperatureSetProhibitNotification @"TemperatureSetProhibitNotification"
+//同意滑动
+#define TemperatureSetAgreeNotification @"TemperatureSetAgreeNotification"
+
+
+
 /*
  ================================   L    Y     D    ============================================
  */

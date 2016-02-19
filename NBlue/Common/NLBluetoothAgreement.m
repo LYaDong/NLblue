@@ -205,11 +205,40 @@ static NSString *TransLationF1 = @"0AF1";
 #pragma mark 搜索到周围设备的特点
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error{
     
+    
+    
+    
+    
+//    NSLog(@"peripheral = %@  \n  service %@     ",peripheral,service.characteristics);
+    
+    
+    
+    
+    
     for (CBCharacteristic *c in service.characteristics) {
+        
+        NSLog(@"CBCharacteristic  ==    %@",c);
+        
         [_dataCharcteristics addObject:c];
         //给所有外设发送通知其代理，获取新的值
         [peripheral setNotifyValue:YES forCharacteristic:c];
     }
+    
+    
+    //获取Characteristic的值，读到数据会进入方法：-(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+//    for (CBCharacteristic *characteristic in service.characteristics){
+//        {
+//            [peripheral readValueForCharacteristic:characteristic];
+//        }
+//    }
+    
+//    //搜索Characteristic的Descriptors，读到数据会进入方法：-(void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+//    for (CBCharacteristic *characteristic in service.characteristics){
+//        [peripheral discoverDescriptorsForCharacteristic:characteristic];
+//    }
+    
+    
+    
     
 }
 
@@ -256,6 +285,22 @@ static NSString *TransLationF1 = @"0AF1";
         
     }
 }
+
+//设置通知
+-(void)notifyCharacteristic:(CBPeripheral *)peripheral
+             characteristic:(CBCharacteristic *)characteristic{
+    //设置通知，数据通知会进入：didUpdateValueForCharacteristic方法
+    [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+    
+}
+
+//取消通知
+-(void)cancelNotifyCharacteristic:(CBPeripheral *)peripheral
+                   characteristic:(CBCharacteristic *)characteristic{
+    
+    [peripheral setNotifyValue:NO forCharacteristic:characteristic];
+}
+
 #pragma mark 暂且用不到
 /*
 #pragma  mark 把字符串转为Data
@@ -301,7 +346,7 @@ static NSString *TransLationF1 = @"0AF1";
         return;
     }
     
-    if ([[buff substringWithRange:NSMakeRange(0, 4)] isEqualToString:EquiomentCommand_0201]) {
+    if ([[buff substringWithRange:NSMakeRange(0, 4)] isEqualToString:EquiomentCommand_0201] || [[buff substringWithRange:NSMakeRange(0, 4)] isEqualToString:EquiomentCommand_9004]) {
         if (self.returnBatteryLevel) {
             self.returnBatteryLevel(buff);
         }

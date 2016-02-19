@@ -17,6 +17,7 @@
 #define EquiomentConnectionFiale @"断开连接"
 
 #define EquiomentCommand_0201 @"0201"
+#define EquiomentCommand_9004 @"9004"
 #define EquiomentCommand_0901 @"0901"
 #define EquiomentCommand_0803 @"0803"
 #define EquiomentCommand_0804 @"0804"

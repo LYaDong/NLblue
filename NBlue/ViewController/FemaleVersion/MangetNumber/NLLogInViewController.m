@@ -70,6 +70,9 @@ static const NSInteger THIRDBTNTAG = 4000;
         text.borderStyle = UITextBorderStyleNone;
         text.tag = TEXT_TAG + i;
         [self.view addSubview:text];
+        if (i==0) {
+            text.keyboardType = UIKeyboardTypeNumberPad;
+        }
         
         if (i==1) {
             text.secureTextEntry=YES;
@@ -153,6 +156,10 @@ static const NSInteger THIRDBTNTAG = 4000;
 -(void)logInDown{
     UITextField *textPhone = (UITextField *)[self.view viewWithTag:TEXT_TAG];
     UITextField *textPassWord = (UITextField *)[self.view viewWithTag:TEXT_TAG + 1];
+    
+    [textPhone resignFirstResponder];
+    [textPassWord resignFirstResponder];
+    
     if (textPhone.text.length == 0) {
        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"请输入手机号"];
         return;

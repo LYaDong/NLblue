@@ -134,11 +134,11 @@ static NSString *NLSportApi = @"/sport";//各个接口端
     [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,user_ForgetPassWord] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserForgetPassWordSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
         });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewFicaledNotification object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLUserForgetPassWordFicaledNotification object:nil userInfo:nil];
         });
     }];
 

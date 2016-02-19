@@ -20,7 +20,6 @@ static const NSInteger BTNPHOTO = 4000;
 @property(nonatomic,strong)UIView *viewPhoto;
 @property(nonatomic,strong)UIImagePickerController *picker;
 @property(nonatomic,strong)UIButton *blackView;
-@property(nonatomic,strong)NLIndividuaFormaCell *cell;
 @property(nonatomic,strong)UIImageView *userHeadImage;
 @property(nonatomic,strong)NLPickView *pickerView;
 @property(nonatomic,strong)NSMutableArray *headArray;
@@ -188,72 +187,74 @@ static const NSInteger BTNPHOTO = 4000;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *str = @"LYD";
-    _cell = [tableView dequeueReusableCellWithIdentifier:str];
-    if (!_cell) {
-        _cell = [[NLIndividuaFormaCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
+    NLIndividuaFormaCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
+    if (!cell) {
+        cell = [[NLIndividuaFormaCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
         UIView *viewLineOn = [[UIView alloc] init];
         viewLineOn.backgroundColor = [ApplicationStyle subjectLineViewColor];
+//        viewLineOn.backgroundColor = [UIColor redColor];
         viewLineOn.tag = 100;
-        [_cell addSubview:viewLineOn];
+        [cell addSubview:viewLineOn];
         
         UIView *viewLineUnder = [[UIView alloc] init];
         viewLineUnder.backgroundColor = [ApplicationStyle subjectLineViewColor];
+//        viewLineUnder.backgroundColor = [UIColor purpleColor];
         viewLineUnder.tag = 200;
-        [_cell addSubview:viewLineUnder];
+        [cell addSubview:viewLineUnder];
     }
-    UILabel *viewLineOn = (UILabel *)[_cell viewWithTag:100];
-    UILabel *viewLineUnder = (UILabel *)[_cell viewWithTag:200];
+    UILabel *viewLineOn = (UILabel *)[cell viewWithTag:100];
+    UILabel *viewLineUnder = (UILabel *)[cell viewWithTag:200];
     
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            _cell.cellHeadTitleLab.frame = CGRectMake([ApplicationStyle control_weight:36], 0, [ApplicationStyle control_weight:300], [ApplicationStyle control_height:170]);
-            _cell.imageArrow.frame = CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:24] - [ApplicationStyle control_weight:16], ([ApplicationStyle control_height:170] - [ApplicationStyle control_height:24])/2, [ApplicationStyle control_weight:16], [ApplicationStyle control_height:24]);
+            cell.cellHeadTitleLab.frame = CGRectMake([ApplicationStyle control_weight:36], 0, [ApplicationStyle control_weight:300], [ApplicationStyle control_height:170]);
+            cell.imageArrow.frame = CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:24] - [ApplicationStyle control_weight:16], ([ApplicationStyle control_height:170] - [ApplicationStyle control_height:24])/2, [ApplicationStyle control_weight:16], [ApplicationStyle control_height:24]);
             _userHeadImage = [[UIImageView alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:54] - [ApplicationStyle control_weight:120], ([ApplicationStyle control_height:170] - [ApplicationStyle control_height:120])/2, [ApplicationStyle control_weight:120], [ApplicationStyle control_height:120])];
             
             _userHeadImage.layer.cornerRadius = [ApplicationStyle control_weight:120]/2;
             _userHeadImage.layer.borderWidth = [ApplicationStyle control_weight:3];
             _userHeadImage.layer.borderColor = [UIColor whiteColor].CGColor;
             _userHeadImage.clipsToBounds = YES;
-            [_cell addSubview:_userHeadImage];
-            _cell.cellimageUrl.hidden = YES;
+            [cell addSubview:_userHeadImage];
+            cell.cellimageUrl.hidden = YES;
 
         }
-        _cell.cellHeadTitleLab.text = [[_individuaDataDic objectForKey:@"headNameArr"] objectAtIndex:indexPath.row];
+        cell.cellHeadTitleLab.text = [[_individuaDataDic objectForKey:@"headNameArr"] objectAtIndex:indexPath.row];
         
         
         if (indexPath.row==0) {
-            [_userHeadImage sd_setImageWithURL:[NSURL URLWithString:[_userCountDataDic objectForKey:@"imageUrl"]] placeholderImage:nil];
+            [_userHeadImage sd_setImageWithURL:[NSURL URLWithString:[_userCountDataDic objectForKey:@"imageUrl"]] placeholderImage:[UIImage imageNamed:@"User_Head"]];
         }else{
-            _cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"userName"];
+            cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"userName"];
         }
 
         
     }else if (indexPath.section == 1){
         
-        _cell.cellHeadTitleLab.text = [[_individuaDataDic objectForKey:@"measUrements"] objectAtIndex:indexPath.row];
+        cell.cellHeadTitleLab.text = [[_individuaDataDic objectForKey:@"measUrements"] objectAtIndex:indexPath.row];
         
         if (indexPath.row==0) {
-           _cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"age"];
+           cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"age"];
         }else if (indexPath.row == 1){
-            _cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"height"];
+            cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"height"];
         }else{
-            _cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"width"];
+            cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"width"];
         }
     }else{
-        _cell.cellHeadTitleLab.text = [[_individuaDataDic objectForKey:@"period"] objectAtIndex:indexPath.row];
+        cell.cellHeadTitleLab.text = [[_individuaDataDic objectForKey:@"period"] objectAtIndex:indexPath.row];
         
         if (indexPath.row==0) {
-            _cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"periodTime"];
+            cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"periodTime"];
         }else{
-            _cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"cycleTime"];
+            cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"cycleTime"];
         }
     }
     
-    [self cellLineView:indexPath viewLineOn:viewLineOn viewLineUnder:viewLineUnder cell:_cell];
+    [self cellLineView:indexPath viewLineOn:viewLineOn viewLineUnder:viewLineUnder cell:cell];
     
     
-    return _cell;
+    return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -447,20 +448,20 @@ static const NSInteger BTNPHOTO = 4000;
          viewLineOn:(UIView *)viewLineOn
       viewLineUnder:(UIView *)viewLineUnder
                cell:(NLIndividuaFormaCell *)cell{
-    
+
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             viewLineOn.frame = CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle control_height:2]);
         }else if (indexPath.row == [[_individuaDataDic objectForKey:@"headNameArr"] count] -1){
             viewLineOn.frame = CGRectMake([ApplicationStyle control_weight:20], 0, SCREENWIDTH - [ApplicationStyle control_weight:20], [ApplicationStyle control_height:2]);
-            viewLineUnder.frame = CGRectMake(0, cell.frame.size.height - [ApplicationStyle control_height:2], SCREENWIDTH, [ApplicationStyle control_height:2]);
+            viewLineUnder.frame = CGRectMake(0, [ApplicationStyle control_height:88 - 2], SCREENWIDTH, [ApplicationStyle control_height:2]);
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
             viewLineOn.frame = CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle control_height:2]);
         }else if (indexPath.row == [[_individuaDataDic objectForKey:@"measUrements"] count] -1){
             viewLineOn.frame = CGRectMake([ApplicationStyle control_weight:20], 0, SCREENWIDTH - [ApplicationStyle control_weight:20], [ApplicationStyle control_height:2]);
-            viewLineUnder.frame = CGRectMake(0, cell.frame.size.height - [ApplicationStyle control_height:2], SCREENWIDTH, [ApplicationStyle control_height:2]);
+            viewLineUnder.frame = CGRectMake(0, [ApplicationStyle control_height:88 - 2], SCREENWIDTH, [ApplicationStyle control_height:2]);
         }else{
             viewLineOn.frame = CGRectMake([ApplicationStyle control_weight:20], 0, SCREENWIDTH - [ApplicationStyle control_weight:20], [ApplicationStyle control_height:2]);
         }

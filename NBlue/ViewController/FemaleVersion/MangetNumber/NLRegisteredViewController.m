@@ -70,6 +70,10 @@ static const NSInteger TEXTFILED_TAG = 1000;
         textFiled.textColor = [ApplicationStyle subjectPinkColor];
         [self.view addSubview:textFiled];
         
+        if (i==0 || i==1) {
+            textFiled.keyboardType = UIKeyboardTypeNumberPad;
+        }
+        
         if (i==1) {
             textFiled.frame = CGRectMake([ApplicationStyle control_weight:20], [ApplicationStyle navigationBarSize] + [ApplicationStyle statusBarSize] + i * [ApplicationStyle control_height:110], SCREENWIDTH - [ApplicationStyle control_weight:200], [ApplicationStyle control_height:90]);
             UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:200], [ApplicationStyle navigationBarSize] + [ApplicationStyle statusBarSize] + i * [ApplicationStyle control_height:110], [ApplicationStyle control_weight:1], [ApplicationStyle control_height:90])];

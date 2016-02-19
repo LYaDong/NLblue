@@ -52,16 +52,12 @@
 -(void)notification{
     NSNotificationCenter *userHeadImageNotifi= [NSNotificationCenter defaultCenter];
     [userHeadImageNotifi addObserver:self selector:@selector(userHeadImageNotifiDown) name:RefreshUserHeadImageSuccessNotification object:nil];
-    
-    
 }
 
 #pragma mark 基础UI
 -(void)bulidUI{
     
     NSDictionary *dicImage = [PlistData getIndividuaData];
-
-
     _userHeadImage = [UIButton buttonWithType:UIButtonTypeCustom];
     _userHeadImage.backgroundColor = [UIColor redColor];
     _userHeadImage.frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:128])/2, [ApplicationStyle control_height:10] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], [ApplicationStyle control_weight:128], [ApplicationStyle control_weight:128]);
@@ -73,29 +69,21 @@
     [self.view addSubview:_userHeadImage];
     
     _userImage = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:128])/2, [ApplicationStyle control_height:10] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], [ApplicationStyle control_weight:128], [ApplicationStyle control_weight:128])];
-    [_userImage sd_setImageWithURL:[NSURL URLWithString:[dicImage objectForKey:@"imageUrl"]] placeholderImage:nil];
+    [_userImage sd_setImageWithURL:[NSURL URLWithString:[dicImage objectForKey:@"imageUrl"]] placeholderImage:[UIImage imageNamed:@"User_Head"]];
     _userImage.layer.cornerRadius = [ApplicationStyle control_weight:128]/2;
     _userImage.layer.borderWidth = [ApplicationStyle control_weight:3];
     _userImage.layer.borderColor = [UIColor whiteColor].CGColor;
     _userImage.clipsToBounds = YES;
     [self.view addSubview:_userImage];
     
-    
-    
-    
     CGSize ss = [ApplicationStyle textSize:[dicImage objectForKey:@"userName"] font:[ApplicationStyle textThrityFont] size:SCREENWIDTH];
     
     _userNameLab = [[UILabel alloc] initWithFrame:CGRectMake((SCREENWIDTH - ss.width)/2, _userHeadImage.bottomOffset + [ApplicationStyle control_height:26], ss.width, [ApplicationStyle control_height:34])];
     _userNameLab.font = [ApplicationStyle textThrityFont];
     _userNameLab.text = [dicImage objectForKey:@"userName"];
-
     _userNameLab.textAlignment = NSTextAlignmentCenter;
     _userNameLab.textColor = [UIColor whiteColor];
     [self.view addSubview:_userNameLab];
-    
-    
-
-    
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle control_height:410], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle control_height:410] - [ApplicationStyle tabBarSize]) style:UITableViewStylePlain];
     _tableView.delegate = self;
@@ -110,14 +98,12 @@
 
 -(void)userHeadImageNotifiDown{
     NSDictionary *dicImage = [PlistData getIndividuaData];
-    [_userImage sd_setImageWithURL:[NSURL URLWithString:[dicImage objectForKey:@"imageUrl"]] placeholderImage:nil];
+    [_userImage sd_setImageWithURL:[NSURL URLWithString:[dicImage objectForKey:@"imageUrl"]] placeholderImage:[UIImage imageNamed:@"User_Head"]];
     _userNameLab.text = [dicImage objectForKey:@"userName"];
 }
 #pragma mark 系统Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 6;
-
-    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [ApplicationStyle control_height:88];

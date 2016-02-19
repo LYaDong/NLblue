@@ -137,6 +137,7 @@
 		04FA89BC1C117E400064F3AA /* NLDatahub.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B71C117E400064F3AA /* NLDatahub.m */; };
 		04FA89BD1C117E400064F3AA /* NLHTTPRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */; };
 		04FB75911C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB75901C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m */; };
+		04FC1CBD1C772108004C0DDD /* User_Head.png in Resources */ = {isa = PBXBuildFile; fileRef = 04FC1CBC1C772108004C0DDD /* User_Head.png */; };
 		04FC238C1C51C3A100FC4FDA /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC238A1C51C3A100FC4FDA /* libMiPushSDK.a */; };
 		04FC238E1C51C3D600FC4FDA /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC238D1C51C3D600FC4FDA /* libresolv.tbd */; };
 		04FC23901C51C3E300FC4FDA /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC238F1C51C3E300FC4FDA /* libxml2.tbd */; };
@@ -410,6 +411,7 @@
 		04FA89B91C117E400064F3AA /* NLHTTPRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHTTPRequestFactory.m; sourceTree = "<group>"; };
 		04FB758F1C3DF8F200A8DF35 /* NLMaleNBluePlanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMaleNBluePlanCell.h; sourceTree = "<group>"; };
 		04FB75901C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMaleNBluePlanCell.m; sourceTree = "<group>"; };
+		04FC1CBC1C772108004C0DDD /* User_Head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = User_Head.png; sourceTree = "<group>"; };
 		04FC238A1C51C3A100FC4FDA /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
 		04FC238B1C51C3A100FC4FDA /* MiPushSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiPushSDK.h; sourceTree = "<group>"; };
 		04FC238D1C51C3D600FC4FDA /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
@@ -849,6 +851,7 @@
 				049751D51BFEEF3F0044D97B /* Common */,
 				040E123F1C48D6CE00769AD1 /* SystemLibrary */,
 				049751A81BFEEED50044D97B /* Main.storyboard */,
+				04FC1CBC1C772108004C0DDD /* User_Head.png */,
 				04F203B21C58555B0077D340 /* Warman.png */,
 				04CD22FC1C29221400AB467A /* Warman-568h@2x.png */,
 				04CD22FD1C29221400AB467A /* Warman@2x.png */,
@@ -1176,7 +1179,7 @@
 				TargetAttributes = {
 					0497519B1BFEEED50044D97B = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = B2TE79W3Y8;
+						DevelopmentTeam = 86G8HDRKQG;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1228,6 +1231,7 @@
 				04CD22FF1C29221400AB467A /* Warman-568h@2x.png in Resources */,
 				04F4B7C41C07FA7100DE60DE /* battery@2x.png in Resources */,
 				0497B9A71C48EE3A003F5CFF /* done@2x.png in Resources */,
+				04FC1CBD1C772108004C0DDD /* User_Head.png in Resources */,
 				04F203B31C58555B0077D340 /* Warman.png in Resources */,
 				04CD23011C29221400AB467A /* Warman@3x.png in Resources */,
 				0497B9AB1C48EE3A003F5CFF /* error@3x.png in Resources */,
@@ -1586,8 +1590,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a3e564b2-1c5f-4f50-9bbd-32e4e20ed082";
-				"PROVISIONING_PROFILE[sdk=*]" = "a3e564b2-1c5f-4f50-9bbd-32e4e20ed082";
+				PROVISIONING_PROFILE = "e1e26d6b-0e4b-45e1-806d-03746c231339";
+				"PROVISIONING_PROFILE[sdk=*]" = "e1e26d6b-0e4b-45e1-806d-03746c231339";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};

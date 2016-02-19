@@ -117,6 +117,7 @@
         // 创建第一个波浪Layer
         _firstWaveLayer = [CAShapeLayer layer];
         _firstWaveLayer.fillColor = _firstWaveColor.CGColor;
+        _firstWaveLayer.opacity = 0.6;
         [self.layer addSublayer:_firstWaveLayer];
     }
     
@@ -124,6 +125,7 @@
         // 创建第二个波浪Layer
         _secondWaveLayer = [CAShapeLayer layer];
         _secondWaveLayer.fillColor = _secondWaveColor.CGColor;
+        _secondWaveLayer.opacity = 0.6;
         [self.layer addSublayer:_secondWaveLayer];
     }
     

@@ -7,7 +7,6 @@
 //
 
 static const NSInteger TIMELINE = 90;
-
 #import "NLHotMoxibustionViewController.h"
 #import "NLBluetoothAgreement.h"
 #import "NLBluetoothDataAnalytical.h"
@@ -317,7 +316,6 @@ static const NSInteger TIMELINE = 90;
         }
         
         
-        
         //获得设备信息
         [NLBluetoothDataAnalytical bluetoothCommandReturnData:blueData];
         //调温
@@ -397,6 +395,7 @@ static const NSInteger TIMELINE = 90;
     _staffScrollew.showsVerticalScrollIndicator = FALSE;
     _staffScrollew.showsHorizontalScrollIndicator = FALSE;
     _staffScrollew.userInteractionEnabled = YES;
+    _staffScrollew.contentOffset = CGPointMake(30 * [ApplicationStyle control_weight:16], 0);
     _staffScrollew.contentSize = CGSizeMake(TIMELINE * [ApplicationStyle control_weight:16] + width, [ApplicationStyle control_height:96]);
     [self.view addSubview:_staffScrollew];
     
@@ -486,21 +485,23 @@ static const NSInteger TIMELINE = 90;
 #pragma mark 自己的Delegate
 //滑动设置显示文字
 -(void)indexNum:(NSInteger)index{
+    if (!_isOff) {
+        _temperatureLab.text = [NSString stringWithFormat:@"%ld°C",(long)35 + index/5];
+    }
     
     
-    NSLog(@"%ld",(long)index);
-    
-    _temperatureLab.text = [NSString stringWithFormat:@"%ld°C",(long)35 + index/5];
 }
 //滑动结束后设置温度
 -(void)gestureRecognizerStateEnded:(NSInteger)index{
-    
-    NSInteger ture = 35 + index/5;
-    
-    _temperatureNUM = ture * 10;
-    if (_isOff) {
-        [self controlTemperaturet];
+    if (!_isOff) {
+        NSInteger ture = 35 + index/5;
+        _temperatureNUM = ture * 10;
     }
+//    NSInteger ture = 35 + index/5;
+//    _temperatureNUM = ture * 10;
+//    if (_isOff) {
+//        [self controlTemperaturet];
+//    }
 }
 
 #pragma makr 蓝牙方法
@@ -611,7 +612,7 @@ static const NSInteger TIMELINE = 90;
 //设置温度
 -(void)controlTemperaturet{
     NSString *str = [NLBluetoothDataAnalytical tenTurnSixTeen:_temperatureNUM];
-    
+
     unsigned long red = strtoul([[str substringWithRange:NSMakeRange(0, 2)] UTF8String],0,16);
     Byte b =  (Byte) ((0xff & red) );//( Byte) 0xff&iByte;
     
@@ -625,6 +626,7 @@ static const NSInteger TIMELINE = 90;
     NSData *data = [NSData dataWithBytes:byte length:20];
     if (_peripheralArray.count>0) {
         [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+        NSLog(@"发送命令==  %@",data);
     }
 }
 
@@ -641,7 +643,7 @@ static const NSInteger TIMELINE = 90;
         }
     }
 }
-
+#pragma mark 睡眠数据
 -(void)sleepDatas:(NSString *)sleepDatas{
     if (sleepDatas.length<=4) {
         return;
@@ -652,6 +654,8 @@ static const NSInteger TIMELINE = 90;
 
         [_sleepDataArr addObject:sleepDatas];
         
+        
+        NSLog(@"%@",sleepDatas);
 
 //        NSLog(@"%@",[NLBluetoothDataAnalytical tenturnSinTenNew:[[sleepDatas substringWithRange:NSMakeRange(sleepDatas.length-2, 2)] integerValue]]);
         
@@ -699,8 +703,14 @@ static const NSInteger TIMELINE = 90;
         _timeInt = 2;
         _timeVer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeVerDown) userInfo:nil repeats:YES];
         if (!_isOff) {
+            _staffScrollew.scrollEnabled = NO;//禁止时间设置
+            
+            [self temperatureSetProhibit:TemperatureSetProhibitNotification];
+            
+            
             [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_K"] forState:UIControlStateNormal];
             _isOff = !_isOff;
+            
             //发送加热
             Byte byte[18] = {0x90,0x01,0x55};
             NSData *data = [NSData dataWithBytes:byte length:20];
@@ -711,6 +721,8 @@ static const NSInteger TIMELINE = 90;
             }
             return;
         }else{
+            _staffScrollew.scrollEnabled = YES;
+            [self temperatureSetProhibit:TemperatureSetAgreeNotification];
             [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_G"] forState:UIControlStateNormal];
             _isOff = !_isOff;
             //关闭加热
@@ -777,6 +789,13 @@ static const NSInteger TIMELINE = 90;
 -(void)delNotification{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+
+#pragma mark 温度滑动禁止
+-(void)temperatureSetProhibit:(NSString *)sliding{
+    [[NSNotificationCenter defaultCenter] postNotificationName:TemperatureSetNotification object:sliding];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

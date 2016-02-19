@@ -19,13 +19,23 @@
 @property(nonatomic,strong)NSMutableDictionary *cellLabdic;
 @property(nonatomic,strong)NSMutableDictionary *cellCountLabDic;
 @property(nonatomic,strong)NSMutableArray *peripheralArray;
-@property(nonatomic,weak) TYWaveProgressView *waveView;
+@property(nonatomic,weak) TYWaveProgressView *waveViewA;
+@property(nonatomic,weak) TYWaveProgressView *waveViewB;
 @end
 
 @implementation NLMyEquipmentController
 
 -(void)queryBatteryLevel{
     Byte byte[20] = {0x02,0x01};
+    NSData *data = [NSData dataWithBytes:byte length:20];
+    if (_peripheralArray.count>0) {
+        //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+    }
+}
+
+-(void)unitBBatteryLevel{
+    Byte byte[20] = {0x90,0x04};
     NSData *data = [NSData dataWithBytes:byte length:20];
     if (_peripheralArray.count>0) {
         //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
@@ -53,18 +63,29 @@
     NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
     _peripheralArray  = blues.arrPeripheral;
     blues.returnBatteryLevel = ^(NSString *batteryLevel){
-        long level = [NLBluetoothDataAnalytical sixTenHexTeen:[batteryLevel substringWithRange:NSMakeRange(14, 2)]];
         
-        CGFloat floatLevel = level*0.01;
-        _waveView.numberLabel.text = [NSString stringWithFormat:@"%ld%@",level,@"%"];
-        _waveView.percent = floatLevel;
-        [_waveView startWave];
+        NSLog(@"%@",batteryLevel);
+        
+        if ([[batteryLevel substringWithRange:NSMakeRange(0, 4)] isEqualToString:EquiomentCommand_0201]) {
+            long level = [NLBluetoothDataAnalytical sixTenHexTeen:[batteryLevel substringWithRange:NSMakeRange(14, 2)]];
+            CGFloat floatLevel = level*0.01;
+            _waveViewA.numberLabel.text = [NSString stringWithFormat:@"%ld%@",level,@"%"];
+            _waveViewA.percent = floatLevel;
+            [_waveViewA startWave];
+            
+            [self unitBBatteryLevel];
+        }else{
+            long level = [NLBluetoothDataAnalytical sixTenHexTeen:[batteryLevel substringWithRange:NSMakeRange(4, 2)]];
+            CGFloat floatLevel = level*0.01;
+            _waveViewB.numberLabel.text = [NSString stringWithFormat:@"%ld%@",level,@"%"];
+            _waveViewB.percent = floatLevel;
+            [_waveViewB startWave];
+        }
+        
+        
+        
+        
     };
-    
-    //    0201 dc07 0d 01 00 30 01 00
-    
-    
-    
     
     [self queryBatteryLevel];
     
@@ -113,18 +134,38 @@
 #pragma mark 基础UI
 //电池UI
 -(void)batteryLevelUI{
-    TYWaveProgressView *waveProgress = [[TYWaveProgressView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:10], [ApplicationStyle navBarAndStatusBarSize] + [ApplicationStyle control_height:60], [ApplicationStyle control_weight:220], [ApplicationStyle control_weight:220])];
-    //    waveProgress.waveViewMargin = UIEdgeInsetsMake(15, 15, 20, 20);
-    waveProgress.numberLabel.text = @"100%";
-    waveProgress.numberLabel.font = [UIFont boldSystemFontOfSize:[ApplicationStyle control_weight:50]];
-    waveProgress.numberLabel.textColor = [UIColor whiteColor];
-    waveProgress.explainLabel.text = @"电量";
-    waveProgress.explainLabel.font = [UIFont systemFontOfSize:20];
-    waveProgress.explainLabel.textColor = [UIColor whiteColor];
-    waveProgress.percent = 100;
-    [self.view addSubview:waveProgress];
-    _waveView = waveProgress;
-    [waveProgress startWave];
+    TYWaveProgressView *waveProgressA = [[TYWaveProgressView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:70], [ApplicationStyle navBarAndStatusBarSize] + [ApplicationStyle control_height:60], [ApplicationStyle control_weight:220], [ApplicationStyle control_weight:220])];
+    waveProgressA.backgroundImageView.image = [UIImage imageNamed:@"NL_BatteryLevel"];
+    waveProgressA.numberLabel.text = @"100%";
+    waveProgressA.numberLabel.font = [UIFont boldSystemFontOfSize:[ApplicationStyle control_weight:50]];
+    waveProgressA.numberLabel.textColor = [UIColor whiteColor];
+    waveProgressA.explainLabel.text = @"电量";
+    waveProgressA.explainLabel.font = [UIFont systemFontOfSize:20];
+    waveProgressA.explainLabel.textColor = [UIColor whiteColor];
+    waveProgressA.percent = 100;
+    [self.view addSubview:waveProgressA];
+    _waveViewA = waveProgressA;
+    [waveProgressA startWave];
+    
+    
+    
+    
+    TYWaveProgressView *waveProgressB = [[TYWaveProgressView alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:290], [ApplicationStyle navBarAndStatusBarSize] + [ApplicationStyle control_height:60], [ApplicationStyle control_weight:220], [ApplicationStyle control_weight:220])];
+    waveProgressB.backgroundImageView.image = [UIImage imageNamed:@"NL_BatteryLevel"];
+    waveProgressB.numberLabel.text = @"100%";
+    waveProgressB.numberLabel.font = [UIFont boldSystemFontOfSize:[ApplicationStyle control_weight:50]];
+    waveProgressB.numberLabel.textColor = [UIColor whiteColor];
+    waveProgressB.explainLabel.text = @"电量";
+    waveProgressB.explainLabel.font = [UIFont systemFontOfSize:20];
+    waveProgressB.explainLabel.textColor = [UIColor whiteColor];
+    waveProgressB.percent = 100;
+    [self.view addSubview:waveProgressB];
+    _waveViewB = waveProgressB;
+    [waveProgressB startWave];
+    
+    
+    
+    
 }
 
 -(void)bulidUI{
@@ -238,8 +279,11 @@
                 break;
         }
     }
-    
 }
+
+
+
+
 #pragma mark 自己的Delegate
 #pragma mark 自己的按钮事件
 
