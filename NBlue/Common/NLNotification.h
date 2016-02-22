@@ -29,6 +29,10 @@
 /*
  ================================   L    Y     D    ============================================
  */
+
+/*
+ *        *****  千万别写重复  *****
+ */
 #define NLConnectBloothSuccessNotification @"NLConnectBloothSuccessNotification"
 #define NLConnectBloothFicaledNotification @"NLConnectBloothFicaledNotification"
 #define NLLogInSuccessNotification @"NLLogInSuccessNotification"
@@ -49,5 +53,7 @@
 #define NLUserUploadUserImageFicaledNotification @"NLUserUploadUserImageFicaledNotification"
 #define NLUsergetUserInformationSuccessNotification @"NLUsergetUserInformationSuccessNotification"
 #define NLUsergetUserInformationFicaledNotification @"NLUsergetUserInformationFicaledNotification"
+#define NLUpDateUserInformationSuccessNotification @"NLUpDateUserInformationSuccessNotification"
+#define NLUpDateUserInformationFicaledNotification @"NLUpDateUserInformationFicaledNotification"
 //================================   L    Y     D    ============================================
 #endif /* NLNotification_h */

@@ -41,20 +41,17 @@
  *上传用户信息
  */
 - (void)upDataUserInformationConsumerid:(NSString *)consumerid
-                                   name:(NSString *)name
-                               nickname:(NSString *)nickname
-                                 gender:(NSString *)gender
-                                    age:(NSString *)age
-                                 height:(NSString *)height
-                                 weight:(NSString *)weight
-                                 header:(NSString *)header
-                               stepGoal:(NSString *)stepGoal
-                              authtoken:(NSString *)authtoken;
+                              authtoken:(NSString *)authtoken
+                          userCountData:(NSMutableDictionary *)userCountData;
 /**
  *二维码扫描
  */
 - (void)qrCodeNextWorkFrom_to_id:(NSString *)from_to_id;
 
 -(void)uploadUserImage:(UIImage *)image imageType:(NSString *)imageType;
+/**
+ * 更新经期信息
+ */
+-(void)upDateMenstruationData:(NSDictionary *)menstruationData;
 
 @end

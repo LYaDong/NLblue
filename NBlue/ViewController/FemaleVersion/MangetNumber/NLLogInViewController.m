@@ -306,6 +306,10 @@ static const NSInteger THIRDBTNTAG = 4000;
     
     NSDictionary *dic =notifi.object;
     
+    
+    NSLog(@"%@",dic);
+    
+    
     [kAPPDELEGATE._loacluserinfo userGender:@"0"];//测试中
     
     [kAPPDELEGATE._loacluserinfo userLogInTime:[dic objectForKey:@"created"]];

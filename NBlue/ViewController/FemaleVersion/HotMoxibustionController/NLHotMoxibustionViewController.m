@@ -126,9 +126,6 @@ static const NSInteger TIMELINE = 90;
 }
 
 
--(void)upDate{
-    [[NLDatahub sharedInstance] upDataUserInformationConsumerid:[kAPPDELEGATE._loacluserinfo GetUser_ID] name:nil nickname:nil gender:nil age:nil height:nil weight:nil header:nil stepGoal:nil authtoken:[kAPPDELEGATE._loacluserinfo GetAccessToken]];
-}
 
 
 - (void)viewDidLoad {
@@ -139,7 +136,6 @@ static const NSInteger TIMELINE = 90;
     _timeInt = 0;
     self.titles.text = @"热灸";
     
-//    [self upDate];
     
     //判断要不要进入搜索页
     if ([[kAPPDELEGATE._loacluserinfo getBlueToothUUID] length]<=0) {

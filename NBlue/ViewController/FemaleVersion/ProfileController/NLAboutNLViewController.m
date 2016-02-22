@@ -60,6 +60,10 @@
     NLIndividuaFormaCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
     if (!cell) {
         cell = [[NLIndividuaFormaCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
+        
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle control_height:88 - 1], SCREENWIDTH, [ApplicationStyle control_height:1])];
+        line.backgroundColor = [@"dedede" hexStringToColor];
+        [cell addSubview:line];
     }
     
     NSArray *arr = @[NSLocalizedString(@"NLAboutNL_CopyrightInformation", nil),

@@ -34,6 +34,7 @@ static NSInteger countNum = 5;
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         _ratingType = FLOAT_TYPE;
         self.widDistance = 5.0f;
         self.heiDistance = 5.0f;
@@ -51,11 +52,14 @@ static NSInteger countNum = 5;
         eachWidth = self.frame.size.width/5;
         
         
+        NSLog(@"%f",self.frame.size.width/5);
+        
+        
         CGFloat imgWidth = [ApplicationStyle control_weight:40],imgHeight = [ApplicationStyle control_height:40.0f],interval = [ApplicationStyle control_weight:10.0f];
 
         for (int i = 0; i < starNumber; i++) {
             UIImage * grayImg = [UIImage imageNamed:@"NLHClen_DYM_TJ_K"];
-            UIImageView * grayImgView = [[UIImageView alloc]initWithFrame:CGRectMake(i*(imgWidth+interval), 0, imgWidth, imgHeight)];
+            UIImageView * grayImgView = [[UIImageView alloc]initWithFrame:CGRectMake(i*(imgWidth+interval),0, imgWidth, imgHeight)];
             grayImgView.image = grayImg;
             [self.grayStarView addSubview:grayImgView];
             
@@ -102,13 +106,14 @@ static NSInteger countNum = 5;
 - (void)tapGestureEvent:(UITapGestureRecognizer *)tap_
 {
     CGPoint point = [tap_ locationInView:self];
-    
+
     if(_ratingType == INTEGER_TYPE){
-        NSInteger count = countNum - ((NSInteger)(point.x/(eachWidth+self.widDistance)));
+        NSInteger count = countNum - ((NSInteger)(point.x/(self.frame.size.width/5)));
         
         
         
         point.x = count*(eachWidth+self.widDistance);
+        NSLog(@"%f",point.x/(eachWidth+self.widDistance));
     }
     
     [self changeStarForeViewWithPoint:point];
@@ -118,6 +123,9 @@ static NSInteger countNum = 5;
 #pragma mark - 滑动
 - (void)panGestureEvent:(UIPanGestureRecognizer *)pan_
 {
+    
+    
+    NSLog(@"%@",pan_);
     
     CGPoint point = [pan_ locationInView:self];
 
@@ -135,11 +143,9 @@ static NSInteger countNum = 5;
 #pragma mark - 设置显示的星星
 - (void)changeStarForeViewWithPoint:(CGPoint)point
 {
-    
-    
     CGFloat width = self.frame.size.width;
     
-    NSInteger num = (NSInteger)(point.x/(width/5));
+    CGFloat num = point.x/(eachWidth+self.widDistance);
     CGFloat imgHeight = [ApplicationStyle control_height:40.0f],imgWidht = [ApplicationStyle control_weight:50];
     
     

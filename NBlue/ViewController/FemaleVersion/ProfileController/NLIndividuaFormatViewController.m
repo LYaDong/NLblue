@@ -517,9 +517,18 @@ static const NSInteger BTNPHOTO = 4000;
 
 
 -(void)returnBtnDown{
-    [PlistData individuaData:_userCountDataDic];
-    [[NSNotificationCenter defaultCenter] postNotificationName:RefreshUserHeadImageSuccessNotification object:nil userInfo:nil];
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    
+    NSLog(@"%@",_userCountDataDic);
+    
+    
+    [[NLDatahub sharedInstance] upDataUserInformationConsumerid:[kAPPDELEGATE._loacluserinfo GetUser_ID] authtoken:[kAPPDELEGATE._loacluserinfo GetAccessToken] userCountData:_userCountDataDic];
+}
+//更新经期和周期
+- (void)upDateMenstruation{
+
+    
+    [[NLDatahub sharedInstance] upDateMenstruationData:_userCountDataDic];
 }
 
 #pragma mark Notification
@@ -527,14 +536,24 @@ static const NSInteger BTNPHOTO = 4000;
     NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
     [notifi addObserver:self selector:@selector(logInSuccess:) name:NLUserUploadUserImageSuccessNotification object:nil];
     [notifi addObserver:self selector:@selector(logInFicaled:) name:NLUserUploadUserImageFicaledNotification object:nil];
+    
+    [notifi addObserver:self selector:@selector(upDataUserInformationSuccess) name:NLUpDateUserInformationSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(upDataUserInformationFicaled) name:NLUpDateUserInformationFicaledNotification object:nil];
+    
 }
 -(void)logInSuccess:(NSNotification *)notifi{
-    
-    NSLog(@"%@",notifi.object);
-    
     [_userCountDataDic setValue:notifi.object forKey:@"imageUrl"];
 }
 -(void)logInFicaled:(NSNotification *)notifi{
+    
+}
+
+-(void)upDataUserInformationSuccess{
+    [PlistData individuaData:_userCountDataDic];
+    [[NSNotificationCenter defaultCenter] postNotificationName:RefreshUserHeadImageSuccessNotification object:nil userInfo:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)upDataUserInformationFicaled{
     
 }
 -(void)delNotification{

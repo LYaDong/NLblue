@@ -209,7 +209,7 @@ NLLHRatingViewDelegate>
         
         if (indexPath.row==1) {
             cell.cellCountImage.hidden = YES;
-            _starView = [[NLLHRatingView alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:240] - [ApplicationStyle control_weight:24], ([ApplicationStyle control_height:88] - [ApplicationStyle control_height:60])/2, [ApplicationStyle control_weight:240], [ApplicationStyle control_height:60])];
+            _starView = [[NLLHRatingView alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:240] - [ApplicationStyle control_weight:24], ([ApplicationStyle control_height:88] - [ApplicationStyle control_height:40])/2, [ApplicationStyle control_weight:240], [ApplicationStyle control_height:40])];
             _starView.ratingType = INTEGER_TYPE;//整颗星
             _starView.clipsToBounds = YES;
             _starView.hidden = NO;
@@ -242,43 +242,74 @@ NLLHRatingViewDelegate>
     cell.cellCountImage.image = [UIImage imageNamed:@"NLHClen_DDD"];
     [cell.switchs addTarget:self action:@selector(switchOffDown:) forControlEvents:UIControlEventValueChanged];
     cell.backgroundColor = [UIColor  clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    switch (indexPath.row) {
-        case 0:{
-            
-            break;
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (_switchOffNum == 1) {
+        switch (indexPath.row) {
+            case 2:
+            {
+                _blackBack.hidden = NO;
+                _calenderPickerView.hidden = NO;
+                _cellRow = indexPath.row;
+                break;
+            }
+            case 3:
+            {
+                _blackBack.hidden = NO;
+                _calenLifeHabitView.hidden = NO;
+                
+                _calenLifeHabitView.commonTime = _selectedTime;
+                [_calenLifeHabitView buildUI];
+                break;
+            }
+            case 4:
+            {
+                _blackBack.hidden = NO;
+                _uncomfortableView.hidden = NO;
+                _uncomfortableView.commonTime = _selectedTime;
+                [_uncomfortableView buildUI];
+                break;
+            }
+            default:
+                break;
         }
-        case 1:{
-            _blackBack.hidden = NO;
-            _calenderPickerView.hidden = NO;
-            _cellRow = indexPath.row;
-            break;
+    }else{
+        switch (indexPath.row) {
+            case 0:{
+                
+                break;
+            }
+            case 1:{
+                _blackBack.hidden = NO;
+                _calenderPickerView.hidden = NO;
+                _cellRow = indexPath.row;
+                break;
+            }
+            case 2:{
+                _blackBack.hidden = NO;
+                _calenLifeHabitView.hidden = NO;
+                
+                _calenLifeHabitView.commonTime = _selectedTime;
+                [_calenLifeHabitView buildUI];
+                
+                break;
+            }
+            case 3:{
+                _blackBack.hidden = NO;
+                _uncomfortableView.hidden = NO;
+                _uncomfortableView.commonTime = _selectedTime;
+                [_uncomfortableView buildUI];
+                
+                break;
+            }
+            default:
+                break;
         }
-        case 2:{
-            _blackBack.hidden = NO;
-            _calenLifeHabitView.hidden = NO;
-            
-            _calenLifeHabitView.commonTime = _selectedTime;
-            [_calenLifeHabitView buildUI];
-            
-            break;
-        }
-        case 3:{
-            _blackBack.hidden = NO;
-            _uncomfortableView.hidden = NO;
-            _uncomfortableView.commonTime = _selectedTime;
-            [_uncomfortableView buildUI];
-            
-            break;
-        }
-        default:
-            break;
     }
-    
 }
 #pragma mark 自己的Delegate
 -(void)returnCalenderTime:(NSString *)time{

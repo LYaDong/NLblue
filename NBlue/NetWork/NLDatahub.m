@@ -16,6 +16,7 @@ static NSString *NLapplication = @"application/json";
 static NSString *NLmobileApiBaseUrl = @"http://123.56.127.139/warman";//主接口
 static NSString *NLUserApi = @"/user";//各个接口端
 static NSString *NLSportApi = @"/sport";//各个接口端
+static NSString *NLMenstruation = @"menstruation";//各个接口端
 
 
 @interface NLDatahub(){
@@ -108,22 +109,6 @@ static NSString *NLSportApi = @"/sport";//各个接口端
             [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewFicaledNotification object:nil userInfo:nil];
         });
     }];
-    
-    
-    
-    
-//    _manger = [[AFHTTPRequestOperationManager alloc]init];
-//    NSDictionary * parameters= @{@"phone":phone,@"code":verfication,@"password":password,@"platform":@"ios"};
-//    _manger.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:NLtextHeml,NLapplication, nil];
-//    [_manger POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_register] parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewSuccessNotification object:responseObject userInfo:nil];
-//        });
-//    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [[NSNotificationCenter defaultCenter] postNotificationName:NLRegisteredViewControllewFicaledNotification object:operation.responseObject userInfo:nil];
-//        });
-//    }];
 }
 #pragma mark 忘记密码
 - (void)forgetPassWordphone:(NSString *)phone verification:(NSString *)verfication password:(NSString *)password {
@@ -229,18 +214,17 @@ static NSString *NLSportApi = @"/sport";//各个接口端
 
 #pragma mark 上传个人信息
 - (void)upDataUserInformationConsumerid:(NSString *)consumerid
-                                   name:(NSString *)name
-                               nickname:(NSString *)nickname
-                                 gender:(NSString *)gender
-                                    age:(NSString *)age
-                                 height:(NSString *)height
-                                 weight:(NSString *)weight
-                                 header:(NSString *)header
-                               stepGoal:(NSString *)stepGoal
-                              authtoken:(NSString *)authtoken{
+                              authtoken:(NSString *)authtoken
+                          userCountData:(NSMutableDictionary *)userCountData{
+    
+    [self loadingView];
     
     NSDictionary *parmeter = @{@"consumerId":consumerid,
-                          @"authToken":authtoken,@"name":@"123",
+                               @"authToken":authtoken,
+                               @"name":[userCountData objectForKey:@"userName"],
+                               @"age":[userCountData objectForKey:@"age"],
+                               @"height":[userCountData objectForKey:@"height"],
+                               @"weight":[userCountData objectForKey:@"width"],
                           };
     
     NSLog(@"%@",parmeter);
@@ -250,14 +234,14 @@ static NSString *NLSportApi = @"/sport";//各个接口端
     _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     [_manager PUT:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Consumer] parameters:parmeter success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self dismissHide];
         
-        
-        NSLog(@"%@",responseObject);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NLUpDateUserInformationSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self dismissHide];
         
-        
-        NSLog(@"%@",error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NLUpDateUserInformationFicaledNotification object:error userInfo:nil];
     }];
 }
 #pragma mark 扫二维码
@@ -314,9 +298,27 @@ static NSString *NLSportApi = @"/sport";//各个接口端
         }];
     });
 }
+//更新经期信息
+-(void)upDateMenstruationData:(NSDictionary *)menstruationData{
+    
+    NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
+                          @"startDate":@"",
+                          @"duration":@"",
+                          @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
+    
+    
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [_manager PUT:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLMenstruation,User_MenstruationRecord] parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
 
-
-
+//转JSON数据
 - (NSDictionary *)dataTransformationJson:(id  _Nullable)responseObject{
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
     return dic;
