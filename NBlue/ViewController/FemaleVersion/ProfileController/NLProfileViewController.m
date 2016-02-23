@@ -17,6 +17,7 @@
 #import "NLMyMaleViewController.h"
 #import "NLGiffiredSignViewController.h"
 #import "UIImageView+WebCache.h"
+#import "NLMyMessageViewController.h"
 @interface NLProfileViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIButton *userHeadImage;
 @property(nonatomic,strong)UILabel *userNameLab;
@@ -39,7 +40,9 @@
     self.navBarBack.hidden = YES;
     self.returnBtn.hidden = YES;
     [self notification];
+    [self liftBtnUI];
     [self bulidUI];
+    
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -55,6 +58,14 @@
 }
 
 #pragma mark 基础UI
+-(void)liftBtnUI{
+    UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    messageBtn.frame = CGRectMake([ApplicationStyle control_weight:36], [ApplicationStyle control_height:63], [ApplicationStyle control_weight:48], [ApplicationStyle control_height:42]);
+    [messageBtn setImage:[UIImage imageNamed:@"NL_Pro_Message"] forState:UIControlStateNormal];
+    [messageBtn addTarget:self action:@selector(messageBtnDown) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:messageBtn];
+    
+}
 -(void)bulidUI{
     
     NSDictionary *dicImage = [PlistData getIndividuaData];
@@ -91,8 +102,6 @@
     _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     _tableView.scrollEnabled = NO;
     [self.view addSubview:_tableView];
-    
-    
     
 }
 
@@ -152,6 +161,12 @@
     NLIndividuaFormatViewController *vc = [[NLIndividuaFormatViewController alloc] init];
     [vc setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)messageBtnDown{
+    NLMyMessageViewController *message = [[NLMyMessageViewController alloc] init];
+    [message setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:message animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

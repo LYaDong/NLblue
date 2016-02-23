@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0400D14E1C7BEFF00075390F /* NLMyMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0400D14D1C7BEFF00075390F /* NLMyMessageViewController.m */; };
+		0400D1511C7BFC9B0075390F /* NLMyMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0400D1501C7BFC9B0075390F /* NLMyMessageCell.m */; };
+		0400D1541C7C0F580075390F /* NLMessageDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0400D1531C7C0F580075390F /* NLMessageDetailsViewController.m */; };
 		04018BFD1C3CB914009AC56A /* NLHealthMangerSleepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018B951C3CB914009AC56A /* NLHealthMangerSleepViewController.m */; };
 		04018BFE1C3CB914009AC56A /* NLHealthMangerStepNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018B971C3CB914009AC56A /* NLHealthMangerStepNumViewController.m */; };
 		04018BFF1C3CB914009AC56A /* NLHealthMangerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018B991C3CB914009AC56A /* NLHealthMangerViewController.m */; };
@@ -167,6 +170,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0400D14C1C7BEFF00075390F /* NLMyMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMyMessageViewController.h; sourceTree = "<group>"; };
+		0400D14D1C7BEFF00075390F /* NLMyMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMyMessageViewController.m; sourceTree = "<group>"; };
+		0400D14F1C7BFC9B0075390F /* NLMyMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMyMessageCell.h; sourceTree = "<group>"; };
+		0400D1501C7BFC9B0075390F /* NLMyMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMyMessageCell.m; sourceTree = "<group>"; };
+		0400D1521C7C0F580075390F /* NLMessageDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMessageDetailsViewController.h; sourceTree = "<group>"; };
+		0400D1531C7C0F580075390F /* NLMessageDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMessageDetailsViewController.m; sourceTree = "<group>"; };
 		04018B941C3CB914009AC56A /* NLHealthMangerSleepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthMangerSleepViewController.h; sourceTree = "<group>"; };
 		04018B951C3CB914009AC56A /* NLHealthMangerSleepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHealthMangerSleepViewController.m; sourceTree = "<group>"; };
 		04018B961C3CB914009AC56A /* NLHealthMangerStepNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHealthMangerStepNumViewController.h; sourceTree = "<group>"; };
@@ -555,6 +564,10 @@
 				04018BC71C3CB914009AC56A /* NLSetProfoleViewController.m */,
 				04018BC81C3CB914009AC56A /* NLShareController.h */,
 				04018BC91C3CB914009AC56A /* NLShareController.m */,
+				0400D14C1C7BEFF00075390F /* NLMyMessageViewController.h */,
+				0400D14D1C7BEFF00075390F /* NLMyMessageViewController.m */,
+				0400D1521C7C0F580075390F /* NLMessageDetailsViewController.h */,
+				0400D1531C7C0F580075390F /* NLMessageDetailsViewController.m */,
 			);
 			path = ProfileController;
 			sourceTree = "<group>";
@@ -643,6 +656,8 @@
 				04018BFA1C3CB914009AC56A /* NLProTableCell.m */,
 				04018BFB1C3CB914009AC56A /* NLSetProfileCell.h */,
 				04018BFC1C3CB914009AC56A /* NLSetProfileCell.m */,
+				0400D14F1C7BFC9B0075390F /* NLMyMessageCell.h */,
+				0400D1501C7BFC9B0075390F /* NLMyMessageCell.m */,
 			);
 			path = ProFileView;
 			sourceTree = "<group>";
@@ -1367,6 +1382,8 @@
 				04FB75911C3DF8F200A8DF35 /* NLMaleNBluePlanCell.m in Sources */,
 				04018C3A1C3CBCD2009AC56A /* NLSubRootViewController.m in Sources */,
 				04018C061C3CB914009AC56A /* NLBodyParamentViewController.m in Sources */,
+				0400D1511C7BFC9B0075390F /* NLMyMessageCell.m in Sources */,
+				0400D1541C7C0F580075390F /* NLMessageDetailsViewController.m in Sources */,
 				045D04111C746FC7006F0653 /* MJRefreshComponent.m in Sources */,
 				045D04191C746FC7006F0653 /* MJRefreshBackStateFooter.m in Sources */,
 				04018C2B1C3CB914009AC56A /* NLProTableCell.m in Sources */,
@@ -1406,6 +1423,7 @@
 				04FA69291C75A9320063F0DB /* TYWaveProgressView.m in Sources */,
 				04018C0F1C3CB914009AC56A /* NLFeedBackViewController.m in Sources */,
 				04018CEE1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m in Sources */,
+				0400D14E1C7BEFF00075390F /* NLMyMessageViewController.m in Sources */,
 				045D041E1C746FC7006F0653 /* MJRefreshConst.m in Sources */,
 				04F4B7D21C083B3E00DE60DE /* NLLocalUserInfo.m in Sources */,
 				04018CE81C3CBFEA009AC56A /* NLMaleProfileViewController.m in Sources */,

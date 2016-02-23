@@ -29,6 +29,7 @@
 "HealthManger_Sleep" = "睡眠";
 "HealthManger_StepNumber" = "计步器";
 //NLProfileViewController
+"NLProfileView_MyMessage" = "消息";
 "NLProfileView_MyEquitment" = "我的设备";
 "NLProfileView_MyMale" = "我的男友";
 "NLProfileView_Share" = "分享";
@@ -168,20 +169,6 @@
 //NLMyHerViewController
 "NLMyHer_titls" = "我的女神";
 "NLMyHer_DayPregnancy" = "今日怀孕指数";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
