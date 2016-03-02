@@ -150,6 +150,8 @@
 		04FC23981C51C41200FC4FDA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC23971C51C41200FC4FDA /* CFNetwork.framework */; };
 		04FDE4C91C464B8800FFB065 /* NLPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FDE4C81C464B8800FFB065 /* NLPickView.m */; };
 		4A3CFF267937751BD6F2302D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E0A4932CCDD3CB9C4B5CFA /* libPods.a */; };
+		BD292EBC1C819CC70099B54B /* NLBluetoothAgreementNew.m in Sources */ = {isa = PBXBuildFile; fileRef = BD292EBB1C819CC70099B54B /* NLBluetoothAgreementNew.m */; };
+		BD292EBF1C81A2820099B54B /* NLBluetoothCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = BD292EBE1C81A2820099B54B /* NLBluetoothCommand.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -434,6 +436,11 @@
 		46E0A4932CCDD3CB9C4B5CFA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D156C54B110CBBF4D4804D4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8F50F23BC12A7C0575CA9364 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		BD292EB71C819C9C0099B54B /* NBlue-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NBlue-Bridging-Header.h"; sourceTree = "<group>"; };
+		BD292EBA1C819CC70099B54B /* NLBluetoothAgreementNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLBluetoothAgreementNew.h; sourceTree = "<group>"; };
+		BD292EBB1C819CC70099B54B /* NLBluetoothAgreementNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLBluetoothAgreementNew.m; sourceTree = "<group>"; };
+		BD292EBD1C81A2820099B54B /* NLBluetoothCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLBluetoothCommand.h; sourceTree = "<group>"; };
+		BD292EBE1C81A2820099B54B /* NLBluetoothCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLBluetoothCommand.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -930,6 +937,10 @@
 				049751DE1BFEF3140044D97B /* ApplicationStyle.m */,
 				04CDA17C1BFF119500D2A304 /* Convenlence.h */,
 				04CDA17D1BFF119500D2A304 /* Convenlence.m */,
+				BD292EBA1C819CC70099B54B /* NLBluetoothAgreementNew.h */,
+				BD292EBB1C819CC70099B54B /* NLBluetoothAgreementNew.m */,
+				BD292EBD1C81A2820099B54B /* NLBluetoothCommand.h */,
+				BD292EBE1C81A2820099B54B /* NLBluetoothCommand.m */,
 				04C995481C029E8300D8AE79 /* NLBluetoothAgreement.h */,
 				04C995491C029E8300D8AE79 /* NLBluetoothAgreement.m */,
 				04C9954B1C029F2400D8AE79 /* NLBluetoothDataAnalytical.h */,
@@ -938,6 +949,7 @@
 				04F4B7CC1C08387A00DE60DE /* NLEquipmentCommand.h */,
 				049B07841C158A78005147B5 /* NLNotification.h */,
 				04F3CC511C0434C10066D39D /* Localizable.strings */,
+				BD292EB71C819C9C0099B54B /* NBlue-Bridging-Header.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1189,12 +1201,13 @@
 		049751941BFEEED50044D97B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = LYD;
 				TargetAttributes = {
 					0497519B1BFEEED50044D97B = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 86G8HDRKQG;
+						DevelopmentTeam = FW77J8F5Y3;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1369,12 +1382,14 @@
 				04F7F64E1C1BFC9000466EBC /* NLGestureRecognizer.m in Sources */,
 				045D041B1C746FC7006F0653 /* MJRefreshNormalHeader.m in Sources */,
 				04F26C3A1C4FC0C000D25D48 /* NLTextImageView.m in Sources */,
+				BD292EBC1C819CC70099B54B /* NLBluetoothAgreementNew.m in Sources */,
 				04C9954D1C029F2400D8AE79 /* NLBluetoothDataAnalytical.m in Sources */,
 				04018C201C3CB914009AC56A /* NLHealthCalenderView.m in Sources */,
 				049751DF1BFEF3140044D97B /* ApplicationStyle.m in Sources */,
 				04018C301C3CB9B7009AC56A /* NLHalfView.m in Sources */,
 				04F762D71C44A54C003DBE4D /* NLQRCodeViewController.m in Sources */,
 				04018C151C3CB914009AC56A /* NLShareController.m in Sources */,
+				BD292EBF1C81A2820099B54B /* NLBluetoothCommand.m in Sources */,
 				04FA69281C75A9320063F0DB /* TYWaterWaveView.m in Sources */,
 				04018C161C3CB914009AC56A /* NLAboutImageBtn.m in Sources */,
 				04CD23121C29310100AB467A /* OLGhostAlertView.m in Sources */,
@@ -1595,6 +1610,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Liu (6568Y9JWXY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Feng Liu (6568Y9JWXY)";
 				ENABLE_BITCODE = NO;
@@ -1608,8 +1624,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e1e26d6b-0e4b-45e1-806d-03746c231339";
-				"PROVISIONING_PROFILE[sdk=*]" = "e1e26d6b-0e4b-45e1-806d-03746c231339";
+				PROVISIONING_PROFILE = "18b75101-21b0-4188-80d9-c2bf9e782e41";
+				"PROVISIONING_PROFILE[sdk=*]" = "18b75101-21b0-4188-80d9-c2bf9e782e41";
+				SWIFT_OBJC_BRIDGING_HEADER = "NBlue/Common/NBlue-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};
@@ -1621,6 +1639,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Pin Ai Networking Technology Co., Ltd. (FW77J8F5Y3)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Pin Ai Networking Technology Co., Ltd. (FW77J8F5Y3)";
 				ENABLE_BITCODE = NO;
@@ -1634,8 +1653,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e406d405-0577-4546-8b64-2b9f042427f5";
-				"PROVISIONING_PROFILE[sdk=*]" = "e406d405-0577-4546-8b64-2b9f042427f5";
+				PROVISIONING_PROFILE = "dc17a229-a905-4d14-92e2-15a194bdbee1";
+				"PROVISIONING_PROFILE[sdk=*]" = "dc17a229-a905-4d14-92e2-15a194bdbee1";
+				SWIFT_OBJC_BRIDGING_HEADER = "NBlue/Common/NBlue-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};

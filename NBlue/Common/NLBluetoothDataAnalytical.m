@@ -440,6 +440,9 @@
     long years = (long)[self sixTenHexTeen:timesYear];
     NSString * months = nil;
     NSString * days = nil;
+    
+    NSLog(@"%@",monthDay[0]);
+    
     //判断大不大于10  大于10 则不补0  否则补0
     if ([monthDay[0] integerValue]>=10) {
         months = [NSString stringWithFormat:@"%@",monthDay[0]];

@@ -375,7 +375,10 @@ static NLColumnImage *cloumnImage = nil;
 -(void)scrollViewAnimation:(UIScrollView *)scrollView{
     
     NSString *index = [NSString stringWithFormat:@"%0.0f",scrollView.contentOffset.x/(_convenImageWeight + [ApplicationStyle control_weight:10])];
-    [self.delegate sildeIndex:[index integerValue]];
+    
+    NSLog(@"index = %@",index);
+    
+//    [self.delegate sildeIndex:[index integerValue]];
     
     
     

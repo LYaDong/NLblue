@@ -19,6 +19,8 @@ static const NSInteger TIMELINE = 90;
 #import <CoreTelephony/CTCall.h>
 #import "NLConnectBloothViewController.h"
 #import "SMProgressHUD.h"
+#import "NLBluetoothAgreementNew.h"
+
 @interface NLHotMoxibustionViewController ()<UIScrollViewDelegate,NLHalfViewDelgate,UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)NLHalfView *temperatureCilcle;
 @property(nonatomic,strong)NSArray *peripheralArray;
@@ -37,6 +39,7 @@ static const NSInteger TIMELINE = 90;
 @property(nonatomic,assign)NSInteger timeInt;
 @property(nonatomic,strong)NSTimer *timeVer;
 @property(nonatomic,assign)NSInteger equipmentStatsCount;
+@property(nonatomic,strong)NLBluetoothAgreementNew *bluetooth;
 
 
 
@@ -126,6 +129,36 @@ static const NSInteger TIMELINE = 90;
 }
 
 
+
+#pragma mark 测试来电提醒
+-(void)ancsNotification{
+    Byte byte[20] = {0x06,0x30};
+    NSData *data = [NSData dataWithBytes:byte length:20];
+    if (_peripheralArray.count>0) {
+        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+        //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+        NSLog(@"发送命令==  %@",data);
+    }
+}
+-(void)callRemind{
+    Byte byte[20] = {0x03,0x30,0x88,0x55};
+    NSData *data = [NSData dataWithBytes:byte length:20];
+    if (_peripheralArray.count>0) {
+        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+        //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+        NSLog(@"发送命令==  %@",data);
+    }
+}
+
+-(void)theMainSwitch{
+    Byte byte[20] = {0x03,0x30,0x55};
+    NSData *data = [NSData dataWithBytes:byte length:20];
+    if (_peripheralArray.count>0) {
+        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+        //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+        NSLog(@"发送命令==  %@",data);
+    }
+}
 
 
 - (void)viewDidLoad {
@@ -285,68 +318,120 @@ static const NSInteger TIMELINE = 90;
     
     _equipmentStatsCount = 0;
     
-    NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
-    [blues bluetoothAllocInit];
-    blues.getConnectData = ^(NSString *blueData){
-        NSLog(@"蓝牙反馈数据：%@",blueData);
-        
-        if ([blueData isEqualToString:EquiomentCommandEndSportBlue]) {
-            _equipmentStatsCount = 1;
-            [_sleepDataArr removeAllObjects];
-            [self sleepDataQuery];//获取睡眠数据
-        }
-        
-        if (_equipmentStatsCount == 1) {
-            if ([blueData isEqualToString:EquiomentCommandEndSleepBlue]) {
-                [[SMProgressHUD shareInstancetype] dismiss];
-            }
-        }
-        
-        
-        //刷新页面数据
-        if ([blueData isEqualToString:EquiomentCommandEndSleepBlue]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:RefrefhSleepDataNotification object:nil];
-        }
-        if ([blueData isEqualToString:EquiomentCommandEndSportBlue]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:RefrefhStopDataNotification object:nil];
-        }
-        
-        
-        //获得设备信息
-        [NLBluetoothDataAnalytical bluetoothCommandReturnData:blueData];
-        //调温
-        [self temperaturetOFF:blueData];
-        //记步
-        [self sportData:blueData];
-        //        //判断温度
-        [self isTemperatureOff:blueData];
-        //睡眠数据
-        [self sleepDatas:blueData];
-    };
-    blues.perheral = ^(NSArray *perpheral){
-        _peripheralArray = perpheral;//获得当前的外围设备
-        
-    };
-    blues.getConnectionSuccess = ^(NSString *connectionSuccess){
-        if ([connectionSuccess isEqualToString:EquiomentConnectionSuccess]) {
-            
-            _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect"];
-            
-            if (!_isQuert) {
-                [[SMProgressHUD shareInstancetype] showLoadingWithTip:@"恢复数据中，请耐心等待"];
-                if (![[kAPPDELEGATE._loacluserinfo getBlueToothTime] isEqualToString:@"1"]) {
-                    [kAPPDELEGATE._loacluserinfo bluetoothSetTime:@"1"];
-                    [self setTimeEquipment];//设置设备时间
-                }
-                [self judgmentTemperatureQuery];//查询温度
-                [self sportDataQuery];//获得运动数据
-                _isQuert = !_isQuert;
-            }
-        }
-        if ([connectionSuccess isEqualToString:EquiomentConnectionFiale]) {
-            _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect_N"];
+    __weak typeof (NLHotMoxibustionViewController) *hotMoxi = self;//防止循环引用，页面释放时释放他
+    
+    _bluetooth = [NLBluetoothAgreementNew shareInstance];
+    [_bluetooth bluetoothInstantiation];//实例化蓝牙
+    [_bluetooth dataArrayInstantiation];//实力化数组
+    
+    _bluetooth.heating = ^(NLBluetoothAgreementNew *heating){
+        if (hotMoxi.isOff) {
+            [heating setTemperatureAndTime: hotMoxi.temperatureNUM time:hotMoxi.blueTime];
         }
     };
+    _bluetooth.queryTempertureStr = ^(NSString *dataStr){
+        [hotMoxi isTemperatureOff:dataStr];
+    };
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
+//    [blues bluetoothAllocInit];
+//    blues.getConnectData = ^(NSString *blueData){
+//        NSLog(@"蓝牙反馈数据：%@",blueData);
+//        
+//
+////        [self theMainSwitch];
+//        
+////        if ([blueData isEqualToString:@"0330880100"]) {
+////            [self theMainSwitch];
+////            return ;
+////        }
+////        [self callRemind];
+//        
+//        
+////        if ([blueData isEqualToString:EquiomentCommandEndSportBlue]) {
+////            _equipmentStatsCount = 1;
+////            [_sleepDataArr removeAllObjects];
+////            [self sleepDataQuery];//获取睡眠数据
+////        }
+////        
+////        if (_equipmentStatsCount == 1) {
+////            if ([blueData isEqualToString:EquiomentCommandEndSleepBlue]) {
+////                [[SMProgressHUD shareInstancetype] dismiss];
+////            }
+////        }
+////        
+////        
+////        //刷新页面数据
+//        if ([blueData isEqualToString:EquiomentCommandEndSleepBlue]) {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:RefrefhSleepDataNotification object:nil];
+//        }
+//        if ([blueData isEqualToString:EquiomentCommandEndSportBlue]) {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:RefrefhStopDataNotification object:nil];
+//        }
+////
+////        
+////        //获得设备信息
+////        [NLBluetoothDataAnalytical bluetoothCommandReturnData:blueData];
+////        //调温
+////        [self temperaturetOFF:blueData];
+////        //记步
+////        [self sportData:blueData];
+////        //        //判断温度
+////        [self isTemperatureOff:blueData];
+////        //睡眠数据
+////        [self sleepDatas:blueData];
+//    };
+//    blues.perheral = ^(NSArray *perpheral){
+//        _peripheralArray = perpheral;//获得当前的外围设备
+//        
+//    };
+//    blues.getConnectionSuccess = ^(NSString *connectionSuccess){
+//        if ([connectionSuccess isEqualToString:EquiomentConnectionSuccess]) {
+//            _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect"];
+//            if (!_isQuert) {
+////                [self judgmentTemperatureQuery];//查询温度
+//                if (![[kAPPDELEGATE._loacluserinfo getBlueToothTime] isEqualToString:@"1"]) {
+//                    [self setTimeEquipment];//第一次连接设备的时候设置设备时间
+//                }
+//                [self sportDataQuery];//获得运动数据命令
+//                
+//                
+//                
+//                
+//                _isQuert = !_isQuert;
+//            }
+//            
+//
+//            
+//
+//            if (!_isQuert) {
+////                [[SMProgressHUD shareInstancetype] showLoadingWithTip:@"恢复数据中，请耐心等待"];
+////                if (![[kAPPDELEGATE._loacluserinfo getBlueToothTime] isEqualToString:@"1"]) {
+////                    [kAPPDELEGATE._loacluserinfo bluetoothSetTime:@"1"];
+////                    [self setTimeEquipment];//设置设备时间
+////                }
+////                [self judgmentTemperatureQuery];//查询温度
+////                [self sportDataQuery];//获得运动数据
+//                
+//            [self ancsNotification];
+////                [self theMainSwitch];
+//
+//                _isQuert = !_isQuert;
+//            }
+//        }
+//        if ([connectionSuccess isEqualToString:EquiomentConnectionFiale]) {
+//            _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect_N"];
+//        }
+//    };
 }
 -(void)halfCircle{
     
@@ -510,187 +595,181 @@ static const NSInteger TIMELINE = 90;
     }
 }
 -(void)isTemperatureOff:(NSString *)data{
-    if (data.length<=4) {
-        return;
-    }
-    NSString *to = [data substringWithRange:NSMakeRange(0, 4)];
-    if ([to isEqualToString:EquiomentCommand_9002]) {
-        NSString *off = [data substringWithRange:NSMakeRange(4, 2)];
-        if ([off isEqualToString:@"00"]) {
-            NSString *temperStr = [data substringWithRange:NSMakeRange(6, 4)];
-            if (![temperStr isEqualToString:@"ffff"]) {
-                NSString *temper = [NLBluetoothDataAnalytical reversedPositionStr:temperStr];
-                _temperatureNUM = [NLBluetoothDataAnalytical sixTenHexTeen:temper];
-                [self controlTemperaturet];
-                [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_K"] forState:UIControlStateNormal];
-                _isOff = !_isOff;
-                _temperatureLab.text = [NSString stringWithFormat:@"%ld°C",(long)_temperatureNUM/10];
-
-                NSInteger num = _temperatureNUM/10;
-                
-                if (num>=44&&num<45) {
-                    _temperatureCilcle.indexTemp = 47;
-                }else if (num>=43&& num<44){
-                    _temperatureCilcle.indexTemp = 43;
-                }else if (num>=42&& num<43){
-                    _temperatureCilcle.indexTemp = 38;
-                }else if (num>=41&& num<42){
-                    _temperatureCilcle.indexTemp = 35;
-                }else if (num>=40&& num<41){
-                    _temperatureCilcle.indexTemp = 27;
-                }else if (num>=39&& num<40) {
-                    _temperatureCilcle.indexTemp = 24;
-                }else if (num>=38 && num<39){
-                    _temperatureCilcle.indexTemp = 18;
-                }else if (num>=37 && num<38){
-                    _temperatureCilcle.indexTemp = 14;
-                }else if (num>=36 && num<37){
-                    _temperatureCilcle.indexTemp = 9;
-                }else if (num>=35 && num<36){
-                    _temperatureCilcle.indexTemp = 4;
-                }else{
-                    _temperatureCilcle.indexTemp = 0;
-                }
+    NSString *off = [data substringWithRange:NSMakeRange(4, 2)];
+    if ([off isEqualToString:@"00"]) {
+        NSString *temperStr = [data substringWithRange:NSMakeRange(6, 4)];
+        if (![temperStr isEqualToString:@"ffff"]) {
+            NSString *temper = [NLBluetoothDataAnalytical reversedPositionStr:temperStr];
+            _temperatureNUM = [NLBluetoothDataAnalytical sixTenHexTeen:temper];
+           [_bluetooth setTemperatureAndTime: _temperatureNUM time:_blueTime];//设置温度
+            [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_K"] forState:UIControlStateNormal];
+            _isOff = !_isOff;
+            _temperatureLab.text = [NSString stringWithFormat:@"%ld°C",(long)_temperatureNUM/10];
+            
+            NSInteger num = _temperatureNUM/10;
+            
+            if (num>=44&&num<45) {
+                _temperatureCilcle.indexTemp = 47;
+            }else if (num>=43&& num<44){
+                _temperatureCilcle.indexTemp = 43;
+            }else if (num>=42&& num<43){
+                _temperatureCilcle.indexTemp = 38;
+            }else if (num>=41&& num<42){
+                _temperatureCilcle.indexTemp = 35;
+            }else if (num>=40&& num<41){
+                _temperatureCilcle.indexTemp = 27;
+            }else if (num>=39&& num<40) {
+                _temperatureCilcle.indexTemp = 24;
+            }else if (num>=38 && num<39){
+                _temperatureCilcle.indexTemp = 18;
+            }else if (num>=37 && num<38){
+                _temperatureCilcle.indexTemp = 14;
+            }else if (num>=36 && num<37){
+                _temperatureCilcle.indexTemp = 9;
+            }else if (num>=35 && num<36){
+                _temperatureCilcle.indexTemp = 4;
+            }else{
+                _temperatureCilcle.indexTemp = 0;
             }
         }
     }
 }
 
-- (void)temperaturetOFF:(NSString *)command{
-    if ([command isEqualToString:EquiomentCommand_9001]) {
-        
-        if (_isOff) {
-            [self controlTemperaturet];
-        }
-    }
-}
-#pragma mark 获取运动数据
--(void)sportDataQuery{
-    {
-        Byte byte[20] = {0x08,0x01,0x01,0x01};
-        NSData *data = [NSData dataWithBytes:byte length:20];
-        if (_peripheralArray.count>0) {
-            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-            NSLog(@"发送命令==  %@",data);
-        }
-    }
-    {
-        Byte byte[20] = {0x08,0x03,0x01};
-        NSData *data = [NSData dataWithBytes:byte length:20];
-        if (_peripheralArray.count>0) {
-            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-            //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-            NSLog(@"发送命令==  %@",data);
-        }
-    }
-}
--(void)sleepDataQuery{
-    
-    {
-        Byte byte[20] = {0x08,0x01,0x01,0x01};
-        NSData *data = [NSData dataWithBytes:byte length:20];
-        if (_peripheralArray.count>0) {
-            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-        }
-    }
-    
-    {
-        Byte byte[20] = {0x08,0x04,0x01};
-        NSData *data = [NSData dataWithBytes:byte length:20];
-        if (_peripheralArray.count>0) {
-            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-        }
-    }
-    
-    
-}
-
-//设置温度
--(void)controlTemperaturet{
-    NSString *str = [NLBluetoothDataAnalytical tenTurnSixTeen:_temperatureNUM];
-
-    unsigned long red = strtoul([[str substringWithRange:NSMakeRange(0, 2)] UTF8String],0,16);
-    Byte b =  (Byte) ((0xff & red) );//( Byte) 0xff&iByte;
-    
-    unsigned long red1 = strtoul([[str substringWithRange:NSMakeRange(2, str.length - 2)] UTF8String],0,16);
-    Byte b1 =  (Byte) ((0xff & red1) );//( Byte) 0xff&iByte;
-    
-    unsigned long time = strtoul([[NSString stringWithFormat:@"%lx",(long)_blueTime] UTF8String], 0, 16);
-    Byte timeByty =  (Byte) ((0xff & time) );//( Byte) 0xff&iByte;
-    
-    Byte byte[20] = {0x90,0x03,b,b1,0x00,timeByty,0x00};
-    NSData *data = [NSData dataWithBytes:byte length:20];
-    if (_peripheralArray.count>0) {
-        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-        NSLog(@"发送命令==  %@",data);
-    }
-}
-
-
--(void)sportData:(NSString *)sportData{
-    if (sportData.length<=4) {
-        return;
-    }
-    NSString *format = [sportData substringWithRange:NSMakeRange(0, 4)];
-    if ([format isEqualToString:EquiomentCommand_0803]) {
-        [_sportDataArr addObject:sportData];
-        if (_sportDataArr.count==34) {
-            [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];
-        }
-    }
-}
-#pragma mark 睡眠数据
--(void)sleepDatas:(NSString *)sleepDatas{
-    if (sleepDatas.length<=4) {
-        return;
-    }
-    
-    NSString *format = [sleepDatas substringWithRange:NSMakeRange(0, 4)];
-    if ([format isEqualToString:EquiomentCommand_0804]) {
-
-        [_sleepDataArr addObject:sleepDatas];
-        
-        
-        NSLog(@"%@",sleepDatas);
-
-//        NSLog(@"%@",[NLBluetoothDataAnalytical tenturnSinTenNew:[[sleepDatas substringWithRange:NSMakeRange(sleepDatas.length-2, 2)] integerValue]]);
-        
-        
-        NSString *count = [NLBluetoothDataAnalytical tenturnSinTenNew:[[sleepDatas substringWithRange:NSMakeRange(sleepDatas.length-2, 2)] integerValue]];
-        if (_sleepDataArr.count>=[count integerValue]) {
-            [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];
-        }
-    }
-}
-
--(void)setTimeEquipment{
-    NSString *dateTime = [ApplicationStyle datePickerTransformationYearDate:[NSDate date]];
-    NSArray *arrText = [ApplicationStyle interceptText:dateTime interceptCharacter:@"-"];
-    
-    NSString *yeatTime = arrText[0];
-    NSString *str = [NLBluetoothDataAnalytical tenTurnSixTeen:[yeatTime integerValue]];
-    unsigned long red = strtoul([[str substringWithRange:NSMakeRange(0, 2)] UTF8String],0,16);
-    Byte b =  (Byte) ((0xff & red) );//( Byte) 0xff&iByte;
-    
-    unsigned long red1 = strtoul([[str substringWithRange:NSMakeRange(2, str.length - 2)] UTF8String],0,16);
-    Byte b1 =  (Byte) ((0xff & red1) );//( Byte) 0xff&iByte;
-    Byte month = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[1] integerValue]]];
-    Byte day = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[2] integerValue]]];
-    Byte dayTime = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[3] integerValue]]];
-    Byte branch = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[4] integerValue]]];
-    Byte second = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[5] integerValue]]];
-    Byte weekDay = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[[NSString stringWithFormat:@"0%ld",(long)[ApplicationStyle currentDayWeek:[NSDate date]]] integerValue]]];
-    
-    NSLog(@"%hhu %hhu",b,b1);
-    
-    Byte byte[20] = {0x03,0x01,b,b1,month,day,dayTime,branch,second,weekDay};
-    
-    NSData *data = [NSData dataWithBytes:byte length:20];
-    if (_peripheralArray.count>0) {
-        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-    }
-
-}
+//- (void)temperaturetOFF:(NSString *)command{
+//    if ([command isEqualToString:EquiomentCommand_9001]) {
+//        
+//        if (_isOff) {
+//            [self controlTemperaturet];
+//        }
+//    }
+//}
+//#pragma mark 获取运动数据
+//-(void)sportDataQuery{
+//    {
+//        Byte byte[20] = {0x08,0x01,0x01,0x01};
+//        NSData *data = [NSData dataWithBytes:byte length:20];
+//        if (_peripheralArray.count>0) {
+//            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+//            NSLog(@"发送命令==  %@",data);
+//        }
+//    }
+//    {
+//        Byte byte[20] = {0x08,0x03,0x01};
+//        NSData *data = [NSData dataWithBytes:byte length:20];
+//        if (_peripheralArray.count>0) {
+//            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+//            //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//            NSLog(@"发送命令==  %@",data);
+//        }
+//    }
+//}
+//-(void)sleepDataQuery{
+//    
+//    {
+//        Byte byte[20] = {0x08,0x01,0x01,0x01};
+//        NSData *data = [NSData dataWithBytes:byte length:20];
+//        if (_peripheralArray.count>0) {
+//            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+//        }
+//    }
+//    
+//    {
+//        Byte byte[20] = {0x08,0x04,0x01};
+//        NSData *data = [NSData dataWithBytes:byte length:20];
+//        if (_peripheralArray.count>0) {
+//            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+//        }
+//    }
+//    
+//    
+//}
+//
+////设置温度
+//-(void)controlTemperaturet{
+//    NSString *str = [NLBluetoothDataAnalytical tenTurnSixTeen:_temperatureNUM];
+//
+//    unsigned long red = strtoul([[str substringWithRange:NSMakeRange(0, 2)] UTF8String],0,16);
+//    Byte b =  (Byte) ((0xff & red) );//( Byte) 0xff&iByte;
+//    
+//    unsigned long red1 = strtoul([[str substringWithRange:NSMakeRange(2, str.length - 2)] UTF8String],0,16);
+//    Byte b1 =  (Byte) ((0xff & red1) );//( Byte) 0xff&iByte;
+//    
+//    unsigned long time = strtoul([[NSString stringWithFormat:@"%lx",(long)_blueTime] UTF8String], 0, 16);
+//    Byte timeByty =  (Byte) ((0xff & time) );//( Byte) 0xff&iByte;
+//    
+//    Byte byte[20] = {0x90,0x03,b,b1,0x00,timeByty,0x00};
+//    NSData *data = [NSData dataWithBytes:byte length:20];
+//    if (_peripheralArray.count>0) {
+//        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//        NSLog(@"发送命令==  %@",data);
+//    }
+//}
+//
+//
+//-(void)sportData:(NSString *)sportData{
+//    if (sportData.length<=4) {
+//        return;
+//    }
+//    NSString *format = [sportData substringWithRange:NSMakeRange(0, 4)];
+//    if ([format isEqualToString:EquiomentCommand_0803]) {
+//        [_sportDataArr addObject:sportData];
+//        if (_sportDataArr.count==34) {
+//            [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];
+//        }
+//    }
+//}
+//#pragma mark 睡眠数据
+//-(void)sleepDatas:(NSString *)sleepDatas{
+//    if (sleepDatas.length<=4) {
+//        return;
+//    }
+//    
+//    NSString *format = [sleepDatas substringWithRange:NSMakeRange(0, 4)];
+//    if ([format isEqualToString:EquiomentCommand_0804]) {
+//
+//        [_sleepDataArr addObject:sleepDatas];
+//        
+//        
+//        NSLog(@"%@",sleepDatas);
+//
+////        NSLog(@"%@",[NLBluetoothDataAnalytical tenturnSinTenNew:[[sleepDatas substringWithRange:NSMakeRange(sleepDatas.length-2, 2)] integerValue]]);
+//        
+//        
+//        NSString *count = [NLBluetoothDataAnalytical tenturnSinTenNew:[[sleepDatas substringWithRange:NSMakeRange(sleepDatas.length-2, 2)] integerValue]];
+//        if (_sleepDataArr.count>=[count integerValue]) {
+//            [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];
+//        }
+//    }
+//}
+//
+//-(void)setTimeEquipment{
+//    NSString *dateTime = [ApplicationStyle datePickerTransformationYearDate:[NSDate date]];
+//    NSArray *arrText = [ApplicationStyle interceptText:dateTime interceptCharacter:@"-"];
+//    
+//    NSString *yeatTime = arrText[0];
+//    NSString *str = [NLBluetoothDataAnalytical tenTurnSixTeen:[yeatTime integerValue]];
+//    unsigned long red = strtoul([[str substringWithRange:NSMakeRange(0, 2)] UTF8String],0,16);
+//    Byte b =  (Byte) ((0xff & red) );//( Byte) 0xff&iByte;
+//    
+//    unsigned long red1 = strtoul([[str substringWithRange:NSMakeRange(2, str.length - 2)] UTF8String],0,16);
+//    Byte b1 =  (Byte) ((0xff & red1) );//( Byte) 0xff&iByte;
+//    Byte month = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[1] integerValue]]];
+//    Byte day = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[2] integerValue]]];
+//    Byte dayTime = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[3] integerValue]]];
+//    Byte branch = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[4] integerValue]]];
+//    Byte second = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[arrText[5] integerValue]]];
+//    Byte weekDay = [ApplicationStyle byteTransformationTextSixteenByteStr:[NLBluetoothDataAnalytical tenturnSinTenNew:[[NSString stringWithFormat:@"0%ld",(long)[ApplicationStyle currentDayWeek:[NSDate date]]] integerValue]]];
+//    
+//    NSLog(@"%hhu %hhu",b,b1);
+//    
+//    Byte byte[20] = {0x03,0x01,b,b1,month,day,dayTime,branch,second,weekDay};
+//    
+//    NSData *data = [NSData dataWithBytes:byte length:20];
+//    if (_peripheralArray.count>0) {
+//        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//    }
+//
+//}
 #pragma mark 按钮事件
 
 - (void)moxibustionBtnDown{
@@ -708,13 +787,7 @@ static const NSInteger TIMELINE = 90;
             _isOff = !_isOff;
             
             //发送加热
-            Byte byte[18] = {0x90,0x01,0x55};
-            NSData *data = [NSData dataWithBytes:byte length:20];
-            if (_peripheralArray.count>0) {
-                //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-                [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-                NSLog(@"发送命令==  %@",data);
-            }
+            [_bluetooth setTemperatureStart];
             return;
         }else{
             _staffScrollew.scrollEnabled = YES;
@@ -722,13 +795,7 @@ static const NSInteger TIMELINE = 90;
             [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_G"] forState:UIControlStateNormal];
             _isOff = !_isOff;
             //关闭加热
-            Byte byte[18] = {0x90,0x01,0xAA};
-            NSData *data = [NSData dataWithBytes:byte length:20];
-            if (_peripheralArray.count>0) {
-                //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-                [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-                NSLog(@"发送命令==  %@",data);
-            }
+            [_bluetooth setTemperatureEnd];
             return;
         }
     }else{

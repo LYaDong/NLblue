@@ -20,6 +20,7 @@
 #import "NLDatahub.h"
 #import "NLNotification.h"
 #import "MJRefresh.h"
+#import "SMProgressHUD.h"
 
 #pragma clangdiagnosticpush
 #pragma clangdiagnosticignored"object file (Pods/UmengSocial/Umeng_SDK_Social_iOS_ARM64_4.4/UMSocial_Sdk_Extra_Frameworks/SinaSSO/libSocialSinaSSO.a(UMSocialSinaSSOHandler.o)) was built for newer iOS version (8.2) than being linked (8.1)"

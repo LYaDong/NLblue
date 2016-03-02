@@ -8,6 +8,7 @@
 
 #import "NLMyMessageViewController.h"
 #import "NLMyMessageCell.h"
+#import "NLMessageDetailsViewController.h"
 #import <UIImageView+WebCache.h>
 @interface NLMyMessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *mainTableView;
@@ -25,7 +26,7 @@
         self.navBarPushBack.hidden = NO;
         self.controllerBack.hidden = YES;
     }
-    
+    self.view.backgroundColor = [ApplicationStyle subjectBackViewColor];
     self.titles.text = NSLocalizedString(@"NLProfileView_MyMessage", nil);
     [self bulidUI];
 }
@@ -65,6 +66,15 @@
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NLMessageDetailsViewController *vc = [[NLMessageDetailsViewController alloc] init];
+    vc.titleLab = @"暖蓝小助手";
+    vc.timeLab = @"2016/1/19   9:30";
+    vc.countLab = @"你女朋友今天在经期，但是已经走了7K步啦，快去阻止她糟蹋自己的身体!";
+    vc.promptLab = @"暖蓝小提示:\n经期不宜过量运动，过量运动会造成经血增加、痛经加重等情况";
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
+    
     
 }
 #pragma mark 自己的Delegate

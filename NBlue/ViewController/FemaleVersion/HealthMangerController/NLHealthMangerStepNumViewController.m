@@ -180,19 +180,19 @@
     }
 }
 
--(void)sildeIndex:(NSInteger)index{
+-(void)sildeIndex:(NSArray *)index{
 
-    [_labViewBack removeFromSuperview];
-    
-    if (index == 0) {
-        NSArray *dataLabArr = @[@"300",@"30千米",@"8千卡",@"00小时15分钟"];
-        
-        [self stepAndColAndTime:dataLabArr];
-    }else{
-        NSArray *dataLabArr = @[@"6880",@"241千米",@"241千卡",@"02小时15分钟"];
-        
-        [self stepAndColAndTime:dataLabArr];
-    }
+//    [_labViewBack removeFromSuperview];
+//    
+//    if (index == 0) {
+//        NSArray *dataLabArr = @[@"300",@"30千米",@"8千卡",@"00小时15分钟"];
+//        
+//        [self stepAndColAndTime:dataLabArr];
+//    }else{
+//        NSArray *dataLabArr = @[@"6880",@"241千米",@"241千卡",@"02小时15分钟"];
+//        
+//        [self stepAndColAndTime:dataLabArr];
+//    }
     
 }
 #pragma mark 自己的按钮事件

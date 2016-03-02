@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <CoreBluetooth/CoreBluetooth.h>
 @interface NLLocalUserInfo : NSObject
 /**
  *存设备名字

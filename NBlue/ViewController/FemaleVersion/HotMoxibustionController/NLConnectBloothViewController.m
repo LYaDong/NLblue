@@ -10,6 +10,7 @@
 #import "NLConnectBloothCell.h"
 #import "NLBluetoothAgreement.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "NLBluetoothAgreementNew.h"
 @interface NLConnectBloothViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *mainTableView;
 @property(nonatomic,strong)NSMutableArray *dataArr;
@@ -48,13 +49,27 @@
 
 -(void)bloothView{
     
-    NLBluetoothAgreement *blue = [NLBluetoothAgreement shareInstance];
-    [blue bluetoothAllocInit];
-    blue.getEquiment = ^(NSArray *perpheral){
+    NLBluetoothAgreementNew *bluetooth = [NLBluetoothAgreementNew shareInstance];
+    [bluetooth bluetoothInstantiation];
+    [bluetooth dataArrayInstantiation];
+    bluetooth.bluetoothDataArr = ^(NSMutableArray *array){
+        NSLog(@"%@",array);
+        
+        
         [_dataArr removeAllObjects];
-        [_dataArr addObjectsFromArray:perpheral];
+        [_dataArr addObjectsFromArray:array];
         [_mainTableView reloadData];
+
     };
+    
+    
+//    NLBluetoothAgreement *blue = [NLBluetoothAgreement shareInstance];
+//    [blue bluetoothAllocInit];
+//    blue.getEquiment = ^(NSArray *perpheral){
+//        [_dataArr removeAllObjects];
+//        [_dataArr addObjectsFromArray:perpheral];
+//        [_mainTableView reloadData];
+//    };
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -69,22 +84,17 @@
     if (!cell) {
         cell = [[NLConnectBloothCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
     }
-    
-    CBPeripheral *peripheral = _dataArr[indexPath.row];
+    CBPeripheral *peripheral = [_dataArr[indexPath.row] objectForKey:@"peripheral"];
     CBUUID *uuid = [CBUUID UUIDWithCFUUID:(__bridge CFUUIDRef _Nonnull)(peripheral.identifier)];
     
     cell.bloothName.text = peripheral.name;
     cell.bloothUUID.text = [NSString stringWithFormat:@"%@",uuid];
-    
-    
-    
-    
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    CBPeripheral *peripheral = _dataArr[indexPath.row];
+    CBPeripheral *peripheral = [_dataArr[indexPath.row] objectForKey:@"peripheral"];
     CBUUID *uuid = [CBUUID UUIDWithCFUUID:(__bridge CFUUIDRef _Nonnull)(peripheral.identifier)];
     [kAPPDELEGATE._loacluserinfo bluetoothUUID:[NSString stringWithFormat:@"%@",uuid]];
     [[NSNotificationCenter defaultCenter] postNotificationName:NLConnectBloothSuccessNotification object:peripheral userInfo:nil];

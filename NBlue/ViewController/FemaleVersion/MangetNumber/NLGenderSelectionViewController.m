@@ -104,12 +104,12 @@ static const NSUInteger NEXTTAG = 2000;
         [kAPPDELEGATE AutoDisplayAlertView:@"温馨提示" :@"男版暂未开放，请选择女版"];
         return;
         
-//        [kAPPDELEGATE._loacluserinfo userGender:@"1"];
-//        [body setImage:[UIImage imageNamed:@"NL_Gender_Cen_Male_X"] forState:UIControlStateNormal];
-//        [female setImage:[UIImage imageNamed:@"NL_Gender_Cen_Female"] forState:UIControlStateNormal];
-//        nextBtn.backgroundColor = [@"70b2e2" hexStringToColor];
-//        self.view.backgroundColor = [@"b7ebff" hexStringToColor];
-//        _nextInt = 1;
+        [kAPPDELEGATE._loacluserinfo userGender:@"1"];
+        [body setImage:[UIImage imageNamed:@"NL_Gender_Cen_Male_X"] forState:UIControlStateNormal];
+        [female setImage:[UIImage imageNamed:@"NL_Gender_Cen_Female"] forState:UIControlStateNormal];
+        nextBtn.backgroundColor = [@"70b2e2" hexStringToColor];
+        self.view.backgroundColor = [@"b7ebff" hexStringToColor];
+        _nextInt = 1;
     }else{
         [kAPPDELEGATE._loacluserinfo userGender:@"0"];
         [body setImage:[UIImage imageNamed:@"NL_Gender_Cen_Male"] forState:UIControlStateNormal];

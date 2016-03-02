@@ -71,7 +71,7 @@
 }
 -(void)tabBarViewControllerType:(Controller)type{
     
-    
+//    [kAPPDELEGATE._loacluserinfo userGender:@"0"];
     switch (type) {
         case Controller_Loing:
         {

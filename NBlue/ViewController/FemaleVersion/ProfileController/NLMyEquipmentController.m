@@ -13,6 +13,7 @@
 #import "NLConnectBloothViewController.h"
 #import "TYWaveProgressView.h"
 #import "NLBluetoothDataAnalytical.h"
+#import "NLBluetoothAgreementNew.h"
 @interface NLMyEquipmentController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIImageView *batteryBack;
 @property(nonatomic,strong)UITableView *tableView;
@@ -21,6 +22,7 @@
 @property(nonatomic,strong)NSMutableArray *peripheralArray;
 @property(nonatomic,weak) TYWaveProgressView *waveViewA;
 @property(nonatomic,weak) TYWaveProgressView *waveViewB;
+@property(nonatomic,strong)NLBluetoothAgreementNew *bluetooth;
 @end
 
 @implementation NLMyEquipmentController
@@ -60,34 +62,39 @@
     
     self.view.backgroundColor = [ApplicationStyle subjectBackViewColor];
     
-    NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
-    _peripheralArray  = blues.arrPeripheral;
-    blues.returnBatteryLevel = ^(NSString *batteryLevel){
-        
-        NSLog(@"%@",batteryLevel);
-        
-        if ([[batteryLevel substringWithRange:NSMakeRange(0, 4)] isEqualToString:EquiomentCommand_0201]) {
-            long level = [NLBluetoothDataAnalytical sixTenHexTeen:[batteryLevel substringWithRange:NSMakeRange(14, 2)]];
-            CGFloat floatLevel = level*0.01;
-            _waveViewA.numberLabel.text = [NSString stringWithFormat:@"%ld%@",level,@"%"];
-            _waveViewA.percent = floatLevel;
-            [_waveViewA startWave];
-            
-            [self unitBBatteryLevel];
-        }else{
-            long level = [NLBluetoothDataAnalytical sixTenHexTeen:[batteryLevel substringWithRange:NSMakeRange(4, 2)]];
-            CGFloat floatLevel = level*0.01;
-            _waveViewB.numberLabel.text = [NSString stringWithFormat:@"%ld%@",level,@"%"];
-            _waveViewB.percent = floatLevel;
-            [_waveViewB startWave];
-        }
-        
-        
-        
-        
-    };
+//    NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
+//    _peripheralArray  = blues.arrPeripheral;
+//    blues.returnBatteryLevel = ^(NSString *batteryLevel){
+//        
+//        NSLog(@"%@",batteryLevel);
+//        
+//        if ([[batteryLevel substringWithRange:NSMakeRange(0, 4)] isEqualToString:EquiomentCommand_0201]) {
+//            long level = [NLBluetoothDataAnalytical sixTenHexTeen:[batteryLevel substringWithRange:NSMakeRange(14, 2)]];
+//            CGFloat floatLevel = level*0.01;
+//            _waveViewA.numberLabel.text = [NSString stringWithFormat:@"%ld%@",level,@"%"];
+//            _waveViewA.percent = floatLevel;
+//            [_waveViewA startWave];
+//
+//            [self unitBBatteryLevel];
+//        }else{
+//            long level = [NLBluetoothDataAnalytical sixTenHexTeen:[batteryLevel substringWithRange:NSMakeRange(4, 2)]];
+//            CGFloat floatLevel = level*0.01;
+//            _waveViewB.numberLabel.text = [NSString stringWithFormat:@"%ld%@",level,@"%"];
+//            _waveViewB.percent = floatLevel;
+//            [_waveViewB startWave];
+//        }
+//        
+//        
+//        
+//        
+//    };
+//    
+//    [self queryBatteryLevel];
     
-    [self queryBatteryLevel];
+    
+    
+    [self bluetoothUI];
+    
     
     
     
@@ -132,6 +139,30 @@
     [super viewWillDisappear:animated];
 }
 #pragma mark 基础UI
+
+-(void)bluetoothUI{
+    
+    __weak typeof (NLMyEquipmentController) *equioment = self;//防止循环引用，页面释放时释放他
+    _bluetooth = [NLBluetoothAgreementNew shareInstance];
+    [_bluetooth queryAunitLevel];
+    _bluetooth.batteryLevelA = ^(NSString *batteryLevel,NLBluetoothAgreementNew *blue){
+        long level = [NLBluetoothDataAnalytical sixTenHexTeen:[batteryLevel substringWithRange:NSMakeRange(14, 2)]];
+        CGFloat floatLevel = level*0.01;
+        equioment.waveViewA.numberLabel.text = [NSString stringWithFormat:@"%ld%@",level,@"%"];
+        equioment.waveViewA.percent = floatLevel;
+        [equioment.waveViewA startWave];
+        [blue queryBunitLevel];
+    };
+    
+    _bluetooth.batteryLevelB = ^(NSString *batteryLelveB){
+        long level = [NLBluetoothDataAnalytical sixTenHexTeen:[batteryLelveB substringWithRange:NSMakeRange(4, 2)]];
+        CGFloat floatLevel = level*0.01;
+        equioment.waveViewB.numberLabel.text = [NSString stringWithFormat:@"%ld%@",level,@"%"];
+        equioment.waveViewB.percent = floatLevel;
+        [equioment.waveViewB startWave];
+
+    };
+}
 //电池UI
 -(void)batteryLevelUI{
     TYWaveProgressView *waveProgressA = [[TYWaveProgressView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:70], [ApplicationStyle navBarAndStatusBarSize] + [ApplicationStyle control_height:60], [ApplicationStyle control_weight:220], [ApplicationStyle control_weight:220])];
@@ -264,12 +295,8 @@
             }
             case 1:
             {
-                Byte byte[20] = {0xF0,0x01};
-                NSData *data = [NSData dataWithBytes:byte length:20];
-                if (_peripheralArray.count>0) {
-                    [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-                }
-                
+                [_bluetooth connectReseart];
+                [kAPPDELEGATE._loacluserinfo bluetoothSetTime:@"1"];
                 NLConnectBloothViewController *vc = [[NLConnectBloothViewController alloc] init];
                 [vc setHidesBottomBarWhenPushed:YES];
                 [self.navigationController pushViewController:vc animated:YES];

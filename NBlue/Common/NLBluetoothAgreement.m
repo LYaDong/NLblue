@@ -55,9 +55,6 @@ static NSString *TransLationF1 = @"0AF1";
     _manger.delegate = self;
     [_manger scanForPeripheralsWithServices:nil options:nil];
     
-    _cbServices = [CBService alloc];
-    _cbCharacteristcs = [CBCharacteristic alloc];
-    
     _periperal.delegate = self;
     
     _dataArr = [NSMutableArray arrayWithCapacity:0];
@@ -65,8 +62,8 @@ static NSString *TransLationF1 = @"0AF1";
     _dataServices = [NSMutableArray  arrayWithCapacity:0];
     
     
-    NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
-    [notifi addObserver:self selector:@selector(logInSuccess:) name:NLConnectBloothSuccessNotification object:nil];
+//    NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
+//    [notifi addObserver:self selector:@selector(logInSuccess:) name:NLConnectBloothSuccessNotification object:nil];
     
 }
 
@@ -171,14 +168,18 @@ static NSString *TransLationF1 = @"0AF1";
     [peripheral discoverServices:nil];
     NSLog(@"连接成功");
     _connectionSuccess = EquiomentConnectionSuccess;
-    
 }
 #pragma mark 连接失败
 -(void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
-    
+    NSLog(@"连接失败： %@",error);
 }
 #pragma mark 断开连接
 -(void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
+    
+    NSLog(@"蓝牙断开连接：%@",error);
+    
+//    [_manger connectPeripheral:_periperal options:nil];
+    
     _periperal = nil;
     _connectionSuccess = EquiomentConnectionFiale;
     [self disconnect];
@@ -200,46 +201,25 @@ static NSString *TransLationF1 = @"0AF1";
     }
     
 }
-
-
 #pragma mark 搜索到周围设备的特点
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error{
-    
-    
-    
-    
-    
-//    NSLog(@"peripheral = %@  \n  service %@     ",peripheral,service.characteristics);
-    
-    
-    
-    
+
     
     for (CBCharacteristic *c in service.characteristics) {
-        
-        NSLog(@"CBCharacteristic  ==    %@",c);
-        
-        [_dataCharcteristics addObject:c];
-        //给所有外设发送通知其代理，获取新的值
-        [peripheral setNotifyValue:YES forCharacteristic:c];
+        CBUUID *charUUIDF1 = [CBUUID UUIDWithString:TransLationF1];
+        CBUUID *charUUIDF6 = [CBUUID UUIDWithString:TranslationF6];
+        if ([charUUIDF1 isEqual:c.UUID] || [charUUIDF6 isEqual:c.UUID]) {
+        }else{
+                [_dataCharcteristics addObject:c];
+                //给所有外设发送通知其代理，获取新的值
+                [peripheral setNotifyValue:YES forCharacteristic:c];
+        }
     }
-    
-    
-    //获取Characteristic的值，读到数据会进入方法：-(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-//    for (CBCharacteristic *characteristic in service.characteristics){
-//        {
-//            [peripheral readValueForCharacteristic:characteristic];
-//        }
-//    }
-    
-//    //搜索Characteristic的Descriptors，读到数据会进入方法：-(void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-//    for (CBCharacteristic *characteristic in service.characteristics){
-//        [peripheral discoverDescriptorsForCharacteristic:characteristic];
-//    }
-    
-    
-    
-    
+    if ([_connectionSuccess isEqualToString:EquiomentConnectionSuccess]) {
+        if (self.getConnectionSuccess) {
+            self.getConnectionSuccess(EquiomentConnectionSuccess);
+        }
+    }    
 }
 
 #pragma mark 搜索到char
@@ -251,14 +231,6 @@ static NSString *TransLationF1 = @"0AF1";
         return;
     }
     unsigned char data[characteristic.value.length];
-    
-//    [peripheral setNotifyValue:NO forCharacteristic:characteristic];
-//    
-//    // and disconnect from the peripehral
-//    [_manger cancelPeripheralConnection:peripheral];
-    
-    
-
 //    [characteristic.value getBytes:&data];
 //    getBytes:length  新方法 试试
     [characteristic.value getBytes:&data length:characteristic.value.length];
@@ -271,8 +243,7 @@ static NSString *TransLationF1 = @"0AF1";
     
     // 通知开始
     if (characteristic.isNotifying) {
-        [peripheral readValueForCharacteristic:characteristic];
-        
+//        [peripheral readValueForCharacteristic:characteristic];
     } else { // 通知结束
         // so disconnect from the peripheral
         NSLog(@"Notification stopped on %@.  Disconnecting", characteristic);
@@ -342,9 +313,16 @@ static NSString *TransLationF1 = @"0AF1";
 -(void)explainOrder:(NSString *)buff
 {
     
+    NSLog(@"%@",buff);
+    
+    
     if (buff.length <4) {
         return;
     }
+    
+    
+    NSLog(@"%@",buff);
+    
     
     if ([[buff substringWithRange:NSMakeRange(0, 4)] isEqualToString:EquiomentCommand_0201] || [[buff substringWithRange:NSMakeRange(0, 4)] isEqualToString:EquiomentCommand_9004]) {
         if (self.returnBatteryLevel) {
@@ -378,7 +356,7 @@ static NSString *TransLationF1 = @"0AF1";
 
 
 
-#pragma mark  指令
+#pragma mark  通道指令指令
 
 #pragma mark 0AF6通道
 -(void)writeCharacteristicF6:(CBPeripheral *)peripheral data:(NSData *)data{
@@ -403,6 +381,14 @@ static NSString *TransLationF1 = @"0AF1";
         }
     }
 }
+
+
+#pragma mark 命令或者返回数据接收
+
+
+
+
+
 
 
 
