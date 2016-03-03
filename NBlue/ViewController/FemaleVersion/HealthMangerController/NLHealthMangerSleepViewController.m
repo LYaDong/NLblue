@@ -26,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _weekMonthCount = 1;
     _dataArr = [NSMutableArray array];
     [self bulidUI];
 }
@@ -62,12 +63,60 @@
         
         
         NSMutableArray *arrs = [NLSQLData sleepDataObtain];
-        NSLog(@"%@",[self sortArrayData:arrs]);
         
         [_dataArr removeAllObjects];
         [_dataArr addObjectsFromArray:arrs];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self imageConvenDataArr:_dataArr type:NLCalendarType_Day];
+            
+            NSMutableArray *arrData = [self sortArrayData:_dataArr];
+            NSString *qualitySleep = @"良";
+            NSString *total_time = [[arrData[0] objectForKey:@"total_time"] length]==0?@"0":[arrData[0] objectForKey:@"total_time"];
+            NSString *deepSleep_mins = [[arrData[0] objectForKey:@"deepSleep_mins"] length]==0?@"0":[arrData[0] objectForKey:@"deepSleep_mins"];
+            NSString *lightSleep_mins = [[arrData[0] objectForKey:@"lightSleep_mins"] length]==0?@"0":[arrData[0] objectForKey:@"lightSleep_mins"];
+            NSString *endSleep_Time = [[arrData[0] objectForKey:@"endSleep_Time"] length]==0?@"0":[arrData[0] objectForKey:@"endSleep_Time"];
+            
+            
+            NSArray *wakeUpArr = [ApplicationStyle interceptText:endSleep_Time interceptCharacter:@":"];
+            
+            NSInteger hourTime = [total_time integerValue]/60;
+            NSInteger miueTime = [total_time integerValue]%60;
+            
+            if (wakeUpArr.count >=2) {
+                if ([wakeUpArr[1] integerValue] - miueTime<0) {
+                    miueTime = [wakeUpArr[1] integerValue] - miueTime + 60;
+                    hourTime = hourTime + 1;
+                }else{
+                    miueTime = [wakeUpArr[1] integerValue] - miueTime;
+                }
+                
+                
+                if ([wakeUpArr[0] integerValue] - hourTime<0) {
+                    hourTime = [wakeUpArr[0] integerValue] - hourTime  + 24;
+                }else{
+                    hourTime = [wakeUpArr[0] integerValue] - hourTime;
+                }
+            }
+            
+            NSArray *timeSleep = [ApplicationStyle interceptText:[NSString stringWithFormat:@"%0.01f",[total_time integerValue]/60.0f] interceptCharacter:@"."];
+            NSArray *depthLab = [ApplicationStyle interceptText:[NSString stringWithFormat:@"%0.01f",[deepSleep_mins integerValue]/60.0f] interceptCharacter:@"."];
+            NSArray *lightLab = [ApplicationStyle interceptText:[NSString stringWithFormat:@"%0.01f",[lightSleep_mins integerValue]/60.0f] interceptCharacter:@"."];
+            NSString *fallAsleep = [NSString stringWithFormat:@"%ld:%ld",(long)hourTime,(long)miueTime];
+            NSString *tital_time_Text = [NSString stringWithFormat:@"%@h%@m",timeSleep[0],timeSleep[1]];
+            NSString *deepSleep_mins_Text = [ NSString stringWithFormat:@"%@h%@m",depthLab[0],depthLab[1]];
+            NSString *lightSleep_mins_Text = [ NSString stringWithFormat:@"%@h%@m",lightLab[0],lightLab[1]];
+            NSString *endSleep_Time_Text = endSleep_Time;
+            
+            NSArray *dataLabArr = @[fallAsleep,endSleep_Time_Text,tital_time_Text,lightSleep_mins_Text,deepSleep_mins_Text,qualitySleep];
+            NSArray *remarkLabText = @[NSLocalizedString(@"NLHealthMangerSleep_FallAsleepTime", nil),
+                                       NSLocalizedString(@"NLHealthMangerSleep_WakeupTime", nil),
+                                       NSLocalizedString(@"NLHealthMangerSleep_SleepTime", nil),
+                                       NSLocalizedString(@"NLHealthMangerSleep_ShallowSleepTime", nil),
+                                       NSLocalizedString(@"NLHealthMangerSleep_DeepSleepTime", nil),
+                                       NSLocalizedString(@"NLHealthMangerSleep_SleepQualityTime", nil),];
+
+            [self stepAndColAndTime:dataLabArr remarkLabText:remarkLabText];
+            
         });
     });
     
@@ -87,8 +136,8 @@
     [[[UIApplication sharedApplication] keyWindow] addSubview:_imageArrow];
     
     
-    NSArray *dataLabArr = @[@"23:08",@"07:26",@"07:26",@"3h15m",@"2h15m",@"良"];
-    [self stepAndColAndTime:dataLabArr];
+//    NSArray *dataLabArr = @[@"23:08",@"07:26",@"07:26",@"3h15m",@"2h15m",@"良"];
+//    [self stepAndColAndTime:dataLabArr];
     
 }
 #pragma mark 系统Delegate
@@ -98,18 +147,22 @@
     switch (index) {
         case NLCalendarType_Day:
         {
+            _weekMonthCount = 1;
+             [self sildeIndex:[self dataThreeData:_dataArr][0]];
             [self imageConvenDataArr:_dataArr type:NLCalendarType_Day];
             break;
         }
         case NLCalendarType_Week:
         {
             _weekMonthCount = 7;
+            [self sildeIndex:[self dataThreeData:_dataArr][0]];
             [self imageConvenDataArr:[self dataThreeData:_dataArr] type:NLCalendarType_Week];
             break;
         }
         case NLCalendarType_Month:
         {
             _weekMonthCount = 30;
+            [self sildeIndex:[self dataThreeData:_dataArr][0]];
             [self imageConvenDataArr:[self dataThreeData:_dataArr] type:NLCalendarType_Month];
             break;
         }
@@ -117,17 +170,17 @@
             break;
     }
 }
--(void)stepAndColAndTime:(NSArray *)arr{
+-(void)stepAndColAndTime:(NSArray *)arr remarkLabText:(NSArray *)remarkLabText{
     _labViewBack = [[UIView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT - [ApplicationStyle control_height:492], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle control_height:492])];
     _labViewBack.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_labViewBack];
     
-    NSArray *remarkLabText = @[NSLocalizedString(@"NLHealthMangerSleep_FallAsleepTime", nil),
-                               NSLocalizedString(@"NLHealthMangerSleep_WakeupTime", nil),
-                               NSLocalizedString(@"NLHealthMangerSleep_SleepTime", nil),
-                               NSLocalizedString(@"NLHealthMangerSleep_ShallowSleepTime", nil),
-                               NSLocalizedString(@"NLHealthMangerSleep_DeepSleepTime", nil),
-                               NSLocalizedString(@"NLHealthMangerSleep_SleepQualityTime", nil),];
+//    NSArray *remarkLabText = @[NSLocalizedString(@"NLHealthMangerSleep_FallAsleepTime", nil),
+//                               NSLocalizedString(@"NLHealthMangerSleep_WakeupTime", nil),
+//                               NSLocalizedString(@"NLHealthMangerSleep_SleepTime", nil),
+//                               NSLocalizedString(@"NLHealthMangerSleep_ShallowSleepTime", nil),
+//                               NSLocalizedString(@"NLHealthMangerSleep_DeepSleepTime", nil),
+//                               NSLocalizedString(@"NLHealthMangerSleep_SleepQualityTime", nil),];
     for (NSInteger i=0; i<arr.count; i++) {
         CGFloat  x = 0+i % 3 * SCREENWIDTH/3,
         y = [ApplicationStyle control_height:40] + i / 3 * [ApplicationStyle control_height:120],
@@ -141,7 +194,73 @@
     
 }
 
--(void)sildeIndex:(NSInteger)index{}
+-(void)sildeIndex:(NSDictionary *)index{
+    [_labViewBack removeFromSuperview];
+    NSString *qualitySleep = @"良";
+    NSString *total_time = [index objectForKey:@"total_time"]==nil?@"0":[index objectForKey:@"total_time"];
+    NSString *deepSleep_mins = [index objectForKey:@"deepSleep_mins"]==nil?@"0":[index objectForKey:@"deepSleep_mins"];
+    NSString *lightSleep_mins = [index objectForKey:@"lightSleep_mins"]==nil?@"0":[index objectForKey:@"lightSleep_mins"];
+    NSString *endSleep_Time = [index objectForKey:@"endSleep_Time"]==nil?@"0":[index objectForKey:@"endSleep_Time"];
+
+    
+    NSArray *wakeUpArr = [ApplicationStyle interceptText:endSleep_Time interceptCharacter:@":"];
+    
+    NSInteger hourTime = [total_time integerValue]/60;
+    NSInteger miueTime = [total_time integerValue]%60;
+    
+    if (wakeUpArr.count >=2) {
+        if ([wakeUpArr[1] integerValue] - miueTime<0) {
+            miueTime = [wakeUpArr[1] integerValue] - miueTime + 60;
+            hourTime = hourTime + 1;
+        }else{
+            miueTime = [wakeUpArr[1] integerValue] - miueTime;
+        }
+        
+        
+        if ([wakeUpArr[0] integerValue] - hourTime<0) {
+            hourTime = [wakeUpArr[0] integerValue] - hourTime  + 24;
+        }else{
+            hourTime = [wakeUpArr[0] integerValue] - hourTime;
+        }
+    }
+
+    NSArray *timeSleep = [ApplicationStyle interceptText:[NSString stringWithFormat:@"%0.01f",[total_time integerValue]/60.0f] interceptCharacter:@"."];
+    NSArray *depthLab = [ApplicationStyle interceptText:[NSString stringWithFormat:@"%0.01f",[deepSleep_mins integerValue]/60.0f] interceptCharacter:@"."];
+    NSArray *lightLab = [ApplicationStyle interceptText:[NSString stringWithFormat:@"%0.01f",[lightSleep_mins integerValue]/60.0f] interceptCharacter:@"."];
+    NSString *fallAsleep = [NSString stringWithFormat:@"%ld:%ld",(long)hourTime,(long)miueTime];
+    NSString *tital_time_Text = [NSString stringWithFormat:@"%@h%@m",timeSleep[0],timeSleep[1]];
+    NSString *deepSleep_mins_Text = [ NSString stringWithFormat:@"%@h%@m",depthLab[0],depthLab[1]];
+    NSString *lightSleep_mins_Text = [ NSString stringWithFormat:@"%@h%@m",lightLab[0],lightLab[1]];
+    NSString *endSleep_Time_Text = endSleep_Time;
+    
+    NSArray *dataLabArr = @[[NSString stringWithFormat:@"%ld",[fallAsleep integerValue]/_weekMonthCount],
+                            [NSString stringWithFormat:@"%ld",[endSleep_Time_Text integerValue]/_weekMonthCount],
+                            [NSString stringWithFormat:@"%ld",[tital_time_Text integerValue]/_weekMonthCount],
+                            [NSString stringWithFormat:@"%ld",[lightSleep_mins_Text integerValue]/_weekMonthCount],
+                            [NSString stringWithFormat:@"%ld",[deepSleep_mins_Text integerValue]/_weekMonthCount],
+                            qualitySleep];
+    
+    NSArray *remarkLabText = nil;
+    
+    
+    if (_weekMonthCount == 7 || _weekMonthCount == 30) {
+        remarkLabText = @[NSLocalizedString(@"NLHealthMangerSleep_FallAsleepTime_average", nil),
+                          NSLocalizedString(@"NLHealthMangerSleep_WakeupTime_average", nil),
+                          NSLocalizedString(@"NLHealthMangerSleep_SleepTime_average", nil),
+                          NSLocalizedString(@"NLHealthMangerSleep_ShallowSleepTime_average", nil),
+                          NSLocalizedString(@"NLHealthMangerSleep_DeepSleepTime_average", nil),
+                          NSLocalizedString(@"NLHealthMangerSleep_SleepQualityTime", nil),];
+    }else{
+        remarkLabText = @[NSLocalizedString(@"NLHealthMangerSleep_FallAsleepTime", nil),
+                                   NSLocalizedString(@"NLHealthMangerSleep_WakeupTime", nil),
+                                   NSLocalizedString(@"NLHealthMangerSleep_SleepTime", nil),
+                                   NSLocalizedString(@"NLHealthMangerSleep_ShallowSleepTime", nil),
+                                   NSLocalizedString(@"NLHealthMangerSleep_DeepSleepTime", nil),
+                                   NSLocalizedString(@"NLHealthMangerSleep_SleepQualityTime", nil),];
+    }
+    [self stepAndColAndTime:dataLabArr remarkLabText:remarkLabText];
+
+}
 #pragma mark 自己的按钮事件
 
 -(void)imageConvenDataArr:(NSArray *)arr type:(NSInteger)type{

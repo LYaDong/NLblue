@@ -10,7 +10,7 @@
 
 @protocol NLColumnImageDelegate <NSObject>
 
--(void)sildeIndex:(NSArray *)index;
+-(void)sildeIndex:(NSDictionary *)index;
 
 @end
 typedef NS_ENUM(NSUInteger,NLCalendarType) {

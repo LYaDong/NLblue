@@ -279,7 +279,7 @@ static const NSInteger TIMELINE = 90;
 
 #pragma mark 基础UI
 -(void)bulidUI{
-//    [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
+    [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
 //    [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];//测试睡眠假数据
     
 

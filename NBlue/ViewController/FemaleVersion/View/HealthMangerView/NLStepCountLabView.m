@@ -25,13 +25,13 @@
     UILabel *remarkLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, [ApplicationStyle control_height:32])];
     remarkLab.textColor = [@"ffc0cc" hexStringToColor];
     remarkLab.font = [ApplicationStyle textThrityFont];
-    remarkLab.text = remarkText;
+    remarkLab.text = [NSString stringWithFormat:@"%@",remarkText];
     remarkLab.textAlignment = NSTextAlignmentCenter;
     [self addSubview:remarkLab];
     
     UILabel *dataLab = [[UILabel alloc] initWithFrame:CGRectMake(0, remarkLab.bottomOffset + [ApplicationStyle control_height:20], self.frame.size.width, [ApplicationStyle control_height:45])];
     dataLab.textColor = [ApplicationStyle subjectWithColor];
-    dataLab.text = dataLabText;
+    dataLab.text = [NSString stringWithFormat:@"%@",dataLabText];
     dataLab.textAlignment = NSTextAlignmentCenter;
 //    dataLab.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:48]];
     [self addSubview:dataLab];

@@ -82,12 +82,24 @@
 "NLHealthManger_StepDistance" = "当日距离";
 "NLHealthManger_StepEnergy" = "当日消耗能量";
 "NLHealthManger_StepActovity" = "当日活动时间";
+"NLHealthManger_StepRemarkLab_average" = "日均步数";
+"NLHealthManger_StepDistance_average" = "日均距离";
+"NLHealthManger_StepEnergy_average" = "日均消耗量";
+"NLHealthManger_StepActovity_average" = "日均活跃时间";
+
 //NLHealthMangerSleep
 "NLHealthMangerSleep_FallAsleepTime" = "入睡时间";
 "NLHealthMangerSleep_WakeupTime" = "醒来时间时间";
 "NLHealthMangerSleep_SleepTime" = "睡眠时间";
 "NLHealthMangerSleep_ShallowSleepTime" = "浅睡眠时间";
 "NLHealthMangerSleep_DeepSleepTime" = "深睡眠时间";
+
+"NLHealthMangerSleep_FallAsleepTime_average" = "日均入睡时间";
+"NLHealthMangerSleep_WakeupTime_average" = "日均醒来时间时间";
+"NLHealthMangerSleep_SleepTime_average" = "日均睡眠时间";
+"NLHealthMangerSleep_ShallowSleepTime_average" = "日均浅睡眠时间";
+"NLHealthMangerSleep_DeepSleepTime_average" = "日均深睡眠时间";
+
 "NLHealthMangerSleep_SleepQualityTime" = "睡眠质量";
 
 //NLLogInViewController

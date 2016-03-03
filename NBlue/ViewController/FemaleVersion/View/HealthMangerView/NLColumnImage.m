@@ -40,6 +40,12 @@ static NLColumnImage *cloumnImage = nil;
 }
 
 -(void)stepArray:(NSArray *)arr strokeColor:(UIColor *)strokeColor withColor:(UIColor *)withColor type:(NSInteger)type{
+    
+    
+    
+    
+    
+    
     CGFloat weightSize = arr.count * (_convenImageWeight + [ApplicationStyle control_weight:10]) - _convenImageWeight - [ApplicationStyle control_weight:10];
     CGFloat height = self.frame.size.height;
     
@@ -376,11 +382,14 @@ static NLColumnImage *cloumnImage = nil;
     
     NSString *index = [NSString stringWithFormat:@"%0.0f",scrollView.contentOffset.x/(_convenImageWeight + [ApplicationStyle control_weight:10])];
     
-    NSLog(@"index = %@",index);
     
-//    [self.delegate sildeIndex:[index integerValue]];
+    NSLog(@"%@",_dataArr);
     
     
+    if ([index integerValue]>=_dataArr.count||[index integerValue]<0) {
+    }else{
+        [self.delegate sildeIndex:_dataArr[_dataArr.count - [index integerValue] - 1]];
+    }
     
     CGFloat toLength = (_dataArr.count - 1) * (_convenImageWeight + [ApplicationStyle control_weight:10]); //总长度
     CGFloat weight = _dataArr.count - 1;//总个数

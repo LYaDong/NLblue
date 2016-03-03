@@ -30,7 +30,7 @@
     // Do any additional setup after loading the view.
     
     _dataArr = [NSMutableArray array];
-    _weekMonthCount = 0;
+    _weekMonthCount = 1;
     [self bulidUI];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -71,6 +71,20 @@
 
        dispatch_async(dispatch_get_main_queue(), ^{
            [self imageConvenDataArr:_dataArr type:NLCalendarType_Day];
+           
+           NSMutableArray *arrDatas = [self sortArrayData:_dataArr];
+           NSString *stepsAmount = [[arrDatas[0] objectForKey:@"stepsAmount"] length]==0?@"0":[arrDatas[0] objectForKey:@"stepsAmount"];
+           NSString *distanceAmount = [[arrDatas[0] objectForKey:@"distanceAmount"] length]==0?@"0":[arrDatas[0] objectForKey:@"distanceAmount"];
+           NSString *caloriesAmount = [[arrDatas[0] objectForKey:@"caloriesAmount"] length]==0l?@"0":[arrDatas[0] objectForKey:@"caloriesAmount"];
+           NSString *timestamp = [[arrDatas[0] objectForKey:@"totalTimeCount"] length]==0?@"0":[arrDatas[0] objectForKey:@"totalTimeCount"];
+           
+           NSArray *dataLabArr = @[stepsAmount,distanceAmount,caloriesAmount,timestamp];
+           NSArray *remarkLabText = @[NSLocalizedString(@"NLHealthManger_StepRemarkLab", nil),
+                                      NSLocalizedString(@"NLHealthManger_StepDistance", nil),
+                                      NSLocalizedString(@"NLHealthManger_StepEnergy", nil),
+                                      NSLocalizedString(@"NLHealthManger_StepActovity", nil),];
+
+           [self stepAndColAndTime:dataLabArr remarkLabText:remarkLabText];
        });
     });
 
@@ -92,8 +106,7 @@
     
     
     
-    NSArray *dataLabArr = @[@"6880",@"241千米",@"241千卡",@"02小时15分钟"];
-    [self stepAndColAndTime:dataLabArr];
+    
     
 }
 
@@ -106,7 +119,12 @@
     switch (index) {
         case NLCalendarType_Day:
         {
+            _weekMonthCount = 1;
+            
+            
+            [self sildeIndex:[self dataThreeData:_dataArr][0]];
             [self imageConvenDataArr:_dataArr type:NLCalendarType_Day];
+            
             
             break;
         }
@@ -114,6 +132,7 @@
         {
             
             _weekMonthCount = 7;
+            [self sildeIndex:[self dataThreeData:_dataArr][0]];
             
             [self imageConvenDataArr:[self dataThreeData:_dataArr] type:NLCalendarType_Week];
             
@@ -124,7 +143,10 @@
             
             _weekMonthCount = 30;
             
+            NSLog(@"%@",[self dataThreeData:_dataArr]);
             
+            
+            [self sildeIndex:[self dataThreeData:_dataArr][0]];
             [self imageConvenDataArr:[self dataThreeData:_dataArr] type:NLCalendarType_Month];
             
 //            NSMutableArray *arrs = [NSMutableArray array];
@@ -142,7 +164,7 @@
 }
 
 
--(void)stepAndColAndTime:(NSArray *)arr{
+-(void)stepAndColAndTime:(NSArray *)arr remarkLabText:(NSArray *)remarkLabText{
     
 
     
@@ -150,10 +172,10 @@
     _labViewBack.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_labViewBack];
     
-    NSArray *remarkLabText = @[NSLocalizedString(@"NLHealthManger_StepRemarkLab", nil),
-                               NSLocalizedString(@"NLHealthManger_StepDistance", nil),
-                               NSLocalizedString(@"NLHealthManger_StepEnergy", nil),
-                               NSLocalizedString(@"NLHealthManger_StepActovity", nil),];
+//    NSArray *remarkLabText = @[NSLocalizedString(@"NLHealthManger_StepRemarkLab", nil),
+//                               NSLocalizedString(@"NLHealthManger_StepDistance", nil),
+//                               NSLocalizedString(@"NLHealthManger_StepEnergy", nil),
+//                               NSLocalizedString(@"NLHealthManger_StepActovity", nil),];
 //    NSArray *dataLabArr = @[@"300",@"30千米",@"8千卡",@"00小时15分钟"];
     NSArray *typeLab = @[[NSNumber numberWithInteger:LabTextType_DayStepNum],
                          [NSNumber numberWithInteger:LabTextType_DayDistance],
@@ -180,10 +202,42 @@
     }
 }
 
--(void)sildeIndex:(NSArray *)index{
+-(void)sildeIndex:(NSDictionary *)index{
+    [_labViewBack removeFromSuperview];
+    
+    
+    NSLog(@"%@",index);
+    
+    
+    NSString *stepsAmount = [index objectForKey:@"stepsAmount"]==nil?@"0":[index objectForKey:@"stepsAmount"];
+    NSString *distanceAmount = [index objectForKey:@"distanceAmount"]==nil?@"0":[index objectForKey:@"distanceAmount"];
+    NSString *caloriesAmount = [index objectForKey:@"caloriesAmount"]==nil?@"0":[index objectForKey:@"caloriesAmount"];
+    NSString *totalTimeCount = [index objectForKey:@"totalTimeCount"]==nil?@"0":[index objectForKey:@"totalTimeCount"];
 
-//    [_labViewBack removeFromSuperview];
-//    
+    NSArray *dataLabArr = @[[NSString stringWithFormat:@"%ld",[stepsAmount integerValue]/_weekMonthCount],
+                            [NSString stringWithFormat:@"%ld",[distanceAmount integerValue]/_weekMonthCount],
+                            [NSString stringWithFormat:@"%ld",[caloriesAmount integerValue]/_weekMonthCount],
+                            [NSString stringWithFormat:@"%ld",[totalTimeCount integerValue]/60/_weekMonthCount]];
+    
+    NSArray *remarkLabText = nil;
+
+    
+    if (_weekMonthCount == 7 || _weekMonthCount == 30) {
+        remarkLabText = @[NSLocalizedString(@"NLHealthManger_StepRemarkLab_average", nil),
+                          NSLocalizedString(@"NLHealthManger_StepDistance_average", nil),
+                          NSLocalizedString(@"NLHealthManger_StepEnergy_average", nil),
+                          NSLocalizedString(@"NLHealthManger_StepActovity_average", nil),];
+    }else{
+        remarkLabText = @[NSLocalizedString(@"NLHealthManger_StepRemarkLab", nil),
+                          NSLocalizedString(@"NLHealthManger_StepDistance", nil),
+                          NSLocalizedString(@"NLHealthManger_StepEnergy", nil),
+                          NSLocalizedString(@"NLHealthManger_StepActovity", nil),];
+    }
+    
+    
+    
+    [self stepAndColAndTime:dataLabArr remarkLabText:remarkLabText];
+//
 //    if (index == 0) {
 //        NSArray *dataLabArr = @[@"300",@"30千米",@"8千卡",@"00小时15分钟"];
 //        
@@ -252,6 +306,9 @@
 -(NSArray *)dataThreeData:(NSMutableArray *)data{
     NSMutableArray *arrData = [self sortArrayData:data];
     
+    NSLog(@"%@",arrData);
+    
+    
     NSInteger dayInt = 0;
     //取出第一条数据，判断是星期几，推断第一个循环
     NSInteger countS = 0;//总累计数的和
@@ -278,6 +335,9 @@
     NSInteger nums = 0;
     //每7天加一次数据/或者30天加一次数据
     NSInteger sportCount = 0;
+    NSInteger caloriesAmount = 0;
+    NSInteger distanceAmount = 0;
+    NSInteger totalTimeCount = 0;
     NSString *dateTime = nil;
 __goto:
     dateTime = [arrData[nums] objectForKey:@"sportDate"];
@@ -288,12 +348,15 @@ __goto:
         for (NSInteger i=nums; i<countS; i++) {
             //每7天加一次数据/或者30天加一次数据
             sportCount =  sportCount + [[arrData[i] objectForKey:@"stepsAmount"] integerValue];
+            caloriesAmount = caloriesAmount + [[arrData[i] objectForKey:@"caloriesAmount"] integerValue];
+            distanceAmount = distanceAmount + [[arrData[i] objectForKey:@"distanceAmount"] integerValue];
+            totalTimeCount = totalTimeCount + [[arrData[i] objectForKey:@"totalTimeCount"] integerValue];
         }
     }
     
     NSLog(@"%@",dateTime);
     //添加到数组
-    NSDictionary *dic = @{@"stepsAmount":[NSNumber numberWithInteger:sportCount],@"sportDate":dateTime};
+    NSDictionary *dic = @{@"stepsAmount":[NSNumber numberWithInteger:sportCount],@"sportDate":dateTime,@"caloriesAmount":[NSNumber numberWithInteger:caloriesAmount],@"distanceAmount":[NSNumber numberWithInteger:distanceAmount],@"totalTimeCount":[NSNumber numberWithInteger:totalTimeCount]};
     [dataGather addObject:dic];
     dayInt  = dayInt - 1;
     if (_weekMonthCount == 7) {
@@ -313,6 +376,9 @@ __goto:
         return dataGather;
     }else{
         sportCount = 0;
+        caloriesAmount = 0;
+        distanceAmount = 0;
+        totalTimeCount = 0;
         goto __goto;
     }
 }

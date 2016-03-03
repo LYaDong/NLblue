@@ -6,6 +6,12 @@
 //  Copyright © 2015年 LYD. All rights reserved.
 //
 
+
+
+
+/*
+ *********************************          学而不思则罔，思而不学则殆             ***************************************************
+ */
 #import "ApplicationStyle.h"
 #import <UIKit/UIKit.h>
 @implementation ApplicationStyle
