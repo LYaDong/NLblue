@@ -21,11 +21,7 @@
 //        self.controllerBack.hidden = YES;
 //        self.navBarBack.hidden = YES;
 //    }
-    {
-        self.navBarBack.hidden = YES;
-        self.navBarPushBack.hidden = NO;
-        self.controllerBack.hidden = YES;
-    }
+
 
     
     

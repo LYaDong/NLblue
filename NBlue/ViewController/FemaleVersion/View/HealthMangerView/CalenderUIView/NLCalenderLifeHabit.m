@@ -79,11 +79,11 @@ static const NSInteger LIFEHABITTAG = 2000;
         }else{
             [lifeHabit setImage:[UIImage imageNamed:imageArrYes[i]] forState:UIControlStateNormal];
             lifeHabit.backgroundColor = [self backColor];
-            [lifeHabit setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
+//            [lifeHabit setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
             lifeHabit.selected = !lifeHabit.selected;
         }
         
-        [lifeHabit setTitleColor:[@"dedede" hexStringToColor] forState:UIControlStateNormal];
+        [lifeHabit setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
         [lifeHabit setTitle:labArr[i] forState:UIControlStateNormal];
         lifeHabit.tag = LIFEHABITTAG + i;
         [lifeHabit addTarget:self action:@selector(lifeHabitDown:) forControlEvents:UIControlEventTouchUpInside];

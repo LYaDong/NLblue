@@ -118,6 +118,8 @@
 "NLRegistered_Protocol" = "同意隐私条款和隐私协议";
 "NLRegistered_completeBtn" = "完成";
 //NLHealthCalenderView
+"NLHealthCalender_CartoonText" = "无法记录未来的日子";
+"NLHealthCalender_GoDay" = "回今天";
 "NLHealthCalender_DYM" = "大姨妈";
 "NLHealthCalender_DYM_TJ" = "痛经程度";
 "NLHealthCalender_AA" = "爱爱";

@@ -40,6 +40,7 @@
     self.navBarBack.hidden = YES;
     self.returnBtn.hidden = YES;
     [self notification];
+    [self backViewUI];
     [self liftBtnUI];
     [self bulidUI];
     
@@ -58,6 +59,13 @@
 }
 
 #pragma mark 基础UI
+
+-(void)backViewUI{
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+    imageView.image = [UIImage imageNamed:@"RootContorllewImage"];
+    [self.view addSubview:imageView];
+}
+
 -(void)liftBtnUI{
     UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     messageBtn.frame = CGRectMake([ApplicationStyle control_weight:36], [ApplicationStyle control_height:63], [ApplicationStyle control_weight:48], [ApplicationStyle control_height:42]);

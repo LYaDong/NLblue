@@ -40,6 +40,8 @@ NLLHRatingViewDelegate>
 @property(nonatomic,assign)NSInteger switchOffNum;
 @property(nonatomic,strong)NLLHRatingView *starView;
 @property(nonatomic,assign)BOOL isQuert;
+@property(nonatomic,assign)NSInteger isCurrentDay;
+@property(nonatomic,strong)UIView *cartoonBackview;
 
 @end
 @implementation NLHealthCalenderView
@@ -49,6 +51,7 @@ NLLHRatingViewDelegate>
     if (self) {
 //        self.backgroundColor = [UIColor yellowColor];
         _switchOffNum = 1;
+        _isCurrentDay = 0;  //是否是今天时间  默认是0 代表是 大于今天的时间 则是1
         [self bulidUI];
         
     }
@@ -92,18 +95,29 @@ NLLHRatingViewDelegate>
     
     
     {//经期时间
-        UIImageView *calenderback = [[UIImageView alloc] initWithFrame:CGRectMake(0, calenderView.bottomOffset , SCREENWIDTH, [ApplicationStyle control_height:100])];
-        calenderback.image = [UIImage imageNamed:@"NLBackCalender"];
+//        UIImageView *calenderback = [[UIImageView alloc] initWithFrame:CGRectMake(0, calenderView.bottomOffset , SCREENWIDTH, [ApplicationStyle control_height:100])];
+//        calenderback.image = [UIImage imageNamed:@"NLBackCalender"];
+//        [_mainScrollew addSubview:calenderback];
+        
+        
+        UIView *calenderback = [[UIView alloc] initWithFrame:CGRectMake(0, calenderView.bottomOffset, SCREENWIDTH, [ApplicationStyle control_height:120])];
+        calenderback.backgroundColor = [@"fbf2d8" hexStringToColor];
         [_mainScrollew addSubview:calenderback];
         
         NSArray *periodArr = @[NSLocalizedString(@"NLHealthCalender_JQ", nil),
                                NSLocalizedString(@"NLHealthCalender_YCQ", nil),
                                NSLocalizedString(@"NLHealthCalender_AQQ", nil),
                                NSLocalizedString(@"NLHealthCalender_YYQ", nil),];
+//        NSArray *periodColor = @[[@"ff7b47" hexStringToColor],
+//                                 [@"ffad54" hexStringToColor],
+//                                 [@"fee69a" hexStringToColor],
+//                                 [@"ffdbe2" hexStringToColor],];
+        
+        
         NSArray *periodColor = @[[@"ff6c32" hexStringToColor],
-                                 [@"ffad54" hexStringToColor],
-                                 [@"fee39a" hexStringToColor],
-                                 [@"ffe9ed" hexStringToColor],];
+                                 [@"ff9e34" hexStringToColor],
+                                 [@"fcc20c" hexStringToColor],
+                                 [@"ffa1b4" hexStringToColor],];
         
         NLHealtCalenderPeriod *periodView;
         for (NSInteger i = 0; i<periodArr.count; i++) {
@@ -114,14 +128,21 @@ NLLHRatingViewDelegate>
             [calenderback addSubview:periodView];
         }
         
+        
+        
+
+        
+        
+        
+        
         _periodTimeDay = [[UILabel alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:52],
                                                                   [ApplicationStyle control_height:40] + ((calenderback.viewHeight - [ApplicationStyle control_height:40]) - [ApplicationStyle control_height:35])/2,
                                                                    SCREENWIDTH - [ApplicationStyle control_weight:100 * 2],
                                                                    [ApplicationStyle control_height:35])];
         
-        _periodTimeDay.textColor = [ApplicationStyle subjectWithColor];
-        _periodTimeDay.font = [UIFont    systemFontOfSize:[ApplicationStyle control_weight:28]];
-        _periodTimeDay.text = @"距离下次来临大约还有15天";
+        _periodTimeDay.textColor = [@"e93a3a" hexStringToColor];
+        _periodTimeDay.font = [UIFont    systemFontOfSize:[ApplicationStyle control_weight:30]];
+        _periodTimeDay.text = [self periodOfTime];
         [calenderback addSubview:_periodTimeDay];
     }
     NSInteger tableHeight = 0;
@@ -131,7 +152,7 @@ NLLHRatingViewDelegate>
         tableHeight = [ApplicationStyle control_height:4*88];
     }
     
-    _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, calenderView.bottomOffset + [ApplicationStyle control_height:100] + [ApplicationStyle control_height:2], SCREENWIDTH, tableHeight) style:UITableViewStylePlain];
+    _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, calenderView.bottomOffset + [ApplicationStyle control_height:120] + [ApplicationStyle control_height:2], SCREENWIDTH, tableHeight) style:UITableViewStylePlain];
     _mainTableView.delegate = self;
     _mainTableView.dataSource = self;
     _mainTableView.scrollEnabled = NO;
@@ -168,13 +189,20 @@ NLLHRatingViewDelegate>
 
 #pragma mark 系统Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (_switchOffNum == 1) {
-        return 5;
+    if (_isCurrentDay == 0) {
+        if (_switchOffNum == 1) {
+            return 5;
+        }else{
+            return 4;
+        }
     }else{
-        return 4;
+        
+        return 0;
     }
     
+    
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [ApplicationStyle control_height:88];
 }
@@ -188,6 +216,7 @@ NLLHRatingViewDelegate>
     }
     NSArray *imageArr = nil;
     NSArray *labArr = nil;
+    
     
     if (_switchOffNum == 1) {
         imageArr = @[@"NLHClen_DYM",
@@ -209,6 +238,7 @@ NLLHRatingViewDelegate>
         
         if (indexPath.row==1) {
             cell.cellCountImage.hidden = YES;
+            
             _starView = [[NLLHRatingView alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:240] - [ApplicationStyle control_weight:24], ([ApplicationStyle control_height:88] - [ApplicationStyle control_height:40])/2, [ApplicationStyle control_weight:240], [ApplicationStyle control_height:40])];
             _starView.ratingType = INTEGER_TYPE;//整颗星
             _starView.clipsToBounds = YES;
@@ -221,7 +251,7 @@ NLLHRatingViewDelegate>
         cell.cellCountImage.hidden = NO;
         cell.switchs.on = false;
         if (indexPath.row == 0) {
-           cell.cellCountImage.hidden = YES;
+            cell.cellCountImage.hidden = YES;
         }
         imageArr = @[@"NLHClen_DYM",
                      @"NLHClen_AA",
@@ -236,13 +266,13 @@ NLLHRatingViewDelegate>
         
     }
     
-    
     cell.cellImage.image = [UIImage imageNamed:imageArr[indexPath.row]];
     cell.cellLab.text = labArr[indexPath.row];
     cell.cellCountImage.image = [UIImage imageNamed:@"NLHClen_DDD"];
     [cell.switchs addTarget:self action:@selector(switchOffDown:) forControlEvents:UIControlEventValueChanged];
-    cell.backgroundColor = [UIColor  clearColor];
+    cell.backgroundColor = [@"fffdfd"  hexStringToColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+  
     return cell;
 }
 
@@ -313,7 +343,44 @@ NLLHRatingViewDelegate>
 }
 #pragma mark 自己的Delegate
 -(void)returnCalenderTime:(NSString *)time{
-    _selectedTime = time;
+    
+    
+    NSString *dayDate = [ApplicationStyle datePickerTransformationCorss:[NSDate date]];
+    
+    NSDate *dayTime = [ApplicationStyle dateTransformationStringWhiffletree:dayDate];
+    NSDate *selectTime = [ApplicationStyle dateTransformationStringWhiffletree:time];
+    
+    NSInteger comperDate = [ApplicationStyle dateCompareDateCurrentDate:dayTime afferentDate:selectTime];
+    
+    if (comperDate<0) {
+        [_starView removeFromSuperview];
+        [_cartoonBackview removeFromSuperview];//删除下面卡通人物
+        _isCurrentDay = 1;
+        _mainTableView.hidden = YES;
+        [_mainTableView reloadData];
+
+       _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78] + [ApplicationStyle control_height:266]);
+        
+        [self cartoon:[ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78] ];
+        
+        
+    }else{
+        [_starView removeFromSuperview];
+        [_cartoonBackview removeFromSuperview];//删除下面卡通人物
+        _isCurrentDay = 0;
+        _selectedTime = time;
+        _mainTableView.hidden = NO;
+        [_mainTableView reloadData];
+        
+        
+        NSInteger tableHeight = 0;
+        if (_switchOffNum == 1) {
+            tableHeight = [ApplicationStyle control_height:5*88];
+        }else{
+            tableHeight = [ApplicationStyle control_height:4*88];
+        }
+        _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78]);
+    }
 }
 //爱爱代理
 -(void)pickerIndex:(NSInteger)index{
@@ -417,6 +484,70 @@ NLLHRatingViewDelegate>
     _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78]);
     [_mainTableView reloadData];
 }
+
+
+-(NSString *)periodOfTime{
+    NSDate *date = [NSDate date];
+    NSDate *lastTimepPeriod = [ApplicationStyle dateTransformationStringWhiffletree:[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate]];//获得上一次来的时间
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+//     NSDate *lastTimepPeriod = [dateFormatter dateFromString:@"2016-02-29"];
+    
+    
+    
+    
+    switch ([ApplicationStyle dateCompareDateCurrentDate:date afferentDate:lastTimepPeriod]) {
+        case  0:{
+            return @"你的月经来了";
+            break;
+        }
+        case  1:{
+            if ([ApplicationStyle dateInteverCurrentDate:date afferentDate:lastTimepPeriod]<=5) {
+                NSInteger minDay = [ApplicationStyle dateInteverCurrentDate:date afferentDate:lastTimepPeriod];
+                return [NSString stringWithFormat:@"你已经来了第%ld天",minDay];
+            }else{
+                NSDictionary *dataDic = [PlistData getIndividuaData];//获得用户数据
+                NSInteger cycle = [[dataDic objectForKey:@"cycleTime"] integerValue];//获得周期
+                NSInteger maxDay = [ApplicationStyle dateInteverCurrentDate:date afferentDate:lastTimepPeriod];
+                NSDate *d = [NSDate dateWithTimeIntervalSinceNow: (cycle - maxDay) * (3600 * 24)];
+                return [NSString stringWithFormat:@"距离经期来临还有%ld天",labs([ApplicationStyle dateInteverCurrentDate:date afferentDate:d])];
+            }
+            break;
+        }
+        default:
+            break;
+    }
+    return nil;
+//    NSDate *d = [NSDate dateWithTimeIntervalSinceNow: 26 * (3600 * 24)];
+}
+
+//卡通人物
+-(void)cartoon:(CGFloat)floats{
+    _cartoonBackview = [[UIView alloc] initWithFrame:CGRectMake(0, floats, SCREENWIDTH, [ApplicationStyle control_height:266])];
+    _cartoonBackview.backgroundColor = [UIColor whiteColor];
+    [_mainScrollew addSubview:_cartoonBackview];
+    
+
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:96], [ApplicationStyle control_height:54 ], [ApplicationStyle control_weight:114], [ApplicationStyle control_height:160])];
+    imageView.image = [UIImage imageNamed:@"NLHClen_Cartoon"];
+    [_cartoonBackview addSubview:imageView];
+    
+    UILabel *countLab = [[UILabel alloc] initWithFrame:CGRectMake(imageView.rightSideOffset + [ApplicationStyle control_weight:24], [ApplicationStyle control_height:54+28], SCREENWIDTH - [ApplicationStyle control_weight:96*2 + 114 + 24], [ApplicationStyle control_height:30])];
+    countLab.text = NSLocalizedString(@"NLHealthCalender_CartoonText", nil);
+    countLab.font = [ApplicationStyle textThrityFont];
+    countLab.textColor = [@"535353" hexStringToColor];
+    [_cartoonBackview addSubview:countLab];
+    
+    UIButton *countBtn = [UIButton  buttonWithType:UIButtonTypeRoundedRect];
+    countBtn.frame = CGRectMake(imageView.rightSideOffset +[ApplicationStyle control_weight:80], countLab.bottomOffset + [ApplicationStyle control_height:24], [ApplicationStyle control_weight:200], [ApplicationStyle control_height:60]);
+    [countBtn setTitle:NSLocalizedString(@"NLHealthCalender_GoDay", nil) forState:UIControlStateNormal];
+    countBtn.titleLabel.font = [ApplicationStyle textThrityFont];
+    [countBtn setTitleColor:[@"ffffff" hexStringToColor] forState:UIControlStateNormal];
+    countBtn.layer.cornerRadius = [ApplicationStyle control_weight:10];
+    countBtn.backgroundColor = [@"fe6987" hexStringToColor];
+    [_cartoonBackview addSubview:countBtn];
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

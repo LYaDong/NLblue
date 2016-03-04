@@ -314,8 +314,15 @@ static const NSInteger THIRDBTNTAG = 4000;
     
     [kAPPDELEGATE._loacluserinfo userLogInTime:[dic objectForKey:@"created"]];
     [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
-    [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
+//    [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
     [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
+    
+    
+    
+    NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
+    
 
 }
 

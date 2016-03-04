@@ -76,10 +76,15 @@
 
 
 @interface ApplicationStyle (Colors)
+
 /**
  *红色  //只是目前做个列子  后期需要在多定义
  */
 + (UIColor *)subjectRedColor;
+/**
+ * 整体TabBar背景
+ */
++ (UIColor *)CodeBackColor;
 /**
  *主题黑色
  */
@@ -231,6 +236,17 @@
  *时间戳转时间
  */
 +(NSString *)timestampTransformationTime:(int64_t)timestamp;
+/**
+ * 时间大小比较
+ *   1                      大于比较的时间
+ *  -1                      小于比较的时间
+ *   0                      等于比较的时间
+ */
++(NSInteger)dateCompareDateCurrentDate:(NSDate *)currentDate afferentDate:(NSDate *)fiierentDate;
+/**
+
+ */
++(NSInteger)dateInteverCurrentDate:(NSDate *)currentDate afferentDate:(NSDate *)afferentDate;
 
 @end
 

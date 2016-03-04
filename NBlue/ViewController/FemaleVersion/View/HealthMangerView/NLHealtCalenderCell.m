@@ -33,7 +33,7 @@
     
     
     self.cellLab = [[UILabel alloc] initWithFrame:CGRectMake(x + w + [ApplicationStyle control_weight:16], 0, [ApplicationStyle control_weight:177], heights)];
-    self.cellLab.textColor = [ApplicationStyle subjectWithColor];
+    self.cellLab.textColor = [@"434343" hexStringToColor];
     self.cellLab.font = [ApplicationStyle textThrityFont];
     [self.contentView addSubview:self.cellLab];
     

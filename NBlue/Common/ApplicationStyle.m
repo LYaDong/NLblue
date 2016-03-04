@@ -84,6 +84,7 @@
 @end
 
 @implementation ApplicationStyle (Colors)
++ (UIColor *)CodeBackColor{return [@"fe5575" hexStringToColor];}
 + (UIColor *)subjectRedColor{return [@"ff0000" hexStringToColor];}
 + (UIColor *)subjectBlackColor{return [UIColor blackColor];}
 + (UIColor *)subjectPinkColor{return [@"f12e56" hexStringToColor];}
@@ -273,6 +274,30 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:timestamp];
     return [dateFormatter stringFromDate:date];
+}
++(NSInteger)dateCompareDateCurrentDate:(NSDate *)currentDate afferentDate:(NSDate *)afferentDate{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *oneDayStr = [dateFormatter stringFromDate:currentDate];
+    NSString *anotherDayStr = [dateFormatter stringFromDate:afferentDate];
+    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
+    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
+    NSComparisonResult result = [dateA compare:dateB];
+    if (result == NSOrderedDescending) {
+        //当前时间大于比较的时间
+        return 1;
+    }
+    else if (result == NSOrderedAscending){
+        //当前时间小于比较的时间
+        return -1;
+    }
+    //当前时间等于比较的时间
+    return 0;
+}
++(NSInteger)dateInteverCurrentDate:(NSDate *)currentDate afferentDate:(NSDate *)afferentDate{
+    NSTimeInterval time = [currentDate timeIntervalSinceDate:afferentDate];
+    NSInteger intervals = (NSInteger)time/(3600*24);
+    return intervals;
 }
 @end
 

@@ -166,6 +166,7 @@ static const NSInteger TIMELINE = 90;
     // Do any additional setup after loading the view.
     
     self.returnBtn.hidden = YES;
+    self.navBarBack.hidden = YES;
     _timeInt = 0;
     self.titles.text = @"热灸";
     
@@ -184,6 +185,7 @@ static const NSInteger TIMELINE = 90;
     _sportDataArr = [NSMutableArray array];
     _sleepDataArr = [NSMutableArray array];
     NSLog(@"%@",NSHomeDirectory());
+    [self backViewUI];
     [self bulidUI];
     
 
@@ -278,6 +280,24 @@ static const NSInteger TIMELINE = 90;
 }
 
 #pragma mark 基础UI
+
+-(void)backViewUI{
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+    imageView.image = [UIImage imageNamed:@"RootContorllewImage"];
+    [self.view addSubview:imageView];
+    
+//    UIView *viewLine = [[UIView   alloc] initWithFrame:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize], SCREENWIDTH, [ApplicationStyle control_height:1])];
+//    viewLine.alpha = 0.4;
+//    viewLine.backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:viewLine];
+    
+    
+    UIView *lineViewBack = [UIView statusBackView:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize], SCREENWIDTH, [ApplicationStyle control_height:1])];
+    [self.view addSubview:lineViewBack];
+    
+    
+}
+
 -(void)bulidUI{
     [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
 //    [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];//测试睡眠假数据

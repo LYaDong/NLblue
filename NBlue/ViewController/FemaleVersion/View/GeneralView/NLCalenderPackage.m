@@ -40,6 +40,8 @@ static const NSInteger ARROWTAG = 1500;
     if (self) {
         _indexDay = 0;
         _radinIndex = 0;
+        
+        self.backgroundColor = [@"fffff0" hexStringToColor];
         [self buildUI:_indexDay];
     }
     return self;
@@ -53,8 +55,12 @@ static const NSInteger ARROWTAG = 1500;
     
     UIView *viewBack = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle control_height:66])];
     viewBack.backgroundColor = [ApplicationStyle subjectWithColor];
-    viewBack.alpha = 0.1;
     [_calenderView addSubview:viewBack];
+    
+    
+    UIView *lineViewBack = [UIView statusBackView:CGRectMake(0, [ApplicationStyle control_height:65], SCREENWIDTH, [ApplicationStyle control_height:1])];
+    [self addSubview:lineViewBack];
+    
     
     _yearTime = [NSString stringWithFormat:@"%ld",(long)[ApplicationStyle whatYears:date]];
     if ((long)[ApplicationStyle whatMonths:date]>=10) {
@@ -101,7 +107,7 @@ static const NSInteger ARROWTAG = 1500;
     for (NSInteger i = 0; i<weekArray.count; i++) {
         UILabel *weekLab = [[UILabel alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:41] + i * [ApplicationStyle control_weight:82], _yearMonthLab.bottomOffset, [ApplicationStyle control_weight:66], [ApplicationStyle control_weight:66])];
         weekLab.text = weekArray[i];
-        weekLab.textColor = [@"ffc4d0" hexStringToColor];
+        weekLab.textColor = [@"929292" hexStringToColor];
         weekLab.textAlignment = NSTextAlignmentCenter;
         weekLab.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:20]];
         [_calenderView addSubview:weekLab];
@@ -110,8 +116,8 @@ static const NSInteger ARROWTAG = 1500;
     
     
     for (NSInteger i = 0; i< calenderVertical * 7; i++) {
-        CGFloat x = [ApplicationStyle control_weight:41] +  i%7*[ApplicationStyle control_weight:82];
-        CGFloat y = _yearMonthLab.bottomOffset + [ApplicationStyle control_height:50] + i/7*[ApplicationStyle control_weight:82];
+        CGFloat x = [ApplicationStyle control_weight:41] +  i%7*([ApplicationStyle control_weight:66] + [ApplicationStyle control_weight:16]);
+        CGFloat y = _yearMonthLab.bottomOffset + [ApplicationStyle control_height:50] + i/7*([ApplicationStyle control_weight:66] + [ApplicationStyle control_height:10]);
 
         UIButton *dayButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         dayButton.frame = CGRectMake(x, y, WidthSCalender, WidthSCalender);
@@ -119,6 +125,8 @@ static const NSInteger ARROWTAG = 1500;
         dayButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         dayButton.layer.cornerRadius = [ApplicationStyle control_weight:6];
         dayButton.tag = CALENDERTAG + i;
+        dayButton.titleLabel.font = [UIFont  systemFontOfSize:[ApplicationStyle control_weight:24]];
+        [dayButton setTitleColor:[@"fe5a7b" hexStringToColor] forState:UIControlStateNormal];
         
         [_calenderView addSubview:dayButton];
         
@@ -153,6 +161,11 @@ static const NSInteger ARROWTAG = 1500;
 }
 //日历按钮
 -(void)dayButtonDown:(UIButton *)btn{
+    
+    
+    
+    
+    
     NSString *dayss = btn.titleLabel.text;
     
     if ([dayss integerValue]>=10) {
@@ -211,7 +224,7 @@ static const NSInteger ARROWTAG = 1500;
         //本月的日子
         [dayButton addTarget:self action:@selector(dayButtonDown:) forControlEvents:UIControlEventTouchUpInside];
         day = i - firstWeekday + 1;
-        dayButton.backgroundColor = [@"fee39a" hexStringToColor];
+        dayButton.backgroundColor = [self safePeriodColor];
         
     }
     //判断让谁圆角
@@ -264,9 +277,9 @@ static const NSInteger ARROWTAG = 1500;
             for (NSInteger z=0; z<5; z++) {
                 //经期来临的日子  经期每次循环5天
                 if (day == [ycqDay integerValue] + z) {
-                    dayButton.backgroundColor = [@"ffad54" hexStringToColor];//预测期
+                    dayButton.backgroundColor = [self theForecastPeriodColor];//预测期
                     if (j==0) {
-                        dayButton.backgroundColor = [@"ff6c32" hexStringToColor];//经期
+                        dayButton.backgroundColor = [self periodColor];//经期
                     }
                 }
             }
@@ -274,13 +287,34 @@ static const NSInteger ARROWTAG = 1500;
             for (NSInteger x = 0; x<10; x++) {
                 if (!day == 0) {//退14天，如果相等当前的day 则是易孕期
                     if ([ycqDay integerValue] - 14 + x == day) {
-                        dayButton.backgroundColor = [@"ffe9ed" hexStringToColor];//易孕期
+                        dayButton.backgroundColor = [self easyPregnancyColor];//易孕期
                     }
                 }
             }
         }
     }
 }
+
+
+
+- (UIColor *)safePeriodColor{
+    UIColor *color = [@"fee69a" hexStringToColor];
+    return color;
+}
+- (UIColor *)periodColor{
+    UIColor *color = [@"ff7b47" hexStringToColor];
+    return color;
+}
+- (UIColor *)theForecastPeriodColor{
+    UIColor *color = [@"ffad54" hexStringToColor];
+    return color;
+}
+- (UIColor *)easyPregnancyColor{
+    UIColor *color = [@"ffdbe2" hexStringToColor];
+    return color;
+}
+
+
 
 -(void)periodAndforecast{
     

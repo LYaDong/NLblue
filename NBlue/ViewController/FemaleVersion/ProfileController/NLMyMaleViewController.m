@@ -18,11 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    {
-        self.navBarBack.hidden = YES;
-        self.navBarPushBack.hidden = NO;
-        self.controllerBack.hidden = YES;
-    }
+
     
     self.view.backgroundColor = [ApplicationStyle subjectBackViewColor];
     self.titles.text = NSLocalizedString(@"NLProfileView_MyMale", nil);
