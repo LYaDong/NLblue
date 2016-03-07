@@ -24,7 +24,8 @@
 //同意滑动
 #define TemperatureSetAgreeNotification @"TemperatureSetAgreeNotification"
 
-
+//日历回到今天
+#define CalenderGoBackToDayNotification @"CalenderGoBackToDayNotification"
 
 /*
  ================================   L    Y     D    ============================================

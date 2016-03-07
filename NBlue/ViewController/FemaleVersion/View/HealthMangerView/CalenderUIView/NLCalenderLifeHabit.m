@@ -75,15 +75,14 @@ static const NSInteger LIFEHABITTAG = 2000;
         lifeHabit.frame = CGRectMake((backView.viewWidth - [ApplicationStyle control_weight:240])/2, [ApplicationStyle control_height:50 + 80]+i*[ApplicationStyle control_height:70], [ApplicationStyle control_weight:240], [ApplicationStyle control_height:60]);
         
         if ([habitData[i] isEqualToString:@"0"]) {
-          [lifeHabit setImage:[UIImage imageNamed:imageArr[i]] forState:UIControlStateNormal];
+            [lifeHabit setImage:[UIImage imageNamed:imageArr[i]] forState:UIControlStateNormal];
+            [lifeHabit setTitleColor:[@"dedede" hexStringToColor] forState:UIControlStateNormal];
         }else{
             [lifeHabit setImage:[UIImage imageNamed:imageArrYes[i]] forState:UIControlStateNormal];
             lifeHabit.backgroundColor = [self backColor];
-//            [lifeHabit setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
+            [lifeHabit setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
             lifeHabit.selected = !lifeHabit.selected;
         }
-        
-        [lifeHabit setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
         [lifeHabit setTitle:labArr[i] forState:UIControlStateNormal];
         lifeHabit.tag = LIFEHABITTAG + i;
         [lifeHabit addTarget:self action:@selector(lifeHabitDown:) forControlEvents:UIControlEventTouchUpInside];

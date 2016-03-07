@@ -77,7 +77,7 @@ static const NSInteger BTNTAG = 4000;
         if (i==0) {
             [btn setTitleColor:[ApplicationStyle subjectPinkColor] forState:UIControlStateNormal];
         }else{
-            btn.backgroundColor = [ApplicationStyle subjectPinkColor];
+            btn.backgroundColor = [@"fb597a" hexStringToColor];
             [btn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
         }
         btn.layer.borderWidth = [ApplicationStyle control_weight:2];

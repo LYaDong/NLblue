@@ -33,44 +33,44 @@
 #pragma mark 基础UI
 -(void)bulidUI{
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle statusBarSize]- [ApplicationStyle navigationBarSize])];
-    imageView.image = [UIImage imageNamed:@"NL_M_Male_B"];
-    [self.view addSubview:imageView];
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle statusBarSize]- [ApplicationStyle navigationBarSize])];
+//    imageView.image = [UIImage imageNamed:@"NL_M_Male_B"];
+//    [self.view addSubview:imageView];
     
     
     
     
-//    UIImageView *expressionImg = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:164])/2, [ApplicationStyle navigationBarSize] + [ApplicationStyle statusBarSize]+[ApplicationStyle control_height:238], [ApplicationStyle control_weight:164], [ApplicationStyle control_height:170])];
-//    expressionImg.image = [UIImage imageNamed:@"NL_Pro_Male_Expression"];
-//    [self.view addSubview:expressionImg];
-//
-//    CGSize textCountSize = [ApplicationStyle textSize:NSLocalizedString(@"NLProfileView_MaleTextCount", nil) font:[ApplicationStyle textThrityFont] size:SCREENWIDTH];
-//    
-//    UILabel *textCount = [[UILabel alloc] initWithFrame:CGRectMake(0, expressionImg.bottomOffset+[ApplicationStyle control_height:108], SCREENWIDTH, textCountSize.height)];
-//    textCount.text = NSLocalizedString(@"NLProfileView_MaleTextCount", nil);
-//    textCount.numberOfLines  = 0;
-//    textCount.font = [ApplicationStyle textThrityFont];
-//    textCount.textAlignment = NSTextAlignmentCenter;
-//    textCount.textColor = [@"535353" hexStringToColor];
-//    [self.view addSubview:textCount];
-//    
-//    UIButton *sweepBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    sweepBtn.frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:300])/2, textCount.bottomOffset + [ApplicationStyle control_height:48], [ApplicationStyle control_weight:300], [ApplicationStyle control_height:80]);
-//    [sweepBtn setImage:[UIImage imageNamed:@"NL_Pro_Male_SYS"] forState:UIControlStateNormal];
-//    [sweepBtn setImage:[UIImage imageNamed:@"NL_Pro_Male_SYS_X"] forState:UIControlStateHighlighted];
-//    sweepBtn.layer.cornerRadius = [ApplicationStyle control_weight:10];
-//    [sweepBtn addTarget:self action:@selector(sweepBtnDown) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:sweepBtn];
-//    
-//    CGSize textSize = [ApplicationStyle textSize:NSLocalizedString(@"NLProfileView_MaleText", nil) font:[UIFont systemFontOfSize:[ApplicationStyle control_weight:24]] size:SCREENWIDTH];
-//    
-//    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT - textSize.height - [ApplicationStyle control_height:40], SCREENWIDTH, textSize.height)];
-//    text.text = NSLocalizedString(@"NLProfileView_MaleText", nil);
-//    text.textColor = [@"570707" hexStringToColor];
-//    text.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:24]];
-//    text.numberOfLines = 0;
-//    text.textAlignment = NSTextAlignmentCenter;
-//    [self.view addSubview:text];
+    UIImageView *expressionImg = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:164])/2, [ApplicationStyle navigationBarSize] + [ApplicationStyle statusBarSize]+[ApplicationStyle control_height:238], [ApplicationStyle control_weight:164], [ApplicationStyle control_height:170])];
+    expressionImg.image = [UIImage imageNamed:@"NL_Pro_Male_Expression"];
+    [self.view addSubview:expressionImg];
+
+    CGSize textCountSize = [ApplicationStyle textSize:NSLocalizedString(@"NLProfileView_MaleTextCount", nil) font:[ApplicationStyle textThrityFont] size:SCREENWIDTH];
+    
+    UILabel *textCount = [[UILabel alloc] initWithFrame:CGRectMake(0, expressionImg.bottomOffset+[ApplicationStyle control_height:108], SCREENWIDTH, textCountSize.height)];
+    textCount.text = NSLocalizedString(@"NLProfileView_MaleTextCount", nil);
+    textCount.numberOfLines  = 0;
+    textCount.font = [ApplicationStyle textThrityFont];
+    textCount.textAlignment = NSTextAlignmentCenter;
+    textCount.textColor = [@"535353" hexStringToColor];
+    [self.view addSubview:textCount];
+    
+    UIButton *sweepBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    sweepBtn.frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:300])/2, textCount.bottomOffset + [ApplicationStyle control_height:48], [ApplicationStyle control_weight:300], [ApplicationStyle control_height:80]);
+    [sweepBtn setImage:[UIImage imageNamed:@"NL_Pro_Male_SYS"] forState:UIControlStateNormal];
+    [sweepBtn setImage:[UIImage imageNamed:@"NL_Pro_Male_SYS_X"] forState:UIControlStateHighlighted];
+    sweepBtn.layer.cornerRadius = [ApplicationStyle control_weight:10];
+    [sweepBtn addTarget:self action:@selector(sweepBtnDown) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:sweepBtn];
+    
+    CGSize textSize = [ApplicationStyle textSize:NSLocalizedString(@"NLProfileView_MaleText", nil) font:[UIFont systemFontOfSize:[ApplicationStyle control_weight:24]] size:SCREENWIDTH];
+    
+    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT - textSize.height - [ApplicationStyle control_height:40], SCREENWIDTH, textSize.height)];
+    text.text = NSLocalizedString(@"NLProfileView_MaleText", nil);
+    text.textColor = [@"570707" hexStringToColor];
+    text.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:24]];
+    text.numberOfLines = 0;
+    text.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:text];
 
     
 }

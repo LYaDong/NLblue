@@ -61,9 +61,7 @@
 //NLFeedBackViewController
 "NLFeedBack_QuestionFeedBack" = "问题反馈";
 //NLAboutNLViewController
-"NLAboutNL_CopyrightInformation" = "版权信息";
-"NLAboutNL_ServiceAgreement" = "隐私策略";
-"NLAboutNL_PrivacyPolicy" = "服务协议";
+"NLAboutNL_UserAgreement" = "用户协议";
 //NLHealthStepNumber
 "NLHealthStepNumber_TargetNumber" = "目标步数";
 "NLHealthStepNumber_TheCurrent" = "今日步数";
@@ -192,6 +190,12 @@
 //通用
 "NL_Currency_YouGender" = "你的性别";
 "NL_Currency_Next" = "下一步";
+//分享
+"NL_Share_WechatFriend" = "微信好友";
+"NL_Share_WechatCircle" = "朋友圈";
+"NL_Share_QQ" = "QQ好友";
+"NL_Share_WeiBo" = "微博";
+
 
 
 

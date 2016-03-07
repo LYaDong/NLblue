@@ -69,6 +69,9 @@
 		040E12641C48DA1400769AD1 /* SMProgressHUDTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E125E1C48DA1400769AD1 /* SMProgressHUDTipView.m */; };
 		040E12651C48DA1400769AD1 /* UIView+SMAutolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E12601C48DA1400769AD1 /* UIView+SMAutolayout.m */; };
 		043D2D311C52281F00873A0E /* sdfsdf.png in Resources */ = {isa = PBXBuildFile; fileRef = 043D2D301C52281F00873A0E /* sdfsdf.png */; };
+		044F093A1C8D6CD6003FAD52 /* NLWarmanAgreement.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F09391C8D6CD6003FAD52 /* NLWarmanAgreement.m */; };
+		044F093D1C8D7DFD003FAD52 /* NLShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F093C1C8D7DFD003FAD52 /* NLShareView.m */; };
+		044F09401C8D8451003FAD52 /* NLAboutUpperImageBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F093F1C8D8451003FAD52 /* NLAboutUpperImageBtn.m */; };
 		045D040F1C746FC7006F0653 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D03E51C746FC7006F0653 /* MJRefreshAutoFooter.m */; };
 		045D04101C746FC7006F0653 /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D03E71C746FC7006F0653 /* MJRefreshBackFooter.m */; };
 		045D04111C746FC7006F0653 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D03E91C746FC7006F0653 /* MJRefreshComponent.m */; };
@@ -295,6 +298,12 @@
 		040E125F1C48DA1400769AD1 /* UIView+SMAutolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SMAutolayout.h"; sourceTree = "<group>"; };
 		040E12601C48DA1400769AD1 /* UIView+SMAutolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SMAutolayout.m"; sourceTree = "<group>"; };
 		043D2D301C52281F00873A0E /* sdfsdf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sdfsdf.png; sourceTree = "<group>"; };
+		044F09381C8D6CD6003FAD52 /* NLWarmanAgreement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLWarmanAgreement.h; sourceTree = "<group>"; };
+		044F09391C8D6CD6003FAD52 /* NLWarmanAgreement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLWarmanAgreement.m; sourceTree = "<group>"; };
+		044F093B1C8D7DFD003FAD52 /* NLShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLShareView.h; sourceTree = "<group>"; };
+		044F093C1C8D7DFD003FAD52 /* NLShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLShareView.m; sourceTree = "<group>"; };
+		044F093E1C8D8451003FAD52 /* NLAboutUpperImageBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLAboutUpperImageBtn.h; sourceTree = "<group>"; };
+		044F093F1C8D8451003FAD52 /* NLAboutUpperImageBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLAboutUpperImageBtn.m; sourceTree = "<group>"; };
 		045D03E41C746FC7006F0653 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		045D03E51C746FC7006F0653 /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		045D03E61C746FC7006F0653 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -553,6 +562,8 @@
 			children = (
 				04018BBA1C3CB914009AC56A /* NLAboutNLViewController.h */,
 				04018BBB1C3CB914009AC56A /* NLAboutNLViewController.m */,
+				044F09381C8D6CD6003FAD52 /* NLWarmanAgreement.h */,
+				044F09391C8D6CD6003FAD52 /* NLWarmanAgreement.m */,
 				04018BBC1C3CB914009AC56A /* NLFeedBackViewController.h */,
 				04018BBD1C3CB914009AC56A /* NLFeedBackViewController.m */,
 				04018BBE1C3CB914009AC56A /* NLIndividuaEditingViewController.h */,
@@ -599,6 +610,8 @@
 				04F26C391C4FC0C000D25D48 /* NLTextImageView.m */,
 				04018BCE1C3CB914009AC56A /* NLCalenderPackage.h */,
 				04018BCF1C3CB914009AC56A /* NLCalenderPackage.m */,
+				044F093E1C8D8451003FAD52 /* NLAboutUpperImageBtn.h */,
+				044F093F1C8D8451003FAD52 /* NLAboutUpperImageBtn.m */,
 			);
 			path = GeneralView;
 			sourceTree = "<group>";
@@ -665,6 +678,8 @@
 				04018BFC1C3CB914009AC56A /* NLSetProfileCell.m */,
 				0400D14F1C7BFC9B0075390F /* NLMyMessageCell.h */,
 				0400D1501C7BFC9B0075390F /* NLMyMessageCell.m */,
+				044F093B1C8D7DFD003FAD52 /* NLShareView.h */,
+				044F093C1C8D7DFD003FAD52 /* NLShareView.m */,
 			);
 			path = ProFileView;
 			sourceTree = "<group>";
@@ -1353,6 +1368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				040E12641C48DA1400769AD1 /* SMProgressHUDTipView.m in Sources */,
+				044F093D1C8D7DFD003FAD52 /* NLShareView.m in Sources */,
 				04F762DA1C44EC69003DBE4D /* NLGiffiredSignViewController.m in Sources */,
 				04018C0E1C3CB914009AC56A /* NLAboutNLViewController.m in Sources */,
 				04018CF11C3D179F009AC56A /* NLMaleIndividuaViewController.m in Sources */,
@@ -1378,6 +1394,7 @@
 				04018C271C3CB914009AC56A /* NLStepCountLabView.m in Sources */,
 				049751A11BFEEED50044D97B /* main.m in Sources */,
 				04018C1C1C3CB914009AC56A /* NLCalenderUncomfortable.m in Sources */,
+				044F093A1C8D6CD6003FAD52 /* NLWarmanAgreement.m in Sources */,
 				04018C241C3CB914009AC56A /* NLRing.m in Sources */,
 				04F7F64E1C1BFC9000466EBC /* NLGestureRecognizer.m in Sources */,
 				045D041B1C746FC7006F0653 /* MJRefreshNormalHeader.m in Sources */,
@@ -1443,6 +1460,7 @@
 				04F4B7D21C083B3E00DE60DE /* NLLocalUserInfo.m in Sources */,
 				04018CE81C3CBFEA009AC56A /* NLMaleProfileViewController.m in Sources */,
 				04C9954A1C029E8300D8AE79 /* NLBluetoothAgreement.m in Sources */,
+				044F09401C8D8451003FAD52 /* NLAboutUpperImageBtn.m in Sources */,
 				040E12631C48DA1400769AD1 /* SMProgressHUDLoadingView.m in Sources */,
 				04018C011C3CB914009AC56A /* LYDSetSegmentControl.m in Sources */,
 				04018C1E1C3CB914009AC56A /* NLHealtCalenderCell.m in Sources */,

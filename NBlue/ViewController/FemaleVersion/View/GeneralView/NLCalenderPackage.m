@@ -42,9 +42,18 @@ static const NSInteger ARROWTAG = 1500;
         _radinIndex = 0;
         
         self.backgroundColor = [@"fffff0" hexStringToColor];
+        
+        [self registerNotification];
         [self buildUI:_indexDay];
     }
     return self;
+}
+-(void)registerNotification{
+    NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
+    [notifi addObserver:self selector:@selector(goBackToDay) name:CalenderGoBackToDayNotification object:nil];
+}
+-(void)goBackToDay{
+    [self goDayDown];
 }
 -(void)buildUI:(NSInteger)day{
     _calenderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, self.frame.size.height)];
@@ -133,7 +142,7 @@ static const NSInteger ARROWTAG = 1500;
 
         
         [self btnCalenderSortBtn:dayButton date:date i:i];
-        [self calculationCalenderBtn:dayButton date:date i:i];
+        [self calculationCalenderBtn:dayButton date:date i:i dayIndex:day];
         
     }
 }
@@ -158,13 +167,13 @@ static const NSInteger ARROWTAG = 1500;
     [_calenderView removeFromSuperview];
     [self buildUI:0];
     
+    NSString *dayDate = [ApplicationStyle datePickerTransformationCorss:[NSDate date]];
+    [self.delegate returnCalenderTime:dayDate];
+    
 }
 //日历按钮
 -(void)dayButtonDown:(UIButton *)btn{
-    
-    
-    
-    
+
     
     NSString *dayss = btn.titleLabel.text;
     
@@ -245,7 +254,7 @@ static const NSInteger ARROWTAG = 1500;
 }
 
 //计算经期
--(void)calculationCalenderBtn:(UIButton *)dayButton date:(NSDate *)date i:(NSInteger)i{
+-(void)calculationCalenderBtn:(UIButton *)dayButton date:(NSDate *)date i:(NSInteger)i dayIndex:(NSInteger)dayIndex{
     /*
      ZQ                     周期
      ycq                    预测期
@@ -256,11 +265,12 @@ static const NSInteger ARROWTAG = 1500;
     
     //间隔周期
     NSInteger ZQ = [[dataDic objectForKey:@"cycleTime"] integerValue];//获得周期
+    NSInteger periodTime = [[dataDic objectForKey:@"periodTime"] integerValue];//获得经期
     
     NSDate *lastTimepPeriod = [ApplicationStyle dateTransformationStringWhiffletree:[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate]];//获得上一次来的时间
     NSString *currentTime = [ApplicationStyle datePickerTransformationStr:date];//获得当前时间
     //预计计算多少周
-    for (NSInteger j=0; j<6; j++) {
+    for (NSInteger j=0; j<12+dayIndex; j++) {
         
         NSString *ycq = [ApplicationStyle datePickerTransformationStr:[lastTimepPeriod dateByAddingTimeInterval:(60 * 60 * 24) * ZQ * j]];//每次的预测期
         NSString *currentYearMonth = [currentTime substringWithRange:NSMakeRange(0, 6)];//来的年月日
@@ -274,8 +284,8 @@ static const NSInteger ARROWTAG = 1500;
                 day = i - firstWeekday + 1;//获得本月的天数
             }
             NSString *ycqDay = [ycq substringWithRange:NSMakeRange(ycq.length-2, 2)];//预测期的天数
-            for (NSInteger z=0; z<5; z++) {
-                //经期来临的日子  经期每次循环5天
+            for (NSInteger z=0; z<periodTime; z++) {
+                //经期来临的日子  经期每次循环用户选择的次数
                 if (day == [ycqDay integerValue] + z) {
                     dayButton.backgroundColor = [self theForecastPeriodColor];//预测期
                     if (j==0) {

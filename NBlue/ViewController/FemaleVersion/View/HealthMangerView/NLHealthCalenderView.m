@@ -50,7 +50,7 @@ NLLHRatingViewDelegate>
     self = [super initWithFrame:frame];
     if (self) {
 //        self.backgroundColor = [UIColor yellowColor];
-        _switchOffNum = 1;
+        [self judgePeriof:[ApplicationStyle datePickerTransformationCorss:[NSDate date]]];//判断今天的时间在不在经期内，在的话打开Switch开关
         _isCurrentDay = 0;  //是否是今天时间  默认是0 代表是 大于今天的时间 则是1
         [self bulidUI];
         
@@ -128,13 +128,6 @@ NLLHRatingViewDelegate>
             [calenderback addSubview:periodView];
         }
         
-        
-        
-
-        
-        
-        
-        
         _periodTimeDay = [[UILabel alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:52],
                                                                   [ApplicationStyle control_height:40] + ((calenderback.viewHeight - [ApplicationStyle control_height:40]) - [ApplicationStyle control_height:35])/2,
                                                                    SCREENWIDTH - [ApplicationStyle control_weight:100 * 2],
@@ -145,20 +138,22 @@ NLLHRatingViewDelegate>
         _periodTimeDay.text = [self periodOfTime];
         [calenderback addSubview:_periodTimeDay];
     }
-    NSInteger tableHeight = 0;
-    if (_switchOffNum == 1) {
-        tableHeight = [ApplicationStyle control_height:5*88];
-    }else{
-        tableHeight = [ApplicationStyle control_height:4*88];
-    }
     
-    _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, calenderView.bottomOffset + [ApplicationStyle control_height:120] + [ApplicationStyle control_height:2], SCREENWIDTH, tableHeight) style:UITableViewStylePlain];
+
+    _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, calenderView.bottomOffset + [ApplicationStyle control_height:120] + [ApplicationStyle control_height:2], SCREENWIDTH, [ApplicationStyle control_height:5*88]) style:UITableViewStylePlain];
     _mainTableView.delegate = self;
     _mainTableView.dataSource = self;
     _mainTableView.scrollEnabled = NO;
     _mainTableView.backgroundColor = [UIColor clearColor];
     [_mainScrollew addSubview:_mainTableView];
     
+    
+    NSInteger tableHeight = 0;
+    if (_switchOffNum == 1) {
+        tableHeight = [ApplicationStyle control_height:5*88];
+    }else{
+        tableHeight = [ApplicationStyle control_height:4*88];
+    }
     
     _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78]);
 }
@@ -218,6 +213,8 @@ NLLHRatingViewDelegate>
     NSArray *labArr = nil;
     
     
+    
+    
     if (_switchOffNum == 1) {
         imageArr = @[@"NLHClen_DYM",
                      @"NLHClen_DYM_TJ",
@@ -238,12 +235,13 @@ NLLHRatingViewDelegate>
         
         if (indexPath.row==1) {
             cell.cellCountImage.hidden = YES;
-            
+            CGFloat scroes = [[[NLSQLData canlenderDayData:_selectedTime] objectForKey:@"dysmenorrheaLevel"] floatValue];
             _starView = [[NLLHRatingView alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:240] - [ApplicationStyle control_weight:24], ([ApplicationStyle control_height:88] - [ApplicationStyle control_height:40])/2, [ApplicationStyle control_weight:240], [ApplicationStyle control_height:40])];
             _starView.ratingType = INTEGER_TYPE;//整颗星
             _starView.clipsToBounds = YES;
             _starView.hidden = NO;
             _starView.delegate = self;
+            _starView.score = scroes;
             [cell addSubview:_starView];
         }
     }else{
@@ -251,6 +249,7 @@ NLLHRatingViewDelegate>
         cell.cellCountImage.hidden = NO;
         cell.switchs.on = false;
         if (indexPath.row == 0) {
+            cell.switchs.hidden = NO;
             cell.cellCountImage.hidden = YES;
         }
         imageArr = @[@"NLHClen_DYM",
@@ -343,8 +342,7 @@ NLLHRatingViewDelegate>
 }
 #pragma mark 自己的Delegate
 -(void)returnCalenderTime:(NSString *)time{
-    
-    
+
     NSString *dayDate = [ApplicationStyle datePickerTransformationCorss:[NSDate date]];
     
     NSDate *dayTime = [ApplicationStyle dateTransformationStringWhiffletree:dayDate];
@@ -365,13 +363,14 @@ NLLHRatingViewDelegate>
         
         
     }else{
+        
+        [self judgePeriof:time];
         [_starView removeFromSuperview];
         [_cartoonBackview removeFromSuperview];//删除下面卡通人物
         _isCurrentDay = 0;
         _selectedTime = time;
         _mainTableView.hidden = NO;
         [_mainTableView reloadData];
-        
         
         NSInteger tableHeight = 0;
         if (_switchOffNum == 1) {
@@ -446,8 +445,8 @@ NLLHRatingViewDelegate>
 #pragma mark - 星星代理
 - (void)ratingView:(NLLHRatingView *)view score:(CGFloat)score
 {
-    NSLog(@"分数  %.2f",score);
-    
+    NSDictionary *dataDic = @{@"dysmenorrheaLevel":[NSString stringWithFormat:@"%0.0f",score],@"time":_selectedTime};
+    [NLSQLData upDataCanlenderDysmenorrheaLevel:dataDic];
 }
 
 -(NSMutableString *)countString:(NSArray *)array{
@@ -475,6 +474,12 @@ NLLHRatingViewDelegate>
     }else{
         _switchOffNum = 0;
     }
+    
+    
+    
+    
+    
+    
     NSInteger tableHeight = 0;
     if (_switchOffNum == 1) {
         tableHeight = [ApplicationStyle control_height:5*88];
@@ -502,11 +507,14 @@ NLLHRatingViewDelegate>
             break;
         }
         case  1:{
-            if ([ApplicationStyle dateInteverCurrentDate:date afferentDate:lastTimepPeriod]<=5) {
+            NSDictionary *dataDic = [PlistData getIndividuaData];//获得用户数据
+            NSInteger periodTime = [[dataDic objectForKey:@"periodTime"] integerValue];//获得经期
+            
+            if ([ApplicationStyle dateInteverCurrentDate:date afferentDate:lastTimepPeriod]<=periodTime) {
                 NSInteger minDay = [ApplicationStyle dateInteverCurrentDate:date afferentDate:lastTimepPeriod];
                 return [NSString stringWithFormat:@"你已经来了第%ld天",minDay];
             }else{
-                NSDictionary *dataDic = [PlistData getIndividuaData];//获得用户数据
+                
                 NSInteger cycle = [[dataDic objectForKey:@"cycleTime"] integerValue];//获得周期
                 NSInteger maxDay = [ApplicationStyle dateInteverCurrentDate:date afferentDate:lastTimepPeriod];
                 NSDate *d = [NSDate dateWithTimeIntervalSinceNow: (cycle - maxDay) * (3600 * 24)];
@@ -545,9 +553,33 @@ NLLHRatingViewDelegate>
     [countBtn setTitleColor:[@"ffffff" hexStringToColor] forState:UIControlStateNormal];
     countBtn.layer.cornerRadius = [ApplicationStyle control_weight:10];
     countBtn.backgroundColor = [@"fe6987" hexStringToColor];
+    [countBtn addTarget:self action:@selector(cartoonBtn) forControlEvents:UIControlEventTouchUpInside];
     [_cartoonBackview addSubview:countBtn];
 }
+//判断经期
+-(void)judgePeriof:(NSString *)time{
+    NSDate *lastTimepPeriod = [ApplicationStyle dateTransformationStringWhiffletree:[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate]];//获得上一次来的时间
+    NSDictionary *dataDic = [PlistData getIndividuaData];//获得用户数据
+    NSInteger cycle = [[dataDic objectForKey:@"cycleTime"] integerValue];//获得周期
+    NSInteger periodTime = [[dataDic objectForKey:@"periodTime"] integerValue];//获得经期
+    
+    for (NSInteger j=0; j<6; j++) {
+        for (NSInteger z=0; z<periodTime; z++) {
+            NSString *ycq = [ApplicationStyle datePickerTransformationCorss:[lastTimepPeriod dateByAddingTimeInterval:((60 * 60 * 24) * cycle * j) + (z * (3600 * 24))]];//每次的预测期     预测的时间+每次来的经期次数，如果相等说明在经期内
+            
+            if ([time isEqualToString:ycq]) {
+                _switchOffNum = 1;
+                return;
+            }else{
+                _switchOffNum = 0;
+            }
+        }
+    }
+}
 
+-(void)cartoonBtn{
+    [[NSNotificationCenter defaultCenter] postNotificationName:CalenderGoBackToDayNotification object:nil];
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

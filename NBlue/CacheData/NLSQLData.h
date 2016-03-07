@@ -74,7 +74,11 @@
  */
 +(void)upDataCanlenderuncomfortable:(NSDictionary *)dic;
 /**
- * @param 获取日历数据
+ * 更新日历痛经程度
+ */
++(void)upDataCanlenderDysmenorrheaLevel:(NSDictionary *)dic;
+/**
+ * 获取日历数据
  */
 +(NSMutableDictionary *)canlenderDayData:(NSString *)dayTime;
 /**

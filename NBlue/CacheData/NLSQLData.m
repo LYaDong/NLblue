@@ -355,7 +355,7 @@
     NSDictionary *dic = nil;
     for (dic in arr) {
         NSString *timesTame = [NSString stringWithFormat:@"%0.0f",[[ApplicationStyle dateTransformationStringWhiffletree:[dic objectForKey:@"sportDate"]]timeIntervalSince1970]];
-        NSString *updateTable = @"UPDATE SportDataBig SET count = ?,distanceAmount = ?,caloriesAmount = ?,stepsAmount = ?,totalTimeCount,isUpData = ?,timestamp = ? WHERE sportDate = ? and user_id = ?";
+        NSString *updateTable = @"UPDATE SportDataBig SET count = ?,distanceAmount = ?,caloriesAmount = ?,stepsAmount = ?,totalTimeCount = ?,isUpData = ?,timestamp = ? WHERE sportDate = ? and user_id = ?";
         [db executeUpdate:
          updateTable,
          [dic objectForKey:@"count"]==nil?@"0":[dic objectForKey:@"count"],
@@ -476,7 +476,7 @@
 +(void)canlenderUncomfortable{
     FMDatabase *db = [self sqlDataRoute];
     [db open];
-    NSString *createTable = @"CREATE TABLE IF NOT EXISTS CanlenderTable (time TEXT PRIMARY KEY,aunt TEXT NOT NULL,loveLove TEXT NOT NULL,habitsAndCustoms TEXT NOT NULL,uncomfortable TEXT NOT NULL,user_id TEXT NOT NULL)";
+    NSString *createTable = @"CREATE TABLE IF NOT EXISTS CanlenderTable (time TEXT PRIMARY KEY,aunt TEXT NOT NULL,loveLove TEXT NOT NULL,habitsAndCustoms TEXT NOT NULL,uncomfortable TEXT NOT NULL,dysmenorrheaLevel TEXT NOT NULL,user_id TEXT NOT NULL)";
     [db executeUpdate:createTable];
     [db close];
 }
@@ -492,7 +492,7 @@ __goto:
         NSInteger dayYear = [ApplicationStyle whatYears:date];
         
         for (NSInteger i=0; i<dayInt; i++) {
-            NSString *inster = @"INSERT OR REPLACE INTO CanlenderTable(time,aunt,loveLove,habitsAndCustoms,uncomfortable,user_id) VALUES (?,?,?,?,?,?)";
+            NSString *inster = @"INSERT OR REPLACE INTO CanlenderTable(time,aunt,loveLove,habitsAndCustoms,uncomfortable,dysmenorrheaLevel,user_id) VALUES (?,?,?,?,?,?,?)";
             
             NSString *month = nil;
             NSString *days = nil;
@@ -518,6 +518,7 @@ __goto:
                                     @"0",
                                     CommonText_Canlender_habitsAndCustoms,
                                     CommonText_Canlender_uncomfortable,
+                                    @"1",
                                     [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
                 [db executeUpdate:inster withArgumentsInArray:dataArr];
             }
@@ -564,7 +565,7 @@ __goto:
                 [db close];
                 return;
             }
-            NSString *inster = @"INSERT OR REPLACE INTO CanlenderTable(time,aunt,loveLove,habitsAndCustoms,uncomfortable,user_id) VALUES (?,?,?,?,?,?)";
+            NSString *inster = @"INSERT OR REPLACE INTO CanlenderTable(time,aunt,loveLove,habitsAndCustoms,uncomfortable,dysmenorrheaLevel,user_id) VALUES (?,?,?,?,?,?,?)";
             
             
             NSString *times = [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days];
@@ -575,6 +576,7 @@ __goto:
                                     @"0",
                                     CommonText_Canlender_habitsAndCustoms,
                                     CommonText_Canlender_uncomfortable,
+                                    @"1",
                                     [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
                 [db executeUpdate:inster withArgumentsInArray:dataArr];
             }
@@ -626,7 +628,16 @@ __goto:
      [kAPPDELEGATE._loacluserinfo GetUser_ID]];
     [db close];
 }
-
++(void)upDataCanlenderDysmenorrheaLevel:(NSDictionary *)dic{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *updateTable = @"UPDATE CanlenderTable SET dysmenorrheaLevel = ? WHERE time = ? and user_id = ?";
+    [db executeUpdate:updateTable,
+     [dic objectForKey:@"dysmenorrheaLevel"]==nil?@"":[dic objectForKey:@"dysmenorrheaLevel"],
+     [dic objectForKey:@"time"]==nil?@"":[dic objectForKey:@"time"],
+     [kAPPDELEGATE._loacluserinfo GetUser_ID]];
+    [db close];
+}
 
 +(NSMutableDictionary *)canlenderDayData:(NSString *)dayTime{
     FMDatabase *db = [self sqlDataRoute];
@@ -638,9 +649,9 @@ __goto:
         [dic setValue:[rs stringForColumn:@"time"] forKey:@"time"];
         [dic setValue:[rs stringForColumn:@"habitsAndCustoms"] forKey:@"habitsAndCustoms"];
         [dic setValue:[rs stringForColumn:@"uncomfortable"] forKey:@"uncomfortable"];
+        [dic setValue:[rs stringForColumn:@"dysmenorrheaLevel"] forKey:@"dysmenorrheaLevel"];
     }
     return dic;
-    
 }
 
 

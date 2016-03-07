@@ -91,7 +91,15 @@ static NSInteger countNum = 5;
     }
 
     CGPoint p = CGPointMake((eachWidth+self.widDistance)*_score, self.heiDistance);
-    [self changeStarForeViewWithPoint:p];
+    CGFloat width = self.frame.size.width;
+    CGFloat num = p.x/(eachWidth+self.widDistance);
+    CGFloat imgHeight = [ApplicationStyle control_height:40.0f],imgWidht = [ApplicationStyle control_weight:50];
+    
+    
+    self.foreStarView.frame = CGRectMake(width+[ApplicationStyle control_weight:10] - (imgWidht*num) , 0, width, imgHeight);
+    
+    
+//    [self changeStarForeViewWithPoint:p];
 }
 
 #pragma mark - 设置当前类型
@@ -109,11 +117,7 @@ static NSInteger countNum = 5;
 
     if(_ratingType == INTEGER_TYPE){
         NSInteger count = countNum - ((NSInteger)(point.x/(self.frame.size.width/5)));
-        
-        
-        
         point.x = count*(eachWidth+self.widDistance);
-        NSLog(@"%f",point.x/(eachWidth+self.widDistance));
     }
     
     [self changeStarForeViewWithPoint:point];
@@ -123,12 +127,7 @@ static NSInteger countNum = 5;
 #pragma mark - 滑动
 - (void)panGestureEvent:(UIPanGestureRecognizer *)pan_
 {
-    
-    
-    NSLog(@"%@",pan_);
-    
     CGPoint point = [pan_ locationInView:self];
-
     if (point.x < 0) {
         return;
     }
@@ -136,7 +135,6 @@ static NSInteger countNum = 5;
         NSInteger count = countNum -((NSInteger)(point.x/(eachWidth+self.widDistance)));
         point.x = count*(eachWidth+self.widDistance);
     }
-    
     [self changeStarForeViewWithPoint:point];
 }
 
@@ -195,7 +193,7 @@ static NSInteger countNum = 5;
     
     if(self.delegate && [self.delegate respondsToSelector:@selector(ratingView:score:)])
     {
-        [self.delegate ratingView:self score:self.score];
+        [self.delegate ratingView:self score:num];
     }
 }
 

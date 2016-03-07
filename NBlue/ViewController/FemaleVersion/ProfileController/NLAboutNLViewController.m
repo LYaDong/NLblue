@@ -8,6 +8,7 @@
 
 #import "NLAboutNLViewController.h"
 #import "NLIndividuaFormaCell.h"
+#import "NLWarmanAgreement.h"
 @interface NLAboutNLViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIImageView *copyrightNLImage;
 @property(nonatomic,strong)UITableView *tableView;
@@ -45,7 +46,7 @@
 }
 #pragma mark 系统Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [ApplicationStyle control_height:88];
@@ -61,15 +62,17 @@
         [cell addSubview:line];
     }
     
-    NSArray *arr = @[NSLocalizedString(@"NLAboutNL_CopyrightInformation", nil),
-                     NSLocalizedString(@"NLAboutNL_ServiceAgreement", nil),
-                     NSLocalizedString(@"NLAboutNL_PrivacyPolicy", nil)];
-    cell.cellHeadTitleLab.text = arr[indexPath.row];
+    cell.cellHeadTitleLab.text = NSLocalizedString(@"NLAboutNL_UserAgreement", nil);
     
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NLWarmanAgreement *vc = [[NLWarmanAgreement alloc] init];
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 #pragma mark 自己的Delegate
 #pragma mark 自己的按钮事件

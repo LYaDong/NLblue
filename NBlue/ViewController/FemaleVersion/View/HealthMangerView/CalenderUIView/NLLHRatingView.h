@@ -14,8 +14,9 @@
 
 @optional
 - (void)ratingView:(NLLHRatingView *)view score:(CGFloat)score;
-
+//- (void)returnScore:(CGFloat)score;
 @end
+
 
 typedef NS_ENUM(NSUInteger, RatingType) {
     INTEGER_TYPE,
