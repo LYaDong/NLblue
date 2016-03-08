@@ -8,6 +8,7 @@
 
 #import "NLMyMaleViewController.h"
 #import "NLQRCodeViewController.h"
+
 @interface NLMyMaleViewController ()
 
 @end
@@ -26,24 +27,22 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self delNotification];
+    [self addNotification];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self delNotification];
 }
 #pragma mark 基础UI
 -(void)bulidUI{
-    
-//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle statusBarSize]- [ApplicationStyle navigationBarSize])];
-//    imageView.image = [UIImage imageNamed:@"NL_M_Male_B"];
-//    [self.view addSubview:imageView];
-    
-    
-    
-    
+    [[NLDatahub sharedInstance] maleJudgeIsHave];
+}
+-(void)scanCodeUI{
     UIImageView *expressionImg = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:164])/2, [ApplicationStyle navigationBarSize] + [ApplicationStyle statusBarSize]+[ApplicationStyle control_height:238], [ApplicationStyle control_weight:164], [ApplicationStyle control_height:170])];
     expressionImg.image = [UIImage imageNamed:@"NL_Pro_Male_Expression"];
     [self.view addSubview:expressionImg];
-
+    
     CGSize textCountSize = [ApplicationStyle textSize:NSLocalizedString(@"NLProfileView_MaleTextCount", nil) font:[ApplicationStyle textThrityFont] size:SCREENWIDTH];
     
     UILabel *textCount = [[UILabel alloc] initWithFrame:CGRectMake(0, expressionImg.bottomOffset+[ApplicationStyle control_height:108], SCREENWIDTH, textCountSize.height)];
@@ -71,8 +70,6 @@
     text.numberOfLines = 0;
     text.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:text];
-
-    
 }
 #pragma mark 系统Delegate
 #pragma mark 自己的Delegate
@@ -90,6 +87,26 @@
     [[NLDatahub sharedInstance] qrCodeNextWorkFrom_to_id:text];
 }
 
+-(void)addNotification{
+    NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
+    [notifi addObserver:self selector:@selector(success:) name:NLFolkSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(ficaled) name:NLFolkFicaledNotification object:nil];
+}
+-(void)success:(NSNotification *)notifi{
+    if (notifi.object == nil) {
+        [self scanCodeUI];
+    }else{
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle statusBarSize]- [ApplicationStyle navigationBarSize])];
+        imageView.image = [UIImage imageNamed:@"NL_M_Male_B"];
+        [self.view addSubview:imageView];
+    }
+}
+-(void)ficaled{
+    
+}
+-(void)delNotification{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

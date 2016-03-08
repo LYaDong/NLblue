@@ -140,13 +140,13 @@ static const NSInteger DATEPICKERTAGBTN = 4000;                             //æ—
                 break;
             }
             case PickerType_Cycle:{
-                [_pickerView selectRow:0 inComponent:0 animated:YES];
-                _data = @"5";
+                [_pickerView selectRow:28 - 5 inComponent:0 animated:YES];
+                _data = @"28";
                 break;
             }
             case PickerType_Period:{
-                [_pickerView selectRow:0 inComponent:0 animated:YES];
-                _data = @"1";
+                [_pickerView selectRow:4 inComponent:0 animated:YES];
+                _data = @"5";
                 break;
             }
             default:

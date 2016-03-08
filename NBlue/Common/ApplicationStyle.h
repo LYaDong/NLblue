@@ -144,6 +144,10 @@
  *判断手机格式
  */
 +(BOOL)PhoteFormat:(NSString *)phone;
+/**
+ * 返回是什么手机
+ */
++(NSString *)Judgingdevice;
 @end
 
 @interface ApplicationStyle (Edition)

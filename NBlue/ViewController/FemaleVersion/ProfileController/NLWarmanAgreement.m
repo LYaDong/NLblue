@@ -8,7 +8,8 @@
 
 #import "NLWarmanAgreement.h"
 #import "NLShareView.h"
-@interface NLWarmanAgreement ()<UIWebViewDelegate>
+
+@interface NLWarmanAgreement ()<UIWebViewDelegate,NLShareViewDelegate>
 
 @end
 
@@ -28,24 +29,24 @@
 }
 #pragma mark 基础UI
 -(void)bulidUI{
-    
-    NLShareView *share = [[NLShareView alloc] initWithFrame:CGRectMake(0, 200, SCREENWIDTH, [ApplicationStyle control_height:300])];
-    [self.view addSubview:share];
-    
-    
-//    [[SMProgressHUD shareInstancetype] showLoading];
-//    NSURL *url = [NSURL URLWithString:@"http://www.nuanlan.love/copyright/useragreement.html"];
-//    UIWebView *weiView = [[UIWebView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle navBarAndStatusBarSize])];
-//    weiView.scalesPageToFit = YES;
-//    weiView.delegate = self;
-//    [weiView loadRequest:[NSURLRequest requestWithURL:url]];
-//    [self.view addSubview:weiView];
+    [[SMProgressHUD shareInstancetype] showLoading];
+    NSURL *url = [NSURL URLWithString:@"http://www.nuanlan.love/copyright/useragreement.html"];
+    UIWebView *weiView = [[UIWebView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle navBarAndStatusBarSize])];
+    weiView.scalesPageToFit = YES;
+    weiView.delegate = self;
+    [weiView loadRequest:[NSURLRequest requestWithURL:url]];
+    [self.view addSubview:weiView];
 }
 #pragma mark 系统Delegate
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-//    [[SMProgressHUD shareInstancetype] dismiss];
+    [[SMProgressHUD shareInstancetype] dismiss];
 }
 #pragma mark 自己的Delegate
+
+
+
+
+
 #pragma mark 自己的按钮事件
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

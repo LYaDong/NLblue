@@ -56,5 +56,7 @@
 #define NLUsergetUserInformationFicaledNotification @"NLUsergetUserInformationFicaledNotification"
 #define NLUpDateUserInformationSuccessNotification @"NLUpDateUserInformationSuccessNotification"
 #define NLUpDateUserInformationFicaledNotification @"NLUpDateUserInformationFicaledNotification"
+#define NLFolkSuccessNotification @"NLFolkSuccessNotification"
+#define NLFolkFicaledNotification @"NLFolkFicaledNotification"
 //================================   L    Y     D    ============================================
 #endif /* NLNotification_h */

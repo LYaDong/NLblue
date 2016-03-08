@@ -6,8 +6,18 @@
 //  Copyright © 2016年 LYD. All rights reserved.
 //
 
+static const NSInteger THIRDSHARETAG = 1000;
+
+
 #import "NLShareView.h"
 #import "NLAboutUpperImageBtn.h"
+#import <UMSocialWechatHandler.h>
+#import <UMSocialDataService.h>
+#import <UMSocialControllerService.h>
+#import <UMSocialSnsPlatformManager.h>
+@interface NLShareView ()<UMSocialDataDelegate>
+@end
+
 @implementation NLShareView
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
@@ -16,8 +26,6 @@
     return self;
 }
 -(void)buildUI{
-    
-    
     UIView *viewBack = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle control_height:297])];
     viewBack.backgroundColor = [ApplicationStyle subjectWithColor];
     [self addSubview:viewBack];
@@ -30,30 +38,42 @@
                             @"NL_Share_WeChartCircle",
                             @"NL_Share_WB",
                             @"NL_Share_QQ",];
-    
-    
-    for (NSInteger i=0; i<4; i++) {
-        NLAboutUpperImageBtn *thirdShare = [[NLAboutUpperImageBtn alloc] initWithFrame:
-                                            CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:132])/4/2 + i*(SCREENWIDTH - [ApplicationStyle control_weight:132])/4,
-                                                       [ApplicationStyle control_height:44],
-                                                       [ApplicationStyle control_weight:132],
-                                                       [ApplicationStyle control_height:132])];
+
+    for (NSInteger i=0; i<shareText.count; i++) {
+        
+        
+        CGRect frame = CGRectMake((SCREENWIDTH/4 - [ApplicationStyle control_weight:132])/2 + i * SCREENWIDTH/4, [ApplicationStyle control_height:44], [ApplicationStyle control_weight:132], [ApplicationStyle control_height:132]);
+        
+
+        NLAboutUpperImageBtn *thirdShare = [[NLAboutUpperImageBtn alloc] initWithFrame:frame];
         
         [thirdShare setImage:[UIImage imageNamed:shareImage[i]] forState:UIControlStateNormal];
         [thirdShare setTitle:shareText[i] forState:UIControlStateNormal];
         [thirdShare setTitleColor:[@"222222" hexStringToColor] forState:UIControlStateNormal];
         thirdShare.titleLabel.font = [ApplicationStyle textSuperSmallFont];
-
-        [self addSubview:thirdShare];
+        thirdShare.tag = THIRDSHARETAG + i;
+        [thirdShare addTarget:self action:@selector(thirdShareDown:) forControlEvents:UIControlEventTouchUpInside];
+        [viewBack addSubview:thirdShare];
         
     }
     
+    UIView *lines = [[UIView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle control_height:200], SCREENWIDTH, [ApplicationStyle control_height:1])];
+    lines.backgroundColor = [@"dddddd" hexStringToColor];
+    [viewBack addSubview:lines];
     
-    
-    
-    
-    
-    
+    UIButton *cancle = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    cancle.frame = CGRectMake(0, lines.bottomOffset+[ApplicationStyle control_height:1], SCREENWIDTH, [ApplicationStyle control_height:96]);
+    [cancle setTitle:NSLocalizedString(@"GeneralText_Cancel", nil) forState:UIControlStateNormal];
+    [cancle setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    cancle.titleLabel.font = [ApplicationStyle textThrityFont];
+    [cancle addTarget:self action:@selector(cancleDown) forControlEvents:UIControlEventTouchUpInside];
+    [viewBack addSubview:cancle];
+}
+-(void)cancleDown{
+    [self.delegate cancleBtn];
+}
+-(void)thirdShareDown:(UIButton *)btn{
+    [self.delegate shareBtnDownIndex:btn.tag];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -18,11 +18,18 @@
 #import "NLGiffiredSignViewController.h"
 #import "UIImageView+WebCache.h"
 #import "NLMyMessageViewController.h"
-@interface NLProfileViewController ()<UITableViewDataSource,UITableViewDelegate>
+#import "NLShareView.h"
+#import <UMSocialWechatHandler.h>
+#import <UMSocialDataService.h>
+#import <UMSocialSnsPlatformManager.h>
+#import <UMSocialAccountManager.h>
+@interface NLProfileViewController ()<UITableViewDataSource,UITableViewDelegate,NLShareViewDelegate>
 @property(nonatomic,strong)UIButton *userHeadImage;
 @property(nonatomic,strong)UILabel *userNameLab;
 @property(nonatomic,strong)UIImageView *userImage;;
 @property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)NLShareView *shareView;
+@property(nonatomic,strong)UIView *blackBackView;
 @end
 
 @implementation NLProfileViewController
@@ -59,7 +66,6 @@
 }
 
 #pragma mark 基础UI
-
 -(void)backViewUI{
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
     imageView.image = [UIImage imageNamed:@"RootContorllewImage"];
@@ -111,6 +117,17 @@
     _tableView.scrollEnabled = NO;
     [self.view addSubview:_tableView];
     
+    _blackBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+    _blackBackView.backgroundColor = [UIColor blackColor];
+    _blackBackView.alpha = 0.3;
+    _blackBackView.hidden = YES;
+    [self.view addSubview:_blackBackView];
+    
+    _shareView = [[NLShareView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, [ApplicationStyle control_height:300])];
+    _shareView.delegate = self;
+    [[[UIApplication sharedApplication] keyWindow] addSubview:_shareView];
+    
+    
 }
 
 -(void)userHeadImageNotifiDown{
@@ -148,22 +165,56 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    
-    
     NSArray *viewConrollerArray = @[@"NLMyEquipmentController",
                                     @"NLMyMaleViewController",
-                                    @"NLShareController",
+                                    @"",
                                     @"NLFeedBackViewController",
                                     @"NLSetProfoleViewController",
                                     @"NLAboutNLViewController"];
     
-    UIViewController *viewControllew = [[NSClassFromString(viewConrollerArray[indexPath.row])alloc] init];
-    [viewControllew setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:viewControllew animated:YES];
-  
+    if (indexPath.row == 2) {
+        _blackBackView.hidden = NO;
+        [UIView animateWithDuration:0.5 animations:^{
+            _shareView.frame = CGRectMake(0, SCREENHEIGHT - [ApplicationStyle control_height:300], SCREENWIDTH, [ApplicationStyle control_height:300]);
+        }];
+    }else{
+        UIViewController *viewControllew = [[NSClassFromString(viewConrollerArray[indexPath.row])alloc] init];
+        [viewControllew setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:viewControllew animated:YES];
+    }
 }
 #pragma mark 自己的Delegate
+-(void)shareBtnDownIndex:(NSInteger)index{
+    switch (index - 1000) {
+        case 0: {
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
+            [UMSocialData defaultData].extConfig.wechatSessionData.title = @"暖蓝Warman";
+            [self sharePlatformArray:@[UMShareToWechatSession] shareCount:@"测试" icon:[UIImage imageNamed:@"User_Head"]];
+            
+            break;
+        }
+        case 1: {
+            [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"www.baidu.com";
+            [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"暖蓝Warman";
+            [self sharePlatformArray:@[UMShareToWechatTimeline] shareCount:@"测试" icon:[UIImage imageNamed:@"User_Head"]];
+            break;
+        }
+        case 2: {
+            [self sharePlatformArray:@[UMShareToQQ] shareCount:@"测试" icon:[UIImage imageNamed:@"User_Head"]];
+            
+            break;
+        }
+        case 3: {
+            [self sharePlatformArray:@[UMShareToSina] shareCount:@"测试" icon:[UIImage imageNamed:@"User_Head"]];
+            break;
+        }
+        default:
+            break;
+    }
+}
+-(void)cancleBtn{
+    [self shareViewHide];
+}
 #pragma mark 事件方法
 -(void)userHeadImageDown{
     NLIndividuaFormatViewController *vc = [[NLIndividuaFormatViewController alloc] init];
@@ -176,6 +227,23 @@
     [message setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:message animated:YES];
 }
+
+- (void)sharePlatformArray:(NSArray *)platrormArray shareCount:(NSString *)shareCount icon:(UIImage *)icon{
+    UMSocialUrlResource *urls = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeDefault url:@"www.baidu.com"];
+    [[UMSocialDataService defaultDataService] postSNSWithTypes:platrormArray content:shareCount image:icon location:nil urlResource:urls presentedController:self completion:^(UMSocialResponseEntity *response) {
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            [self shareViewHide];
+        }
+    }];
+}
+
+-(void)shareViewHide{
+    [UIView animateWithDuration:0.5 animations:^{
+        _shareView.frame = CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, [ApplicationStyle control_height:300]);
+    }];
+    _blackBackView.hidden = YES;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

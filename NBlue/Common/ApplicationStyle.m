@@ -14,6 +14,7 @@
  */
 #import "ApplicationStyle.h"
 #import <UIKit/UIKit.h>
+#import "sys/utsname.h"
 @implementation ApplicationStyle
 
 
@@ -36,10 +37,10 @@
     return rectStatus.size.height;
 }
 + (CGFloat)navBarAndStatusBarSize{
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] init];
+    NSInteger  rectNav = nav.navigationBar.frame.size.height;
     CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
-    NSInteger tab =  tabBarController.tabBar.frame.size.height;
-    return tab+rectStatus.size.height;
+    return rectNav+rectStatus.size.height;
 }
 + (CGFloat)screenWidth {return [UIScreen mainScreen].bounds.size.width;}
 
@@ -122,6 +123,12 @@
     BOOL isMatch = [pred evaluateWithObject:phone];
     return isMatch;
     return YES;
+}
++(NSString *)Judgingdevice{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+    return platform;
 }
 @end
 

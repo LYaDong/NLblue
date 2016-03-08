@@ -53,5 +53,9 @@
  * 更新经期信息
  */
 -(void)upDateMenstruationData:(NSDictionary *)menstruationData;
+/**
+ * 查询是否拥有男友
+ */
+-(void)maleJudgeIsHave;
 
 @end

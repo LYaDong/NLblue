@@ -7,6 +7,7 @@
 //
 
 static const NSInteger TIMELINE = 90;
+static const NSInteger NOVICEGUIDETAG = 6000;
 #import "NLHotMoxibustionViewController.h"
 #import "NLBluetoothAgreement.h"
 #import "NLBluetoothDataAnalytical.h"
@@ -40,6 +41,7 @@ static const NSInteger TIMELINE = 90;
 @property(nonatomic,strong)NSTimer *timeVer;
 @property(nonatomic,assign)NSInteger equipmentStatsCount;
 @property(nonatomic,strong)NLBluetoothAgreementNew *bluetooth;
+@property(nonatomic,assign)NSInteger noviceGuideIndex;
 
 
 
@@ -171,6 +173,13 @@ static const NSInteger TIMELINE = 90;
     self.titles.text = @"热灸";
     
     
+    
+    NSLog(@"%f %f",SCREENWIDTH,SCREENHEIGHT);
+    //828 1472
+    
+    //1424 2208
+    
+    
     //判断要不要进入搜索页
     if ([[kAPPDELEGATE._loacluserinfo getBlueToothUUID] length]<=0) {
        [self connectBlueTooth]; 
@@ -209,7 +218,7 @@ static const NSInteger TIMELINE = 90;
 //    };
  
  
-    _blueImage = [[UIImageView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:24], [ApplicationStyle statusBarSize] + ([ApplicationStyle navigationBarSize] - [ApplicationStyle control_height:40])/2, [ApplicationStyle control_weight:40], [ApplicationStyle control_height:44])];
+    _blueImage = [[UIImageView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:42], ([ApplicationStyle navBarAndStatusBarSize] - [ApplicationStyle control_height:44])/2 + [ApplicationStyle control_height:20], [ApplicationStyle control_weight:40], [ApplicationStyle control_height:44])];
     _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect_N"];
     [self.view addSubview:_blueImage];
     
@@ -308,7 +317,7 @@ static const NSInteger TIMELINE = 90;
     
     [self halfCircle];
     [self estableSqlite];
-    
+    [self noviceGuideIMG];
     
 //    [self loadStepData];
     
@@ -877,6 +886,62 @@ static const NSInteger TIMELINE = 90;
 #pragma mark 温度滑动禁止
 -(void)temperatureSetProhibit:(NSString *)sliding{
     [[NSNotificationCenter defaultCenter] postNotificationName:TemperatureSetNotification object:sliding];
+}
+#pragma mark 新手引导
+-(void)noviceGuideIMG{
+    _noviceGuideIndex = 0;
+    UIButton *noviceGuideBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    noviceGuideBtn.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle tabBarSize]);
+    [noviceGuideBtn addTarget:self action:@selector(noviceGuideDown:) forControlEvents:UIControlEventTouchUpInside];
+    noviceGuideBtn.tag = NOVICEGUIDETAG;
+//    noviceGuideBtn.backgroundColor = [UIColor redColor];
+    [noviceGuideBtn setImage:[UIImage imageNamed:@"NL_NoviceGuide_0"] forState:UIControlStateNormal];
+    [self.view addSubview:noviceGuideBtn];
+    
+    if (SCREENHEIGHT == iPhone5Height) {
+        [noviceGuideBtn setImage:[UIImage imageNamed:@"NL_NoviceGuide_0"] forState:UIControlStateNormal];
+    }
+    _noviceGuideIndex++;
+    
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle tabBarSize])];
+//    imageView.image = [UIImage imageNamed:@"NL_NoviceGuide_0"];
+//    imageView.userInteractionEnabled = YES;
+//    [self.view addSubview:imageView];
+}
+-(void)noviceGuideDown:(UIButton *)btn{
+    
+//    switch (_noviceGuideIndex) {
+//        case 0: {
+//            btn.backgroundColor  = [UIColor redColor];
+//            _noviceGuideIndex++;
+//            break;
+//        }
+//        case 1: {
+//            btn.backgroundColor  = [UIColor yellowColor];
+//            _noviceGuideIndex++;
+//            break;
+//        }
+//        case 2: {
+//            btn.backgroundColor  = [UIColor orangeColor];
+//            _noviceGuideIndex++;
+//            break;
+//        }
+//        case 3: {
+//            btn.backgroundColor  = [UIColor greenColor];
+//            _noviceGuideIndex++;
+//            break;
+//        }
+//        default:
+//            break;
+//    }
+}
+
+- (void)noviceGuideBtn:(UIButton *)btn Image:(UIImage *)image{
+    if (SCREENHEIGHT == iPhone5Height) {
+        [btn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    }else{
+        [btn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    }
 }
 
 

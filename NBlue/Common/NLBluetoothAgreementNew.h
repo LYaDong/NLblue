@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
+typedef void (^BlueSuccess)(NSString *blueSuccess);
 typedef void (^BluetoothDataArr)(NSMutableArray *array);
 typedef void (^BatteryLevelB)(NSString *battery);
 @interface NLBluetoothAgreementNew : NSObject

@@ -19,10 +19,10 @@
     return self;
 }
 -(CGRect)titleRectForContentRect:(CGRect)contentRect{
-    return CGRectMake(0, [ApplicationStyle control_height:80+24], contentRect.size.width, 20);
+    return CGRectMake(0, [ApplicationStyle control_height:80+18], contentRect.size.width, [ApplicationStyle control_height:40]);
 }
 -(CGRect)imageRectForContentRect:(CGRect)contentRect{
-    return CGRectMake((self.frame.size.width - [ApplicationStyle control_weight:80])/2, 0, [ApplicationStyle control_weight:80], [ApplicationStyle control_height:80]);
+    return CGRectMake((self.frame.size.width - [ApplicationStyle control_weight:80])/2, [ApplicationStyle control_height:10], [ApplicationStyle control_weight:80], [ApplicationStyle control_height:80]);
 }
 /*
 // Only override drawRect: if you perform custom drawing.

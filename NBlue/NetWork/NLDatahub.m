@@ -17,6 +17,7 @@ static NSString *NLmobileApiBaseUrl = @"http://123.56.127.139/warman";//主接�
 static NSString *NLUserApi = @"/user";//各个接口端
 static NSString *NLSportApi = @"/sport";//各个接口端
 static NSString *NLMenstruation = @"menstruation";//各个接口端
+static NSString *NLFolks = @"/folks";//各个接口端 User的子接口
 
 
 @interface NLDatahub(){
@@ -316,6 +317,23 @@ static NSString *NLMenstruation = @"menstruation";//各个接口端
         NSLog(@"%@",error);
     }];
     
+}
+-(void)maleJudgeIsHave{
+    NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                 @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
+
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [_manager GET:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,NLFolks] parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLFolkSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLFolkFicaledNotification object:nil userInfo:nil];
+        });
+    }];
 }
 
 //转JSON数据

@@ -16,6 +16,17 @@
 #define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
 #define kDEFAULTNOTIFICATION   [NSNotificationCenter defaultCenter]
 
+
+//屏幕长度宽度
+#define iPhone4Height 480
+#define iPhone4Width 320
+#define iPhone5Height 568
+#define iPhone5Width 320
+#define iPhone6Height 667
+#define iPhone6Width 375
+#define iPhone6PHeight 736
+#define iPhone6PWidth 414
+
 #define UM_APP_KEY @"562f231fe0f55a5607002eba"
 #define QQ_APP_ID @"1104886750"
 #define QQ_APP_EKY @"RCfbnvd8m02seW0K"

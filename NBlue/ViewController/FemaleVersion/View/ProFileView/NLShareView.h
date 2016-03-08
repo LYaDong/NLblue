@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NLShareView : UIView
+@protocol NLShareViewDelegate <NSObject>
+-(void)shareBtnDownIndex:(NSInteger)index;
+-(void)cancleBtn;
+@end
 
+
+
+@interface NLShareView : UIView
+@property(nonatomic,strong)id<NLShareViewDelegate>delegate;
 @end

@@ -19,5 +19,6 @@
 #define User_QRCode @"/folk"
 #define user_ForgetPassWord @"/updatepwd"
 #define User_MenstruationRecord @"/Record"
+#define Folk_Permission @"/permission"
 
 #endif /* NLApiURL_h */
