@@ -506,7 +506,7 @@ static const NSInteger BTNPHOTO = 4000;
 
 -(void)pickerViewFramkeHide{
     [UIView animateWithDuration:0.5 animations:^{
-        _pickerView.frame = CGRectMake(0, SCREENHEIGHT + [ApplicationStyle control_height:560], SCREENWIDTH, [ApplicationStyle control_height:560]);
+        _pickerView.frame = CGRectMake(0, SCREENHEIGHT + [ApplicationStyle control_height:53], SCREENWIDTH, [ApplicationStyle control_height:560]);
     }];
 }
 

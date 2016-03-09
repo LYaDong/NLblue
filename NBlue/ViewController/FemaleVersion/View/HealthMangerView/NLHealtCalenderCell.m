@@ -19,7 +19,7 @@
 -(void)buildUI{
     
     
-    CGFloat heights = self.frame.size.height;
+    CGFloat heights = [ApplicationStyle control_height:88];
     CGFloat x = [ApplicationStyle control_weight:46],w = [ApplicationStyle control_weight:40],h = [ApplicationStyle control_height:40];
     
     

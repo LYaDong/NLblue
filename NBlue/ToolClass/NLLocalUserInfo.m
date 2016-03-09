@@ -117,4 +117,13 @@
    NSData *data = [[NSUserDefaults standardUserDefaults] dataForKey:@"NL_User_bloth_equment"];
     return data;
 }
+
+-(void)noviceGuide:(NSString *)novice{
+    [[NSUserDefaults standardUserDefaults] setObject:novice forKey:@"NL_User_NoviceGuide"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)getNoviceGuide{
+    NSString *noviceGuide = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_NoviceGuide"];
+    return noviceGuide;
+}
 @end

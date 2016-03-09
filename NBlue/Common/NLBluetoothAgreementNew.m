@@ -23,6 +23,7 @@ static NSString *TransLationF1 = @"0AF1";
 @property(nonatomic,strong)NSMutableArray *sleepDataArray;
 @property(nonatomic,strong)NSMutableArray *bluetoothArray;//设备数组
 //=========================处理数据的数组
+@property(nonatomic,strong)NSString *searchBluetoothStartJudge;
 @property(nonatomic,assign)BOOL isbluetooth;
 @end
 
@@ -66,18 +67,20 @@ static NSString *TransLationF1 = @"0AF1";
 
 -(void)bluetoothInstantiation{
 //    _isbluetooth = NO;
+    _searchBluetoothStartJudge = NLSearchBluetoothStopNotification;//是否开始搜索蓝牙//默认停止
     _equipmentArr = [NSMutableArray array];
     //设置中心蓝牙和代理
     if (!_isbluetooth) {
         _manger = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
         _manger.delegate = self;
-        [_manger scanForPeripheralsWithServices:nil options:nil];
+//        [_manger scanForPeripheralsWithServices:nil options:nil];
         _periperal.delegate = self;//设置外围蓝牙代理
     }
     
     
     NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
     [notifi addObserver:self selector:@selector(bluetoothSuccess:) name:NLConnectBloothSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(startBluetooth) name:NLSearchBluetoothNotification object:nil];
 }
 -(void)bluetoothSuccess:(NSNotification *)notifi{
     
@@ -93,12 +96,21 @@ static NSString *TransLationF1 = @"0AF1";
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+-(void)startBluetooth{
+//    _searchBluetoothStartJudge = NLSearchBluetoothStartNotification;//开始
+    [_manger scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)}];
+}
 -(void)dataArrayInstantiation{
     _sportDataArray = [NSMutableArray array];
     _sleepDataArray = [NSMutableArray array];
     _bluetoothArray = [NSMutableArray array];
 }
-
+-(void)searchBluetooth{
+    [_manger scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)}];
+}
+-(void)cancleBluetooth{
+    [_manger cancelPeripheralConnection:_periperal];
+}
 
 
 #pragma mark 蓝牙代理
@@ -108,7 +120,6 @@ static NSString *TransLationF1 = @"0AF1";
     
     switch (central.state) {
         case CBCentralManagerStatePoweredOn:{
-            [_manger scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)}];
             NSLog(@"蓝牙已经打开，请扫描外设,请打开外围设备");
             break;
         }
@@ -144,30 +155,43 @@ static NSString *TransLationF1 = @"0AF1";
 //    NSLog(@"附近设备有:%@  UUID ==%@ ",peripheral.name,peripheral.identifier);
 //    NSLog(@"name = %@ rssi %@",peripheral.name,peripheral.RSSI);
     
-    if ([peripheral.name isEqualToString:@"WARMAN"]) {
-//        NSLog(@"name = %@ 信号强度 = %@   UUID = %@",peripheral.name,RSSI,peripheral.identifier);
-        
-        if (![_equipmentArr containsObject:peripheral]) {
-            [_equipmentArr addObject:peripheral];
-            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-            [dic setValue:RSSI forKey:@"RSSI"];
-            [dic setValue:peripheral forKey:@"peripheral"];
-            [_bluetoothArray addObject:dic];
-            if (self.bluetoothDataArr) {
-                self.bluetoothDataArr(_bluetoothArray);
+//    if ([_searchBluetoothStartJudge isEqualToString:NLSearchBluetoothStartNotification]) {
+        if ([peripheral.name isEqualToString:@"WARMAN"]) {
+            //        NSLog(@"name = %@ 信号强度 = %@   UUID = %@",peripheral.name,RSSI,peripheral.identifier);
+            
+            if (![_equipmentArr containsObject:peripheral]) {
+                [_equipmentArr addObject:peripheral];
+                NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+                [dic setValue:RSSI forKey:@"RSSI"];
+                [dic setValue:peripheral forKey:@"peripheral"];
+                [_bluetoothArray addObject:dic];
+                if (self.bluetoothDataArr) {
+                    self.bluetoothDataArr(_bluetoothArray);
+                }
             }
-        }
-        if ([[kAPPDELEGATE._loacluserinfo getBlueToothUUID] length]>0) {
-            CBUUID *blue_UUID = [CBUUID UUIDWithCFUUID:(__bridge CFUUIDRef _Nonnull)(peripheral.identifier)];
-            NSString *blue_uuidstr = [NSString stringWithFormat:@"%@",blue_UUID];
-            if ([blue_uuidstr isEqualToString:[kAPPDELEGATE._loacluserinfo getBlueToothUUID]]) {
+            if ([[kAPPDELEGATE._loacluserinfo getBlueToothUUID] length]>0) {
+                NSLog(@"%@",[kAPPDELEGATE._loacluserinfo getBlueToothUUID]);
+                CBUUID *blue_UUID = [CBUUID UUIDWithCFUUID:(__bridge CFUUIDRef _Nonnull)(peripheral.identifier)];
+                NSString *blue_uuidstr = [NSString stringWithFormat:@"%@",blue_UUID];
+                if ([blue_uuidstr isEqualToString:[kAPPDELEGATE._loacluserinfo getBlueToothUUID]]) {
+                    _periperal = peripheral;
+                    [_manger connectPeripheral:_periperal options:nil];
+                    [kAPPDELEGATE._loacluserinfo setBluetoothName:peripheral.name];//设备的名字
+                    [_manger stopScan];
+                }
+            }else{
                 _periperal = peripheral;
                 [_manger connectPeripheral:_periperal options:nil];
                 [kAPPDELEGATE._loacluserinfo setBluetoothName:peripheral.name];//设备的名字
                 [_manger stopScan];
+//                CBUUID *uuid = [CBUUID UUIDWithCFUUID:(__bridge CFUUIDRef _Nonnull)(peripheral.identifier)];
+//                [kAPPDELEGATE._loacluserinfo bluetoothUUID:[NSString stringWithFormat:@"%@",uuid]];
             }
         }
-    }
+//    }
+    
+    
+    
     
     
     
@@ -210,6 +234,11 @@ static NSString *TransLationF1 = @"0AF1";
     [peripheral discoverServices:nil];
     _isbluetooth = !_isbluetooth;
     NSLog(@"连接成功");
+    CBUUID *uuid = [CBUUID UUIDWithCFUUID:(__bridge CFUUIDRef _Nonnull)(peripheral.identifier)];
+    [kAPPDELEGATE._loacluserinfo bluetoothUUID:[NSString stringWithFormat:@"%@",uuid]];
+    if (self.bluetoothSuccess) {
+        self.bluetoothSuccess(EquiomentConnectionSuccess);
+    }
 }
 #pragma mark 连接失败
 -(void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{

@@ -74,11 +74,11 @@
  */
 -(NSString *)getLastTimeGoPeriodDate;
 /**
- * 输入用户UUID
+ * 输入用户设备UUID
  */
 -(void)bluetoothUUID:(NSString *)UUID;
 /**
- * 获取用户UUID
+ * 获取用户设备UUID
  */
 - (NSString *)getBlueToothUUID;
 /**
@@ -105,4 +105,12 @@
  * 用户现在是哪个设备
  */
 -(NSData *)getUserBlothEquipment;
+/**
+ * 新手引导
+ */
+-(void)noviceGuide:(NSString *)novice;
+/**
+ * 获得新手引导
+ */
+-(NSString *)getNoviceGuide;
 @end

@@ -81,7 +81,7 @@
     segement.selectedSegmentIndex = 0;
     segement.borderColors = [UIColor whiteColor];
     segement.clipsBounds = YES;
-    segement.backGroupColor = [ApplicationStyle subjectShowAllPinkColor];
+    segement.backGroupColor = [@"f3375a" hexStringToColor];
     segement.titleColor = [UIColor  whiteColor];
     segement.titleFont = [ApplicationStyle textSuperSmallFont];
     segement.lineHide = YES;

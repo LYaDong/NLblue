@@ -35,6 +35,11 @@
 #define CommonText_Canlender_habitsAndCustoms @"0-0-0"
 #define CommonText_Canlender_uncomfortable @"0-0-0-0-0-0-0-0-0-0-0-0"
 #define EquiomentRefresh @"刷新数据中，请耐心等待~~"
+#define NLSearchBluetoothNotification @"NLSearchBluetoothNotification"
+#define NLSearchBluetoothStartNotification @"NLSearchBluetoothStartNotification"//开始搜索蓝牙
+#define NLSearchBluetoothStopNotification @"NLSearchBluetoothStopNotification"//停止搜索蓝牙
+
+
 //************************************ 常用 ***********************************
 
 #endif /* NLEquipmentCommand_h */

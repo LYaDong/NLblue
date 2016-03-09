@@ -174,16 +174,15 @@ static const NSInteger NOVICEGUIDETAG = 6000;
     
     
     
-    NSLog(@"%f %f",SCREENWIDTH,SCREENHEIGHT);
+    
+    
     //828 1472
     
     //1424 2208
     
     
     //判断要不要进入搜索页
-    if ([[kAPPDELEGATE._loacluserinfo getBlueToothUUID] length]<=0) {
-       [self connectBlueTooth]; 
-    }
+    
 
     
 //    =================================================================================================================================
@@ -261,8 +260,6 @@ static const NSInteger NOVICEGUIDETAG = 6000;
 
 
 -(void)btnDownXXX{
-    
-    
     NLConnectBloothViewController *vc = [[NLConnectBloothViewController alloc] init];
     [vc setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:vc animated:YES];
@@ -310,9 +307,13 @@ static const NSInteger NOVICEGUIDETAG = 6000;
 -(void)bulidUI{
     [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
 //    [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];//测试睡眠假数据
-    
+//    if ([kAPPDELEGATE._loacluserinfo getBlueToothUUID] ==nil) {
+        [self connectBlueTooth];
+//    }else{
+//       [self bluetoothConnectOperation]; 
+//    }
 
-    [self bluetoothConnectOperation];
+    
     
     
     [self halfCircle];
@@ -352,6 +353,7 @@ static const NSInteger NOVICEGUIDETAG = 6000;
     _bluetooth = [NLBluetoothAgreementNew shareInstance];
     [_bluetooth bluetoothInstantiation];//实例化蓝牙
     [_bluetooth dataArrayInstantiation];//实力化数组
+    [_bluetooth searchBluetooth];//搜索蓝牙
     
     _bluetooth.heating = ^(NLBluetoothAgreementNew *heating){
         if (hotMoxi.isOff) {
@@ -889,58 +891,58 @@ static const NSInteger NOVICEGUIDETAG = 6000;
 }
 #pragma mark 新手引导
 -(void)noviceGuideIMG{
-    _noviceGuideIndex = 0;
-    UIButton *noviceGuideBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    noviceGuideBtn.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle tabBarSize]);
-    [noviceGuideBtn addTarget:self action:@selector(noviceGuideDown:) forControlEvents:UIControlEventTouchUpInside];
-    noviceGuideBtn.tag = NOVICEGUIDETAG;
-//    noviceGuideBtn.backgroundColor = [UIColor redColor];
-    [noviceGuideBtn setImage:[UIImage imageNamed:@"NL_NoviceGuide_0"] forState:UIControlStateNormal];
-    [self.view addSubview:noviceGuideBtn];
     
-    if (SCREENHEIGHT == iPhone5Height) {
-        [noviceGuideBtn setImage:[UIImage imageNamed:@"NL_NoviceGuide_0"] forState:UIControlStateNormal];
+    
+    if ([[kAPPDELEGATE._loacluserinfo getNoviceGuide] isEqualToString:@"1"]) {
+        _noviceGuideIndex = 0;
+        UIButton *noviceGuideBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        noviceGuideBtn.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle tabBarSize]);
+        [noviceGuideBtn addTarget:self action:@selector(noviceGuideDown:) forControlEvents:UIControlEventTouchUpInside];
+        noviceGuideBtn.tag = NOVICEGUIDETAG;
+        //    noviceGuideBtn.backgroundColor = [UIColor redColor];
+        [noviceGuideBtn setImage:[UIImage imageNamed:@"NL_NoviceGuide_6_0"] forState:UIControlStateNormal];
+        [self.view addSubview:noviceGuideBtn];
+        
+        if (SCREENHEIGHT == iPhone5Height) {
+            [noviceGuideBtn setImage:[UIImage imageNamed:@"NL_NoviceGuide_0"] forState:UIControlStateNormal];
+        }
+        _noviceGuideIndex++;
     }
-    _noviceGuideIndex++;
-    
-//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle tabBarSize])];
-//    imageView.image = [UIImage imageNamed:@"NL_NoviceGuide_0"];
-//    imageView.userInteractionEnabled = YES;
-//    [self.view addSubview:imageView];
 }
 -(void)noviceGuideDown:(UIButton *)btn{
     
-//    switch (_noviceGuideIndex) {
-//        case 0: {
-//            btn.backgroundColor  = [UIColor redColor];
-//            _noviceGuideIndex++;
-//            break;
-//        }
-//        case 1: {
-//            btn.backgroundColor  = [UIColor yellowColor];
-//            _noviceGuideIndex++;
-//            break;
-//        }
-//        case 2: {
-//            btn.backgroundColor  = [UIColor orangeColor];
-//            _noviceGuideIndex++;
-//            break;
-//        }
-//        case 3: {
-//            btn.backgroundColor  = [UIColor greenColor];
-//            _noviceGuideIndex++;
-//            break;
-//        }
-//        default:
-//            break;
-//    }
+    switch (_noviceGuideIndex) {
+        case 0: {
+            [self noviceGuideBtn:btn image_5:[UIImage imageNamed:@"NL_NoviceGuide_0"] image_6:[UIImage imageNamed:@"NL_NoviceGuide_6_0"]];
+            _noviceGuideIndex++;
+            break;
+        }
+        case 1: {
+            [self noviceGuideBtn:btn image_5:[UIImage imageNamed:@"NL_NoviceGuide_1"] image_6:[UIImage imageNamed:@"NL_NoviceGuide_6_1"]];
+            _noviceGuideIndex++;
+            break;
+        }
+        case 2: {
+            [self noviceGuideBtn:btn image_5:[UIImage imageNamed:@"NL_NoviceGuide_2"] image_6:[UIImage imageNamed:@"NL_NoviceGuide_6_2"]];
+            _noviceGuideIndex++;
+            break;
+        }
+        case 3: {
+            [self noviceGuideBtn:btn image_5:[UIImage imageNamed:@"NL_NoviceGuide_3"] image_6:[UIImage imageNamed:@"NL_NoviceGuide_6_3"]];
+            _noviceGuideIndex++;
+            btn.hidden = YES;
+            break;
+        }
+        default:
+            break;
+    }
 }
 
-- (void)noviceGuideBtn:(UIButton *)btn Image:(UIImage *)image{
+- (void)noviceGuideBtn:(UIButton *)btn image_5:(UIImage *)image_5 image_6:(UIImage *)image_6{
     if (SCREENHEIGHT == iPhone5Height) {
-        [btn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [btn setImage:image_5 forState:UIControlStateNormal];
     }else{
-        [btn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [btn setImage:image_6 forState:UIControlStateNormal];
     }
 }
 

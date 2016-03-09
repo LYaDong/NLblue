@@ -9,6 +9,14 @@
 
 "GeneralText_OK" = "确定";
 "GeneralText_Cancel" = "取消";
+//蓝牙搜索文字
+"NL_BlueSearch_Return" = "先进去看看";
+"NL_BlueSearch_Next" = "开始配对设备";
+"NL_BlueSearch_TextTitle" = "正在搜索";
+"NL_BlueSearch_TextCount" = "请将您要绑定的设备尽量靠近手机哦~";
+"NL_BlueSearch_StopSearch" = "停止查找";
+"NL_BlueSearch_Success" = "我要绑定手环在震动\n您是否要绑定这只手环";
+"NL_BlueSearch_AgainSearch" = "不是这只,重新查找";
 
 //tabBar
 "TabBar_HealthManger" = "健康管理";

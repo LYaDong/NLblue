@@ -39,7 +39,7 @@
     _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.viewWidth, self.viewHeight) style:UITableViewStylePlain];
     _mainTableView.delegate = self;
     _mainTableView.dataSource = self;
-    _mainTableView.backgroundColor = [UIColor clearColor];
+    _mainTableView.backgroundColor = [@"fffdfd" hexStringToColor];
     _mainTableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self addSubview:_mainTableView];
     

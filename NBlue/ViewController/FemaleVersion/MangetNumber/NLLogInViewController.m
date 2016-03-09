@@ -44,6 +44,12 @@ static const NSInteger THIRDBTNTAG = 4000;
 #pragma mark 基础UI
 -(void)bulidUI{
     
+    UIImageView *imageBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+    
+    
+    
+    
+    
     UIImageView *logoImage = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:360])/2, [ApplicationStyle control_height:210], [ApplicationStyle control_weight:360], [ApplicationStyle control_height:84])];
     logoImage.image = [UIImage imageNamed:@"NL_logo"];
     [self.view addSubview:logoImage];
@@ -307,21 +313,28 @@ static const NSInteger THIRDBTNTAG = 4000;
     NSDictionary *dic =notifi.object;
     
     
-    NSLog(@"%@",dic);
+
     
-    
+    NSMutableDictionary *userDataDic = [NSMutableDictionary dictionary];
+    [userDataDic setValue:[dic objectForKey:@"header"] forKey:@"imageUrl"];
+    [userDataDic setValue:[dic objectForKey:@"name"] forKey:@"userName"];
+    [userDataDic setValue:[dic objectForKey:@"age"] forKey:@"age"];
+    [userDataDic setValue:[dic objectForKey:@"height"] forKey:@"height"];
+    [userDataDic setValue:[dic objectForKey:@"weight"] forKey:@"width"];
+    [PlistData individuaData:userDataDic];
+
     [kAPPDELEGATE._loacluserinfo userGender:@"0"];//测试中
     
     [kAPPDELEGATE._loacluserinfo userLogInTime:[dic objectForKey:@"created"]];
     [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
-//    [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
+    [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
     [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
     
     
     
-    NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
-    [vc setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:vc animated:YES];
+//    NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
+//    [vc setHidesBottomBarWhenPushed:YES];
+//    [self.navigationController pushViewController:vc animated:YES];
     
 
 }

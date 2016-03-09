@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
-typedef void (^BlueSuccess)(NSString *blueSuccess);
 typedef void (^BluetoothDataArr)(NSMutableArray *array);
 typedef void (^BatteryLevelB)(NSString *battery);
+typedef void (^BluetoothSuccess) (NSString *bluetoothSuccess);
 @interface NLBluetoothAgreementNew : NSObject
+//-------------------------------------------------------------------------------------
 typedef void (^HanldHeating) (NLBluetoothAgreementNew *heating);
 typedef void (^BatteryLevelA)(NSString *battery,NLBluetoothAgreementNew *bluetooth);
 typedef void (^QueryTemperure)(NSString *temperture);
@@ -22,11 +23,20 @@ typedef void (^QueryTemperure)(NSString *temperture);
 @property(nonatomic,strong)BatteryLevelA batteryLevelA;
 @property(nonatomic,strong)BatteryLevelB batteryLevelB;
 @property(nonatomic,strong)BluetoothDataArr bluetoothDataArr;//返回搜索到的设备
+@property(nonatomic,strong)BluetoothSuccess bluetoothSuccess;
 
 
 +(NLBluetoothAgreementNew *)shareInstance;
 -(void)bluetoothInstantiation;
 -(void)dataArrayInstantiation;
+/**
+ * 搜索蓝牙
+ */
+-(void)searchBluetooth;
+/**
+ * 断开蓝牙
+ */
+-(void)cancleBluetooth;
 /**
  * 查询A单元电量
  */

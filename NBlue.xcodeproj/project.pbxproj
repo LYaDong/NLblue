@@ -64,6 +64,7 @@
 		04018CEE1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018CED1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m */; };
 		04018CF11C3D179F009AC56A /* NLMaleIndividuaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018CF01C3D179F009AC56A /* NLMaleIndividuaViewController.m */; };
 		0403F9781C2CE3420000A9C3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0403F9771C2CE3420000A9C3 /* CoreTelephony.framework */; };
+		040BBD871C8FD27200C7E5A0 /* NLSearchBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 040BBD861C8FD27200C7E5A0 /* NLSearchBluetooth.m */; };
 		040E12621C48DA1400769AD1 /* SMProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E12591C48DA1400769AD1 /* SMProgressHUD.m */; };
 		040E12631C48DA1400769AD1 /* SMProgressHUDLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E125C1C48DA1400769AD1 /* SMProgressHUDLoadingView.m */; };
 		040E12641C48DA1400769AD1 /* SMProgressHUDTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E125E1C48DA1400769AD1 /* SMProgressHUDTipView.m */; };
@@ -288,6 +289,8 @@
 		04018CEF1C3D179F009AC56A /* NLMaleIndividuaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMaleIndividuaViewController.h; sourceTree = "<group>"; };
 		04018CF01C3D179F009AC56A /* NLMaleIndividuaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMaleIndividuaViewController.m; sourceTree = "<group>"; };
 		0403F9771C2CE3420000A9C3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		040BBD851C8FD27200C7E5A0 /* NLSearchBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLSearchBluetooth.h; sourceTree = "<group>"; };
+		040BBD861C8FD27200C7E5A0 /* NLSearchBluetooth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLSearchBluetooth.m; sourceTree = "<group>"; };
 		040E12581C48DA1400769AD1 /* SMProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMProgressHUD.h; sourceTree = "<group>"; };
 		040E12591C48DA1400769AD1 /* SMProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMProgressHUD.m; sourceTree = "<group>"; };
 		040E125A1C48DA1400769AD1 /* SMProgressHUDConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMProgressHUDConfigure.h; sourceTree = "<group>"; };
@@ -532,6 +535,8 @@
 				04018BA11C3CB914009AC56A /* NLConnectBloothCell.m */,
 				04018BA21C3CB914009AC56A /* NLConnectBloothViewController.h */,
 				04018BA31C3CB914009AC56A /* NLConnectBloothViewController.m */,
+				040BBD851C8FD27200C7E5A0 /* NLSearchBluetooth.h */,
+				040BBD861C8FD27200C7E5A0 /* NLSearchBluetooth.m */,
 				04018BA41C3CB914009AC56A /* NLHotMoxibustionViewController.h */,
 				04018BA51C3CB914009AC56A /* NLHotMoxibustionViewController.m */,
 			);
@@ -1389,6 +1394,7 @@
 				04018CEB1C3CC002009AC56A /* NLMaleHealthMangerViewController.m in Sources */,
 				04F7A23F1C57567C0044923B /* NLLHRatingView.m in Sources */,
 				04FA89BD1C117E400064F3AA /* NLHTTPRequestFactory.m in Sources */,
+				040BBD871C8FD27200C7E5A0 /* NLSearchBluetooth.m in Sources */,
 				04018BFE1C3CB914009AC56A /* NLHealthMangerStepNumViewController.m in Sources */,
 				045D04151C746FC7006F0653 /* MJRefreshAutoNormalFooter.m in Sources */,
 				04018C271C3CB914009AC56A /* NLStepCountLabView.m in Sources */,

@@ -39,7 +39,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.backgroundColor = [@"hgfddd" hexStringToColor];
     [self addSubview:_tableView];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadNewData];

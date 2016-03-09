@@ -155,7 +155,7 @@ NLLHRatingViewDelegate>
         tableHeight = [ApplicationStyle control_height:4*88];
     }
     
-    _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78]);
+    _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:22] + [ApplicationStyle control_height:78]);
 }
 -(void)controlUI{
     
@@ -378,7 +378,7 @@ NLLHRatingViewDelegate>
         }else{
             tableHeight = [ApplicationStyle control_height:4*88];
         }
-        _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78]);
+        _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:22] + [ApplicationStyle control_height:78]);
     }
 }
 //爱爱代理
@@ -486,7 +486,7 @@ NLLHRatingViewDelegate>
     }else{
         tableHeight = [ApplicationStyle control_height:4*88];
     }
-    _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78]);
+    _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:22] + [ApplicationStyle control_height:78]);
     [_mainTableView reloadData];
 }
 

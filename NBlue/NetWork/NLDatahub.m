@@ -222,10 +222,10 @@ static NSString *NLFolks = @"/folks";//各个接口端 User的子接口
     
     NSDictionary *parmeter = @{@"consumerId":consumerid,
                                @"authToken":authtoken,
-                               @"name":[userCountData objectForKey:@"userName"],
-                               @"age":[userCountData objectForKey:@"age"],
-                               @"height":[userCountData objectForKey:@"height"],
-                               @"weight":[userCountData objectForKey:@"width"],
+                               @"name":[userCountData objectForKey:@"userName"]==nil?@"":[userCountData objectForKey:@"userName"],
+                               @"age":[userCountData objectForKey:@"age"]==nil?@"":[userCountData objectForKey:@"age"],
+                               @"height":[userCountData objectForKey:@"height"]==nil?@"":[userCountData objectForKey:@"height"],
+                               @"weight":[userCountData objectForKey:@"width"]==nil?@"":[userCountData objectForKey:@"width"],
                           };
     
     NSLog(@"%@",parmeter);
