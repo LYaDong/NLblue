@@ -44,6 +44,10 @@
     if (![[kAPPDELEGATE._loacluserinfo getControllew] isEqualToString:@"1"]) {
         [self tabBarViewControllerType:Controller_Loing];
     }else{
+        
+        
+        NSLog(@"%@",[kAPPDELEGATE._loacluserinfo getUserGender]);
+        
         if ([[kAPPDELEGATE._loacluserinfo getUserGender] isEqualToString:@"0"]) {
             [self tabBarViewControllerType:Controller_WoManMain];
         }else{

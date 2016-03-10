@@ -47,7 +47,9 @@
  *二维码扫描
  */
 - (void)qrCodeNextWorkFrom_to_id:(NSString *)from_to_id;
-
+/**
+ * 上传用户头像
+ */
 -(void)uploadUserImage:(UIImage *)image imageType:(NSString *)imageType;
 /**
  * 更新经期信息
@@ -57,5 +59,16 @@
  * 查询是否拥有男友
  */
 -(void)maleJudgeIsHave;
-
+/**
+ * 获得周期和经期
+ */
+-(void)getUserCycleOrperiod;
+/**
+ * 上传用户经期，周期，开始时间
+ */
+-(void)upDataCycleOrPeriod:(NSDictionary *)dic;
+/**
+ * 第三方登录
+ */
+-(void)thirdLogin:(NSDictionary *)dic;
 @end

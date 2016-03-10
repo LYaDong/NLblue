@@ -58,5 +58,13 @@
 #define NLUpDateUserInformationFicaledNotification @"NLUpDateUserInformationFicaledNotification"
 #define NLFolkSuccessNotification @"NLFolkSuccessNotification"
 #define NLFolkFicaledNotification @"NLFolkFicaledNotification"
+#define NLGetCycleOrPeriodSuccessNotification @"NLGetCycleOrPeriodSuccessNotification"
+#define NLGetCycleOrPeriodFicaledNotification @"NLGetCycleOrPeriodFicaledNotification"
+#define NLUpCycleOrPeriodSuccessNotification @"NLUpCycleOrPeriodSuccessNotification"
+#define NLUpCycleOrPeriodFicaledNotification @"NLUpCycleOrPeriodFicaledNotification"
+#define NLThirdLoginSuccessNotification @"NLThirdLoginSuccessNotification"
+#define NLThirdLoginFicaledNotification @"NLThirdLoginFicaledNotification"
+
+
 //================================   L    Y     D    ============================================
 #endif /* NLNotification_h */

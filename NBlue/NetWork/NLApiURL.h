@@ -18,7 +18,8 @@
 #define User_Consumer @"/consumer"
 #define User_QRCode @"/folk"
 #define user_ForgetPassWord @"/updatepwd"
-#define User_MenstruationRecord @"/Record"
+#define User_MenstruationRecord @"/record"
 #define Folk_Permission @"/permission"
+#define User_ThirdLogin @"/thirdlogin"
 
 #endif /* NLApiURL_h */

@@ -37,6 +37,12 @@
 #define MI_APP_ID @"2882303761517425655"
 #define MI_APP_KEY @"5541742568655"
 
+//第三方登录
+#define Third_QQ @"QQ"
+#define Third_WeCha @"WeChat"
+#define Third_Weibo @"Weibo"
+
+
 #define APP_Story_URL @"itms-apps://itunes.apple.com/cn/app/jie-zou-da-shi/id1070088198?mt=8"//到时候替换ID
 
 #endif /* ApplicationConstants_h */

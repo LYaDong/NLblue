@@ -100,7 +100,7 @@
     [cell addSubview:yesterdayLab];
     
     _timeSleep = [[UILabel alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:300])/2, yesterdayLab.bottomOffset + [ApplicationStyle control_height:20], [ApplicationStyle control_weight:300], [ApplicationStyle control_height:50])];
-    _timeSleep.font = [UIFont  fontWithName:@"Helvetica-Bold" size:[ApplicationStyle control_weight:40]];
+    _timeSleep.font = [UIFont  fontWithName:@"Helvetica-Bold" size:[ApplicationStyle control_weight:48]];
     _timeSleep.textColor = [self titleColor];
     _timeSleep.textAlignment = NSTextAlignmentCenter;
     NSString *total_time = nil;
@@ -133,7 +133,7 @@
     [cell addSubview:_depthLab];
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:40], [ApplicationStyle control_height:600], SCREENWIDTH - [ApplicationStyle control_weight:40 * 2], [ApplicationStyle control_height:1])];
-    line.backgroundColor = [self circleBackColor];
+    line.backgroundColor = [@"de6a31" hexStringToColor];
     [cell addSubview:line];
     
     
@@ -227,7 +227,7 @@
     
     UIColor *color = nil;
     if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
-        color = [@"f7f3ff" hexStringToColor];
+        color = [@"f9872b" hexStringToColor];
     }else{
         color = [@"e5aa5f" hexStringToColor];
     }
@@ -237,7 +237,7 @@
     UIColor *color = nil;
     
     if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
-        color = [@"ffde6a" hexStringToColor];
+        color = [@"ebcd65" hexStringToColor];
     }else{
         color = [@"a66d1b" hexStringToColor];
     }
@@ -247,12 +247,13 @@
     UIColor *color = nil;
     
     if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
-        color = [@"ffde6a" hexStringToColor];
+        color = [@"cc4300" hexStringToColor];
     }else{
         color = [@"a66d1b" hexStringToColor];
     }
     return color;
 }
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

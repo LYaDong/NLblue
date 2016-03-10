@@ -88,7 +88,7 @@ static const NSInteger BTNPHOTO = 4000;
         }
         
         
-        
+        NSLog(@"%@",_userCountDataDic);;
         
 //        [_userCountDataDic setValue:@"www.baidu.com" forKey:@"imageUrl"];
 //        [_userCountDataDic setValue:@"小丑" forKey:@"userName"];
@@ -231,19 +231,19 @@ static const NSInteger BTNPHOTO = 4000;
         cell.cellHeadTitleLab.text = [[_individuaDataDic objectForKey:@"measUrements"] objectAtIndex:indexPath.row];
         
         if (indexPath.row==0) {
-           cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"age"];
+           cell.cellimageUrl.text = [NSString stringWithFormat:@"%@",[_userCountDataDic objectForKey:@"age"]];
         }else if (indexPath.row == 1){
-            cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"height"];
+            cell.cellimageUrl.text = [NSString stringWithFormat:@"%@",[_userCountDataDic objectForKey:@"height"]];
         }else{
-            cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"width"];
+            cell.cellimageUrl.text = [NSString stringWithFormat:@"%@",[_userCountDataDic objectForKey:@"width"]];
         }
     }else{
         cell.cellHeadTitleLab.text = [[_individuaDataDic objectForKey:@"period"] objectAtIndex:indexPath.row];
         
         if (indexPath.row==0) {
-            cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"periodTime"];
+            cell.cellimageUrl.text = [NSString stringWithFormat:@"%@",[_userCountDataDic objectForKey:@"periodTime"]];
         }else{
-            cell.cellimageUrl.text = [_userCountDataDic objectForKey:@"cycleTime"];
+            cell.cellimageUrl.text = [NSString stringWithFormat:@"%@",[_userCountDataDic objectForKey:@"cycleTime"]];
         }
     }
     
@@ -518,13 +518,39 @@ static const NSInteger BTNPHOTO = 4000;
     NSLog(@"%@",_userCountDataDic);
     
     
+    if ([_userCountDataDic objectForKey:@"userName"] == nil) {
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"昵称不能为空哦~"];
+        return;
+    }
+    if ([_userCountDataDic objectForKey:@"age"] == nil) {
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"年龄不能为空哦~"];
+        return;
+    }
+    if ([_userCountDataDic objectForKey:@"height"] == nil) {
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"身高不能为空哦~"];
+        return;
+    }
+    if ([_userCountDataDic objectForKey:@"width"] == nil) {
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"体重不能为空哦~"];
+        return;
+    }
+    if ([_userCountDataDic objectForKey:@"periodTime"] == nil) {
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"经期不能为空哦~"];
+        return;
+    }
+    if ([_userCountDataDic objectForKey:@"cycleTime"] == nil) {
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"周期不能为空哦~"];
+        return;
+    }
+    
+    
     [[NLDatahub sharedInstance] upDataUserInformationConsumerid:[kAPPDELEGATE._loacluserinfo GetUser_ID] authtoken:[kAPPDELEGATE._loacluserinfo GetAccessToken] userCountData:_userCountDataDic];
 }
 //更新经期和周期
 - (void)upDateMenstruation{
-
     
-    [[NLDatahub sharedInstance] upDateMenstruationData:_userCountDataDic];
+    [[NLDatahub sharedInstance] upDataCycleOrPeriod:_userCountDataDic];
+//    [[NLDatahub sharedInstance] upDateMenstruationData:_userCountDataDic];
 }
 
 #pragma mark Notification
@@ -532,9 +558,10 @@ static const NSInteger BTNPHOTO = 4000;
     NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
     [notifi addObserver:self selector:@selector(logInSuccess:) name:NLUserUploadUserImageSuccessNotification object:nil];
     [notifi addObserver:self selector:@selector(logInFicaled:) name:NLUserUploadUserImageFicaledNotification object:nil];
-    
     [notifi addObserver:self selector:@selector(upDataUserInformationSuccess) name:NLUpDateUserInformationSuccessNotification object:nil];
     [notifi addObserver:self selector:@selector(upDataUserInformationFicaled) name:NLUpDateUserInformationFicaledNotification object:nil];
+    [notifi addObserver:self selector:@selector(upCycleOrPeriodSuccess) name:NLUpCycleOrPeriodSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(upCycleOrPeriodFicaled) name:NLUpCycleOrPeriodFicaledNotification object:nil];
     
 }
 -(void)logInSuccess:(NSNotification *)notifi{
@@ -543,15 +570,23 @@ static const NSInteger BTNPHOTO = 4000;
 -(void)logInFicaled:(NSNotification *)notifi{
     
 }
-
+//上传经期和周期
 -(void)upDataUserInformationSuccess{
-    [PlistData individuaData:_userCountDataDic];
-    [[NSNotificationCenter defaultCenter] postNotificationName:RefreshUserHeadImageSuccessNotification object:nil userInfo:nil];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self upDateMenstruation];
 }
 -(void)upDataUserInformationFicaled{
     
 }
+//上传成功经期和周期
+-(void)upCycleOrPeriodSuccess{
+    [PlistData individuaData:_userCountDataDic];
+    [[NSNotificationCenter defaultCenter] postNotificationName:RefreshUserHeadImageSuccessNotification object:nil userInfo:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)upCycleOrPeriodFicaled{
+    
+}
+
 -(void)delNotification{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

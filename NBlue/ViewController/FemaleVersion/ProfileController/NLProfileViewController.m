@@ -23,6 +23,11 @@
 #import <UMSocialDataService.h>
 #import <UMSocialSnsPlatformManager.h>
 #import <UMSocialAccountManager.h>
+#import <WXApi.h>
+#import <WeiboSDK.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <UMSocialQQHandler.h>
+
 @interface NLProfileViewController ()<UITableViewDataSource,UITableViewDelegate,NLShareViewDelegate>
 @property(nonatomic,strong)UIButton *userHeadImage;
 @property(nonatomic,strong)UILabel *userNameLab;
@@ -103,7 +108,7 @@
     
     CGSize ss = [ApplicationStyle textSize:[dicImage objectForKey:@"userName"] font:[ApplicationStyle textThrityFont] size:SCREENWIDTH];
     
-    _userNameLab = [[UILabel alloc] initWithFrame:CGRectMake((SCREENWIDTH - ss.width)/2, _userHeadImage.bottomOffset + [ApplicationStyle control_height:26], ss.width, [ApplicationStyle control_height:34])];
+    _userNameLab = [[UILabel alloc] initWithFrame:CGRectMake(0, _userHeadImage.bottomOffset + [ApplicationStyle control_height:26], SCREENWIDTH, ss.height)];
     _userNameLab.font = [ApplicationStyle textThrityFont];
     _userNameLab.text = [dicImage objectForKey:@"userName"];
     _userNameLab.textAlignment = NSTextAlignmentCenter;
@@ -187,25 +192,40 @@
 -(void)shareBtnDownIndex:(NSInteger)index{
     switch (index - 1000) {
         case 0: {
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
-            [UMSocialData defaultData].extConfig.wechatSessionData.title = @"暖蓝Warman";
-            [self sharePlatformArray:@[UMShareToWechatSession] shareCount:@"测试" icon:[UIImage imageNamed:@"User_Head"]];
-            
+            if ([WXApi isWXAppInstalled]) {
+                [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
+                [UMSocialData defaultData].extConfig.wechatSessionData.title = @"暖蓝Warman";
+                [self sharePlatformArray:@[UMShareToWechatSession] shareCount:@"测试" icon:[UIImage imageNamed:@"User_Head"]];
+            }else{
+                
+            }
             break;
         }
         case 1: {
-            [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"www.baidu.com";
-            [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"暖蓝Warman";
-            [self sharePlatformArray:@[UMShareToWechatTimeline] shareCount:@"测试" icon:[UIImage imageNamed:@"User_Head"]];
+            if ([WXApi isWXAppInstalled]) {
+                [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"www.baidu.com";
+                [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"暖蓝Warman";
+                [self sharePlatformArray:@[UMShareToWechatTimeline] shareCount:@"测试" icon:[UIImage imageNamed:@"User_Head"]];
+            }else{
+                [kAPPDELEGATE AutoDisplayAlertView:@"提示：" :@"你还没有安装微信哦~"];
+            }
             break;
         }
         case 2: {
-            [self sharePlatformArray:@[UMShareToQQ] shareCount:@"测试" icon:[UIImage imageNamed:@"User_Head"]];
-            
+            if ([TencentOAuth iphoneQQInstalled]) {
+              [self sharePlatformArray:@[UMShareToQQ] shareCount:@"测试" icon:[UIImage imageNamed:@"User_Head"]];
+            }else{
+               [kAPPDELEGATE AutoDisplayAlertView:@"提示：" :@"你还没有安装QQ哦~"]; 
+            }
             break;
         }
         case 3: {
-            [self sharePlatformArray:@[UMShareToSina] shareCount:@"测试" icon:[UIImage imageNamed:@"User_Head"]];
+            if ([WeiboSDK isWeiboAppInstalled]) {
+                [self sharePlatformArray:@[UMShareToSina] shareCount:@"测试" icon:[UIImage imageNamed:@"User_Head"]];
+            }else{
+                [kAPPDELEGATE AutoDisplayAlertView:@"提示：" :@"你还没有安装微博哦~"];
+            }
+            
             break;
         }
         default:

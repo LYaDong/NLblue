@@ -16,7 +16,7 @@ static NSString *NLapplication = @"application/json";
 static NSString *NLmobileApiBaseUrl = @"http://123.56.127.139/warman";//主接口
 static NSString *NLUserApi = @"/user";//各个接口端
 static NSString *NLSportApi = @"/sport";//各个接口端
-static NSString *NLMenstruation = @"menstruation";//各个接口端
+static NSString *NLMenstruation = @"/menstruation";//各个接口端
 static NSString *NLFolks = @"/folks";//各个接口端 User的子接口
 
 
@@ -142,8 +142,6 @@ static NSString *NLFolks = @"/folks";//各个接口端 User的子接口
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self dismissHide];
-            
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:NLLogInSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
         });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -226,6 +224,7 @@ static NSString *NLFolks = @"/folks";//各个接口端 User的子接口
                                @"age":[userCountData objectForKey:@"age"]==nil?@"":[userCountData objectForKey:@"age"],
                                @"height":[userCountData objectForKey:@"height"]==nil?@"":[userCountData objectForKey:@"height"],
                                @"weight":[userCountData objectForKey:@"width"]==nil?@"":[userCountData objectForKey:@"width"],
+                               @"gender":[userCountData objectForKey:@"gender"]==nil?@"":[userCountData objectForKey:@"gender"],
                           };
     
     NSLog(@"%@",parmeter);
@@ -267,6 +266,28 @@ static NSString *NLFolks = @"/folks";//各个接口端 User的子接口
         });
     }];
 }
+
+#pragma mark 获取经期和周期
+-(void)getUserCycleOrperiod{
+    [self  loadingView];
+    NSDictionary *parameters =@{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],@"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [_manager GET:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLMenstruation,User_MenstruationRecord] parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissHide];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLGetCycleOrPeriodSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissHide];
+            NSLog(@"%@",error);
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLGetCycleOrPeriodFicaledNotification object:nil userInfo:nil];
+        });
+    }];
+}
+
 #pragma mark 提醒他
 -(void)remindMale{
     
@@ -299,6 +320,36 @@ static NSString *NLFolks = @"/folks";//各个接口端 User的子接口
         }];
     });
 }
+//上传经期和周期
+-(void)upDataCycleOrPeriod:(NSDictionary *)dic{
+    
+
+    [self loadingView];
+    NSDictionary *paramenters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                  @"startDate":[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate],
+                                  @"duration":[dic objectForKey:@"periodTime"],
+                                  @"cycle":[dic objectForKey:@"cycleTime"],
+                                  @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLMenstruation,User_MenstruationRecord] parameters:paramenters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissHide];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLUpCycleOrPeriodSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissHide];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLUpCycleOrPeriodFicaledNotification object:nil userInfo:nil];
+        });
+    }];
+    
+    
+}
+
 //更新经期信息
 -(void)upDateMenstruationData:(NSDictionary *)menstruationData{
     
@@ -307,7 +358,7 @@ static NSString *NLFolks = @"/folks";//各个接口端 User的子接口
                           @"duration":@"",
                           @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
     
-    
+    NSLog(@"%@",[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLMenstruation,User_MenstruationRecord]);
     _manager = [AFHTTPSessionManager manager];
     _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
     _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -318,6 +369,31 @@ static NSString *NLFolks = @"/folks";//各个接口端 User的子接口
     }];
     
 }
+#pragma mark 第三方登录
+-(void)thirdLogin:(NSDictionary *)dic{
+    [self loadingView];
+    NSDictionary *paramenters = @{@"openId":[dic objectForKey:@"openId"],
+                                  @"type":[dic objectForKey:@"type"],
+                                  @"platform":[dic objectForKey:@"platform"]};
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_ThirdLogin] parameters:paramenters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissHide];
+            NSLog(@"%@",[self dataTransformationJson:responseObject]);
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLThirdLoginSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissHide];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLThirdLoginFicaledNotification object:nil userInfo:nil];
+        });
+    }];
+}
+//判断是否有男友
 -(void)maleJudgeIsHave{
     NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
                                  @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};

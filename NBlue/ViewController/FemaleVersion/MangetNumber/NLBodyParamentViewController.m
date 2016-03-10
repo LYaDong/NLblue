@@ -35,9 +35,12 @@ static const NSInteger BTNPICKERTAG = 2000;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self delNotification];
+    [self addNotification];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self delNotification];
 }
 #pragma mark 基础UI
 -(void)bulidUI{
@@ -150,11 +153,12 @@ static const NSInteger BTNPICKERTAG = 2000;
         
         
         if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"1"]) {
-            [kAPPDELEGATE._loacluserinfo isLoginUser:@"1"];
-            [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
-            [kAPPDELEGATE tabBarViewControllerType:Controller_MaleMain];
-            [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
-            [PlistData individuaData:_userDic];
+            
+            [_userDic setValue:@"1" forKey:@"gender"];//传性别，0 是女1 是男
+            
+            
+            [[NLDatahub sharedInstance] upDataUserInformationConsumerid:[kAPPDELEGATE._loacluserinfo GetUser_ID] authtoken:[kAPPDELEGATE._loacluserinfo GetAccessToken] userCountData:_userDic];
+            
         }else{
             NLPeriodViewController *vc = [[NLPeriodViewController alloc] init];
             [vc setHidesBottomBarWhenPushed:YES];
@@ -288,6 +292,26 @@ static const NSInteger BTNPICKERTAG = 2000;
     }
     return img;
 }
+-(void)addNotification{
+    NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
+    [notifi addObserver:self selector:@selector(upDataUserInformationSuccess) name:NLUpDateUserInformationSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(upDataUserInformationFicaled) name:NLUpDateUserInformationFicaledNotification object:nil];
+}
+-(void)upDataUserInformationSuccess{
+    [kAPPDELEGATE._loacluserinfo isLoginUser:@"1"];
+    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
+    [kAPPDELEGATE tabBarViewControllerType:Controller_MaleMain];
+    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
+    [PlistData individuaData:_userDic];
+
+}
+-(void)upDataUserInformationFicaled{
+    
+}
+-(void)delNotification{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

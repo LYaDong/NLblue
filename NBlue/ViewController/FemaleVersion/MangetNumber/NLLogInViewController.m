@@ -16,8 +16,12 @@ static const NSInteger THIRDBTNTAG = 4000;
 #import "NLForgetPasswordViewController.h"
 #import "UMSocial.h"
 #import "NLGenderSelectionViewController.h"
+#import <WXApi.h>
+#import <WeiboSDK.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <UMSocialQQHandler.h>
 @interface NLLogInViewController ()<UITextFieldDelegate>
-
+@property(nonatomic,strong)NSMutableDictionary *userInformation;
 @end
 
 @implementation NLLogInViewController
@@ -27,7 +31,7 @@ static const NSInteger THIRDBTNTAG = 4000;
     // Do any additional setup after loading the view.
     self.navBarBack.hidden = YES;
     self.returnBtn.hidden = YES;
-    
+    _userInformation = [NSMutableDictionary dictionary];
     
     
     [self bulidUI];
@@ -43,7 +47,7 @@ static const NSInteger THIRDBTNTAG = 4000;
 }
 #pragma mark 基础UI
 -(void)bulidUI{
-    
+
     UIImageView *imageBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
     
     
@@ -208,64 +212,98 @@ static const NSInteger THIRDBTNTAG = 4000;
     
 //    [kAPPDELEGATE AutoDisplayAlertView:@"温馨提示" :@"暂未开放使用"];
     
+    
+    
+    
+    
     switch (btn.tag - THIRDBTNTAG) {
         case 0:
         {
-            //  qq
-            UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
-            
-            snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+
+            if ([TencentOAuth iphoneQQInstalled]) {
+                //  qq
+                UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
                 
-                //          获取微博用户名、uid、token等
-                
-                if (response.responseCode == UMSResponseCodeSuccess) {
+                snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
                     
-                    UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
+                    //          获取微博用户名、uid、token等
                     
-                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-                    
-                }});
+                    if (response.responseCode == UMSResponseCodeSuccess) {
+                        
+                        UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
+                        
+                        
+                        NSDictionary *dic =@{@"openId":snsAccount.usid,@"type":Third_QQ,@"platform":@"ios"};
+                        [_userInformation setValue:snsAccount.userName forKey:@"name"];
+                        [[NLDatahub sharedInstance] thirdLogin:dic];
+                        
+                        
+                        //                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+                        
+                    }});
+            }else{
+                [kAPPDELEGATE AutoDisplayAlertView:@"提示：" :@"你还没有安装QQ哦~"];
+            }
+
+           
             
             break;
         }
         case 1:
         {
-            //    WeChat
-            UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
             
-            snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+            if ([WXApi isWXAppInstalled]) {
+                //    WeChat
+                UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
                 
-                if (response.responseCode == UMSResponseCodeSuccess) {
+                snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
                     
-                    UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
+                    if (response.responseCode == UMSResponseCodeSuccess) {
+                        
+                        UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
+                        NSDictionary *dic =@{@"openId":snsAccount.usid,@"type":Third_WeCha,@"platform":@"ios"};
+                        [_userInformation setValue:snsAccount.userName forKey:@"name"];
+                        [[NLDatahub sharedInstance] thirdLogin:dic];
+                        
+                        //                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+                        
+                    }
                     
-                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-                    
-                }
-                
-            });
+                });
+            }else{
+                [kAPPDELEGATE AutoDisplayAlertView:@"提示：" :@"你还没有安装微信哦~"];
+            }
+            
+            
             
             break;
         }
         case 2:
         {
-            
-            //微博
-            
-            UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
-            
-            snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+            if ([WeiboSDK isWeiboAppInstalled]) {
+                //微博
                 
-                //          获取微博用户名、uid、token等
+                UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
                 
-                if (response.responseCode == UMSResponseCodeSuccess) {
+                snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
                     
-                    UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
+                    //          获取微博用户名、uid、token等
                     
-                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-                    
-                }
-            });
+                    if (response.responseCode == UMSResponseCodeSuccess) {
+                        
+                        UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
+                        [_userInformation setValue:snsAccount.userName forKey:@"name"];
+                        NSDictionary *dic =@{@"openId":snsAccount.usid,@"type":Third_Weibo,@"platform":@"ios"};
+                        [[NLDatahub sharedInstance] thirdLogin:dic];
+                        //                    NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+                        
+                    }
+                });
+            }else{
+                [kAPPDELEGATE AutoDisplayAlertView:@"提示：" :@"你还没有安装微博哦~"];
+            }
+            
+            
             
             break;
         }
@@ -281,60 +319,64 @@ static const NSInteger THIRDBTNTAG = 4000;
     NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
     [notifi addObserver:self selector:@selector(logInSuccess:) name:NLLogInSuccessNotification object:nil];
     [notifi addObserver:self selector:@selector(logInFicaled) name:NLLogInFailedNotiFicaledtion object:nil];
-    
-    NSNotificationCenter *notifixx= [NSNotificationCenter defaultCenter];
-    [notifixx addObserver:self selector:@selector(userInformationS:) name:NLUsergetUserInformationSuccessNotification object:nil];
-    [notifixx addObserver:self selector:@selector(userInformationF) name:NLUsergetUserInformationFicaledNotification object:nil];
+    [notifi addObserver:self selector:@selector(getCycleOrPeriod:) name:NLGetCycleOrPeriodSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(thirdLoginSuccess:) name:NLThirdLoginSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(thirdLoginFalieds) name:NLThirdLoginFicaledNotification object:nil];
     
 }
 -(void)logInSuccess:(NSNotification *)notifi{
     NSDictionary *dic = notifi.object;
     
+    NSLog(@"%@",dic);
+    
    
     [kAPPDELEGATE._loacluserinfo SetUser_ID:[dic objectForKey:@"consumerId"]];
     [kAPPDELEGATE._loacluserinfo SetUserAccessToken:[dic objectForKey:@"authToken"]];
-    
-    
-     [[NLDatahub sharedInstance] getUserInformation];
-    
-    
-//    [kAPPDELEGATE._loacluserinfo goControllew:@"0"];
-//    [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
-//    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
-    
-    
-    
-}
--(void)logInFicaled{
-    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"账号或密码错误"];
-}
--(void)userInformationS:(NSNotification *)notifi{
-    
-    NSDictionary *dic =notifi.object;
-    
-    
 
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"header"] forKey:@"imageUrl"];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"name"] forKey:@"userName"];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"age"] forKey:@"age"];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"height"] forKey:@"height"];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"weight"] forKey:@"width"];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"gender"] forKey:@"gender"];
+    [kAPPDELEGATE._loacluserinfo userLogInTime:[[dic objectForKey:@"consumer"] objectForKey:@"created"]];
+    [kAPPDELEGATE._loacluserinfo userGender:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]];
     
-    NSMutableDictionary *userDataDic = [NSMutableDictionary dictionary];
-    [userDataDic setValue:[dic objectForKey:@"header"] forKey:@"imageUrl"];
-    [userDataDic setValue:[dic objectForKey:@"name"] forKey:@"userName"];
-    [userDataDic setValue:[dic objectForKey:@"age"] forKey:@"age"];
-    [userDataDic setValue:[dic objectForKey:@"height"] forKey:@"height"];
-    [userDataDic setValue:[dic objectForKey:@"weight"] forKey:@"width"];
-    [PlistData individuaData:userDataDic];
-
-    [kAPPDELEGATE._loacluserinfo userGender:@"0"];//测试中
+    [[NLDatahub sharedInstance] getUserCycleOrperiod];
     
-    [kAPPDELEGATE._loacluserinfo userLogInTime:[dic objectForKey:@"created"]];
-    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
-    [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
-    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
+    
     
     
     
 //    NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
 //    [vc setHidesBottomBarWhenPushed:YES];
-//    [self.navigationController pushViewController:vc animated:YES];
+//    [self.navigationController pushViewController:vc animated:YES]
+}
+
+-(void)logInFicaled{
+    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"账号或密码错误"];
+}
+-(void)getCycleOrPeriod:(NSNotification *)notifi{
+    NSDictionary *dic = notifi.object;
+    NSLog(@"%@",_userInformation);
+    [_userInformation setValue:[dic objectForKey:@"cycle"] forKey:@"cycleTime"];
+    [_userInformation setValue:[dic objectForKey:@"duration"] forKey:@"periodTime"];
+    [PlistData individuaData:_userInformation];
+    [kAPPDELEGATE._loacluserinfo lastTimeGoPeriodDate:[dic objectForKey:@"startDate"]];
+    
+    [kAPPDELEGATE._loacluserinfo userGender:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]];
+    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];//进入哪个试图
+    if ([[_userInformation objectForKey:@"gender"] isEqualToString:@"0"]) {
+        [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
+    }else{
+        [kAPPDELEGATE tabBarViewControllerType:Controller_MaleMain];
+    }
+    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
+    
+
+    
+
+
     
 
 }
@@ -343,6 +385,44 @@ static const NSInteger THIRDBTNTAG = 4000;
     
 }
 
+//第三方登录成功
+-(void)thirdLoginSuccess:(NSNotification *)notifi{
+    NSDictionary *dic = notifi.object;
+
+    [kAPPDELEGATE._loacluserinfo SetUser_ID:[dic objectForKey:@"consumerId"]];
+    [kAPPDELEGATE._loacluserinfo SetUserAccessToken:[dic objectForKey:@"authToken"]];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"header"] forKey:@"imageUrl"];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"name"] forKey:@"userName"];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"age"] forKey:@"age"];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"height"] forKey:@"height"];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"weight"] forKey:@"width"];
+    [kAPPDELEGATE._loacluserinfo userLogInTime:[[dic objectForKey:@"consumer"] objectForKey:@"created"]];
+    [PlistData individuaData:_userInformation];
+    
+    NSLog(@"%@",[[dic objectForKey:@"consumer"] objectForKey:@"gender"]);
+    
+
+    
+    if ([[[dic objectForKey:@"consumer"] objectForKey:@"gender"] isEqual:[NSNull null]]) {
+        NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
+        [vc setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }else{
+        [kAPPDELEGATE._loacluserinfo userGender:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]];//测试中
+        [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
+        if ([[[dic objectForKey:@"consumer"] objectForKey:@"gender"] isEqualToString:@"0"]) {
+            [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
+        }else{
+            [kAPPDELEGATE tabBarViewControllerType:Controller_MaleMain];
+        }
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
+    }
+}
+//第三放登录失败
+-(void)thirdLoginFalieds{
+    
+}
 -(void)delNotification{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

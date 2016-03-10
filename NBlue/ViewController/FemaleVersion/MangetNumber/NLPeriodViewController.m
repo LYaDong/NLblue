@@ -39,10 +39,14 @@ static const NSInteger BTNPICKERTAG = 2000;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self delNotification];
+    [self addNotification];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self delNotification];
 }
+
 #pragma mark 基础UI
 -(void)bulidUI{
     UIImageView *logoImage = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:360])/2, [ApplicationStyle control_height:210], [ApplicationStyle control_weight:360], [ApplicationStyle control_height:84])];
@@ -147,14 +151,10 @@ static const NSInteger BTNPICKERTAG = 2000;
             return;
         }
         
+        [_userdic setValue:@"0" forKey:@"gender"];//传性别，0 是女1 是男
         
         
-        [kAPPDELEGATE._loacluserinfo isLoginUser:@"1"];
-        [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
-        [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
-        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
-        
-        [PlistData individuaData:_userdic];
+        [[NLDatahub sharedInstance] upDataUserInformationConsumerid:[kAPPDELEGATE._loacluserinfo GetUser_ID] authtoken:[kAPPDELEGATE._loacluserinfo GetAccessToken] userCountData:_userdic];
     }
 }
 -(void)pickerCount:(NSString *)count seleType:(NSInteger)type pickerType:(NSInteger)pickType{
@@ -212,6 +212,7 @@ static const NSInteger BTNPICKERTAG = 2000;
                     UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + UseDatePicker_UpNext];
                     text.text = [ApplicationStyle datePickerTransformationCorss:date];
                     [kAPPDELEGATE._loacluserinfo lastTimeGoPeriodDate:[ApplicationStyle datePickerTransformationCorss:date]];
+                    [_userdic setValue:[ApplicationStyle datePickerTransformationCorss:date] forKey:@"lastTime"];
                     break;
                 }
                 default:
@@ -309,8 +310,34 @@ static const NSInteger BTNPICKERTAG = 2000;
     }
     return img;
 }
+-(void)addNotification{
+    NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
+    [notifi addObserver:self selector:@selector(upDataUserInformationSuccess) name:NLUpDateUserInformationSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(upDataUserInformationFicaled) name:NLUpDateUserInformationFicaledNotification object:nil];
+    [notifi addObserver:self selector:@selector(upCycleOrPeriodSuccess) name:NLUpCycleOrPeriodSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(upCycleOrPeriodFicaled) name:NLUpCycleOrPeriodFicaledNotification object:nil];
+}
+-(void)upDataUserInformationSuccess{
+    [[NLDatahub sharedInstance] upDataCycleOrPeriod:_userdic];
+}
+-(void)upDataUserInformationFicaled{
+    
+}
+-(void)upCycleOrPeriodSuccess{
+    [kAPPDELEGATE._loacluserinfo isLoginUser:@"1"];
+    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
+    [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
+    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
+    
+    [PlistData individuaData:_userdic];
+}
+-(void)upCycleOrPeriodFicaled{
+    
+}
 
-
+-(void)delNotification{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

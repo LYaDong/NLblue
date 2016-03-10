@@ -176,12 +176,7 @@ static const NSInteger NOVICEGUIDETAG = 6000;
     
     
     
-    //828 1472
-    
-    //1424 2208
-    
-    
-    //判断要不要进入搜索页
+//    
     
 
     
@@ -305,7 +300,7 @@ static const NSInteger NOVICEGUIDETAG = 6000;
 }
 
 -(void)bulidUI{
-    [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
+//    [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
 //    [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];//测试睡眠假数据
 //    if ([kAPPDELEGATE._loacluserinfo getBlueToothUUID] ==nil) {
         [self connectBlueTooth];

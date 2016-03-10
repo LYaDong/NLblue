@@ -117,18 +117,20 @@ static const NSUInteger NEXTTAG = 2000;
         nextBtn.backgroundColor = [@"ff5b89" hexStringToColor];
         self.view.backgroundColor = [@"ffe3e3" hexStringToColor];
         _nextInt = 1;
-        [nextBtn addTarget:self action:@selector(nextBtnDown) forControlEvents:UIControlEventTouchUpInside];
+//        [nextBtn addTarget:self action:@selector(nextBtnDown) forControlEvents:UIControlEventTouchUpInside];
     }
     
-//    [nextBtn addTarget:self action:@selector(nextBtnDown) forControlEvents:UIControlEventTouchUpInside];
+    [nextBtn addTarget:self action:@selector(nextBtnDown) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)nextBtnDown{
-    if (!_nextInt == 0) {
-        NLBodyParamentViewController *vc = [[NLBodyParamentViewController  alloc] init];
-        [vc setHidesBottomBarWhenPushed:YES];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    
+    [self alenderView];
+//    if (!_nextInt == 0) {
+//        NLBodyParamentViewController *vc = [[NLBodyParamentViewController  alloc] init];
+//        [vc setHidesBottomBarWhenPushed:YES];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
     
 }
 - (void)didReceiveMemoryWarning {

@@ -87,9 +87,6 @@
     
     CGRect frame = CGRectMake(0, line.bottomOffset, SCREENWIDTH, [ApplicationStyle control_height:480]);
     
-    
-    NSLog(@"%@",dataArray);
-    
     NLStepColumnImage  *column = [[NLStepColumnImage alloc] initWithFrame:frame DataArr:dataArray strokeColor:[@"882a00" hexStringToColor] withColor:[self histogramColor]];
     column.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:column];
