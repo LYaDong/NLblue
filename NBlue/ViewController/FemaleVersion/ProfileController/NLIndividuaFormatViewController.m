@@ -231,19 +231,19 @@ static const NSInteger BTNPHOTO = 4000;
         cell.cellHeadTitleLab.text = [[_individuaDataDic objectForKey:@"measUrements"] objectAtIndex:indexPath.row];
         
         if (indexPath.row==0) {
-           cell.cellimageUrl.text = [NSString stringWithFormat:@"%@",[_userCountDataDic objectForKey:@"age"]];
+           cell.cellimageUrl.text = [NSString stringWithFormat:@"%@岁",[_userCountDataDic objectForKey:@"age"]];
         }else if (indexPath.row == 1){
-            cell.cellimageUrl.text = [NSString stringWithFormat:@"%@",[_userCountDataDic objectForKey:@"height"]];
+            cell.cellimageUrl.text = [NSString stringWithFormat:@"%@cm",[_userCountDataDic objectForKey:@"height"]];
         }else{
-            cell.cellimageUrl.text = [NSString stringWithFormat:@"%@",[_userCountDataDic objectForKey:@"width"]];
+            cell.cellimageUrl.text = [NSString stringWithFormat:@"%@kg",[_userCountDataDic objectForKey:@"width"]];
         }
     }else{
         cell.cellHeadTitleLab.text = [[_individuaDataDic objectForKey:@"period"] objectAtIndex:indexPath.row];
         
         if (indexPath.row==0) {
-            cell.cellimageUrl.text = [NSString stringWithFormat:@"%@",[_userCountDataDic objectForKey:@"periodTime"]];
+            cell.cellimageUrl.text = [NSString stringWithFormat:@"%@天",[_userCountDataDic objectForKey:@"periodTime"]];
         }else{
-            cell.cellimageUrl.text = [NSString stringWithFormat:@"%@",[_userCountDataDic objectForKey:@"cycleTime"]];
+            cell.cellimageUrl.text = [NSString stringWithFormat:@"%@天",[_userCountDataDic objectForKey:@"cycleTime"]];
         }
     }
     
@@ -267,6 +267,7 @@ static const NSInteger BTNPHOTO = 4000;
             case 1:
             {
                 NLIndividuaEditingViewController *vc = [[NLIndividuaEditingViewController alloc] init];
+                vc.userName = [_userCountDataDic objectForKey:@"userName"];
                 vc.editionName = ^(NSString * userName){
 //                    [_headArray replaceObjectAtIndex:indexPath.row withObject:userName];
                     NSLog(@"%@",userName);
@@ -542,7 +543,7 @@ static const NSInteger BTNPHOTO = 4000;
         [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"周期不能为空哦~"];
         return;
     }
-    
+    [_userCountDataDic setValue:[kAPPDELEGATE._loacluserinfo getUserGender] forKey:@"gender"];
     
     [[NLDatahub sharedInstance] upDataUserInformationConsumerid:[kAPPDELEGATE._loacluserinfo GetUser_ID] authtoken:[kAPPDELEGATE._loacluserinfo GetAccessToken] userCountData:_userCountDataDic];
 }

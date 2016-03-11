@@ -49,7 +49,8 @@ static const NSInteger THIRDBTNTAG = 4000;
 -(void)bulidUI{
 
     UIImageView *imageBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
-    
+    imageBack.image = [UIImage imageNamed:@"RootContorllewImage"];
+    [self.view addSubview:imageBack];
     
     
     
@@ -280,6 +281,10 @@ static const NSInteger THIRDBTNTAG = 4000;
         }
         case 2:
         {
+            
+            [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"暂不支持微博登录哦~"];
+            return;
+            
             if ([WeiboSDK isWeiboAppInstalled]) {
                 //微博
                 
@@ -329,20 +334,31 @@ static const NSInteger THIRDBTNTAG = 4000;
     
     NSLog(@"%@",dic);
     
-   
+//   
     [kAPPDELEGATE._loacluserinfo SetUser_ID:[dic objectForKey:@"consumerId"]];
     [kAPPDELEGATE._loacluserinfo SetUserAccessToken:[dic objectForKey:@"authToken"]];
 
-    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"header"] forKey:@"imageUrl"];
-    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"name"] forKey:@"userName"];
-    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"age"] forKey:@"age"];
-    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"height"] forKey:@"height"];
-    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"weight"] forKey:@"width"];
-    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"gender"] forKey:@"gender"];
-    [kAPPDELEGATE._loacluserinfo userLogInTime:[[dic objectForKey:@"consumer"] objectForKey:@"created"]];
-    [kAPPDELEGATE._loacluserinfo userGender:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"header"]==nil?@"":[[dic objectForKey:@"consumer"] objectForKey:@"header"] forKey:@"imageUrl"];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"name"]==nil?@"":[[dic objectForKey:@"consumer"] objectForKey:@"name"] forKey:@"userName"];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"age"]==nil?@"":[[dic objectForKey:@"consumer"] objectForKey:@"age"] forKey:@"age"];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"height"]==nil?@"":[[dic objectForKey:@"consumer"] objectForKey:@"height"] forKey:@"height"];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"weight"]==nil?@"":[[dic objectForKey:@"consumer"] objectForKey:@"weight"] forKey:@"width"];
+    [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]==nil?@"":[[dic objectForKey:@"consumer"] objectForKey:@"gender"] forKey:@"gender"];
     
-    [[NLDatahub sharedInstance] getUserCycleOrperiod];
+    if ([[[dic objectForKey:@"consumer"] objectForKey:@"gender"] isEqual:[NSNull null]]|| [[dic objectForKey:@"consumer"] objectForKey:@"gender"]==nil) {
+        NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
+        [vc setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        [kAPPDELEGATE._loacluserinfo userLogInTime:[[dic objectForKey:@"consumer"] objectForKey:@"created"]];
+        [kAPPDELEGATE._loacluserinfo userGender:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]];
+        [[NLDatahub sharedInstance] getUserCycleOrperiod];
+    }
+    
+    
+    
+    
     
     
     
@@ -350,7 +366,7 @@ static const NSInteger THIRDBTNTAG = 4000;
     
 //    NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
 //    [vc setHidesBottomBarWhenPushed:YES];
-//    [self.navigationController pushViewController:vc animated:YES]
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)logInFicaled{
@@ -364,7 +380,7 @@ static const NSInteger THIRDBTNTAG = 4000;
     [PlistData individuaData:_userInformation];
     [kAPPDELEGATE._loacluserinfo lastTimeGoPeriodDate:[dic objectForKey:@"startDate"]];
     
-    [kAPPDELEGATE._loacluserinfo userGender:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]];
+//    [kAPPDELEGATE._loacluserinfo userGender:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]];
     [kAPPDELEGATE._loacluserinfo goControllew:@"1"];//进入哪个试图
     if ([[_userInformation objectForKey:@"gender"] isEqualToString:@"0"]) {
         [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
@@ -398,25 +414,29 @@ static const NSInteger THIRDBTNTAG = 4000;
     [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"weight"] forKey:@"width"];
     [kAPPDELEGATE._loacluserinfo userLogInTime:[[dic objectForKey:@"consumer"] objectForKey:@"created"]];
     [PlistData individuaData:_userInformation];
+    NSLog(@"%@",dic);
     
     NSLog(@"%@",[[dic objectForKey:@"consumer"] objectForKey:@"gender"]);
     
-
     
-    if ([[[dic objectForKey:@"consumer"] objectForKey:@"gender"] isEqual:[NSNull null]]) {
+    
+    if ([[[dic objectForKey:@"consumer"] objectForKey:@"gender"] isEqual:[NSNull null]]|| [[dic objectForKey:@"consumer"] objectForKey:@"gender"]==nil) {
         NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
         [vc setHidesBottomBarWhenPushed:YES];
         [self.navigationController pushViewController:vc animated:YES];
 
     }else{
+        [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"gender"] forKey:@"gender"];
         [kAPPDELEGATE._loacluserinfo userGender:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]];//测试中
-        [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
-        if ([[[dic objectForKey:@"consumer"] objectForKey:@"gender"] isEqualToString:@"0"]) {
-            [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
-        }else{
-            [kAPPDELEGATE tabBarViewControllerType:Controller_MaleMain];
-        }
-        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
+        [[NLDatahub sharedInstance] getUserCycleOrperiod];
+        
+//        [kAPPDELEGATE._loacluserinfo goControllew:@"1"];
+//        if ([[[dic objectForKey:@"consumer"] objectForKey:@"gender"] isEqualToString:@"0"]) {
+//            [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
+//        }else{
+//            [kAPPDELEGATE tabBarViewControllerType:Controller_MaleMain];
+//        }
+//        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
     }
 }
 //第三放登录失败

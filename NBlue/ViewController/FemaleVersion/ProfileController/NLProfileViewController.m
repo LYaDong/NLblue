@@ -39,21 +39,22 @@
 
 @implementation NLProfileViewController
 -(void)rightBtnDown{
-    NLGiffiredSignViewController *vc = [[NLGiffiredSignViewController alloc] init];
-    [vc setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:vc animated:YES];
+    //暂时隐藏
+//    NLGiffiredSignViewController *vc = [[NLGiffiredSignViewController alloc] init];
+//    [vc setHidesBottomBarWhenPushed:YES];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.rightBtn.hidden = NO;
+    self.rightBtn.hidden = YES;
     [self.rightBtn setTitle:NSLocalizedString(@"TabBar_Male_SignIn", nil) forState:UIControlStateNormal];
     
     self.navBarBack.hidden = YES;
     self.returnBtn.hidden = YES;
     [self notification];
     [self backViewUI];
-    [self liftBtnUI];
+//    [self liftBtnUI];//后期打开
     [self bulidUI];
     
     
@@ -138,6 +139,10 @@
 -(void)userHeadImageNotifiDown{
     NSDictionary *dicImage = [PlistData getIndividuaData];
     [_userImage sd_setImageWithURL:[NSURL URLWithString:[dicImage objectForKey:@"imageUrl"]] placeholderImage:[UIImage imageNamed:@"User_Head"]];
+    CGSize ss = [ApplicationStyle textSize:[dicImage objectForKey:@"userName"] font:[ApplicationStyle textThrityFont] size:SCREENWIDTH];
+    
+    _userNameLab = [[UILabel alloc] initWithFrame:CGRectMake(0, _userHeadImage.bottomOffset + [ApplicationStyle control_height:26], SCREENWIDTH, ss.height)];
+    _userNameLab.backgroundColor = [UIColor redColor];
     _userNameLab.text = [dicImage objectForKey:@"userName"];
 }
 #pragma mark 系统Delegate
@@ -178,10 +183,11 @@
                                     @"NLAboutNLViewController"];
     
     if (indexPath.row == 2) {
-        _blackBackView.hidden = NO;
-        [UIView animateWithDuration:0.5 animations:^{
-            _shareView.frame = CGRectMake(0, SCREENHEIGHT - [ApplicationStyle control_height:300], SCREENWIDTH, [ApplicationStyle control_height:300]);
-        }];
+        [kAPPDELEGATE AutoDisplayAlertView:@"温馨提示" :@"暂未开放，敬请期待哦~~😊"];//暂时隐藏
+//        _blackBackView.hidden = NO;
+//        [UIView animateWithDuration:0.5 animations:^{
+//            _shareView.frame = CGRectMake(0, SCREENHEIGHT - [ApplicationStyle control_height:300], SCREENWIDTH, [ApplicationStyle control_height:300]);
+//        }];
     }else{
         UIViewController *viewControllew = [[NSClassFromString(viewConrollerArray[indexPath.row])alloc] init];
         [viewControllew setHidesBottomBarWhenPushed:YES];

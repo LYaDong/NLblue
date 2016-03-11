@@ -22,7 +22,7 @@ static const NSInteger NOVICEGUIDETAG = 6000;
 #import "SMProgressHUD.h"
 #import "NLBluetoothAgreementNew.h"
 
-@interface NLHotMoxibustionViewController ()<UIScrollViewDelegate,NLHalfViewDelgate,UITableViewDataSource,UITableViewDelegate>
+@interface NLHotMoxibustionViewController ()<UIScrollViewDelegate,NLHalfViewDelgate>
 @property(nonatomic,strong)NLHalfView *temperatureCilcle;
 @property(nonatomic,strong)NSArray *peripheralArray;
 @property(nonatomic,strong)NSMutableArray *sportDataArr;
@@ -49,118 +49,118 @@ static const NSInteger NOVICEGUIDETAG = 6000;
 @end
 
 @implementation NLHotMoxibustionViewController
-//打开温度
--(void)btnDown{
-    Byte byte[18] = {0x90,0x01,0x55};
-    NSData *data = [NSData dataWithBytes:byte length:20];
-    if (_peripheralArray.count>0) {
-        //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-        NSLog(@"发送命令==  %@",data);
-    }
-}
-//打开关闭
--(void)btnDown1{
-    Byte byte[18] = {0x90,0x01,0xAA};
-    NSData *data = [NSData dataWithBytes:byte length:20];
-    if (_peripheralArray.count>0) {
-        //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-        NSLog(@"发送命令==  %@",data);
-    }
-}
-//调节温度
--(void)btnDown2{
-    
-    NSString *str = [NLBluetoothDataAnalytical tenTurnSixTeen:400];
-    
-    unsigned long red = strtoul([[str substringWithRange:NSMakeRange(0, 2)] UTF8String],0,16);
-    Byte b =  (Byte) ((0xff & red) );//( Byte) 0xff&iByte;
-    
-    unsigned long red1 = strtoul([[str substringWithRange:NSMakeRange(2, str.length - 2)] UTF8String],0,16);
-    Byte b1 =  (Byte) ((0xff & red1) );//( Byte) 0xff&iByte;
-
-    
-    Byte byte[20] = {0x90,0x03,b,b1,0x00,0x08,0x00};
-    NSData *data = [NSData dataWithBytes:byte length:20];
-    if (_peripheralArray.count>0) {
-        //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-        NSLog(@"发送命令==  %@",data);
-    }
-}
-//查询温度
--(void)btnDown3{
-    Byte byte[20] = {0x90,0x02};
-    NSData *data = [NSData dataWithBytes:byte length:20];
-    if (_peripheralArray.count>0) {
-        //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-        NSLog(@"发送命令==  %@",data);
-    }
-}
-
-
--(void)sportxx{
-    Byte byte[20] = {0x08,0x01,0x01,0x01};
-    NSData *data = [NSData dataWithBytes:byte length:20];
-    if (_peripheralArray.count>0) {
-        [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-        NSLog(@"发送命令==  %@",data);
-    }
-}
-
--(void)sportxx1{
-    Byte byte[20] = {0x08,0x03,0x01};
-    NSData *data = [NSData dataWithBytes:byte length:20];
-    if (_peripheralArray.count>0) {
-        [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-        //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-        NSLog(@"发送命令==  %@",data);
-    }
-}
-
--(void)sleep1{
-    Byte byte[20] = {0x08,0x04,0x01};
-    NSData *data = [NSData dataWithBytes:byte length:20];
-    if (_peripheralArray.count>0) {
-        [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
-        //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-        NSLog(@"发送命令==  %@",data);
-    }
-}
-
-
-
-#pragma mark 测试来电提醒
--(void)ancsNotification{
-    Byte byte[20] = {0x06,0x30};
-    NSData *data = [NSData dataWithBytes:byte length:20];
-    if (_peripheralArray.count>0) {
-        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-        //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-        NSLog(@"发送命令==  %@",data);
-    }
-}
--(void)callRemind{
-    Byte byte[20] = {0x03,0x30,0x88,0x55};
-    NSData *data = [NSData dataWithBytes:byte length:20];
-    if (_peripheralArray.count>0) {
-        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-        //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-        NSLog(@"发送命令==  %@",data);
-    }
-}
-
--(void)theMainSwitch{
-    Byte byte[20] = {0x03,0x30,0x55};
-    NSData *data = [NSData dataWithBytes:byte length:20];
-    if (_peripheralArray.count>0) {
-        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-        //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-        NSLog(@"发送命令==  %@",data);
-    }
-}
+////打开温度
+//-(void)btnDown{
+//    Byte byte[18] = {0x90,0x01,0x55};
+//    NSData *data = [NSData dataWithBytes:byte length:20];
+//    if (_peripheralArray.count>0) {
+//        //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+//        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//        NSLog(@"发送命令==  %@",data);
+//    }
+//}
+////打开关闭
+//-(void)btnDown1{
+//    Byte byte[18] = {0x90,0x01,0xAA};
+//    NSData *data = [NSData dataWithBytes:byte length:20];
+//    if (_peripheralArray.count>0) {
+//        //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+//        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//        NSLog(@"发送命令==  %@",data);
+//    }
+//}
+////调节温度
+//-(void)btnDown2{
+//    
+//    NSString *str = [NLBluetoothDataAnalytical tenTurnSixTeen:400];
+//    
+//    unsigned long red = strtoul([[str substringWithRange:NSMakeRange(0, 2)] UTF8String],0,16);
+//    Byte b =  (Byte) ((0xff & red) );//( Byte) 0xff&iByte;
+//    
+//    unsigned long red1 = strtoul([[str substringWithRange:NSMakeRange(2, str.length - 2)] UTF8String],0,16);
+//    Byte b1 =  (Byte) ((0xff & red1) );//( Byte) 0xff&iByte;
+//
+//    
+//    Byte byte[20] = {0x90,0x03,b,b1,0x00,0x08,0x00};
+//    NSData *data = [NSData dataWithBytes:byte length:20];
+//    if (_peripheralArray.count>0) {
+//        //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+//        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//        NSLog(@"发送命令==  %@",data);
+//    }
+//}
+////查询温度
+//-(void)btnDown3{
+//    Byte byte[20] = {0x90,0x02};
+//    NSData *data = [NSData dataWithBytes:byte length:20];
+//    if (_peripheralArray.count>0) {
+//        //       [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+//        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//        NSLog(@"发送命令==  %@",data);
+//    }
+//}
+//
+//
+//-(void)sportxx{
+//    Byte byte[20] = {0x08,0x01,0x01,0x01};
+//    NSData *data = [NSData dataWithBytes:byte length:20];
+//    if (_peripheralArray.count>0) {
+//        [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+//        NSLog(@"发送命令==  %@",data);
+//    }
+//}
+//
+//-(void)sportxx1{
+//    Byte byte[20] = {0x08,0x03,0x01};
+//    NSData *data = [NSData dataWithBytes:byte length:20];
+//    if (_peripheralArray.count>0) {
+//        [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+//        //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//        NSLog(@"发送命令==  %@",data);
+//    }
+//}
+//
+//-(void)sleep1{
+//    Byte byte[20] = {0x08,0x04,0x01};
+//    NSData *data = [NSData dataWithBytes:byte length:20];
+//    if (_peripheralArray.count>0) {
+//        [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:_peripheralArray[0] data:data];
+//        //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//        NSLog(@"发送命令==  %@",data);
+//    }
+//}
+//
+//
+//
+//#pragma mark 测试来电提醒
+//-(void)ancsNotification{
+//    Byte byte[20] = {0x06,0x30};
+//    NSData *data = [NSData dataWithBytes:byte length:20];
+//    if (_peripheralArray.count>0) {
+//        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//        //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//        NSLog(@"发送命令==  %@",data);
+//    }
+//}
+//-(void)callRemind{
+//    Byte byte[20] = {0x03,0x30,0x88,0x55};
+//    NSData *data = [NSData dataWithBytes:byte length:20];
+//    if (_peripheralArray.count>0) {
+//        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//        //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//        NSLog(@"发送命令==  %@",data);
+//    }
+//}
+//
+//-(void)theMainSwitch{
+//    Byte byte[20] = {0x03,0x30,0x55};
+//    NSData *data = [NSData dataWithBytes:byte length:20];
+//    if (_peripheralArray.count>0) {
+//        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//        //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//        NSLog(@"发送命令==  %@",data);
+//    }
+//}
 
 
 - (void)viewDidLoad {
@@ -168,15 +168,22 @@ static const NSInteger NOVICEGUIDETAG = 6000;
     // Do any additional setup after loading the view.
     
     self.returnBtn.hidden = YES;
-    self.navBarBack.hidden = YES;
+//    self.navBarBack.hidden = YES;
     _timeInt = 0;
-    self.titles.text = @"热灸";
     
     
     
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+    imageView.image = [UIImage imageNamed:@"RootContorllewImage"];
+    [self.view addSubview:imageView];
     
+    UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, [ApplicationStyle statusBarSize], SCREENWIDTH, [ApplicationStyle navigationBarSize])];
+    titleLab.text = @"热灸";
+    titleLab.textAlignment = NSTextAlignmentCenter;
+    titleLab.textColor = [UIColor whiteColor];
+    titleLab.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:36]];
+    [self.view addSubview:titleLab];
     
-//    
     
 
     
@@ -283,9 +290,7 @@ static const NSInteger NOVICEGUIDETAG = 6000;
 #pragma mark 基础UI
 
 -(void)backViewUI{
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
-    imageView.image = [UIImage imageNamed:@"RootContorllewImage"];
-    [self.view addSubview:imageView];
+    
     
 //    UIView *viewLine = [[UIView   alloc] initWithFrame:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize], SCREENWIDTH, [ApplicationStyle control_height:1])];
 //    viewLine.alpha = 0.4;
@@ -302,11 +307,11 @@ static const NSInteger NOVICEGUIDETAG = 6000;
 -(void)bulidUI{
 //    [NLBluetoothDataAnalytical blueSportOrdinArrayData:_sportDataArr];////测试假数据
 //    [NLBluetoothDataAnalytical bluesleepOrdinArrayData:_sleepDataArr];//测试睡眠假数据
-//    if ([kAPPDELEGATE._loacluserinfo getBlueToothUUID] ==nil) {
+    if ([kAPPDELEGATE._loacluserinfo getBlueToothUUID] ==nil) {
         [self connectBlueTooth];
-//    }else{
-//       [self bluetoothConnectOperation]; 
-//    }
+    }else{
+       [self bluetoothConnectOperation]; 
+    }
 
     
     
@@ -468,7 +473,7 @@ static const NSInteger NOVICEGUIDETAG = 6000;
     _temperatureCilcle = [[NLHalfView alloc] initWithFrame:frame
                                                    num:50
                                                  index:0
-                                                redius:[ApplicationStyle control_weight:190]
+                                                redius:[ApplicationStyle control_weight:170]
                                                  width:[ApplicationStyle control_weight:40]
                                              starColor:[@"f7f3ff" hexStringToColor]
                                               endColor:[@"ffde6a" hexStringToColor]];
@@ -799,6 +804,13 @@ static const NSInteger NOVICEGUIDETAG = 6000;
 #pragma mark 按钮事件
 
 - (void)moxibustionBtnDown{
+    
+    
+    if ([kAPPDELEGATE._loacluserinfo getBluetoothName] == nil) {
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"你还没有连接设备"];
+        return;
+    }
+    
     
     if (_timeInt ==0) {
         _timeInt = 2;

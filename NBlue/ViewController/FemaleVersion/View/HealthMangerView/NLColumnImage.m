@@ -115,7 +115,6 @@ static NLColumnImage *cloumnImage = nil;
             {
                 NSArray *timeArr = [time componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
                 labTime.text = [NSString stringWithFormat:@"%@/%@",timeArr[1],timeArr[2]];
-                labTime.textColor = [ApplicationStyle subjectWithColor];
                 
                 if (i == 0) {
                     labTime.text = @"今天";
@@ -130,7 +129,6 @@ static NLColumnImage *cloumnImage = nil;
             {
                 NSArray *timeArr = [time componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
                 labTime.text = [NSString stringWithFormat:@"%@/%@",timeArr[1],timeArr[2]];
-                labTime.textColor = [ApplicationStyle subjectWithColor];
                 
                 if (i == 0) {
                     labTime.text = @"本周";
@@ -145,7 +143,6 @@ static NLColumnImage *cloumnImage = nil;
             {
                 NSArray *timeArr = [time componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
                 labTime.text = [NSString stringWithFormat:@"%@月",timeArr[1]];
-                labTime.textColor = [ApplicationStyle subjectWithColor];
                 
                 if (i == 0) {
                     labTime.text = @"本月";
@@ -159,6 +156,7 @@ static NLColumnImage *cloumnImage = nil;
             default:
                 break;
         }
+        labTime.textColor = [@"cc4300" hexStringToColor];
         labTime.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:16]];
         labTime.textAlignment = NSTextAlignmentCenter;
         labTime.tag = LABTIMETAG + i;
@@ -245,7 +243,6 @@ static NLColumnImage *cloumnImage = nil;
             {
                 NSArray *timeArr = [time componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
                 labTime.text = [NSString stringWithFormat:@"%@/%@",timeArr[1],timeArr[2]];
-                labTime.textColor = [ApplicationStyle subjectWithColor];
                 
                 if (i == 0) {
                     labTime.text = @"今天";
@@ -260,7 +257,6 @@ static NLColumnImage *cloumnImage = nil;
             {
                 NSArray *timeArr = [time componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
                 labTime.text = [NSString stringWithFormat:@"%@/%@",timeArr[1],timeArr[2]];
-                labTime.textColor = [ApplicationStyle subjectWithColor];
                 
                 if (i == 0) {
                     labTime.text = @"本周";
@@ -275,7 +271,7 @@ static NLColumnImage *cloumnImage = nil;
             {
                 NSArray *timeArr = [time componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
                 labTime.text = [NSString stringWithFormat:@"%@月",timeArr[1]];
-                labTime.textColor = [ApplicationStyle subjectWithColor];
+                
                 
                 if (i == 0) {
                     labTime.text = @"本月";
@@ -289,6 +285,7 @@ static NLColumnImage *cloumnImage = nil;
             default:
                 break;
         }
+        labTime.textColor = [@"cc4300" hexStringToColor];
         labTime.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:16]];
         labTime.textAlignment = NSTextAlignmentCenter;
         labTime.tag = LABTIMETAG + i;
@@ -367,7 +364,7 @@ static NLColumnImage *cloumnImage = nil;
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     for (NSInteger i=0; i<_dataArr.count; i++) {
         UILabel *timeLab = (UILabel *)[self viewWithTag:LABTIMETAG + i];
-        timeLab.textColor = [ApplicationStyle subjectWithColor];
+        timeLab.textColor = [@"cc4300" hexStringToColor];
         UIButton *columBtn = (UIButton *)[self viewWithTag:BTNTAB + i];
         columBtn.backgroundColor = _withColor;
     }

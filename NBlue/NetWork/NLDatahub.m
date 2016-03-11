@@ -18,6 +18,7 @@ static NSString *NLUserApi = @"/user";//各个接口端
 static NSString *NLSportApi = @"/sport";//各个接口端
 static NSString *NLMenstruation = @"/menstruation";//各个接口端
 static NSString *NLFolks = @"/folks";//各个接口端 User的子接口
+static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
 
 
 @interface NLDatahub(){
@@ -239,6 +240,10 @@ static NSString *NLFolks = @"/folks";//各个接口端 User的子接口
         [[NSNotificationCenter defaultCenter] postNotificationName:NLUpDateUserInformationSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [self urlResponseErrorCode:task.response];
+        
+        
         [self dismissHide];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NLUpDateUserInformationFicaledNotification object:error userInfo:nil];
@@ -325,11 +330,20 @@ static NSString *NLFolks = @"/folks";//各个接口端 User的子接口
     
 
     [self loadingView];
+    
+    
+    NSLog(@"%@ %@ %@ %@ %@",[kAPPDELEGATE._loacluserinfo GetUser_ID],[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate],[dic objectForKey:@"periodTime"],[dic objectForKey:@"cycleTime"],[kAPPDELEGATE._loacluserinfo GetAccessToken]);
+    
+    
     NSDictionary *paramenters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
-                                  @"startDate":[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate],
+                                  @"startDate":[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate]==nil?@"":[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate],
                                   @"duration":[dic objectForKey:@"periodTime"],
                                   @"cycle":[dic objectForKey:@"cycleTime"],
                                   @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
+    
+    
+    
+    
     _manager = [AFHTTPSessionManager manager];
     _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
     _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -416,6 +430,15 @@ static NSString *NLFolks = @"/folks";//各个接口端 User的子接口
 - (NSDictionary *)dataTransformationJson:(id  _Nullable)responseObject{
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
     return dic;
+}
+#pragma mark 处理报错401 直接跳到登录页
+- (void)urlResponseErrorCode:(NSURLResponse *)response{
+    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+    NSInteger responseStatusCode = [httpResponse statusCode];
+    if (responseStatusCode == errorStatusCode) {
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录过期"];
+        [kAPPDELEGATE tabBarViewControllerType:Controller_Loing];
+    }
 }
 
 

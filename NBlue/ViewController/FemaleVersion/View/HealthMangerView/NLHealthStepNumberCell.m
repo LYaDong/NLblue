@@ -61,11 +61,11 @@
     targetNumber.text = NSLocalizedString(@"NLHealthStepNumber_TargetNumber", nil);
     targetNumber.textColor = [self titleColor];
     targetNumber.font = [ApplicationStyle  textThrityFont];
-    targetNumber.textAlignment = NSTextAlignmentCenter;
+    targetNumber.textAlignment = NSTextAlignmentLeft;
     [self.contentView addSubview:targetNumber];
     
     _stepNumber = [UIButton buttonWithType:UIButtonTypeCustom];
-    _stepNumber.frame = CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:150] - x, 0, [ApplicationStyle control_weight:150], h);
+    _stepNumber.frame = CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:110] - x, 0, [ApplicationStyle control_weight:150], h);
     [_stepNumber setTitle:@"8,000" forState:UIControlStateNormal];
     [_stepNumber setTitleColor:[self titleColor] forState:UIControlStateNormal];
     [_stepNumber setImage:[UIImage imageNamed:@"Health_M_R_B"] forState:UIControlStateNormal];
@@ -92,8 +92,7 @@
     [self.contentView addSubview:column];
     
     UIView *viewTimeBack = [[UIView alloc] initWithFrame:CGRectMake(0, column.bottomOffset, SCREENWIDTH, [ApplicationStyle control_height:60])];
-    viewTimeBack.backgroundColor = [ApplicationStyle subjectWithColor];
-    viewTimeBack.alpha = 0.1;
+    viewTimeBack.backgroundColor = [@"fffde6" hexStringToColor];
     [self.contentView addSubview:viewTimeBack];
     
     
@@ -112,7 +111,7 @@
         [self.contentView addSubview:timeLab];
     }
     UIView *lineTime = [[UIView alloc] initWithFrame:CGRectMake(0, column.bottomOffset + [ApplicationStyle control_height:60 - 1], SCREENWIDTH, [ApplicationStyle control_height:1])];
-    lineTime.backgroundColor = [self lineColor];
+    lineTime.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:lineTime];
 
     
@@ -142,7 +141,10 @@
                             NSLocalizedString(@"NLHealthStepNumber_ConsumedEnergy", nil)];
     
     for (NSInteger i=0; i<stepArr.count; i++) {
-        CGRect frames = CGRectMake(0+i*SCREENWIDTH/3, lineTime.bottomOffset+ [ApplicationStyle control_height:100], SCREENWIDTH/3, [ApplicationStyle control_height:200]);
+        CGRect frames = CGRectMake(0+i*SCREENWIDTH/3,
+                                   lineTime.bottomOffset,
+                                   SCREENWIDTH/3,
+                                   self.viewHeight - [ApplicationStyle control_height:60 + 480 + 60]);
         
         NLStepImageLabView *viewLab = [[NLStepImageLabView alloc] initWithImage:[UIImage imageNamed:stepArr[i]]
                                                                        textFont:[ApplicationStyle textThrityFont]
@@ -150,6 +152,7 @@
                                                                      textRemark:stepRemark[i]
                                                                         textNum:stepData[i]
                                                                           frame:frames];
+        viewLab.backgroundColor = [@"fef6dc" hexStringToColor];
         viewLab.frame = frames;
         [self.contentView addSubview:viewLab];
     }
@@ -171,7 +174,7 @@
 - (UIColor *)titleColor{
     UIColor *color = nil;
     if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
-        color = [ApplicationStyle subjectWithColor];
+        color = [@"dc5d18" hexStringToColor];
     }else{
         color = [@"d49a2f" hexStringToColor];
     }
@@ -181,7 +184,7 @@
 - (UIColor *)lineColor{
     UIColor *color = nil;
     if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
-        color = [@"ffcdd0" hexStringToColor];
+        color = [@"dc5d18" hexStringToColor];
     }else{
         color = [@"ddab56" hexStringToColor];
     }

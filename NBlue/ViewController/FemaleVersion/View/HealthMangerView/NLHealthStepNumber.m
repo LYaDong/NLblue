@@ -13,11 +13,13 @@
 #import "NLSQLData.h"
 #import "NLHealthStepNumberCell.h"
 #import "NLBluetoothAgreement.h"
+#import "NLBluetoothAgreementNew.h"
 @interface NLHealthStepNumber()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIButton *stepNumber;
 @property(nonatomic,strong)UILabel *maxStepNumber;
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *sportData;
+@property(nonatomic,strong)NLBluetoothAgreementNew *bluetooth;
 
 @end
 
@@ -35,11 +37,13 @@
     
     [self loadData];
     
+    _bluetooth = [NLBluetoothAgreementNew shareInstance];
+    
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, self.frame.size.height) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    _tableView.backgroundColor = [@"hgfddd" hexStringToColor];
+    _tableView.backgroundColor = [@"fffff8" hexStringToColor];
     [self addSubview:_tableView];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadNewData];
@@ -144,7 +148,6 @@
     }
     
     
-    NSLog(@"xxx = %@",sportData);
     
     
     [cell histogram:sportData
@@ -159,26 +162,35 @@
 
 
 -(void)loadNewData{
-    NSMutableArray *dataArr = [NSMutableArray array];
-    NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
-    dataArr  = blues.arrPeripheral;
-    {
-        Byte byte[20] = {0x08,0x01,0x01,0x01};
-        NSData *data = [NSData dataWithBytes:byte length:20];
-        if (dataArr.count>0) {
-            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:dataArr[0] data:data];
-            NSLog(@"发送命令==  %@",data);
-        }
+    
+    if ([kAPPDELEGATE._loacluserinfo getBluetoothName] == nil) {
+        [_tableView.mj_header endRefreshing];
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"你还没有连接设备"];
+        return;
     }
-    {
-        Byte byte[20] = {0x08,0x03,0x01};
-        NSData *data = [NSData dataWithBytes:byte length:20];
-        if (dataArr.count>0) {
-            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:dataArr[0] data:data];
-            //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
-            NSLog(@"发送命令==  %@",data);
-        }
-    }
+    
+    [_bluetooth sportDataQuery];
+    
+//    NSMutableArray *dataArr = [NSMutableArray array];
+//    NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
+//    dataArr  = blues.arrPeripheral;
+//    {
+//        Byte byte[20] = {0x08,0x01,0x01,0x01};
+//        NSData *data = [NSData dataWithBytes:byte length:20];
+//        if (dataArr.count>0) {
+//            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:dataArr[0] data:data];
+//            NSLog(@"发送命令==  %@",data);
+//        }
+//    }
+//    {
+//        Byte byte[20] = {0x08,0x03,0x01};
+//        NSData *data = [NSData dataWithBytes:byte length:20];
+//        if (dataArr.count>0) {
+//            [[NLBluetoothAgreement shareInstance] writeCharacteristicF1:dataArr[0] data:data];
+//            //        [[NLBluetoothAgreement shareInstance] writeCharacteristicF6:_peripheralArray[0] data:data];
+//            NSLog(@"发送命令==  %@",data);
+//        }
+//    }
 }
 -(void)refishData{
     [_tableView.mj_header endRefreshing];

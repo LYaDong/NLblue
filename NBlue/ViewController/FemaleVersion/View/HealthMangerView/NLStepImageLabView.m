@@ -25,17 +25,22 @@
                         frame:(CGRect)frame{
     if (self = [super init]) {
         
+        
+        
 
         CGSize textNumSize = [ApplicationStyle textSize:textNum font:textFont size:SCREENWIDTH];
+        CGSize textRemarkSize = [ApplicationStyle textSize:textRemark font:textFont size:SCREENWIDTH];
         
-        UILabel *labNum = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, textNumSize.height)];
+        
+        
+        UILabel *labNum = [[UILabel alloc] initWithFrame:CGRectMake(0,(frame.size.height - (textNumSize.height + textRemarkSize.height + images.size.height))/2, frame.size.width, textNumSize.height)];
         labNum.text = textNum;
         labNum.font = textFont;
         labNum.textColor = textColor;
         labNum.textAlignment = NSTextAlignmentCenter;
         [self addSubview:labNum];
         
-        CGSize textRemarkSize = [ApplicationStyle textSize:textRemark font:textFont size:SCREENWIDTH];
+        
         
         
         UILabel *labRemark = [[UILabel alloc] initWithFrame:CGRectMake(0, labNum.bottomOffset + [ApplicationStyle control_height:24], frame.size.width, textRemarkSize.height)];

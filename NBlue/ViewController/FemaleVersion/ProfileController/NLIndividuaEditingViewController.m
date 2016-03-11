@@ -20,6 +20,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    UIButton *ribtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    ribtn.frame = CGRectMake(SCREENWIDTH - ([ApplicationStyle control_weight:36] + [ApplicationStyle control_weight:34]) - [ApplicationStyle control_weight:34],[ApplicationStyle statusBarSize] + ([ApplicationStyle navigationBarSize] - [ApplicationStyle control_height:63])/2, [ApplicationStyle control_weight:36] + [ApplicationStyle control_weight:34], [ApplicationStyle control_height:63]);
+    [ribtn setTitle:NSLocalizedString(@"GeneralText_OK", nil) forState:UIControlStateNormal];
+    [ribtn addTarget:self action:@selector(rightBtnDown) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:ribtn];
 
     
     
@@ -60,11 +65,25 @@
 #pragma mark 自己的Delegate
 #pragma mark 自己的按钮事件
 -(void)returnBtnDown{
+    if (_nameTextFiled.text.length==0) {
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"名字不能为空"];
+        return;
+    }
     if (self.editionName) {
        self.editionName(_nameTextFiled.text);
     }
-    
-    
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+-(void)rightBtnDown{
+    if (_nameTextFiled.text.length==0) {
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"名字不能为空"];
+        return;
+    }
+    if (self.editionName) {
+        self.editionName(_nameTextFiled.text);
+    }
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];

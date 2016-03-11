@@ -38,6 +38,14 @@ typedef void (^QueryTemperure)(NSString *temperture);
  */
 -(void)cancleBluetooth;
 /**
+ * 开始获得运动数据
+ */
+-(void)sportDataQuery;
+/**
+ * 开始获得睡眠数据
+ */
+-(void)sleepDataQuery;
+/**
  * 查询A单元电量
  */
 -(void)queryAunitLevel;

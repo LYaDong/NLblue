@@ -43,7 +43,7 @@
 #pragma mark 基础UI
 -(void)bulidUI{
     
-
+    self.view.backgroundColor = [@"fffff5" hexStringToColor];
     
     CGRect frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:360])/2, [ApplicationStyle statusBarSize] + ([ApplicationStyle navigationBarSize] - [ApplicationStyle control_height:60])/2, [ApplicationStyle control_weight:360], [ApplicationStyle control_height:60]);
     NSArray * items = @[NSLocalizedString(@"NLHealthManger_StepDay", nil),
@@ -102,12 +102,6 @@
     _imageArrow = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:28])/2, [ApplicationStyle control_height:480] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize] - [ApplicationStyle control_weight:14], [ApplicationStyle control_weight:28], [ApplicationStyle control_weight:14])];
     _imageArrow.image = [UIImage imageNamed:@"NL_Step_Arrow"];
     [[[UIApplication sharedApplication] keyWindow] addSubview:_imageArrow];
-    
-    
-    
-    
-    
-    
 }
 
 #pragma mark 系统Delegate
@@ -168,9 +162,15 @@
     
 
     
-    _labViewBack = [[UIView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT - [ApplicationStyle control_height:492], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle control_height:492])];
-    _labViewBack.backgroundColor = [UIColor clearColor];
+    _labViewBack = [[UIView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle control_height:540] + [ApplicationStyle navBarAndStatusBarSize], SCREENWIDTH, SCREENHEIGHT - ([ApplicationStyle control_height:540] + [ApplicationStyle navBarAndStatusBarSize]))];
+    _labViewBack.backgroundColor = [@"fef6dc" hexStringToColor];
     [self.view addSubview:_labViewBack];
+    
+    
+    UIView *lines = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle control_height:2])];
+    lines.backgroundColor = [@"ef9264" hexStringToColor];
+    [_labViewBack addSubview:lines];
+    
     
 //    NSArray *remarkLabText = @[NSLocalizedString(@"NLHealthManger_StepRemarkLab", nil),
 //                               NSLocalizedString(@"NLHealthManger_StepDistance", nil),
@@ -186,7 +186,7 @@
     
     for (NSInteger i=0; i<arr.count; i++) {
         NSInteger x = 0 + i % 2 * SCREENWIDTH/2,
-        y = [ApplicationStyle control_height:40] + i / 2 * [ApplicationStyle control_height:115],
+        y = (_labViewBack.topPosition - [ApplicationStyle control_height:115*3+20])/2 + i / 2 * [ApplicationStyle control_height:115],
         w = SCREENWIDTH/2,
         h = [ApplicationStyle control_height:115];
         

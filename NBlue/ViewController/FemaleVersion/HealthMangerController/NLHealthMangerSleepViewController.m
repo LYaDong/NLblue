@@ -39,6 +39,9 @@
 }
 #pragma mark 基础UI
 -(void)bulidUI{
+    
+    self.view.backgroundColor = [@"fffff5" hexStringToColor];
+    
     CGRect frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:360])/2, [ApplicationStyle statusBarSize] + ([ApplicationStyle navigationBarSize] - [ApplicationStyle control_height:60])/2, [ApplicationStyle control_weight:360], [ApplicationStyle control_height:60]);
     NSArray * items = @[NSLocalizedString(@"NLHealthManger_StepDay", nil),
                         NSLocalizedString(@"NLHealthManger_StepWeek", nil),
@@ -172,9 +175,13 @@
     }
 }
 -(void)stepAndColAndTime:(NSArray *)arr remarkLabText:(NSArray *)remarkLabText{
-    _labViewBack = [[UIView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT - [ApplicationStyle control_height:492], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle control_height:492])];
-    _labViewBack.backgroundColor = [UIColor clearColor];
+    _labViewBack = [[UIView alloc] initWithFrame:CGRectMake(0, ([ApplicationStyle control_height:540] + [ApplicationStyle navBarAndStatusBarSize]), SCREENWIDTH, SCREENHEIGHT - ([ApplicationStyle control_height:540] + [ApplicationStyle navBarAndStatusBarSize]))];
+    _labViewBack.backgroundColor = [@"fef6dc" hexStringToColor];
     [self.view addSubview:_labViewBack];
+    
+    UIView *lines = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle control_height:2])];
+    lines.backgroundColor = [@"ef9264" hexStringToColor];
+    [_labViewBack addSubview:lines];
     
 //    NSArray *remarkLabText = @[NSLocalizedString(@"NLHealthMangerSleep_FallAsleepTime", nil),
 //                               NSLocalizedString(@"NLHealthMangerSleep_WakeupTime", nil),
@@ -184,7 +191,7 @@
 //                               NSLocalizedString(@"NLHealthMangerSleep_SleepQualityTime", nil),];
     for (NSInteger i=0; i<arr.count; i++) {
         CGFloat  x = 0+i % 3 * SCREENWIDTH/3,
-        y = [ApplicationStyle control_height:40] + i / 3 * [ApplicationStyle control_height:120],
+        y = (_labViewBack.topPosition - [ApplicationStyle control_height:115*3+20])/2 + i / 3 * [ApplicationStyle control_height:120],
         w = SCREENWIDTH/3,
         h = [ApplicationStyle control_height:115];
         

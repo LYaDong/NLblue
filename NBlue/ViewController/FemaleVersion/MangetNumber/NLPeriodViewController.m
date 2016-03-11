@@ -58,6 +58,10 @@ static const NSInteger BTNPICKERTAG = 2000;
     NSArray *titleArr = @[NSLocalizedString(@"NLIndividuaFormat_UserPeriod", nil),
                           NSLocalizedString(@"NLIndividuaFormat_UserCycle", nil),
                           NSLocalizedString(@"NLIndividuaFormat_UpDayDate", nil),];
+    NSArray *textFieldRemark = @[NSLocalizedString(@"NLIndividuaFormat_UserPeriod_FiledText", nil),
+                                 NSLocalizedString(@"NLIndividuaFormat_UserCycle_FiledText", nil),
+                                 NSLocalizedString(@"NLIndividuaFormat_UpDayDate_FiledText", nil),];
+    
     
     
     for (NSInteger i=0; i<titleArr.count; i++) {
@@ -69,7 +73,7 @@ static const NSInteger BTNPICKERTAG = 2000;
         [self.view addSubview:titleLab];
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:70], [ApplicationStyle control_height:480 + i* 100], SCREENWIDTH - [ApplicationStyle control_weight:70 * 2], [ApplicationStyle control_height:1])];
-        line.backgroundColor = [self colors];
+        line.backgroundColor = [self titleColor];
         [self.view addSubview:line];
     }
     
@@ -77,6 +81,9 @@ static const NSInteger BTNPICKERTAG = 2000;
     for (NSInteger i=0; i<titleArr.count; i++) {
         UITextField *textFiled = [[UITextField alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:170], [ApplicationStyle control_height:403] + i*[ApplicationStyle control_height:100], SCREENWIDTH - [ApplicationStyle control_weight:170 + 120], [ApplicationStyle control_height:80])];
         textFiled.tag = TEXTFILEDTAG + i;
+        textFiled.placeholder = textFieldRemark[i];
+        [textFiled setValue:[@"ff5b89" hexStringToColor] forKeyPath:@"_placeholderLabel.textColor"];
+        textFiled.textColor = [@"f3366b" hexStringToColor];
         textFiled.textAlignment = NSTextAlignmentRight;
         [self.view addSubview:textFiled];
         
@@ -173,14 +180,14 @@ static const NSInteger BTNPICKERTAG = 2000;
                 case PickerType_Cycle:
                 {
                     UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + UseDatePicker_Period];
-                    text.text = count;
+                    text.text = [NSString stringWithFormat:@"%@天",count];;;
                     [_userdic setValue:count forKey:@"cycleTime"];
                     break;
                 }
                 case PickerType_Period:
                 {
                     UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + UseDatePicker_Cycle];
-                    text.text = count;
+                    text.text = [NSString stringWithFormat:@"%@天",count];;;
                     [_userdic setValue:count   forKey:@"periodTime"];
                     break;
                 }
@@ -210,7 +217,7 @@ static const NSInteger BTNPICKERTAG = 2000;
                 case UseDatePicker_UpNext:
                 {
                     UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + UseDatePicker_UpNext];
-                    text.text = [ApplicationStyle datePickerTransformationCorss:date];
+                    text.text = [NSString stringWithFormat:@"%@天",[ApplicationStyle datePickerTransformationCorss:date]];
                     [kAPPDELEGATE._loacluserinfo lastTimeGoPeriodDate:[ApplicationStyle datePickerTransformationCorss:date]];
                     [_userdic setValue:[ApplicationStyle datePickerTransformationCorss:date] forKey:@"lastTime"];
                     break;

@@ -67,7 +67,7 @@ static const NSInteger ARROWTAG = 1500;
     [_calenderView addSubview:viewBack];
     
     
-    UIView *lineViewBack = [UIView statusBackView:CGRectMake(0, [ApplicationStyle control_height:65], SCREENWIDTH, [ApplicationStyle control_height:1])];
+    UIView *lineViewBack = [UIView statusBackView:CGRectMake(0, [ApplicationStyle control_height:65], SCREENWIDTH, [ApplicationStyle control_height:4])];
     [self addSubview:lineViewBack];
     
     

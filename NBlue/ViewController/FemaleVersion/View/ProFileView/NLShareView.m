@@ -36,8 +36,8 @@ static const NSInteger THIRDSHARETAG = 1000;
                            NSLocalizedString(@"NL_Share_WeiBo", nil),];
     NSArray *shareImage = @[@"NL_Share_WeChartFriend",
                             @"NL_Share_WeChartCircle",
-                            @"NL_Share_WB",
-                            @"NL_Share_QQ",];
+                            @"NL_Share_QQ",
+                            @"NL_Share_WB"];
 
     for (NSInteger i=0; i<shareText.count; i++) {
         

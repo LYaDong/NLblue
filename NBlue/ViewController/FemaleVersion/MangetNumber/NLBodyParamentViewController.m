@@ -72,6 +72,7 @@ static const NSInteger BTNPICKERTAG = 2000;
     for (NSInteger i=0; i<titleArr.count; i++) {
         UITextField *textFiled = [[UITextField alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:175], [ApplicationStyle control_height:403] + i*[ApplicationStyle control_height:100], SCREENWIDTH - [ApplicationStyle control_weight:170 + 120], [ApplicationStyle control_height:80])];
         textFiled.textAlignment = NSTextAlignmentRight;
+        textFiled.textColor = [@"f3366b" hexStringToColor];
         textFiled.tag = TEXTFILEDTAG + i;
         [self.view addSubview:textFiled];
         
@@ -185,21 +186,21 @@ static const NSInteger BTNPICKERTAG = 2000;
                 case PickerType_Age:
                 {
                     UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + PickerType_Age];
-                    text.text = count;
+                    text.text = [NSString stringWithFormat:@"%@岁",count];
                     [_userDic setValue:count  forKey:@"age"];
                     break;
                 }
                 case PickerType_Height:
                 {
                     UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + PickerType_Height];
-                    text.text = count;
+                    text.text = [NSString stringWithFormat:@"%@cm",count];;
                     [_userDic setValue:count  forKey:@"height"];
                     break;
                 }
                 case PickerType_Width:
                 {
                     UITextField *text = (UITextField *)[self.view viewWithTag:TEXTFILEDTAG + PickerType_Width];
-                    text.text = count;
+                    text.text = [NSString stringWithFormat:@"%@kg",count];;
                     [_userDic setValue:count  forKey:@"width"];
                     break;
                 }

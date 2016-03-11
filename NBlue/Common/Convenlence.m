@@ -21,7 +21,7 @@ const char completionHandlerKey;
 
 + (UIView *)statusBackView:(CGRect)frame{
     UIView *statusView = [[UIView alloc] initWithFrame:frame];
-    [statusView.layer addSublayer:[ApplicationStyle shadowAsInverse:CGRectMake(0, 0, frame.size.width, frame.size.height) colorOne:[@"a60034" hexStringToColor] colorTow:[@"ffffff" hexStringToColor]]];
+    [statusView.layer addSublayer:[ApplicationStyle shadowAsInverse:CGRectMake(0, 0, frame.size.width, frame.size.height) colorOne:[@"eecdd7" hexStringToColor] colorTow:[@"fffefe" hexStringToColor]]];
     return statusView;
 }
 + (UIButton *)gradiengBtnFrame:(CGRect)frame{

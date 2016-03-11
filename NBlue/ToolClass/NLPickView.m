@@ -278,10 +278,10 @@ static const NSInteger DATEPICKERTAGBTN = 4000;                             //æ—
         
         UILabel *lbl = [[UILabel alloc] init];
         if (_picktype == PickerType_RemindSection) {
-            lbl.frame = CGRectMake(0, 0, SCREENWIDTH/_pickerNum, [ApplicationStyle control_height:80]);
+            lbl.frame = CGRectMake(-10, 0, SCREENWIDTH/_pickerNum, [ApplicationStyle control_height:80]);
             lbl.textAlignment = NSTextAlignmentCenter;
         }else{
-            lbl.frame = CGRectMake(0, 0, [ApplicationStyle control_weight:160], [ApplicationStyle control_height:80]);
+            lbl.frame = CGRectMake(-10, 0, [ApplicationStyle control_weight:160], [ApplicationStyle control_height:80]);
             lbl.textAlignment = NSTextAlignmentLeft;
         }
         
@@ -293,8 +293,6 @@ static const NSInteger DATEPICKERTAGBTN = 4000;                             //æ—
         [view addSubview:lbl];
     }
     UILabel *lbl = (UILabel*)[view viewWithTag:LBLTAG];
-    
-    NSLog(@"%@",_dataArray);
     lbl.text = [NSString stringWithFormat:@"%@",[_dataArray objectAtIndex:row]];
     return view;
 }
@@ -313,7 +311,6 @@ static const NSInteger DATEPICKERTAGBTN = 4000;                             //æ—
         }
         case SelectionBtn + 1:
         {
-            NSLog(@"%@",_data);
             
             [self.delegate pickerCount:_data seleType:pickerBtn.tag - SelectionBtn pickerType:_picktype];
             break;

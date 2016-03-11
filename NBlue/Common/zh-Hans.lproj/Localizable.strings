@@ -59,6 +59,13 @@
 "NLIndividuaFormat_UserPeriod" = "经期";
 "NLIndividuaFormat_UserCycle" = "周期";
 "NLIndividuaFormat_UpDayDate" = "上次的日期";
+"NLIndividuaFormat_UserPeriod_FiledText" = "月经来几天";
+"NLIndividuaFormat_UserCycle_FiledText" = "两次月经间隔天数";
+"NLIndividuaFormat_UpDayDate_FiledText" = "上次月经的时间";
+
+
+
+
 //NLMyEquipmentController
 "NLMyEquipment_MyEquipment" = "我的设备";
 "NLMyEquipment_EquipmentName" = "设备名称";
@@ -74,7 +81,7 @@
 "NLHealthStepNumber_TargetNumber" = "目标步数";
 "NLHealthStepNumber_TheCurrent" = "今日步数";
 "NLHealthStepNumber_MovingDistance" = "移动距离";
-"NLHealthStepNumber_ConsumedEnergy" = "消耗能量";
+"NLHealthStepNumber_ConsumedEnergy" = "消耗热量";
 //NLHealthSleepView
 "NLHealthSleepView_YesterDay" = "昨日睡眠";
 "NLHealthSleepView_GOSleepTime" = "入睡时间";
@@ -86,22 +93,22 @@
 "NLHealthManger_StepMonth" = "月";
 "NLHealthManger_StepRemarkLab" = "当日步数";
 "NLHealthManger_StepDistance" = "当日距离";
-"NLHealthManger_StepEnergy" = "当日消耗能量";
+"NLHealthManger_StepEnergy" = "当日消耗热量";
 "NLHealthManger_StepActovity" = "当日活动时间";
 "NLHealthManger_StepRemarkLab_average" = "日均步数";
 "NLHealthManger_StepDistance_average" = "日均距离";
-"NLHealthManger_StepEnergy_average" = "日均消耗量";
-"NLHealthManger_StepActovity_average" = "日均活跃时间";
+"NLHealthManger_StepEnergy_average" = "日均消耗热量";
+"NLHealthManger_StepActovity_average" = "日均活动时间";
 
 //NLHealthMangerSleep
 "NLHealthMangerSleep_FallAsleepTime" = "入睡时间";
-"NLHealthMangerSleep_WakeupTime" = "醒来时间时间";
+"NLHealthMangerSleep_WakeupTime" = "醒来时间";
 "NLHealthMangerSleep_SleepTime" = "睡眠时间";
 "NLHealthMangerSleep_ShallowSleepTime" = "浅睡眠时间";
 "NLHealthMangerSleep_DeepSleepTime" = "深睡眠时间";
 
 "NLHealthMangerSleep_FallAsleepTime_average" = "日均入睡时间";
-"NLHealthMangerSleep_WakeupTime_average" = "日均醒来时间时间";
+"NLHealthMangerSleep_WakeupTime_average" = "日均醒来时间";
 "NLHealthMangerSleep_SleepTime_average" = "日均睡眠时间";
 "NLHealthMangerSleep_ShallowSleepTime_average" = "日均浅睡眠时间";
 "NLHealthMangerSleep_DeepSleepTime_average" = "日均深睡眠时间";

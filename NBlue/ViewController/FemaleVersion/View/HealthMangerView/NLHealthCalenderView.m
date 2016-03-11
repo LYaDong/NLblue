@@ -89,7 +89,7 @@ NLLHRatingViewDelegate>
     
     
     
-    NLCalenderPackage *calenderView = [[NLCalenderPackage alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle control_height:598])];
+    NLCalenderPackage *calenderView = [[NLCalenderPackage alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle control_height:598 + 30])];
     calenderView.delegate = self;
     [_mainScrollew addSubview:calenderView];
     
@@ -100,7 +100,7 @@ NLLHRatingViewDelegate>
 //        [_mainScrollew addSubview:calenderback];
         
         
-        UIView *calenderback = [[UIView alloc] initWithFrame:CGRectMake(0, calenderView.bottomOffset, SCREENWIDTH, [ApplicationStyle control_height:120])];
+        UIView *calenderback = [[UIView alloc] initWithFrame:CGRectMake(0, calenderView.bottomOffset + [ApplicationStyle control_height:0], SCREENWIDTH, [ApplicationStyle control_height:120])];
         calenderback.backgroundColor = [@"fbf2d8" hexStringToColor];
         [_mainScrollew addSubview:calenderback];
         
@@ -155,7 +155,7 @@ NLLHRatingViewDelegate>
         tableHeight = [ApplicationStyle control_height:4*88];
     }
     
-    _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:22] + [ApplicationStyle control_height:78]);
+    _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:22] + [ApplicationStyle control_height:78] + [ApplicationStyle control_height:30]);
 }
 -(void)controlUI{
     
@@ -357,7 +357,7 @@ NLLHRatingViewDelegate>
         _mainTableView.hidden = YES;
         [_mainTableView reloadData];
 
-       _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78] + [ApplicationStyle control_height:266]);
+       _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78] + [ApplicationStyle control_height:266]+ [ApplicationStyle control_height:30]);
         
         [self cartoon:[ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + [ApplicationStyle control_height:2] + [ApplicationStyle control_height:78] ];
         
@@ -378,7 +378,7 @@ NLLHRatingViewDelegate>
         }else{
             tableHeight = [ApplicationStyle control_height:4*88];
         }
-        _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:22] + [ApplicationStyle control_height:78]);
+        _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:22] + [ApplicationStyle control_height:78]+ [ApplicationStyle control_height:30]);
     }
 }
 //爱爱代理
@@ -486,7 +486,7 @@ NLLHRatingViewDelegate>
     }else{
         tableHeight = [ApplicationStyle control_height:4*88];
     }
-    _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:22] + [ApplicationStyle control_height:78]);
+    _mainScrollew.contentSize = CGSizeMake(SCREENWIDTH, [ApplicationStyle control_height:520] + [ApplicationStyle control_height:100] + tableHeight + [ApplicationStyle control_height:22] + [ApplicationStyle control_height:78]+ [ApplicationStyle control_height:30]);
     [_mainTableView reloadData];
 }
 
@@ -512,7 +512,7 @@ NLLHRatingViewDelegate>
             
             if ([ApplicationStyle dateInteverCurrentDate:date afferentDate:lastTimepPeriod]<=periodTime) {
                 NSInteger minDay = [ApplicationStyle dateInteverCurrentDate:date afferentDate:lastTimepPeriod];
-                return [NSString stringWithFormat:@"你已经来了第%ld天",minDay];
+                return [NSString stringWithFormat:@"你已经来了第%ld天",(long)minDay];
             }else{
                 
                 NSInteger cycle = [[dataDic objectForKey:@"cycleTime"] integerValue];//获得周期

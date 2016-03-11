@@ -21,11 +21,9 @@ static const NSInteger TEXTFILED_TAG = 1000;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    {
-        self.navBarBack.hidden = YES;
-        self.navBarPushBack.hidden = NO;
-        self.controllerBack.hidden = YES;
-    }
+//    UIImageView *imageBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+//    imageBack.image = [UIImage imageNamed:@"RootContorllewImage"];
+//    [self.view addSubview:imageBack];
     
     self.view.backgroundColor = [ApplicationStyle subjectBackViewColor];
     self.titles.text = NSLocalizedString(@"NLRegistered_registered", nil);
@@ -42,6 +40,8 @@ static const NSInteger TEXTFILED_TAG = 1000;
 }
 #pragma mark 基础UI
 -(void)bulidUI{
+    
+    
     NSArray *arrLab = @[NSLocalizedString(@"NLRegistered_PhoneNumber", nil),
                         NSLocalizedString(@"NLRegistered_Verification", nil),
                         NSLocalizedString(@"NLRegistered_PassWord", nil),];
@@ -112,11 +112,12 @@ static const NSInteger TEXTFILED_TAG = 1000;
     [protocol setTitle:NSLocalizedString(@"NLRegistered_Protocol", nil) forState:UIControlStateNormal];
     protocol.titleLabel.font = [ApplicationStyle textSuperSmallFont];
     [protocol setTitleColor:[ApplicationStyle subjectPinkColor] forState:UIControlStateNormal];
-    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"NLRegistered_Protocol", nil) attributes:@{NSFontAttributeName:[ApplicationStyle textSuperSmallFont],NSForegroundColorAttributeName:[ApplicationStyle subjectPinkColor]}];
-    NSRange titleRange = {2,[title length] - 2};
-    [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:titleRange];
-    
-    [protocol setAttributedTitle:title forState:UIControlStateNormal];
+    //后期打开
+//    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"NLRegistered_Protocol", nil) attributes:@{NSFontAttributeName:[ApplicationStyle textSuperSmallFont],NSForegroundColorAttributeName:[ApplicationStyle subjectPinkColor]}];
+//    NSRange titleRange = {2,[title length] - 2};
+//    [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:titleRange];
+//    
+//    [protocol setAttributedTitle:title forState:UIControlStateNormal];
     [self.view addSubview:protocol];
     
 

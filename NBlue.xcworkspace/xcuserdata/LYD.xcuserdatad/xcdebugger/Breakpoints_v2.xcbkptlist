@@ -9,13 +9,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NBlue/Common/AppDelegate.m"
-            timestampString = "479299445.589237"
+            filePath = "NBlue/ViewController/FemaleVersion/MangetNumber/NLLogInViewController.m"
+            timestampString = "479381885.122741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "-application:didFinishLaunchingWithOptions:"
+            startingLineNumber = "417"
+            endingLineNumber = "417"
+            landmarkName = "-thirdLoginSuccess:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NBlue/ViewController/FemaleVersion/MangetNumber/NLLogInViewController.m"
+            timestampString = "479381885.122741"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "377"
+            endingLineNumber = "377"
+            landmarkName = "-getCycleOrPeriod:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NBlue/ViewController/FemaleVersion/MangetNumber/NLLogInViewController.m"
+            timestampString = "479381694.673446"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
+            landmarkName = "-logInSuccess:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

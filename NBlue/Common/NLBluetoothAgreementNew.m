@@ -120,11 +120,13 @@ static NSString *TransLationF1 = @"0AF1";
     
     switch (central.state) {
         case CBCentralManagerStatePoweredOn:{
+            [kAPPDELEGATE._loacluserinfo setBluetoothName:nil];//设备的名字
             NSLog(@"蓝牙已经打开，请扫描外设,请打开外围设备");
             break;
         }
         case CBCentralManagerStatePoweredOff: {
             _isbluetooth = !_isbluetooth;
+            [kAPPDELEGATE._loacluserinfo setBluetoothName:nil];//设备的名字
             NSLog(@"蓝牙已关闭，请开启外设");
             break;
         }
@@ -247,6 +249,7 @@ static NSString *TransLationF1 = @"0AF1";
 }
 #pragma mark 断开连接
 -(void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
+    [kAPPDELEGATE._loacluserinfo setBluetoothName:nil];//设备的名字
     NSLog(@"蓝牙断开连接：%@",error);
 }
 

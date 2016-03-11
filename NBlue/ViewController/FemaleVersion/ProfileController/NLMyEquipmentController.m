@@ -291,11 +291,15 @@
             }
             case 1:
             {
+                if ([kAPPDELEGATE._loacluserinfo getBluetoothName] == nil) {
+                    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"你还没有连接设备"];
+                    return;
+                }
                 [_bluetooth connectReseart];
                 [kAPPDELEGATE._loacluserinfo bluetoothSetTime:@"1"];
-                NLConnectBloothViewController *vc = [[NLConnectBloothViewController alloc] init];
-                [vc setHidesBottomBarWhenPushed:YES];
-                [self.navigationController pushViewController:vc animated:YES];
+//                NLConnectBloothViewController *vc = [[NLConnectBloothViewController alloc] init];
+//                [vc setHidesBottomBarWhenPushed:YES];
+//                [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
             default:
