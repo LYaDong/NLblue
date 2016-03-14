@@ -64,6 +64,8 @@
 #define NLUpCycleOrPeriodFicaledNotification @"NLUpCycleOrPeriodFicaledNotification"
 #define NLThirdLoginSuccessNotification @"NLThirdLoginSuccessNotification"
 #define NLThirdLoginFicaledNotification @"NLThirdLoginFicaledNotification"
+#define NLGetMyMessageSuccessNotification @"NLGetMyMessageSuccessNotification"
+#define NLGetMyMessageFicaledNotification @"NLGetMyMessageFicaledNotification"
 
 
 //================================   L    Y     D    ============================================

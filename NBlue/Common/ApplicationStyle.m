@@ -261,6 +261,12 @@
     NSString *formatDate = [formatter stringFromDate:date];
     return formatDate;
 }
++(NSString *)datePickerTransformationVacancyTime:(NSInteger)time{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy/MM/dd  HH:mm"];
+    NSString *formatDate = [formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:time/1000]];
+    return formatDate;
+}
 +(NSDate *)dateTransformationStr:(NSString *)str{
     NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init] ;
     [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];

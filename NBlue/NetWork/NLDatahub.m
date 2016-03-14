@@ -18,6 +18,7 @@ static NSString *NLUserApi = @"/user";//各个接口端
 static NSString *NLSportApi = @"/sport";//各个接口端
 static NSString *NLMenstruation = @"/menstruation";//各个接口端
 static NSString *NLFolks = @"/folks";//各个接口端 User的子接口
+static NSString *NLMessage = @"/message";//消息接口端
 static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
 
 
@@ -45,7 +46,6 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
 -(instancetype)init{
     self = [super init];
     if (self) {
-        
     }
     return self;
 }
@@ -425,10 +425,72 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
         });
     }];
 }
-
-//转JSON数据
+#pragma mark 获取我的消息
+-(void)getMyMessages{
+    NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                 @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@%@",NLmobileApiBaseUrl,NLMessage];
+    [_manager GET:url parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLGetMyMessageSuccessNotification object:[self dataTransformationJson:responseObject]];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLGetMyMessageFicaledNotification object:error];
+        });
+    }];
+    
+   
+}
+//根据消息ID获得消息
+-(void)getMyMessagesID:(NSString *)messageID{
+    NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                 @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLMessage,messageID];
+    [_manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+       dispatch_async(dispatch_get_main_queue(), ^{
+           NSLog(@"%@",[self dataTransformationJson:responseObject]);
+       });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"%@",error);
+        });
+    }];
+}
+//提醒他的消息接口
+-(void)remindMessage:(NSString *)message type:(NSString *)type{
+    NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                 @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken],
+                                 @"to":@"2ed1b589-a47d-4663-9884-d9f650aa3d6e",//后期填绑定之后的ID
+                                 @"message":message,
+                                 @"type":type};
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLapplication,NLtextHeml, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = API_BASE_URL(NLMessage);
+    [_manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",[self dataTransformationJson:responseObject]);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+#pragma mark 转JSON数据
 - (NSDictionary *)dataTransformationJson:(id  _Nullable)responseObject{
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject
+                                                        options:NSJSONReadingMutableLeaves
+                                                          error:nil];
     return dic;
 }
 #pragma mark 处理报错401 直接跳到登录页
@@ -454,4 +516,5 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
 -(void)dismissHide{
     [[SMProgressHUD shareInstancetype] dismiss];
 }
+
 @end

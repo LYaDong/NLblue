@@ -40,9 +40,9 @@
 @implementation NLProfileViewController
 -(void)rightBtnDown{
     //暂时隐藏
-//    NLGiffiredSignViewController *vc = [[NLGiffiredSignViewController alloc] init];
-//    [vc setHidesBottomBarWhenPushed:YES];
-//    [self.navigationController pushViewController:vc animated:YES];
+    NLGiffiredSignViewController *vc = [[NLGiffiredSignViewController alloc] init];
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,7 +54,7 @@
     self.returnBtn.hidden = YES;
     [self notification];
     [self backViewUI];
-//    [self liftBtnUI];//后期打开
+    [self liftBtnUI];//后期打开
     [self bulidUI];
     
     

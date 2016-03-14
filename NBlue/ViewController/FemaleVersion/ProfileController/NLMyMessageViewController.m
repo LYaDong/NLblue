@@ -17,20 +17,25 @@
 
 @implementation NLMyMessageViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    _dataArray = [NSMutableArray array];
 
     self.view.backgroundColor = [ApplicationStyle subjectBackViewColor];
     self.titles.text = NSLocalizedString(@"NLProfileView_MyMessage", nil);
     [self bulidUI];
+    [self loadDataMessage];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self delNotification];
+    [self addNotification];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self delNotification];
 }
 #pragma mark 基础UI
 -(void)bulidUI{
@@ -39,11 +44,19 @@
     _mainTableView.dataSource = self;
     _mainTableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.view addSubview:_mainTableView];
+    _mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self loadDataMessage];
+    }];
+    //暂时注释掉
+//    _mainTableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+//        [self footerDataMessage];
+//    }];
 }
+
 #pragma mark 系统Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    return _dataArray.count;
-    return 4;
+    return _dataArray.count;
+//    return 4;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [ApplicationStyle control_height:201];
@@ -54,19 +67,31 @@
     if (!cell) {
         cell = [[NLMyMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
     }
+    NSString *headImage = [[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"header"]==[NSNull null]||[[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"header"]==nil?@"":[[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"header"];
+    NSString *name = [[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"name"]==[NSNull null]||[[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"name"]==nil?@"":[[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"name"];
+    NSString *count = [[_dataArray[indexPath.row] objectForKey:@"message"] objectForKey:@"message"]==[NSNull null]||[[_dataArray[indexPath.row] objectForKey:@"message"] objectForKey:@"message"]==nil?@"":[[_dataArray[indexPath.row] objectForKey:@"message"] objectForKey:@"message"];
     
-    [cell.headImage sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"User_Head"]];
-    cell.headTitle.text = @"暖蓝小助手";
-    cell.timeLab.text = [NSString stringWithFormat:@"%@  %@",@"12/16",@"12:25"];
-    cell.countLab.text = @"你女朋友今天在经期，但是已经走了7K步啦，快去阻止她糟蹋自己的身体!";
+    NSString *times = [ApplicationStyle datePickerTransformationVacancyTime:[[[_dataArray[indexPath.row] objectForKey:@"message"] objectForKey:@"created"] integerValue]];
+    
+    [cell.headImage sd_setImageWithURL:[NSURL URLWithString:headImage] placeholderImage:[UIImage imageNamed:@"User_Head"]];
+    cell.headTitle.text = name;
+    cell.timeLab.text = [times substringWithRange:NSMakeRange(5, times.length - 5)];
+    cell.countLab.text = count;
+    
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSString *name = [[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"name"]==[NSNull null]||[[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"name"]==nil?@"":[[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"name"];
+    
+    NSString *count = [[_dataArray[indexPath.row] objectForKey:@"message"] objectForKey:@"message"]==[NSNull null]||[[_dataArray[indexPath.row] objectForKey:@"message"] objectForKey:@"message"]==nil?@"":[[_dataArray[indexPath.row] objectForKey:@"message"] objectForKey:@"message"];
+    NSString *times = [ApplicationStyle datePickerTransformationVacancyTime:[[[_dataArray[indexPath.row] objectForKey:@"message"] objectForKey:@"created"] integerValue]];
+    
     NLMessageDetailsViewController *vc = [[NLMessageDetailsViewController alloc] init];
-    vc.titleLab = @"暖蓝小助手";
-    vc.timeLab = @"2016/1/19   9:30";
-    vc.countLab = @"你女朋友今天在经期，但是已经走了7K步啦，快去阻止她糟蹋自己的身体!";
+    vc.titleLab = name;
+    vc.timeLab = times;
+    vc.countLab = count;
     vc.promptLab = @"暖蓝小提示:\n经期不宜过量运动，过量运动会造成经血增加、痛经加重等情况";
     [vc setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:vc animated:YES];
@@ -75,6 +100,35 @@
 }
 #pragma mark 自己的Delegate
 #pragma mark 自己的按钮事件
+-(void)addNotification{
+    NSNotificationCenter *notifi = [NSNotificationCenter defaultCenter];
+    [notifi addObserver:self selector:@selector(myMessageSuccess:) name:NLGetMyMessageSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(myMessageFicaled) name:NLGetMyMessageFicaledNotification object:nil];
+}
+-(void)myMessageSuccess:(NSNotification *)notifi{
+    [_dataArray removeAllObjects];
+    [_dataArray addObjectsFromArray:notifi.object];
+    [_mainTableView reloadData];
+}
+-(void)myMessageFicaled{
+    
+}
+
+
+
+
+
+#pragma mark 网络请求
+-(void)loadDataMessage{
+    [[NLDatahub sharedInstance] getMyMessages];
+}
+//-(void)footerDataMessage{
+//    
+//}
+
+-(void)delNotification{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

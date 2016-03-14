@@ -153,6 +153,7 @@
 		04FC23961C51C40600FC4FDA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC23951C51C40600FC4FDA /* MobileCoreServices.framework */; };
 		04FC23981C51C41200FC4FDA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FC23971C51C41200FC4FDA /* CFNetwork.framework */; };
 		04FDE4C91C464B8800FFB065 /* NLPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FDE4C81C464B8800FFB065 /* NLPickView.m */; };
+		04FF1C451C969A8400153D82 /* NLRemindMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF1C441C969A8400153D82 /* NLRemindMessageViewController.m */; };
 		4A3CFF267937751BD6F2302D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E0A4932CCDD3CB9C4B5CFA /* libPods.a */; };
 		BD292EBC1C819CC70099B54B /* NLBluetoothAgreementNew.m in Sources */ = {isa = PBXBuildFile; fileRef = BD292EBB1C819CC70099B54B /* NLBluetoothAgreementNew.m */; };
 		BD292EBF1C81A2820099B54B /* NLBluetoothCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = BD292EBE1C81A2820099B54B /* NLBluetoothCommand.m */; };
@@ -445,6 +446,8 @@
 		04FC23971C51C41200FC4FDA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		04FDE4C71C464B8800FFB065 /* NLPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLPickView.h; sourceTree = "<group>"; };
 		04FDE4C81C464B8800FFB065 /* NLPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLPickView.m; sourceTree = "<group>"; };
+		04FF1C431C969A8400153D82 /* NLRemindMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRemindMessageViewController.h; sourceTree = "<group>"; };
+		04FF1C441C969A8400153D82 /* NLRemindMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRemindMessageViewController.m; sourceTree = "<group>"; };
 		46E0A4932CCDD3CB9C4B5CFA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D156C54B110CBBF4D4804D4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8F50F23BC12A7C0575CA9364 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -539,6 +542,8 @@
 				040BBD861C8FD27200C7E5A0 /* NLSearchBluetooth.m */,
 				04018BA41C3CB914009AC56A /* NLHotMoxibustionViewController.h */,
 				04018BA51C3CB914009AC56A /* NLHotMoxibustionViewController.m */,
+				04FF1C431C969A8400153D82 /* NLRemindMessageViewController.h */,
+				04FF1C441C969A8400153D82 /* NLRemindMessageViewController.m */,
 			);
 			path = HotMoxibustionController;
 			sourceTree = "<group>";
@@ -1383,6 +1388,7 @@
 				040E12651C48DA1400769AD1 /* UIView+SMAutolayout.m in Sources */,
 				04018CE51C3CBDBC009AC56A /* NLMyHerViewController.m in Sources */,
 				04018C0A1C3CB914009AC56A /* NLPeriodViewController.m in Sources */,
+				04FF1C451C969A8400153D82 /* NLRemindMessageViewController.m in Sources */,
 				04018C1A1C3CB914009AC56A /* NLCalenderPicker.m in Sources */,
 				04018C191C3CB914009AC56A /* NLCalenderLifeHabit.m in Sources */,
 				04018C041C3CB914009AC56A /* NLHotMoxibustionViewController.m in Sources */,

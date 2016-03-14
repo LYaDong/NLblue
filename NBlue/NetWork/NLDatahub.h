@@ -71,4 +71,14 @@
  * 第三方登录
  */
 -(void)thirdLogin:(NSDictionary *)dic;
+/**
+ * 获取我的消息
+ */
+-(void)getMyMessages;
+/**
+ * 提醒他 
+ * message:你需要提醒的内容 type:页面的Type
+ */
+-(void)remindMessage:(NSString *)message type:(NSString *)type;
+
 @end

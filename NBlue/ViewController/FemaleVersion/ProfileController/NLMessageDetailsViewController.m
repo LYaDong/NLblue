@@ -35,7 +35,7 @@
     headTitle.textColor = [@"313131" hexStringToColor];
     [self.view addSubview:headTitle];
     
-    UILabel *headTime = [[UILabel alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:222+24], [ApplicationStyle navBarAndStatusBarSize] + [ApplicationStyle control_height:40], [ApplicationStyle control_weight:222], [ApplicationStyle control_height:30])];
+    UILabel *headTime = [[UILabel alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:240+24], [ApplicationStyle navBarAndStatusBarSize] + [ApplicationStyle control_height:40], [ApplicationStyle control_weight:240], [ApplicationStyle control_height:30])];
     headTime.text = self.timeLab;
     headTime.font = [UIFont  systemFontOfSize:[ApplicationStyle control_weight:28]];
     headTime.textColor = [@"959595" hexStringToColor];

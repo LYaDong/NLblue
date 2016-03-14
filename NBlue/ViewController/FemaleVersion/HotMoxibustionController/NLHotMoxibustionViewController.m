@@ -21,6 +21,7 @@ static const NSInteger NOVICEGUIDETAG = 6000;
 #import "NLConnectBloothViewController.h"
 #import "SMProgressHUD.h"
 #import "NLBluetoothAgreementNew.h"
+#import "NLRemindMessageViewController.h"
 
 @interface NLHotMoxibustionViewController ()<UIScrollViewDelegate,NLHalfViewDelgate>
 @property(nonatomic,strong)NLHalfView *temperatureCilcle;
@@ -42,6 +43,7 @@ static const NSInteger NOVICEGUIDETAG = 6000;
 @property(nonatomic,assign)NSInteger equipmentStatsCount;
 @property(nonatomic,strong)NLBluetoothAgreementNew *bluetooth;
 @property(nonatomic,assign)NSInteger noviceGuideIndex;
+@property(nonatomic,strong)UIButton *remindMessageBtn;
 
 
 
@@ -363,106 +365,7 @@ static const NSInteger NOVICEGUIDETAG = 6000;
     _bluetooth.queryTempertureStr = ^(NSString *dataStr){
         [hotMoxi isTemperatureOff:dataStr];
     };
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
-//    [blues bluetoothAllocInit];
-//    blues.getConnectData = ^(NSString *blueData){
-//        NSLog(@"蓝牙反馈数据：%@",blueData);
-//        
-//
-////        [self theMainSwitch];
-//        
-////        if ([blueData isEqualToString:@"0330880100"]) {
-////            [self theMainSwitch];
-////            return ;
-////        }
-////        [self callRemind];
-//        
-//        
-////        if ([blueData isEqualToString:EquiomentCommandEndSportBlue]) {
-////            _equipmentStatsCount = 1;
-////            [_sleepDataArr removeAllObjects];
-////            [self sleepDataQuery];//获取睡眠数据
-////        }
-////        
-////        if (_equipmentStatsCount == 1) {
-////            if ([blueData isEqualToString:EquiomentCommandEndSleepBlue]) {
-////                [[SMProgressHUD shareInstancetype] dismiss];
-////            }
-////        }
-////        
-////        
-////        //刷新页面数据
-//        if ([blueData isEqualToString:EquiomentCommandEndSleepBlue]) {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:RefrefhSleepDataNotification object:nil];
-//        }
-//        if ([blueData isEqualToString:EquiomentCommandEndSportBlue]) {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:RefrefhStopDataNotification object:nil];
-//        }
-////
-////        
-////        //获得设备信息
-////        [NLBluetoothDataAnalytical bluetoothCommandReturnData:blueData];
-////        //调温
-////        [self temperaturetOFF:blueData];
-////        //记步
-////        [self sportData:blueData];
-////        //        //判断温度
-////        [self isTemperatureOff:blueData];
-////        //睡眠数据
-////        [self sleepDatas:blueData];
-//    };
-//    blues.perheral = ^(NSArray *perpheral){
-//        _peripheralArray = perpheral;//获得当前的外围设备
-//        
-//    };
-//    blues.getConnectionSuccess = ^(NSString *connectionSuccess){
-//        if ([connectionSuccess isEqualToString:EquiomentConnectionSuccess]) {
-//            _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect"];
-//            if (!_isQuert) {
-////                [self judgmentTemperatureQuery];//查询温度
-//                if (![[kAPPDELEGATE._loacluserinfo getBlueToothTime] isEqualToString:@"1"]) {
-//                    [self setTimeEquipment];//第一次连接设备的时候设置设备时间
-//                }
-//                [self sportDataQuery];//获得运动数据命令
-//                
-//                
-//                
-//                
-//                _isQuert = !_isQuert;
-//            }
-//            
-//
-//            
-//
-//            if (!_isQuert) {
-////                [[SMProgressHUD shareInstancetype] showLoadingWithTip:@"恢复数据中，请耐心等待"];
-////                if (![[kAPPDELEGATE._loacluserinfo getBlueToothTime] isEqualToString:@"1"]) {
-////                    [kAPPDELEGATE._loacluserinfo bluetoothSetTime:@"1"];
-////                    [self setTimeEquipment];//设置设备时间
-////                }
-////                [self judgmentTemperatureQuery];//查询温度
-////                [self sportDataQuery];//获得运动数据
-//                
-//            [self ancsNotification];
-////                [self theMainSwitch];
-//
-//                _isQuert = !_isQuert;
-//            }
-//        }
-//        if ([connectionSuccess isEqualToString:EquiomentConnectionFiale]) {
-//            _blueImage.image = [UIImage imageNamed:@"NL_Blue_Connect_N"];
-//        }
-//    };
+ 
 }
 -(void)halfCircle{
     
@@ -540,6 +443,14 @@ static const NSInteger NOVICEGUIDETAG = 6000;
     [_moxibustionBtn setImage:[UIImage imageNamed:@"HM_G"] forState:UIControlStateNormal];
     [_moxibustionBtn addTarget:self action:@selector(moxibustionBtnDown) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_moxibustionBtn];
+    
+    
+    _remindMessageBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    _remindMessageBtn.frame = CGRectMake(0, _staffScrollew.bottomOffset + [ApplicationStyle control_height:86], [ApplicationStyle control_weight:100], [ApplicationStyle control_height:50]);
+    [_remindMessageBtn setTitle:@"召唤暖男" forState:UIControlStateNormal];
+    [_remindMessageBtn addTarget:self action:@selector(remindMessageDown) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_remindMessageBtn];
+    
 }
 
 
@@ -847,6 +758,13 @@ static const NSInteger NOVICEGUIDETAG = 6000;
         [_timeVer invalidate];
     }
 }
+//提醒他的按钮事件
+-(void)remindMessageDown{
+    NLRemindMessageViewController *vc = [[NLRemindMessageViewController alloc] init];
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 
 #pragma makr 字体大小

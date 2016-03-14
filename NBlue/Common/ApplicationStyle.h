@@ -221,6 +221,10 @@
  */
 +(NSString *)datePickerTransformationCorssCorssMothDay:(NSDate *)date;
 /**
+ * 12/23  11:11 格式
+ */
++(NSString *)datePickerTransformationVacancyTime:(NSInteger)time;
+/**
  *20150101格式
  */
 +(NSString *)datePickerTransformationStr:(NSDate *)date;
