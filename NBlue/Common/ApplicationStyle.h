@@ -277,6 +277,11 @@
  * @param  size 要压缩的尺寸
  */
 + (UIImage *)compressFinishIsImages:(UIImage *)image scaledToSize:(CGSize)size;
+/**
+ * 创建毛玻璃
+ * @param  imageView  要做图片的毛玻璃
+ */
++ (UIVisualEffectView *)woolGlassEatablishImage:(UIImageView *)imageView;
 @end
 
 @interface ApplicationStyle (NSArrays)

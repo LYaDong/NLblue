@@ -11,44 +11,40 @@ static const NSInteger THIRDSHARETAG = 1000;
 
 #import "NLShareView.h"
 #import "NLAboutUpperImageBtn.h"
-#import <UMSocialWechatHandler.h>
-#import <UMSocialDataService.h>
-#import <UMSocialControllerService.h>
-#import <UMSocialSnsPlatformManager.h>
-@interface NLShareView ()<UMSocialDataDelegate>
+@interface NLShareView ()
 @end
 
 @implementation NLShareView
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame imageArray:(NSArray *)imageArray textArray:(NSArray *)textArray{
     if (self = [super initWithFrame:frame]) {
-        [self buildUI];
+        [self buildUIImageArray:imageArray textArray:textArray];
     }
     return self;
 }
--(void)buildUI{
+-(void)buildUIImageArray:(NSArray *)imageArray textArray:(NSArray *)textArray{
     UIView *viewBack = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle control_height:297])];
-    viewBack.backgroundColor = [ApplicationStyle subjectWithColor];
+    viewBack.backgroundColor = [UIColor clearColor];
     [self addSubview:viewBack];
     
-    NSArray *shareText = @[NSLocalizedString(@"NL_Share_WechatFriend", nil),
-                           NSLocalizedString(@"NL_Share_WechatCircle", nil),
-                           NSLocalizedString(@"NL_Share_QQ", nil),
-                           NSLocalizedString(@"NL_Share_WeiBo", nil),];
-    NSArray *shareImage = @[@"NL_Share_WeChartFriend",
-                            @"NL_Share_WeChartCircle",
-                            @"NL_Share_QQ",
-                            @"NL_Share_WB"];
+//    NSArray *shareText = @[NSLocalizedString(@"NL_Share_WechatFriend", nil),
+//                           NSLocalizedString(@"NL_Share_WechatCircle", nil),
+//                           NSLocalizedString(@"NL_Share_QQ", nil),
+//                           NSLocalizedString(@"NL_Share_WeiBo", nil),];
+//    NSArray *shareImage = @[@"NL_Share_WeChartFriend",
+//                            @"NL_Share_WeChartCircle",
+//                            @"NL_Share_QQ",
+//                            @"NL_Share_WB"];
 
-    for (NSInteger i=0; i<shareText.count; i++) {
+    for (NSInteger i=0; i<imageArray.count; i++) {
         
         
-        CGRect frame = CGRectMake((SCREENWIDTH/4 - [ApplicationStyle control_weight:132])/2 + i * SCREENWIDTH/4, [ApplicationStyle control_height:44], [ApplicationStyle control_weight:132], [ApplicationStyle control_height:132]);
+        CGRect frame = CGRectMake((SCREENWIDTH/imageArray.count - [ApplicationStyle control_weight:132])/2 + i * SCREENWIDTH/imageArray.count, [ApplicationStyle control_height:44], [ApplicationStyle control_weight:132], [ApplicationStyle control_height:132]);
         
 
         NLAboutUpperImageBtn *thirdShare = [[NLAboutUpperImageBtn alloc] initWithFrame:frame];
         
-        [thirdShare setImage:[UIImage imageNamed:shareImage[i]] forState:UIControlStateNormal];
-        [thirdShare setTitle:shareText[i] forState:UIControlStateNormal];
+        [thirdShare setImage:[UIImage imageNamed:imageArray[i]] forState:UIControlStateNormal];
+        [thirdShare setTitle:textArray[i] forState:UIControlStateNormal];
         [thirdShare setTitleColor:[@"222222" hexStringToColor] forState:UIControlStateNormal];
         thirdShare.titleLabel.font = [ApplicationStyle textSuperSmallFont];
         thirdShare.tag = THIRDSHARETAG + i;
@@ -61,10 +57,11 @@ static const NSInteger THIRDSHARETAG = 1000;
     lines.backgroundColor = [@"dddddd" hexStringToColor];
     [viewBack addSubview:lines];
     
-    UIButton *cancle = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIButton *cancle = [UIButton buttonWithType:UIButtonTypeCustom];
     cancle.frame = CGRectMake(0, lines.bottomOffset+[ApplicationStyle control_height:1], SCREENWIDTH, [ApplicationStyle control_height:96]);
-    [cancle setTitle:NSLocalizedString(@"GeneralText_Cancel", nil) forState:UIControlStateNormal];
-    [cancle setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [cancle setTitle:NSLocalizedString(@"GeneralText_Cancel", nil) forState:UIControlStateNormal];
+//    [cancle setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [cancle setImage:[UIImage imageNamed:@"NL_Callmale_cancle"] forState:UIControlStateNormal];
     cancle.titleLabel.font = [ApplicationStyle textThrityFont];
     [cancle addTarget:self action:@selector(cancleDown) forControlEvents:UIControlEventTouchUpInside];
     [viewBack addSubview:cancle];

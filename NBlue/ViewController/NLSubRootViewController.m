@@ -91,31 +91,6 @@
         self.rightBtn.hidden = YES;
         [self.view addSubview:self.rightBtn];
         
-        
-        
-//        self.controllerBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
-//        self.controllerBack.image = [UIImage imageNamed:@"RootContorllewImage"];
-//        [self.view addSubview:self.controllerBack];
-//        
-//        self.navBarBack = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, [ApplicationStyle navigationBarSize] + [ApplicationStyle statusBarSize])];
-//        self.navBarBack.backgroundColor = [ApplicationStyle subjectNavBarBackColor];
-//        self.navBarBack.alpha = 0.5;
-//        [self.view addSubview:self.navBarBack];
-//        
-//        UIView *nabStroke = [UIView statusBackView:CGRectMake(0, [ApplicationStyle navigationBarSize] + [ApplicationStyle statusBarSize] - [ApplicationStyle control_height:5], SCREENWIDTH, [ApplicationStyle control_height:5])];
-//        nabStroke.alpha = 0.15 + 0.25;
-//        [self.navBarBack addSubview:nabStroke];
-//        
-//        self.navBarPushBack = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH,[ApplicationStyle navBarAndStatusBarSize])];
-//        self.navBarPushBack.hidden = YES;
-//        self.navBarPushBack.backgroundColor = [ApplicationStyle subJectNavBarColor];
-//        [self.view addSubview:self.navBarPushBack];
-//        
-//        
-//
-        
-//
-        
     }
     
     

@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NBlue/ViewController/FemaleVersion/MangetNumber/NLLogInViewController.m"
-            timestampString = "479381885.122741"
+            filePath = "NBlue/NetWork/NLBlockInterface.m"
+            timestampString = "479617779.327346"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "417"
-            endingLineNumber = "417"
-            landmarkName = "-thirdLoginSuccess:"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "-interfaceReturn:error:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NBlue/NetWork/NLBlockInterface.m"
-            timestampString = "479617779.327346"
+            filePath = "NBlue/ViewController/FemaleVersion/ProfileController/NLMyMessageViewController.m"
+            timestampString = "479732522.00274"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "-interfaceReturn:error:"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "-myMessageSuccess:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NBlue/CacheData/NLSQLData.m"
+            timestampString = "479733322.821534"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "940"
+            endingLineNumber = "940"
+            landmarkName = "+myMessage:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

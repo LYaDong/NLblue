@@ -10,7 +10,8 @@
 #import "NLQRCodeViewController.h"
 
 @interface NLMyMaleViewController ()
-
+@property(nonatomic,strong)UIView *sweepView;
+@property(nonatomic,strong)UIImageView *imageView;
 @end
 
 @implementation NLMyMaleViewController
@@ -39,9 +40,12 @@
     [[NLDatahub sharedInstance] maleJudgeIsHave];
 }
 -(void)scanCodeUI{
-    UIImageView *expressionImg = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:164])/2, [ApplicationStyle navigationBarSize] + [ApplicationStyle statusBarSize]+[ApplicationStyle control_height:238], [ApplicationStyle control_weight:164], [ApplicationStyle control_height:170])];
+    _sweepView = [[UIView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle navBarAndStatusBarSize])];
+    [self.view addSubview:_sweepView];
+    
+    UIImageView *expressionImg = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:164])/2,[ApplicationStyle statusBarSize]+[ApplicationStyle control_height:238], [ApplicationStyle control_weight:164], [ApplicationStyle control_height:170])];
     expressionImg.image = [UIImage imageNamed:@"NL_Pro_Male_Expression"];
-    [self.view addSubview:expressionImg];
+    [_sweepView addSubview:expressionImg];
     
     CGSize textCountSize = [ApplicationStyle textSize:NSLocalizedString(@"NLProfileView_MaleTextCount", nil) font:[ApplicationStyle textThrityFont] size:SCREENWIDTH];
     
@@ -51,7 +55,7 @@
     textCount.font = [ApplicationStyle textThrityFont];
     textCount.textAlignment = NSTextAlignmentCenter;
     textCount.textColor = [@"535353" hexStringToColor];
-    [self.view addSubview:textCount];
+    [_sweepView addSubview:textCount];
     
     UIButton *sweepBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     sweepBtn.frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:300])/2, textCount.bottomOffset + [ApplicationStyle control_height:48], [ApplicationStyle control_weight:300], [ApplicationStyle control_height:80]);
@@ -59,17 +63,17 @@
     [sweepBtn setImage:[UIImage imageNamed:@"NL_Pro_Male_SYS_X"] forState:UIControlStateHighlighted];
     sweepBtn.layer.cornerRadius = [ApplicationStyle control_weight:10];
     [sweepBtn addTarget:self action:@selector(sweepBtnDown) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:sweepBtn];
+    [_sweepView addSubview:sweepBtn];
     
     CGSize textSize = [ApplicationStyle textSize:NSLocalizedString(@"NLProfileView_MaleText", nil) font:[UIFont systemFontOfSize:[ApplicationStyle control_weight:24]] size:SCREENWIDTH];
     
-    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT - textSize.height - [ApplicationStyle control_height:40], SCREENWIDTH, textSize.height)];
+    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT - [ApplicationStyle navBarAndStatusBarSize] - textSize.height - [ApplicationStyle control_height:40], SCREENWIDTH, textSize.height)];
     text.text = NSLocalizedString(@"NLProfileView_MaleText", nil);
     text.textColor = [@"570707" hexStringToColor];
     text.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:24]];
     text.numberOfLines = 0;
     text.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:text];
+    [_sweepView addSubview:text];
 }
 #pragma mark 系统Delegate
 #pragma mark 自己的Delegate
@@ -91,17 +95,28 @@
     NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
     [notifi addObserver:self selector:@selector(success:) name:NLFolkSuccessNotification object:nil];
     [notifi addObserver:self selector:@selector(ficaled) name:NLFolkFicaledNotification object:nil];
+    [notifi addObserver:self selector:@selector(bindingSuccess) name:NLFolkSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(bindingFicaled) name:NLFolkFicaledNotification object:nil];
 }
 -(void)success:(NSNotification *)notifi{
+    [self scanCodeUI];
     if (notifi.object == nil) {
         [self scanCodeUI];
     }else{
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle statusBarSize]- [ApplicationStyle navigationBarSize])];
-        imageView.image = [UIImage imageNamed:@"NL_M_Male_B"];
-        [self.view addSubview:imageView];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle statusBarSize]- [ApplicationStyle navigationBarSize])];
+        _imageView.image = [UIImage imageNamed:@"NL_M_Male_B"];
+        [self.view addSubview:_imageView];
     }
 }
 -(void)ficaled{
+    
+}
+//绑定成功
+-(void)bindingSuccess{
+    _sweepView.hidden = YES;
+    _imageView.hidden = YES;
+}
+-(void)bindingFicaled{
     
 }
 -(void)delNotification{

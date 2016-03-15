@@ -9,5 +9,5 @@
 #import "NLSubRootViewController.h"
 
 @interface NLRemindMessageViewController : NLSubRootViewController
-
+@property(nonatomic,strong)UIImage *backImage;
 @end

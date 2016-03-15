@@ -19,11 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    {
-        self.navBarBack.hidden = YES;
-        self.navBarPushBack.hidden = NO;
-        self.controllerBack.hidden = YES;
-    }
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [ApplicationStyle subjectBackViewColor];
     

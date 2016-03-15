@@ -10,6 +10,7 @@
 #import "NLMyMessageCell.h"
 #import "NLMessageDetailsViewController.h"
 #import <UIImageView+WebCache.h>
+#import "NLSQLData.h"
 @interface NLMyMessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *mainTableView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
@@ -107,8 +108,13 @@
 }
 -(void)myMessageSuccess:(NSNotification *)notifi{
     [_dataArray removeAllObjects];
+    
+    [NLSQLData myMessage:_dataArray];
     [_dataArray addObjectsFromArray:notifi.object];
     [_mainTableView reloadData];
+    [_mainTableView.mj_header endRefreshing];
+    
+    
 }
 -(void)myMessageFicaled{
     

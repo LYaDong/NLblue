@@ -129,8 +129,21 @@
     _blackBackView.hidden = YES;
     [self.view addSubview:_blackBackView];
     
-    _shareView = [[NLShareView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, [ApplicationStyle control_height:300])];
+    
+    NSArray *shareText = @[NSLocalizedString(@"NL_Share_WechatFriend", nil),
+                           NSLocalizedString(@"NL_Share_WechatCircle", nil),
+                           NSLocalizedString(@"NL_Share_QQ", nil),
+                           NSLocalizedString(@"NL_Share_WeiBo", nil),];
+    NSArray *shareImage = @[@"NL_Share_WeChartFriend",
+                            @"NL_Share_WeChartCircle",
+                            @"NL_Share_QQ",
+                            @"NL_Share_WB"];
+
+    CGRect frame = CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, [ApplicationStyle control_height:300]);
+    
+    _shareView = [[NLShareView alloc] initWithFrame:frame imageArray:shareImage textArray:shareText];
     _shareView.delegate = self;
+    _shareView.backgroundColor = [UIColor whiteColor];
     [[[UIApplication sharedApplication] keyWindow] addSubview:_shareView];
     
     
@@ -183,11 +196,11 @@
                                     @"NLAboutNLViewController"];
     
     if (indexPath.row == 2) {
-        [kAPPDELEGATE AutoDisplayAlertView:@"温馨提示" :@"暂未开放，敬请期待哦~~😊"];//暂时隐藏
-//        _blackBackView.hidden = NO;
-//        [UIView animateWithDuration:0.5 animations:^{
-//            _shareView.frame = CGRectMake(0, SCREENHEIGHT - [ApplicationStyle control_height:300], SCREENWIDTH, [ApplicationStyle control_height:300]);
-//        }];
+//        [kAPPDELEGATE AutoDisplayAlertView:@"温馨提示" :@"暂未开放，敬请期待哦~~😊"];//暂时隐藏
+        _blackBackView.hidden = NO;
+        [UIView animateWithDuration:0.5 animations:^{
+            _shareView.frame = CGRectMake(0, SCREENHEIGHT - [ApplicationStyle control_height:300], SCREENWIDTH, [ApplicationStyle control_height:300]);
+        }];
     }else{
         UIViewController *viewControllew = [[NSClassFromString(viewConrollerArray[indexPath.row])alloc] init];
         [viewControllew setHidesBottomBarWhenPushed:YES];
@@ -203,7 +216,7 @@
                 [UMSocialData defaultData].extConfig.wechatSessionData.title = @"暖蓝Warman";
                 [self sharePlatformArray:@[UMShareToWechatSession] shareCount:@"测试" icon:[UIImage imageNamed:@"User_Head"]];
             }else{
-                
+                [kAPPDELEGATE AutoDisplayAlertView:@"提示：" :@"你还没有安装微信哦~"];
             }
             break;
         }

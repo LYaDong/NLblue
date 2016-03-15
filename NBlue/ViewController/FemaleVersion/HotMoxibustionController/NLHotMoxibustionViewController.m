@@ -761,8 +761,11 @@ static const NSInteger NOVICEGUIDETAG = 6000;
 //提醒他的按钮事件
 -(void)remindMessageDown{
     NLRemindMessageViewController *vc = [[NLRemindMessageViewController alloc] init];
+    vc.backImage = [self imageFromView];
     [vc setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self presentViewController:vc animated:YES completion:^{
+        
+    }];
 }
 
 
@@ -869,6 +872,15 @@ static const NSInteger NOVICEGUIDETAG = 6000;
     }else{
         [btn setImage:image_6 forState:UIControlStateNormal];
     }
+}
+
+- (UIImage *)imageFromView {
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.view.layer renderInContext:context];
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
 }
 
 

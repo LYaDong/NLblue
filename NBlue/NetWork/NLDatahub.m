@@ -257,17 +257,16 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
     _manager = [AFHTTPSessionManager manager];
     _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLtextHeml,NLapplication, nil];
     _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_Login] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,User_QRCode] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"%ld",task.state);
-            NSLog(@"%@",responseObject);
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLMaleBindingSuccessNotification object:[self dataTransformationJson:responseObject] userInfo:nil];
         });
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@" error = %@",error);
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLMaleBindingFicaledNotification object:error userInfo:nil];
         });
     }];
 }
@@ -481,9 +480,9 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
     [_manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",[self dataTransformationJson:responseObject]);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NLRemindMessageSuccessNotification object:[self dataTransformationJson:responseObject]];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NLRemindMessageFicaledNotification object:error];
     }];
 }
 #pragma mark 转JSON数据

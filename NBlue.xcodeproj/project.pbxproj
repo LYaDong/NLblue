@@ -64,6 +64,7 @@
 		04018CEE1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018CED1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m */; };
 		04018CF11C3D179F009AC56A /* NLMaleIndividuaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04018CF01C3D179F009AC56A /* NLMaleIndividuaViewController.m */; };
 		0403F9781C2CE3420000A9C3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0403F9771C2CE3420000A9C3 /* CoreTelephony.framework */; };
+		04048D5D1C97E0D800CC0D38 /* NLShareToolClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 04048D5C1C97E0D800CC0D38 /* NLShareToolClass.m */; };
 		040BBD871C8FD27200C7E5A0 /* NLSearchBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 040BBD861C8FD27200C7E5A0 /* NLSearchBluetooth.m */; };
 		040E12621C48DA1400769AD1 /* SMProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E12591C48DA1400769AD1 /* SMProgressHUD.m */; };
 		040E12631C48DA1400769AD1 /* SMProgressHUDLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E125C1C48DA1400769AD1 /* SMProgressHUDLoadingView.m */; };
@@ -290,6 +291,8 @@
 		04018CEF1C3D179F009AC56A /* NLMaleIndividuaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMaleIndividuaViewController.h; sourceTree = "<group>"; };
 		04018CF01C3D179F009AC56A /* NLMaleIndividuaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMaleIndividuaViewController.m; sourceTree = "<group>"; };
 		0403F9771C2CE3420000A9C3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		04048D5B1C97E0D800CC0D38 /* NLShareToolClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLShareToolClass.h; sourceTree = "<group>"; };
+		04048D5C1C97E0D800CC0D38 /* NLShareToolClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLShareToolClass.m; sourceTree = "<group>"; };
 		040BBD851C8FD27200C7E5A0 /* NLSearchBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLSearchBluetooth.h; sourceTree = "<group>"; };
 		040BBD861C8FD27200C7E5A0 /* NLSearchBluetooth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLSearchBluetooth.m; sourceTree = "<group>"; };
 		040E12581C48DA1400769AD1 /* SMProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMProgressHUD.h; sourceTree = "<group>"; };
@@ -949,6 +952,8 @@
 				04F7F64D1C1BFC9000466EBC /* NLGestureRecognizer.m */,
 				04F762D51C44A54C003DBE4D /* NLQRCodeViewController.h */,
 				04F762D61C44A54C003DBE4D /* NLQRCodeViewController.m */,
+				04048D5B1C97E0D800CC0D38 /* NLShareToolClass.h */,
+				04048D5C1C97E0D800CC0D38 /* NLShareToolClass.m */,
 			);
 			path = ToolClass;
 			sourceTree = "<group>";
@@ -1469,6 +1474,7 @@
 				04018CEE1C3D16E3009AC56A /* NLMaleNBLuePlanViewController.m in Sources */,
 				0400D14E1C7BEFF00075390F /* NLMyMessageViewController.m in Sources */,
 				045D041E1C746FC7006F0653 /* MJRefreshConst.m in Sources */,
+				04048D5D1C97E0D800CC0D38 /* NLShareToolClass.m in Sources */,
 				04F4B7D21C083B3E00DE60DE /* NLLocalUserInfo.m in Sources */,
 				04018CE81C3CBFEA009AC56A /* NLMaleProfileViewController.m in Sources */,
 				04C9954A1C029E8300D8AE79 /* NLBluetoothAgreement.m in Sources */,
@@ -1654,8 +1660,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.pinai.NBlue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00a9a783-4e3d-4590-a579-06b3c83785d6";
-				"PROVISIONING_PROFILE[sdk=*]" = "00a9a783-4e3d-4590-a579-06b3c83785d6";
+				PROVISIONING_PROFILE = "ed6278e0-9abb-488a-ae5c-d7966c29635b";
+				"PROVISIONING_PROFILE[sdk=*]" = "ed6278e0-9abb-488a-ae5c-d7966c29635b";
 				SWIFT_OBJC_BRIDGING_HEADER = "NBlue/Common/NBlue-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;

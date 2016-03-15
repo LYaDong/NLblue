@@ -37,9 +37,9 @@
 }
 #pragma mark 基础UI
 -(void)bulidUI{
-//    [self generateQRCode];
-    [self periodCircleView];
-    [self pregnancyIndex];
+    [self generateQRCode];
+//    [self periodCircleView];
+//    [self pregnancyIndex];
 }
 -(void)generateQRCode{
     UIImage *qrcode = [ApplicationStyle createNonInterpolatedUIImageFormCIImage:

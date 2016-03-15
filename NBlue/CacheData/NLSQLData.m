@@ -579,9 +579,7 @@ __goto:
                                     @"1",
                                     [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
                 [db executeUpdate:inster withArgumentsInArray:dataArr];
-            }
-            
-            
+            }            
             if ([[kAPPDELEGATE._loacluserinfo getUserLogInTime] isEqualToString:times]) {
                 return;
             }
@@ -895,5 +893,106 @@ __goto:
         [dic setValue:[rs stringForColumn:@"endSleep_Time"] forKey:@"endSleep_Time"];
     }
     return dic;
+}
+#pragma mark 我的消息
++(void)myMessage:(NSMutableArray *)array{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    
+//    from =         {
+//        age = 18;
+//        created = 1450938532780;
+//        gender = 0;
+//        header = "<null>";
+//        height = 158;
+//        id = "def2074d-9e3f-457f-bded-5b1e1edf069e";
+//        name = "<null>";
+//        nickName = "<null>";
+//        openId = 13418919366;
+//        score = 0;
+//        stepGoal = 8000;
+//        type = phone;
+//        weight = 41;
+//    };
+//    message =         {
+//        created = 1453447287288;
+//        description = "\U60a8\U6536\U5230\U4e86\U4e00\U6761\U6696\U84dd\U6d88\U606f";
+//        from = "def2074d-9e3f-457f-bded-5b1e1edf069e";
+//        id = "d11ac64c-05de-45d0-a357-78e1c299e3ed";
+//        message = "<null>";
+//        read = 0;
+//        refer = "<null>";
+//        send = 1;
+//        templateId = "<null>";
+//        title = WARMAN;
+//        to = "ae6050ec-63fa-40eb-b326-e43aa280ab2c";
+//        type = 123;
+//    };
+//}
+
+    NSString *createTable = @"CREATE TABLE IF NOT EXISTS MyMessage (created TEXE NOT NULL,description TEXT NOT NULL,from TEXT NOT NULL,id TEXT PRIMARY KEY,message TEXT NOT NULL,read TEXT NOT NULL,refer TEXT NOT NULL,send TEXT NOT NULL,templateId TEXT NOT NULL,title TEXT NOT NULL,to TEXT NOT NULL,type TEXT NOT NULL,header TEXT NOT NULL,name TEXT NOT NULL,user_id TEXT NOT NULL)";
+    [db executeUpdate:createTable];
+    NSDictionary *dic = nil;
+    for (dic in array) {
+        
+        NSString *inster = @"INSERT OR REPLACE INTO MyMessage (created,description,from,id,message,read,refer,send,templateId,title,to,type,header,name,user_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        
+        NSLog(@"%@",array);
+        
+        NSArray *gumentsArr = [NSArray arrayWithObjects:
+                               [[dic objectForKey:@"message"] objectForKey:@"created"] == [NSNull null]?@"":[[dic objectForKey:@"message"] objectForKey:@"created"],
+                               [[dic objectForKey:@"message"] objectForKey:@"description"] == [NSNull null]?@"":[[dic objectForKey:@"message"] objectForKey:@"description"],
+                               [[dic objectForKey:@"message"] objectForKey:@"from"] == [NSNull null]?@"":[[dic objectForKey:@"message"] objectForKey:@"from"],
+                               [[dic objectForKey:@"message"] objectForKey:@"id"] == [NSNull null]?@"":[[dic objectForKey:@"message"] objectForKey:@"id"],
+                               [[dic objectForKey:@"message"] objectForKey:@"message"] == [NSNull null]?@"":[[dic objectForKey:@"message"] objectForKey:@"message"],
+                               [[dic objectForKey:@"message"] objectForKey:@"read"] == [NSNull null]?@"":[[dic objectForKey:@"message"] objectForKey:@"read"],
+                               [[dic objectForKey:@"message"] objectForKey:@"refer"] == [NSNull null]?@"":[[dic objectForKey:@"message"] objectForKey:@"refer"],
+                               [[dic objectForKey:@"message"] objectForKey:@"send"] == [NSNull null]?@"":[[dic objectForKey:@"message"] objectForKey:@"send"],
+                               [[dic objectForKey:@"message"] objectForKey:@"templateId"] == [NSNull null]?@"":[[dic objectForKey:@"message"] objectForKey:@"templateId"],
+                               [[dic objectForKey:@"message"] objectForKey:@"title"] == [NSNull null]?@"":[[dic objectForKey:@"message"] objectForKey:@"title"],
+                               [[dic objectForKey:@"message"] objectForKey:@"to"] == [NSNull null]?@"":[[dic objectForKey:@"message"] objectForKey:@"to"],
+                               [[dic objectForKey:@"message"] objectForKey:@"type"] == [NSNull null]?@"":[[dic objectForKey:@"message"] objectForKey:@"type"],
+                               [[dic objectForKey:@"from"] objectForKey:@"header"] == [NSNull null]?@"":[[dic objectForKey:@"from"] objectForKey:@"header"],
+                               [[dic objectForKey:@"from"] objectForKey:@"name"] == [NSNull null]?@"":[[dic objectForKey:@"from"] objectForKey:@"name"],
+                               [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
+        [db executeUpdate:inster withArgumentsInArray:gumentsArr];
+    }
+    [db close];
+}
++(NSMutableArray *)getMyMessageData{
+    NSMutableArray *array = [NSMutableArray array];
+    
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *takeCreate = [NSString stringWithFormat:@"SELECT * FROME MyMessage WHERE user_id = '%@'",[kAPPDELEGATE._loacluserinfo GetUser_ID]];
+    FMResultSet *rs = [db executeQuery:takeCreate];
+    while ([rs next]) {
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//        (created,description,from,id,message,read,refer,send,templateId,title,to,type,header,name,user_id) 
+        [dic setValue:[rs stringForColumn:@"created"] forKey:@"created"];
+        [dic setValue:[rs stringForColumn:@"description"] forKey:@"description"];
+        [dic setValue:[rs stringForColumn:@"from"] forKey:@"from"];
+        [dic setValue:[rs stringForColumn:@"id"] forKey:@"id"];
+        [dic setValue:[rs stringForColumn:@"message"] forKey:@"message"];
+        [dic setValue:[rs stringForColumn:@"read"] forKey:@"read"];
+        [dic setValue:[rs stringForColumn:@"refer"] forKey:@"refer"];
+        [dic setValue:[rs stringForColumn:@"send"] forKey:@"send"];
+        [dic setValue:[rs stringForColumn:@"templateId"] forKey:@"templateId"];
+        [dic setValue:[rs stringForColumn:@"title"] forKey:@"title"];
+        [dic setValue:[rs stringForColumn:@"to"] forKey:@"to"];
+        [dic setValue:[rs stringForColumn:@"type"] forKey:@"type"];
+        [dic setValue:[rs stringForColumn:@"header"] forKey:@"header"];
+        [dic setValue:[rs stringForColumn:@"name"] forKey:@"name"];
+        [array addObject:dic];
+    }
+    [db close];
+    return array;
+}
++(void)deleMyMessage{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *del = @"DROP TABLE MyMessage";
+    [db executeUpdate:del];
+    [db close];
 }
 @end

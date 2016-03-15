@@ -101,5 +101,17 @@
  * 根据时间获取当天睡眠数据
  */
 +(NSMutableArray *)sleepDataObtainTime:(NSString *)time;
+/**
+ * 填写我的消息
+ */
++(void)myMessage:(NSMutableArray *)array;
+/**
+ * 获得我的消息
+ */
++(NSMutableArray *)getMyMessageData;
+/**
+ * 删除我的消息
+ */
++(void)deleMyMessage;
 
 @end

@@ -351,19 +351,15 @@ static const NSInteger THIRDBTNTAG = 4000;
         [self.navigationController pushViewController:vc animated:YES];
         
     }else{
+        
+        
+        //暂时隐藏
+//        [kAPPDELEGATE._loacluserinfo userLogInTime:[ApplicationStyle datePickerTransformationCorss:[NSDate dateWithTimeIntervalSince1970:[[[dic objectForKey:@"consumer"] objectForKey:@"created"] integerValue]/1000]]];
         [kAPPDELEGATE._loacluserinfo userLogInTime:[[dic objectForKey:@"consumer"] objectForKey:@"created"]];
         [kAPPDELEGATE._loacluserinfo userGender:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]];
         [[NLDatahub sharedInstance] getUserCycleOrperiod];
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 //    NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
 //    [vc setHidesBottomBarWhenPushed:YES];
 //    [self.navigationController pushViewController:vc animated:YES];
@@ -374,7 +370,6 @@ static const NSInteger THIRDBTNTAG = 4000;
 }
 -(void)getCycleOrPeriod:(NSNotification *)notifi{
     NSDictionary *dic = notifi.object;
-    NSLog(@"%@",_userInformation);
     [_userInformation setValue:[dic objectForKey:@"cycle"] forKey:@"cycleTime"];
     [_userInformation setValue:[dic objectForKey:@"duration"] forKey:@"periodTime"];
     [PlistData individuaData:_userInformation];
@@ -414,11 +409,6 @@ static const NSInteger THIRDBTNTAG = 4000;
     [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"weight"] forKey:@"width"];
     [kAPPDELEGATE._loacluserinfo userLogInTime:[[dic objectForKey:@"consumer"] objectForKey:@"created"]];
     [PlistData individuaData:_userInformation];
-    NSLog(@"%@",dic);
-    
-    NSLog(@"%@",[[dic objectForKey:@"consumer"] objectForKey:@"gender"]);
-    
-    
     
     if ([[[dic objectForKey:@"consumer"] objectForKey:@"gender"] isEqual:[NSNull null]]|| [[dic objectForKey:@"consumer"] objectForKey:@"gender"]==nil) {
         NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];

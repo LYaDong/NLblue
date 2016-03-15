@@ -23,9 +23,12 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self delNotification];
+    [self addNotification];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self delNotification];
 }
 #pragma mark 基础UI
 -(void)bulidUI{
@@ -72,8 +75,20 @@
 #pragma mark 系统Delegate
 #pragma mark 自己的Delegate
 #pragma mark 自己的按钮事件
-
-
+-(void)addNotification{
+    NSNotificationCenter *notifi = [NSNotificationCenter defaultCenter];
+    [notifi addObserver:self selector:@selector(remindMessageSuccess:) name:NLGetMyMessageSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(remindMessageFalied) name:NLGetMyMessageFicaledNotification object:nil];
+}
+-(void)remindMessageSuccess:(NSNotification *)object{
+    [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"提醒他成功~~~"];
+}
+-(void)remindMessageFalied{
+    
+}
+-(void)delNotification{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -402,6 +402,18 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     return newImage;
 }
 
+#pragma mark 毛玻璃
++ (UIVisualEffectView *)woolGlassEatablishImage:(UIImageView *)imageView{
+    //创建需要的毛玻璃特效类型
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+    //毛玻璃的View试图
+    UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:blurEffect];
+    //添加毛玻璃
+    effectView.frame = imageView.bounds;
+    effectView.alpha = 1;
+    return effectView;
+}
+
 @end
 
 @implementation ApplicationStyle (NSArrays)

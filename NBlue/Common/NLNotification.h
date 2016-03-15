@@ -66,7 +66,10 @@
 #define NLThirdLoginFicaledNotification @"NLThirdLoginFicaledNotification"
 #define NLGetMyMessageSuccessNotification @"NLGetMyMessageSuccessNotification"
 #define NLGetMyMessageFicaledNotification @"NLGetMyMessageFicaledNotification"
-
+#define NLRemindMessageSuccessNotification @"NLRemindMessageSuccessNotification"
+#define NLRemindMessageFicaledNotification @"NLRemindMessageFicaledNotification"
+#define NLMaleBindingSuccessNotification @"NLMaleBindingSuccessNotification"
+#define NLMaleBindingFicaledNotification @"NLMaleBindingFicaledNotification"
 
 //================================   L    Y     D    ============================================
 #endif /* NLNotification_h */

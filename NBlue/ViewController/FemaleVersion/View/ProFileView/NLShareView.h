@@ -17,4 +17,5 @@
 
 @interface NLShareView : UIView
 @property(nonatomic,strong)id<NLShareViewDelegate>delegate;
+- (instancetype)initWithFrame:(CGRect)frame imageArray:(NSArray *)imageArray textArray:(NSArray *)textArray;
 @end
