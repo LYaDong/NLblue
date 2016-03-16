@@ -137,6 +137,9 @@ static const NSInteger BTNTAG = 4000;
     }else{
         [self.delegate pickerIndex:_choicePickerIndex];
     }
+    
+    
+//    isMenstruation : @"menstruation,"
 }
 
 /*

@@ -27,6 +27,7 @@
     self.view.backgroundColor = [ApplicationStyle subjectBackViewColor];
     self.titles.text = NSLocalizedString(@"NLProfileView_MyMessage", nil);
     [self bulidUI];
+    [self sqlData];
     [self loadDataMessage];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -53,7 +54,19 @@
 //        [self footerDataMessage];
 //    }];
 }
-
+-(void)sqlData{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [_dataArray removeAllObjects];
+        NSMutableArray *array = [NSMutableArray array];
+        array = [NLSQLData getMyMessageData];
+        NSLog(@"%@",array);
+        
+        [_dataArray addObjectsFromArray:array];
+       dispatch_async(dispatch_get_main_queue(), ^{
+           [_mainTableView reloadData];
+       });
+    });
+}
 #pragma mark 系统Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _dataArray.count;
@@ -68,6 +81,7 @@
     if (!cell) {
         cell = [[NLMyMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
     }
+
     NSString *headImage = [[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"header"]==[NSNull null]||[[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"header"]==nil?@"":[[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"header"];
     NSString *name = [[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"name"]==[NSNull null]||[[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"name"]==nil?@"":[[_dataArray[indexPath.row] objectForKey:@"from"] objectForKey:@"name"];
     NSString *count = [[_dataArray[indexPath.row] objectForKey:@"message"] objectForKey:@"message"]==[NSNull null]||[[_dataArray[indexPath.row] objectForKey:@"message"] objectForKey:@"message"]==nil?@"":[[_dataArray[indexPath.row] objectForKey:@"message"] objectForKey:@"message"];
@@ -108,9 +122,8 @@
 }
 -(void)myMessageSuccess:(NSNotification *)notifi{
     [_dataArray removeAllObjects];
-    
-    [NLSQLData myMessage:_dataArray];
     [_dataArray addObjectsFromArray:notifi.object];
+    [NLSQLData myMessage:_dataArray];
     [_mainTableView reloadData];
     [_mainTableView.mj_header endRefreshing];
     

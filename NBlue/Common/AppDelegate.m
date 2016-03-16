@@ -46,15 +46,12 @@
     }else{
         
         
-        NSLog(@"%@",[kAPPDELEGATE._loacluserinfo getUserGender]);
-        
         if ([[kAPPDELEGATE._loacluserinfo getUserGender] isEqualToString:@"0"]) {
             [self tabBarViewControllerType:Controller_WoManMain];
         }else{
             [self tabBarViewControllerType:Controller_MaleMain];
         }
     }
-    NSLog(@"%@",[_loacluserinfo GetUser_ID]);
     [MiPushSDK registerMiPush:self type:0 connect:YES];
     [MiPushSDK setAlias:[kAPPDELEGATE._loacluserinfo GetUser_ID]];
     
@@ -76,6 +73,8 @@
 -(void)tabBarViewControllerType:(Controller)type{
     
 //    [kAPPDELEGATE._loacluserinfo userGender:@"0"];
+//    type = 2;
+    
     switch (type) {
         case Controller_Loing:
         {

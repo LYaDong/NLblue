@@ -426,6 +426,7 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
 }
 #pragma mark 获取我的消息
 -(void)getMyMessages{
+    [self loadingView];
     NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
                                  @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
     _manager = [AFHTTPSessionManager manager];
@@ -436,10 +437,12 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissHide];
             [[NSNotificationCenter defaultCenter] postNotificationName:NLGetMyMessageSuccessNotification object:[self dataTransformationJson:responseObject]];
         });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissHide];
             [[NSNotificationCenter defaultCenter] postNotificationName:NLGetMyMessageFicaledNotification object:error];
         });
     }];
@@ -484,6 +487,53 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [[NSNotificationCenter defaultCenter] postNotificationName:NLRemindMessageFicaledNotification object:error];
     }];
+}
+
+-(void)calendarUpLoadDataDic:(NSDictionary *)dataDic{
+    
+    NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                 @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken],
+                                 @"currentDate":@"",
+                                 @"isMenstruation":@"",
+                                 @"dysmenorrhea":@"",
+                                 @"haveSex":@"",
+                                 @"lifeHabit":@"",
+                                 @"uncomfortable":@""};
+    
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLapplication,NLtextHeml, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *api = [NSString stringWithFormat:@"%@%@",NLMenstruation,Menstruation_Calender];
+    NSString *url = API_BASE_URL(api);
+    [_manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",[self dataTransformationJson:responseObject]);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+//获得日历数据
+-(void)getCalendar:(NSDictionary *)dic{
+    
+    NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                 @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken],
+                                 @"startDate":[dic objectForKey:@"startDate"],
+                                 @"endDate":[dic objectForKey:@"endDate"]};
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLapplication,NLtextHeml, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *api = [NSString stringWithFormat:@"%@%@",NLMenstruation,Menstruation_Calender];
+    NSString *url = API_BASE_URL(api);
+    [_manager GET:url parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NLGetCalendarSuccessNotification object:[self dataTransformationJson:responseObject]];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+       [[NSNotificationCenter defaultCenter] postNotificationName:NLGetCalendarFicaledNotification object:error];
+    }];
+    
 }
 #pragma mark 转JSON数据
 - (NSDictionary *)dataTransformationJson:(id  _Nullable)responseObject{

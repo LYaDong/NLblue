@@ -31,15 +31,25 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self delNotification];
+    [self addNotification];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self delNotification];
 }
 #pragma mark 基础UI
 -(void)bulidUI{
+    
+    [self loadData];
+    
+    
     [self generateQRCode];
 //    [self periodCircleView];
 //    [self pregnancyIndex];
+}
+-(void)loadData{
+    [[NLDatahub sharedInstance] maleJudgeIsHave];
 }
 -(void)generateQRCode{
     UIImage *qrcode = [ApplicationStyle createNonInterpolatedUIImageFormCIImage:
@@ -161,6 +171,21 @@
 #pragma mark 自己的Delegate
 #pragma mark 自己的按钮事件
 
+-(void)addNotification{
+    NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
+    [notifi addObserver:self selector:@selector(folksSuccess:) name:NLFolkSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(folksFicaled) name:NLFolkFicaledNotification object:nil];
+}
+-(void)folksSuccess:(NSNotification *)notifi{
+    NSLog(@"%@",notifi.object);
+}
+-(void)folksFicaled{
+    
+}
+
+-(void)delNotification{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

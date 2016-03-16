@@ -121,6 +121,7 @@ static NSString *TransLationF1 = @"0AF1";
     switch (central.state) {
         case CBCentralManagerStatePoweredOn:{
             [kAPPDELEGATE._loacluserinfo setBluetoothName:nil];//设备的名字
+            [_manger scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)}];
             NSLog(@"蓝牙已经打开，请扫描外设,请打开外围设备");
             break;
         }

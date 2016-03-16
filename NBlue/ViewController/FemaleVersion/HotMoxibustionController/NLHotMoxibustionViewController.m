@@ -246,6 +246,14 @@ static const NSInteger NOVICEGUIDETAG = 6000;
 //    [xvfvf addTarget:self action:@selector(xvfvf) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview:xvfvf];
     
+    
+    
+    
+    
+    
+    
+
+    
 }
 -(void)xxxxxxxx{
     Byte byte[20] = {0xF0,0x01};
@@ -276,6 +284,7 @@ static const NSInteger NOVICEGUIDETAG = 6000;
     [super viewWillAppear:animated];
     [self delNotification];
     [self addNotification];
+    [self bluetoothConnectOperation];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];

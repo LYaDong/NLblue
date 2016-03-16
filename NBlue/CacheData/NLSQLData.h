@@ -62,6 +62,10 @@
  */
 +(void)insterCanlenderData;
 /**
+ * 更新日历信息
+ */
++(void)upDateCanlendarData:(NSArray *)arr;
+/**
  *更新日历爱爱数据
  */
 +(void)upDataCanlenderLoveLove:(NSDictionary *)dic;

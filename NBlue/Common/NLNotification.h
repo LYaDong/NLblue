@@ -70,6 +70,8 @@
 #define NLRemindMessageFicaledNotification @"NLRemindMessageFicaledNotification"
 #define NLMaleBindingSuccessNotification @"NLMaleBindingSuccessNotification"
 #define NLMaleBindingFicaledNotification @"NLMaleBindingFicaledNotification"
+#define NLGetCalendarSuccessNotification @"NLGetCalendarSuccessNotification"
+#define NLGetCalendarFicaledNotification @"NLGetCalendarFicaledNotification"
 
 //================================   L    Y     D    ============================================
 #endif /* NLNotification_h */

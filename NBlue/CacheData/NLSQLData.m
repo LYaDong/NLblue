@@ -219,7 +219,7 @@
 
 
 
-
+#pragma mark 创建运动数据表
 +(void)establishSportDataTable{
     FMDatabase *db = [self sqlDataRoute];
     [db open];
@@ -472,6 +472,7 @@
     [db executeUpdate:delSmall];
     [db close];
 }
+#pragma mark 创建日历表
 
 +(void)canlenderUncomfortable{
     FMDatabase *db = [self sqlDataRoute];
@@ -579,7 +580,9 @@ __goto:
                                     @"1",
                                     [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
                 [db executeUpdate:inster withArgumentsInArray:dataArr];
-            }            
+            }
+            
+            NSLog(@"%@ %@",[kAPPDELEGATE._loacluserinfo getUserLogInTime],times);
             if ([[kAPPDELEGATE._loacluserinfo getUserLogInTime] isEqualToString:times]) {
                 return;
             }
@@ -592,6 +595,65 @@ __goto:
         goto __goto;
     }
 }
++(void)upDateCanlendarData:(NSArray *)arr{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+//    [self uncomfortableHandleStr:[arr[1] objectForKey:@"uncomfortable"]]],
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    for (dic in arr) {
+        //    time,aunt,loveLove,habitsAndCustoms,uncomfortable,dysmenorrheaLevel,user_id
+        NSString *updateTable = @"UPDATE CanlenderTable SET aunt = ?,loveLove = ?,habitsAndCustoms = ?,uncomfortable = ?,dysmenorrheaLevel = ? WHERE time = ? AND user_id = ?";
+        [db executeUpdate:updateTable,
+         [dic objectForKey:@"isMenstruation"],
+         [dic objectForKey:@"haveSex"],
+         [dic objectForKey:@"lifeHabit"],
+         [self uncomfortableHandleStr:[dic objectForKey:@"uncomfortable"]],
+         [dic objectForKey:@"dysmenorrhea"],
+         [dic objectForKey:@"currentDate"],
+         [kAPPDELEGATE._loacluserinfo GetUser_ID]];
+    }
+    [db close];
+}
+
++(NSMutableString *)uncomfortableHandleStr:(NSString *)uncomfortable{
+    NSArray *array = @[NSLocalizedString(@"NLHealthCalender_Unconmfortable_TT", nil),
+                        NSLocalizedString(@"NLHealthCalender_Unconmfortable_BD", nil),
+                        NSLocalizedString(@"NLHealthCalender_Unconmfortable_HLLY", nil),
+                        NSLocalizedString(@"NLHealthCalender_Unconmfortable_FX", nil),
+                        NSLocalizedString(@"NLHealthCalender_Unconmfortable_XFZT", nil),
+                        NSLocalizedString(@"NLHealthCalender_Unconmfortable_MSY", nil),
+                        NSLocalizedString(@"NLHealthCalender_Unconmfortable_YS", nil),
+                        NSLocalizedString(@"NLHealthCalender_Unconmfortable_HSST", nil),
+                        NSLocalizedString(@"NLHealthCalender_Unconmfortable_RFZT", nil),
+                        NSLocalizedString(@"NLHealthCalender_Unconmfortable_RFCT", nil),
+                        NSLocalizedString(@"NLHealthCalender_Unconmfortable_BDYC", nil),
+                        NSLocalizedString(@"NLHealthCalender_Unconmfortable_QT", nil),];
+    
+    NSMutableArray *arrayCount = [NSMutableArray array];
+    for (NSInteger i=0; i<12; i++) {
+        [arrayCount addObject:@"0"];
+    }
+    NSArray *uncomforTableArray = [ApplicationStyle interceptText:uncomfortable interceptCharacter:@"-"];
+    
+    for (NSInteger i=0; i<array.count; i++) {
+        for (NSInteger j=0; j<uncomforTableArray.count; j++) {
+            if ([array[i] isEqualToString:uncomforTableArray[j]]) {
+                [arrayCount replaceObjectAtIndex:i withObject:uncomforTableArray[j]];
+            }
+        }
+    }
+    
+    NSMutableString *count = [NSMutableString string];
+    for (NSInteger i=0; i<arrayCount.count; i++) {
+        if (i==arrayCount.count-1) {
+            [count appendFormat:@"%@",arrayCount[i]];
+        }else{
+            [count appendFormat:@"%@-",arrayCount[i]];
+        }
+    }
+    return count;
+}
+
 
 +(void)upDataCanlenderLoveLove:(NSDictionary *)dic{
     FMDatabase *db = [self sqlDataRoute];
@@ -652,7 +714,7 @@ __goto:
     return dic;
 }
 
-
+#pragma mark 创建睡眠数据表
 + (void)sleepDataTable{
     FMDatabase *db = [self sqlDataRoute];
     [db open];
@@ -929,15 +991,13 @@ __goto:
 //        type = 123;
 //    };
 //}
+    
 
-    NSString *createTable = @"CREATE TABLE IF NOT EXISTS MyMessage (created TEXE NOT NULL,description TEXT NOT NULL,from TEXT NOT NULL,id TEXT PRIMARY KEY,message TEXT NOT NULL,read TEXT NOT NULL,refer TEXT NOT NULL,send TEXT NOT NULL,templateId TEXT NOT NULL,title TEXT NOT NULL,to TEXT NOT NULL,type TEXT NOT NULL,header TEXT NOT NULL,name TEXT NOT NULL,user_id TEXT NOT NULL)";
+    NSString *createTable = @"CREATE TABLE IF NOT EXISTS MyMessage(created TEXE NOT NULL,description TEXT NOT NULL,froms TEXT NOT NULL,ids TEXT PRIMARY KEY,message TEXT NOT NULL,read TEXT NOT NULL,refer TEXT NOT NULL,send TEXT NOT NULL,templateId TEXT NOT NULL,title TEXT NOT NULL,tos TEXT NOT NULL,type TEXT NOT NULL,header TEXT NOT NULL,name TEXT NOT NULL,user_id TEXT NOT NULL)";
     [db executeUpdate:createTable];
     NSDictionary *dic = nil;
     for (dic in array) {
-        
-        NSString *inster = @"INSERT OR REPLACE INTO MyMessage (created,description,from,id,message,read,refer,send,templateId,title,to,type,header,name,user_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        
-        NSLog(@"%@",array);
+        NSString *inster = @"INSERT OR REPLACE INTO MyMessage(created,description,froms,ids,message,read,refer,send,templateId,title,tos,type,header,name,user_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         
         NSArray *gumentsArr = [NSArray arrayWithObjects:
                                [[dic objectForKey:@"message"] objectForKey:@"created"] == [NSNull null]?@"":[[dic objectForKey:@"message"] objectForKey:@"created"],
@@ -964,25 +1024,31 @@ __goto:
     
     FMDatabase *db = [self sqlDataRoute];
     [db open];
-    NSString *takeCreate = [NSString stringWithFormat:@"SELECT * FROME MyMessage WHERE user_id = '%@'",[kAPPDELEGATE._loacluserinfo GetUser_ID]];
+    NSString *takeCreate = [NSString stringWithFormat:@"SELECT * FROM MyMessage WHERE user_id = '%@'",[kAPPDELEGATE._loacluserinfo GetUser_ID]];
+    
     FMResultSet *rs = [db executeQuery:takeCreate];
     while ([rs next]) {
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-//        (created,description,from,id,message,read,refer,send,templateId,title,to,type,header,name,user_id) 
-        [dic setValue:[rs stringForColumn:@"created"] forKey:@"created"];
-        [dic setValue:[rs stringForColumn:@"description"] forKey:@"description"];
-        [dic setValue:[rs stringForColumn:@"from"] forKey:@"from"];
-        [dic setValue:[rs stringForColumn:@"id"] forKey:@"id"];
-        [dic setValue:[rs stringForColumn:@"message"] forKey:@"message"];
-        [dic setValue:[rs stringForColumn:@"read"] forKey:@"read"];
-        [dic setValue:[rs stringForColumn:@"refer"] forKey:@"refer"];
-        [dic setValue:[rs stringForColumn:@"send"] forKey:@"send"];
-        [dic setValue:[rs stringForColumn:@"templateId"] forKey:@"templateId"];
-        [dic setValue:[rs stringForColumn:@"title"] forKey:@"title"];
-        [dic setValue:[rs stringForColumn:@"to"] forKey:@"to"];
-        [dic setValue:[rs stringForColumn:@"type"] forKey:@"type"];
-        [dic setValue:[rs stringForColumn:@"header"] forKey:@"header"];
-        [dic setValue:[rs stringForColumn:@"name"] forKey:@"name"];
+//        (created,description,from,id,message,read,refer,send,templateId,title,to,type,header,name,user_id)
+        NSMutableDictionary *dicFrome = [NSMutableDictionary dictionary];
+        NSMutableDictionary *dicMessage = [NSMutableDictionary dictionary];
+
+        [dicMessage setValue:[rs stringForColumn:@"created"] forKey:@"created"];
+        [dicMessage setValue:[rs stringForColumn:@"description"] forKey:@"description"];
+        [dicMessage setValue:[rs stringForColumn:@"froms"] forKey:@"froms"];
+        [dicMessage setValue:[rs stringForColumn:@"ids"] forKey:@"ids"];
+        [dicMessage setValue:[rs stringForColumn:@"message"] forKey:@"message"];
+        [dicMessage setValue:[rs stringForColumn:@"read"] forKey:@"read"];
+        [dicMessage setValue:[rs stringForColumn:@"refer"] forKey:@"refer"];
+        [dicMessage setValue:[rs stringForColumn:@"send"] forKey:@"send"];
+        [dicMessage setValue:[rs stringForColumn:@"templateId"] forKey:@"templateId"];
+        [dicMessage setValue:[rs stringForColumn:@"title"] forKey:@"title"];
+        [dicMessage setValue:[rs stringForColumn:@"tos"] forKey:@"tos"];
+        [dicMessage setValue:[rs stringForColumn:@"type"] forKey:@"type"];
+        [dicFrome setValue:[rs stringForColumn:@"header"] forKey:@"header"];
+        [dicFrome setValue:[rs stringForColumn:@"name"] forKey:@"name"];
+        [dic setValue:dicMessage forKey:@"message"];
+        [dic setValue:dicFrome forKey:@"from"];
         [array addObject:dic];
     }
     [db close];

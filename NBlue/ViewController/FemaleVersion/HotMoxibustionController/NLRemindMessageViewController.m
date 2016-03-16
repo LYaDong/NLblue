@@ -95,7 +95,8 @@
             break;
         }
         case 1: {
-            [[NLShareToolClass sharedInstance] WechatTimelineText:@"测试" title:@"Warman" url:@"www.baidu.com" viewController:self];
+//            [[NLShareToolClass sharedInstance] WechatTimelineText:@"测试" title:@"Warman" url:@"www.baidu.com" viewController:self];
+            [[NLShareToolClass sharedInstance] weiChatText:@"测试" title:@"暖蓝 Warman" url:@"http://h.eqxiu.com/s/19IputB2?eqrcode=1&from=groupmessage&isappinstalled=0" viewController:self];
             break;
         }
         case 2: {
@@ -103,7 +104,7 @@
             break;
         }
         case 3: {
-            [[NLShareToolClass sharedInstance] qqShareText:@"测试" title:@"Warman" url:@"www.baidu.com" viewController:self];
+            [[NLShareToolClass sharedInstance] qqShareText:@"测试" title:@"Warman" url:@"http://h.eqxiu.com/s/19IputB2?eqrcode=1&from=groupmessage&isappinstalled=0" viewController:self];
             break;
         }
         case 4: {

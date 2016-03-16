@@ -80,5 +80,12 @@
  * message:你需要提醒的内容 type:页面的Type
  */
 -(void)remindMessage:(NSString *)message type:(NSString *)type;
-
+/**
+ *  日历上传接口
+ */
+-(void)calendarUpLoadDataDic:(NSDictionary *)dataDic;
+/**
+ * 获得日历数据
+ */
+-(void)getCalendar:(NSDictionary *)dic;
 @end

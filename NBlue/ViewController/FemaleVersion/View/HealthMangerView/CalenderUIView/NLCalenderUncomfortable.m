@@ -24,9 +24,10 @@ static const NSInteger LIFEHABITTAG = 2000;
 }
 -(void)buildUI{
     _addDataArr = [NSMutableArray array];
-    
+    [_addDataArr removeAllObjects];
     NSArray *habitData = [self canlenData];//获得生活习惯的每天数据
     [_addDataArr addObjectsFromArray:habitData];
+    
     
     
     
@@ -106,10 +107,6 @@ static const NSInteger LIFEHABITTAG = 2000;
         [backView addSubview:uncomfortableBtn];
     }
     
-    for (NSInteger i=0; i<labArr.count; i++) {
-        [_addDataArr addObject:@"0"];
-    }
-    
     NSArray *btnArr = @[NSLocalizedString(@"NLHealthCalender_Picker_BtnCalue", nil),
                         NSLocalizedString(@"NLHealthCalender_Picker_BtnOK", nil),];
     for (NSInteger i=0; i<btnArr.count; i++) {
@@ -158,19 +155,21 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         [self.delegate uncomfortableArr:nil];
     }else{
+
         [self.delegate uncomfortableArr:_addDataArr];
     }   
 }
 -(void)uncomfortableBtnDown:(UIButton *)btn{
-    NSInteger num = [[NSString stringWithFormat:@"%@",_addDataArr[btn.tag - LIFEHABITTAG]] intValue] - 1;
-                     
+//    NSInteger num = [[NSString stringWithFormat:@"%@",_addDataArr[btn.tag - LIFEHABITTAG]] intValue] - 1;
+//    NSLog(@"%@",_addDataArr);
+    
     btn.selected = !btn.selected;
     switch (btn.tag - LIFEHABITTAG) {
         case Uncomfortable_TT:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
             
             if (btn.selected) {
@@ -189,9 +188,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_BD:  {
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
             
             if (btn.selected) {
@@ -209,9 +208,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_HELY:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
             
             if (btn.selected) {
@@ -229,9 +228,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_FX:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
             
             if (btn.selected) {
@@ -250,9 +249,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_XFZT:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
             
             if (btn.selected) {
@@ -271,9 +270,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_MSY:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
             
             if (btn.selected) {
@@ -292,9 +291,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_YS:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
             
             if (btn.selected) {
@@ -313,9 +312,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_HSST:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
             
             if (btn.selected) {
@@ -334,9 +333,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_RFZT:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
             
             if (btn.selected) {
@@ -355,9 +354,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_RFCT:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
             
             if (btn.selected) {
@@ -376,9 +375,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_BDYC:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
             
             if (btn.selected) {
@@ -397,9 +396,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case Uncomfortable_QT:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
             
             if (btn.selected) {
@@ -428,6 +427,7 @@ static const NSInteger LIFEHABITTAG = 2000;
 -(NSArray *)canlenData{
     NSString *count = [[NLSQLData canlenderDayData:self.commonTime] objectForKey:@"uncomfortable"];
     NSArray *array = [count componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
+        
     return array;
 }
 

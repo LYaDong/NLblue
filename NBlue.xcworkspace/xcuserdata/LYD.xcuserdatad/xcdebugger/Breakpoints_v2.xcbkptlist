@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NBlue/NetWork/NLBlockInterface.m"
-            timestampString = "479617779.327346"
+            filePath = "NBlue/ViewController/FemaleVersion/MangetNumber/NLLogInViewController.m"
+            timestampString = "479818898.21027"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "-interfaceReturn:error:"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
+            landmarkName = "-logInSuccess:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NBlue/ViewController/FemaleVersion/ProfileController/NLMyMessageViewController.m"
-            timestampString = "479732522.00274"
+            filePath = "NBlue/ViewController/FemaleVersion/HotMoxibustionController/NLHotMoxibustionViewController.m"
+            timestampString = "479819548.440952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "-myMessageSuccess:"
+            startingLineNumber = "748"
+            endingLineNumber = "748"
+            landmarkName = "-moxibustionBtnDown"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NBlue/CacheData/NLSQLData.m"
-            timestampString = "479733322.821534"
+            filePath = "NBlue/Common/NLBluetoothAgreementNew.m"
+            timestampString = "479820335.056314"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "940"
-            endingLineNumber = "940"
-            landmarkName = "+myMessage:"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
+            landmarkName = "-setTemperatureStart"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NBlue/Common/NLBluetoothAgreementNew.m"
+            timestampString = "479820335.056314"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "-centralManager:didDiscoverPeripheral:advertisementData:RSSI:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NBlue/Common/NLBluetoothAgreementNew.m"
+            timestampString = "479820158.028725"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "-searchBluetooth"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

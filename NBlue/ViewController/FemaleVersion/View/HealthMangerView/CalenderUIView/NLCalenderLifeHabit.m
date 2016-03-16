@@ -138,6 +138,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         [self.delegate lifeHabitCount:nil];
     }else{
+        
+        NSLog(@"%@",_addDataArr);
+        
         [self.delegate lifeHabitCount:_addDataArr];
     }
 }
@@ -218,6 +221,9 @@ static const NSInteger LIFEHABITTAG = 2000;
 -(NSArray *)canlenData{
     NSString *count = [[NLSQLData canlenderDayData:self.commonTime] objectForKey:@"habitsAndCustoms"];
     NSArray *array = [count componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
+    
+    NSLog(@"%@",array);
+    
     return array;
 }
 /*

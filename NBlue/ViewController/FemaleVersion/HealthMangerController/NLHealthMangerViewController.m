@@ -14,6 +14,7 @@
 #import "NLHealthStepNumber.h"
 #import "NLHealthMangerStepNumViewController.h"
 #import "NLHealthMangerSleepViewController.h"
+#import "NLSQLData.h"
 @interface NLHealthMangerViewController ()<UIScrollViewDelegate,LYDSetSegmentDelegate>
 @property(nonatomic,strong)UIScrollView *mainScrollew;
 @property(nonatomic,assign)NSInteger numPage;
@@ -63,9 +64,12 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self delNotification];
+    [self addNotification];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self delNotification];
 }
 #pragma mark 基础UI
 -(void)bulidUI{
@@ -101,6 +105,12 @@
     [self.view addSubview:_mainScrollew];
     
 
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setValue:@"2016-03-01" forKey:@"startDate"];
+    [dic setValue:@"2016-03-29" forKey:@"endDate"];
+    [[NLDatahub sharedInstance] getCalendar:dic];
+    
     
 }
 -(void)initView{
@@ -148,6 +158,21 @@
                                          consumerId:[kAPPDELEGATE._loacluserinfo GetUser_ID]
                                           startDate:@"2015-10-01"
                                             endDate:@"2015-10-30"];
+}
+-(void)addNotification{
+    NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
+    [notifi addObserver:self selector:@selector(calendarSuccess:) name:NLGetCalendarSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(calendarFicaled) name:NLGetCalendarFicaledNotification object:nil];
+}
+
+-(void)calendarSuccess:(NSNotification *)notifi{
+    [NLSQLData upDateCanlendarData:notifi.object];
+}
+-(void)calendarFicaled{
+    
+}
+-(void)delNotification{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -344,6 +344,7 @@ static const NSInteger THIRDBTNTAG = 4000;
     [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"height"]==nil?@"":[[dic objectForKey:@"consumer"] objectForKey:@"height"] forKey:@"height"];
     [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"weight"]==nil?@"":[[dic objectForKey:@"consumer"] objectForKey:@"weight"] forKey:@"width"];
     [_userInformation setValue:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]==nil?@"":[[dic objectForKey:@"consumer"] objectForKey:@"gender"] forKey:@"gender"];
+    [kAPPDELEGATE._loacluserinfo userLogInTime:[[dic objectForKey:@"consumer"] objectForKey:@"created"]];
     
     if ([[[dic objectForKey:@"consumer"] objectForKey:@"gender"] isEqual:[NSNull null]]|| [[dic objectForKey:@"consumer"] objectForKey:@"gender"]==nil) {
         NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
@@ -355,7 +356,6 @@ static const NSInteger THIRDBTNTAG = 4000;
         
         //暂时隐藏
 //        [kAPPDELEGATE._loacluserinfo userLogInTime:[ApplicationStyle datePickerTransformationCorss:[NSDate dateWithTimeIntervalSince1970:[[[dic objectForKey:@"consumer"] objectForKey:@"created"] integerValue]/1000]]];
-        [kAPPDELEGATE._loacluserinfo userLogInTime:[[dic objectForKey:@"consumer"] objectForKey:@"created"]];
         [kAPPDELEGATE._loacluserinfo userGender:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]];
         [[NLDatahub sharedInstance] getUserCycleOrperiod];
     }
