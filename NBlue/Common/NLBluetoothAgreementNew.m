@@ -121,7 +121,9 @@ static NSString *TransLationF1 = @"0AF1";
     switch (central.state) {
         case CBCentralManagerStatePoweredOn:{
             [kAPPDELEGATE._loacluserinfo setBluetoothName:nil];//设备的名字
-            [_manger scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)}];
+            if ([[kAPPDELEGATE._loacluserinfo getBlueToothUUID] length]>0) {
+                [_manger scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)}];
+            }
             NSLog(@"蓝牙已经打开，请扫描外设,请打开外围设备");
             break;
         }
@@ -350,9 +352,13 @@ static NSString *TransLationF1 = @"0AF1";
 //    [self setANCSNotification];
 //    [self setSubclassSwitch];
 //    [self setSuperclassSwitch];
+    //==================分割线================
     [self connectShock];
     [[SMProgressHUD shareInstancetype] showLoadingWithTip:EquiomentRefresh];
     [self sportDataQuery];
+    [self setTatget];
+    [self queryTemperatureEquiment];
+
     
 }
 -(void)setANCSNotification{
@@ -419,22 +425,17 @@ static NSString *TransLationF1 = @"0AF1";
 }
 //连接震动
 -(void)connectShock{
-    
-//    CBPeripheral *periperal = [[NLSQLData getPeripheral] objectForKey:@"peripheral"];//外围蓝牙
-    
-    
-//    NSLog(@"%@",periperal);
-//    for ( CBService *service in periperal.services ) {
-//        NSLog(@"%@",service);
-//    }
-    
-    
     NSData *data = [NLBluetoothCommand connectShonk];
     [self writeCharacteristicF6:_periperal data:data];
 }
 //重启设备
 -(void)connectReseart{
     NSData *data = [NLBluetoothCommand connectRestart];
+    [self writeCharacteristicF6:_periperal data:data];
+}
+//目标设置
+-(void)setTatget{
+    NSData *data = [NLBluetoothCommand setSportTarget];
     [self writeCharacteristicF6:_periperal data:data];
 }
 
@@ -518,4 +519,8 @@ static NSString *TransLationF1 = @"0AF1";
         }
     }
 }
+//#pragma mark 加热返回
+//-(void)hanldReturnTemperature:(NSString *)dataStr{
+//    NSLog(@"%@",dataStr);
+//}
 @end

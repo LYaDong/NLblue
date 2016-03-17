@@ -5,8 +5,10 @@
 //  Created by LYD on 15/11/27.
 //  Copyright © 2015年 LYD. All rights reserved.
 //
-
+static const NSInteger TEXTVIEWLENTH = 100;
 #import "NLFeedBackViewController.h"
+
+
 
 @interface NLFeedBackViewController ()<UITextViewDelegate>
 @property(nonatomic,strong)UITextView *textView;
@@ -28,18 +30,21 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self delNotification];
+    [self addNotification];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self delNotification];
 }
 #pragma mark 基础UI
 -(void)bulidUI{
-    _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle control_height:26] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], SCREENWIDTH, [ApplicationStyle control_height:260])];
+    _textView = [[UITextView alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:20], [ApplicationStyle control_height:26] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], SCREENWIDTH - [ApplicationStyle control_weight:20 * 2], [ApplicationStyle control_height:260])];
     _textView.delegate = self;
     _textView.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:24]];
     [self.view addSubview:_textView];
     
-    _textViewLab = [[UILabel alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:40], [ApplicationStyle control_height:20], SCREENWIDTH - [ApplicationStyle control_weight:40 *2], [ApplicationStyle control_height:24])];
+    _textViewLab = [[UILabel alloc] initWithFrame:CGRectMake([ApplicationStyle control_weight:10], [ApplicationStyle control_height:20], SCREENWIDTH - [ApplicationStyle control_weight:40 *2], [ApplicationStyle control_height:24])];
     _textViewLab.textColor = [@"959595" hexStringToColor];
     _textViewLab.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:24]];
     _textViewLab.text = @"请输入您的宝贵意见";
@@ -80,6 +85,13 @@
     
     return YES;
 }
+- (void)textViewDidChange:(UITextView *)textView{
+    NSInteger number = [textView.text length];
+    if (number>TEXTVIEWLENTH) {
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"最多输入100个字符哦~~~"];
+        textView.text = [textView.text substringToIndex:TEXTVIEWLENTH];
+    }
+}
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [_textView resignFirstResponder];
 }
@@ -87,9 +99,20 @@
 #pragma mark 自己的按钮事件
 -(void)submitBtnDown{
     [_textView endEditing:YES];
-    
+    [[NLDatahub sharedInstance] setFeedback:_textView.text];
+}
+-(void)addNotification{
+    NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
+    [notifi addObserver:self selector:@selector(feedbackSuccess) name:NLSetFeedbackSuccessNotification object:nil];
+}
+-(void)feedbackSuccess{
+    [self.navigationController popViewControllerAnimated:YES];
     [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"谢谢你的宝贵意见~~我们会及时处理"];
 }
+-(void)delNotification{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

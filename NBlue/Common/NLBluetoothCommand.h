@@ -69,4 +69,8 @@
  * 重启设备
  */
 +(NSData *)connectRestart;
+/**
+ * 运动目标设置
+ */
++(NSData *)setSportTarget;
 @end

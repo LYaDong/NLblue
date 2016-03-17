@@ -9,8 +9,7 @@
 #import "NLMaleIndividuaViewController.h"
 #import "NLMaleIndivuaCell.h"
 #import "NLPickView.h"
-
-#import "NLPickView.h"
+#import "NLMaleNBLuePlanViewController.h"
 @interface NLMaleIndividuaViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *mainTableView;
 @property(nonatomic,assign)BOOL isCallRemind; 
@@ -110,11 +109,18 @@
     cell.titleLab.textColor = [@"1b1b1b" hexStringToColor];
     cell.arrowImg.hidden = NO;
     
-    if (indexPath.section == 2 || indexPath.section == 3) {
-        cell.switchs.hidden = YES;
+    
+    if (indexPath.section == 0) {
+       cell.arrowImg.hidden = YES;
     }else{
-        cell.arrowImg.hidden = YES;
+        cell.switchs.hidden = YES;
     }
+    
+//    if (indexPath.section == 2 || indexPath.section == 3) {
+//        cell.switchs.hidden = YES;
+//    }else{
+//        cell.arrowImg.hidden = YES;
+//    }
     
     switch (indexPath.section) {
         case 0:
@@ -125,15 +131,7 @@
         }
         case 1:
         {
-            if (_isSendentary==NO) {
-                [cell.switchs addTarget:self action:@selector(switchSedentaryDown:) forControlEvents:UIControlEventValueChanged];
-                cell.titleLab.text = NSLocalizedString(@"NLMaleIndividua_SedentaryRemid", nil);
-            }else{
-                NSArray *titleArr = @[NSLocalizedString(@"NLMaleIndividua_SedentaryRemid", nil),
-                                      NSLocalizedString(@"NLMaleIndividua_IntervalTime", nil),
-                                      NSLocalizedString(@"NLMaleIndividua_ReminderInterval", nil)];
-                cell.titleLab.text = titleArr[indexPath.row];
-            }
+            cell.titleLab.text = NSLocalizedString(@"NLMaleProfile_NBluePlan", nil);
             break;
         }
         case 2:
@@ -161,7 +159,12 @@
 -(void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.section) {
-        
+        case 1:{
+            NLMaleNBLuePlanViewController *vc = [[NLMaleNBLuePlanViewController alloc] init];
+            [vc setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
         case 2:{
             [ApplicationStyle jumpAppStoreScore];
             break;

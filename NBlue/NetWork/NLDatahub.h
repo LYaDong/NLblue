@@ -88,4 +88,8 @@
  * 获得日历数据
  */
 -(void)getCalendar:(NSDictionary *)dic;
+/**
+ * 反馈接口
+ */
+-(void)setFeedback:(NSString *)count;
 @end

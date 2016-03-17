@@ -43,6 +43,12 @@ NLLHRatingViewDelegate>
 @property(nonatomic,assign)NSInteger isCurrentDay;
 @property(nonatomic,strong)UIView *cartoonBackview;
 
+@property(nonatomic,strong)NSMutableDictionary *canledarDataDic;
+//@property(nonatomic,strong)NSString *loveloveStr;
+//@property(nonatomic,strong)NSString *habitsLivingStr;
+//@property(nonatomic,strong)NSString *uncomfortableStr;
+
+
 @end
 @implementation NLHealthCalenderView
 - (instancetype)initWithFrame:(CGRect)frame
@@ -50,6 +56,13 @@ NLLHRatingViewDelegate>
     self = [super initWithFrame:frame];
     if (self) {
 //        self.backgroundColor = [UIColor yellowColor];
+        _canledarDataDic = [NSMutableDictionary dictionary];
+        [_canledarDataDic setValue:CommonText_Canlender_uncomfortable forKey:@"uncomfortable"];
+        [_canledarDataDic setValue:CommonText_Canlender_habitsAndCustoms forKey:@"lifeHabit"];
+        [_canledarDataDic setValue:@"0" forKey:@"haveSex"];
+        [_canledarDataDic setValue:@"0" forKey:@"dysmenorrhea"];
+        
+        
         [self judgePeriof:[ApplicationStyle datePickerTransformationCorss:[NSDate date]]];//判断今天的时间在不在经期内，在的话打开Switch开关
         _isCurrentDay = 0;  //是否是今天时间  默认是0 代表是 大于今天的时间 则是1
         [self bulidUI];
@@ -230,11 +243,11 @@ NLLHRatingViewDelegate>
         cell.switchs.on = true;
         if (indexPath.row == 0) {
             cell.switchs.hidden = NO;
-            cell.cellCountImage.hidden = YES;
+            cell.cellCountLab.hidden = YES;
         }
         
         if (indexPath.row==1) {
-            cell.cellCountImage.hidden = YES;
+            cell.cellCountLab.hidden = YES;
             CGFloat scroes = [[[NLSQLData canlenderDayData:_selectedTime] objectForKey:@"dysmenorrheaLevel"] floatValue];
             _starView = [[NLLHRatingView alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:240] - [ApplicationStyle control_weight:24], ([ApplicationStyle control_height:88] - [ApplicationStyle control_height:40])/2, [ApplicationStyle control_weight:240], [ApplicationStyle control_height:40])];
             _starView.ratingType = INTEGER_TYPE;//整颗星
@@ -246,11 +259,11 @@ NLLHRatingViewDelegate>
         }
     }else{
         _starView.hidden = YES;
-        cell.cellCountImage.hidden = NO;
+        cell.cellCountLab.hidden = NO;
         cell.switchs.on = false;
         if (indexPath.row == 0) {
             cell.switchs.hidden = NO;
-            cell.cellCountImage.hidden = YES;
+            cell.cellCountLab.hidden = YES;
         }
         imageArr = @[@"NLHClen_DYM",
                      @"NLHClen_AA",
@@ -267,7 +280,7 @@ NLLHRatingViewDelegate>
     
     cell.cellImage.image = [UIImage imageNamed:imageArr[indexPath.row]];
     cell.cellLab.text = labArr[indexPath.row];
-    cell.cellCountImage.image = [UIImage imageNamed:@"NLHClen_DDD"];
+    cell.cellCountLab.text = @"...";
     [cell.switchs addTarget:self action:@selector(switchOffDown:) forControlEvents:UIControlEventValueChanged];
     cell.backgroundColor = [@"fffdfd"  hexStringToColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -290,7 +303,7 @@ NLLHRatingViewDelegate>
             {
                 _blackBack.hidden = NO;
                 _calenLifeHabitView.hidden = NO;
-                
+                _cellRow = indexPath.row;
                 _calenLifeHabitView.commonTime = _selectedTime;
                 [_calenLifeHabitView buildUI];
                 break;
@@ -299,6 +312,7 @@ NLLHRatingViewDelegate>
             {
                 _blackBack.hidden = NO;
                 _uncomfortableView.hidden = NO;
+                _cellRow = indexPath.row;
                 _uncomfortableView.commonTime = _selectedTime;
                 [_uncomfortableView buildUI];
                 break;
@@ -321,7 +335,7 @@ NLLHRatingViewDelegate>
             case 2:{
                 _blackBack.hidden = NO;
                 _calenLifeHabitView.hidden = NO;
-                
+                _cellRow = indexPath.row;
                 _calenLifeHabitView.commonTime = _selectedTime;
                 [_calenLifeHabitView buildUI];
                 
@@ -330,6 +344,7 @@ NLLHRatingViewDelegate>
             case 3:{
                 _blackBack.hidden = NO;
                 _uncomfortableView.hidden = NO;
+                _cellRow = indexPath.row;
                 _uncomfortableView.commonTime = _selectedTime;
                 [_uncomfortableView buildUI];
                 
@@ -388,27 +403,27 @@ NLLHRatingViewDelegate>
     switch (index) {
         case PlayLove_MYZ:
         {
-            cell.cellCountImage.image = [UIImage imageNamed:@"NLHClen_AA_XX"];
+            cell.cellCountLab.text = NSLocalizedString(@"NLHealthCalender_Picker_MYZ", nil);
             break;
         }
         case PlayLove_DTZ:
         {
-            cell.cellCountImage.image = [UIImage imageNamed:@"NLHClen_AA_TT"];
+            cell.cellCountLab.text = NSLocalizedString(@"NLHealthCalender_Picker_DTZ", nil);
             break;
         }
         case PlayLove_CLYSH:
         {
-            cell.cellCountImage.image = [UIImage imageNamed:@"NLHClen_AA_YY"];
+            cell.cellCountLab.text = NSLocalizedString(@"NLHealthCalender_Picker_CLSHY", nil);
             break;
         }
         case PlayLove_WBHCS:
         {
-            cell.cellCountImage.image = [UIImage imageNamed:@"NLHClen_AA_N_TT"];
+            cell.cellCountLab.text = NSLocalizedString(@"NLHealthCalender_Picker_WBHCS", nil);
             break;
         }
         case PlayLove_QC:
         {
-            cell.cellCountImage.image = [UIImage imageNamed:@"NLHClen_DDD"];
+            cell.cellCountLab.text = @"...";
             break;
         }
         default:
@@ -420,14 +435,25 @@ NLLHRatingViewDelegate>
 }
 //生活习惯
 -(void)lifeHabitCount:(NSArray *)array{
+    
+   
+    
     [self hideBack];
     NSDictionary *dataDic = nil;
     if (array==nil) {
         dataDic = @{@"habitsAndCustoms":CommonText_Canlender_habitsAndCustoms,@"time":_selectedTime};
+        [_canledarDataDic setValue:CommonText_Canlender_habitsAndCustoms forKey:@"lifeHabit"];
     }else{
         dataDic = @{@"habitsAndCustoms":[self countString:array]==nil?@"":[self countString:array],@"time":_selectedTime};
+        [_canledarDataDic setValue:[self countString:array] forKey:@"lifeHabit"];
     }
+    [_canledarDataDic setValue:_selectedTime forKey:@"currentDate"];
     [NLSQLData upDataCanlenderhabitsAndCustoms:dataDic];
+    [[NLDatahub sharedInstance] calendarUpLoadDataDic:_canledarDataDic];
+    
+    NLHealtCalenderCell *cell = (NLHealtCalenderCell *)[self viewWithTag:_cellRow+CELLTAG];
+    cell.cellCountLab.text = [self canledarStrHandle:array];
+    
 }
 //不舒服
 -(void)uncomfortableArr:(NSArray *)array{
@@ -436,10 +462,17 @@ NLLHRatingViewDelegate>
     NSDictionary *dataDic = nil;
     if (array == nil) {
         dataDic = @{@"uncomfortable":CommonText_Canlender_uncomfortable,@"time":_selectedTime};
+        [_canledarDataDic setValue:CommonText_Canlender_uncomfortable forKey:@"uncomfortable"];
     }else{
         dataDic = @{@"uncomfortable":[self countString:array]==nil?@"":[self countString:array],@"time":_selectedTime};
+        [_canledarDataDic setValue:[self countString:array] forKey:@"uncomfortable"];
     }
+    [_canledarDataDic setValue:_selectedTime forKey:@"currentDate"];
     [NLSQLData upDataCanlenderuncomfortable:dataDic];
+    [[NLDatahub sharedInstance] calendarUpLoadDataDic:_canledarDataDic];
+    
+    NLHealtCalenderCell *cell = (NLHealtCalenderCell *)[self viewWithTag:_cellRow+CELLTAG];
+    cell.cellCountLab.text = [self canledarStrHandle:array];
 }
 
 #pragma mark - 星星代理
@@ -448,14 +481,32 @@ NLLHRatingViewDelegate>
     NSDictionary *dataDic = @{@"dysmenorrheaLevel":[NSString stringWithFormat:@"%0.0f",score],@"time":_selectedTime};
     [NLSQLData upDataCanlenderDysmenorrheaLevel:dataDic];
 }
-
+//字符拼接
 -(NSMutableString *)countString:(NSArray *)array{
     NSMutableString *count = [NSMutableString string];
     for (NSInteger i=0; i<array.count; i++) {
         if (i==array.count-1) {
             [count appendFormat:@"%@",array[i]];
         }else{
-            [count appendFormat:@"%@-",array[i]];
+            [count appendFormat:@"%@.",array[i]];
+        }
+    }
+    return count;
+}
+-(NSMutableString *)canledarStrHandle:(NSArray *)arr{
+    NSMutableString *count = [NSMutableString string];
+    
+    NSMutableArray *arrayStr = [NSMutableArray array];
+    for (NSString *str in arr) {
+        if (![str isEqualToString:@"0"]) {
+            [arrayStr addObject:str];
+        }
+    }
+    for (NSInteger i=0; i<arrayStr.count; i++) {
+        if (i==arrayStr.count-1) {
+            [count appendFormat:@"%@",arrayStr[i]];
+        }else{
+            [count appendFormat:@"%@.",arrayStr[i]];
         }
     }
     return count;

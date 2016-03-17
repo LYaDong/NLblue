@@ -146,15 +146,18 @@ static const NSInteger LIFEHABITTAG = 2000;
 }
 
 -(void)lifeHabitDown:(UIButton *)btn{
-    NSInteger num = [[NSString stringWithFormat:@"%@",_addDataArr[btn.tag - LIFEHABITTAG]] intValue] - 1;
+//    NSInteger num = [[NSString stringWithFormat:@"%@",_addDataArr[btn.tag - LIFEHABITTAG]] intValue] - 1;
     btn.selected = !btn.selected;
     switch (btn.tag - LIFEHABITTAG) {
         case LifeHabit_SG:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
+            
+            
+            NSLog(@"%@",_addDataArr);
             
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_SHXG_SG"] forState:UIControlStateNormal];
@@ -172,9 +175,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case LifeHabit_YD:  {
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
             
             if (btn.selected) {
@@ -192,9 +195,9 @@ static const NSInteger LIFEHABITTAG = 2000;
         }
         case LifeHabit_PB:{
             if ([_addDataArr[btn.tag - LIFEHABITTAG] isEqualToString:@"0"]) {
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG +1]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:btn.titleLabel.text];
             }else{
-                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - LIFEHABITTAG - num]];
+                [_addDataArr replaceObjectAtIndex:btn.tag - LIFEHABITTAG withObject:@"0"];
             }
             if (btn.selected) {
                 [btn setImage:[UIImage imageNamed:@"NLHClen_SHXG_DB"] forState:UIControlStateNormal];
@@ -220,7 +223,7 @@ static const NSInteger LIFEHABITTAG = 2000;
 }
 -(NSArray *)canlenData{
     NSString *count = [[NLSQLData canlenderDayData:self.commonTime] objectForKey:@"habitsAndCustoms"];
-    NSArray *array = [count componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
+    NSArray *array = [count componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"."]];
     
     NSLog(@"%@",array);
     

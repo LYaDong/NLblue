@@ -24,4 +24,5 @@
 #define Folk_Permission @"/permission"
 #define User_ThirdLogin @"/thirdlogin"
 #define Menstruation_Calender @"/calendar"
+#define User_Feedback @"/feedback"
 #endif /* NLApiURL_h */

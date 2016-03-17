@@ -11,7 +11,7 @@
 @interface NLHealtCalenderCell : UITableViewCell
 @property(nonatomic,strong)UIImageView *cellImage;
 @property(nonatomic,strong)UILabel *cellLab;
-@property(nonatomic,strong)UIImageView *cellCountImage;
+@property(nonatomic,strong)UILabel *cellCountLab;
 @property(nonatomic,strong)UISwitch *switchs;
 
 @end

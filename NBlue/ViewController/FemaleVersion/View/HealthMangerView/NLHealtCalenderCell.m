@@ -42,9 +42,13 @@
     self.switchs.on = false;
     self.switchs.hidden = YES;
     [self.contentView addSubview:self.switchs];
-
-    self.cellCountImage = [[UIImageView alloc] initWithFrame:CGRectMake(SCREENWIDTH - w - [ApplicationStyle control_weight:24], (heights - h)/2, w, h)];
-    [self.contentView addSubview:self.cellCountImage];
+    
+    self.cellCountLab = [[UILabel alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:200] - [ApplicationStyle control_weight:24], (heights - h)/2, [ApplicationStyle control_weight:200], h)];
+    self.cellCountLab.textColor = [@"ff8d8d" hexStringToColor];
+//    self.cellCountLab.backgroundColor = [UIColor redColor];
+    self.cellCountLab.textAlignment = NSTextAlignmentRight;
+    self.cellCountLab.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:28]];
+    [self.contentView addSubview:self.cellCountLab];
     
 }
 - (void)awakeFromNib {

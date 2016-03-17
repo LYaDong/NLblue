@@ -209,6 +209,11 @@
  */
 +(NSString *)datePickerTransformationCorss:(NSDate *)date;
 /**
+ * 2015-01  格式：只有年和月
+ */
++(NSString *)datePickerTransformationYearOrMonth:(NSDate *)date;
+
+/**
  *2015.01.01  格式
  */
 +(NSString *)datePickerTransformationCorssPoint:(NSDate *)date;

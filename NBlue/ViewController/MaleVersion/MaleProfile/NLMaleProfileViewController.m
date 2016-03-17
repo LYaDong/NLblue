@@ -77,7 +77,7 @@ static NSInteger NAVBTNTAG = 1000;
 }
 #pragma mark 系统Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 6;
+    return 5;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [ApplicationStyle control_height:88];
@@ -91,13 +91,12 @@ static NSInteger NAVBTNTAG = 1000;
     
     
     NSArray *cellLabArray = @[NSLocalizedString(@"NLMaleProfile_Myequipment", nil),
-                              NSLocalizedString(@"NLMaleProfile_NBluePlan", nil),
                               NSLocalizedString(@"NLMaleProfile_Share", nil),
                               NSLocalizedString(@"NLMaleProfile_FeedBack", nil),
                               NSLocalizedString(@"NLMaleProfile_Set", nil),
                               NSLocalizedString(@"NLMaleProfile_AboutNBlue", nil)];
     
-    NSArray *cellImageArray = @[@"NL_Male_M_Equ",@"NL_Male_NBlplan",@"NL_Male_Share",@"NL_Male_Feedback",@"NL_Male_Set",@"NL_Male_About_NL"];
+    NSArray *cellImageArray = @[@"NL_Male_M_Equ",@"NL_Male_Share",@"NL_Male_Feedback",@"NL_Male_Set",@"NL_Male_About_NL"];
     cell.cellImages.image = [UIImage imageNamed:cellImageArray[indexPath.row]];
     cell.cellLabs.text = cellLabArray[indexPath.row];
     cell.imageArrow.image = [UIImage imageNamed:@"NL_Male_lightArrow"];
@@ -109,7 +108,6 @@ static NSInteger NAVBTNTAG = 1000;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSArray *viewControllerArray = @[@"NLMyEquipmentController",
-                                     @"NLMaleNBLuePlanViewController",
                                      @"NLShareController",
                                      @"NLFeedBackViewController",
                                      @"NLMaleIndividuaViewController",

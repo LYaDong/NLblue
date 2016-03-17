@@ -72,14 +72,14 @@ static const NSInteger DATEPICKERTAGBTN = 4000;                             //æ—
             }
             case PickerType_Cycle:
             {
-                for (NSInteger i = 5; i <= 50; i++) {
+                for (NSInteger i = 10; i <= 60; i++) {
                     [self.dataArray addObject:[NSString stringWithFormat:@"%ld",(long)i]];
                 }
                 break;
             }
             case PickerType_Period:
             {
-                for (NSInteger i = 1; i <= 50; i++) {
+                for (NSInteger i = 1; i <= 15; i++) {
                     [self.dataArray addObject:[NSString stringWithFormat:@"%ld",(long)i]];
                 }
                 break;

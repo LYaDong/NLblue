@@ -78,7 +78,10 @@
            NSString *caloriesAmount = [[arrDatas[0] objectForKey:@"caloriesAmount"] length]==0l?@"0":[arrDatas[0] objectForKey:@"caloriesAmount"];
            NSString *timestamp = [[arrDatas[0] objectForKey:@"totalTimeCount"] length]==0?@"0":[arrDatas[0] objectForKey:@"totalTimeCount"];
            
-           NSArray *dataLabArr = @[stepsAmount,distanceAmount,caloriesAmount,timestamp];
+           NSArray *dataLabArr = @[[NSString stringWithFormat:@"%@米",stepsAmount],
+                                   [NSString stringWithFormat:@"%@步",distanceAmount],
+                                   [NSString stringWithFormat:@"%@卡",caloriesAmount],
+                                   [NSString stringWithFormat:@"%@分",timestamp]];
            NSArray *remarkLabText = @[NSLocalizedString(@"NLHealthManger_StepRemarkLab", nil),
                                       NSLocalizedString(@"NLHealthManger_StepDistance", nil),
                                       NSLocalizedString(@"NLHealthManger_StepEnergy", nil),
@@ -214,10 +217,10 @@
     NSString *caloriesAmount = [index objectForKey:@"caloriesAmount"]==nil?@"0":[index objectForKey:@"caloriesAmount"];
     NSString *totalTimeCount = [index objectForKey:@"totalTimeCount"]==nil?@"0":[index objectForKey:@"totalTimeCount"];
 
-    NSArray *dataLabArr = @[[NSString stringWithFormat:@"%ld",[stepsAmount integerValue]/_weekMonthCount],
-                            [NSString stringWithFormat:@"%ld",[distanceAmount integerValue]/_weekMonthCount],
-                            [NSString stringWithFormat:@"%ld",[caloriesAmount integerValue]/_weekMonthCount],
-                            [NSString stringWithFormat:@"%ld",[totalTimeCount integerValue]/60/_weekMonthCount]];
+    NSArray *dataLabArr = @[[NSString stringWithFormat:@"%ld步",[stepsAmount integerValue]/_weekMonthCount],
+                            [NSString stringWithFormat:@"%ld米",[distanceAmount integerValue]/_weekMonthCount],
+                            [NSString stringWithFormat:@"%ld卡",[caloriesAmount integerValue]/_weekMonthCount],
+                            [NSString stringWithFormat:@"%ld分",[totalTimeCount integerValue]/60/_weekMonthCount]];
     
     NSArray *remarkLabText = nil;
 

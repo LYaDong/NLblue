@@ -13,7 +13,7 @@
 #import "NLRingLine.h"
 
 @interface NLMyHerViewController ()
-
+@property(nonatomic,strong)UIView *qrcodeBackView;
 @end
 
 @implementation NLMyHerViewController
@@ -22,7 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [ApplicationStyle subjectBackViewColor];
+    self.view.backgroundColor = [@"fffeeb" hexStringToColor];
     
     
     self.returnBtn.hidden = YES;
@@ -44,21 +44,50 @@
     [self loadData];
     
     
-    [self generateQRCode];
-//    [self periodCircleView];
-//    [self pregnancyIndex];
+    
 }
 -(void)loadData{
     [[NLDatahub sharedInstance] maleJudgeIsHave];
 }
 -(void)generateQRCode{
+    
+    _qrcodeBackView = [[UIView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle navBarAndStatusBarSize] - [ApplicationStyle tabBarSize])];
+    [self.view addSubview:_qrcodeBackView];
+    
+    UIView *qrcodeView = [[UIView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:500])/2,[ApplicationStyle control_height:120], [ApplicationStyle control_weight:500], [ApplicationStyle control_weight:500])];
+    qrcodeView.backgroundColor = [UIColor whiteColor];
+    qrcodeView.layer.cornerRadius = [ApplicationStyle control_weight:10];
+    qrcodeView.layer.borderColor = [@"929178" hexStringToColor].CGColor;
+    qrcodeView.layer.borderWidth = [ApplicationStyle control_weight:5];
+    [_qrcodeBackView addSubview:qrcodeView];
+    
     UIImage *qrcode = [ApplicationStyle createNonInterpolatedUIImageFormCIImage:
                        [ApplicationStyle createQRForString:
                         [kAPPDELEGATE._loacluserinfo GetUser_ID]] withSize:SCREENWIDTH];
-    UIImageView *imagex = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 200, 200)];
+    UIImageView *imagex = [[UIImageView alloc] initWithFrame:CGRectMake((qrcodeView.viewWidth - [ApplicationStyle control_weight:360])/2, [ApplicationStyle control_height:70], [ApplicationStyle control_height:360], [ApplicationStyle control_height:360])];
     imagex.image =  qrcode;
     imagex.backgroundColor = [UIColor redColor];
-    [self.view addSubview:imagex];
+    [qrcodeView addSubview:imagex];
+    
+    NSString *labTextStr = NSLocalizedString(@"NLMyHer_TitleQocodeText", nil);
+    CGSize labTextSize = [ApplicationStyle textSize:labTextStr font:[UIFont systemFontOfSize:[ApplicationStyle control_weight:36]] size:SCREENWIDTH - [ApplicationStyle control_weight:120]];
+    
+    UILabel *labText = [[UILabel alloc] initWithFrame:CGRectMake((_qrcodeBackView.viewWidth - labTextSize.width)/2, qrcodeView.bottomOffset + [ApplicationStyle control_height:70], labTextSize.width, labTextSize.height)];
+    labText.text = labTextStr;
+    labText.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:36]];
+    labText.textColor = [@"de9124" hexStringToColor];
+    labText.textAlignment = NSTextAlignmentCenter;
+    labText.numberOfLines = 0;
+    [_qrcodeBackView addSubview:labText];
+    
+    UIButton *btnAdd = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btnAdd.frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:166])/2, labText.bottomOffset+[ApplicationStyle control_height:20], [ApplicationStyle control_weight:166], [ApplicationStyle control_height:30]);
+    [btnAdd setTitle:NSLocalizedString(@"NLMyHer_BtnAdd", nil) forState:UIControlStateNormal];
+    [btnAdd setTitleColor:[@"959595" hexStringToColor] forState:UIControlStateNormal];
+    btnAdd.titleLabel.font = [ApplicationStyle textThrityFont];
+    [btnAdd addTarget:self action:@selector(btnAddDown) forControlEvents:UIControlEventTouchUpInside];
+    [_qrcodeBackView addSubview:btnAdd];
+    
 }
 -(void)periodCircleView{
     NLMyHerPeriodCircle *periodView = [[NLMyHerPeriodCircle alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:400])/2, [ApplicationStyle navBarAndStatusBarSize] + [ApplicationStyle control_height:110], [ApplicationStyle control_weight:400], [ApplicationStyle control_weight:400])];
@@ -170,6 +199,10 @@
 #pragma mark 系统Delegate
 #pragma mark 自己的Delegate
 #pragma mark 自己的按钮事件
+-(void)btnAddDown{
+    
+}
+
 
 -(void)addNotification{
     NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
@@ -177,7 +210,12 @@
     [notifi addObserver:self selector:@selector(folksFicaled) name:NLFolkFicaledNotification object:nil];
 }
 -(void)folksSuccess:(NSNotification *)notifi{
-    NSLog(@"%@",notifi.object);
+    if (notifi.object==nil) {
+        [self generateQRCode];
+    }else{
+        [self periodCircleView];
+        [self pregnancyIndex];
+    }
 }
 -(void)folksFicaled{
     

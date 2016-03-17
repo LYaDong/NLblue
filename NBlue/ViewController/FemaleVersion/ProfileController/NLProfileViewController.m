@@ -38,17 +38,21 @@
 @end
 
 @implementation NLProfileViewController
--(void)rightBtnDown{
-    //暂时隐藏
-    NLGiffiredSignViewController *vc = [[NLGiffiredSignViewController alloc] init];
-    [vc setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//-(void)rightBtnDown{
+//    //暂时隐藏
+//    NLGiffiredSignViewController *vc = [[NLGiffiredSignViewController alloc] init];
+//    [vc setHidesBottomBarWhenPushed:YES];
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.rightBtn.hidden = YES;
     [self.rightBtn setTitle:NSLocalizedString(@"TabBar_Male_SignIn", nil) forState:UIControlStateNormal];
+    
+//    self.titles.text = NSLocalizedString(@"TabBar_Profile", nil);
+    
+    
     
     self.navBarBack.hidden = YES;
     self.returnBtn.hidden = YES;
@@ -80,26 +84,46 @@
 
 -(void)liftBtnUI{
     UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    messageBtn.frame = CGRectMake([ApplicationStyle control_weight:36], [ApplicationStyle control_height:63], [ApplicationStyle control_weight:48], [ApplicationStyle control_height:42]);
+    messageBtn.frame = CGRectMake([ApplicationStyle control_weight:36], [ApplicationStyle statusBarSize] + ([ApplicationStyle navigationBarSize] - [ApplicationStyle control_height:48])/2, [ApplicationStyle control_weight:48], [ApplicationStyle control_height:48]);
     [messageBtn setImage:[UIImage imageNamed:@"NL_Pro_Message"] forState:UIControlStateNormal];
     [messageBtn addTarget:self action:@selector(messageBtnDown) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:messageBtn];
     
+    
+    UILabel *labTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, [ApplicationStyle statusBarSize] + ([ApplicationStyle navigationBarSize] - [ApplicationStyle control_height:40])/2, SCREENWIDTH, [ApplicationStyle control_height:40])];
+    labTitle.text = NSLocalizedString(@"TabBar_Profile", nil);
+    labTitle.textAlignment = NSTextAlignmentCenter;
+    labTitle.textColor = [UIColor whiteColor];
+    labTitle.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:36]];
+    [self.view addSubview:labTitle];
+    
+    UIButton *signBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    signBtn.frame = CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:90 + 30],[ApplicationStyle statusBarSize] + ([ApplicationStyle navigationBarSize] - [ApplicationStyle control_height:48])/2, [ApplicationStyle control_weight:90], [ApplicationStyle control_height:48]);
+    [signBtn setTitle:NSLocalizedString(@"TabBar_Male_SignIn", nil) forState:UIControlStateNormal];
+    [signBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    signBtn.layer.cornerRadius = [ApplicationStyle control_weight:6];
+    signBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    signBtn.layer.borderWidth = [ApplicationStyle control_weight:1];
+    [signBtn addTarget:self action:@selector(signBtnDown) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:signBtn];
+    
 }
 -(void)bulidUI{
     
+//    http://warman-user-header.pinaivip.com/ae6050ec-63fa-40eb-b326-e43aa280ab2c.png
+//    http://warman-user-header.pinaivip.com/ae6050ec-63fa-40eb-b326-e43aa280ab2c.png
+    
     NSDictionary *dicImage = [PlistData getIndividuaData];
     _userHeadImage = [UIButton buttonWithType:UIButtonTypeCustom];
-    _userHeadImage.backgroundColor = [UIColor redColor];
-    _userHeadImage.frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:128])/2, [ApplicationStyle control_height:10] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], [ApplicationStyle control_weight:128], [ApplicationStyle control_weight:128]);
-    _userHeadImage.layer.cornerRadius = [ApplicationStyle control_weight:128]/2;
-    _userHeadImage.layer.borderWidth = [ApplicationStyle control_weight:3];
-    _userHeadImage.layer.borderColor = [UIColor whiteColor].CGColor;
-    _userHeadImage.alpha = 0.15;
+    _userHeadImage.frame = CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:128])/2, [ApplicationStyle control_height:30] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], [ApplicationStyle control_weight:128], [ApplicationStyle control_weight:128]);
+//    _userHeadImage.layer.cornerRadius = [ApplicationStyle control_weight:128]/2;
+//    _userHeadImage.layer.borderWidth = [ApplicationStyle control_weight:4];
+//    _userHeadImage.layer.borderColor = [UIColor whiteColor].CGColor;
+//    _userHeadImage.alpha = 0.15;
     [_userHeadImage addTarget:self action:@selector(userHeadImageDown) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_userHeadImage];
     
-    _userImage = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:128])/2, [ApplicationStyle control_height:10] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], [ApplicationStyle control_weight:128], [ApplicationStyle control_weight:128])];
+    _userImage = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:128])/2, [ApplicationStyle control_height:30] + [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], [ApplicationStyle control_weight:128], [ApplicationStyle control_weight:128])];
     [_userImage sd_setImageWithURL:[NSURL URLWithString:[dicImage objectForKey:@"imageUrl"]] placeholderImage:[UIImage imageNamed:@"User_Head"]];
     _userImage.layer.cornerRadius = [ApplicationStyle control_weight:128]/2;
     _userImage.layer.borderWidth = [ApplicationStyle control_weight:3];
@@ -154,8 +178,7 @@
     [_userImage sd_setImageWithURL:[NSURL URLWithString:[dicImage objectForKey:@"imageUrl"]] placeholderImage:[UIImage imageNamed:@"User_Head"]];
     CGSize ss = [ApplicationStyle textSize:[dicImage objectForKey:@"userName"] font:[ApplicationStyle textThrityFont] size:SCREENWIDTH];
     
-    _userNameLab = [[UILabel alloc] initWithFrame:CGRectMake(0, _userHeadImage.bottomOffset + [ApplicationStyle control_height:26], SCREENWIDTH, ss.height)];
-    _userNameLab.backgroundColor = [UIColor redColor];
+//    _userNameLab = [[UILabel alloc] initWithFrame:CGRectMake(0, _userHeadImage.bottomOffset + [ApplicationStyle control_height:26], SCREENWIDTH, ss.height)];
     _userNameLab.text = [dicImage objectForKey:@"userName"];
 }
 #pragma mark 系统Delegate
@@ -265,6 +288,11 @@
     NLMyMessageViewController *message = [[NLMyMessageViewController alloc] init];
     [message setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:message animated:YES];
+}
+-(void)signBtnDown{
+    NLGiffiredSignViewController *vc = [[NLGiffiredSignViewController alloc] init];
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)sharePlatformArray:(NSArray *)platrormArray shareCount:(NSString *)shareCount icon:(UIImage *)icon{

@@ -231,6 +231,12 @@
     NSString *formatDate = [formatter stringFromDate:date];
     return formatDate;
 }
++(NSString *)datePickerTransformationYearOrMonth:(NSDate *)date{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM"];
+    NSString *formatDate = [formatter stringFromDate:date];
+    return formatDate;
+}
 +(NSString *)datePickerTransformationCorssPoint:(NSDate *)date{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy.MM.dd"];

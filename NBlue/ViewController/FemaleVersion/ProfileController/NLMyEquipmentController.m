@@ -23,6 +23,7 @@
 @property(nonatomic,weak) TYWaveProgressView *waveViewA;
 @property(nonatomic,weak) TYWaveProgressView *waveViewB;
 @property(nonatomic,strong)NLBluetoothAgreementNew *bluetooth;
+@property(nonatomic,strong)UIView *noBluetoothView;
 @end
 
 @implementation NLMyEquipmentController
@@ -89,44 +90,19 @@
     
     
     
-    [self bluetoothUI];
     
     
     
     
     
+
     
-    _cellLabdic = [NSMutableDictionary dictionary];
-    _cellCountLabDic = [NSMutableDictionary dictionary];
-    {
-        NSArray *equipmentLabArray = @[NSLocalizedString(@"NLMyEquipment_EquipmentName", nil),
-                                       NSLocalizedString(@"NLMyEquipment_FirmwareEdition", nil),
-                                       NSLocalizedString(@"NLMyEquipment_MACAddress", nil)];
-        NSArray *firmentUP = @[NSLocalizedString(@"NLMyEquipment_FirmwareUP", nil)];
-        NSArray *reilveArr = @[NSLocalizedString(@"NLMyEquipment_RelieveBinding", nil)];
-        [_cellLabdic setValue:equipmentLabArray forKey:@"equipmentLabArray"];
-        [_cellLabdic setValue:firmentUP forKey:@"firmentUP"];
-        [_cellLabdic setValue:reilveArr forKey:@"reilveArr"];
-    }
-    {
-        NSDictionary *dic = [NLSQLData getBluetoothEquipmentInformation];
-        
-        NSString *equiomentName = nil;
-        if ([kAPPDELEGATE._loacluserinfo getBluetoothName] == nil) {
-            equiomentName = @"您还没有链接任何设备";
-        }else{
-            equiomentName = [kAPPDELEGATE._loacluserinfo getBluetoothName];
-        }
-        
-        
-        NSString *edition = [NSString stringWithFormat:@"v%@.0",[dic objectForKey:@"Version"]];
-        NSArray *equipmentLabArray = @[equiomentName,edition,@""];
-        [_cellCountLabDic setValue:equipmentLabArray forKey:@"equipmentLabArray"];
-        
-    }
     
     self.titles.text = NSLocalizedString(@"NLMyEquipment_MyEquipment", nil);
+    [self noBluetoothUI];
+    [self bluetoothUI];
     [self bulidUI];
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -135,6 +111,12 @@
     [super viewWillDisappear:animated];
 }
 #pragma mark 基础UI
+-(void)noBluetoothUI{
+    
+    _noBluetoothView = [[UIView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle navBarAndStatusBarSize])];
+    _noBluetoothView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_noBluetoothView];
+}
 
 -(void)bluetoothUI{
     
@@ -197,8 +179,34 @@
 
 -(void)bulidUI{
     
-    
-    
+    _cellLabdic = [NSMutableDictionary dictionary];
+    _cellCountLabDic = [NSMutableDictionary dictionary];
+    {
+        NSArray *equipmentLabArray = @[NSLocalizedString(@"NLMyEquipment_EquipmentName", nil),
+                                       NSLocalizedString(@"NLMyEquipment_FirmwareEdition", nil),
+                                       NSLocalizedString(@"NLMyEquipment_MACAddress", nil)];
+        NSArray *firmentUP = @[NSLocalizedString(@"NLMyEquipment_FirmwareUP", nil)];
+        NSArray *reilveArr = @[NSLocalizedString(@"NLMyEquipment_RelieveBinding", nil)];
+        [_cellLabdic setValue:equipmentLabArray forKey:@"equipmentLabArray"];
+        [_cellLabdic setValue:firmentUP forKey:@"firmentUP"];
+        [_cellLabdic setValue:reilveArr forKey:@"reilveArr"];
+    }
+    {
+        NSDictionary *dic = [NLSQLData getBluetoothEquipmentInformation];
+        
+        NSString *equiomentName = nil;
+        if ([kAPPDELEGATE._loacluserinfo getBluetoothName] == nil) {
+            equiomentName = @"您还没有链接任何设备";
+        }else{
+            equiomentName = [kAPPDELEGATE._loacluserinfo getBluetoothName];
+        }
+        
+        
+        NSString *edition = [NSString stringWithFormat:@"v%@.0",[dic objectForKey:@"Version"]];
+        NSArray *equipmentLabArray = @[equiomentName,edition,@""];
+        [_cellCountLabDic setValue:equipmentLabArray forKey:@"equipmentLabArray"];
+        
+    }
     
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize] + [ApplicationStyle control_height:420], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle navBarAndStatusBarSize] - [ApplicationStyle control_height:420]) style:UITableViewStylePlain];
@@ -224,7 +232,11 @@
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return [ApplicationStyle control_height:30];
+    if (section == 0) {
+        return 0;
+    }else{
+      return [ApplicationStyle control_height:30];
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [ApplicationStyle control_height:88];

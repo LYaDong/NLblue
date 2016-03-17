@@ -529,9 +529,6 @@ __goto:
                 return;
             }
         }
-        
-        
-        
         num = num -1;
         goto __goto;
     }else{
@@ -606,7 +603,7 @@ __goto:
         [db executeUpdate:updateTable,
          [dic objectForKey:@"isMenstruation"],
          [dic objectForKey:@"haveSex"],
-         [dic objectForKey:@"lifeHabit"],
+         [self habitsLivingStr:[dic objectForKey:@"lifeHabit"]],
          [self uncomfortableHandleStr:[dic objectForKey:@"uncomfortable"]],
          [dic objectForKey:@"dysmenorrhea"],
          [dic objectForKey:@"currentDate"],
@@ -614,7 +611,7 @@ __goto:
     }
     [db close];
 }
-
+//转换不舒服数据格式：因为安卓和后台不用Typedef,要用字符串，故加一个数据匹配格式
 +(NSMutableString *)uncomfortableHandleStr:(NSString *)uncomfortable{
     NSArray *array = @[NSLocalizedString(@"NLHealthCalender_Unconmfortable_TT", nil),
                         NSLocalizedString(@"NLHealthCalender_Unconmfortable_BD", nil),
@@ -630,10 +627,10 @@ __goto:
                         NSLocalizedString(@"NLHealthCalender_Unconmfortable_QT", nil),];
     
     NSMutableArray *arrayCount = [NSMutableArray array];
-    for (NSInteger i=0; i<12; i++) {
+    for (NSInteger i=0; i<array.count; i++) {
         [arrayCount addObject:@"0"];
     }
-    NSArray *uncomforTableArray = [ApplicationStyle interceptText:uncomfortable interceptCharacter:@"-"];
+    NSArray *uncomforTableArray = [ApplicationStyle interceptText:uncomfortable interceptCharacter:@"."];
     
     for (NSInteger i=0; i<array.count; i++) {
         for (NSInteger j=0; j<uncomforTableArray.count; j++) {
@@ -648,7 +645,34 @@ __goto:
         if (i==arrayCount.count-1) {
             [count appendFormat:@"%@",arrayCount[i]];
         }else{
-            [count appendFormat:@"%@-",arrayCount[i]];
+            [count appendFormat:@"%@.",arrayCount[i]];
+        }
+    }
+    return count;
+}
+//同上
++(NSMutableString *)habitsLivingStr:(NSString *)habutsLivingStr{
+    NSArray *array = @[NSLocalizedString(@"NLHealthCalender_LifeHabit_SG", nil),
+                        NSLocalizedString(@"NLHealthCalender_LifeHabit_YD", nil),
+                        NSLocalizedString(@"NLHealthCalender_LifeHabit_PB", nil),];
+    NSMutableArray *arrayCount = [NSMutableArray array];
+    for (NSInteger i=0; i<array.count; i++) {
+        [arrayCount addObject:@"0"];
+    }
+    NSArray *habutsArray = [ApplicationStyle interceptText:habutsLivingStr interceptCharacter:@"."];
+    for (NSInteger i=0; i<array.count; i++) {
+        for (NSInteger j=0; j<habutsArray.count; j++) {
+            if ([array[i] isEqualToString:habutsArray[j]]) {
+                [arrayCount replaceObjectAtIndex:i withObject:habutsArray[j]];
+            }
+        }
+    }
+    NSMutableString *count = [NSMutableString string];
+    for (NSInteger i=0; i<arrayCount.count; i++) {
+        if (i==arrayCount.count-1) {
+            [count appendFormat:@"%@",arrayCount[i]];
+        }else{
+            [count appendFormat:@"%@.",arrayCount[i]];
         }
     }
     return count;

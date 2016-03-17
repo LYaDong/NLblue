@@ -426,7 +426,7 @@ static const NSInteger LIFEHABITTAG = 2000;
 }
 -(NSArray *)canlenData{
     NSString *count = [[NLSQLData canlenderDayData:self.commonTime] objectForKey:@"uncomfortable"];
-    NSArray *array = [count componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
+    NSArray *array = [count componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"."]];
         
     return array;
 }

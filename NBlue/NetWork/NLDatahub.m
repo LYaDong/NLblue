@@ -171,6 +171,7 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NLUsergetUserInformationFicaledNotification object:nil userInfo:nil];
+            [self urlResponseErrorCode:task.response];
         });
     }];
 }
@@ -208,6 +209,7 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NLGetSoortRecordDataFicaledNotification object:error userInfo:nil];
+            [self urlResponseErrorCode:task.response];
         });
     }];
 }
@@ -267,6 +269,7 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NLMaleBindingFicaledNotification object:error userInfo:nil];
+            [self urlResponseErrorCode:task.response];
         });
     }];
 }
@@ -288,6 +291,7 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
             [self dismissHide];
             NSLog(@"%@",error);
             [[NSNotificationCenter defaultCenter] postNotificationName:NLGetCycleOrPeriodFicaledNotification object:nil userInfo:nil];
+            [self urlResponseErrorCode:task.response];
         });
     }];
 }
@@ -309,6 +313,7 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
         [_manager POST:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLUserApi,@"/header"] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             //        NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"sdfsdf.png" withExtension:nil];
             //        [formData appendPartWithFileURL:[NSURL URLWithString:image] name:@"file" fileName:@"sdfsdf.png" mimeType:@"image/png" error:NULL];
+//            NSString *files = [NSString stringWithFormat:@"%0.0f",[[NSDate date] timeIntervalSince1970]];
             [formData appendPartWithFileData:imgData name:@"file" fileName:@"test.png" mimeType:@"image/png"];
         } progress:^(NSProgress * _Nonnull uploadProgress) {
             
@@ -320,6 +325,7 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:NLUserUploadUserImageFicaledNotification object:error userInfo:nil];
+                [self urlResponseErrorCode:task.response];
             });
         }];
     });
@@ -357,6 +363,7 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
         dispatch_async(dispatch_get_main_queue(), ^{
             [self dismissHide];
             [[NSNotificationCenter defaultCenter] postNotificationName:NLUpCycleOrPeriodFicaledNotification object:nil userInfo:nil];
+            [self urlResponseErrorCode:task.response];
         });
     }];
     
@@ -378,7 +385,7 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
     [_manager PUT:[NSString stringWithFormat:@"%@%@%@",NLmobileApiBaseUrl,NLMenstruation,User_MenstruationRecord] parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@",responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
+        [self urlResponseErrorCode:task.response];
     }];
     
 }
@@ -403,6 +410,7 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
         dispatch_async(dispatch_get_main_queue(), ^{
             [self dismissHide];
             [[NSNotificationCenter defaultCenter] postNotificationName:NLThirdLoginFicaledNotification object:nil userInfo:nil];
+            
         });
     }];
 }
@@ -421,6 +429,7 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NLFolkFicaledNotification object:nil userInfo:nil];
+            [self urlResponseErrorCode:task.response];
         });
     }];
 }
@@ -444,6 +453,7 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
         dispatch_async(dispatch_get_main_queue(), ^{
             [self dismissHide];
             [[NSNotificationCenter defaultCenter] postNotificationName:NLGetMyMessageFicaledNotification object:error];
+            [self urlResponseErrorCode:task.response];
         });
     }];
     
@@ -465,7 +475,7 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
        });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"%@",error);
+             [self urlResponseErrorCode:task.response];
         });
     }];
 }
@@ -483,22 +493,32 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
     [_manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NLRemindMessageSuccessNotification object:[self dataTransformationJson:responseObject]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLRemindMessageSuccessNotification object:[self dataTransformationJson:responseObject]];
+        });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NLRemindMessageFicaledNotification object:error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+             [[NSNotificationCenter defaultCenter] postNotificationName:NLRemindMessageFicaledNotification object:error];
+            [self urlResponseErrorCode:task.response];
+        });
+       
+
     }];
 }
 
 -(void)calendarUpLoadDataDic:(NSDictionary *)dataDic{
     
+    
+    
+    
     NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
                                  @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken],
-                                 @"currentDate":@"",
+                                 @"currentDate":[dataDic objectForKey:@"currentDate"]==nil?@"":[dataDic objectForKey:@"currentDate"],
                                  @"isMenstruation":@"",
-                                 @"dysmenorrhea":@"",
-                                 @"haveSex":@"",
-                                 @"lifeHabit":@"",
-                                 @"uncomfortable":@""};
+                                 @"dysmenorrhea":[dataDic objectForKey:@"dysmenorrhea"]==nil?@"":[dataDic objectForKey:@"dysmenorrhea"],
+                                 @"haveSex":[dataDic objectForKey:@"haveSex"]==nil?@"":[dataDic objectForKey:@"haveSex"],
+                                 @"lifeHabit":[dataDic objectForKey:@"lifeHabit"]==nil?@"":[dataDic objectForKey:@"lifeHabit"],
+                                 @"uncomfortable":[dataDic objectForKey:@"uncomfortable"]==nil?@"":[dataDic objectForKey:@"uncomfortable"]};
     
     _manager = [AFHTTPSessionManager manager];
     _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLapplication,NLtextHeml, nil];
@@ -508,9 +528,9 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
     [_manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",[self dataTransformationJson:responseObject]);
+        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"上传成功"];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
+        [self urlResponseErrorCode:task.response];
     }];
 }
 //获得日历数据
@@ -531,10 +551,35 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
         [[NSNotificationCenter defaultCenter] postNotificationName:NLGetCalendarSuccessNotification object:[self dataTransformationJson:responseObject]];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-       [[NSNotificationCenter defaultCenter] postNotificationName:NLGetCalendarFicaledNotification object:error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLGetCalendarFicaledNotification object:error];
+            [self urlResponseErrorCode:task.response];
+        });
     }];
-    
 }
+//反馈接口
+-(void)setFeedback:(NSString *)count{
+    NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                 @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken],
+                                 @"message":count};
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLapplication,NLtextHeml, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *api = [NSString stringWithFormat:@"%@%@",NLUserApi,User_Feedback];
+    NSString *url = API_BASE_URL(api);
+    [_manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+       dispatch_async(dispatch_get_main_queue(), ^{
+           [[NSNotificationCenter defaultCenter] postNotificationName:NLSetFeedbackSuccessNotification object:nil];
+       });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self urlResponseErrorCode:task.response];
+        });
+    }];
+}
+
 #pragma mark 转JSON数据
 - (NSDictionary *)dataTransformationJson:(id  _Nullable)responseObject{
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject

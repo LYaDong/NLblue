@@ -216,8 +216,6 @@ static const NSInteger ARROWTAG = 1500;
     NSInteger theCurrent = [ApplicationStyle whatDays:date];
     NSInteger daysInLastMonth = [ApplicationStyle totalDaysInMonth:date];
     NSInteger firstWeekday    = [ApplicationStyle getWeekofFirstInDate:date];
-
-    
     NSInteger lastCountDay = [self getLastMonthDay:_index - 1];
 
 //    NSInteger nextCountDay = [self getNextMonthDay:_index + 1];
@@ -255,12 +253,20 @@ static const NSInteger ARROWTAG = 1500;
 
 //计算经期
 -(void)calculationCalenderBtn:(UIButton *)dayButton date:(NSDate *)date i:(NSInteger)i dayIndex:(NSInteger)dayIndex{
+    
+    
+//    NSLog(@"点击的年月 = %@  \n 当前的年月 = %@",[ApplicationStyle datePickerTransformationYearOrMonth:date],[ApplicationStyle datePickerTransformationYearOrMonth:[NSDate date]]);
+    
+    
+    
+    
+    
     /*
      ZQ                     周期
      ycq                    预测期
      ycqDay                 预测期的哪天
      */
-    NSInteger firstWeekday    = [ApplicationStyle getWeekofFirstInDate:date];//获得本周的时间
+    NSInteger firstWeekday    = [ApplicationStyle getWeekofFirstInDate:date];//获得本周的时间,在周几
     NSDictionary *dataDic = [PlistData getIndividuaData];//获得用户数据
     
     //间隔周期
@@ -283,6 +289,8 @@ static const NSInteger ARROWTAG = 1500;
             if (i>=firstWeekday) {
                 day = i - firstWeekday + 1;//获得本月的天数
             }
+            
+            NSLog(@"%ld",day);
             NSString *ycqDay = [ycq substringWithRange:NSMakeRange(ycq.length-2, 2)];//预测期的天数
             for (NSInteger z=0; z<periodTime; z++) {
                 //经期来临的日子  经期每次循环用户选择的次数

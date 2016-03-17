@@ -73,7 +73,6 @@ static NLBluetoothCommand *bluetoothaCommand = nil;
 
 + (NSData *)setTemperatureAndTime:(NSInteger)temperature time:(NSInteger)temperatureTime{
     NSString *str = [NLBluetoothDataAnalytical tenTurnSixTeen:temperature];
-    
     unsigned long red = strtoul([[str substringWithRange:NSMakeRange(0, 2)] UTF8String],0,16);
     Byte b =  (Byte) ((0xff & red) );//( Byte) 0xff&iByte;
     
@@ -147,6 +146,14 @@ static NLBluetoothCommand *bluetoothaCommand = nil;
 //重启设备
 +(NSData *)connectRestart{
     Byte byte[20] = {0xF0,0x01};
+    NSData *data = [NSData dataWithBytes:byte length:20];
+    return data;
+}
+//运动目标设置
++(NSData *)setSportTarget{
+    unsigned long target = strtoul([[NSString stringWithFormat:@"%lx",(long)8000] UTF8String], 0, 16);
+    Byte targetByty =  (Byte) ((0xff & target) );//( Byte) 0xff&iByte;
+    Byte byte[20] = {0x03,0x03,0x00,targetByty};
     NSData *data = [NSData dataWithBytes:byte length:20];
     return data;
 }
