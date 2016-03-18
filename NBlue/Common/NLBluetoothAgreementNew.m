@@ -340,8 +340,9 @@ static NSString *TransLationF1 = @"0AF1";
     [self hanldReturnQueryTempe:dataStr];
     [self hanldReturnBatteryA:dataStr];
     [self hanldReturnBatteryB:dataStr];
+    [self hanldReturnMac:dataStr];
 }
-
+//81:be:16:d0:df:fc
 
 -(void)connect{
     if (![[kAPPDELEGATE._loacluserinfo getBlueToothTime] isEqualToString:@"1"]) {
@@ -358,6 +359,10 @@ static NSString *TransLationF1 = @"0AF1";
     [self sportDataQuery];
     [self setTatget];
     [self queryTemperatureEquiment];
+    
+    
+    [self queryAunitLevel];//获得设备信息
+    [self getBluetoothMac];//获得设备MAC地址
 
     
 }
@@ -438,6 +443,10 @@ static NSString *TransLationF1 = @"0AF1";
     NSData *data = [NLBluetoothCommand setSportTarget];
     [self writeCharacteristicF6:_periperal data:data];
 }
+-(void)getBluetoothMac{
+    NSData *data = [NLBluetoothCommand setBluetoothMAC];
+    [self writeCharacteristicF6:_periperal data:data];
+}
 
 #pragma mark 处理返回数据
 #pragma mark 处理运动返回数据
@@ -506,6 +515,10 @@ static NSString *TransLationF1 = @"0AF1";
 //A单元电池电量返回
 -(void)hanldReturnBatteryA:(NSString *)dataStr{
     if ([[dataStr substringWithRange:NSMakeRange(0, 4)] isEqualToString:EquiomentCommand_0201]) {
+        //存储版本号
+        NSString *edition = [dataStr substringWithRange:NSMakeRange(8, 2)];
+        long editionNum = [NLBluetoothDataAnalytical sixTenHexTeen:edition];
+        [kAPPDELEGATE._loacluserinfo setBluetoothEdition:[NSString stringWithFormat:@"%ld",editionNum]];
         if (self.batteryLevelA) {
             self.batteryLevelA(dataStr,self);
         }
@@ -517,6 +530,13 @@ static NSString *TransLationF1 = @"0AF1";
         if (self.batteryLevelB) {
             self.batteryLevelB(dataStr);
         }
+    }
+}
+//MAC地址处理返回
+-(void)hanldReturnMac:(NSString *)dataStr{
+    if ([[dataStr substringWithRange:NSMakeRange(0, 4)] isEqualToString:EquiomentCommand_0204]) {
+        NSString *count = [dataStr substringWithRange:NSMakeRange(4, dataStr.length - 4)];
+        [kAPPDELEGATE._loacluserinfo setBluetoothMAC:[ApplicationStyle stringMosiac:count mosiacSymbolStr:@":" index:2]];
     }
 }
 //#pragma mark 加热返回

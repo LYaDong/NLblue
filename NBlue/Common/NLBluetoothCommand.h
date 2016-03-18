@@ -73,4 +73,8 @@
  * 运动目标设置
  */
 +(NSData *)setSportTarget;
+/**
+ * 获得设备的MAC地址
+ */
++(NSData *)setBluetoothMAC;
 @end

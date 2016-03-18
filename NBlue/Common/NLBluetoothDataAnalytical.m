@@ -61,7 +61,7 @@
     long   number = strtoul([[num substringWithRange:NSMakeRange(0, 4)] UTF8String],0,16);
     return number;
 }
-
+#pragma mark 16进制转换 10进制
 + (long)sixTenHexTeen:(NSString *)num
 {
     long   number = strtoul([[num substringWithRange:NSMakeRange(0, num.length)] UTF8String],0,16);

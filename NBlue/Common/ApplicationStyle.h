@@ -301,6 +301,15 @@
  * @param str 要转换的字符  一定要等于两位字符，否则补足
  */
 + (Byte)byteTransformationTextSixteenByteStr:(NSString *)str;
-
-
+/**
+ * 字符串拼接
+ * @param strArr 要拆开拼接的字符串
+ * @param mosiacSymbolStr 要连接在一起的字符
+ * @param index 每次重第几个开始
+ */
++ (NSMutableString *)stringMosiac:(NSString *)strArr mosiacSymbolStr:(NSString *)mosiacSybolStr index:(NSInteger)index;
+/**
+ * 字典转JSON
+ */
++ (NSString *)jsonDataTransString:(NSDictionary *)dic;
 @end

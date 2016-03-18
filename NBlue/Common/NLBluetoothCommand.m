@@ -157,4 +157,10 @@ static NLBluetoothCommand *bluetoothaCommand = nil;
     NSData *data = [NSData dataWithBytes:byte length:20];
     return data;
 }
+//获得设备的MAC地址
++(NSData *)setBluetoothMAC{
+    Byte byte[20] = {0x02,0x04};
+    NSData *data = [NSData dataWithBytes:byte length:20];
+    return data;
+}
 @end

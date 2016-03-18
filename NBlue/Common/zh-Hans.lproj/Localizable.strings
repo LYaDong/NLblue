@@ -39,7 +39,12 @@
 //NLProfileViewController
 "NLProfileView_MyMessage" = "消息";
 "NLProfileView_MyEquitment" = "我的设备";
+"NLProfileView_MyEquitmentText" = "您的手机当前尚未绑定设备，如需使用请立即绑定。";
+"NLProfileView_MyEquitmentBinding" = "立即绑定";
 "NLProfileView_MyMale" = "我的男友";
+"NLProfileView_MyMaleSet" = "男友设置";
+"NLProfileView_MyMaleSoport" = "步数记录";
+"NLProfileView_MyMaleSleep" = "睡眠质量";
 "NLProfileView_Share" = "分享";
 "NLProfileView_FeedBack" = "反馈";
 "NLProfileView_Set" = "设置";
@@ -206,6 +211,7 @@
 "NL_Currency_YouGender" = "你的性别";
 "NL_Currency_Next" = "下一步";
 "NL_NL_CallmaleText" = "嘤嘤嘤又痛经了,你这个猪头还不来帮我赶走大姨妈!";
+"NL_Del_Texr" = "删除";
 
 //分享
 "NL_Share_WechatFriend" = "微信好友";

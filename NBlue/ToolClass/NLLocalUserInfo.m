@@ -126,4 +126,21 @@
     NSString *noviceGuide = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_NoviceGuide"];
     return noviceGuide;
 }
+#pragma mark 蓝牙设备信息
+-(void)setBluetoothEdition:(NSString *)edition{
+    [[NSUserDefaults standardUserDefaults] setObject:edition forKey:@"NL_User_Bluetooth_Edition"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)getBluetoothEdition{
+    NSString *edition = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_Bluetooth_Edition"];
+    return edition;
+}
+-(void)setBluetoothMAC:(NSString *)mac{
+    [[NSUserDefaults standardUserDefaults] setObject:mac forKey:@"NL_User_Bluetooth_MAC"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)getBluetoothMac{
+    NSString *edition = [[NSUserDefaults standardUserDefaults] stringForKey:@"NL_User_Bluetooth_MAC"];
+    return edition;
+}
 @end

@@ -14,6 +14,7 @@
 #import "TYWaveProgressView.h"
 #import "NLBluetoothDataAnalytical.h"
 #import "NLBluetoothAgreementNew.h"
+#import "NLConnectBloothViewController.h"
 @interface NLMyEquipmentController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIImageView *batteryBack;
 @property(nonatomic,strong)UITableView *tableView;
@@ -58,6 +59,7 @@
     
     
     self.view.backgroundColor = [ApplicationStyle subjectBackViewColor];
+
     
 //    NLBluetoothAgreement *blues = [NLBluetoothAgreement shareInstance];
 //    _peripheralArray  = blues.arrPeripheral;
@@ -99,10 +101,17 @@
     
     
     self.titles.text = NSLocalizedString(@"NLMyEquipment_MyEquipment", nil);
-    [self noBluetoothUI];
+    
+//    if ([kAPPDELEGATE._loacluserinfo getBlueToothUUID] ==nil) {
+//      [self noBluetoothUI];
+//    }else{
+//        [self bluetoothUI];
+//        [self bulidUI];
+// 
+//    }
+    
     [self bluetoothUI];
     [self bulidUI];
-    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -116,6 +125,32 @@
     _noBluetoothView = [[UIView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle navBarAndStatusBarSize])];
     _noBluetoothView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_noBluetoothView];
+    
+    UIImageView *blueImg = [[UIImageView alloc] initWithFrame:CGRectMake((_noBluetoothView.viewWidth - [ApplicationStyle control_weight:360])/2, [ApplicationStyle control_height:92], [ApplicationStyle control_weight:360], [ApplicationStyle control_weight:360])];
+    blueImg.image = [UIImage imageNamed:@"NL_Bluetooth_img"];
+    [_noBluetoothView addSubview:blueImg];
+    
+    CGSize blueLabSize = [ApplicationStyle textSize:NSLocalizedString(@"NLProfileView_MyEquitmentText", nil) font:[ApplicationStyle textThrityFont] size:SCREENWIDTH - [ApplicationStyle control_weight:65 * 2]];
+    
+    UILabel *blueLab = [[UILabel alloc] initWithFrame:CGRectMake((SCREENWIDTH - blueLabSize.width)/2, blueImg.bottomOffset+[ApplicationStyle control_height:180], blueLabSize.width, blueLabSize.height)];
+    blueLab.text = NSLocalizedString(@"NLProfileView_MyEquitmentText", nil);
+    blueLab.textColor = [@"7d7d7d" hexStringToColor];
+    blueLab.font = [ApplicationStyle textThrityFont];
+    blueLab.numberOfLines = 0;
+    blueLab.textAlignment = NSTextAlignmentCenter;
+    [_noBluetoothView addSubview:blueLab];
+    
+    UIButton *bindingBlueToothBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    bindingBlueToothBtn.frame = CGRectMake(-5, blueLab.bottomOffset + [ApplicationStyle control_height:120], SCREENWIDTH+7, [ApplicationStyle control_height:80]);
+    bindingBlueToothBtn.layer.borderColor = [UIColor redColor].CGColor;
+    bindingBlueToothBtn.layer.borderWidth = [ApplicationStyle control_weight:1];
+    [bindingBlueToothBtn setTitle:NSLocalizedString(@"NLProfileView_MyEquitmentBinding", nil) forState:UIControlStateNormal];
+    [bindingBlueToothBtn setTitleColor:[@"f13c61" hexStringToColor] forState:UIControlStateNormal];
+    bindingBlueToothBtn.backgroundColor = [UIColor whiteColor];
+    [bindingBlueToothBtn addTarget:self action:@selector(bindingBlueToothBtnDown) forControlEvents:UIControlEventTouchUpInside];
+    [_noBluetoothView addSubview:bindingBlueToothBtn];
+  
+    
 }
 
 -(void)bluetoothUI{
@@ -124,6 +159,7 @@
     _bluetooth = [NLBluetoothAgreementNew shareInstance];
     [_bluetooth queryAunitLevel];
     _bluetooth.batteryLevelA = ^(NSString *batteryLevel,NLBluetoothAgreementNew *blue){
+        
         long level = [NLBluetoothDataAnalytical sixTenHexTeen:[batteryLevel substringWithRange:NSMakeRange(14, 2)]];
         CGFloat floatLevel = level*0.01;
         equioment.waveViewA.numberLabel.text = [NSString stringWithFormat:@"%ld%@",level,@"%"];
@@ -135,9 +171,19 @@
     _bluetooth.batteryLevelB = ^(NSString *batteryLelveB){
         long level = [NLBluetoothDataAnalytical sixTenHexTeen:[batteryLelveB substringWithRange:NSMakeRange(4, 2)]];
         CGFloat floatLevel = level*0.01;
-        equioment.waveViewB.numberLabel.text = [NSString stringWithFormat:@"%ld%@",level,@"%"];
-        equioment.waveViewB.percent = floatLevel;
-        [equioment.waveViewB startWave];
+        
+        if (level == 100) {
+            equioment.waveViewB.numberLabel.text = @"设备未连接";
+            equioment.waveViewB.numberLabel.font = [UIFont boldSystemFontOfSize:[ApplicationStyle control_weight:20]];
+            equioment.waveViewB.percent = floatLevel;
+            [equioment.waveViewB startWave];
+        }else{
+            equioment.waveViewB.numberLabel.text = [NSString stringWithFormat:@"%ld%@",level,@"%"];
+            equioment.waveViewB.percent = floatLevel;
+            [equioment.waveViewB startWave];
+        }
+        
+        
 
     };
 }
@@ -191,9 +237,7 @@
         [_cellLabdic setValue:firmentUP forKey:@"firmentUP"];
         [_cellLabdic setValue:reilveArr forKey:@"reilveArr"];
     }
-    {
-        NSDictionary *dic = [NLSQLData getBluetoothEquipmentInformation];
-        
+    {   
         NSString *equiomentName = nil;
         if ([kAPPDELEGATE._loacluserinfo getBluetoothName] == nil) {
             equiomentName = @"您还没有链接任何设备";
@@ -202,12 +246,11 @@
         }
         
         
-        NSString *edition = [NSString stringWithFormat:@"v%@.0",[dic objectForKey:@"Version"]];
-        NSArray *equipmentLabArray = @[equiomentName,edition,@""];
+        NSString *edition = [NSString stringWithFormat:@"v%@",[kAPPDELEGATE._loacluserinfo getBluetoothEdition]];
+        NSArray *equipmentLabArray = @[equiomentName,edition,[kAPPDELEGATE._loacluserinfo getBluetoothMac]];
         [_cellCountLabDic setValue:equipmentLabArray forKey:@"equipmentLabArray"];
         
     }
-    
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize] + [ApplicationStyle control_height:420], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle navBarAndStatusBarSize] - [ApplicationStyle control_height:420]) style:UITableViewStylePlain];
     _tableView.delegate = self;
@@ -325,6 +368,11 @@
 
 #pragma mark 自己的Delegate
 #pragma mark 自己的按钮事件
+-(void)bindingBlueToothBtnDown{
+    NLConnectBloothViewController *vc = [[NLConnectBloothViewController alloc] init];
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

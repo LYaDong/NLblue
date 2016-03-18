@@ -579,6 +579,54 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
         });
     }];
 }
+//权限设置
+-(void)permissionStr:(NSMutableDictionary *)dic{
+    
+    
+    NSString *str = [ApplicationStyle jsonDataTransString:dic];
+    
+    NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                 @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken],
+                                 @"folkConsumerId":@"df2e7ad0-a149-4b79-bd27-b4cba4481eef",
+                                 @"permission":str};
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLapplication,NLtextHeml, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *api = [NSString stringWithFormat:@"%@%@%@",NLUserApi,User_QRCode,User_Permission];
+    NSString *url = API_BASE_URL(api);
+    [_manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",[self dataTransformationJson:responseObject]);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
+//获得权限
+-(void)getMalePermission:(NSString *)maleID{
+    NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                 @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken],
+                                 @"folkConsumerId":maleID};
+    
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSString *api = [NSString stringWithFormat:@"%@%@%@",NLUserApi,User_QRCode,User_Permission];
+    NSString *url = API_BASE_URL(api);
+    
+    [_manager GET:url parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (![responseObject isKindOfClass:[NSDictionary class]]) {
+            NSLog(@"expecting NSDictionary class");
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"%@",[self dataTransformationJson:responseObject]);
+            
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+        });
+    }];
+}
 
 #pragma mark 转JSON数据
 - (NSDictionary *)dataTransformationJson:(id  _Nullable)responseObject{

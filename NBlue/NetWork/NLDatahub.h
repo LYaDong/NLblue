@@ -92,4 +92,12 @@
  * 反馈接口
  */
 -(void)setFeedback:(NSString *)count;
+/**
+ * 权限接口
+ */
+-(void)permissionStr:(NSMutableDictionary *)dic;
+/**
+ * 获得男友权限
+ */
+-(void)getMalePermission:(NSString *)maleID;
 @end

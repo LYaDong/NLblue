@@ -8,10 +8,12 @@
 
 #import "NLMyMaleViewController.h"
 #import "NLQRCodeViewController.h"
-
+#import "NLMyMaleSetViewController.h"
 @interface NLMyMaleViewController ()
 @property(nonatomic,strong)UIView *sweepView;
 @property(nonatomic,strong)UIImageView *imageView;
+@property(nonatomic,strong)NSString *setMaleID;
+
 @end
 
 @implementation NLMyMaleViewController
@@ -38,12 +40,13 @@
 #pragma mark 基础UI
 -(void)bulidUI{
     [[NLDatahub sharedInstance] maleJudgeIsHave];
+//    [self scanCodeUI];
 }
 -(void)scanCodeUI{
     _sweepView = [[UIView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle navBarAndStatusBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle navBarAndStatusBarSize])];
     [self.view addSubview:_sweepView];
     
-    UIImageView *expressionImg = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:164])/2,[ApplicationStyle statusBarSize]+[ApplicationStyle control_height:238], [ApplicationStyle control_weight:164], [ApplicationStyle control_height:170])];
+    UIImageView *expressionImg = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:500])/2,[ApplicationStyle statusBarSize]+[ApplicationStyle control_height:100], [ApplicationStyle control_weight:500],[ApplicationStyle control_weight:500])];
     expressionImg.image = [UIImage imageNamed:@"NL_Pro_Male_Expression"];
     [_sweepView addSubview:expressionImg];
     
@@ -95,17 +98,26 @@
     NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
     [notifi addObserver:self selector:@selector(success:) name:NLFolkSuccessNotification object:nil];
     [notifi addObserver:self selector:@selector(ficaled) name:NLFolkFicaledNotification object:nil];
-    [notifi addObserver:self selector:@selector(bindingSuccess) name:NLFolkSuccessNotification object:nil];
-    [notifi addObserver:self selector:@selector(bindingFicaled) name:NLFolkFicaledNotification object:nil];
+    [notifi addObserver:self selector:@selector(bindingSuccess) name:NLMaleBindingSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(bindingFicaled) name:NLMaleBindingFicaledNotification object:nil];
 }
 -(void)success:(NSNotification *)notifi{
-    [self scanCodeUI];
     if (notifi.object == nil) {
         [self scanCodeUI];
     }else{
+        NSLog(@"%@",notifi.object);
+        
+        _setMaleID = [notifi.object[0] objectForKey:@"id"];
         _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, [ApplicationStyle statusBarSize] + [ApplicationStyle navigationBarSize], SCREENWIDTH, SCREENHEIGHT - [ApplicationStyle statusBarSize]- [ApplicationStyle navigationBarSize])];
         _imageView.image = [UIImage imageNamed:@"NL_M_Male_B"];
         [self.view addSubview:_imageView];
+        
+        UIButton *setBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        setBtn.frame = CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:73 + 30], [ApplicationStyle statusBarSize] + ([ApplicationStyle navBarAndStatusBarSize] - [ApplicationStyle control_height:44])/2, [ApplicationStyle control_weight:73], [ApplicationStyle control_height:44]);
+        [setBtn setTitle:NSLocalizedString(@"NLProfileView_Set", nil) forState:UIControlStateNormal];
+        [setBtn setTitleColor:[ApplicationStyle subjectWithColor] forState:UIControlStateNormal];
+        [setBtn addTarget:self action:@selector(dinding) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:setBtn];
     }
 }
 -(void)ficaled{
@@ -114,10 +126,21 @@
 //绑定成功
 -(void)bindingSuccess{
     _sweepView.hidden = YES;
-    _imageView.hidden = YES;
 }
 -(void)bindingFicaled{
     
+}
+
+-(void)dinding{
+    NLMyMaleSetViewController *vc = [[NLMyMaleSetViewController alloc] init];
+    vc.maleID = _setMaleID;
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+//    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"NLMyMaleSetViewController" bundle:nil];
+//    NLMyMaleSetViewController *vc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"NLMyMaleSet"];
+//    [vc setHidesBottomBarWhenPushed:YES];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)delNotification{
     [[NSNotificationCenter defaultCenter] removeObserver:self];

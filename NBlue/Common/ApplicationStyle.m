@@ -86,6 +86,7 @@
 
 @implementation ApplicationStyle (Colors)
 + (UIColor *)CodeBackColor{return [@"fe5575" hexStringToColor];}
++ (UIColor *)subjectPodflieBackColor{return [@"" hexStringToColor];}
 + (UIColor *)subjectRedColor{return [@"ff0000" hexStringToColor];}
 + (UIColor *)subjectBlackColor{return [UIColor blackColor];}
 + (UIColor *)subjectPinkColor{return [@"f12e56" hexStringToColor];}
@@ -432,5 +433,23 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     unsigned long red1 = strtoul([[str substringWithRange:NSMakeRange(0, str.length)] UTF8String],0,16);
     Byte byte =  (Byte) ((0xff & red1) );//( Byte) 0xff&iByte;
     return byte;
+}
++ (NSMutableString *)stringMosiac:(NSString *)strArr mosiacSymbolStr:(NSString *)mosiacSybolStr index:(NSInteger)index{
+    NSMutableString *string = [NSMutableString string];
+    for (NSInteger i=0; i<strArr.length; i+=index) {
+        NSString *str = [strArr substringWithRange: NSMakeRange(i, index)];
+        if (i==strArr.length - index) {
+            [string appendFormat:@"%@",str];
+        }else{
+            [string appendFormat:@"%@%@",str,mosiacSybolStr];
+        }
+    }
+    return string;
+}
++ (NSString *)jsonDataTransString:(NSDictionary *)dic{
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *string = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return string;
 }
 @end

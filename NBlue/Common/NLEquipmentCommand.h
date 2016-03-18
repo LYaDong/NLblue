@@ -27,6 +27,7 @@
 #define EquiomentCommand_9001 @"9001"
 #define EquiomentCommand_9002 @"9002"
 #define EquiomentCommand_9004 @"9004"
+#define EquiomentCommand_0204 @"0204"
 
 //************************************ 蓝牙 ***********************************
 

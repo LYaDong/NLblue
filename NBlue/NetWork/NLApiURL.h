@@ -25,4 +25,5 @@
 #define User_ThirdLogin @"/thirdlogin"
 #define Menstruation_Calender @"/calendar"
 #define User_Feedback @"/feedback"
+#define User_Permission @"/permission"
 #endif /* NLApiURL_h */

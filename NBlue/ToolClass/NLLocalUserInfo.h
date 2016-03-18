@@ -113,4 +113,20 @@
  * 获得新手引导
  */
 -(NSString *)getNoviceGuide;
+/**
+ * 设置蓝牙版本号
+ */
+-(void)setBluetoothEdition:(NSString *)edition;
+/**
+ * 获得蓝牙版本号
+ */
+-(NSString *)getBluetoothEdition;
+/**
+ * 设置蓝牙MAC地址
+ */
+-(void)setBluetoothMAC:(NSString *)mac;
+/**
+ * 获得蓝牙MAC地址
+ */
+-(NSString *)getBluetoothMac;
 @end

@@ -9,5 +9,4 @@
 #import "NLSubRootViewController.h"
 
 @interface NLMyMaleViewController : NLSubRootViewController
-
 @end
