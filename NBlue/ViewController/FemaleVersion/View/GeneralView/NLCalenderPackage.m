@@ -7,12 +7,13 @@
 //
 
 #import "NLCalenderPackage.h"
-
+#import "NLSQLData.h"
 #define WidthSCalender [ApplicationStyle control_weight:66]
 
 static const NSInteger CALENDERTAG = 1000;
 static const NSInteger calenderVertical = 6;
 static const NSInteger ARROWTAG = 1500;
+static const NSInteger DIFFERDAYINDEX = 90;
 
 
 @interface NLCalenderPackage()
@@ -32,6 +33,9 @@ static const NSInteger ARROWTAG = 1500;
 @property(nonatomic,strong)NSString *dayText;
 //判断加减
 @property(nonatomic,assign)NSInteger index;
+
+
+@property(nonatomic,assign)NSInteger countIndex;
 @end
 @implementation NLCalenderPackage
 - (instancetype)initWithFrame:(CGRect)frame
@@ -190,6 +194,67 @@ static const NSInteger ARROWTAG = 1500;
     btn.layer.cornerRadius = WidthSCalender/2;
     _radinIndex = 1;
     _dayText = btn.titleLabel.text;
+    
+    
+    
+    
+    
+    //获得现在是时间
+    NSString *toTime = [ApplicationStyle datePickerTransformationCorss:[NSDate date]];
+    
+    
+//    NSLog(@"%ld",_countIndex + [ApplicationStyle whatDays:[NSDate date]]);
+    
+    //时间比较
+    if (![times isEqualToString:toTime]) {
+        //现在的时间
+        NSDate *toDate = [ApplicationStyle dateTransformationStringWhiffletree:toTime];
+        //点击的时间
+        NSDate *clickDate = [ApplicationStyle dateTransformationStringWhiffletree:times];
+        //计算相差多少天
+        NSInteger maxDay = [ApplicationStyle dateInteverCurrentDate:clickDate afferentDate:toDate];
+        if (labs(maxDay)>DIFFERDAYINDEX) {
+            //清除按钮编辑。重新绘制
+            NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:_index];
+            
+            for (NSInteger i = 0; i<calenderVertical * 7; i++) {
+                UIButton *btnC = (UIButton *)[self viewWithTag:CALENDERTAG + i];
+                NSInteger daysInLastMonth = [ApplicationStyle totalDaysInMonth:date];
+                NSInteger firstWeekday    = [ApplicationStyle getWeekofFirstInDate:date];
+                NSInteger lastCountDay = [self getLastMonthDay:_index - 1];
+                NSInteger day = 0;
+                if (i < firstWeekday) {
+                    //上个月的日子
+                    day = lastCountDay - (firstWeekday - 1 - i);
+                }else if (i > firstWeekday + daysInLastMonth - 1){
+                    //下个月的日子
+                    day = i + 1 - firstWeekday - daysInLastMonth;
+                }else{
+                    //本月的日子
+                    day = i - firstWeekday + 1;
+                    btnC.backgroundColor = [self safePeriodColor];
+                    
+                }
+            }
+            //重新绘制
+            for (NSInteger i=0; i<5; i++) {
+                UIButton *btns = (UIButton *)[self viewWithTag:btn.tag + i];
+                btns.backgroundColor = [self periodColor];
+            }
+            NSMutableDictionary *dics = [NSMutableDictionary dictionary];
+            [dics setValue:times forKey:@"isMenstruation"];
+            [dics setValue:times forKey:@"currentDate"];
+            [dics setValue:[times substringWithRange:NSMakeRange(0, 7)] forKey:@"yearOrMonth"];
+            [[NLDatahub sharedInstance] calendarUpLoadDataDic:dics];
+            [NLSQLData insterCanlenderDysmenorrheaDateData:dics];
+        }else{//如果在三个月内。直接暴力把所有数据重新绘制
+            [kAPPDELEGATE._loacluserinfo lastTimeGoPeriodDate:times];
+            [_calenderView removeFromSuperview];
+            [self buildUI:_indexDay + _index];
+        }
+        
+    }
+    
 }
 //重置btn
 -(void)resetRadius{
@@ -206,20 +271,31 @@ static const NSInteger ARROWTAG = 1500;
     if (btn.tag == ARROWTAG) {
         _index --;
         [self buildUI:_indexDay + _index];
+        
+//        NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:_indexDay + _index];
+//        _countIndex += [ApplicationStyle totalDaysInMonth:date];
+        
     }else{
         _index ++;
         [self buildUI:_indexDay + _index];
+//        NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:_indexDay + _index];
+//        _countIndex -= [ApplicationStyle totalDaysInMonth:date];
     }
 }
 //计算内容
 -(void)btnCalenderSortBtn:(UIButton *)dayButton date:(NSDate*)date i:(NSInteger)i{
+    
+    
+    
+    
+    
+    
+    
+    
     NSInteger theCurrent = [ApplicationStyle whatDays:date];
     NSInteger daysInLastMonth = [ApplicationStyle totalDaysInMonth:date];
     NSInteger firstWeekday    = [ApplicationStyle getWeekofFirstInDate:date];
     NSInteger lastCountDay = [self getLastMonthDay:_index - 1];
-
-//    NSInteger nextCountDay = [self getNextMonthDay:_index + 1];
-
     NSInteger day = 0;
     if (i < firstWeekday) {
         //上个月的日子
@@ -249,68 +325,99 @@ static const NSInteger ARROWTAG = 1500;
         }
     }
     [dayButton setTitle:[NSString stringWithFormat:@"%ld",(long)day] forState:UIControlStateNormal];
+    
+    
+    
+
+    
+    
 }
 
 //计算经期
 -(void)calculationCalenderBtn:(UIButton *)dayButton date:(NSDate *)date i:(NSInteger)i dayIndex:(NSInteger)dayIndex{
     
     
-//    NSLog(@"点击的年月 = %@  \n 当前的年月 = %@",[ApplicationStyle datePickerTransformationYearOrMonth:date],[ApplicationStyle datePickerTransformationYearOrMonth:[NSDate date]]);
+    NSLog(@"点击的年月 = %@  \n 当前的年月 = %@",[ApplicationStyle datePickerTransformationYearOrMonth:date],[ApplicationStyle datePickerTransformationYearOrMonth:[NSDate date]]);
     
     
+    NSString *strClickDate = [ApplicationStyle datePickerTransformationCorss:date];
+    //现在的时间
+    NSDate *lastToDate = [ApplicationStyle dateTransformationStringWhiffletree:[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate]];
+    //点击的时间
+    NSDate *clickDate = [ApplicationStyle dateTransformationStringWhiffletree:strClickDate];
+
     
+    NSLog(@"%@  %@",lastToDate,clickDate);
+    NSLog(@"xxxxx = =  %ld",[ApplicationStyle dateCompareDateCurrentDate:clickDate afferentDate:lastToDate]);
     
-    
-    /*
-     ZQ                     周期
-     ycq                    预测期
-     ycqDay                 预测期的哪天
-     */
-    NSInteger firstWeekday    = [ApplicationStyle getWeekofFirstInDate:date];//获得本周的时间,在周几
-    NSDictionary *dataDic = [PlistData getIndividuaData];//获得用户数据
-    
-    //间隔周期
-    NSInteger ZQ = [[dataDic objectForKey:@"cycleTime"] integerValue];//获得周期
-    NSInteger periodTime = [[dataDic objectForKey:@"periodTime"] integerValue];//获得经期
-    
-    NSDate *lastTimepPeriod = [ApplicationStyle dateTransformationStringWhiffletree:[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate]];//获得上一次来的时间
-    NSString *currentTime = [ApplicationStyle datePickerTransformationStr:date];//获得当前时间
-    //预计计算多少周
-    for (NSInteger j=0; j<12+dayIndex; j++) {
+    if ([ApplicationStyle dateCompareDateCurrentDate:clickDate afferentDate:lastToDate] == -1) {
+        NSLog(@"%@",strClickDate);
+        NSLog(@"%@",[NLSQLData canlenderDysmenorrheaDateData:[strClickDate substringWithRange:NSMakeRange(0, 7)]]);
         
-        NSString *ycq = [ApplicationStyle datePickerTransformationStr:[lastTimepPeriod dateByAddingTimeInterval:(60 * 60 * 24) * ZQ * j]];//每次的预测期
-        NSString *currentYearMonth = [currentTime substringWithRange:NSMakeRange(0, 6)];//来的年月日
-        NSString *userYearMonth = [ycq  substringWithRange:NSMakeRange(0, 6)];//用户的年月日
+    }else{
+        /*
+         ZQ                     周期
+         ycq                    预测期
+         ycqDay                 预测期的哪天
+         */
+        NSInteger firstWeekday    = [ApplicationStyle getWeekofFirstInDate:date];//获得本周的时间,在周几
+        NSDictionary *dataDic = [PlistData getIndividuaData];//获得用户数据
         
+        //间隔周期
+        NSInteger ZQ = [[dataDic objectForKey:@"cycleTime"] integerValue];//获得周期
+        NSInteger periodTime = [[dataDic objectForKey:@"periodTime"] integerValue];//获得经期
         
-        if ([currentYearMonth isEqualToString:userYearMonth]) {
+        NSDate *lastTimepPeriod = [ApplicationStyle dateTransformationStringWhiffletree:[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate]];//获得上一次来的时间
+        NSString *currentTime = [ApplicationStyle datePickerTransformationStr:date];//获得当前时间
+        //预计计算多少周
+        for (NSInteger j=0; j<12+dayIndex; j++) {
             
-            NSInteger day = 0;
-            if (i>=firstWeekday) {
-                day = i - firstWeekday + 1;//获得本月的天数
-            }
+            NSString *ycq = [ApplicationStyle datePickerTransformationStr:[lastTimepPeriod dateByAddingTimeInterval:(60 * 60 * 24) * ZQ * j]];//每次的预测期
+            NSString *currentYearMonth = [currentTime substringWithRange:NSMakeRange(0, 6)];//来的年月日
+            NSString *userYearMonth = [ycq  substringWithRange:NSMakeRange(0, 6)];//用户的年月日
             
-            NSLog(@"%ld",day);
-            NSString *ycqDay = [ycq substringWithRange:NSMakeRange(ycq.length-2, 2)];//预测期的天数
-            for (NSInteger z=0; z<periodTime; z++) {
-                //经期来临的日子  经期每次循环用户选择的次数
-                if (day == [ycqDay integerValue] + z) {
-                    dayButton.backgroundColor = [self theForecastPeriodColor];//预测期
-                    if (j==0) {
-                        dayButton.backgroundColor = [self periodColor];//经期
+            
+            if ([currentYearMonth isEqualToString:userYearMonth]) {
+                
+                NSInteger day = 0;
+                if (i>=firstWeekday) {
+                    day = i - firstWeekday + 1;//获得本月的天数
+                }
+                
+                NSString *ycqDay = [ycq substringWithRange:NSMakeRange(ycq.length-2, 2)];//预测期的天数
+                for (NSInteger z=0; z<periodTime; z++) {
+                    //经期来临的日子  经期每次循环用户选择的次数
+                    if (day == [ycqDay integerValue] + z) {
+                        dayButton.backgroundColor = [self theForecastPeriodColor];//预测期
+                        if (j==0) {
+                            dayButton.backgroundColor = [self periodColor];//经期
+                        }
                     }
                 }
-            }
-            //易孕期
-            for (NSInteger x = 0; x<10; x++) {
-                if (!day == 0) {//退14天，如果相等当前的day 则是易孕期
-                    if ([ycqDay integerValue] - 14 + x == day) {
-                        dayButton.backgroundColor = [self easyPregnancyColor];//易孕期
+                //易孕期
+                for (NSInteger x = 0; x<10; x++) {
+                    if (!day == 0) {//退14天，如果相等当前的day 则是易孕期
+                        if ([ycqDay integerValue] - 14 + x == day) {
+                            dayButton.backgroundColor = [self easyPregnancyColor];//易孕期
+                        }
                     }
                 }
             }
         }
+
     }
+    
+    
+    
+    
+//    NSString *toDate = [ApplicationStyle datePickerTransformationYearOrMonth:[NSDate date]];
+//    NSString *clickDate = [ApplicationStyle datePickerTransformationYearOrMonth:date];
+//    if (![toDate isEqualToString:clickDate]) {
+//        
+//    }
+    
+    
+    
 }
 
 

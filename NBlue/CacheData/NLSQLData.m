@@ -477,7 +477,7 @@
 +(void)canlenderUncomfortable{
     FMDatabase *db = [self sqlDataRoute];
     [db open];
-    NSString *createTable = @"CREATE TABLE IF NOT EXISTS CanlenderTable (time TEXT PRIMARY KEY,aunt TEXT NOT NULL,loveLove TEXT NOT NULL,habitsAndCustoms TEXT NOT NULL,uncomfortable TEXT NOT NULL,dysmenorrheaLevel TEXT NOT NULL,user_id TEXT NOT NULL)";
+    NSString *createTable = @"CREATE TABLE IF NOT EXISTS CanlenderTable (time TEXT PRIMARY KEY,aunt TEXT NOT NULL,loveLove TEXT NOT NULL,habitsAndCustoms TEXT NOT NULL,uncomfortable TEXT NOT NULL,dysmenorrheaLevel TEXT NOT NULL,yearOrMonth TEXT NOT NULL,user_id TEXT NOT NULL)";
     [db executeUpdate:createTable];
     [db close];
 }
@@ -493,7 +493,7 @@ __goto:
         NSInteger dayYear = [ApplicationStyle whatYears:date];
         
         for (NSInteger i=0; i<dayInt; i++) {
-            NSString *inster = @"INSERT OR REPLACE INTO CanlenderTable(time,aunt,loveLove,habitsAndCustoms,uncomfortable,dysmenorrheaLevel,user_id) VALUES (?,?,?,?,?,?,?)";
+            NSString *inster = @"INSERT OR REPLACE INTO CanlenderTable(time,aunt,loveLove,habitsAndCustoms,uncomfortable,dysmenorrheaLevel,yearOrMonth,user_id) VALUES (?,?,?,?,?,?,?,?)";
             
             NSString *month = nil;
             NSString *days = nil;
@@ -520,6 +520,7 @@ __goto:
                                     CommonText_Canlender_habitsAndCustoms,
                                     CommonText_Canlender_uncomfortable,
                                     @"1",
+                                    @"",
                                     [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
                 [db executeUpdate:inster withArgumentsInArray:dataArr];
             }
@@ -563,7 +564,7 @@ __goto:
                 [db close];
                 return;
             }
-            NSString *inster = @"INSERT OR REPLACE INTO CanlenderTable(time,aunt,loveLove,habitsAndCustoms,uncomfortable,dysmenorrheaLevel,user_id) VALUES (?,?,?,?,?,?,?)";
+            NSString *inster = @"INSERT OR REPLACE INTO CanlenderTable(time,aunt,loveLove,habitsAndCustoms,uncomfortable,dysmenorrheaLevel,yearOrMonth,user_id) VALUES (?,?,?,?,?,?,?,?)";
             
             
             NSString *times = [NSString stringWithFormat:@"%ld-%@-%@",(long)dayYear,month,days];
@@ -575,6 +576,7 @@ __goto:
                                     CommonText_Canlender_habitsAndCustoms,
                                     CommonText_Canlender_uncomfortable,
                                     @"1",
+                                    @"",
                                     [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
                 [db executeUpdate:inster withArgumentsInArray:dataArr];
             }
@@ -592,6 +594,24 @@ __goto:
         goto __goto;
     }
 }
+
++(void)insterCanlenderDysmenorrheaDateData:(NSDictionary *)dic{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *inster = @"INSERT OR REPLACE INTO CanlenderTable(time,aunt,loveLove,habitsAndCustoms,uncomfortable,dysmenorrheaLevel,yearOrMonth,user_id) VALUES (?,?,?,?,?,?,?,?)";
+    NSArray *dataArr = [NSArray arrayWithObjects:
+                        [dic objectForKey:@"currentDate"]==nil?@"":[dic objectForKey:@"currentDate"],
+                        [dic objectForKey:@"isMenstruation"]==nil?@"":[dic objectForKey:@"isMenstruation"],
+                        [dic objectForKey:@"haveSex"]==nil?@"":[dic objectForKey:@"haveSex"],
+                        [dic objectForKey:@"lifeHabit"]==nil?@"":[dic objectForKey:@"lifeHabit"],
+                        [dic objectForKey:@"uncomfortable"]==nil?@"":[dic objectForKey:@"uncomfortable"],
+                        [dic objectForKey:@"dysmenorrhea"]==nil?@"":[dic objectForKey:@"dysmenorrhea"],
+                        [dic objectForKey:@"yearOrMonth"]==nil?@"":[dic objectForKey:@"yearOrMonth"],
+                        [kAPPDELEGATE._loacluserinfo GetUser_ID],nil];
+    [db executeUpdate:inster withArgumentsInArray:dataArr];
+    [db close];
+}
+
 +(void)upDateCanlendarData:(NSArray *)arr{
     FMDatabase *db = [self sqlDataRoute];
     [db open];
@@ -737,6 +757,20 @@ __goto:
     }
     return dic;
 }
+
++(NSMutableDictionary *)canlenderDysmenorrheaDateData:(NSString *)dayTime{
+    FMDatabase *db = [self sqlDataRoute];
+    [db open];
+    NSString *takeCreate = [NSString stringWithFormat:@"SELECT * FROM CanlenderTable WHERE yearOrMonth = '%@' and user_id = '%@'",dayTime,[kAPPDELEGATE._loacluserinfo GetUser_ID]];
+    FMResultSet *rs = [db executeQuery:takeCreate];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    while ([rs next]) {
+        [dic setValue:[rs stringForColumn:@"time"] forKey:@"time"];
+        [dic setValue:[rs stringForColumn:@"aunt"] forKey:@"aunt"];
+    }
+    return dic;
+}
+
 
 #pragma mark 创建睡眠数据表
 + (void)sleepDataTable{

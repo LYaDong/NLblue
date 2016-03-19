@@ -257,7 +257,7 @@
  */
 +(NSInteger)dateCompareDateCurrentDate:(NSDate *)currentDate afferentDate:(NSDate *)fiierentDate;
 /**
-
+ * currentDate 你想重什么时候开始的天数  afferentDate 要比较的天数
  */
 +(NSInteger)dateInteverCurrentDate:(NSDate *)currentDate afferentDate:(NSDate *)afferentDate;
 

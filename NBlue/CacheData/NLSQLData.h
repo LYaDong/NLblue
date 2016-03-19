@@ -62,19 +62,23 @@
  */
 +(void)insterCanlenderData;
 /**
+ * 插入临时数据
+ */
++(void)insterCanlenderDysmenorrheaDateData:(NSDictionary *)dic;
+/**
  * 更新日历信息
  */
 +(void)upDateCanlendarData:(NSArray *)arr;
 /**
- *更新日历爱爱数据
+ * 更新日历爱爱数据
  */
 +(void)upDataCanlenderLoveLove:(NSDictionary *)dic;
 /**
- *更新日历生活习惯数据
+ * 更新日历生活习惯数据
  */
 +(void)upDataCanlenderhabitsAndCustoms:(NSDictionary *)dic;
 /**
- *更新日历不舒服数据
+ * 更新日历不舒服数据
  */
 +(void)upDataCanlenderuncomfortable:(NSDictionary *)dic;
 /**
@@ -85,6 +89,10 @@
  * 获取日历数据
  */
 +(NSMutableDictionary *)canlenderDayData:(NSString *)dayTime;
+/**
+ * 根据月份获得有没有大姨妈
+ */
++(NSMutableDictionary *)canlenderDysmenorrheaDateData:(NSString *)dayTime;
 /**
  * 创建睡眠表
  */

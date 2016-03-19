@@ -514,7 +514,7 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
     NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
                                  @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken],
                                  @"currentDate":[dataDic objectForKey:@"currentDate"]==nil?@"":[dataDic objectForKey:@"currentDate"],
-                                 @"isMenstruation":@"",
+                                 @"isMenstruation":[dataDic objectForKey:@"isMenstruation"]==nil?@"":[dataDic objectForKey:@"isMenstruation"],
                                  @"dysmenorrhea":[dataDic objectForKey:@"dysmenorrhea"]==nil?@"":[dataDic objectForKey:@"dysmenorrhea"],
                                  @"haveSex":[dataDic objectForKey:@"haveSex"]==nil?@"":[dataDic objectForKey:@"haveSex"],
                                  @"lifeHabit":[dataDic objectForKey:@"lifeHabit"]==nil?@"":[dataDic objectForKey:@"lifeHabit"],

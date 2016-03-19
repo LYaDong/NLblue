@@ -107,7 +107,7 @@
 
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setValue:@"2016-03-01" forKey:@"startDate"];
+    [dic setValue:@"2015-03-01" forKey:@"startDate"];
     [dic setValue:@"2016-03-29" forKey:@"endDate"];
     [[NLDatahub sharedInstance] getCalendar:dic];
     
@@ -157,7 +157,7 @@
     [[NLDatahub sharedInstance] userStepNumberToken:[kAPPDELEGATE._loacluserinfo GetAccessToken]
                                          consumerId:[kAPPDELEGATE._loacluserinfo GetUser_ID]
                                           startDate:@"2015-10-01"
-                                            endDate:@"2015-10-30"];
+                                            endDate:@"2016-10-30"];
 }
 -(void)addNotification{
     NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
@@ -166,6 +166,7 @@
 }
 
 -(void)calendarSuccess:(NSNotification *)notifi{
+    
     [NLSQLData upDateCanlendarData:notifi.object];
 }
 -(void)calendarFicaled{
