@@ -12,9 +12,12 @@
 #import "NLHealthSleepView.h"
 #import "NLHealthStepNumber.h"
 #import "NLHealthMangerViewController.h"
+#import "NLHealthMangerSleepViewController.h"
+#import "NLHealthMangerStepNumViewController.h"
 
 @interface NLMaleHealthMangerViewController ()<UIScrollViewDelegate,LYDSetSegmentDelegate>
 @property(nonatomic,strong)UIScrollView *mainScrollew;
+@property(nonatomic,assign)NSInteger numPage;
 @end
 
 @implementation NLMaleHealthMangerViewController
@@ -25,12 +28,9 @@
     
     self.view.backgroundColor = [@"fffeeb" hexStringToColor];
     self.returnBtn.hidden = YES;
-    self.rightBtn.hidden = YES;
-    
-    
-    
-    
-    
+    self.rightBtn.hidden = NO;
+    [self.rightBtn setImage:[UIImage imageNamed:@"Step_T_B"] forState:UIControlStateNormal];
+    _numPage = 0;
     [self bulidUI];
     [self initView];
 }
@@ -86,16 +86,16 @@
 #pragma mark 系统Delegate
 #pragma mark 自己的Delegate
 -(void)segmentedIndex:(NSInteger)index{
+    _numPage = index;
     switch (index) {
         case 0:
         {
-            self.rightBtn.hidden = NO;
             _mainScrollew.contentOffset = CGPointMake(0 * SCREENWIDTH, 0);
             break;
         }
         case 1:
         {
-            self.rightBtn.hidden = NO;
+            
             _mainScrollew.contentOffset = CGPointMake(1 * SCREENWIDTH, 0);
             break;
         }
@@ -104,6 +104,27 @@
     }
 }
 #pragma mark 自己的按钮事件
+
+-(void)rightBtnDown{
+    switch (_numPage+1) {
+        case NLHealthMangerController_Sleep:
+        {
+            NLHealthMangerSleepViewController *vc = [[NLHealthMangerSleepViewController alloc] init];
+            [vc setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case NLHealthMangerController_Step:
+        {
+            NLHealthMangerStepNumViewController *vc = [[NLHealthMangerStepNumViewController alloc] init];
+            [vc setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        default:
+            break;
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -57,13 +57,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NBlue/ViewController/FemaleVersion/View/GeneralView/NLCalenderPackage.m"
-            timestampString = "480073986.271735"
+            filePath = "NBlue/NetWork/NLDatahub.m"
+            timestampString = "480246255.08916"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "354"
-            endingLineNumber = "354"
-            landmarkName = "-calculationCalenderBtn:date:i:dayIndex:"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "-qrCodeNextWorkFrom_to_id:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NBlue/NetWork/NLDatahub.m"
+            timestampString = "480246256.281582"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
+            landmarkName = "-qrCodeNextWorkFrom_to_id:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

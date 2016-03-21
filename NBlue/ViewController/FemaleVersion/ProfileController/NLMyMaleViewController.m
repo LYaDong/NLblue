@@ -134,6 +134,9 @@
 -(void)dinding{
     NLMyMaleSetViewController *vc = [[NLMyMaleSetViewController alloc] init];
     vc.maleID = _setMaleID;
+    vc.delMale = ^(NSString *delMale){
+        [self bulidUI];
+    };
     [vc setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:vc animated:YES];
     

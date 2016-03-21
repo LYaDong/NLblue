@@ -20,6 +20,7 @@
 @property(nonatomic,strong)UIView *labViewBack;
 @property(nonatomic,assign)NSInteger weekMonthCount;
 @property(nonatomic,strong)UIImageView *imageArrow;
+@property(nonatomic,assign)NSInteger indexWeekCount;
 
 @end
 
@@ -31,6 +32,7 @@
     
     _dataArr = [NSMutableArray array];
     _weekMonthCount = 1;
+    _indexWeekCount = 0;
     [self bulidUI];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -217,10 +219,10 @@
     NSString *caloriesAmount = [index objectForKey:@"caloriesAmount"]==nil?@"0":[index objectForKey:@"caloriesAmount"];
     NSString *totalTimeCount = [index objectForKey:@"totalTimeCount"]==nil?@"0":[index objectForKey:@"totalTimeCount"];
 
-    NSArray *dataLabArr = @[[NSString stringWithFormat:@"%ld步",[stepsAmount integerValue]/_weekMonthCount],
-                            [NSString stringWithFormat:@"%ld米",[distanceAmount integerValue]/_weekMonthCount],
-                            [NSString stringWithFormat:@"%ld卡",[caloriesAmount integerValue]/_weekMonthCount],
-                            [NSString stringWithFormat:@"%ld分",[totalTimeCount integerValue]/60/_weekMonthCount]];
+    NSArray *dataLabArr = @[[NSString stringWithFormat:@"%ld步",[stepsAmount integerValue]/_indexWeekCount],
+                            [NSString stringWithFormat:@"%ld米",[distanceAmount integerValue]/_indexWeekCount],
+                            [NSString stringWithFormat:@"%ld卡",[caloriesAmount integerValue]/_indexWeekCount],
+                            [NSString stringWithFormat:@"%ld分",[totalTimeCount integerValue]/60/_indexWeekCount]];
     
     NSArray *remarkLabText = nil;
 
@@ -349,6 +351,9 @@ __goto:
 
     }else{
         for (NSInteger i=nums; i<countS; i++) {
+            if ([[arrData[i] objectForKey:@"stepsAmount"] integerValue] != 0) {
+                _indexWeekCount++;
+            }
             //每7天加一次数据/或者30天加一次数据
             sportCount =  sportCount + [[arrData[i] objectForKey:@"stepsAmount"] integerValue];
             caloriesAmount = caloriesAmount + [[arrData[i] objectForKey:@"caloriesAmount"] integerValue];
@@ -359,7 +364,11 @@ __goto:
     
     NSLog(@"%@",dateTime);
     //添加到数组
-    NSDictionary *dic = @{@"stepsAmount":[NSNumber numberWithInteger:sportCount],@"sportDate":dateTime,@"caloriesAmount":[NSNumber numberWithInteger:caloriesAmount],@"distanceAmount":[NSNumber numberWithInteger:distanceAmount],@"totalTimeCount":[NSNumber numberWithInteger:totalTimeCount]};
+    NSDictionary *dic = @{@"stepsAmount":[NSNumber numberWithInteger:sportCount],
+                          @"sportDate":dateTime,
+                          @"caloriesAmount":[NSNumber numberWithInteger:caloriesAmount],
+                          @"distanceAmount":[NSNumber numberWithInteger:distanceAmount],
+                          @"totalTimeCount":[NSNumber numberWithInteger:totalTimeCount]};
     [dataGather addObject:dic];
     dayInt  = dayInt - 1;
     if (_weekMonthCount == 7) {

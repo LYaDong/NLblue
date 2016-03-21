@@ -73,6 +73,14 @@
 #define NLGetCalendarSuccessNotification @"NLGetCalendarSuccessNotification"
 #define NLGetCalendarFicaledNotification @"NLGetCalendarFicaledNotification"
 #define NLSetFeedbackSuccessNotification @"NLSetFeedbackSuccessNotification"
+#define NLMaleGetPermissionSuccessNotification @"NLMaleGetPermissionSuccessNotification"
+#define NLMaleGetPermissionFicaledNotification @"NLMaleGetPermissionFicaledNotification"
+#define NLMaleDELETEPermissionSuccessNotification @"NLMaleDELETEPermissionSuccessNotification"
+#define NLMaleDELETEPermissionFailureNotification @"NLMaleDELETEPermissionFailureNotification"
 
 //================================   L    Y     D    ============================================
+//================================   其他   ============================================
+#define NLClaeanPeriodOffSuccessNotification @"NLClaeanPeriodOffSuccessNotification"
+#define NLClaeanPeriodOnSuccessNotification @"NLClaeanPeriodOnSuccessNotification"
+//================================   其他   ============================================
 #endif /* NLNotification_h */

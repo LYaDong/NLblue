@@ -102,16 +102,16 @@
     
     self.titles.text = NSLocalizedString(@"NLMyEquipment_MyEquipment", nil);
     
-//    if ([kAPPDELEGATE._loacluserinfo getBlueToothUUID] ==nil) {
-//      [self noBluetoothUI];
-//    }else{
-//        [self bluetoothUI];
-//        [self bulidUI];
-// 
-//    }
+    if ([kAPPDELEGATE._loacluserinfo getBlueToothUUID] ==nil) {
+      [self noBluetoothUI];
+    }else{
+        [self bluetoothUI];
+        [self bulidUI];
+ 
+    }
     
-    [self bluetoothUI];
-    [self bulidUI];
+//    [self bluetoothUI];
+//    [self bulidUI];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -245,9 +245,21 @@
             equiomentName = [kAPPDELEGATE._loacluserinfo getBluetoothName];
         }
         
+        NSString *edition = nil;
+        if ([kAPPDELEGATE._loacluserinfo getBluetoothEdition]==nil) {
+             edition = [NSString stringWithFormat:@"v%@",@"0"];
+        }else{
+             edition = [NSString stringWithFormat:@"v%@",[kAPPDELEGATE._loacluserinfo getBluetoothEdition]];
+        }
         
-        NSString *edition = [NSString stringWithFormat:@"v%@",[kAPPDELEGATE._loacluserinfo getBluetoothEdition]];
-        NSArray *equipmentLabArray = @[equiomentName,edition,[kAPPDELEGATE._loacluserinfo getBluetoothMac]];
+        NSString *macBluetooth = nil;
+        if ([kAPPDELEGATE._loacluserinfo getBluetoothMac]==nil) {
+            macBluetooth = [NSString stringWithFormat:@"%@",@"00:00:00:00:00"];
+        }else{
+            macBluetooth = [NSString stringWithFormat:@"%@",[kAPPDELEGATE._loacluserinfo getBluetoothMac]];
+        }
+        
+        NSArray *equipmentLabArray = @[equiomentName,edition,macBluetooth];
         [_cellCountLabDic setValue:equipmentLabArray forKey:@"equipmentLabArray"];
         
     }

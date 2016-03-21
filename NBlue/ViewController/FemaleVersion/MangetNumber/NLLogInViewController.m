@@ -331,6 +331,8 @@ static const NSInteger THIRDBTNTAG = 4000;
 }
 -(void)logInSuccess:(NSNotification *)notifi{
     NSDictionary *dic = notifi.object;
+    NSLog(@"%@",dic);
+    
      
     [kAPPDELEGATE._loacluserinfo SetUser_ID:[dic objectForKey:@"consumerId"]];
     [kAPPDELEGATE._loacluserinfo SetUserAccessToken:[dic objectForKey:@"authToken"]];
@@ -372,14 +374,20 @@ static const NSInteger THIRDBTNTAG = 4000;
     [PlistData individuaData:_userInformation];
     [kAPPDELEGATE._loacluserinfo lastTimeGoPeriodDate:[dic objectForKey:@"startDate"]];
     
-//    [kAPPDELEGATE._loacluserinfo userGender:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]];
-    [kAPPDELEGATE._loacluserinfo goControllew:@"1"];//进入哪个试图
+    
     if ([[_userInformation objectForKey:@"gender"] isEqualToString:@"0"]) {
+        [kAPPDELEGATE._loacluserinfo goControllew:@"1"];//进入哪个试图
         [kAPPDELEGATE tabBarViewControllerType:Controller_WoManMain];
     }else{
+        [kAPPDELEGATE._loacluserinfo goControllew:@"2"];//进入哪个试图
         [kAPPDELEGATE tabBarViewControllerType:Controller_MaleMain];
     }
     [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"登录成功"];
+    
+    
+    
+//    [kAPPDELEGATE._loacluserinfo userGender:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]];
+    
     
 
     
@@ -407,7 +415,7 @@ static const NSInteger THIRDBTNTAG = 4000;
     [kAPPDELEGATE._loacluserinfo userLogInTime:[[dic objectForKey:@"consumer"] objectForKey:@"created"]];
     [PlistData individuaData:_userInformation];
     
-    if ([[[dic objectForKey:@"consumer"] objectForKey:@"gender"] isEqual:[NSNull null]]|| [[dic objectForKey:@"consumer"] objectForKey:@"gender"]==nil) {
+    if ([[dic objectForKey:@"consumer"] objectForKey:@"gender"] == [NSNull null]|| [[dic objectForKey:@"consumer"] objectForKey:@"gender"]==nil) {
         NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
         [vc setHidesBottomBarWhenPushed:YES];
         [self.navigationController pushViewController:vc animated:YES];

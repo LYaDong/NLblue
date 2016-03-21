@@ -522,8 +522,10 @@ NLLHRatingViewDelegate>
 -(void)switchOffDown:(UISwitch *)sw{
     if (sw.on == YES) {
         _switchOffNum = 1;
+        [[NSNotificationCenter defaultCenter] postNotificationName:NLClaeanPeriodOffSuccessNotification object:nil];
     }else{
         _switchOffNum = 0;
+        [[NSNotificationCenter defaultCenter] postNotificationName:NLClaeanPeriodOnSuccessNotification object:nil];
     }
     
     

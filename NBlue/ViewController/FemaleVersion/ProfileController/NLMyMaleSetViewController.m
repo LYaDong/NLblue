@@ -28,6 +28,7 @@ static const NSInteger SWITCHTAG = 1000;
     [_maleSetDic setValue:@"no" forKey:@"sleep"];
     
     [self bulidUI];
+    [self loadDataPermisson];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -41,7 +42,7 @@ static const NSInteger SWITCHTAG = 1000;
 #pragma mark 基础UI
 -(void)bulidUI{
     
-    [[NLDatahub sharedInstance] getMalePermission:_maleID];
+    
     
    
     
@@ -86,9 +87,7 @@ static const NSInteger SWITCHTAG = 1000;
     
     for (NSInteger i=0; i<jurisdictionArr.count; i++) {
         UISwitch *switchs = [[UISwitch    alloc] initWithFrame:CGRectMake(_footerView.viewWidth - [ApplicationStyle control_weight:130] - [ApplicationStyle control_weight:24], [ApplicationStyle control_height:18]+i*[ApplicationStyle control_height:88], [ApplicationStyle control_weight:130], [ApplicationStyle control_height:88])];
-        switchs.on = false;
         switchs.tag = SWITCHTAG +i;
-        switchs.on = YES;
         [switchs addTarget:self action:@selector(switchOffDown:) forControlEvents:UIControlEventValueChanged];
         [_footerView addSubview:switchs];
     }
@@ -104,14 +103,22 @@ static const NSInteger SWITCHTAG = 1000;
     deleMale.backgroundColor = [UIColor whiteColor];
     deleMale.layer.borderColor = [self userLineColor].CGColor;
     deleMale.layer.borderWidth = [ApplicationStyle control_weight:1];
-    [deleMale addTarget:self action:@selector(deleMaleDown) forControlEvents:UIControlEventTouchCancel];
+    [deleMale addTarget:self action:@selector(deleMaleDown) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:deleMale];
+    
+    
+    [[NLDatahub sharedInstance] getMalePermission:_maleID];
+    
     
 //    NSString *strx = @"{\"calendar\":\"yes\",\"sport\":\"yes\",\"sleep\":\"yes\"}";
 //    [dic setValue:@"yes" forKey:@"calendar"];
 //    [dic setValue:@"yes" forKey:@"sport"];
 //    [dic setValue:@"yes" forKey:@"sleep"];
 //    [ApplicationStyle jsonDataTransString:dic];
+    //481078
+}
+
+-(void)loadDataPermisson{
     
 }
 #pragma mark 系统Delegate
@@ -126,7 +133,7 @@ static const NSInteger SWITCHTAG = 1000;
             }else{
                 [_maleSetDic setValue:@"no" forKey:@"sport"];
             }
-            switchs.on = !switchs.on;
+//            switchs.on = switchs.on;
             [[NLDatahub sharedInstance] permissionStr:_maleSetDic];
             break;
         }
@@ -137,7 +144,7 @@ static const NSInteger SWITCHTAG = 1000;
             }else{
                 [_maleSetDic setValue:@"no" forKey:@"sleep"];
             }
-            switchs.on = !switchs.on;
+//            switchs.on = !switchs.on;
             [[NLDatahub sharedInstance] permissionStr:_maleSetDic];
             break;
         }
@@ -146,7 +153,7 @@ static const NSInteger SWITCHTAG = 1000;
     }
 }
 -(void)deleMaleDown{
-    
+    [[NLDatahub sharedInstance] delMaleFamile:self.maleID];
 }
 #pragma mark 通知处理
 #pragma mark Color
@@ -164,7 +171,36 @@ static const NSInteger SWITCHTAG = 1000;
     return color;
 }
 -(void)addNotification{
+    NSNotificationCenter *notifi = [NSNotificationCenter defaultCenter];
+    [notifi addObserver:self selector:@selector(perMissionSuccessNotifi:) name:NLMaleGetPermissionSuccessNotification object:nil];
+    [notifi addObserver:self selector:@selector(delMaleFamileSuccessNotifi:) name:NLMaleDELETEPermissionSuccessNotification object:nil];
+}
+-(void)perMissionSuccessNotifi:(NSNotification *)notifi{
+    NSLog(@"%@",notifi.object);
+    NSDictionary *dic = notifi.object;
+    UISwitch *switchSleep = (UISwitch *)[self.view viewWithTag:SWITCHTAG+0];
+    UISwitch *switchSport = (UISwitch *)[self.view viewWithTag:SWITCHTAG+1];
     
+    if ([[dic objectForKey:@"sport"] isEqualToString:@"no"]) {
+        switchSleep.on = NO;
+        [_maleSetDic setValue:@"no" forKey:@"sport"];
+    }else{
+        switchSleep.on = YES;
+        [_maleSetDic setValue:@"yes" forKey:@"sport"];
+    }
+    
+    if ([[dic objectForKey:@"sleep"] isEqualToString:@"no"]) {
+        switchSport.on = NO;
+        [_maleSetDic setValue:@"no" forKey:@"sleep"];
+    }else{
+        switchSport.on = YES;
+        [_maleSetDic setValue:@"yes" forKey:@"sleep"];
+    }
+}
+-(void)delMaleFamileSuccessNotifi:(NSNotification *)notifi{
+    if (self.delMale) {
+        self.delMale(@"");
+    }
 }
 -(void)delNotification{
     [[NSNotificationCenter defaultCenter] removeObserver:self];

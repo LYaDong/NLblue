@@ -100,4 +100,8 @@
  * 获得男友权限
  */
 -(void)getMalePermission:(NSString *)maleID;
+/**
+ * 删除男友
+ */
+-(void)delMaleFamile:(NSString *)maleID;
 @end

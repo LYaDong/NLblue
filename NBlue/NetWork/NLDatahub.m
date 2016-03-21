@@ -12,8 +12,9 @@
 #import "SMProgressHUD.h"
 static NLDatahub *datahub = nil;
 static NSString *NLtextHeml = @"text/html";
-static NSString *NLapplication = @"application/json";
+static NSString *NLapplication = @"application/x-www-form-urlencoded";
 static NSString *NLmobileApiBaseUrl = @"http://123.56.127.139/warman";//主接口
+//static NSString *NLmobileApiBaseUrl = @"http://192.168.1.108:8080/warman";//主接口
 static NSString *NLUserApi = @"/user";//各个接口端
 static NSString *NLSportApi = @"/sport";//各个接口端
 static NSString *NLMenstruation = @"/menstruation";//各个接口端
@@ -595,9 +596,9 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
     NSString *api = [NSString stringWithFormat:@"%@%@%@",NLUserApi,User_QRCode,User_Permission];
     NSString *url = API_BASE_URL(api);
     [_manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",[self dataTransformationJson:responseObject]);
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
+        
     }];
     
 }
@@ -615,16 +616,36 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
     
     [_manager GET:url parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (![responseObject isKindOfClass:[NSDictionary class]]) {
-            NSLog(@"expecting NSDictionary class");
-        }
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"%@",[self dataTransformationJson:responseObject]);
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLMaleGetPermissionSuccessNotification object:[self dataTransformationJson:responseObject]];
         });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NLMaleGetPermissionFicaledNotification object:nil];
         });
+    }];
+}
+//删除男友
+-(void)delMaleFamile:(NSString *)maleID{
+     NSDictionary *parameters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
+                                 @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken],
+                                 @"folkConsumerId":maleID};
+    
+    
+    NSLog(@"%@",parameters);
+    
+    
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:NLapplication,NLtextHeml, nil];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *api = [NSString stringWithFormat:@"%@%@",NLUserApi,User_QRCode];
+    NSString *url = API_BASE_URL(api);
+    [_manager DELETE:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self notificationAPINameSuccess:NLMaleDELETEPermissionSuccessNotification object:[self dataTransformationJson:responseObject]];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self notificationAPINamefailure:NLMaleDELETEPermissionFailureNotification object:error];
     }];
 }
 
@@ -644,7 +665,13 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
         [kAPPDELEGATE tabBarViewControllerType:Controller_Loing];
     }
 }
-
+#pragma mark notification 
+-(void)notificationAPINameSuccess:(NSString *)notificationName object:(nullable id)anObject{
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:anObject];
+}
+-(void)notificationAPINamefailure:(NSString *)notificationName object:(nullable id)anObject{
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:anObject];
+}
 
 #pragma mark loading提示框
 -(void)loadingView{

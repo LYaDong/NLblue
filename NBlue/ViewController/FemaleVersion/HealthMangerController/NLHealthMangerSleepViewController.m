@@ -19,6 +19,7 @@
 @property(nonatomic,strong)NLColumnImage *column;
 @property(nonatomic,assign)NSInteger weekMonthCount;
 @property(nonatomic,strong)UIImageView *imageArrow;
+@property(nonatomic,assign)NSInteger indexWeekCount;
 @end
 
 @implementation NLHealthMangerSleepViewController
