@@ -54,7 +54,7 @@
     _integral.font = [UIFont systemFontOfSize:[ApplicationStyle control_weight:26]];
     [self.view addSubview:_integral];
     
-    UIImageView *singIntegral = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:370])/2, [ApplicationStyle navBarAndStatusBarSize] + [ApplicationStyle control_height:26], [ApplicationStyle control_weight:370], [ApplicationStyle control_height:370])];
+    UIImageView *singIntegral = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - [ApplicationStyle control_weight:370])/2, [ApplicationStyle navBarAndStatusBarSize] + [ApplicationStyle control_height:46], [ApplicationStyle control_weight:370], [ApplicationStyle control_height:370])];
     singIntegral.image = [UIImage imageNamed:@"NL_Sign_Y_H"];
     [self.view addSubview:singIntegral];
     

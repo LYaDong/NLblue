@@ -55,7 +55,7 @@
     segement.selectedSegmentIndex = 0;
     segement.borderColors = [UIColor whiteColor];
     segement.clipsBounds = YES;
-    segement.backGroupColor = [@"f3375a" hexStringToColor];
+    segement.backGroupColor = [self segementColor];
     segement.titleColor = [UIColor  whiteColor];
     segement.titleFont = [ApplicationStyle textSuperSmallFont];
     segement.lineHide = YES;
@@ -75,11 +75,28 @@
             [self imageConvenDataArr:_dataArr type:NLCalendarType_Day];
             
             NSMutableArray *arrData = [self sortArrayData:_dataArr];
-            NSString *qualitySleep = @"良";
-            NSString *total_time = [[arrData[0] objectForKey:@"total_time"] length]==0?@"0":[arrData[0] objectForKey:@"total_time"];
-            NSString *deepSleep_mins = [[arrData[0] objectForKey:@"deepSleep_mins"] length]==0?@"0":[arrData[0] objectForKey:@"deepSleep_mins"];
-            NSString *lightSleep_mins = [[arrData[0] objectForKey:@"lightSleep_mins"] length]==0?@"0":[arrData[0] objectForKey:@"lightSleep_mins"];
-            NSString *endSleep_Time = [[arrData[0] objectForKey:@"endSleep_Time"] length]==0?@"0":[arrData[0] objectForKey:@"endSleep_Time"];
+            NSLog(@"%@",arrData);
+            NSString *qualitySleep = nil;
+            NSString *total_time = nil;
+            NSString *deepSleep_mins = nil;
+            NSString *lightSleep_mins = nil;
+            NSString *endSleep_Time = nil;
+            
+            if (arrData.count==0) {
+                qualitySleep = @"良";
+                total_time = @"0";
+                deepSleep_mins = @"0";
+                lightSleep_mins = @"0";
+                endSleep_Time = @"0";
+            }else{
+                qualitySleep = @"良";
+                total_time = [arrData[0] objectForKey:@"total_time"]==nil?@"0":[arrData[0] objectForKey:@"total_time"];
+                deepSleep_mins = [arrData[0] objectForKey:@"deepSleep_mins"] ==nil?@"0":[arrData[0] objectForKey:@"deepSleep_mins"];
+                lightSleep_mins = [arrData[0] objectForKey:@"lightSleep_mins"] ==nil?@"0":[arrData[0] objectForKey:@"lightSleep_mins"];
+                endSleep_Time = [arrData[0] objectForKey:@"endSleep_Time"] ==nil?@"0":[arrData[0] objectForKey:@"endSleep_Time"];
+            }
+            
+            
             
             
             NSArray *wakeUpArr = [ApplicationStyle interceptText:endSleep_Time interceptCharacter:@":"];
@@ -205,11 +222,38 @@
 
 -(void)sildeIndex:(NSDictionary *)index{
     [_labViewBack removeFromSuperview];
+    
+    
+
+    
     NSString *qualitySleep = @"良";
     NSString *total_time = [index objectForKey:@"total_time"]==nil?@"0":[index objectForKey:@"total_time"];
     NSString *deepSleep_mins = [index objectForKey:@"deepSleep_mins"]==nil?@"0":[index objectForKey:@"deepSleep_mins"];
     NSString *lightSleep_mins = [index objectForKey:@"lightSleep_mins"]==nil?@"0":[index objectForKey:@"lightSleep_mins"];
     NSString *endSleep_Time = [index objectForKey:@"endSleep_Time"]==nil?@"0":[index objectForKey:@"endSleep_Time"];
+    
+//    NSString *qualitySleep = nil;
+//    NSString *total_time = nil;
+//    NSString *deepSleep_mins = nil;
+//    NSString *lightSleep_mins = nil;
+//    NSString *endSleep_Time = nil;
+//    
+//    if (arrData.count==0) {
+//        qualitySleep = @"良";
+//        total_time = @"0";
+//        deepSleep_mins = @"0";
+//        lightSleep_mins = @"0";
+//        endSleep_Time = @"0";
+//    }else{
+//        qualitySleep = @"良";
+//        total_time = [arrData[0] objectForKey:@"total_time"]==nil?@"0":[arrData[0] objectForKey:@"total_time"];
+//        deepSleep_mins = [arrData[0] objectForKey:@"deepSleep_mins"] ==nil?@"0":[arrData[0] objectForKey:@"deepSleep_mins"];
+//        lightSleep_mins = [arrData[0] objectForKey:@"lightSleep_mins"] ==nil?@"0":[arrData[0] objectForKey:@"lightSleep_mins"];
+//        endSleep_Time = [arrData[0] objectForKey:@"endSleep_Time"] ==nil?@"0":[arrData[0] objectForKey:@"endSleep_Time"];
+//    }
+    
+    
+    
 
     
     NSArray *wakeUpArr = [ApplicationStyle interceptText:endSleep_Time interceptCharacter:@":"];
@@ -392,6 +436,17 @@ __goto:
         goto __goto;
     }
 }
+
+-(UIColor *)segementColor{
+    UIColor *color = nil;
+    if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
+        color = [@"f3375a" hexStringToColor];
+    }else{
+        color = [@"05b9ff" hexStringToColor];
+    }
+    return color;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

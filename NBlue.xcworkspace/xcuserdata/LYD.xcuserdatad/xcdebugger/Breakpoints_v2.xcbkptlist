@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NBlue/ViewController/FemaleVersion/View/HealthMangerView/CalenderUIView/NLCalenderLifeHabit.m"
-            timestampString = "479879763.32441"
+            filePath = "NBlue/ViewController/FemaleVersion/HealthMangerController/NLHealthMangerSleepViewController.m"
+            timestampString = "480305036.702354"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
-            landmarkName = "-lifeHabitDown:"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "-segmentedIndex:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,61 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NBlue/ViewController/FemaleVersion/ProfileController/NLProfileViewController.m"
-            timestampString = "479910371.863663"
+            filePath = "NBlue/ViewController/FemaleVersion/HealthMangerController/NLHealthMangerSleepViewController.m"
+            timestampString = "480305039.447541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "-userHeadImageNotifiDown"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NBlue/ViewController/FemaleVersion/View/HealthMangerView/CalenderUIView/NLCalenderUncomfortable.m"
-            timestampString = "479911022.364403"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
-            landmarkName = "-buildUI"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NBlue/NetWork/NLDatahub.m"
-            timestampString = "480246255.08916"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
-            landmarkName = "-qrCodeNextWorkFrom_to_id:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NBlue/NetWork/NLDatahub.m"
-            timestampString = "480246256.281582"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
-            landmarkName = "-qrCodeNextWorkFrom_to_id:"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "-segmentedIndex:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -358,10 +358,6 @@ static const NSInteger THIRDBTNTAG = 4000;
         [kAPPDELEGATE._loacluserinfo userGender:[[dic objectForKey:@"consumer"] objectForKey:@"gender"]];
         [[NLDatahub sharedInstance] getUserCycleOrperiod];
     }
-
-//    NLGenderSelectionViewController *vc = [[NLGenderSelectionViewController alloc] init];
-//    [vc setHidesBottomBarWhenPushed:YES];
-//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)logInFicaled{

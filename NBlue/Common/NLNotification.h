@@ -9,8 +9,9 @@
 #ifndef NLNotification_h
 #define NLNotification_h
 
-
+//刷新女版个人信息
 #define RefreshUserHeadImageSuccessNotification @"RefreshUserHeadImageSuccessNotification"
+#define RefreshUserHeadImageMaleIndividSuccessNotification @"RefreshUserHeadImageMaleIndividSuccessNotification"
 //创建数据库通知
 #define EstablishDataSqliteNotification @"EstablishDataSqliteNotification"
 

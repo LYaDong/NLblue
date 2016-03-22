@@ -41,11 +41,12 @@
     
     _loacluserinfo = [[NLLocalUserInfo alloc] init];
     
-    if (![[kAPPDELEGATE._loacluserinfo getControllew] isEqualToString:@"1"]) {
+    NSLog(@"%@",[kAPPDELEGATE._loacluserinfo getControllew]);
+    
+    
+    if (![[kAPPDELEGATE._loacluserinfo getControllew] isEqualToString:@"1"]&&![[kAPPDELEGATE._loacluserinfo getControllew] isEqualToString:@"2"]) {
         [self tabBarViewControllerType:Controller_Loing];
     }else{
-        
-        
         if ([[kAPPDELEGATE._loacluserinfo getUserGender] isEqualToString:@"0"]) {
             [self tabBarViewControllerType:Controller_WoManMain];
         }else{

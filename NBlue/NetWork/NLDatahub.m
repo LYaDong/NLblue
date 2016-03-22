@@ -336,15 +336,11 @@ static const NSInteger errorStatusCode = 401;//报错：一般是登录过期
     
 
     [self loadingView];
-    
-    
-    NSLog(@"%@ %@ %@ %@ %@",[kAPPDELEGATE._loacluserinfo GetUser_ID],[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate],[dic objectForKey:@"periodTime"],[dic objectForKey:@"cycleTime"],[kAPPDELEGATE._loacluserinfo GetAccessToken]);
-    
-    
+
     NSDictionary *paramenters = @{@"consumerId":[kAPPDELEGATE._loacluserinfo GetUser_ID],
                                   @"startDate":[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate]==nil?@"":[kAPPDELEGATE._loacluserinfo getLastTimeGoPeriodDate],
-                                  @"duration":[dic objectForKey:@"periodTime"],
-                                  @"cycle":[dic objectForKey:@"cycleTime"],
+                                  @"duration":[dic objectForKey:@"periodTime"]==nil?@"":[dic objectForKey:@"periodTime"],
+                                  @"cycle":[dic objectForKey:@"cycleTime"]==nil?@"":[dic objectForKey:@"cycleTime"],
                                   @"authToken":[kAPPDELEGATE._loacluserinfo GetAccessToken]};
     
     

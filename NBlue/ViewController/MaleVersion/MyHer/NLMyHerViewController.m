@@ -11,9 +11,12 @@
 #import "NLTextImageView.h"
 #import "NlRing.h"
 #import "NLRingLine.h"
-
-@interface NLMyHerViewController ()
+#import "NLSQLData.h"
+#import "NLHyHerCell.h"
+@interface NLMyHerViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIView *qrcodeBackView;
+@property(nonatomic,strong)UITableView *herSleepAndSportTable;
+@property(nonatomic,strong)UIButton *liftBtn;
 @end
 
 @implementation NLMyHerViewController
@@ -41,10 +44,54 @@
 #pragma mark 基础UI
 -(void)bulidUI{
     
+    _herSleepAndSportTable = [[UITableView alloc] initWithFrame:CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:288], [ApplicationStyle control_height:20] + [ApplicationStyle navBarAndStatusBarSize], [ApplicationStyle control_weight:276], [ApplicationStyle control_height:176]) style:UITableViewStylePlain];
+    
+    _herSleepAndSportTable.delegate = self;
+    _herSleepAndSportTable.dataSource = self;
+    _herSleepAndSportTable.scrollEnabled = NO;
+    _herSleepAndSportTable.hidden = YES;
+    _herSleepAndSportTable.backgroundColor = [UIColor blackColor];
+    _herSleepAndSportTable.separatorStyle = UITableViewCellSelectionStyleNone;
+    [self.view addSubview:_herSleepAndSportTable];
+    
+    UIView *lines = [[UIView alloc] initWithFrame:CGRectMake([ApplicationStyle control_height:40], [ApplicationStyle control_height:87], _herSleepAndSportTable.frame.size.width - [ApplicationStyle control_weight:80], [ApplicationStyle control_height:1])];
+    lines.backgroundColor = [UIColor whiteColor];
+    [_herSleepAndSportTable addSubview:lines];
+    
+    
+    
+    _liftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _liftBtn.frame = CGRectMake(SCREENWIDTH - [ApplicationStyle control_weight:42 + 30], [ApplicationStyle statusBarSize]+([ApplicationStyle navigationBarSize] - [ApplicationStyle control_weight:42])/2, [ApplicationStyle control_weight:42], [ApplicationStyle control_weight:42]);
+    _liftBtn.hidden = YES;
+    [_liftBtn setImage:[UIImage imageNamed:@"NL_ThreeSpot"] forState:UIControlStateNormal];
+    [_liftBtn addTarget:self action:@selector(liftBtnDown) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_liftBtn];
+    
+    [self estableSqlite];
     [self loadData];
     
     
     
+}
+-(void)estableSqlite{
+    //循环创建数据库
+    [[SMProgressHUD shareInstancetype] showLoadingWithTip:@"恢复数据中，请耐心等待"];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [NLSQLData canlenderUncomfortable];
+        [NLSQLData insterCanlenderData];
+        
+        [NLSQLData establishSportDataTable];
+        [NLSQLData insterSportData:nil isUpdata:0];
+        
+        
+        [NLSQLData sleepDataTable];
+        [NLSQLData insterSleepData:nil isUpdata:0];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:EstablishDataSqliteNotification object:nil];
+            [self loadStepData];
+            [[SMProgressHUD shareInstancetype] dismiss];
+        });
+    });
 }
 -(void)loadData{
     [[NLDatahub sharedInstance] maleJudgeIsHave];
@@ -197,12 +244,80 @@
     
 }
 #pragma mark 系统Delegate
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 2;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return [ApplicationStyle control_height:88];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *str = @"LYD";
+    
+    NLHyHerCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
+    if (!cell) {
+        cell = [[NLHyHerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
+        
+        
+        
+    }
+    
+    NSArray *imgArr = @[@"NL_MaleSleep",@"NL_MaleSport"];
+
+    cell.imageViews.image = [UIImage imageNamed:imgArr[indexPath.row]];
+    cell.titleLabs.text = @"她的睡眠";
+    cell.backgroundColor = [@"49484b" hexStringToColor];
+    
+    
+    UIView *viewB = [[UIView alloc] initWithFrame:cell.bounds];
+    viewB.backgroundColor = [@"3b3b3b" hexStringToColor];
+    cell.selectedBackgroundView = viewB;
+    
+
+    
+    
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    _herSleepAndSportTable.hidden = YES;
+    
+}
 #pragma mark 自己的Delegate
+#pragma mark 接口
+-(void)loadStepData{
+    
+    NSDate *date = [ApplicationStyle whatMonth:[NSDate date] timeDay:0];
+    /*
+     下面是真数据
+     */
+    NSString *starDate = [ApplicationStyle datePickerTransformationCorss:date];
+    NSString *endDate = [ApplicationStyle datePickerTransformationCorss:[NSDate date]];
+    
+    
+    NSLog(@"%@  %@",[kAPPDELEGATE._loacluserinfo GetAccessToken],[kAPPDELEGATE._loacluserinfo GetUser_ID]);
+    
+    
+    //测试
+    //    [[NLDatahub sharedInstance] userStepNumberToken:[kAPPDELEGATE._loacluserinfo GetAccessToken]
+    //                                         consumerId:[kAPPDELEGATE._loacluserinfo GetUser_ID]
+    //                                          startDate:@"2015-6-01"
+    //                                            endDate:@"2016-10-30"];
+    
+    //此为真实
+    [[NLDatahub sharedInstance] userStepNumberToken:[kAPPDELEGATE._loacluserinfo GetAccessToken]
+                                         consumerId:[kAPPDELEGATE._loacluserinfo GetUser_ID]
+                                          startDate:starDate
+                                            endDate:endDate];
+}
 #pragma mark 自己的按钮事件
 -(void)btnAddDown{
     
 }
-
+-(void)liftBtnDown{
+    _herSleepAndSportTable.hidden = NO;
+}
 
 -(void)addNotification{
     NSNotificationCenter *notifi= [NSNotificationCenter defaultCenter];
@@ -213,6 +328,7 @@
     if (notifi.object==nil) {
         [self generateQRCode];
     }else{
+        _liftBtn.hidden = NO;
         [self periodCircleView];
         [self pregnancyIndex];
     }

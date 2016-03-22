@@ -72,7 +72,13 @@ static const NSInteger BTNPHOTO = 4000;
         _individuaDataDic = [NSMutableDictionary dictionary];
         [_individuaDataDic setValue:headNameArr forKey:@"headNameArr"];
         [_individuaDataDic setValue:measUrements forKey:@"measUrements"];
-        [_individuaDataDic setValue:period forKey:@"period"];
+        
+        if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
+            [_individuaDataDic setValue:period forKey:@"period"];
+        }
+        
+        
+        
     }
     
     {
@@ -535,14 +541,20 @@ static const NSInteger BTNPHOTO = 4000;
         [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"体重不能为空哦~"];
         return;
     }
-    if ([_userCountDataDic objectForKey:@"periodTime"] == nil) {
-        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"经期不能为空哦~"];
-        return;
+    //如果为女版，则有下面这
+    if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
+        if ([_userCountDataDic objectForKey:@"periodTime"] == nil) {
+            [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"经期不能为空哦~"];
+            return;
+        }
+        if ([_userCountDataDic objectForKey:@"cycleTime"] == nil) {
+            [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"周期不能为空哦~"];
+            return;
+        }
     }
-    if ([_userCountDataDic objectForKey:@"cycleTime"] == nil) {
-        [kAPPDELEGATE AutoDisplayAlertView:@"提示" :@"周期不能为空哦~"];
-        return;
-    }
+    
+    
+    
     [_userCountDataDic setValue:[kAPPDELEGATE._loacluserinfo getUserGender] forKey:@"gender"];
     
     [[NLDatahub sharedInstance] upDataUserInformationConsumerid:[kAPPDELEGATE._loacluserinfo GetUser_ID] authtoken:[kAPPDELEGATE._loacluserinfo GetAccessToken] userCountData:_userCountDataDic];
@@ -550,7 +562,11 @@ static const NSInteger BTNPHOTO = 4000;
 //更新经期和周期
 - (void)upDateMenstruation{
     
+
     [[NLDatahub sharedInstance] upDataCycleOrPeriod:_userCountDataDic];
+    
+    
+    
 //    [[NLDatahub sharedInstance] upDateMenstruationData:_userCountDataDic];
 }
 
@@ -573,7 +589,15 @@ static const NSInteger BTNPHOTO = 4000;
 }
 //上传经期和周期
 -(void)upDataUserInformationSuccess{
-    [self upDateMenstruation];
+    if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
+        [self upDateMenstruation];
+    }else{
+        [PlistData individuaData:_userCountDataDic];
+        [[NSNotificationCenter defaultCenter] postNotificationName:RefreshUserHeadImageMaleIndividSuccessNotification object:nil userInfo:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+    
 }
 -(void)upDataUserInformationFicaled{
     

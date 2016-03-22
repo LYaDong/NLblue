@@ -59,7 +59,7 @@
     segement.selectedSegmentIndex = 0;
     segement.borderColors = [UIColor whiteColor];
     segement.clipsBounds = YES;
-    segement.backGroupColor = [@"f3375a" hexStringToColor];
+    segement.backGroupColor = [self segementColor];
     segement.titleColor = [UIColor  whiteColor];
     segement.titleFont = [ApplicationStyle textSuperSmallFont];
     segement.lineHide = YES;
@@ -393,6 +393,16 @@ __goto:
         totalTimeCount = 0;
         goto __goto;
     }
+}
+
+-(UIColor *)segementColor{
+    UIColor *color = nil;
+    if ([[kAPPDELEGATE._loacluserinfo getUserGender]isEqualToString:@"0"]) {
+        color = [@"f3375a" hexStringToColor];
+    }else{
+        color = [@"05b9ff" hexStringToColor];
+    }
+    return color;
 }
 
 

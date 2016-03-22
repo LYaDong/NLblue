@@ -176,7 +176,6 @@
 -(void)userHeadImageNotifiDown{
     NSDictionary *dicImage = [PlistData getIndividuaData];
     [_userImage sd_setImageWithURL:[NSURL URLWithString:[dicImage objectForKey:@"imageUrl"]] placeholderImage:[UIImage imageNamed:@"User_Head"]];
-    CGSize ss = [ApplicationStyle textSize:[dicImage objectForKey:@"userName"] font:[ApplicationStyle textThrityFont] size:SCREENWIDTH];
     
 //    _userNameLab = [[UILabel alloc] initWithFrame:CGRectMake(0, _userHeadImage.bottomOffset + [ApplicationStyle control_height:26], SCREENWIDTH, ss.height)];
     _userNameLab.text = [dicImage objectForKey:@"userName"];
